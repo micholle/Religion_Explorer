@@ -17,7 +17,6 @@
     </head>
     <body>
         <!-- Sidebar -->
-        <div class="showSidebar" id="showSidebar"><a>☰</a></div>
         <div class="sidebar" id="sidebar">
             <div class="closeSidebar" id="closeSidebar">&times;</div>
             <a href="" class="app-logo"><img src="../assets/images/logo.png" alt="Religion Explorer Logo"></a>
@@ -39,7 +38,7 @@
                     <option value="Hinduism">Hinduism</option>
                     <option value="Islam">Islam</option>
                     <option value="Judaism">Judaism</option>
-                    <option value="Others">Others</option>
+                    <option value="Other Religions">Other Religions</option>
                     <option value="Non-Religious">Non-Religious</option>
                 </select><br><br>
             <p>Geographic Region:</p>
@@ -56,15 +55,6 @@
                     <option value="East and Southeast Asia">East and Southeast Asia</option>
                     <option value="Australia and Oceania">Australia and Oceania</option>
                 </select><br><br>
-            <p>Key:<br>
-                <span class="dot"></span>Buddhism<br>
-                <span class="dot"></span>Christianity<br>
-                <span class="dot"></span>Hinduism<br>
-                <span class="dot"></span>Islam<br>
-                <span class="dot"></span>Judaism<br>
-                <span class="dot"></span>Others<br>
-                <span class="dot"></span>Non-Religious
-            </p>
         </div>
 
         <!-- Modal -->
@@ -78,12 +68,12 @@
                     <div class="modal-body">
                         <!-- Chart -->
                         <div id="showReligionChart">
-                            <canvas id="religionChart" width="80%" height="50%"></canvas>
+                            <canvas id="religionChart" width="80%" height="30%"></canvas>
                         </div>
                         <div id="modalContent">
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sodales odio id purus vehicula commodo. In eu est erat. Donec enim sapien, hendrerit nec nunc at, posuere cursus dui. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Integer quis imperdiet nunc. Morbi ac congue erat. Quisque malesuada erat non facilisis ornare.
-                                <br><br>Duis consequat ac turpis ac commodo. Integer vestibulum placerat ultricies. In quis fringilla orci. Aenean eget felis magna. Pellentesque porttitor interdum dui ac congue. Suspendisse suscipit orci leo, in pretium quam cursus a. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+                                <br><br>Duis consequat ac turpis ac commodo. Integer vestibulum placerat ultricies. In quis fringilla orci. Aenean eget felis magna. Pellentesque porttitor interdum dui ac congue. Suspendisse suscipit orci leo, in pretium quam cursus a. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
                             </p>
                         </div>
                     </div>
@@ -119,8 +109,18 @@
         THE SOFTWARE.
 
         -->
-        <div id="main">
-            <svg baseprofile="tiny" stroke-linecap="round" stroke-linejoin="round" version="1.2" viewbox="0 0 2000 857" xmlns="http://www.w3.org/2000/svg">
+        <div id="main" class="main">
+            <div class="mapHeader">
+                <div class="showSidebar"><a id="showSidebar">☰</a></div>
+                <input type="text" id="searchCountryInput" class="searchCountryInput" placeholder="Search Country or Event">
+            </div>
+            <div class="mapKeys">
+                <p>Key:<br>
+                    <div id="colorKeys">
+                    </div>
+                </p>
+            </div>
+            <svg id="svgMap" baseprofile="tiny" stroke-linecap="round" stroke-linejoin="round" version="1.2" viewbox="0 0 2000 857" xmlns="http://www.w3.org/2000/svg">
                 <g id="Afghanistan">
                     <path d="M1383 261.6l1.5 1.8-2.9 0.8-2.4 1.1-5.9 0.8-5.3 1.3-2.4 2.8 1.9 2.7 1.4 3.2-2 2.7 0.8 2.5-0.9 2.3-5.2-0.2 3.1 4.2-3.1 1.7-1.4 3.8 1.1 3.9-1.8 1.8-2.1-0.6-4 0.9-0.2 1.7-4.1 0-2.3 3.7 0.8 5.4-6.6 2.7-3.9-0.6-0.9 1.4-3.4-0.8-5.3 1-9.6-3.3 3.9-5.8-1.1-4.1-4.3-1.1-1.2-4.1-2.7-5.1 1.6-3.5-2.5-1 0.5-4.7 0.6-8 5.9 2.5 3.9-0.9 0.4-2.9 4-0.9 2.6-2-0.2-5.1 4.2-1.3 0.3-2.2 2.9 1.7 1.6 0.2 3 0 4.3 1.4 1.8 0.7 3.4-2 2.1 1.2 0.9-2.9 3.2 0.1 0.6-0.9-0.2-2.6 1.7-2.2 3.3 1.4-0.1 2 1.7 0.3 0.9 5.4 2.7 2.1 1.5-1.4 2.2-0.6 2.5-2.9 3.8 0.5 5.4 0z" id="AF" name="Afghanistan">
                     </path>
@@ -1461,22 +1461,6 @@
                 <path d="M644 406.9l0 0.2 0.4-0.1-0.2 0.5 0.2 0.2 0 0.2 0.2 0.2 0.2 0.9-0.3 0.3-0.1-0.4-0.1 0.1-0.6-0.1-0.4 0-0.2-0.3 0.6-0.5-0.4 0-0.4-0.4-0.1-0.5-0.2-0.5 0.3-0.4 0.4 0.1 0.5 0.3 0.2 0.2z" id="MQ" name="Martinique">
                 </path>
                 </g>
-                <!-- <g id="Canary Islands (Spain)">
-                    <path class="Canary Islands (Spain)" d="M 888.4 323.4 888.1 323.9 887.7 324.4 887.4 324 887 324 886.8 323.8 887 323.5 887.4 323.6 887.8 323.2 888.1 323 888.3 323.1 888.4 323.4 Z">
-                    </path>
-                    <path class="Canary Islands (Spain)" d="M 902 321.1 902 321.6 902.2 322 902 322.7 902.1 323 901.7 323.4 901.2 323.6 901 323.8 900.4 323.6 899.9 323.1 899.7 322.7 899.7 322.1 900.3 321.7 900.4 321.2 900.4 321 901 321.1 901.4 321.1 901.7 321.2 902 321.1 Z">
-                    </path>
-                    <path class="Canary Islands (Spain)" d="M 892.1 321.9 891.9 321.9 891.6 321.7 891.4 321.4 891.5 321 891.6 320.7 891.9 320.7 892.2 320.7 892.7 321.1 892.8 321.4 892.3 321.9 892.1 321.9 Z">
-                    </path>
-                    <path class="Canary Islands (Spain)" d="M 898.2 318.4 898.2 318.6 897.6 318.9 897.2 319.4 896.9 319.6 896.9 320 896.5 320.7 896.4 321.1 895.9 321.7 895.8 321.9 895.6 321.9 895 322.1 894.9 322 894.8 321.6 894.5 321.2 894.4 321 894.2 320.7 894.2 320.4 893.8 319.8 894.3 319.5 894.6 319.7 895.2 319.5 895.6 319.5 896.1 319.3 896.6 318.9 896.6 318.7 897.2 318.4 897.8 318.4 898.1 318.3 898.2 318.4 Z">
-                    </path>
-                    <path class="Canary Islands (Spain)" d="M 908.4 321.2 908.1 321.6 907.7 321.7 907.4 321.6 907 321.6 907 321.4 907.3 321.4 907.9 321.2 908.3 320.9 908.6 320.6 908.7 320.1 908.8 319.8 909 319.3 909.3 318.9 909.6 318.3 909.8 317.5 910 317.3 910.4 317.2 910.7 317.5 910.8 318 910.7 318.5 910.6 319 910.6 319.5 910.5 319.6 910.2 320.3 909.9 320.6 909.3 320.7 908.6 321 908.4 321.2 Z">
-                    </path>
-                    <path class="Canary Islands (Spain)" d="M 888.8 316.7 889.1 316.6 889.3 316.9 889.5 317.4 889.3 317.7 889.4 318.1 888.8 319.1 888.7 319 888.6 318.6 888.2 317.7 888.1 317.4 888 317.2 888.2 316.8 888.5 316.6 888.8 316.7 Z">
-                    </path>
-                    <path class="Canary Islands (Spain)" d="M 912.9 314.7 912.9 315.1 912.7 315.6 912 316.1 911.5 316.2 911.1 316.7 910.6 316.5 910.6 316.4 910.8 316 910.8 315.6 911 315.3 911.3 315.1 911.6 315.1 911.9 314.8 912.4 314.8 912.5 314.7 912.7 314.2 912.9 314.1 913.1 314.3 912.9 314.7 Z">
-                    </path>
-                </g> -->
                 <g id="Mayotte">
                 <path d="M1240.2 583.1l0.2 0.3 0.5 0.2 0 0.3-0.2 0.2 0.1 0.2-0.3 0.6 0.1 0.2-0.3 0.1-0.2-0.3 0-0.3 0.2-0.2-0.2-0.7-0.1-0.1-0.1-0.2 0.3-0.3z" id="YT" name="Mayotte">
                 </path>
@@ -1522,7 +1506,95 @@
                 <circle cx="1798.2" cy="719.3" id="2">
                 </circle>
             </svg>
-            <input type="range" class="slider" min="1" max="100" value="50" style="width: 100%">
+            <div id="mapSlider" class="mapSlider">
+                <div id="sliderOptions" class="sliderOptions">
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="1" value="1">
+                        <label for="1"><p>1 CE</p></label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="100" value="1">
+                        <label for="100">100</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="200" value="1">
+                        <label for="200">200</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="300" value="1">
+                        <label for="300">300</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="400" value="1">
+                        <label for="400">400</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="500" value="1">
+                        <label for="500">500</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="600" value="1">
+                        <label for="600">600</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="700" value="1">
+                        <label for="700">700</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="800" value="1">
+                        <label for="800">800</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="900" value="1">
+                        <label for="900">900</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="1000" value="1">
+                        <label for="1000">1000</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="1100" value="1">
+                        <label for="1100">1100</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="1200" value="1">
+                        <label for="1200">1200</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="1300" value="1">
+                        <label for="1300">1300</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="1400" value="1">
+                        <label for="1400">1400</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="1500" value="1">
+                        <label for="1500">1500</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="1600" value="1">
+                        <label for="1600">1600</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="1700" value="1">
+                        <label for="1700">1700</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="1800" value="1">
+                        <label for="1800">1800</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="1900" value="1">
+                        <label for="1900">1900</label>
+                    </div>
+                    <div class="timelineOption">
+                        <input type="radio" name="timelineValue" id="2000" value="1" checked>
+                        <label for="2000">2000</label>
+                    </div>
+                </div>
+                <hr id="sliderLine" class="sliderLine">  
+            </div>
         </div>
     </body>
 </html>

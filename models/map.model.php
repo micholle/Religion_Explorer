@@ -19,7 +19,7 @@ class mapModel{
                 "Hinduism" => intval($row["hinduism"]),
                 "Islam" => intval($row["islam"]),
                 "Judaism" => intval($row["judaism"]),
-                "Others" => intval($row["others"]),
+                "Other Religions" => intval($row["otherReligions"]),
                 "Non-Religious" => intval($row["nonReligious"])
             ];
             $allCountries += [$row["country"] => $data];

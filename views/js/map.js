@@ -1,4 +1,99 @@
 $(function() {
+    var religionColors = {
+        "Buddhism" : "#BAA400",
+        "Christianity" : "#56097A",
+        "Hinduism" : "#A81315",
+        "Islam" : "#018744",
+        "Judaism" : "#1334A8",
+        "Other Religions" : "#B37100",
+        "Non-Religious" : "#242424"};
+    var buddhismColors = {
+        "0% - 20%" : "#F1ECCC",
+        "20% - 40%" : "#E3DA99",
+        "40% - 60%" : "#D5C866",
+        "60% - 80%" : "#C7B632",
+        "80% - 100%" : "#BAA400"};
+    var christianityColors = {
+        "0% - 20%" : "#DDCDE4",
+        "20% - 40%" : "#BB9CC9",
+        "40% - 60%" : "#996BAF",
+        "60% - 80%" : "#773A94",
+        "80% - 100%" : "#56097A"};
+    var hinduismColors = {
+        "0% - 20%" : "#EDCFD0",
+        "20% - 40%" : "#DCA0A1",
+        "40% - 60%" : "#CA7172",
+        "60% - 80%" : "#B94243",
+        "80% - 100%" : "#A81315"};
+    var islamColors = {
+        "0% - 20%" : "#CCE7D9",
+        "20% - 40%" : "#99CFB4",
+        "40% - 60%" : "#66B78E",
+        "60% - 80%" : "#339F69",
+        "80% - 100%" : "#018744"};
+    var judaismColors = {
+        "0% - 20%" : "#CFD6ED",
+        "20% - 40%" : "#A0ADDC",
+        "40% - 60%" : "#7185CA",
+        "60% - 80%" : "#425CB9",
+        "80% - 100%" : "#1334A8"};
+    var otherreligionsColors = {
+        "0% - 20%" : "#EFE2CC",
+        "20% - 40%" : "#E0C699",
+        "40% - 60%" : "#D1A966",
+        "60% - 80%" : "#C28D32",
+        "80% - 100%" : "#B37100"};
+    var nonreligiousColors = {
+        "0% - 20%" : "#D3D3D3",
+        "20% - 40%" : "#A7A7A7",
+        "40% - 60%" : "#7B7B7B",
+        "60% - 80%" : "#4F4F4F",
+        "80% - 100%" : "#242424"};
+
+    //change display base on geographic region filter
+    var geographicRegionFilter = "All Countries";
+    $('#geographicRegionFilterOptions').click(function(){
+        if($('#geographicRegionFilterOptions').val() != geographicRegionFilter){
+            geographicRegionFilter = $('#geographicRegionFilterOptions').val();
+
+            switch(geographicRegionFilter){
+                case "All Countries":
+                    $("#svgMap").attr("viewBox", "0 0 2000 857");
+                    break;
+                case "North America":
+                    $("#svgMap").attr("viewBox", "0 0 1100 480");
+                    break;
+                case "Central America":
+                    $("#svgMap").attr("viewBox", "0 150 1100 480");
+                    break;
+                case "South America":
+                    $("#svgMap").attr("viewBox", "0 400 1100 480");
+                    break;
+                case "Europe":
+                    $("#svgMap").attr("viewBox", "550 0 1100 480");
+                    break;
+                case "Middle East":
+                    $("#svgMap").attr("viewBox", "750 50 1100 480");
+                    break;
+                case "Africa":
+                    $("#svgMap").attr("viewBox", "500 240 1200 525");
+                    break;
+                case "Central Asia":
+                    $("#svgMap").attr("viewBox", "770 0 1200 525");
+                    break;
+                case "South Asia":
+                    $("#svgMap").attr("viewBox", "1100 180 800 350");
+                    break;
+                case "East and Southeast Asia":
+                    $("#svgMap").attr("viewBox", "1000 150 1100 480");
+                    break;
+                case "Australia and Oceania":
+                    $("#svgMap").attr("viewBox", "1200 400 1100 480");
+                    break;
+            }
+        }
+    });
+
     $.ajax({
         url: '../../ajax/getMapData.ajax.php',
         method: "POST",
@@ -6,45 +101,120 @@ $(function() {
             var religionByCountry = data;
             var prevailingReligionVal = 0;
             var countryColor = "";
+            var religionFilter = "All Religions";
+            var applyFilter;
 
-            //loop through all countries
-            for (let country in religionByCountry) {
-                var countryData = religionByCountry[country];
-                
-                //determine prevailing religion of each country
-                for (let religion in countryData) {
-                    if (countryData[religion] > prevailingReligionVal) {
-                        prevailingReligionVal = countryData[religion];
-                        prevailingReligion = religion;
+            //retrieve religion filter value
+            setMapColor(religionFilter);
+            $('#religionFilterOptions').click(function(){
+                if($('#religionFilterOptions').val() != religionFilter){
+                    religionFilter = $('#religionFilterOptions').val();
+                    setMapColor(religionFilter);
+                }
+            });
 
-                        //set color of country to assigned color of prevailing religion
-                        switch(prevailingReligion){
-                            case "Buddhism":
-                                countryColor = "#BAA400";
-                                break;
-                            case "Christianity":
-                                countryColor = "#56097A";
-                                break;
-                            case "Hinduism":
-                                countryColor = "#A81315";
-                                break;
-                            case "Islam":
-                                countryColor = "#018744";
-                                break;
-                            case "Judaism":
-                                countryColor = "#1334A8";
-                                break;
-                            case "Others":
-                                countryColor = "#B37100";
-                                break;
-                            case "Non-Religious":
-                                countryColor = "#242424";
-                                break;
+            function setMapColor(religionFilter){
+                //determine colors based on religion filter
+                switch(religionFilter){
+                    case "All Religions":
+                        applyFilter = religionColors;
+                        break;
+                    case "Buddhism":
+                        applyFilter = buddhismColors;
+                        break;
+                    case "Christianity":
+                        applyFilter = christianityColors;
+                        break;
+                    case "Hinduism":
+                        applyFilter = hinduismColors;
+                        break;
+                    case "Islam":
+                        applyFilter = islamColors;
+                        break;
+                    case "Judaism":
+                        applyFilter = judaismColors;
+                        break;
+                    case "Other Religions":
+                        applyFilter = otherreligionsColors;
+                        break;
+                    case "Non-Religious":
+                        applyFilter = nonreligiousColors;
+                        break;
+                }
+
+                //set keys
+                var mapKeysText = "";
+                for (let color in applyFilter){
+                    mapKeysText+= "<span class='dot' style='background-color: " + applyFilter[color] +"'></span>" + color + "<br>";
+                }
+                $('#colorKeys').html(mapKeysText);
+
+                //loop through all countries
+                for (let country in religionByCountry) {
+                    var countryData = religionByCountry[country];
+{}
+                    if(religionFilter == "All Religions"){
+                        //determine prevailing religion of each country
+                        for (let religion in countryData) {
+                            if (countryData[religion] > prevailingReligionVal) {
+                                prevailingReligionVal = countryData[religion];
+                                prevailingReligion = religion;
+
+                                //set color of country to assigned color of prevailing religion
+                                for (let religionColor in religionColors){
+                                    if (prevailingReligion == religionColor){
+                                        countryColor = religionColors[religionColor];
+                                    }
+                                }
+                            }
                         }
+                        document.getElementById(country).style.fill = countryColor;
+                        document.getElementById(country).style.stroke = "#FFFFFF";
+
+                        prevailingReligionVal = 0;
+                    } else {
+                        var totalPopulation = 0;
+                        var religionPercentage = 0;
+                        var religionFilterVal = 0;
+                        var countryData = religionByCountry[country];
+
+                        //determine percentage of religion filter
+                        for (let religion in countryData) {
+                            totalPopulation += countryData[religion];
+
+                            if(religionFilter == religion){
+                                religionFilterVal = countryData[religion];
+                            }
+                        }
+
+                        religionPercentage = (Math.round(((religionFilterVal / totalPopulation) * 100) * 100) / 100).toFixed(2);
+
+                        //set color of country depending on religion percentage
+                        if(religionPercentage <= 20){
+                            religionPercentage = "0% - 20%"
+                        } else if(religionPercentage > 20 && religionPercentage <=40){
+                            religionPercentage = "20% - 40%"
+                        } else if(religionPercentage > 40 && religionPercentage <=60){
+                            religionPercentage = "40% - 60%"
+                        } else if(religionPercentage > 60 && religionPercentage <=80){
+                            religionPercentage = "60% - 80%"
+                        } else {
+                            religionPercentage = "80% - 100%"
+                        }
+
+
+                        for (let percentage in applyFilter){
+                            if (religionPercentage == percentage){
+                                countryColor = applyFilter[percentage];
+                            }
+                        }
+                        document.getElementById(country).style.fill = countryColor;
+                        document.getElementById(country).style.stroke = "#000000";
+                        totalPopulation = 0;
+                        religionPercentage = 0;
+                        religionFilterVal = 0;
                     }
                 }
-                document.getElementById(country).style.fill = countryColor;
-                prevailingReligionVal = 0;
             }
 
             var allCountries = document.getElementsByTagName("g");
@@ -59,8 +229,9 @@ $(function() {
 
                 //get total population
                 var totalPopulation = 0;
-                var prevailingReligionPercentage = 0;
-                var prevailingReligionVal = 0;
+                var religionPercentage = 0;
+                var religionVal = 0;
+                var popoverContent = "";
 
                 for (let country in religionByCountry) {
                     if (country == currentCountry){
@@ -69,19 +240,34 @@ $(function() {
                         for (let religion in countryData) {
                             totalPopulation += countryData[religion];
     
-                            if (countryData[religion] > prevailingReligionVal) {
-                                prevailingReligionVal = countryData[religion];
-                                prevailingReligion = religion;
-                            }    
+                            if (religionFilter == "All Religions"){
+                                //prevailing religions
+                                if (countryData[religion] > religionVal) {
+                                    religionVal = countryData[religion];
+                                    prevailingReligion = religion;
+                                }   
+                            } else {
+                                //religion filter
+                                if(religionFilter == religion){
+                                    religionVal = countryData[religion];
+                                }
+                            }
                         }
 
-                        prevailingReligionPercentage = (Math.round(((prevailingReligionVal / totalPopulation) * 100) * 100) / 100).toFixed(2);
+                        religionPercentage = (Math.round(((religionVal / totalPopulation) * 100) * 100) / 100).toFixed(2);
                     }
+                }
+
+                //set popover content
+                if(religionFilter == "All Religions"){
+                    popoverContent = "The prevailing religion in " + currentCountry + " is " + prevailingReligion + ", comprising " + religionPercentage + "% of the population.";
+                } else {
+                    popoverContent = religionFilter + " comprises " + religionPercentage + "% of " + currentCountry +"'s population.";
                 }
 
                 $('[data-toggle = "popover"]').popover({
                     title: currentCountry, 
-                    content: "The prevailing religion in " + currentCountry + " is " + prevailingReligion + ", comprising " + prevailingReligionPercentage + "% of the population.",
+                    content: popoverContent,
                     placement: "top"
                 });
                 $('[data-toggle = "popover"]').popover("show");
