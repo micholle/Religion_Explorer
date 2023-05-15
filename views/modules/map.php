@@ -24,7 +24,7 @@
             <a href="" class="menu"><img src="../assets/images/feat-worldwide.png" alt="World Map Icon"><p>World Map</p></a>
             <a href="" class="menu"><img src="../assets/images/feat-book-stack.png" alt="Library of Resources Icon"><p>Library of Resources</p></a>
             <a href="" class="menu"><img src="../assets/images/feat-chat.png" alt="Discussion Forum Icon"><p>Discussion Forum</p></a>
-            <a href="" class="menu"><img src="../assets/images/feat-calendar.png" alt="Calendar Icon"><p>Calendar</p></a>
+            <a href="calendar.php" class="menu"><img src="../assets/images/feat-calendar.png" alt="Calendar Icon"><p>Calendar</p></a>
             <a href="" class="menu"><img src="../assets/images/logout.png" alt="Logout Icon"><p>Logout</p></a>
         </div>
 
@@ -55,6 +55,19 @@
                     <option value="East and Southeast Asia">East and Southeast Asia</option>
                     <option value="Australia and Oceania">Australia and Oceania</option>
                 </select><br><br>
+            <div class="mapPopupSettings">
+                <input type="checkbox" id="mapEvents" checked>
+                <label for="mapEvents">Important Events</label>
+            </div>
+            <div class="mapPopupSettings">
+                <input type="checkbox" id="mapPeople" checked>
+                <label for="mapPeople">Important People</label>
+            </div>
+            <div class="mapPopupSettings">
+                <input type="checkbox" id="mapLocations" checked>
+                <label for="mapLocations">Important Locations</label>
+            </div><br>
+            <button id="mapHelpButton" class="mapHelpButton">Help</button> 
         </div>
 
         <!-- Modal -->
@@ -80,6 +93,13 @@
                 </div>
             </div>
         </div>
+        <div id="timelineOverlay" class="timelineOverlay">
+            <div class="timelineOverlayText">
+                <h1 id="timelineOverlayYear">2000</h1>
+                <p>Click anywhere to continue</p>
+            </div>
+        </div>
+
         <?xml version="1.0"?>
         <!--
         *************Map created by Simplemaps.com********************		
@@ -112,7 +132,7 @@
         <div id="main" class="main">
             <div class="mapHeader">
                 <div class="showSidebar"><a id="showSidebar">☰</a></div>
-                <input type="text" id="searchCountryInput" class="searchCountryInput" placeholder="Search Country or Event">
+                <input type="text" id="searchCountryInput" class="searchCountryInput" placeholder="Search Country">
             </div>
             <div class="mapKeys">
                 <p>Key:<br>
@@ -1508,90 +1528,92 @@
             </svg>
             <div id="mapSlider" class="mapSlider">
                 <div id="sliderOptions" class="sliderOptions">
+                    <div class="timelinePrev"><</div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1" value="1">
+                        <input type="radio" name="timelineValue" id="1" value="1 CE">
                         <label for="1"><p>1 CE</p></label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="100" value="1">
+                        <input type="radio" name="timelineValue" id="100" value="100">
                         <label for="100">100</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="200" value="1">
+                        <input type="radio" name="timelineValue" id="200" value="200">
                         <label for="200">200</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="300" value="1">
+                        <input type="radio" name="timelineValue" id="300" value="300">
                         <label for="300">300</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="400" value="1">
+                        <input type="radio" name="timelineValue" id="400" value="400">
                         <label for="400">400</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="500" value="1">
+                        <input type="radio" name="timelineValue" id="500" value="500">
                         <label for="500">500</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="600" value="1">
+                        <input type="radio" name="timelineValue" id="600" value="600">
                         <label for="600">600</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="700" value="1">
+                        <input type="radio" name="timelineValue" id="700" value="700">
                         <label for="700">700</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="800" value="1">
+                        <input type="radio" name="timelineValue" id="800" value="800">
                         <label for="800">800</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="900" value="1">
+                        <input type="radio" name="timelineValue" id="900" value="900">
                         <label for="900">900</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1000" value="1">
+                        <input type="radio" name="timelineValue" id="1000" value="1000">
                         <label for="1000">1000</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1100" value="1">
+                        <input type="radio" name="timelineValue" id="1100" value="1100">
                         <label for="1100">1100</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1200" value="1">
+                        <input type="radio" name="timelineValue" id="1200" value="1200">
                         <label for="1200">1200</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1300" value="1">
+                        <input type="radio" name="timelineValue" id="1300" value="1300">
                         <label for="1300">1300</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1400" value="1">
+                        <input type="radio" name="timelineValue" id="1400" value="1400">
                         <label for="1400">1400</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1500" value="1">
+                        <input type="radio" name="timelineValue" id="1500" value="1500">
                         <label for="1500">1500</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1600" value="1">
+                        <input type="radio" name="timelineValue" id="1600" value="1600">
                         <label for="1600">1600</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1700" value="1">
+                        <input type="radio" name="timelineValue" id="1700" value="1700">
                         <label for="1700">1700</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1800" value="1">
+                        <input type="radio" name="timelineValue" id="1800" value="1800">
                         <label for="1800">1800</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1900" value="1">
+                        <input type="radio" name="timelineValue" id="1900" value="1900">
                         <label for="1900">1900</label>
                     </div>
                     <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="2000" value="1" checked>
+                        <input type="radio" name="timelineValue" id="2000" value="2000" checked>
                         <label for="2000">2000</label>
                     </div>
+                    <div class="timelineNext">></div>
                 </div>
                 <hr id="sliderLine" class="sliderLine">  
             </div>

@@ -58,6 +58,10 @@ g:hover {
     background: rgba(255, 255, 255, 0.5);
 }
 
+.searchCountryInput {
+    padding: 10px;
+}
+
 /* sidebar */
 
 .sidebar {
@@ -131,6 +135,20 @@ g:hover {
     font-size: 12px;
 }
 
+.sliderOptions .timelinePrev {
+    background: #FFFFFF;
+    font-size: 14px;
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+.sliderOptions .timelineNext {
+    background: #FFFFFF;
+    font-size: 14px;
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
 .sliderOptions input[type=radio]{
     accent-color: #000000;
     transform: scale(1.3);
@@ -196,6 +214,28 @@ g:hover {
     color: #000000;
 }
 
+.mapPopupSettings {
+    display: flex;
+    align-items: center;
+}
+
+.mapPopupSettings label {
+    margin-left: 5px;
+    margin-bottom: 0;
+}
+
+/* map help */
+.mapHelpButton {
+    width: 100%;
+    padding: 3px;
+    background: transparent;
+    color: #FFFFFF;
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
 /* map keys */
 
 .mapKeys .dot {
@@ -217,4 +257,32 @@ g:hover {
     margin: 5px;
     font-family: "Lexend Deca";
     font-size: 12px;
+}
+
+/* overlays */
+.timelineOverlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.timelineOverlayText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: "Lexend Deca";
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.timelineOverlay h1 {
+    font-size: 150px;
 }
