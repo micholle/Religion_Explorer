@@ -30,6 +30,7 @@
 
         <!-- Filter -->
         <div class="mapFilter">
+            <input type="text" id="searchCountryInput" class="searchCountryInput" placeholder="Search Country"><br><br>
             <p>Religion:</p>
                 <select id="religionFilterOptions">
                     <option value="All Religions">All Religions</option>
@@ -132,7 +133,6 @@
         <div id="main" class="main">
             <div class="mapHeader">
                 <div class="showSidebar"><a id="showSidebar">☰</a></div>
-                <input type="text" id="searchCountryInput" class="searchCountryInput" placeholder="Search Country">
             </div>
             <div class="mapKeys">
                 <p>Key:<br>
