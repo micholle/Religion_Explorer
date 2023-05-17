@@ -14,7 +14,8 @@ $(function() {
         $("#showSidebar").css("display", "block");
     });
 
-    //js functions below this line are temporary
+
+    //js functions below this line are temporary---------------------------------------------------------------
 
     //timeline overlays
     $("#timelineOverlay").click(function(){
@@ -135,4 +136,15 @@ $(function() {
         $('.popover').popover('dispose');
     });
 
+    //calendar
+    window.focus()
+
+    window.addEventListener("blur", () => {
+        setTimeout(() => {
+            if (document.activeElement.tagName === "IFRAME") {
+                $("#calendarEventModal").modal();
+                console.log("clicked");
+            }
+        });
+    });
 })
