@@ -136,6 +136,18 @@ $(function() {
         $('.popover').popover('dispose');
     });
 
+    $("#sidebarNotifications").hover(function(){
+        $("#sidebarNotifications").attr("data-toggle", "popover");
+        $("#sidebarNotifications").popover({
+            content: "The Notifications tab displays recent engagements to your submitted content and forum comments and posts.",
+            placement: "right"
+        });
+        $('[data-toggle = "popover"]').popover("show");
+    }, function(){
+        $("#sidebarNotifications").removeAttr("data-toggle");
+        $('.popover').popover('dispose');
+    });
+
     //calendar
     window.focus()
 

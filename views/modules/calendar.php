@@ -14,32 +14,24 @@
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar" style="display:block">
             <a href="" class="app-logo"><img src="../assets/images/logo.png" alt="Religion Explorer Logo"></a>
-            <a href="" class="menu" id="sidebarProfile"><img src="../assets/images/user.png" alt="Profile Icon"><p>Profile</p></a>
+            <a href="" class="menu" id="sidebarProfile"><img src="../assets/images/rabbit.png" alt="Profile Icon"><p>Profile</p></a>
             <a href="map.php" class="menu" id="sidebarMap"><img src="../assets/images/feat-worldwide.png" alt="World Map Icon"><p>World Map</p></a>
             <a href="" class="menu" id="sidebarLibrary"><img src="../assets/images/feat-book-stack.png" alt="Library of Resources Icon"><p>Library of Resources</p></a>
             <a href="" class="menu" id="sidebarForum"><img src="../assets/images/feat-chat.png" alt="Discussion Forum Icon"><p>Discussion Forum</p></a>
             <a href="calendar.php" class="menu" id="sidebarCalendar"><img src="../assets/images/feat-calendar.png" alt="Calendar Icon"><p>Calendar</p></a>
+            <a href="" class="menu" id="sidebarNotifications"><img src="../assets/images/bell.png" alt="Notifications Icon"><p>Notifications</p></a>
             <a href="" class="menu"><img src="../assets/images/logout.png" alt="Logout Icon"><p>Logout</p></a>
         </div>
 
         <!-- Modal -->
         <div class="modal fade" id="calendarEventModal" style="font-family:'Lexend Deca'">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalTitle">Ascension Day</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <div id="modalContent">
-                            <span class="badge badge-pill badge-primary" style="background:#56097A">Christianity</span>
-                            <p>
-                                One of the earliest Christian festivals, Ascension Day marks the end of the Easter season. This event is celebrated primarily by Catholics and Anglican Christians; most Protestant churches do not follow this tradition anymore. The date, too, differs in different geographic locations. Western Churches prefer to use the Gregorian calendar for calculating this date, while many Eastern Orthodox Churches calculate this date according to the Julian calendar. As a result, their celebrations occur at a later date than the Western event.
-                                <br><br>As per the New Testament in the Bible, after Jesus Christ’s crucifixion on Good Friday, he was resurrected from the dead in three days, on the day we know as Easter Sunday. For 40 days after this, he stayed with his Apostles (the primary disciples of Christ) to instruct them on how to carry out his teachings. As the Bible says, at the end of day 40, Jesus Christ and his disciples went to Mount Olivet (or the Mount of Olives), near Jerusalem. After asking them to stay, Christ then ascended to heaven to take his seat at the right hand of God, under the gaze of his disciples. To Christians, the ascension signifies that Christ completed his work on Earth and allowed him to prepare a place for his followers in heaven.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
                         <button type="button" style="padding: 5px 10px 5px 10px; background:#000000; color:#FFFFFF; border-radius:15px; cursor:pointer">Add Event to Personal Calendar</button>
                     </div>
                 </div>
@@ -54,7 +46,7 @@
                 <span class="badge badge-pill badge-primary" style="cursor:pointer; margin:0 5px 0 0; background:#A81315">Hinduism</span>
                 <span class="badge badge-pill badge-primary" style="cursor:pointer; margin:0 5px 0 0; background:#018744">Islam</span>
                 <span class="badge badge-pill badge-primary" style="cursor:pointer; background:#1334A8">Judaism</span>
-            </div>
+            </div>  
 
             <!-- Calendar -->
             <iframe id="open-web-calendar"
