@@ -1533,8 +1533,8 @@
             </svg>
             <div id="mapSlider" class="mapSlider">
                 <div id="sliderOptions" class="sliderOptions">
-                    <div class="timelinePrev"><</div>
-                    <div class="timelineOption">
+                    <!-- <div class="timelinePrev"><</div> -->
+                    <!-- <div class="timelineOption">
                         <input type="radio" name="timelineValue" id="1820" value="1820">
                         <label for="1820"><p>1820</p></label>
                     </div>
@@ -1617,8 +1617,8 @@
                     <div class="timelineOption">
                         <input type="radio" name="timelineValue" id="2020" value="2020" checked>
                         <label for="2020">2020</label>
-                    </div>
-                    <div class="timelineNext">></div>
+                    </div> -->
+                    <!-- <div class="timelineNext">></div> -->
                 </div>
                 <hr id="sliderLine" class="sliderLine">  
             </div>

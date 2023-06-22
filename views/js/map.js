@@ -1,4 +1,5 @@
 $(function() {
+    //initiate colors
     var religionColors = {
         "Buddhism" : "#BAA400",
         "Christianity" : "#56097A",
@@ -49,6 +50,15 @@ $(function() {
         "40% - 60%" : "#7B7B7B",
         "60% - 80%" : "#4F4F4F",
         "80% - 100%" : "#242424"};
+
+    //initiate timeline
+    var religionStart = {
+        "Buddhism" : -490,
+        "Christianity" : -2100,
+        "Hinduism" : -2500,
+        "Islam" : 540,
+        "Judaism" : -2000
+    }
 
     //change display base on geographic region filter
     var geographicRegionFilter = "All Countries";
@@ -105,16 +115,143 @@ $(function() {
             var applyFilter;
 
             //retrieve religion filter value
-            setMapColor(religionFilter);
+            setMapFilter(religionFilter);
             $('#religionFilterOptions').click(function(){
                 if($('#religionFilterOptions').val() != religionFilter){
                     religionFilter = $('#religionFilterOptions').val();
-                    setMapColor(religionFilter);
+                    setMapFilter(religionFilter);
                 }
             });
 
-            function setMapColor(religionFilter){
-                //determine colors based on religion filter
+
+            //set map color and timeline
+            function setMapFilter(religionFilter){
+                //set timeline based on filter
+                const timelineSlider = $('#mapSlider');
+                const timelineOptions = $('#sliderOptions').empty();
+                const timelinePrev = $('<div>').attr("id", "timelinePrev").addClass("timelinePrev").text("<");
+                const timelineNext = $('<div>').attr("id", "timelineNext").addClass("timelineNext").text(">");
+
+                function addTimelineOption(year) {
+                    if (year < 0){
+                        year = year.toString();
+                        year = year.substr(1) + " BCE";
+                    } else {
+                        year = year + " CE"; 
+                    }
+                    
+                    timelineSlider.show();
+                    const optionDiv = $('<div>').addClass('timelineOption');
+                    const input = $('<input>').attr({
+                        type: 'radio',
+                        name: 'timelineValue',
+                        id: year,
+                        value: year
+                    });
+
+                    const optionLabel = $('<label>').attr('for', year).text(year);
+                    
+                    optionDiv.append(input, optionLabel);
+                    timelineOptions.append(optionDiv);
+                }
+
+                //set timeline
+                var earliestReligionVal = 0;
+                var majorReligion = false;
+
+                for (let religion in religionStart) {
+                    if (religionStart[religion] < earliestReligionVal) {
+                        earliestReligion = religion;
+                        earliestReligionVal = religionStart[religion];
+                    }
+                }
+
+                var timelineYears = [];
+                var timelineStart;
+                var timelineEnd;
+                var minYear;
+                var maxYear = 2020;
+
+                function createTimeline(yearStart, yearEnd) {
+                    for (var year = yearStart; year <= yearEnd; year += 10) {
+                        timelineYears.push(year);
+                    }
+
+                    for (let i = 0; i < timelineYears.length; i++) {
+                        addTimelineOption(timelineYears[i]);
+                    }
+                }
+
+                if(religionFilter == "All Religions"){
+                    minYear = earliestReligionVal;
+                    timelineStart = minYear;
+                    timelineEnd = minYear + 190;
+                } else {
+                    for (religion in religionStart) {
+                        if (religionFilter == religion){
+                            majorReligion = true;
+
+                            minYear = religionStart[religion];
+                            timelineStart = minYear;
+                            timelineEnd = minYear + 190;
+                        }
+                        if (!majorReligion) {
+                            timelineSlider.hide();
+                        }
+                    }
+                }
+
+                function createSlider() {
+                    timelineYears = [];
+                    timelineOptions.empty();
+                    timelineOptions.append(timelinePrev);
+                    timelineOptions.append(createTimeline(timelineStart, timelineEnd));
+                    timelineOptions.append(timelineNext);
+                }
+
+                createSlider();
+
+                $(document).on('click', '#timelinePrev', function() {
+                    timelineEnd = timelineStart;
+                    timelineStart -= 190;
+                    
+                    if (timelineStart <= minYear) {
+                        timelineStart = minYear;
+                        timelineEnd = minYear + 190;
+
+                        $('#timelinePrev').css("color", "#A6A6A6");
+                        $('#timelinePrev').css("cursor", "default");
+                    } else {
+                        $('#timelinePrev').css("color", "#000000");
+                        $('#timelinePrev').css("cursor", "pointer");
+                        $('#timelineNext').css("color", "#000000");
+                        $('#timelineNext').css("cursor", "pointer");
+                    }
+
+                    createSlider();
+                  });
+
+                $(document).on('click', '#timelineNext', function() {
+                    timelineStart = timelineEnd;
+                    timelineEnd += 190;
+                
+                    if (timelineEnd >= maxYear) {
+                        timelineStart = maxYear - 190;
+                        timelineEnd = maxYear;
+
+                        $('#timelineNext').css("color", "#A6A6A6");
+                        $('#timelineNext').css("cursor", "default");
+                    } else {
+                        $('#timelinePrev').css("color", "#000000");
+                        $('#timelinePrev').css("cursor", "pointer");
+                        $('#timelineNext').css("color", "#000000");
+                        $('#timelineNext').css("cursor", "pointer");
+                    }
+                
+                    createSlider();
+                });
+
+                //set color based on filter
                 switch(religionFilter){
                     case "All Religions":
                         applyFilter = religionColors;
@@ -172,7 +309,9 @@ $(function() {
                         document.getElementById(country).style.stroke = "#FFFFFF";
 
                         prevailingReligionVal = 0;
+
                     } else {
+                        //color
                         var totalPopulation = 0;
                         var religionPercentage = 0;
                         var religionFilterVal = 0;
@@ -213,6 +352,7 @@ $(function() {
                         totalPopulation = 0;
                         religionPercentage = 0;
                         religionFilterVal = 0;
+
                     }
                 }
             }

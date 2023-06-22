@@ -129,7 +129,8 @@ g:hover {
     background: #FFFFFF;
     font-size: 14px;
     transform: scale(1.5);
-    cursor: pointer;
+    color: #A6A6A6;
+    cursor: default;
 }
 
 .sliderOptions .timelineNext {
@@ -141,6 +142,7 @@ g:hover {
 
 .sliderOptions input[type=radio]{
     accent-color: #000000;
+    cursor: pointer;
     transform: scale(1.3);
 }
 
