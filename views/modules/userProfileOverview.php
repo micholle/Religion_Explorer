@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <?php
         require 'sidebar.php';
-        require 'userbasicinfo.php';
+        require 'userBasicInfo.php';
     ?>
 </head>
 
@@ -22,18 +22,18 @@
     <div class="mainContent">
         <div class="container mw-100 mh-100">
             <?php  
-            $userbasicinfo_html = create_userbasicinfo();
-            echo $userbasicinfo_html;
+                $userBasicInfo_html = create_userBasicInfo();
+                echo $userBasicInfo_html;
             ?>
 
             <div class="row no-gutters justify-content-center no-gutters userTabsContainer">
                 <div class="col-12 d-flex justify-content-center align-items-start userTabs">
                     <div class="tabs activeTab">Overview</div>
-                    <a href="userprofile-posts.php"><div class="tabs">Posts</div></a>
-                    <a href="userprofile-comments.php"><div class="tabs">Comments</div></a>
-                    <a href="userprofile-bookmarks.php"><div class="tabs">Bookmarks</div></a>
-                    <a href="userprofile-personalcalendar.php"><div class="tabs">Personal Calendar</div></a>
-                    <a href="userprofile-statistics.php"><div class="tabs">Statistics</div></a>
+                    <a href="userProfilePosts.php"><div class="tabs">Posts</div></a>
+                    <a href="userProfileComments.php"><div class="tabs">Comments</div></a>
+                    <a href="userProfileBookmarks.php"><div class="tabs">Bookmarks</div></a>
+                    <a href="userProfilePersonalCalendar.php"><div class="tabs">Personal Calendar</div></a>
+                    <a href="userProfileStatistics.php"><div class="tabs">Statistics</div></a>
                     <div class="tabs">Achievements</div>
                 </div>
 

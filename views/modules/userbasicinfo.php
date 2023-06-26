@@ -1,6 +1,6 @@
 <?php
-function create_userbasicinfo() {
-    $userbasicinfo_html = '
+function create_userBasicinfo() {
+    $userBasicInfo_html = '
         <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
 
             <div class="col-3 d-flex justify-content-end align-items-end">
@@ -68,12 +68,12 @@ function create_userbasicinfo() {
             </div>
 
             <div class="col-3 d-flex flex-column justify-content-start align-items-start buttonProfile">
-                <a href="userprofile-editprofile.php"><button class="roundedButton">Edit Profile</button></a>
+                <a href="userProfileEditProfile.php"><button class="roundedButton">Edit Profile</button></a>
             </div>
 
         </div>
         ';
 
-        return $userbasicinfo_html;
+        return $userBasicInfo_html;
     }
     ?>
