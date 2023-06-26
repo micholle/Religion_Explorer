@@ -103,7 +103,7 @@
                                 <div class="col-3 d-flex justify-content-center align-items-center">
                                     <p>Username</p>
                                 </div>
-                                <div class="col-9 d-flex justify-content-start align-items-center personalInfoInput">
+                                <div class="col-9 d-flex justify-content-start align-items-center">
                                     <input type="text" id="" name="" placeholder="Placeholder">
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                 <div class="col-3 d-flex justify-content-center align-items-center">
                                     <p>Email</p>
                                 </div>
-                                <div class="col-9 d-flex justify-content-start align-items-center personalInfoInput">
+                                <div class="col-9">
                                     <input type="text" id="" name="" placeholder="Placeholder">
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
                                 <div class="col-3 d-flex justify-content-center align-items-center">
                                     <p>Password</p>
                                 </div>
-                                <div class="col-9 personalInfoInput">
+                                <div class="col-9">
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-start align-items-start">
                                             <input type="password" id="" name="" placeholder="Placeholder">
@@ -137,7 +137,7 @@
                                 <div class="col-3 d-flex justify-content-center align-items-center">
                                     <p>Religious Affiliation</p>
                                 </div>
-                                <div class="col-9 d-flex justify-content-start align-items-center personalInfoInput">
+                                <div class="col-9 d-flex justify-content-start align-items-center">
                                     <select id="" name="">
                                         <option value="" disabled selected hidden>Choose your religion</option>
                                         <option value="">Buddhism</option>

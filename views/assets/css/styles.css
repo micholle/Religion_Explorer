@@ -1022,8 +1022,14 @@ p {
     background-position: right 15px center;
 }
 
-.editProfileContainer select:focus {
-    border-color: #2CA464;
+.personalInfoContainer input:focus {
+    border-color: #2CA464 !important;
+    outline: none;
+    transition: 0.5s;
+}
+
+.personalInfoContainer select:focus {
+    border-color: #2CA464 !important;
     outline: none;
     transition: 0.5s;
 }
