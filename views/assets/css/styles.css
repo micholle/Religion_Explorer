@@ -567,7 +567,7 @@ p {
     margin: 0px 0px;
 }
 
-#loginSignup input[type=text],input[type=password] {
+#loginSignup input[type=text],input[type=password]{
     background-color: #FAFAFA;
     color: #3E3E3E;
     border-radius: 15px;
@@ -578,6 +578,7 @@ p {
     margin: 5px 0px;
     padding: 0px 15px;
 }
+
 #loginSignup .forgotLink {
     margin-bottom: 0px;
     font-family: Lexend;
@@ -835,10 +836,6 @@ p {
     border-bottom: solid #D0D0D0 2px;
 }
 
-.userBasicInfo p {
-    margin-top: -10px;
-}
-
 .basicInfoContainer p {
     font-size: 16px;
 }
@@ -876,6 +873,11 @@ p {
 .buttonProfile {
     height: 170px;
     padding: 3px 0;
+}
+
+.buttonProfile a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .userTabsContainer {
@@ -956,4 +958,100 @@ p {
 .postVotes {
     width: 20px;
     height: 20px;
+}
+
+.editNicknameButton {
+    background-color: #B3B3B3;
+    color: white;
+    border-style: none;
+    border-radius: 30px;
+    font-family: Lexend;
+    font-size: 12px;
+    height: 25px;
+    padding: 0 20px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+}
+
+.nicknameContainer {
+    margin-bottom: 15px;
+    height: 25px;
+}
+
+.editProfileContainer {
+    font-family: Lexend;
+    padding: 20px 0;
+}
+
+.editProfileContainer p {
+    font-size: 16x;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.editProfileContainer input[type=text],input[type=password] {
+    background-color: #FAFAFA;
+    width: 80%;
+    color: #3E3E3E;
+    border-radius: 15px;
+    border: solid #D6D6D6 2px;
+    font-family: Lexend;
+    font-size: 16px;
+    height: 45px;
+    margin: 5px 0px;
+    padding: 0px 15px;
+}
+
+.editProfileContainer select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: solid #D6D6D6 2px;
+    border-radius: 15PX;
+    font-family: Lexend;
+    height: 45px;
+    margin: 5px 0px;
+    padding: 0px 15px;
+    width: 80%;
+    color: #3E3E3E;
+    background-color: #FAFAFA;
+    font-size: 16px;
+    background-image: url("../img/dropdown.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+}
+
+.editProfileContainer select:focus {
+    border-color: #2CA464;
+    outline: none;
+    transition: 0.5s;
+}
+
+.achBlock {
+    margin-bottom: 20px;
+}
+
+.achContainer {
+    border: solid #D6D6D6 2px;
+    border-radius: 20px
+}
+
+.settingsContainer {
+    border: solid #D6D6D6 2px;
+    border-radius: 20px
+}
+
+.editPasswordButton {
+    background-color: #B3B3B3;
+    color: white;
+    border-style: none;
+    border-radius: 30px;
+    font-family: Lexend;
+    font-size: 12px;
+    height: 25px;
+    padding: 0 15px;
+    margin-right: 10px;
+    text-align: center;
+    transition: background-color 0.5s ease;
 }

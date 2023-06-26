@@ -18,8 +18,11 @@ function create_userbasicinfo() {
                         </div>
 
                         <div class="row d-flex justify-content-center align-items-center">
-                            <div class="col-12 mh-100 d-flex justify-content-start">
-                                <p>aka Johnny</p>
+                            <div class="col-4 mh-100 d-flex justify-content-start">
+                                <p class="nicknameText">aka Johnny</p>
+                            </div>
+                            <div class="col-8 mh-100 d-flex justify-content-start">
+                                <button class="editNicknameButton">Edit Nickname</button>
                             </div>
                         </div>
 
@@ -31,7 +34,7 @@ function create_userbasicinfo() {
 
                         <div class="row d-flex justify-content-start align-items-center userBasicStats">
                             <div class="col-1 d-flex justify-content-start align-items-center">
-                                <img src="../assets/img/userBasicStats-clock.png" width="25px">
+                                <img src="../assets/img/userBasicStats-clock.png" width="20px">
                             </div>
                             
                             <div class="col-8 d-flex justify-content-start align-items-center">
@@ -41,7 +44,7 @@ function create_userbasicinfo() {
 
                         <div class="row d-flex justify-content-start align-items-center userBasicStats">
                             <div class="col-1 d-flex justify-content-start align-items-center">
-                                <img src="../assets/img/userBasicStats-star.png" width="25px">
+                                <img src="../assets/img/userBasicStats-star.png" width="20px">
                             </div>
                             
                             <div class="col-8 d-flex justify-content-start align-items-center">
@@ -51,7 +54,7 @@ function create_userbasicinfo() {
 
                         <div class="row d-flex justify-content-start align-items-center userBasicStats">
                             <div class="col-1 d-flex justify-content-start align-items-center">
-                                <img src="../assets/img/userBasicStats-feather.png" width="25px">
+                                <img src="../assets/img/userBasicStats-feather.png" width="20px">
                             </div>
                             
                             <div class="col-8 d-flex justify-content-start align-items-center">
@@ -65,7 +68,7 @@ function create_userbasicinfo() {
             </div>
 
             <div class="col-3 d-flex flex-column justify-content-start align-items-start buttonProfile">
-                <button class="roundedButton">Edit Profile</button></a>
+                <a href="userprofile-editprofile.php"><button class="roundedButton">Edit Profile</button></a>
             </div>
 
         </div>
