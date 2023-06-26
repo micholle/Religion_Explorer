@@ -308,3 +308,120 @@ g:hover {
     z-index: 10;
     cursor: pointer;
 }
+
+/* calendar */
+.calendar {
+    display: flex;
+    flex-flow: column;
+    font-family: "Lexend Deca";
+}
+.calendar .header .month-year {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+    padding: 0 10px 10px 10px;
+}
+.calendar .days {
+    display: flex;
+    flex-flow: wrap;
+}
+.calendar .days .day_name {
+    width: calc(100% / 7);
+    display: flex;
+    justify-content: center;
+    border-right: 1px solid #FFFFFF;
+    padding: 20px;
+    background-color: #808080;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    align-text: center;
+    color: #FFFFFF;
+}
+.calendar .days .day_name:nth-child(7) {
+    border: none;
+}
+.calendar .days .day_num {
+    width: calc(100% / 7);
+    display: flex;
+    flex-flow: column;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    padding: 15px;
+    font-weight: bold;
+    color: #363636;
+    min-height: 100px;
+}
+.calendar .days .day_num span {
+    display: inline-flex;
+    width: 30px;
+    font-size: 14px;
+}
+.calendar .days .day_num .calendarEvent {
+    margin-top: 10px;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    color: #FFFFFF;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+.calendar .days .day_num:nth-child(7n+1) {
+    border-left: 1px solid #808080;
+}
+.calendar .days .day_num:hover {
+    background-color: #FDFDFD;
+}
+.calendar .days .day_num.ignore {
+    background-color: #FDFDFD;
+    color: #A6A6A6;
+    cursor: inherit;
+}
+.calendar .days .day_num.selected {
+    background-color: #E0E0E0;
+}
+.month-year {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.calendarFilter {
+    display:flex;
+    justify-content: flex-end;
+}
+.calendarReligion {
+    border-radius: 15px;
+    margin:0 5px 0 0;
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: normal;
+    color: #FFFFFF;
+}
+.calendarMonth {
+    display: flex;
+    align-items: center;
+}
+.calendarMonthButton {
+    border: none;
+    border-radius: 10px;
+    background: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+.calendar .days .day_num .calendarEvent.Buddhism {
+    background-color: #BAA400;
+}
+.calendar .days .day_num .calendarEvent.Christianity {
+    background-color: #56097A;
+}
+.calendar .days .day_num .calendarEvent.Hinduism {
+    background-color: #A81315;
+}
+.calendar .days .day_num .calendarEvent.Islam {
+    background-color: #018744;
+}
+.calendar .days .day_num .calendarEvent.Judaism {
+    background-color: #1334A8;
+}
