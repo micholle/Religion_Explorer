@@ -12,18 +12,6 @@
         <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
     </head>
     <body>
-        <!-- Sidebar -->
-        <div class="sidebar" id="sidebar" style="display:block">
-            <a href="" class="app-logo"><img src="../assets/images/logo.png" alt="Religion Explorer Logo"></a>
-            <a href="" class="menu" id="sidebarProfile"><img src="../assets/images/rabbit.png" alt="Profile Icon"><p>Profile</p></a>
-            <a href="map.php" class="menu" id="sidebarMap"><img src="../assets/images/feat-worldwide.png" alt="World Map Icon"><p>World Map</p></a>
-            <a href="" class="menu" id="sidebarLibrary"><img src="../assets/images/feat-book-stack.png" alt="Library of Resources Icon"><p>Library of Resources</p></a>
-            <a href="" class="menu" id="sidebarForum"><img src="../assets/images/feat-chat.png" alt="Discussion Forum Icon"><p>Discussion Forum</p></a>
-            <a href="calendar.php" class="menu" id="sidebarCalendar"><img src="../assets/images/feat-calendar.png" alt="Calendar Icon"><p>Calendar</p></a>
-            <a href="" class="menu" id="sidebarNotifications"><img src="../assets/images/bell.png" alt="Notifications Icon"><p>Notifications</p></a>
-            <a href="" class="menu"><img src="../assets/images/logout.png" alt="Logout Icon"><p>Logout</p></a>
-        </div>
-
         <!-- Modal -->
         <div class="modal fade" id="calendarEventModal">
             <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -40,7 +28,7 @@
             </div>
         </div>
 
-        <div style="margin-left:20%">
+        <div>
             <!-- Calendar -->
             <?php
             function generateCalendar($date) {
