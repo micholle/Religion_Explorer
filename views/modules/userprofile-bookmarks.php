@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Religion Explorer</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <?php
+        require 'sidebar.php';
+        require 'userbasicinfo.php';
+    ?>
+</head>
+
+<body>
+    <?php  
+    $sidebar_html = create_sidebar();
+    echo $sidebar_html;
+    ?>
+
+    <div class="mainContent">
+        <div class="container mw-100 mh-100">
+            <?php  
+            $userbasicinfo_html = create_userbasicinfo();
+            echo $userbasicinfo_html;
+            ?>
+
+            <div class="row no-gutters justify-content-center no-gutters userTabsContainer">
+                <div class="col-12 d-flex justify-content-center align-items-start userTabs">
+                    <a href="userprofile-overview.php"><div class="tabs">Overview</div></a>
+                    <a href="userprofile-posts.php"><div class="tabs">Posts</div></a>
+                    <a href="userprofile-comments.php"><div class="tabs">Comments</div></a>
+                    <div class="tabs activeTab">Bookmarks</div>
+                    <a href="userprofile-personalcalendar.php"><div class="tabs">Personal Calendar</div></a>
+                    <a href="userprofile-statistics.php"><div class="tabs">Statistics</div></a>
+                    <div class="tabs">Achievements</div>
+                </div>
+
+                <div class="userContent">
+                    <div class="userContentContainer">
+                        <img src="../assets/img/bookmark.png" class="userProfBookmark">
+                        <p>ReligionExplorer_User123 has added ‘Mere Christianity’ to their bookmarks.<p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let minimize = document.querySelector('#minimize');
+    let sidebar = document.querySelector('.sidebar');
+    let textImage = document.querySelector('#text');
+    let minmaxImage = document.querySelector('#minmax');
+
+    minimize.onclick = function () {
+        sidebar.classList.toggle('active');
+        if (sidebar.classList.contains('active')) {
+            textImage.style.display = 'none';
+            minmaxImage.src = '../assets/img/maximize.png';
+        } else {
+            textImage.style.display = 'inline-block';
+            minmaxImage.src = '../assets/img/minimize.png';
+        }
+    };
+</script>
+
+</html>

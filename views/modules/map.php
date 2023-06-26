@@ -13,7 +13,7 @@
         <script type="text/javascript" src="../js/script.js"></script>
 
         <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
-        <link type="text/css" rel="stylesheet" href="../assets/css/style.css">
+        <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
     </head>
     <body>
         <!-- Sidebar -->
