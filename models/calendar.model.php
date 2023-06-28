@@ -8,7 +8,7 @@ class calendarModel{
         $allEvents = [];
 
         foreach ($events as $event) {
-            $data= [
+            $data = [
                 "religion" => $event["religion"],
                 "date" => $event["date"]
             ];

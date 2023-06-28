@@ -14,5 +14,131 @@
     </head>
     <body>
         <div id="communitySidebar"></div>
+        <div class="mainContent">
+            <div>
+                Community Creations
+                <input type="search" id="communitySearch" name="communitySearch" placeholder="Search">
+            </div>
+            <div id="communityScreen">
+                <div>
+                    Start Creating Submissions<br>
+                    Drafts expire after 30 days. After that, those drafts are deleted.<br>
+                    <button id="communityCreate">Create New</button>
+                </div>
+                <div>
+                    Photos
+                    <div id="communityPhotos"></div>
+                    <button id="communityPhotosMore">See More</button>
+                </div>
+                <div>
+                    Videos
+                    <div id="communityVideos"></div>
+                    <button id="communityVideosMore">See More</button>
+                </div>
+                <div>
+                    Reading Materials
+                    <div id="communityBlogs"></div>
+                    <button id="communityVideosMore">See More</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="communityModal">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Submit a Creation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="communityForm" method="post">
+                            <div class="communityUploadArea">
+                                <input type="file" class="communityUpload" id="communityUpload" multiple accept="image/*, video/*" onchange="handleFiles(this.files)">
+                                <label class="button" for="communityUpload">
+                                    <img src="../assets/img/community-upload.png"><br>
+                                    Choose a file or drag it here.
+                                </label>
+                            </div>
+                            <input id="communityTitle" name="communityTitle" placeholder="Title">
+                            <select id="communityCategory" name="communityCategory">
+                                <option selected hidden disabled>Category</option>
+                                <optgroup label="Religion">
+                                    <option value="">Buddhism</option>
+                                    <option value="">Christianity</option>
+                                    <option value="">Hinduism</option>
+                                    <option value="">Islam</option>
+                                    <option value="">Judaism</option>
+                                </optgroup>
+                                <optgroup label="Topic">
+                                    <option value="saab">Religious Traditions</option>
+                                    <option value="mercedes">Historical Context</option>
+                                    <option value="mercedes">Theology</option>
+                                    <option value="mercedes">Religious Practices</option>
+                                    <option value="mercedes">Ethics</option>
+                                    <option value="mercedes">Social Issues</option>
+                                </optgroup>
+                            </select>
+                            <br>
+                            <textarea id="communityDescription" name="communityDescription" placeholder="Description"></textarea>
+                            <br>
+                            <button type="button" id="communityPublish">Publish</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="communityDisplayModal">
+            <div class="modal-dialog modal-xs modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                        <div class="modal-body" id="communityDisplayContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="reportContentModal">
+            <div class="modal-dialog modal-xs modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        Report Content
+                        <div id="reportContentHeader"></div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="reportContentForm" method="post">
+                            As accurately as you can, please tell us what happened. <br>
+                            <input type="checkbox" id="privacy violation" name="privacy violation" value="privacy violation">
+                            <label for="privacy violation">Privacy Violation</label><br>
+                            <input type="checkbox" id="misinformation" name="misinformation" value="misinformation">
+                            <label for="misinformation">Misinformation</label><br>
+                            <input type="checkbox" id="graphic content" name="graphic content" value="graphic content">
+                            <label for="graphic content">Graphic Content</label><br>
+                            <input type="checkbox" id="offensive language" name="offensive language" value="offensive language">
+                            <label for="offensive language">Offensive Language</label><br>
+                            <input type="checkbox" id="spam" name="spam" value="spam">
+                            <label for="spam">Spam or Unwanted Content</label><br>
+                            <input type="checkbox" id="others" name="others" value="others">
+                            <label for="others">Others, Specify:</label><br>
+                            <input id="othersSpecify" name="othersSpecify"><br>
+                            <textarea id="reportContentAdditional" name="reportContentAdditional" placeholder="Give additional context."></textarea><br>
+                            <button type="button" id="submitReportContent">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="communityNoticeModal">
+            <div class="modal-dialog modal-xs modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header" id="communityNoticeHeader"></div>
+                    <div class="modal-body" id="communityNoticeContent"></div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

@@ -8,7 +8,7 @@ class calendarAjax{
     }
 }
 
-$setCalendarData = new calendarAjax();
-$setCalendarData -> ajaxGetCalendarData();
+$getCalendarData = new calendarAjax();
+$getCalendarData -> ajaxGetCalendarData();
 
 ?>

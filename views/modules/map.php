@@ -8,7 +8,6 @@
         <script type="text/javascript" src="../assets/js/chart.umd.js"></script>
         <!-- <script type="text/javascript" src="../assets/js/chartjs-plugin-datalabels.min.js"></script> -->
 
-
         <script type="text/javascript" src="../js/map.js"></script>
         <script type="text/javascript" src="../js/script.js"></script>
 
