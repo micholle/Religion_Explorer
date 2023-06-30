@@ -16,17 +16,7 @@
     </head>
     <body>
         <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
-            <div class="closeSidebar" id="closeSidebar">&times;</div>
-            <a href="" class="app-logo"><img src="../assets/images/logo.png" alt="Religion Explorer Logo"></a>
-            <a href="" class="menu" id="sidebarProfile"><img src="../assets/images/rabbit.png" alt="Profile Icon"><p>Profile</p></a>
-            <a href="map.php" class="menu" id="sidebarMap"><img src="../assets/images/feat-worldwide.png" alt="World Map Icon"><p>World Map</p></a>
-            <a href="" class="menu" id="sidebarLibrary"><img src="../assets/images/feat-book-stack.png" alt="Library of Resources Icon"><p>Library of Resources</p></a>
-            <a href="" class="menu" id="sidebarForum"><img src="../assets/images/feat-chat.png" alt="Discussion Forum Icon"><p>Discussion Forum</p></a>
-            <a href="calendar.php" class="menu" id="sidebarCalendar"><img src="../assets/images/feat-calendar.png" alt="Calendar Icon"><p>Calendar</p></a>
-            <a href="" class="menu" id="sidebarNotifications"><img src="../assets/images/bell.png" alt="Notifications Icon"><p>Notifications</p></a>
-            <a href="" class="menu"><img src="../assets/images/logout.png" alt="Logout Icon"><p>Logout</p></a>
-        </div>
+        <div id="mapSidebar"></div>
 
         <!-- Filter -->
         <div id="mapFilter" class="mapFilter">
@@ -134,7 +124,7 @@
         THE SOFTWARE.
 
         -->
-        <div id="main" class="main">
+        <div id="mainContent" class="mapScreen">
             <div class="mapHeader">
                 <div class="showSidebar"><a id="showSidebar">☰</a></div>
             </div>
@@ -1531,94 +1521,7 @@
                 </circle>
             </svg>
             <div id="mapSlider" class="mapSlider">
-                <div id="sliderOptions" class="sliderOptions">
-                    <!-- <div class="timelinePrev"><</div> -->
-                    <!-- <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1820" value="1820">
-                        <label for="1820"><p>1820</p></label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1830" value="1830">
-                        <label for="1830">1830</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1840" value="1840">
-                        <label for="1840">1840</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1850" value="1850">
-                        <label for="1850">1850</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1860" value="1860">
-                        <label for="1860">1860</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1870" value="1870">
-                        <label for="1870">1870</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1880" value="1880">
-                        <label for="1880">1880</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1890" value="1890">
-                        <label for="1890">1890</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1900" value="1900">
-                        <label for="1900">1900</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1910" value="1910">
-                        <label for="1910">1910</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1920" value="1920">
-                        <label for="1920">1920</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1930" value="1930">
-                        <label for="1930">1930</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1940" value="1940">
-                        <label for="1940">1940</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1950" value="1950">
-                        <label for="1950">1950</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1960" value="1960">
-                        <label for="1960">1960</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1970" value="1970">
-                        <label for="1970">1970</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1980" value="1980">
-                        <label for="1980">1980</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="1990" value="1990">
-                        <label for="1990">1990</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="2000" value="2000">
-                        <label for="2000">2000</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="2010" value="2010">
-                        <label for="2010">2010</label>
-                    </div>
-                    <div class="timelineOption">
-                        <input type="radio" name="timelineValue" id="2020" value="2020" checked>
-                        <label for="2020">2020</label>
-                    </div> -->
-                    <!-- <div class="timelineNext">></div> -->
-                </div>
+                <div id="sliderOptions" class="sliderOptions"></div>
                 <hr id="sliderLine" class="sliderLine">  
             </div>
         </div>

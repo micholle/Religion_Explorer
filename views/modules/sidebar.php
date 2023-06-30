@@ -17,20 +17,20 @@ function create_sidebar() {
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="map.php">
                         <img src="../assets/img/feat-worldwide.png">
                         <span class="navItem">World Map</span>
                     </a>
                 </li>
 
                 <li class="dropdown">
-                    <a href="#">
+                    <a href="library.php">
                         <img src="../assets/img/feat-book-stack.png">
                         <span class="navItem">Library of Resources</span>
                     </a>
                     <ul class="dropdownMenu">
                         <li>
-                            <a href="#">
+                            <a href="community.php">
                                 <img src="../assets/img/diversity.png">
                                 <span class="navItem">Community Creations</span>
                             </a>
@@ -46,7 +46,7 @@ function create_sidebar() {
                 </li>
                 
                 <li>
-                    <a href="#">
+                    <a href="calendar.php">
                         <img src="../assets/img/feat-calendar.png">
                         <span class="navItem">Calendar</span>
                     </a>

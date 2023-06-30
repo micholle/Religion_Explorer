@@ -40,8 +40,8 @@ g:hover {
     cursor: pointer;
 }
 
-.main {
-    position: relative;
+.mapScreen {
+    /* position: relative; */
     height: 90vh;
 }
 

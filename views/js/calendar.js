@@ -1,4 +1,12 @@
 $(function() {
+    $.ajax({
+        url: "../../ajax/showSidebar.ajax.php",
+        method: "POST",
+        success:function(data){
+            $("#calendarSidebar").html(data);
+        }
+    });
+
     $('#buddhismEvents').click(function(){
         enableFilter("Buddhism");
     });
