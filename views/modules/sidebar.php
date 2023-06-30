@@ -1,6 +1,9 @@
 <?php
 function create_sidebar() {
     $sidebar_html = '
+        <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
+        <script type="text/javascript" src="../js/script.js"></script>
+        
         <div class="sidebar">
             <div class="top">
                 <div class="logo d-flex justify-content-center align-items-center">
@@ -72,7 +75,7 @@ function create_sidebar() {
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" id="reportUser">
                                 <img src="../assets/img/report.png">
                                 <span class="navItem">Report a User</span>
                             </a>

@@ -88,4 +88,27 @@ $(function() {
         $("#sidebarNotifications").removeAttr("data-toggle");
         $('.popover').popover('dispose');
     });
+
+    $.ajax({
+        url: "../../ajax/showReportUser.ajax.php",
+        method: "POST",
+        success:function(data){
+            $("#reportUserDiv").html(data);
+        }
+    });
+
+    $("#reportUser").click(function () { 
+        $("#reportUserModal").modal();
+    });
+
+    $("#submitReportUser").click(function () { 
+        $("#reportUserModal").removeClass("fade").modal("hide");
+        $("#reportUserModal").modal("dispose");
+
+        $("#resultHeader").html("Report Received");
+        $("#resultContent").html("The team will review your complaint. Please expect a notification in 3-5 business days. <br>");
+        $("#resultContent").append("<button data-dismiss='modal'>Thanks!</button>");
+        $("#resultModal").modal();
+        $("#resultModal").show();
+    });
 });

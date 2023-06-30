@@ -75,11 +75,21 @@
         </div>
 
         <!-- Modal -->
+        <div id="reportUserDiv"></div>
         <div class="modal fade" id="libraryBasicInformationModal">
             <div class="modal-dialog modal-xs modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header" id="libraryBasicInformationHeader"></div>
                     <div class="modal-body" id="libraryBasicInformationContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="resultModal">
+            <div class="modal-dialog modal-xs modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header" id="resultHeader"></div>
+                    <div class="modal-body" id="resultContent"></div>
                 </div>
             </div>
         </div>
