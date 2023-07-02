@@ -14,31 +14,55 @@
     </head>
     <body>
         <div id="communitySidebar"></div>
-        <div class="mainContent">
+
+        <div class="pageContainer">
+            <div class="container mw-100 mh-100">
+                <div class="row d-flex justify-content-center align-items-center pageHeader">
+                    <div class="col-4 d-flex justify-content-start align-items-center">
+                        <h1>Community Creations</h1>
+                    </div>
+                    <div class="col-8 d-flex justify-content-start align-items-center">
+                        <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community">
+                    </div>
+                </div>
             <div>
-                Community Creations
+                <!-- Community Creations
                 <input type="search" id="communitySearch" name="communitySearch" placeholder="Search">
-            </div>
-            <div id="communityScreen">
-                <div>
-                    Start Creating Submissions<br>
-                    Drafts expire after 30 days. After that, those drafts are deleted.<br>
-                    <button id="communityCreate">Create New</button>
+            </div> -->
+            <div class="row pageContent">
+                <div class="col-12 d-flex justify-content-center align-items-center flex-column createSubmissionsBox">
+                    <!-- <div id="communityScreen"> -->
+                    <img src="../assets/img/commcreations.png">
+                    <h1>Start Creating Submissions</h1>
+                    <p>Drafts expire after 30 days. After that, those drafts are deleted.</p>
+                    <button id="communityCreate" class="roundedButton">Create New</button>
                 </div>
-                <div>
-                    Photos
-                    <div id="communityPhotos"></div>
-                    <button id="communityPhotosMore">See More</button>
+                <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
+                    <div>
+                        <h1>Photos</h1>
+                        <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
+                            <div id="communityPhotos"></div>
+                            <button id="communityPhotosMore" class="roundedButton">See More</button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    Videos
-                    <div id="communityVideos"></div>
-                    <button id="communityVideosMore">See More</button>
+                <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
+                    <div>
+                        <h1>Videos</h1>
+                        <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
+                            <div id="communityVideos"></div>
+                            <button id="communityVideosMore" class="roundedButton">See More</button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    Reading Materials
-                    <div id="communityBlogs"></div>
-                    <button id="communityVideosMore">See More</button>
+                <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
+                    <div>
+                        <h1>Reading Materials</h1>
+                        <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
+                            <div id="communityBlogs"></div>
+                            <button id="communityVideosMore" class="roundedButton">See More</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,43 +71,50 @@
         <div class="modal fade" id="communityModal">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Submit a Creation</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-header border-0 text-center">
+                        <h5 class="modal-title w-100">Submit a Creation</h5>
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
                     </div>
                     <div class="modal-body">
-                        <form id="communityForm" method="post">
-                            <div class="communityUploadArea">
-                                <input type="file" class="communityUpload" id="communityUpload" multiple accept="image/*, video/*" onchange="handleFiles(this.files)">
-                                <label class="button" for="communityUpload">
-                                    <img src="../assets/img/community-upload.png"><br>
-                                    Choose a file or drag it here.
-                                </label>
-                            </div>
-                            <input id="communityTitle" name="communityTitle" placeholder="Title">
-                            <select id="communityCategory" name="communityCategory">
-                                <option selected hidden disabled>Category</option>
-                                <optgroup label="Religion">
-                                    <option value="">Buddhism</option>
-                                    <option value="">Christianity</option>
-                                    <option value="">Hinduism</option>
-                                    <option value="">Islam</option>
-                                    <option value="">Judaism</option>
-                                </optgroup>
-                                <optgroup label="Topic">
-                                    <option value="saab">Religious Traditions</option>
-                                    <option value="mercedes">Historical Context</option>
-                                    <option value="mercedes">Theology</option>
-                                    <option value="mercedes">Religious Practices</option>
-                                    <option value="mercedes">Ethics</option>
-                                    <option value="mercedes">Social Issues</option>
-                                </optgroup>
-                            </select>
-                            <br>
-                            <textarea id="communityDescription" name="communityDescription" placeholder="Description"></textarea>
-                            <br>
-                            <button type="button" id="communityPublish">Publish</button>
-                        </form>
+                        <div class="container">
+                            <form id="communityForm" method="post">
+                                <div class="communityUploadArea d-flex justify-content-center align-items-center flex-column">
+                                    <input type="file" class="communityUpload" id="communityUpload" multiple accept="image/*, video/*" onchange="handleFiles(this.files)">
+                                    <label class="button text-center" for="communityUpload">
+                                        <img src="../assets/img/community-upload.png" class="commUploadImg"><br>
+                                        <p>Choose a file or drag it here.</p>
+                                    </label>
+                                </div>
+                                <div class="row communityUploadDetails">
+                                    <div class="col-8 d-flex justify-content-center align-items-center">
+                                        <input id="communityTitle" name="communityTitle" placeholder="Title">
+                                    </div>
+                                    <div class="col-4 d-flex justify-content-center align-items-center">
+                                        <select id="communityCategory" name="communityCategory">
+                                            <option selected hidden disabled>Category</option>
+                                            <optgroup label="Religion">
+                                                <option value="">Buddhism</option>
+                                                <option value="">Christianity</option>
+                                                <option value="">Hinduism</option>
+                                                <option value="">Islam</option>
+                                                <option value="">Judaism</option>
+                                            </optgroup>
+                                            <optgroup label="Topic">
+                                                <option value="saab">Religious Traditions</option>
+                                                <option value="mercedes">Historical Context</option>
+                                                <option value="mercedes">Theology</option>
+                                                <option value="mercedes">Religious Practices</option>
+                                                <option value="mercedes">Ethics</option>
+                                                <option value="mercedes">Social Issues</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                <br>
+                                <textarea id="communityDescription" name="communityDescription" placeholder="Description"></textarea>
+                                <br>
+                                <button type="button" id="communityPublish">Publish</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

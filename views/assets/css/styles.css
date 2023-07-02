@@ -25,10 +25,6 @@ p {
     margin: 0;
 }
 
-body {
-    padding: 20px;
-    /* background-color: #021c21; */
-}
 g {
     fill: #5d5d5d;
     stroke: #FFFFFF;
@@ -145,6 +141,17 @@ h5 {
 .modal-content {
     text-align: justify;
     padding: 30px;
+}
+
+.modal-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.commUploadImg {
+    width: 40px;
+    margin: 10px;
 }
 
 /* map */
@@ -403,6 +410,38 @@ h5 {
     border-radius: 15px;
     width: 100%;
     height: 200px;
+    margin-bottom: 20px;
+}
+
+.communityUploadDetails input[id=communityTitle] {
+    background-color: #FAFAFA;
+    color: #3E3E3E;
+    border-radius: 15px;
+    border: solid #D6D6D6 2px;
+    font-family: Lexend;
+    font-size: 16px;
+    height: 45px;
+    padding: 0px 15px;
+    width: 100%;
+}
+
+.communityUploadDetails select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: solid #D6D6D6 2px;
+    border-radius: 15px;
+    font-family: Lexend;
+    height: 45px;
+    padding: 0px 15px;
+    width: 100%;
+    color: #3E3E3E;
+    background-color: #FAFAFA;
+    font-size: 16px;
+    background-image: url("../img/dropdown.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
 }
 
 /*navbar*/
@@ -808,6 +847,7 @@ p {
     border: none;
     border-right: solid #D0D0D0 2px;
     transition: 0.5s ease;
+    z-index: 9999;
 }
   
 .sidebar.active {
@@ -913,7 +953,7 @@ p {
     position: absolute;
     height: 60px;
     left: 96%;
-    background-color: transparent;
+    background-color: tran;
     top: -10px;
     padding-left: 25px;
 }
@@ -937,6 +977,7 @@ p {
 }
 
 .sidebar .dropdown .dropdownMenu a {
+    background-color: white;
     font-size: 16px;
     width: 245px;
     border: solid #D0D0D0 2px;
@@ -999,7 +1040,7 @@ p {
     font-family: Lexend;
     font-size: 16px;
     height: 35px;
-    padding: 0 50px;
+    padding: 0 40px;
     text-align: center;
     transition: background-color 0.5s ease;
 }
@@ -1195,4 +1236,198 @@ p {
     margin-right: 10px;
     text-align: center;
     transition: background-color 0.5s ease;
+} 
+
+/* Style the tab */
+.userProfileTab {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+  
+.userProfileTab .userProfileTabBtn {
+    font-size: 16px;
+    font-family: Lexend;
+    color: #3E3E3E;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: solid transparent 3px;
+}
+
+.userProfileTab .userProfileTabBtn.active {
+    font-weight: 600;
+    border-bottom: solid #2CA464 3px;
+    transition: border-bottom-color 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        border-bottom-color: transparent;
+    }
+    to {
+        border-bottom-color: #2CA464;
+    }
+}
+
+.userProfileTab .userProfileTabBtn.active {
+    animation: slideIn 0.3s forwards;
+}
+
+.userProfileContentBox {
+    padding: 20px;
+}
+
+.userProfileContentBox .userProfileContent {
+    display: none;
+    animation: moving 0.5s ease;
+}
+
+@keyframes moving {
+    from{transform: translateX(50px); opacity: 0;}
+    to{transform: translateX(0px); opacity: 1;}
+}
+
+.userProfileContentBox .userProfileContent.active {
+    display: block;
+}
+
+.userProfileContentBox .userProfileContent h2{
+    margin-bottom: 10px;
+}
+
+/* .userProfileLine {
+    position: absolute;
+    top: 40px;
+    left: 24px;
+    width: 90px;
+    height: 3px;
+    background-color: #2CA464;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+} */
+
+.pageContainer {
+    margin: 0 !important;
+    font-family: Lexend;
+    transition: 0.5s ease;
+    padding-left: 275px;
+}
+
+.pageContainer h1 {
+    color: #3E3E3E;
+    margin: 0;
+    padding: 0;
+    font-family: Lexend;
+}
+
+.sidebar.active ~ .pageContainer {
+    padding-left: 85px;
+    transition: 0.5 ease;
+}
+
+.pageHeader {
+    margin: 0 20px;
+    height: 90px;
+    border-bottom: solid #D0D0D0 2px;
+}
+
+.pageHeader h1 {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.pageHeader input {
+    background-color: #F5F5F5;
+    font-size: 16px;
+    border-radius: 20px;
+    border-color: #3E3E3E;
+    padding: 3px 15px;
+    width: 100%;
+}
+
+.pageContent {
+    margin: 0 20px;
+    padding: 0;
+    height: 100%;
+}
+
+.pageContent h1 {
+    font-size: 22px;
+    padding: 0 !important;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.libraryBasicInfoCont {
+    padding: 15px;
+    border-bottom: solid #D0D0D0 2px;
+}
+
+.libraryBasicInfoCont p {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+
+.libraryBasicInfoBox {
+    background-color: white;
+    border: solid #D0D0D0 2px;
+    border-radius: 25px;
+    padding: 15px;
+    margin: 5px;
+}
+
+.libraryBasicInfoBox img {
+    width: 70px;
+}
+
+.libraryReadMatCont {
+    background-color: yellow;
+    padding: 15px;
+}
+
+.libraryFilterCont {
+    padding: 20px 30px;
+}
+
+.libraryFilterBox {
+    padding: 15px;
+    border: solid #D0D0D0 2px;
+    border-radius: 25px;
+}
+
+.createSubmissionsBox {
+    border-bottom: solid #D0D0D0 2px;
+}
+
+.createSubmissionsBox .roundedButton {
+    margin: 15px 15px 20px;
+}
+
+.createSubmissionsBox img {
+    width: 250px;
+    margin: 20px;
+}
+
+.submissionsContainer {
+    padding-bottom: 20px;
+}
+
+.submissionsContainer .roundedButton {
+    margin-top: 20px;
+}
+
+.submissionsContainer h1{
+    margin: 10px 0px
+}
+
+.submissionsBox {
+    border: solid #D0D0D0 2px;
+    border-radius: 15px;
+    padding: 20px;
 }
