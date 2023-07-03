@@ -1,4 +1,12 @@
 $(function() {
+    $.ajax({
+        url: "../../ajax/showSidebar.ajax.php",
+        method: "POST",
+        success:function(data){
+            $("#mapSidebar").html(data);
+        }
+    });
+
     //initiate colors
     var religionColors = {
         "Buddhism" : "#BAA400",
@@ -289,7 +297,7 @@ $(function() {
                 //loop through all countries
                 for (let country in religionByCountry) {
                     var countryData = religionByCountry[country];
-{}
+
                     if(religionFilter == "All Religions"){
                         //determine prevailing religion of each country
                         for (let religion in countryData) {
@@ -502,4 +510,63 @@ $(function() {
             }
         }
     });
+
+    //timeline overlays
+    $("#timelineOverlay").click(function(){
+        $("#timelineOverlay").css("display", "none");
+    });
+
+    var timelineYear = "2020";
+    $("#sliderOptions").click(function(){
+        var timelineYears = document.getElementsByName("timelineValue");
+
+        for (i = 0; i < timelineYears.length; i++) {
+            if (timelineYears[i].checked){
+                if(timelineYears[i].value != timelineYear){
+                    timelineYear = timelineYears[i].value;
+                    $("#timelineOverlayYear").text(timelineYear);
+                    $("#timelineOverlay").css("display", "block");
+                }
+            }
+        }
+    });
+
+    //help overlay
+    $("#mapHelpButton").click(function(){
+        $("#helpOverlay").css("display", "block");
+
+        //display tooltip
+        $("#Brazil").attr("data-toggle", "popover");
+        $("#mapFilter").attr("data-toggle", "popover");
+        $("#1970").attr("data-toggle", "popover");
+
+        $("#Brazil").popover({
+            content: "Hover on a country to view its prevailing religion, and click on it for more information.",
+            placement: "top"
+        });
+
+        $("#mapFilter").popover({
+            content: "Filter the religion, geographic region, and pins on the map.",
+            placement: "left"
+        });
+
+        // $("#").popover({
+        //     content: "Click on a year to change the year displayed on the map.",
+        //     placement: "top"
+        // });
+
+        $('[data-toggle = "popover"]').popover("show");
+    })
+
+    $("#helpOverlay").click(function(){
+        //hide tooltip
+        $("#Brazil").removeAttr("data-toggle");
+        $("#mapFilter").removeAttr("data-toggle");
+        // $("#").removeAttr("data-toggle");
+
+        $('.popover').popover('dispose');
+
+        $("#helpOverlay").css("display", "none");
+    });
+
 });

@@ -16,67 +16,6 @@ $(function() {
         }
     };
 
-
-    //js functions below this line are temporary---------------------------------------------------------------
-
-    //timeline overlays
-    $("#timelineOverlay").click(function(){
-        $("#timelineOverlay").css("display", "none");
-    });
-
-    var timelineYear = "2020";
-    $("#sliderOptions").click(function(){
-        var timelineYears = document.getElementsByName("timelineValue");
-
-        for (i = 0; i < timelineYears.length; i++) {
-            if (timelineYears[i].checked){
-                if(timelineYears[i].value != timelineYear){
-                    timelineYear = timelineYears[i].value;
-                    $("#timelineOverlayYear").text(timelineYear);
-                    $("#timelineOverlay").css("display", "block");
-                }
-            }
-        }
-    });
-
-    //help overlay
-    $("#mapHelpButton").click(function(){
-        $("#helpOverlay").css("display", "block");
-
-        //display tooltip
-        $("#Brazil").attr("data-toggle", "popover");
-        $("#mapFilter").attr("data-toggle", "popover");
-        $("#1970").attr("data-toggle", "popover");
-
-        $("#Brazil").popover({
-            content: "Hover on a country to view its prevailing religion, and click on it for more information.",
-            placement: "top"
-        });
-
-        $("#mapFilter").popover({
-            content: "Filter the religion, geographic region, and pins on the map.",
-            placement: "left"
-        });
-
-        $("#1970").popover({
-            content: "Click on a year to change the year displayed on the map.",
-            placement: "top"
-        });
-
-        $('[data-toggle = "popover"]').popover("show");
-    })
-
-    $("#helpOverlay").click(function(){
-        //hide tooltip
-        $("#Brazil").removeAttr("data-toggle");
-        $("#mapFilter").removeAttr("data-toggle");
-        $("#1970").removeAttr("data-toggle");
-
-        $('.popover').popover('dispose');
-
-        $("#helpOverlay").css("display", "none");
-    });
-
     //sidebar tooltip    
     $("#sidebarProfile").hover(function(){
         $("#sidebarProfile").attr("data-toggle", "popover");
@@ -150,15 +89,26 @@ $(function() {
         $('.popover').popover('dispose');
     });
 
-    //calendar
-    window.focus()
-
-    window.addEventListener("blur", () => {
-        setTimeout(() => {
-            if (document.activeElement.tagName === "IFRAME") {
-                $("#calendarEventModal").modal();
-                console.log("clicked");
-            }
-        });
+    $.ajax({
+        url: "../../ajax/showReportUser.ajax.php",
+        method: "POST",
+        success:function(data){
+            $("#reportUserDiv").html(data);
+        }
     });
-})
+
+    $("#reportUser").click(function () { 
+        $("#reportUserModal").modal();
+    });
+
+    $("#submitReportUser").click(function () { 
+        $("#reportUserModal").removeClass("fade").modal("hide");
+        $("#reportUserModal").modal("dispose");
+
+        $("#resultHeader").html("Report Received");
+        $("#resultContent").html("The team will review your complaint. Please expect a notification in 3-5 business days. <br>");
+        $("#resultContent").append("<button data-dismiss='modal'>Thanks!</button>");
+        $("#resultModal").modal();
+        $("#resultModal").show();
+    });
+});

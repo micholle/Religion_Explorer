@@ -1,6 +1,9 @@
 <?php
 function create_sidebar() {
     $sidebar_html = '
+        <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
+        <script type="text/javascript" src="../js/script.js"></script>
+        
         <div class="sidebar">
             <div class="top">
                 <div class="logo d-flex justify-content-center align-items-center">
@@ -24,7 +27,7 @@ function create_sidebar() {
                 </li>
 
                 <li class="dropdown">
-                    <a href="#">
+                    <a href="library.php">
                         <img src="../assets/img/feat-book-stack.png">
                         <span class="navItem">Library of Resources</span>
                     </a>
@@ -36,6 +39,7 @@ function create_sidebar() {
                             </a>
                         </li>
                         <li>
+                            <a href="community.php">
                             <a href="community.php">
                                 <img src="../assets/img/diversity.png">
                                 <span class="navItem">Community Creations</span>
@@ -78,7 +82,7 @@ function create_sidebar() {
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" id="reportUser">
                                 <img src="../assets/img/report.png">
                                 <span class="navItem">Report a User</span>
                             </a>

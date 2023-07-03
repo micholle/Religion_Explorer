@@ -12,23 +12,8 @@
         <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
     </head>
     <body>
-        <!-- Modal -->
-        <div class="modal fade" id="calendarEventModal">
-            <div class="modal-dialog modal-sm modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="calendarEvent"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <button type="button">Add to Personal Calendar</button>
-                        <button type="button">Learn More</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div>
+        <div id="calendarSidebar"></div>
+        <div class="mainContent">
             <!-- Calendar -->
             <?php
             function generateCalendar($date) {
@@ -119,7 +104,23 @@
 
             $date = isset($_GET['date']) ? $_GET['date'] : null;
             generateCalendar($date);
-        ?>
+            ?>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="calendarEventModal">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="calendarEvent"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <button type="button">Add to Personal Calendar</button>
+                        <button type="button">Learn More</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
