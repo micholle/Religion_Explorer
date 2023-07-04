@@ -109,10 +109,13 @@
                                             </optgroup>
                                         </select>
                                     </div>
-                                <br>
-                                <textarea id="communityDescription" name="communityDescription" placeholder="Description"></textarea>
-                                <br>
-                                <button type="button" id="communityPublish">Publish</button>
+                                </div>
+                                <div class="row communityUploadDetails">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <textarea id="communityDescription" name="communityDescription" placeholder="Description"></textarea>
+                                        <button type="button" id="communityPublish" class="roundedButton">Publish</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -134,30 +137,42 @@
         <div class="modal fade" id="reportContentModal">
             <div class="modal-dialog modal-xs modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        Report Content
-                        <div id="reportContentHeader"></div>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-header text-center">
+                        <div class="container d-flex justify-content-center align-items-center flex-column">
+                            <h5 class="modal-title w-100">Report Content</h5>
+                            <div id="reportContentHeader"></div>
+                        </div>
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
                     </div>
                     <div class="modal-body">
-                        <form id="reportContentForm" method="post">
-                            As accurately as you can, please tell us what happened. <br>
-                            <input type="checkbox" id="privacy violation" name="privacy violation" value="privacy violation">
-                            <label for="privacy violation">Privacy Violation</label><br>
-                            <input type="checkbox" id="misinformation" name="misinformation" value="misinformation">
-                            <label for="misinformation">Misinformation</label><br>
-                            <input type="checkbox" id="graphic content" name="graphic content" value="graphic content">
-                            <label for="graphic content">Graphic Content</label><br>
-                            <input type="checkbox" id="offensive language" name="offensive language" value="offensive language">
-                            <label for="offensive language">Offensive Language</label><br>
-                            <input type="checkbox" id="spam" name="spam" value="spam">
-                            <label for="spam">Spam or Unwanted Content</label><br>
-                            <input type="checkbox" id="others" name="others" value="others">
-                            <label for="others">Others, Specify:</label><br>
-                            <input id="othersSpecify" name="othersSpecify"><br>
-                            <textarea id="reportContentAdditional" name="reportContentAdditional" placeholder="Give additional context."></textarea><br>
-                            <button type="button" id="submitReportContent">Send</button>
-                        </form>
+                        <div class="container">
+                            <form id="reportContentForm" method="post">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="reportDescription">As accurately as you can, please tell us what happened.</p>
+                                        <input type="checkbox" id="privacy violation" name="privacy violation" value="privacy violation">
+                                        <label for="privacy violation">Privacy Violation</label><br>
+                                        <input type="checkbox" id="misinformation" name="misinformation" value="misinformation">
+                                        <label for="misinformation">Misinformation</label><br>
+                                        <input type="checkbox" id="graphic content" name="graphic content" value="graphic content">
+                                        <label for="graphic content">Graphic Content</label><br>
+                                        <input type="checkbox" id="offensive language" name="offensive language" value="offensive language">
+                                        <label for="offensive language">Offensive Language</label><br>
+                                        <input type="checkbox" id="spam" name="spam" value="spam">
+                                        <label for="spam">Spam or Unwanted Content</label><br>
+                                        <input type="checkbox" id="others" name="others" value="others">
+                                        <label for="others">Others, Specify:</label><br>
+                                        <input id="othersSpecify" name="othersSpecify"><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <textarea id="reportContentAdditional" name="reportContentAdditional" placeholder="Give additional context."></textarea><br>
+                                        <button type="button" id="submitReportContent" class="roundedButton">Send</button>
+                                    </div>
+                                </div>
+                            </form>    
+                        </div>
                     </div>
                 </div>
             </div>

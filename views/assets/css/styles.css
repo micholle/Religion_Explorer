@@ -147,6 +147,47 @@ h5 {
     text-align: center;
     font-size: 22px;
     font-weight: 600;
+    color: #3E3E3E;
+}
+
+.modal-header {
+    border-bottom: solid #D0D0D0 2px;
+}
+
+.reportDescription {
+    font-size: 16px;
+    color: #3E3E3E;
+    text-align: center;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+
+#reportContentHeader {
+    margin-top: -20px;
+}
+
+#reportContentModal input[id=othersSpecify] {
+    color: #3E3E3E;
+    border-radius: 20px;
+    border: solid #B0BEC5 2px;
+    font-family: Lexend;
+    font-size: 16px;
+    height: 30px;
+    padding: 0px 15px;
+    width: 100%;
+}
+
+#reportContentModal textarea {
+    color: #3E3E3E;
+    border-radius: 20px;
+    border: solid #B0BEC5 2px;
+    font-family: Lexend;
+    font-size: 16px;
+    height: 120px;
+    padding: 10px 15px;
+    width: 100%;
+    resize: none;
+    margin-top: 10px;
 }
 
 .commUploadImg {
@@ -411,7 +452,17 @@ h5 {
     width: 100%;
     height: 200px;
     margin-bottom: 20px;
+    cursor: pointer;
 }
+
+.communityUploadArea img {
+    cursor: pointer;
+}
+
+.communityUploadArea p {
+    cursor: pointer;
+}
+
 
 .communityUploadDetails input[id=communityTitle] {
     background-color: #FAFAFA;
@@ -442,6 +493,24 @@ h5 {
     background-size: 10px;
     background-repeat: no-repeat;
     background-position: right 15px center;
+}
+
+.communityUploadDetails textarea {
+    background-color: #FAFAFA;
+    color: #3E3E3E;
+    border-radius: 15px;
+    border: solid #D6D6D6 2px;
+    font-family: Lexend;
+    font-size: 16px;
+    height: 125px;
+    padding: 10px 15px;
+    width: 100%;
+    margin-top: 10px;
+    resize: none;
+}
+
+.communityUploadDetails .roundedButton {
+    margin-top: 10px;
 }
 
 /*navbar*/
@@ -838,7 +907,7 @@ p {
 /*sidebar*/
 .sidebar {
     font-family: Lexend;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
@@ -847,7 +916,7 @@ p {
     border: none;
     border-right: solid #D0D0D0 2px;
     transition: 0.5s ease;
-    z-index: 9999;
+    z-index: 1;
 }
   
 .sidebar.active {
@@ -1430,4 +1499,23 @@ p {
     border: solid #D0D0D0 2px;
     border-radius: 15px;
     padding: 20px;
+}
+
+.libraryFilterBox select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: solid #D0D0D0 2px;
+    border-radius: 50px;
+    font-family: Lexend;
+    height: 30px;
+    padding: 0px 15px;
+    width: 100%;
+    color: #3E3E3E;
+    font-size: 16px;
+    background-image: url("../img/dropdown.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    margin-bottom: 10px;
 }

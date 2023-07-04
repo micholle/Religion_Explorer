@@ -96,7 +96,31 @@
                         <div class="row">
                             <div class="col-12 libraryFilterCont">
                                 <div class="libraryFilterBox">
-                                    <p>Filter ni siya</p>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p>Religion:</p>
+                                            <select id="" name="">
+                                                <option selected hidden disabled>Select a Religion</option>
+                                                <option value="">Buddhism</option>
+                                                <option value="">Christianity</option>
+                                                <option value="">Hinduism</option>
+                                                <option value="">Islam</option>
+                                                <option value="">Judaism</option>
+                                            </select>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Religious Traditions</label><br>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Historical Context</label><br>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Theology</label><br>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Religious Practices</label><br>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Ethics</label><br>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Social Issues</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
