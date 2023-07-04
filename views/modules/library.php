@@ -101,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-        <!-- <div id="librarySidebar"></div>
+        <div id="librarySidebar"></div>
         <div class="mainContent">
             <div>
                 Library of Resources
@@ -181,7 +181,7 @@
                     <div class="modal-body" id="resultContent"></div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </body>
 
     <!--pasaylo sa js pls-->
