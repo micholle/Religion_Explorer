@@ -11,19 +11,11 @@
 
         <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
         <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
-        <?php
-        require 'sidebar.php';
-        ?>
     </head>
     <body>
-        <!-- <div id="librarySidebar"></div> -->
-        <!--pasaylo sa js pls-->
-        <?php  
-        $sidebar_html = create_sidebar();
-        echo $sidebar_html;
-        ?>
+        <div id="librarySidebar"></div>
 
-        <div class="pageContainer">
+        <div id="mainContent" class="mainContent">
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
                     <div class="col-4 d-flex justify-content-start align-items-center">
@@ -129,24 +121,5 @@
             </div>
         </div>
     </body>
-
-    <!--pasaylo sa js pls-->
-    <script>
-    let minimize = document.querySelector('#minimize');
-    let sidebar = document.querySelector('.sidebar');
-    let textImage = document.querySelector('#text');
-    let minmaxImage = document.querySelector('#minmax');
-
-    minimize.onclick = function () {
-        sidebar.classList.toggle('active');
-        if (sidebar.classList.contains('active')) {
-            textImage.style.display = 'none';
-            minmaxImage.src = '../assets/img/maximize.png';
-        } else {
-            textImage.style.display = 'inline-block';
-            minmaxImage.src = '../assets/img/minimize.png';
-        }
-    };
-    </script>
 
 </html>

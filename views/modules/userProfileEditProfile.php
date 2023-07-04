@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Religion Explorer</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <?php
-        require 'sidebar.php';
-    ?>
+    <title>Religion Explorer: Library of Resources</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
+    <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript" src="../js/userProfileEditProfile.js"></script>
+    <script type="text/javascript" src="../js/script.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
 <body>
-    <?php  
-    $sidebar_html = create_sidebar();
-    echo $sidebar_html;
-    ?>
-
+    <div id="userProfileEditProfileSidebar"></div>
     <div class="mainContent">
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
@@ -184,23 +184,4 @@
         </div>
     </div>
 </body>
-
-<script>
-    let minimize = document.querySelector('#minimize');
-    let sidebar = document.querySelector('.sidebar');
-    let textImage = document.querySelector('#text');
-    let minmaxImage = document.querySelector('#minmax');
-
-    minimize.onclick = function () {
-        sidebar.classList.toggle('active');
-        if (sidebar.classList.contains('active')) {
-            textImage.style.display = 'none';
-            minmaxImage.src = '../assets/img/maximize.png';
-        } else {
-            textImage.style.display = 'inline-block';
-            minmaxImage.src = '../assets/img/minimize.png';
-        }
-    };
-</script>
-
 </html>

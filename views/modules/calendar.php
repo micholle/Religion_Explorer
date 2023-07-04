@@ -12,6 +12,8 @@
         <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
     </head>
     <body>
+        <div id="calendarSidebar"></div>
+        
         <!-- Modal -->
         <div class="modal fade" id="calendarEventModal">
             <div class="modal-dialog modal-sm modal-dialog-centered">

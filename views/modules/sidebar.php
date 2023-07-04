@@ -1,6 +1,11 @@
 <?php
 function create_sidebar() {
     $sidebar_html = '
+        <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
+        <script type="text/javascript" src="../js/script.js"></script>
+        <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
+
         <div class="sidebar">
             <div class="top">
                 <div class="logo d-flex justify-content-center align-items-center">

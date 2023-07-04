@@ -1,4 +1,12 @@
 $(function() {
+    $.ajax({
+        url: "../../ajax/showSidebar.ajax.php",
+        method: "POST",
+        success:function(data){
+            $("#mapSidebar").html(data);
+        }
+    });
+
     //initiate colors
     var religionColors = {
         "Buddhism" : "#BAA400",
