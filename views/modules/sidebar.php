@@ -13,14 +13,14 @@ function create_sidebar() {
             </div>
             <ul>
                 <li>
-                    <a href="userProfile.php">
+                    <a href="#">
                         <img src="../assets/img/lamb.png">
                         <span class="navItem">Profile</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="map.php">
+                    <a href="#">
                         <img src="../assets/img/feat-worldwide.png">
                         <span class="navItem">World Map</span>
                     </a>
@@ -33,13 +33,7 @@ function create_sidebar() {
                     </a>
                     <ul class="dropdownMenu">
                         <li>
-                            <a href="library.php">
-                                <img src="../assets/img/feat-book-stack.png">
-                                <span class="navItem">Main Library</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="community.php">
+                            <a href="#">
                                 <img src="../assets/img/diversity.png">
                                 <span class="navItem">Community Creations</span>
                             </a>
@@ -48,14 +42,14 @@ function create_sidebar() {
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="#">
                         <img src="../assets/img/feat-chat.png">
                         <span class="navItem">Discussion Forum</span>
                     </a>
                 </li>
                 
                 <li>
-                    <a href="calendar.php">
+                    <a href="#">
                         <img src="../assets/img/feat-calendar.png">
                         <span class="navItem">Calendar</span>
                     </a>
