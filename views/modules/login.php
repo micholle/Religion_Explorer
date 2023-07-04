@@ -27,7 +27,7 @@
             </div>
             
             <div class="row loginSignupHeader">
-              <a href="userprofile-overview.php"><h3>Log in</h3></a>
+              <a href="userprofile.php"><h3>Log in</h3></a>
             </div>
             
             <div class="row d-flex justify-content-center align-items-center">
