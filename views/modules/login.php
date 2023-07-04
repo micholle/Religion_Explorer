@@ -1,3 +1,15 @@
+<?php
+require_once "../../controllers/login.controller.php";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    $controller = new ControllerLogin();
+    $errorMessage = $controller->loginUser($username, $password);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +26,7 @@
     <div class="container mw-100 mh-100">
       <div class="row d-flex justify-content-center align-items-center loginSignupContainer">
         <div class="col-4 mh-100 d-flex align-items-start loginSignupContainer">
-          <a href="splash.php"><img src="../assets/img/close.png" class="margin" height="20px" width="20px"></a>
+          <a href="splash.php"><img src="../assets/images/close.png" class="margin" height="20px" width="20px"></a>
         </div>
       
         <div class="col-4 mh-100 d-flex justify-content-center align-items-center loginSignupForm">
@@ -22,20 +34,26 @@
 
             <div class="row d-flex justify-content-center align-items-center">
               <div class="col-12 mh-100 d-flex justify-content-center align-items-center">
-                <img src="../assets/img/applogo.png" height="110px" width="110px">
+                <img src="../assets/images/applogo.png" height="110px" width="110px">
               </div>
             </div>
             
             <div class="row loginSignupHeader">
-              <a href="userprofile-overview.php"><h3>Log in</h3></a>
+              <h3>Log in</h3>
             </div>
-            
+            <?php if (isset($errorMessage)) : ?>
             <div class="row d-flex justify-content-center align-items-center">
-              <input type="text" id="" name="" placeholder="Email or username">
-              <input type="password" id="" name="" placeholder="Password">
-              <p class="forgotLink">Forgot your password?</p>
-              <input type="submit" value="Log in">
+              <p class="error-message"><?php echo $errorMessage; ?></p>
             </div>
+            <?php endif; ?>
+            <form method="POST">
+            <div class="row d-flex justify-content-center align-items-center">
+              <input type="text" id="username" name="username" placeholder="Email or username">
+              <input type="password" id="password" name="password" placeholder="Password">
+              <p class="forgotLink">Forgot your password?</p>
+              <button type="submit" id="btn-login" name="btn-login">Login</button>
+            </div>
+            </form>
             
           </div>
         </div>
@@ -47,4 +65,4 @@
     </div>
   </section>
 </body>
-  
+</html>
