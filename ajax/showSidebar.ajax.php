@@ -8,7 +8,7 @@ class sidebarAjax{
     }
 }
 
-$showSidebar = new sidebarAjax();
-$showSidebar -> ajaxShowSidebar();
+$getMapData = new sidebarAjax();
+$getMapData -> ajaxShowSidebar();
 
 ?>

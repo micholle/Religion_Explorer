@@ -2,7 +2,7 @@
 <html lang="en">
     <head> 
         <title>Religion Explorer: Calendar</title>
-        <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
+        <link rel="icon" type="image/x-icon" href="../assets/images/applogo.png">
         <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
         <script type="text/javascript" src="../js/script.js"></script>
@@ -13,7 +13,24 @@
     </head>
     <body>
         <div id="calendarSidebar"></div>
-        <div class="mainContent">
+        
+        <!-- Modal -->
+        <div class="modal fade" id="calendarEventModal">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="calendarEvent"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <button type="button">Add to Personal Calendar</button>
+                        <button type="button">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
             <!-- Calendar -->
             <?php
             function generateCalendar($date) {
@@ -104,23 +121,7 @@
 
             $date = isset($_GET['date']) ? $_GET['date'] : null;
             generateCalendar($date);
-            ?>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="calendarEventModal">
-            <div class="modal-dialog modal-sm modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="calendarEvent"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <button type="button">Add to Personal Calendar</button>
-                        <button type="button">Learn More</button>
-                    </div>
-                </div>
-            </div>
+        ?>
         </div>
     </body>
 </html>

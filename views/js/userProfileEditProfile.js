@@ -3,7 +3,8 @@ $(function() {
         url: "../../ajax/showSidebar.ajax.php",
         method: "POST",
         success:function(data){
-            $("#librarySidebar").html(data);
+            $("#userProfileEditProfileSidebar").html(data);
         }
     });
+
 });

@@ -3,7 +3,9 @@ function create_sidebar() {
     $sidebar_html = '
         <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="../js/script.js"></script>
-        
+        <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
+
         <div class="sidebar">
             <div class="top">
                 <div class="logo d-flex justify-content-center align-items-center">
@@ -13,27 +15,33 @@ function create_sidebar() {
             </div>
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="userProfile.php">
                         <img src="../assets/img/lamb.png">
                         <span class="navItem">Profile</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="map.php">
                         <img src="../assets/img/feat-worldwide.png">
                         <span class="navItem">World Map</span>
                     </a>
                 </li>
 
                 <li class="dropdown">
-                    <a href="library.php">
+                    <a href="#">
                         <img src="../assets/img/feat-book-stack.png">
                         <span class="navItem">Library of Resources</span>
                     </a>
                     <ul class="dropdownMenu">
                         <li>
-                            <a href="#">
+                            <a href="library.php">
+                                <img src="../assets/img/feat-book-stack.png">
+                                <span class="navItem">Main Library</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="community.php">
                                 <img src="../assets/img/diversity.png">
                                 <span class="navItem">Community Creations</span>
                             </a>
@@ -42,14 +50,14 @@ function create_sidebar() {
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="">
                         <img src="../assets/img/feat-chat.png">
                         <span class="navItem">Discussion Forum</span>
                     </a>
                 </li>
                 
                 <li>
-                    <a href="#">
+                    <a href="calendar.php">
                         <img src="../assets/img/feat-calendar.png">
                         <span class="navItem">Calendar</span>
                     </a>
@@ -75,7 +83,7 @@ function create_sidebar() {
                             </a>
                         </li>
                         <li>
-                            <a href="#" id="reportUser">
+                            <a href="#">
                                 <img src="../assets/img/report.png">
                                 <span class="navItem">Report a User</span>
                             </a>

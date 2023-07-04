@@ -11,19 +11,11 @@
 
         <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
         <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
-        <?php
-        require 'sidebar.php';
-        ?>
     </head>
     <body>
-        <!-- <div id="librarySidebar"></div> -->
-        <!--pasaylo sa js pls-->
-        <?php  
-        $sidebar_html = create_sidebar();
-        echo $sidebar_html;
-        ?>
+        <div id="librarySidebar"></div>
 
-        <div class="pageContainer">
+        <div id="mainContent" class="mainContent">
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
                     <div class="col-4 d-flex justify-content-start align-items-center">
@@ -96,111 +88,38 @@
                         <div class="row">
                             <div class="col-12 libraryFilterCont">
                                 <div class="libraryFilterBox">
-                                    <p>Filter ni siya</p>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p>Religion:</p>
+                                            <select id="" name="">
+                                                <option selected hidden disabled>Select a Religion</option>
+                                                <option value="">Buddhism</option>
+                                                <option value="">Christianity</option>
+                                                <option value="">Hinduism</option>
+                                                <option value="">Islam</option>
+                                                <option value="">Judaism</option>
+                                            </select>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Religious Traditions</label><br>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Historical Context</label><br>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Theology</label><br>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Religious Practices</label><br>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Ethics</label><br>
+                                            <input type="checkbox" id="" name="" value="">
+                                            <label for="">Social Issues</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-        <!-- <div id="librarySidebar"></div>
-        <div class="mainContent">
-            <div>
-                Library of Resources
-                <input type="search" id="communitySearch" name="communitySearch" placeholder="Search">
-            </div>
-            <div>
-                Basic Information
-                <div class="libraryBasicInformation">
-                    <button id="libraryBuddhismInformation">Buddhism</button>
-                    <button id="libraryChristianityInformation">Christianity</button>
-                    <button id="libraryHinduismInformation">Hinduism</button>
-                    <button id="libraryIslamInformation">Islam</button>
-                    <button id="libraryJudaismInformation">Judaism</button>
-                </div>
-            </div>
-            <div id="libraryFilter">
-                <form>
-                    <label for="libraryReligion">Religion:</label><br>
-                    <select id="libraryReligion" name="libraryReligion">
-                        <option selected hidden disabled>Choose Religion</option>
-                        <option value="">Buddhism</option>
-                        <option value="">Christianity</option>
-                        <option value="">Hinduism</option>
-                        <option value="">Islam</option>
-                        <option value="">Judaism</option>
-                    </select><br>
-                    <input type="checkbox" id="religious traditions" name="religious traditions" value="religious traditions">
-                    <label for="religious traditions">Religious Traditions</label><br>
-                    <input type="checkbox" id="historical context" name="historical context" value="historical context">
-                    <label for="historical context">Historical Context</label><br>
-                    <input type="checkbox" id="theology" name="theology" value="theology">
-                    <label for="theology">Theology</label><br>
-                    <input type="checkbox" id="religious practices" name="religious practices" value="religious practices">
-                    <label for="religious practices">Religious Practices</label><br>
-                    <input type="checkbox" id="ethics" name="ethics" value="ethics">
-                    <label for="ethics">Ethics</label><br>
-                    <input type="checkbox" id="social issues" name="social issues" value="social issues">
-                    <label for="social issues">Social Issues</label><br>
-                </form>
-            </div>
-            <div id="libraryPhotos" >
-                Photos
-            </div>
-            <div id="libraryVideos">
-                Videos
-            </div>
-            <div id="libraryReadingMaterials">
-                Reading Materials
-            </div>
-            <div id="libraryPhotosPreview">
-                Photos
-            </div>
-            <div id="libraryVideosPreview">
-                Videos
-            </div>
-            <div id="libraryReadingMaterialsPreview">
-                Reading Materials
-            </div>
-        </div>
-    
-    -->
-        <!-- Modal -->
-        <!-- <div id="reportUserDiv"></div>
-        <div class="modal fade" id="libraryBasicInformationModal">
-            <div class="modal-dialog modal-xs modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header" id="libraryBasicInformationHeader"></div>
-                    <div class="modal-body" id="libraryBasicInformationContent"></div>
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="resultModal">
-            <div class="modal-dialog modal-xs modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header" id="resultHeader"></div>
-                    <div class="modal-body" id="resultContent"></div>
-                </div>
-            </div>
-        </div> -->
     </body>
-
-    <!--pasaylo sa js pls-->
-    <script>
-    let minimize = document.querySelector('#minimize');
-    let sidebar = document.querySelector('.sidebar');
-    let textImage = document.querySelector('#text');
-    let minmaxImage = document.querySelector('#minmax');
-
-    minimize.onclick = function () {
-        sidebar.classList.toggle('active');
-        if (sidebar.classList.contains('active')) {
-            textImage.style.display = 'none';
-            minmaxImage.src = '../assets/img/maximize.png';
-        } else {
-            textImage.style.display = 'inline-block';
-            minmaxImage.src = '../assets/img/minimize.png';
-        }
-    };
-    </script>
 
 </html>
