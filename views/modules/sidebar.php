@@ -89,7 +89,7 @@ function create_sidebar() {
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="../../models/logout.model.php">
                                 <img src="../assets/img/logout.png">
                                 <span class="navItem">Logout</span>
                             </a>

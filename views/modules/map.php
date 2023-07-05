@@ -124,7 +124,7 @@
         THE SOFTWARE.
 
         -->
-        <div id="mainContent" class="main">
+        <div class="pageContainer">
             <div class="mapHeader">
                 <div class="showSidebar"><a id="showSidebar">☰</a></div>
             </div>

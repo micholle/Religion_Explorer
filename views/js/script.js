@@ -11,7 +11,6 @@ $(function() {
         }
     });
 
-
     //js functions below this line are temporary---------------------------------------------------------------
 
     //timeline overlays
