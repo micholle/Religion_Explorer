@@ -575,6 +575,7 @@ h5 {
 }
 
 .submissionsContainer {
+    margin-top: 20px;
     padding-bottom: 20px;
 }
 
@@ -584,6 +585,60 @@ h5 {
 
 .submissionsContainer h1{
     margin: 10px 0px
+}
+
+.viewSubmissionsContainer {
+    width: 45%;
+    background-color: #018744;
+}
+
+.libraryMediaContainer {
+    width: 45%;
+    border: solid #D0D0D0 2px;
+    border-radius: 25px;
+    padding: 50px;
+    margin-top: 20px;
+}
+
+.libraryMediaContainer p {
+    margin: 0;
+    text-align: justify;
+    line-height: 20px;
+}
+
+.libraryMediaContainer img {
+    margin: 10px 0;
+}
+
+.libraryMediaContainer img {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.libraryMediaContainer .libraryMediaHeader p {
+    margin-top: -15px;
+    line-height: 25px;
+}
+
+.libraryMediaHeader {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.libraryMediaHeader p {
+    margin-right: 10px;
+}
+
+.libraryMediaInteractions {
+    margin-bottom: 10px;
+}
+
+.libraryMediaContainer .libraryMediaInteractions img {
+    width: 25px;
+}
+
+.libraryMediaInteractions .mediaInteractionsLeft img {
+    margin-right: 10px;
 }
 
 /*navbar*/
