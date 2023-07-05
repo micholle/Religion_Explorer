@@ -20,7 +20,7 @@
     <div class="container mw-100 mh-100">
       <div class="row d-flex justify-content-center align-items-center loginSignupContainer">
         <div class="col-4 mh-100 d-flex align-items-start loginSignupContainer">
-            <a href="splash.php"><img src="../assets/images/close.png" class="margin" height="20px" width="20px"></a>
+            <a href="splash.php"><img src="../assets/img/close.png" class="margin" height="20px" width="20px"></a>
         </div>
       
         <div class="col-4 mh-100 d-flex justify-content-center align-items-center loginSignupForm">
@@ -28,7 +28,7 @@
 
             <div class="row d-flex justify-content-center align-items-center">
               <div class="col-12 mh-100 d-flex justify-content-center align-items-center">
-                <img src="../assets/images/applogo.png" height="110px" width="110px">
+                <img src="../assets/img/applogo.png" height="110px" width="110px">
               </div>
             </div>
             

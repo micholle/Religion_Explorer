@@ -15,7 +15,7 @@
     <body>
         <div id="librarySidebar"></div>
 
-        <div id="mainContent" class="mainContent">
+        <div class="pageContainer">
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
                     <div class="col-4 d-flex justify-content-start align-items-center">

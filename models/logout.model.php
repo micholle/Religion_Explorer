@@ -5,6 +5,6 @@ session_start(); // Start the session if it hasn't already been started
 session_destroy();
 
 // Redirect the user to the login page or any other desired page
-header("Location: login.php");
+header("Location: ../views/modules/login.php");
 exit();
 ?>

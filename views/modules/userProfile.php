@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +19,9 @@
 
 <body>
     <div id="userProfileSidebar"></div>
+    <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
 
-    <div class="mainContent">
+    <div class="pageContainer">
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
                 <div class="col-3 d-flex justify-content-end align-items-end">
@@ -127,12 +129,8 @@
                     </div>
                 </div>
 
-                <div class="userProfileContent">
-                    <h2>Personal Calendar</h2>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend ligula nisl, ac aliquam felis faucibus id. Aenean vel lacinia massa.    
-                    </p>
-                </div>
+                <div id="calendarDatePlaceHolder" hidden></div>
+                <div class="userProfileContent" id="userProfileCalendar"></div>
 
                 <div class="userProfileContent">
                     <h2>Statistics</h2>
@@ -166,6 +164,18 @@
                 })
             })
             </script>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="calendarEventModal">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="calendarEvent"></h5>
+                </div>
+                <div class="modal-body" id="calendarEventContent"></div>
+            </div>
         </div>
     </div>
 </body>

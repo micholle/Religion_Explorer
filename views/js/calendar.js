@@ -7,24 +7,33 @@ $(function() {
         }
     });
 
-    $('#buddhismEvents').click(function(){
-        enableFilter("Buddhism");
-    });
+    $.ajax({
+        url: '../../ajax/createCalendar.ajax.php',
+        method: "POST",
+        data: {"calendarDate" : ($("#calendarDatePlaceHolder").text())},
+        success: function(data){
+            $("#calendarContainer").html(data);
 
-    $('#christianityEvents').click(function(){
-        enableFilter("Christianity");
-    });
-
-    $('#hinduismEvents').click(function(){
-        enableFilter("Hinduism");
-    });
-
-    $('#islamEvents').click(function(){
-        enableFilter("Islam");
-    });
-
-    $('#judaismEvents').click(function(){
-        enableFilter("Judaism");
+            $('#buddhismEvents').click(function(){
+                enableFilter("Buddhism");
+            });
+        
+            $('#christianityEvents').click(function(){
+                enableFilter("Christianity");
+            });
+        
+            $('#hinduismEvents').click(function(){
+                enableFilter("Hinduism");
+            });
+        
+            $('#islamEvents').click(function(){
+                enableFilter("Islam");
+            });
+        
+            $('#judaismEvents').click(function(){
+                enableFilter("Judaism");
+            });
+        }
     });
 
     $.ajax({
@@ -40,7 +49,7 @@ $(function() {
                     var eventDetails = eventsList[event];
                     if (eventDetails["date"] == day.getAttribute("id")){
                         var dayWithEvent = "#" + eventDetails["date"];
-                        $(dayWithEvent).append('<div class="calendarEvent ' + eventDetails["religion"] + '" data-religion="' + eventDetails["religion"] + '" onclick="viewEvent(' + "'" + event + "'" + ')">' + event +'</div>');
+                        $(dayWithEvent).append('<div class="calendarEvent ' + eventDetails["religion"] + '" data-religion="' + eventDetails["religion"] + '" onclick="viewEvent(' + "'" + event + "', '" + eventDetails["religion"] + "', '"+ eventDetails["date"] + "'" + ')">' + event +'</div>');
                     }
                 }
             }
@@ -109,7 +118,116 @@ function enableFilter(religion) {
     }
 }
 
-function viewEvent(event) {
-    $('#calendarEvent').text(event);
-    $('#calendarEventModal').modal();
+function viewEvent(event, religion, date) {
+    $("#calendarEvent").text(event);
+    var personalEvent = false;
+
+    $.ajax({
+        url: '../../ajax/getPersonalCalendarData.ajax.php',
+        method: "POST",
+        data: {"accountid" : $("#accountidPlaceholder").text()},
+        success: function(personaldata){
+            var personalEvents = personaldata;
+             
+            if (personalEvents.length != 0) {
+                for (let personalevent in personalEvents) {
+                    var eventDetails = personalEvents[personalevent];
+
+                    if (personalevent == event) {
+                        personalEvent = true;
+                    } else {
+                        personalEvent = false;
+                    }
+                }
+            } else {
+                personalEvent = false;
+            }
+
+            if (personalEvent) {
+                $("#calendarEventContent").html('<button onclick="removeFromPersonalCalendar(' + "'" + eventDetails["personaleventid"] + "'" + ')" type="button">Remove from Personal Calendar</button> <button type="button">Learn More</button>');
+            } else {
+                $("#calendarEventContent").html('<button onclick="addToPersonalCalendar(' + "'" + event + "', '" + religion + "', '" + date + "'" + ')" type="button">Add to Personal Calendar</button> <button type="button">Learn More</button>');
+            }
+
+        }
+    });
+
+    $("#calendarEventModal").modal();
+    $("#calendarEventModal").show();
+}
+
+function addToPersonalCalendar(event, religion, date) {
+    var accountid = $("#accountidPlaceholder").text();
+    var event = event;
+    var religion = religion;
+    var date = date;
+
+    var personalEvent = new FormData();
+    personalEvent.append("accountid", accountid);
+    personalEvent.append("event", event);
+    personalEvent.append("religion", religion);
+    personalEvent.append("date", date);
+
+    $.ajax({
+        url: '../../ajax/addToPersonalCalendar.ajax.php',
+        method: "POST",
+        data: personalEvent,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "text",
+        success: function(){
+            $("#calendarEventModal").removeClass("fade").modal("hide");
+            $("#calendarEventModal").modal("dispose");
+        }
+    });
+}
+
+function removeFromPersonalCalendar(personaleventid) {
+    $.ajax({
+        url: '../../ajax/removeFromPersonalCalendar.ajax.php',
+        method: "POST",
+        data: {"personaleventid" : personaleventid},
+        success: function(){
+            $("#calendarEventModal").removeClass("fade").modal("hide");
+            $("#calendarEventModal").modal("dispose");
+            $("#calendarContainer").fadeOut(200, function() {
+                $("#calendarContainer").load("#calendarContainer", function() {
+                    $("#calendarContainer").fadeIn(200);
+                });
+            });
+        }
+    });
+}
+
+function prevMonth(prevMonth, day) {
+    var date = "2023-" + prevMonth + "-" + day;
+
+    if (prevMonth == 0) {
+        $("#prevMonthButton").css("color", "#A6A6A6");
+        $("#prevMonthButton").css("cursor", "auto");
+    } else {
+        $("#calendarContainer").fadeOut(200, function() {
+            $("#calendarDatePlaceHolder").html(date);
+            $("#calendarContainer").load("#calendarContainer", function() {
+                $("#calendarContainer").fadeIn(200);
+            });
+        });
+    }
+}
+
+function nextMonth(nextMonth, day) {
+    var date = "2023-" + nextMonth + "-" + day;
+
+    if (nextMonth == 13) {
+        $("#nextMonthButton").css("color", "#A6A6A6");
+        $("#nextMonthButton").css("cursor", "auto");
+    } else {
+        $("#calendarContainer").fadeOut(200, function() {
+            $("#calendarDatePlaceHolder").html(date);
+            $("#calendarContainer").load("#calendarContainer", function() {
+                $("#calendarContainer").fadeIn(200);
+            });
+        });
+    }
 }

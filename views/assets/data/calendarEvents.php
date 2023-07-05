@@ -68,12 +68,12 @@ class calendarData{
             array(
             'date' => '03-01-2023',
             'religion' => 'Christianity',
-            'event' => "St. David's Day"
+            'event' => 'St. David&#8217;s Day'
             ),
             array(
             'date' => '03-17-2023',
             'religion' => 'Christianity',
-            'event' => "St. Patrick's Day"
+            'event' => 'St. Patrick&#8217;s Day'
             ),
             array(
             'date' => '04-02-2023',
@@ -143,12 +143,12 @@ class calendarData{
             array(
             'date' => '11-01-2023',
             'religion' => 'Christianity',
-            'event' => "All Saints' Day"
+            'event' => 'All Saints&#8217; Day'
             ),
             array(
             'date' => '11-02-2023',
             'religion' => 'Christianity',
-            'event' => "All Souls' Day"
+            'event' => 'All Souls&#8217; Day'
             ),
             array(
             'date' => '12-03-2023',
@@ -293,7 +293,7 @@ class calendarData{
             array(
             'date' => '02-18-2023',
             'religion' => 'Islam',
-            'event' => "Isra and Mi'raj"
+            'event' => 'Isra and Mi&#8217;raj'
             ),
             array(
             'date' => '03-23-2023',
@@ -328,12 +328,12 @@ class calendarData{
             array(
             'date' => '09-27-2023',
             'religion' => 'Islam',
-            'event' => "The Prophet's Birthday"
+            'event' => 'The Prophet&#8217;s Birthday'
             ),
             array(
             'date' => '01-03-2023',
             'religion' => 'Judaism',
-            'event' => "Asarah B'Tevet (Tenth of Tevet)"
+            'event' => 'Asarah B&#8217;Tevet (Tenth of Tevet)'
             ),
             array(
             'date' => '02-06-2023',
@@ -443,12 +443,12 @@ class calendarData{
             array(
             'date' => '07-26-2023',
             'religion' => 'Judaism',
-            'event' => "Tisha B'Av Eve"
+            'event' => 'Tisha B&#8217;Av Eve'
             ),
             array(
             'date' => '07-27-2023',
             'religion' => 'Judaism',
-            'event' => "Tisha B'Av"
+            'event' => 'Tisha B&#8217;Av'
             ),
             array(
             'date' => '09-15-2023',
@@ -568,7 +568,7 @@ class calendarData{
             array(
             'date' => '12-22-2023',
             'religion' => 'Judaism',
-            'event' => "Asarah B'Tevet (Tenth of Tevet)"
+            'event' => 'Asarah B&#8217;Tevet (Tenth of Tevet)'
             )
         );
 

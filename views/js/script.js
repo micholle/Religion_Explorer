@@ -1,21 +1,15 @@
 $(function() {
     //sidebar
-    let minimize = document.querySelector('#minimize');
-    let sidebar = document.querySelector('.sidebar');
-    let textImage = document.querySelector('#text');
-    let minmaxImage = document.querySelector('#minmax');
-
-    minimize.onclick = function () {
-        sidebar.classList.toggle('active');
-        if (sidebar.classList.contains('active')) {
-            textImage.style.display = 'none';
-            minmaxImage.src = '../assets/img/maximize.png';
+    $("#minimize").click(function() {
+        $(".sidebar").toggleClass("active");
+        if ($(".sidebar").hasClass("active")) {
+            $("#text").css("display", "none");
+            $("#minmax").attr("src", "../assets/img/maximize.png");
         } else {
-            textImage.style.display = 'inline-block';
-            minmaxImage.src = '../assets/img/minimize.png';
+            $("#text").css("display", "inline-block");
+            $("#minmax").attr("src", "../assets/img/minimize.png");
         }
-    };
-
+    });
 
     //js functions below this line are temporary---------------------------------------------------------------
 

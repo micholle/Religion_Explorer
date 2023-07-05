@@ -36,10 +36,10 @@ g:hover {
     cursor: pointer;
 }
 
-.main {
+/* .main {
     position: relative;
     height: 90vh;
-}
+} */
 
 /*header styling*/
 h2 {
@@ -325,6 +325,9 @@ h5 {
 }
 
 /* calendar */
+.calendarContainer {
+    padding: 25px;
+}
 .calendar {
     display: flex;
     flex-flow: column;
@@ -358,6 +361,7 @@ h5 {
 }
 .calendar .days .day_num {
     width: calc(100% / 7);
+    min-height: 100px;
     display: flex;
     flex-flow: column;
     border-right: 1px solid #808080;
@@ -365,7 +369,6 @@ h5 {
     padding: 15px;
     font-weight: bold;
     color: #363636;
-    min-height: 100px;
 }
 .calendar .days .day_num span {
     display: inline-flex;
@@ -405,6 +408,9 @@ h5 {
     display:flex;
     justify-content: flex-end;
 }
+.calendarFilter span {
+    font-size: 12px;
+}
 .calendarReligion {
     border-radius: 15px;
     margin:0 5px 0 0;
@@ -415,9 +421,11 @@ h5 {
     color: #FFFFFF;
 }
 .calendarMonth {
+    width: 100%;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
 }
+
 .calendarMonthButton {
     border: none;
     border-radius: 10px;
@@ -439,6 +447,9 @@ h5 {
 }
 .calendar .days .day_num .calendarEvent.Judaism {
     background-color: #1334A8;
+}
+.monthButton {
+    cursor: pointer;
 }
 
 /* community creations */
@@ -1063,17 +1074,6 @@ p {
 }
 
 /*user profile*/
-.mainContent {
-    padding-left: 275px;
-    transition: 0.5s ease;
-    margin: 0px 75px;
-}
-
-.sidebar.active ~ .mainContent {
-    padding-left: 85px;
-    transition: 0.5s ease;
-}
-
 .basicInfoContainer {
     height: 275px;
     color: #3E3E3E;
