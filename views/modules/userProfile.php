@@ -34,7 +34,7 @@
 
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-start">
-                                    <h1>ReligionExplorer_123</h1>
+                                    <h1><?php echo $_SESSION['username']; ?></h1>
                                 </div>
                             </div>
 
