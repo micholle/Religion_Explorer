@@ -34,7 +34,7 @@
 
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-start">
-                                    <h1><?php echo $_SESSION['username']; ?></h1>
+                                    <h1><?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} else {echo "not logged in";}?></h1>
                                 </div>
                             </div>
 
