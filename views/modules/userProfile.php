@@ -19,7 +19,7 @@
 <body>
     <div id="userProfileSidebar"></div>
 
-    <div class="mainContent">
+    <div class="pageContainer">
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
                 <div class="col-3 d-flex justify-content-end align-items-end">

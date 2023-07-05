@@ -6,4 +6,24 @@ $(function() {
             $("#librarySidebar").html(data);
         }
     });
+
+    $("#buddhismBasicInfoBox").click(function(){
+        $('#libraryBasicInfoModal').modal();
+    });
+
+    $("#christianityBasicInfoBox").click(function(){
+        $('#libraryBasicInfoModal').modal();
+    });
+
+    $("#hinduismBasicInfoBox").click(function(){
+        $('#libraryBasicInfoModal').modal();
+    });
+
+    $("#islamBasicInfoBox").click(function(){
+        $('#libraryBasicInfoModal').modal();
+    });
+
+    $("#judaismBasicInfoBox").click(function(){
+        $('#libraryBasicInfoModal').modal();
+    });
 });

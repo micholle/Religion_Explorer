@@ -36,10 +36,10 @@ g:hover {
     cursor: pointer;
 }
 
-.main {
+/* .main {
     position: relative;
     height: 90vh;
-}
+} */
 
 /*header styling*/
 h2 {
@@ -441,6 +441,26 @@ h5 {
     background-color: #1334A8;
 }
 
+.calendarButton {
+    height: 50px;
+    line-height: 15px;
+    background-color: #2CA464;
+    border: solid #2CA464 2px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    color: white;
+    margin: 5px;
+    font-family: Lexend;
+    font-size: 16px;
+    width: 100%;
+}
+
+.learnMoreButton {
+    background-color: transparent;
+    border: solid #2CA464 2px;
+    color: #2CA464
+}
+
 /* community creations */
 .communityUpload {
     display: none;
@@ -511,6 +531,39 @@ h5 {
 
 .communityUploadDetails .roundedButton {
     margin-top: 10px;
+}
+
+
+.createSubmissionsBox {
+    border-bottom: solid #D0D0D0 2px;
+}
+
+
+.createSubmissionsBox .roundedButton {
+    margin: 15px 15px 20px;
+}
+
+.createSubmissionsBox img {
+    width: 250px;
+    margin: 20px;
+}
+
+.submissionsBox {
+    border: solid #D0D0D0 2px;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.submissionsContainer {
+    padding-bottom: 20px;
+}
+
+.submissionsContainer .roundedButton {
+    margin-top: 20px;
+}
+
+.submissionsContainer h1{
+    margin: 10px 0px
 }
 
 /*navbar*/
@@ -595,7 +648,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover{
     width: 100%;
 }
 
-/*buttons*/
+/*splash buttons*/
 
 .col-7 .button1 {
     background-color: transparent;
@@ -1063,17 +1116,6 @@ p {
 }
 
 /*user profile*/
-.mainContent {
-    padding-left: 275px;
-    transition: 0.5s ease;
-    margin: 0px 75px;
-}
-
-.sidebar.active ~ .mainContent {
-    padding-left: 85px;
-    transition: 0.5s ease;
-}
-
 .basicInfoContainer {
     height: 275px;
     color: #3E3E3E;
@@ -1166,7 +1208,7 @@ p {
 .userContentContainer h1 {
     font-size: 20px;
     font-weight: 600;
-    color: #2CA464;
+    color: #2CA464 !important;
 }
 
 .userContentContainer h2 {
@@ -1368,19 +1410,8 @@ p {
     margin-bottom: 10px;
 }
 
-/* .userProfileLine {
-    position: absolute;
-    top: 40px;
-    left: 24px;
-    width: 90px;
-    height: 3px;
-    background-color: #2CA464;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-} */
-
 .pageContainer {
-    margin: 0 !important;
+    margin: 0px 30px;
     font-family: Lexend;
     transition: 0.5s ease;
     padding-left: 275px;
@@ -1413,8 +1444,8 @@ p {
     background-color: #F5F5F5;
     font-size: 16px;
     border-radius: 20px;
-    border-color: #3E3E3E;
-    padding: 3px 15px;
+    border: solid #3E3E3E 1px;
+    padding: 5px 15px;
     width: 100%;
 }
 
@@ -1431,23 +1462,66 @@ p {
     font-weight: 600;
 }
 
-.libraryBasicInfoCont {
+/*library*/
+
+/*main library*/
+
+.libraryBasicInfoContainer {
     padding: 15px;
     border-bottom: solid #D0D0D0 2px;
 }
 
-.libraryBasicInfoCont p {
+.libraryBasicInfoContainer p {
     font-size: 16px;
     margin: 0;
     padding: 0;
 }
 
-
 .libraryBasicInfoBox {
     background-color: white;
     border: solid #D0D0D0 2px;
     border-radius: 25px;
+    cursor: pointer;
     padding: 15px;
+    margin: 5px;
+}
+
+/*library basic information modal*/
+
+#libraryBasicInfoModal .modal-header {
+    margin: 0;
+    padding: 0;
+}
+
+#libraryBasicInfoModal #basicInfoModalTitle {
+    font-size: 26px;
+    font-family: Lexend;
+    font-weight: 600;
+}
+
+#libraryBasicInfoModal .col-2 img {
+    width: 80px;
+}
+
+#libraryBasicInfoModal .basicItemsBox {
+    border: solid #D0D0D0 2px;
+    border-radius: 25px;
+    padding: 20px;
+    text-align: center;
+}
+
+#libraryBasicInfoModal .basicItemsBox .basicItemsBoxTitle {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#libraryBasicInfoModal .basicItemsBox #basicItemsBoxSubtitle {
+    margin-top: -20px;
+    padding: 0;
+}
+
+#libraryBasicInfoModal .basicItemsBox img {
+    width: 125px;
     margin: 5px;
 }
 
@@ -1455,53 +1529,33 @@ p {
     width: 70px;
 }
 
-.libraryReadMatCont {
-    background-color: yellow;
-    padding: 15px;
+/*main library content*/
+
+.libraryMainContainer {  
+    padding: 20px 0;
 }
 
-.libraryFilterCont {
-    padding: 20px 30px;
+.libraryRightContainer {
+    padding: 20px;
 }
 
-.libraryFilterBox {
-    padding: 15px;
+.libraryRightContainer .roundedButton {
+    margin-top: 20px;
+}
+
+.libraryRightContBox {
+    padding: 20px;
     border: solid #D0D0D0 2px;
     border-radius: 25px;
 }
 
-.createSubmissionsBox {
-    border-bottom: solid #D0D0D0 2px;
+.libraryRightContBox p {
+    margin-bottom: 5px;
+    font-weight: 600;
 }
 
-.createSubmissionsBox .roundedButton {
-    margin: 15px 15px 20px;
-}
 
-.createSubmissionsBox img {
-    width: 250px;
-    margin: 20px;
-}
-
-.submissionsContainer {
-    padding-bottom: 20px;
-}
-
-.submissionsContainer .roundedButton {
-    margin-top: 20px;
-}
-
-.submissionsContainer h1{
-    margin: 10px 0px
-}
-
-.submissionsBox {
-    border: solid #D0D0D0 2px;
-    border-radius: 15px;
-    padding: 20px;
-}
-
-.libraryFilterBox select {
+.libraryRightContBox select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -1509,7 +1563,7 @@ p {
     border-radius: 50px;
     font-family: Lexend;
     height: 30px;
-    padding: 0px 15px;
+    padding: 0px 10px;
     width: 100%;
     color: #3E3E3E;
     font-size: 16px;
@@ -1518,4 +1572,48 @@ p {
     background-repeat: no-repeat;
     background-position: right 15px center;
     margin-bottom: 10px;
+}
+
+.libraryReadMatsBox {
+    height: 150px;
+    margin: 10px 0;
+}
+
+.libraryReadMatsHeader {
+    height: 20px;
+}
+
+.libraryReadMatsSubheader {
+    margin-bottom: 0px;
+}
+
+.libraryReadMatsSubheader p {
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.libraryReadMatsSummary {
+    text-align: justify;
+    font-size: 16px;
+}
+
+.libraryReadMatsType {
+    color: #428DE5;
+    text-transform: uppercase;
+    margin-right: 5px;
+}
+
+.libraryReadMatsTitle {
+    color: #3E3E3E;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.libraryReadMatsTag {
+    background-color: #428DE5;
+    color: white;
+    border-radius: 100px;
+    padding: 4px 10px;
+    font-size: 12px;
+    height: 25px;
 }

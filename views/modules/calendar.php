@@ -18,19 +18,18 @@
         <div class="modal fade" id="calendarEventModal">
             <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="calendarEvent"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-header border-0 text-center">
+                        <h5 class="modal-title w-100" id="calendarEvent"></h5>
                     </div>
-                    <div class="modal-body">
-                        <button type="button">Add to Personal Calendar</button>
-                        <button type="button">Learn More</button>
+                    <div class="modal-body flex-row">
+                        <button type="button" class="calendarButton">Add to Personal Calendar</button>
+                        <button type="button" class="calendarButton learnMoreButton">Learn More</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div>
+        <div class="pageContainer">
             <!-- Calendar -->
             <?php
             function generateCalendar($date) {
