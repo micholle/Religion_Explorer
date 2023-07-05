@@ -171,8 +171,8 @@
     <div class="modal fade" id="calendarEventModal">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="calendarEvent"></h5>
+                <div class="modal-header border-0">
+                    <h5 class="modal-title w-100" id="calendarEvent"></h5>
                 </div>
                 <div class="modal-body" id="calendarEventContent"></div>
             </div>

@@ -37,35 +37,35 @@
                                 </div>
                                 <div class="row d-flex justify-content-center align-items-center flex-row">
                                     <div class="col-2 d-flex justify-content-center align-items-center flex-column">
-                                        <div class="libraryBasicInfoBox" id="buddhismBasicInfoBox">
+                                        <div class="libraryBasicInfoBox" id="Buddhism">
                                             <img src="../assets/img/lib-buddhism.png">
                                         </div>
                                         <p>Buddhism</p>
                                     </div>
                                     
                                     <div class="col-2 d-flex justify-content-center align-items-center flex-column">
-                                        <div class="libraryBasicInfoBox" id="christianityBasicInfoBox">
+                                        <div class="libraryBasicInfoBox" id="Christianity">
                                             <img src="../assets/img/lib-christianity.png">
                                         </div>
                                         <p>Christianity</p>
                                     </div>
 
                                     <div class="col-2 d-flex justify-content-center align-items-center flex-column">
-                                        <div class="libraryBasicInfoBox" id="hinduismBasicInfoBox">
+                                        <div class="libraryBasicInfoBox" id="Hinduism">
                                             <img src="../assets/img/lib-hinduism.png">
                                         </div>
                                         <p>Hinduism</p>
                                     </div>
 
                                     <div class="col-2 d-flex justify-content-center align-items-center flex-column">
-                                        <div class="libraryBasicInfoBox" id="islamBasicInfoBox">
+                                        <div class="libraryBasicInfoBox" id="Islam">
                                             <img src="../assets/img/lib-islam.png">
                                         </div>
                                         <p>Islam</p>
                                     </div>
 
                                     <div class="col-2 d-flex justify-content-center align-items-center flex-column">
-                                        <div class="libraryBasicInfoBox" id="judaismBasicInfoBox">
+                                        <div class="libraryBasicInfoBox" id="Judaism">
                                             <img src="../assets/img/lib-judaism.png">
                                         </div>
                                         <p>Judaism</p>
@@ -84,29 +84,7 @@
                                 <!--Reading Materials (Large Container)-->
                                 <div id="" class="row d-flex justify-content-center align-items-center flex-row">
                                     <div class="col-12 flex-column">
-                                        <!--Reading Materials Container-->
-                                        <div class="libraryReadMatsBox">
-                                            <!--Reading Materials Header-->
-                                            <div class="row">
-                                                <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">
-                                                    <div class="libraryReadMatsType">[PLACEHOLDER]</div>
-                                                    <div class="libraryReadMatsTitle">Placeholder Title Ni Siya</div>
-                                                    <div class="libraryReadMatsTag">Tag</div>
-                                                </div>
-                                            </div>
-                                            <!--Sub-header-->
-                                            <div class="row">
-                                                <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">
-                                                    <p>Placeholder - </p><p>Placeholder Year</p>
-                                                </div>
-                                            </div>
-                                            <!--Reading Materials Summary-->
-                                            <div class="row libraryReadMatsSummary">
-                                                <div class="col-12">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in turpis tincidunt, pretium neque non, venenatis erat. Pellentesque interdum nunc metus, eu rhoncus orci scelerisque a. Quisque et metus ut mi ullamcorper finibus. Suspendisse sed ultricies turpis. Praesent maximus odio metus, et rhoncus libero interdum in.</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div id="libraryReadMatsContainer"></div>
                                     </div>
                                 </div>
                                 <!--Reading Materials (Large Container)-->
@@ -144,11 +122,7 @@
                             <h1>Photos</h1>
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column libraryRightContBox">
                                 <div class="row d-flex flex-row">
-                                    <div class="col-12 d-flex justify-content-center align-items-center">
-                                        <p>Placeholder content.</p>
-                                        <p>Placeholder content.</p>
-                                        <p>Placeholder content.</p>
-                                    </div>
+                                    <div id="libraryPhotosPreview" class="col-12 d-flex justify-content-center align-items-center"></div>
                                 </div>
                                 <div class="row d-flex flex-row">
                                     <div class="col-12 d-flex justify-content-center align-items-center">
@@ -161,11 +135,7 @@
                             <h1>Videos</h1>
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column libraryRightContBox">
                                 <div class="row d-flex flex-row">
-                                    <div class="col-12 d-flex justify-content-center align-items-center">
-                                        <p>Placeholder content.</p>
-                                        <p>Placeholder content.</p>
-                                        <p>Placeholder content.</p>
-                                    </div>
+                                    <div id="libraryVideosPreview" class="col-12 d-flex justify-content-center align-items-center"></div>
                                 </div>
                                 <div class="row d-flex flex-row">
                                     <div class="col-12 d-flex justify-content-center align-items-center">
@@ -178,7 +148,9 @@
                 </div>
             </div>
         </div>
-        
+
+        <!-- Modal -->
+
         <div class="modal fade" id="libraryBasicInfoModal">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
@@ -186,13 +158,13 @@
                         <div class="container">
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-2">
-                                    <img src="../assets/img/judaism-border-left.png">
+                                    <img id="borderLeftImg" src="">
                                 </div>
                                 <div class="col-3">
-                                    <h5 class="modal-title w-100" id="basicInfoModalTitle">Judaism</h5>
+                                    <h5 class="modal-title w-100" id="basicInfoModalTitle"></h5>
                                 </div>
                                 <div class="col-2">
-                                    <img src="../assets/img/judaism-border-right.png">
+                                    <img id="borderRightImg" src="">
                                 </div>
                             </div>
                         </div>
@@ -202,32 +174,32 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-12">
-                                <p id="basicInfoDescription">Judaism is the world's oldest monotheistic religion, dating back nearly 4,000 years. Followers of Judaism believe in one God who revealed himself through ancient prophets. Judaism is the complex phenomenon of a total way of life for the Jewish people, comprising theology, law, and innumerable cultural traditions.</p>
+                                <p id="basicInfoDescription"></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="basicItemsBox d-flex justify-content-center align-items-center flex-column">
                                         <p class="basicItemsBoxTitle">Sacred Scripture</p>
-                                        <p id="basicItemsBoxSubtitle">The Tanakh</p>
-                                            <img src="../assets/img/tanakh.png">
-                                        <p id="basicItemsBoxText">The Hebrew Bible comprising of the Torah, Nevi'im, and Ketuvim.</p>
+                                        <p id="sacredScripture"></p>
+                                        <img id="sacredScriptureImg" src="">
+                                        <p id="sacredScriptureDesc"></p>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="basicItemsBox d-flex justify-content-center align-items-center flex-column">
                                         <p class="basicItemsBoxTitle">Place of Worship</p>
-                                        <p id="basicItemsBoxSubtitle">The Synagogue</p>
-                                            <img src="../assets/img/synagogue.png">
-                                        <p id="basicItemsBoxText">The Jewish place for gathering, prayer, and community engagement.</p>
+                                        <p id="placeOfWorship"></p>
+                                        <img id="placeOfWorshipImg" src="">
+                                        <p id="placeOfWorshipDesc"></p>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="basicItemsBox d-flex justify-content-center align-items-center flex-column">
                                         <p class="basicItemsBoxTitle">Sacred Symbol</p>
-                                        <p id="basicItemsBoxSubtitle">The Menorah</p>
-                                            <img src="../assets/img/menorah.png">
-                                        <p id="basicItemsBoxText">A multi-branched candelabra, used in the religious rituals of Judaism.</p>
+                                        <p id="sacredSymbol"></p>
+                                        <img id="sacredSymbolImg" src="">
+                                        <p id="sacredSymbolDesc"></p>
                                     </div>
                                 </div>
                             </div>
@@ -236,6 +208,7 @@
                 </div>
             </div>
         </div>
+
     </body>
 
 </html>

@@ -143,16 +143,4 @@ $(function() {
         $("#sidebarNotifications").removeAttr("data-toggle");
         $('.popover').popover('dispose');
     });
-
-    //calendar
-    window.focus()
-
-    window.addEventListener("blur", () => {
-        setTimeout(() => {
-            if (document.activeElement.tagName === "IFRAME") {
-                $("#calendarEventModal").modal();
-                console.log("clicked");
-            }
-        });
-    });
 })
