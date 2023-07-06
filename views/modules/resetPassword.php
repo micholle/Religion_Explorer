@@ -29,8 +29,8 @@
                         <h3>Reset Password</h3>
                         <p>Enter your new password.</p>
                         <form method="POST">
-                            <input type="password" id="" name="" placeholder="New Password">
-                            <input type="password" id="" name="" placeholder="Confirm New Password">
+                            <input type="password" id="password" name="password" placeholder="New Password">
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm New Password">
                             <button type="submit" id="resetPasswordSubmit" name="" class="registrationSubmitButton">Submit</button>
                         </form>
                     </div>
