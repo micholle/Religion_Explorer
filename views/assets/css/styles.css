@@ -1031,6 +1031,7 @@ p {
 
 #loginSignup .signupLink {
     color: #2CA464;
+    cursor: pointer;
 }
 
 /*sidebar*/

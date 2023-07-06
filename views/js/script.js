@@ -11,6 +11,14 @@ $(function() {
         }
     });
 
+    $("#termsOfService").click(function() {
+        window.location.href = "../modules/userAgreement.php/terms-of-service";
+    });
+
+    $("#privacyPolicy").click(function() {
+        window.location.href = "../modules/userAgreement.php/privacy-policy";
+    });
+
     //js functions below this line are temporary---------------------------------------------------------------
 
     //timeline overlays

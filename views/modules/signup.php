@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Religion Explorer</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    
-    <!-- scripts -->
+    <title>Religion Explorer: Library of Resources</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="../assets/js/chart.umd.js"></script>
+
     <script type="text/javascript" src="../js/accounts.js"></script>
+    <script type="text/javascript" src="../js/script.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
 <body>
@@ -52,7 +53,7 @@
                     <option value="Other">Other</option>
                 </select>
               <button type="submit" id="btn-signup" name="btn-signup">Sign Up</button>
-              <p class="terms">By signing up, you agree to Religion Explorer’s <span class="signupLink">Terms of Service</span> and have acknowledged our <span class="signupLink">Privacy Policy</span>.</p>
+              <p class="terms">By signing up, you agree to Religion Explorer's <span class="signupLink" id="termsOfService">Terms of Service</span> and have acknowledged our <span class="signupLink" id="privacyPolicy">Privacy Policy</span>.</p>
             </div>
             <form>
             
