@@ -21,7 +21,7 @@ $(function() {
 
                 // Wide
                 $libraryPhotosMats =
-                '<div class="d-flex flex-column libraryMediaContainer libraryWideContainer">' +
+                '<div id="' + photoDetails.resourceid +'" class="d-flex flex-column libraryMediaContainer libraryWideContainer">' +
                     '<div class="row d-flex justify-content-center align-items-center">' +
                         '<div class="col-12 libraryMediaHeader">' +
                             '<div class="row">' +
@@ -35,7 +35,7 @@ $(function() {
 
                     '<div class="row">' +
                         '<div class="col-12 d-flex justify-content-center align-items-center">' +
-                            '<img src="' + photoDetails.file +'">' +
+                            '<img style="border-radius:15px" src="' + photoDetails.file +'">' +
                         '</div>' +
                     '</div>' +
 
@@ -70,7 +70,7 @@ $(function() {
 
                 // Wide
                 $libraryVideosMats = 
-                '<div class="d-flex flex-column libraryMediaContainer libraryWideContainer">' +
+                '<div id="' + videoDetails.resourceid +'" class="d-flex flex-column libraryMediaContainer libraryWideContainer">' +
                     '<div class="row d-flex justify-content-center align-items-center">' +
                         '<div class="col-12 libraryMediaHeader">' +
                            ' <div class="row">' +
@@ -225,10 +225,26 @@ $(function() {
     
                 // for (let photo in libraryData["photos"]) {
                 //     var photoDetails = libraryData["photos"][photo];
+
+                //     if ((photo.toLowerCase()).includes(librarySearchVal) || ((photoDetails.author).toLowerCase()).includes(librarySearchVal) || ((readinphotoDetailsgMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                //         var resourceid = "#" + photoDetails.resourceid;
+                //         $(resourceid).css("display", "block");
+                //     } else {
+                //         var resourceid = "#" + photoDetails.resourceid;
+                //         $(resourceid).css("display", "none");
+                //     }
                 // }
     
                 // for (let video in libraryData["videos"]) {
                 //     var videoDetails = libraryData["videos"][video];
+
+                //     if ((video.toLowerCase()).includes(librarySearchVal) || ((videoDetails.author).toLowerCase()).includes(librarySearchVal) || ((videoDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                //         var resourceid = "#" + videoDetails.resourceid;
+                //         $(resourceid).css("display", "block");
+                //     } else {
+                //         var resourceid = "#" + videoDetails.resourceid;
+                //         $(resourceid).css("display", "none");
+                //     }
                 // }
                 
                 for (let readingMat in libraryData["readingMats"]) {
@@ -344,7 +360,6 @@ $(function() {
 
 function showReadingMaterialModal(resourceid, resourceImg, title, author, date, source, mainPoint1, mainPoint2, mainPoint3) {
     $("#readingMaterialTitle").text(title);
-    $("#readingMaterialBookmark").html('<img class="libraryActions" src="../assets/img/bookmark-white.png" onclick="bookmarkResource(this, \'' + resourceid + '\', \'' + title + '\')">');
     $("#readingMaterialBg").attr("src", resourceImg);
     $("#readingMaterialAuthor").text(author);
     $("#readingMaterialDate").text(date);
@@ -352,6 +367,28 @@ function showReadingMaterialModal(resourceid, resourceImg, title, author, date, 
     $("#readingMaterial1").text(mainPoint1);
     $("#readingMaterial2").text(mainPoint2);
     $("#readingMaterial3").text(mainPoint3);
+
+    $.ajax({
+        url: "../../ajax/getBookmarksData.ajax.php",
+        method: "POST",
+        data: {"accountid" : $("#accountidPlaceholder").text()},
+        success:function(data){
+            var bookmarksList = data;
+            var bookmarks = [];
+
+            for (let bookmark in bookmarksList) {
+                var bookmarkDetails = bookmarksList[bookmark];
+                bookmarks.push(bookmarkDetails["resourceid"]);
+            }
+
+            if (bookmarks.includes(resourceid)) {
+                $("#readingMaterialBookmark").html('<img class="libraryActions" src="../assets/img/bookmark-black.png" onclick="bookmarkResource(this, \'' + resourceid + '\', \'' + title + '\')">');
+            } else {
+                $("#readingMaterialBookmark").html('<img class="libraryActions" src="../assets/img/bookmark-white.png" onclick="bookmarkResource(this, \'' + resourceid + '\', \'' + title + '\')">');
+
+            }
+        }
+    });
 
     $('#readingMaterialOverview').modal();
     $('#readingMaterialOverview').show();
@@ -407,27 +444,72 @@ function copyResourceLink(thisIcon, file) {
 }
 
 function bookmarkResource(thisIcon, resourceid, resourceTitle) {
-    if ($(thisIcon).attr("src") == "../assets/img/bookmark-white.png") {
-        // add content to user profile bookmarks
-        $(thisIcon).attr("src", "../assets/img/bookmark-black.png");
+    $.ajax({
+        url: "../../ajax/getBookmarksData.ajax.php",
+        method: "POST",
+        data: {"accountid" : $("#accountidPlaceholder").text()},
+        success:function(data){
+            var bookmarksList = data;
+            var bookmarks = [];
 
-        $("#toast").html('"' + resourceTitle +  '" was added to the bookmarks.')
+            for (let bookmark in bookmarksList) {
+                var bookmarkDetails = bookmarksList[bookmark];
+                bookmarks.push(bookmarkDetails["resourceid"]);
 
-        $('#toast').addClass('show');
-    
-        setTimeout(function() {
-            $('#toast').removeClass('show');
-        }, 2000);
-    } else {
-        // remove content from user profile bookmarks
-        $(thisIcon).attr("src", "../assets/img/bookmark-white.png");
+                if(bookmarkDetails["resourceid"] == resourceid) {
+                    var bookmarkid = bookmarkDetails["bookmarkid"];
 
-        $("#toast").html('"' + resourceTitle +  '" was removed from the bookmarks.')
+                    $.ajax({
+                        url: "../../ajax/removeFromBookmarks.ajax.php",
+                        method: "POST",
+                        data: {"bookmarkid" : bookmarkid},
+                        success:function(){
+                            $(thisIcon).attr("src", "../assets/img/bookmark-white.png");
+                            $("#toast").html('"' + resourceTitle +  '" was removed from the bookmarks.')
+                            $('#toast').addClass('show');
+                        
+                            setTimeout(function() {
+                                $('#toast').removeClass('show');
+                            }, 2000);
+                        },
+                        error: function() {
+                            $(thisIcon).attr("src", "../assets/img/bookmark-black.png");
+                            $("#toast").html('Error removing "' + resourceTitle +  '" from the bookmarks.')
+                            $('#toast').addClass('show');
+                    
+                            setTimeout(function() {
+                                $('#toast').removeClass('show');
+                            }, 2000);
+                        }
+                    });
+                }
+            }
 
-        $('#toast').addClass('show');
-    
-        setTimeout(function() {
-            $('#toast').removeClass('show');
-        }, 2000);
-    }
+            if (!bookmarks.includes(resourceid)) {
+                $.ajax({
+                    url: "../../ajax/addToBookmarks.ajax.php",
+                    method: "POST",
+                    data: {"accountid" : $("#accountidPlaceholder").text(), "resourceid" : resourceid, "resourceTitle" : resourceTitle},
+                    success:function(){
+                        $(thisIcon).attr("src", "../assets/img/bookmark-black.png");
+                        $("#toast").html('"' + resourceTitle +  '" was added to the bookmarks.')
+                        $('#toast').addClass('show');
+                
+                        setTimeout(function() {
+                            $('#toast').removeClass('show');
+                        }, 2000);
+                    },
+                    error: function() {
+                        $(thisIcon).attr("src", "../assets/img/bookmark-white.png");
+                        $("#toast").html('Error adding "' + resourceTitle +  '" to the bookmarks.')
+                        $('#toast').addClass('show');
+                
+                        setTimeout(function() {
+                            $('#toast').removeClass('show');
+                        }, 2000);
+                    }
+                });
+            }
+        }
+    });
 }

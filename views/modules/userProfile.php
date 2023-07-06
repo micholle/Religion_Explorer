@@ -20,6 +20,7 @@
 <body>
     <div id="userProfileSidebar"></div>
     <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
+    <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
     <div class="pageContainer">
         <div class="container mw-100 mh-100">
@@ -123,10 +124,7 @@
                 </div>
 
                 <div class="userProfileContent">
-                    <div class="userContentContainer">
-                        <img src="../assets/img/bookmark.png" class="userProfBookmark">
-                        <p id="bookmarksList">ReligionExplorer_User123 has added 'Mere Christianity' to their bookmarks.<p>
-                    </div>
+                    <div id="userProfileBookmarksList"></div>
                 </div>
 
                 <div id="calendarDatePlaceHolder" hidden></div>

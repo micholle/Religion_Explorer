@@ -125,14 +125,14 @@ class libraryData {
                     "file" => "../assets/data/vid/library/Mosque.mp4",
                     "religion" => "Islam",
                     "category" => ["Religious Practices"],
-                    "description" => "",
+                    "description" => "A mosque is a place of worship and community for followers of Islam. It is typically a building where Muslims gather for congregational prayers, engage in spiritual activities, seek religious guidance, and foster community bonds. ",
                     "author" => "Ali Karim"
                 ],
                 "Hindu Event" => [
                     "file" => "../assets/data/vid/library/Hindu_Event.mp4",
                     "religion" => "Hinduism",
                     "category" => ["Religious Practices"],
-                    "description" => "",
+                    "description" => "Hindu events encompass a rich tapestry of religious, cultural, and traditional celebrations that hold significant importance for followers of Hinduism. These events are often marked by elaborate rituals, vibrant festivities, and communal gatherings, creating an atmosphere of joy, devotion, and spiritual connection.",
                     "author" => "Abhilash Bahirat"
                 ],  
                 // "Video 3" => [

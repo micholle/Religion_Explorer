@@ -55,7 +55,32 @@ $(function() {
             }
         }
     });
+
+    $.ajax({
+        url: '../../ajax/getBookmarksData.ajax.php',
+        method: "POST",
+        data: {"accountid" : $("#accountidPlaceholder").text()},
+        success: function(data){
+            var bookmarksList = data;
+            for (let bookmark in bookmarksList) {
+                var bookmarkDetails = bookmarksList[bookmark];
+
+                var $bookmarkDiv = 
+                '<div class="userContentContainer" onclick="viewBookmark(' + "'" + bookmarkDetails.resourceTitle + "'" + ')" style="cursor: pointer;">' +
+                    '<img src="../assets/img/bookmark.png" class="userProfBookmark">' +
+                    '<p>' + $("#accountUsernamePlaceholder").text() + ' has added "' + bookmarkDetails.resourceTitle + '" to their bookmarks.<p>' +
+                '</div>';
+
+                $("#userProfileBookmarksList").append($bookmarkDiv);
+            }
+        }
+    });    
+    
 });
+
+function viewBookmark(resourceTitle) {
+    window.location.href = "../modules/library.php?search=" + encodeURIComponent(resourceTitle);
+}
 
 var activeFilter = "";
 

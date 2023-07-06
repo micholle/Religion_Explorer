@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -14,6 +15,7 @@
     </head>
     <body>
         <div id="librarySidebar"></div>
+        <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
 
         <div class="pageContainer">
             <div class="container mw-100 mh-100">
