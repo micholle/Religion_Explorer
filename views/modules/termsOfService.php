@@ -27,11 +27,11 @@
                     <div class="card-body">
                         <p>These terms of service are entered into by and between You and Pathfinders ("Company," "we," "our," or "us"). The following terms and conditions, together with any documents they expressly incorporate by reference (collectively "Terms of Service"), govern your access to and use of localhost, including any content, functionality, and services offered on or through localhost (the "Website").<br><br>
                         Please read the Terms of Service carefully before you start to use the Website.<br><br>
-                        By using the Website [or by clicking to accept or agree to the Terms of Service when this option is made available to you], you accept and agree to be bound and abide by these Terms of Service and our Privacy Policy, found at <a href="https://religionexplorer.uno/userAgreement/privacy-policy">https://religionexplorer.uno/userAgreement/privacy-policy</a>, incorporated herein by reference. If you do not want to agree to these Terms of Service, you must not access or use the Website.<br><br>
-                        BY ACCESSING AND USING THIS WEBSITE, YOU:<br><br>
+                        By using the Website [or by clicking to accept or agree to the Terms of Service when this option is made available to you], you accept and agree to be bound and abide by these Terms of Service and our Privacy Policy, found at <a href="https://religionexplorer.uno/privacypolicy">https://religionexplorer.uno/privacypolicy</a>, incorporated herein by reference. If you do not want to agree to these Terms of Service, you must not access or use the Website.<br><br>
+                        <b>BY ACCESSING AND USING THIS WEBSITE, YOU:<br><br>
                         1. &nbsp; ACCEPT AND AGREE TO BE BOUND AND COMPLY WITH THESE TERMS OF SERVICE;<br>
                         2. &nbsp; REPRESENT AND WARRANT THAT YOU ARE THE LEGAL AGE OF MAJORITY UNDER APPLICABLE LAW TO FORM A BINDING CONTRACT WITH US; AND,<br>
-                        3. &nbsp; AGREE IF YOU ACCESS THE WEBSITE FROM A JURISDICTION WHERE IT IS NOT PERMITTED, YOU DO SO AT YOUR OWN RISK.
+                        3. &nbsp; AGREE IF YOU ACCESS THE WEBSITE FROM A JURISDICTION WHERE IT IS NOT PERMITTED, YOU DO SO AT YOUR OWN RISK.</b>
                         </p>
                     </div>
                     </div>
@@ -161,9 +161,9 @@
                     <div class="card-body">
                         <p>YOU UNDERSTAND AND AGREE THAT YOUR USE OF THE WEBSITE, ITS CONTENT, AND ANY GOODS, DIGITAL PRODUCTS, SERVICES, INFORMATION OR ITEMS FOUND OR ATTAINED THROUGH THE WEBSITE IS AT YOUR OWN RISK. THE WEBSITE, ITS CONTENT, AND ANY GOODS, SERVICES, DIGITAL PRODUCTS, INFORMATION OR ITEMS FOUND OR ATTAINED THROUGH THE WEBSITE ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT ANY WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. THE FOREGOING DOES NOT AFFECT ANY WARRANTIES THAT CANNOT BE EXCLUDED OR LIMITED UNDER APPLICABLE LAW.<br><br>
                             YOU ACKNOWLEDGE AND AGREE THAT COMPANY OR ITS RESPECTIVE DIRECTORS, OFFICERS, EMPLOYEES, AGENTS, SERVICE PROVIDERS, CONTRACTORS, LICENSORS, LICENSEES, SUPPLIERS, OR SUCCESSORS MAKE NO WARRANTY, REPRESENTATION, OR ENDORSEMENT WITH RESPECT TO THE COMPLETENESS, SECURITY, RELIABILITY, SUITABILITY, ACCURACY, CURRENCY, OR AVAILABILITY OF THE WEBSITE OR ITS CONTENTS OR THAT ANY GOODS, SERVICES, DIGITAL PRODUCTS, INFORMATION OR ITEMS FOUND OR ATTAINED THROUGH THE WEBSITE WILL BE ACCURATE, RELIABLE, ERROR-FREE, OR UNINTERRUPTED, THAT DEFECTS WILL BE CORRECTED, THAT OUR WEBSITE OR THE SERVER THAT MAKES IT AVAILABLE OR CONTENT ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS OR DESTRUCTIVE CODE.<br><br>
-                            How We Limit Our Liability to You<br><br>
+                            <b>How We Limit Our Liability to You</b><br><br>
                             EXCEPT WHERE SUCH EXCLUSIONS ARE PROHIBITED BY LAW, IN NO EVENT SHALL THE COMPANY NOR ITS RESPECTIVE DIRECTORS, OFFICERS, EMPLOYEES, AGENTS, SERVICE PROVIDERS, CONTRACTORS, LICENSORS, LICENSEES, SUPPLIERS, OR SUCCESSORS BE LIABLE UNDER THESE TERMS OF SERVICE TO YOU OR ANY THIRD-PARTY FOR ANY CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, SPECIAL, OR PUNITIVE DAMAGES WHATSOEVER, INCLUDING ANY DAMAGES FOR BUSINESS INTERRUPTION, LOSS OF USE, DATA, REVENUE OR PROFIT, COST OF CAPITAL, LOSS OF BUSINESS OPPORTUNITY, LOSS OF GOODWILL, WHETHER ARISING OUT OF BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE), ANY OTHER THEORY OF LIABILITY, OR OTHERWISE, REGARDLESS OF WHETHER SUCH DAMAGES WERE FORESEEABLE AND WHETHER OR NOT THE COMPANY WAS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.<br><br>
-                            Indemnification<br><br>
+                            <b>Indemnification</b><br><br>
                             To the maximum extent permitted by applicable law, you agree to defend, indemnify, and hold harmless Company, its parent, subsidiaries, affiliates, and their respective directors, officers, employees, agents, service providers, contractors, licensors, suppliers, successors, and assigns from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your breach of these Terms of Service or your use of the Website including, but not limited to, third-party sites and content, any use of the Website's content and services other than as expressly authorized in these Terms of Service or any use of any goods, digital products and information purchased from this Website.
                         </p>
                     </div>
@@ -177,7 +177,7 @@
                     </div>
                     <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
                     <div class="card-body">
-                        <p>Your provision of personal information through the Website is governed by our privacy policy located at <a href="https://religionexplorer.uno/userAgreement/privacy-policy">https://religionexplorer.uno/userAgreement/privacy-policy</a> (the "Privacy Policy").
+                        <p>Your provision of personal information through the Website is governed by our privacy policy located at <a href="https://religionexplorer.uno/privacypolicy">https://religionexplorer.uno/privacypolicy</a> (the <b>"Privacy Policy"</b>).
                         </p>
                     </div>
                     </div>
@@ -256,7 +256,7 @@
                     </div>
                     <div id="collapseFifteen" class="collapse" aria-labelledby="headingFifteen" data-parent="#accordion">
                     <div class="card-body">
-                        <p>If you have any questions or concerns regarding these Terms, please contact us at help@religionexplorer.uno
+                        <p>If you have any questions or concerns regarding these Terms, please contact us at religionexplorer@religionexplorer.uno
                         </p>
                     </div>
                     </div>
