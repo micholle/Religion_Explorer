@@ -123,7 +123,7 @@ class ModelAccount{
 			  $mail->setFrom('religionexplorer@religionexplorer.uno', 'Religion Explorer'); // Sender's email address and name
 			  $mail->addAddress($email); // Recipient's email address
 			  $mail->Subject = 'Reset Password'; // Email subject
-			  $mail->Body = 'Click the link to reset your password: http://localhost/forgotpassword/views/modules/resetPassword.php'; // Email body
+			  $mail->Body = 'Click the link to reset your password: http://localhost/religion_explorer/views/modules/resetPassword.php'; // Email body
 	  
 			  // Send the email
 			  $mail->send();
