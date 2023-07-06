@@ -604,6 +604,7 @@ h5 {
 .libraryMediaContainer p {
     margin: 0;
     text-align: justify;
+    font-size: 15px;
     line-height: 20px;
 }
 
@@ -618,7 +619,7 @@ h5 {
 
 .libraryMediaContainer .libraryMediaHeader p {
     margin-top: -15px;
-    line-height: 25px;
+    line-height: 20px;
 }
 
 .libraryMediaHeader {
@@ -640,6 +641,15 @@ h5 {
 
 .libraryMediaInteractions .mediaInteractionsLeft img {
     margin-right: 10px;
+}
+
+.libraryWideContainer {
+    width: 100% !important;
+    margin: 20px 0;
+}
+
+.libraryWideContainer .libraryMediaHeader {
+    padding-left: 15px !important;
 }
 
 /*navbar*/
@@ -975,7 +985,7 @@ p {
     -webkit-appearance: none;
     -moz-appearance: none;
     border: solid #D6D6D6 2px;
-    border-radius: 15PX;
+    border-radius: 15px;
     font-family: Lexend;
     height: 45px;
     margin: 5px 0px;
@@ -1404,12 +1414,12 @@ p {
 
 .achContainer {
     border: solid #D6D6D6 2px;
-    border-radius: 20px
+    border-radius: 15px
 }
 
 .settingsContainer {
     border: solid #D6D6D6 2px;
-    border-radius: 20px
+    border-radius: 15px
 }
 
 .editPasswordButton {
@@ -1557,7 +1567,7 @@ p {
 .libraryBasicInfoBox {
     background-color: white;
     border: solid #D0D0D0 2px;
-    border-radius: 25px;
+    border-radius: 15px;
     cursor: pointer;
     padding: 15px;
     margin: 5px;
@@ -1580,9 +1590,13 @@ p {
     width: 80px;
 }
 
+#libraryBasicInfoModal p {
+    font-size: 15px;
+}
+
 #libraryBasicInfoModal .basicItemsBox {
     border: solid #D0D0D0 2px;
-    border-radius: 25px;
+    border-radius: 15px;
     padding: 20px;
     text-align: center;
 }
@@ -1608,12 +1622,21 @@ p {
 
 /*main library content*/
 
-.libraryMainContainer {  
+.libraryMainContainer { 
     padding: 20px 0;
 }
 
 .libraryRightContainer {
     padding: 20px;
+}
+
+.libraryRightContainer .libraryReadMatsBox {
+    padding: 0 20px;
+    margin: 0;
+}
+
+.libraryRightContainer .libraryReadMatsBox p {
+    font-weight: 400 !important;
 }
 
 .libraryRightContainer .roundedButton {
@@ -1623,7 +1646,7 @@ p {
 .libraryRightContBox {
     padding: 20px;
     border: solid #D0D0D0 2px;
-    border-radius: 25px;
+    border-radius: 15px;
 }
 
 .libraryRightContBox p {
@@ -1651,9 +1674,12 @@ p {
     margin-bottom: 10px;
 }
 
+#libraryReadMatsContainer {
+    cursor: pointer;
+}
+
 .libraryReadMatsBox {
-    height: 150px;
-    margin: 10px 0;
+    margin: 20px 0;
 }
 
 .libraryReadMatsHeader {
@@ -1665,13 +1691,14 @@ p {
 }
 
 .libraryReadMatsSubheader p {
-    font-size: 14px;
+    font-size: 13px;
     margin-right: 5px;
 }
 
 .libraryReadMatsSummary {
     text-align: justify;
-    font-size: 16px;
+    font-size: 15px;
+    line-height: 20px;
 }
 
 .libraryReadMatsType {
@@ -1698,6 +1725,51 @@ p {
 .libraryPreview {
     width: 200px;
     height: 120px;
-    border-radius: 10px;
+    border-radius: 15px;
     object-fit: cover;
+}
+
+#readingMaterialOverview .readingMaterialImg {
+    margin: 0;
+    padding: 0;
+}
+
+#readingMaterialOverview img {
+    max-width: 100%;
+}
+
+#readingMaterialOverview .readingMaterialHeader h1 {
+    font-family: Lexend;
+    font-size: 26px;
+    color: #3E3E3E;
+    font-weight: 600;
+    padding: 0;
+    margin: 0;
+}
+
+#readingMaterialOverview .readingMaterialHeader p {
+    font-family: Lexend;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+#readingMaterialOverview .readingMaterialHeader .readingMaterialTitle img {
+    width: 25px;
+}
+
+#readingMaterialOverview .readingMaterialHeader .readingMaterialTitle {
+    margin: 0;
+    padding: 0;
+}
+
+#readingMaterialOverview .readingMaterialHeader .readingMaterialExternal {
+    color: #2CA464;
+}
+
+#readingMaterialOverview .readingMaterialOveContent {
+    padding: 10px;
+    padding-bottom: 0px;
+    border-radius: 15px;
+    border: solid #2CA464 2px;
+    margin: 10px 0;
 }
