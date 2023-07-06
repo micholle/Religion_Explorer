@@ -29,7 +29,7 @@
                         <h3>Forgot Password</h3>
                         <p>Enter your email for the verification process.</p>
                         <form method="POST">
-                            <input type="text" id="" name="" placeholder="Email">
+                            <input type="text" id="email" name="email" placeholder="Email">
                             <button type="submit" id="forgotPasswordSubmit" name="" class="registrationSubmitButton">Submit</button>
                         </form>
                     </div>
