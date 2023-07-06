@@ -12,12 +12,12 @@ $(function() {
     });
 
     $("#termsOfService").click(function() {
-        window.location.href = "../modules/userAgreement.php/terms-of-service";
+        window.location.href = "../modules/termsOfService.php";
     });
 
     $("#privacyPolicy").click(function() {
-        window.location.href = "../modules/userAgreement.php/privacy-policy";
-    });
+        window.location.href = "../modules/privacyPolicy.php";
+    });  
 
     //js functions below this line are temporary---------------------------------------------------------------
 
@@ -151,4 +151,4 @@ $(function() {
         $("#sidebarNotifications").removeAttr("data-toggle");
         $('.popover').popover('dispose');
     });
-})
+});

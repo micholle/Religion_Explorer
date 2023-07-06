@@ -1701,3 +1701,33 @@ p {
     border-radius: 10px;
     object-fit: cover;
 }
+
+/* user agreement */
+
+.userAgreementDiv {
+    padding: 50px 200px 50px 200px;
+}
+
+.userAgreementDiv h3 {
+    text-align: center;
+}
+
+.userAgreementDiv h4 {
+    text-align: center;
+    font-size: 14px;
+}
+
+.userAgreementDiv p {
+    text-align: justify;
+    font-size: 14px;
+}
+
+.no-underline {
+    text-decoration: none;
+    color: #000000;
+}
+
+.no-underline:hover {
+    text-decoration: none;
+    color: #000000;
+}
