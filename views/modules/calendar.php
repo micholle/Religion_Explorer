@@ -20,6 +20,7 @@
             <div id="calendarDatePlaceHolder" hidden></div>
             <div id="calendarContainer" class="calendarContainer"></div>
         </div>
+        <div id="toast" class="toast"></div>
 
         <!-- Modal -->
         <div class="modal fade" id="calendarEventModal">

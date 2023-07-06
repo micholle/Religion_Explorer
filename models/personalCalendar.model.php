@@ -53,6 +53,7 @@ class personalCalendarModel{
 			$stmt->execute();
 	
 			$pdo->commit();
+            echo $data["event"];
 			return "ok";
 		} catch (Exception $e) {
 			$pdo->rollBack();
@@ -67,9 +68,17 @@ class personalCalendarModel{
         $pdo = $db->connect();
     
         try {
+            $stmt2 = $pdo->prepare("SELECT event FROM personalcalendar WHERE personaleventid = :personaleventid");
+            $stmt2->bindParam(":personaleventid", $personaleventid, PDO::PARAM_INT);
+            $stmt2->execute();
+            $row = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+            echo $row["event"];            
+
             $stmt = $pdo->prepare("DELETE FROM personalcalendar WHERE personaleventid = :personaleventid");
             $stmt->bindParam(":personaleventid", $personaleventid, PDO::PARAM_INT);
             $stmt->execute();
+
             return "success";
         } catch (Exception $e) {
             return "error";

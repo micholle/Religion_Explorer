@@ -75,7 +75,7 @@
                         </div>
 
                         <!--Reading Materials-->
-                        <div class="row libraryMainContainer">
+                        <div class="row libraryMainContainer" id="libraryReadingMaterialsWide">
                             <div class="col-12">
                                 <div class="row d-flex justify-content-center align-items-center">
                                     <div class="col-12 d-flex justify-content-start align-items-start">
@@ -91,7 +91,7 @@
                         </div>
                         
                         <!--Photos Wide-->
-                        <div class="row libraryMainContainer">
+                        <div class="row libraryMainContainer" id="libraryPhotosWide" hidden>
                             <div class="col-12">
                                 <div class="row d-flex justify-content-center align-items-center">
                                     <div class="col-12 d-flex justify-content-start align-items-start">
@@ -100,45 +100,12 @@
                                 </div>
                             </div>
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <div class="d-flex flex-column libraryMediaContainer libraryWideContainer">
-                                    <div class="row d-flex justify-content-center align-items-center">
-                                        <div class="col-12 libraryMediaHeader">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <h1>Placeholder Title</h1>
-                                                    <p>Placeholder Date</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-12 d-flex justify-content-center align-items-center">
-                                            <img src="../assets/img/placeholder.png">
-                                        </div>
-                                    </div>
-
-                                    <div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">
-                                        <div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">
-                                            <img src="../assets/img/download.png">
-                                            <img src="../assets/img/broken-link.png">
-                                        </div>
-                                        <div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">
-                                            <img src="../assets/img/bookmark-white.png">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at leo sed justo dignissim viverra. Nulla facilisi. Aliquam efficitur at eros eget interdum. Nulla eget ipsum orci. Praesent varius non lacus ac cursus. Curabitur metus nibh, pellentesque maximus mi non, hendrerit fringilla purus.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="libraryPhotosContainer"></div>
                             </div>
                         </div>
 
                         <!--Videos Wide-->
-                        <div class="row libraryMainContainer">
+                        <div class="row libraryMainContainer" id="libraryVideosWide" hidden>
                             <div class="col-12">
                                 <div class="row d-flex justify-content-center align-items-center">
                                     <div class="col-12 d-flex justify-content-start align-items-start">
@@ -147,40 +114,7 @@
                                 </div>
                             </div>
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <div class="d-flex flex-column libraryMediaContainer libraryWideContainer">
-                                    <div class="row d-flex justify-content-center align-items-center">
-                                        <div class="col-12 libraryMediaHeader">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <h1>Placeholder Title</h1>
-                                                    <p>Placeholder Date</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-12 d-flex justify-content-center align-items-center">
-                                            <img src="../assets/img/placeholder.png">
-                                        </div>
-                                    </div>
-
-                                    <div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">
-                                        <div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">
-                                            <img src="../assets/img/download.png">
-                                            <img src="../assets/img/broken-link.png">
-                                        </div>
-                                        <div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">
-                                            <img src="../assets/img/bookmark-white.png">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at leo sed justo dignissim viverra. Nulla facilisi. Aliquam efficitur at eros eget interdum. Nulla eget ipsum orci. Praesent varius non lacus ac cursus. Curabitur metus nibh, pellentesque maximus mi non, hendrerit fringilla purus.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="libraryVideosContainer"></div>
                             </div>
                         </div>
                     </div>
@@ -212,7 +146,7 @@
                             </div>
                         </div>
                         <!--Photos Small-->
-                        <div class="row libraryRightContainer">
+                        <div class="row libraryRightContainer" id="libraryPhotosSmall">
                             <h1>Photos</h1>
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column libraryRightContBox">
                                 <div class="row d-flex flex-row">
@@ -220,14 +154,14 @@
                                 </div>
                                 <div class="row d-flex flex-row">
                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                        <button class="roundedButton">See More</button>
+                                        <button class="roundedButton librarySeeMore" id="libraryPhotosSeeMore">See More</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!--Videos Small-->
-                        <div class="row libraryRightContainer">
+                        <div class="row libraryRightContainer" id="libraryVideosSmall">
                             <h1>Videos</h1>
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column libraryRightContBox">
                                 <div class="row d-flex flex-row">
@@ -235,40 +169,22 @@
                                 </div>
                                 <div class="row d-flex flex-row">
                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                        <button class="roundedButton">See More</button>
+                                        <button class="roundedButton librarySeeMore" id="libraryVideosSeeMore">See More</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!--Reading Materials Small-->
-                        <div class="row libraryRightContainer">
+                        <div class="row libraryRightContainer" id="libraryReadingMaterialsSmall" hidden>
                             <h1>Reading Materials</h1>
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column libraryRightContBox">
-                                <div id="" class="row d-flex justify-content-center align-items-center flex-row">
-                                    <div id="" class="libraryReadMatsBox">
-                                        <div class="row"> 
-                                            <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">
-                                                <div class="libraryReadMatsType">[PLACEHOLDER]</div>
-                                                <div class="libraryReadMatsTitle">Placeholder Title</div>
-                                                <div class="libraryReadMatsTag">Placeholder</div>
-                                            </div>
-                                        </div>  
-                                        <div class="row"> 
-                                            <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">
-                                                <p>Placeholder Author</p> 
-                                            </div> 
-                                        </div>
-                                        <div class="row libraryReadMatsSummary"> 
-                                            <div class="col-12">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium tellus eu dolor ultricies interdum. Nam consequat tincidunt eros, eget luctus massa. Nulla facilisi. Integer ut nisl non ante luctus sodales sed lobortis dui. Nunc auctor pellentesque metus eu consectetur.</p>
-                                            </div>
-                                        </div> 
-                                    </div>
+                                <div class="row d-flex justify-content-center align-items-center flex-row">
+                                    <div id="libraryReadingMatsPreview" class="libraryReadMatsBox"></div>
                                 </div>
                                 <div class="row d-flex flex-row">
                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                        <button class="roundedButton">See More</button>
+                                        <button class="roundedButton librarySeeMore" id="libraryReadingMaterialsSeeMore">See More</button>
                                     </div>
                                 </div>
                             </div>
@@ -277,6 +193,7 @@
                 </div>
             </div>
         </div>
+        <div id="toast" class="toast"></div>
 
         <!-- Modal -->
         <div class="modal fade" id="libraryBasicInfoModal">
@@ -343,7 +260,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-4 readingMaterialImg">
-                                <img src="../assets/img/placeholder.png">
+                                <img id="readingMaterialBg" class="readingMaterialBg" src="">
                             </div>
 
                             <div class="col-8">
@@ -351,38 +268,36 @@
                                     <div class="col-1">
                                     </div>
                                     <div class="col-10 d-flex justify-content-center align-items-center flex-row readingMaterialTitle">
-                                        <h1>Placeholder Title</h1>
+                                        <h1 id="readingMaterialTitle"></h1>
                                     </div>
-                                    <div class="col-1 d-flex justify-content-end align-items-center flex-row readingMaterialTitle">
-                                        <img src="../assets/img/community-bookmark.png">
-                                    </div>
+                                    <div id="readingMaterialBookmark" class="col-1 d-flex justify-content-end align-items-center flex-row readingMaterialTitle"></div>
 
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-center align-items-center flex-row">
-                                            <p>Placeholder Author</p>
+                                            <p id="readingMaterialAuthor"></p>
                                             <p>•</p>
-                                            <p>Placeholder Date</p>
+                                            <p id="readingMaterialDate"></p>
                                             <p>•</p>
-                                            <p class="readingMaterialExternal">[External Link]</p>
+                                            <div class="readingMaterialEvent" id="readingMaterialSource"></div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row readingMaterialOveContent">
                                     <div class="col-12 d-flex flex-row">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu nunc in massa pulvinar tincidunt sit amet vitae arcu. Proin sed posuere urna. Nunc mauris massa, feugiat et neque sed, tempor mattis metus. Nunc consequat eu nisl a vehicula.</p>
+                                        <p id="readingMaterial1"></p>
                                     </div>
                                 </div>
 
                                 <div class="row readingMaterialOveContent">
                                     <div class="col-12 d-flex flex-row">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu nunc in massa pulvinar tincidunt sit amet vitae arcu. Proin sed posuere urna. Nunc mauris massa, feugiat et neque sed, tempor mattis metus. Nunc consequat eu nisl a vehicula.</p>
+                                        <p id="readingMaterial2"></p>
                                     </div>
                                 </div>
 
                                 <div class="row readingMaterialOveContent">
                                     <div class="col-12 d-flex flex-row">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu nunc in massa pulvinar tincidunt sit amet vitae arcu. Proin sed posuere urna. Nunc mauris massa, feugiat et neque sed, tempor mattis metus. Nunc consequat eu nisl a vehicula.</p>
+                                        <p id="readingMaterial3"></p>
                                     </div>
                                 </div>
 

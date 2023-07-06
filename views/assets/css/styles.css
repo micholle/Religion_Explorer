@@ -1325,7 +1325,7 @@ p {
 
 .userProfBookmark {
     width: 20px;
-    margin-right: -95px;
+    margin-right: 15px;
 }
 
 .postVotes {
@@ -1727,6 +1727,25 @@ p {
     height: 120px;
     border-radius: 15px;
     object-fit: cover;
+    cursor: pointer;
+}
+
+.librarySeeMore {
+    cursor: pointer;
+}
+
+.libraryActions {
+    cursor: pointer;
+}
+
+.libraryVideo {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.readingMaterialBg {
+    height: 100%;
+    object-fit: cover;
 }
 
 #readingMaterialOverview .readingMaterialImg {
@@ -1802,4 +1821,27 @@ p {
 .no-underline:hover {
     text-decoration: none;
     color: #000000;
+}
+
+.toast {
+    background-color: #333333;
+    color: #FFFFFF;
+    font-family: "Lexend";
+    font-size: 12px;
+    border-radius: 15px;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease;
+    z-index: 9999;
+}
+
+.toast.show {
+    bottom: 5%;
+    opacity: 1;
+    visibility: visible;
 }

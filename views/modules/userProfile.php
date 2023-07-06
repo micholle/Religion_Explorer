@@ -125,7 +125,7 @@
                 <div class="userProfileContent">
                     <div class="userContentContainer">
                         <img src="../assets/img/bookmark.png" class="userProfBookmark">
-                        <p>ReligionExplorer_User123 has added ‘Mere Christianity’ to their bookmarks.<p>
+                        <p id="bookmarksList">ReligionExplorer_User123 has added 'Mere Christianity' to their bookmarks.<p>
                     </div>
                 </div>
 
@@ -166,6 +166,7 @@
             </script>
         </div>
     </div>
+    <div id="toast" class="toast"></div>
 
     <!-- Modal -->
     <div class="modal fade" id="calendarEventModal">

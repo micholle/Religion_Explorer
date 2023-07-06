@@ -130,10 +130,23 @@ function removeFromPersonalCalendar(personaleventid) {
         url: '../../ajax/removeFromPersonalCalendar.ajax.php',
         method: "POST",
         data: {"personaleventid" : personaleventid},
-        success: function(){
+        success: function(data){
             $("#calendarEventModal").removeClass("fade").modal("hide");
             $("#calendarEventModal").modal("dispose");
-            $("#userProfileCalendar").load("userProfile.php" + "#userProfileCalendar");
+            $("#userProfileCalendar").fadeOut(200, function() {
+                $("#userProfileCalendar").load("#userProfileCalendar", function() {
+                    $("#userProfileCalendar").fadeIn(200);
+                });
+            });
+
+            $("#toast").html('"' + data +  '" was removed from your personal calendar.')
+
+            $('#toast').addClass('show');
+        
+            setTimeout(function() {
+                $('#toast').removeClass('show');
+            }, 2000);
+
         }
     });
 }

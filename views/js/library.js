@@ -14,37 +14,120 @@ $(function() {
             var libraryData = data;
             var photoPreviewCounter = 0;
             var videoPreviewCounter = 0;
+            var readingMarsPreviewCounter = 0;
 
             for (let photo in libraryData["photos"]) {
                 var photoDetails = libraryData["photos"][photo];
-                $("#libraryPhotosPreview").append("<img onclick='viewContent(\"" + photoDetails.contentid + "\")' src=" + photoDetails.file +" class='libraryPreview'> &nbsp;");
-                photoPreviewCounter++;
 
-                if (photoPreviewCounter == 2) {
-                    break;
+                // Wide
+                $libraryPhotosMats =
+                '<div class="d-flex flex-column libraryMediaContainer libraryWideContainer">' +
+                    '<div class="row d-flex justify-content-center align-items-center">' +
+                        '<div class="col-12 libraryMediaHeader">' +
+                            '<div class="row">' +
+                                '<div class="col-12">' +
+                                    '<h1>' + photo + '</h1>' +
+                                    '<p>' + photoDetails.author + '</p>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+
+                    '<div class="row">' +
+                        '<div class="col-12 d-flex justify-content-center align-items-center">' +
+                            '<img src="' + photoDetails.file +'">' +
+                        '</div>' +
+                    '</div>' +
+
+                    '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
+                        '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
+                            '<img class="libraryActions" src="../assets/img/download.png" onclick="downloadPhoto(\'' + photoDetails.file + '\')">' +
+                            '<img class="libraryActions" src="../assets/img/broken-link.png" onclick="copyResourceLink(this, \'' + photoDetails.file + '\')">' +
+                        '</div>' +
+                        '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
+                            '<img class="libraryActions" src="../assets/img/bookmark-white.png" onclick="bookmarkResource(this, \'' + photoDetails.resourceid + '\', \'' + photo + '\')">' +
+                        '</div>' +
+                    '</div>' +
+
+                    '<div class="row">' +
+                        '<div class="col-12">' +
+                            '<p>' + photoDetails.description +'</p>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+
+                $("#libraryPhotosContainer").append($libraryPhotosMats);
+
+                // Small
+                if (photoPreviewCounter <= 1) {
+                    $("#libraryPhotosPreview").append("<img onclick='searchContent(\"" + photo + "\")' src=" + photoDetails.file +" class='libraryPreview'> &nbsp;");
+                    photoPreviewCounter++;
                 }
             }
 
             for (let video in libraryData["videos"]) {
                 var videoDetails = libraryData["videos"][video];
-                $("#libraryVideosPreview").append("<video onclick='viewContent(\"" + videoDetails.contentid + "\")' class='libraryPreview' controls> <source src=" + videoDetails.file +"> </video> &nbsp;");
-                videoPreviewCounter++;
 
-                if (videoPreviewCounter == 2) {
-                    break;
+                // Wide
+                $libraryVideosMats = 
+                '<div class="d-flex flex-column libraryMediaContainer libraryWideContainer">' +
+                    '<div class="row d-flex justify-content-center align-items-center">' +
+                        '<div class="col-12 libraryMediaHeader">' +
+                           ' <div class="row">' +
+                                '<div class="col-12">' +
+                                    '<h1>' + video + '</h1>' +
+                                    '<p>' + videoDetails.author + '</p>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+
+                    '<div class="row">' +
+                        '<div class="col-12 d-flex justify-content-center align-items-center">' +
+                            '<video controls class="libraryVideo"> <source src="' + videoDetails.file +'"> </video>' +
+                        '</div>' +
+                    '</div>' +
+
+                    '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
+                        '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
+                            '<img class="libraryActions" src="../assets/img/download.png" onclick="downloadVideo(\'' + videoDetails.file + '\')">' +
+                            '<img class="libraryActions" src="../assets/img/broken-link.png" onclick="copyResourceLink(this, \'' + videoDetails.file + '\')">' +
+                        '</div>' +
+                        '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
+                           '<img class="libraryActions" src="../assets/img/bookmark-white.png" onclick="bookmarkResource(this, \'' + videoDetails.resourceid + '\', \'' + video + '\')">' +
+                        '</div>' +
+                    '</div>' +
+
+                    '<div class="row">' +
+                        '<div class="col-12">'
+                            '<p>' + videoDetails.description + '</p>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+
+                $("#libraryVideosContainer").append($libraryVideosMats);
+
+                // Small
+                
+                if (videoPreviewCounter <= 1) {
+                    $("#libraryVideosPreview").append("<video onclick='searchContent(\"" + video + "\")' class='libraryPreview' controls> <source src=" + videoDetails.file +"> </video> &nbsp;");
+                    videoPreviewCounter++;
                 }
+
             }
             
             for (let readingMat in libraryData["readingMats"]) {
                 var readingMatDetails = libraryData["readingMats"][readingMat];
+
+                // Wide
                 var tags = "";
 
                 $.each(readingMatDetails.category, function(index, category) {
                     tags += '<div class="libraryReadMatsTag"><p style="color: #FFFFFF">' + category + '</p></div>&nbsp;';
                 });
 
-                $libraryreadingMats =
-                        '<div id="' + readingMatDetails.resourceid +'" class="libraryReadMatsBox"> <div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
+                $libraryReadingMats =
+                        '<div id="' + readingMatDetails.resourceid +'" class="libraryReadMatsBox" onclick="showReadingMaterialModal(' + "'" + readingMatDetails.resourceid + "', '" + readingMatDetails.resourceImg + "', '" + readingMat + "', '" + readingMatDetails.author + "', '" + readingMatDetails.date + "', '" + readingMatDetails.source + "', '" + readingMatDetails.mainPoint1 + "', '" + readingMatDetails.mainPoint2 + "', '" + readingMatDetails.mainPoint3 + "' " + ')"> <div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
                             '<div class="libraryReadMatsType">[' + readingMatDetails.type + ']</div>' +
                             '<div class="libraryReadMatsTitle">' + readingMat + '</div>' +
                             tags + '</div> </div> ' +
@@ -54,14 +137,35 @@ $(function() {
                             '<p>' + readingMatDetails.description + '</p>' +
                         '</div> </div> </div>';
 
-                $("#libraryReadMatsContainer").append($libraryreadingMats);
+                $("#libraryReadMatsContainer").append($libraryReadingMats);
+
+                // Small
+                $libraryReadingMatsPreview =
+                '<div onclick="searchContent(\'' + readingMat + '\')" style="cursor: pointer;">' +
+                    '<div class="row">' +
+                        '<div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
+                            '<div class="libraryReadMatsType">[' + readingMatDetails.type + ']</div>' +
+                            '<div class="libraryReadMatsTitle">' + readingMat + '</div>' +
+                        '</div>' +
+                    '</div>' + 
+                    '<div class="row">' +
+                        '<div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">' +
+                            '<p>' + readingMatDetails.author + '</p>' +
+                        '</div>' +
+                ' </div>' +
+                    '<div class="row libraryReadMatsSummary">' +
+                        '<div class="col-12">' +
+                            '<p>' + readingMatDetails.description + '</p>' +
+                        '</div>' +
+                    '</div>' +
+                '</div><br>';
+
+                if (readingMarsPreviewCounter <= 1) {
+                    $("#libraryReadingMatsPreview").append($libraryReadingMatsPreview);
+                    readingMarsPreviewCounter++;
+                }
             }
         }
-    });
-
-    $("#libraryReadMatsContainer").click(function(){
-        $('#readingMaterialOverview').modal();
-        $('#readingMaterialOverview').show();
     });
 
     $(".libraryBasicInfoBox").click(function(){
@@ -206,4 +310,124 @@ $(function() {
 
     $("#libraryReligionFilter, .libraryCategoryFilter").on("change", handleFilterChange);
 
+    $("#libraryPhotosSeeMore").click(function () { 
+        $("#libraryReadingMaterialsWide").attr("hidden", true);
+        $("#libraryPhotosWide").removeAttr("hidden");
+        $("#libraryVideosWide").attr("hidden", true);
+
+        $("#libraryPhotosSmall").attr("hidden", true);
+        $("#libraryVideosSmall").removeAttr("hidden");
+        $("#libraryReadingMaterialsSmall").removeAttr("hidden");
+    });
+
+    $("#libraryVideosSeeMore").click(function () { 
+        $("#libraryReadingMaterialsWide").attr("hidden", true);
+        $("#libraryPhotosWide").attr("hidden", true);
+        $("#libraryVideosWide").removeAttr("hidden");
+
+        $("#libraryPhotosSmall").removeAttr("hidden");
+        $("#libraryVideosSmall").attr("hidden", true);
+        $("#libraryReadingMaterialsSmall").removeAttr("hidden");
+    });
+
+    $("#libraryReadingMaterialsSeeMore").click(function () { 
+        $("#libraryReadingMaterialsWide").removeAttr("hidden");
+        $("#libraryPhotosWide").attr("hidden", true);
+        $("#libraryVideosWide").attr("hidden", true);
+
+        $("#libraryPhotosSmall").removeAttr("hidden");
+        $("#libraryVideosSmall").removeAttr("hidden");
+        $("#libraryReadingMaterialsSmall").attr("hidden", true);
+    });
+
 });
+
+function showReadingMaterialModal(resourceid, resourceImg, title, author, date, source, mainPoint1, mainPoint2, mainPoint3) {
+    $("#readingMaterialTitle").text(title);
+    $("#readingMaterialBookmark").html('<img class="libraryActions" src="../assets/img/bookmark-white.png" onclick="bookmarkResource(this, \'' + resourceid + '\', \'' + title + '\')">');
+    $("#readingMaterialBg").attr("src", resourceImg);
+    $("#readingMaterialAuthor").text(author);
+    $("#readingMaterialDate").text(date);
+    $("#readingMaterialSource").html("<p><a href=" + source +">[External Link]</a></p>");
+    $("#readingMaterial1").text(mainPoint1);
+    $("#readingMaterial2").text(mainPoint2);
+    $("#readingMaterial3").text(mainPoint3);
+
+    $('#readingMaterialOverview').modal();
+    $('#readingMaterialOverview').show();
+}
+
+function searchContent(resourceTitle) {
+    window.location.href = "../modules/library.php?search=" + encodeURIComponent(resourceTitle);
+}
+
+function downloadPhoto(file) {
+    fetch(file)
+    .then(response => response.blob())
+    .then(blob => {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = "image.jpg";
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    });
+}
+
+function downloadVideo(file) {
+    fetch(file)
+    .then(response => response.blob())
+    .then(blob => {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = "video.mp4";
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    });
+}
+
+function copyResourceLink(thisIcon, file) {
+    var imageLink = window.location.href.substring(0, window.location.href.indexOf("views/") + "views/".length) + file.substring(file.indexOf("assets/"));
+    navigator.clipboard.writeText(imageLink);
+
+    $("#toast").html("Link copied to clipboard.")
+
+    $('#toast').addClass('show');
+
+    setTimeout(function() {
+        $('#toast').removeClass('show');
+    }, 2000);
+}
+
+function bookmarkResource(thisIcon, resourceid, resourceTitle) {
+    if ($(thisIcon).attr("src") == "../assets/img/bookmark-white.png") {
+        // add content to user profile bookmarks
+        $(thisIcon).attr("src", "../assets/img/bookmark-black.png");
+
+        $("#toast").html('"' + resourceTitle +  '" was added to the bookmarks.')
+
+        $('#toast').addClass('show');
+    
+        setTimeout(function() {
+            $('#toast').removeClass('show');
+        }, 2000);
+    } else {
+        // remove content from user profile bookmarks
+        $(thisIcon).attr("src", "../assets/img/bookmark-white.png");
+
+        $("#toast").html('"' + resourceTitle +  '" was removed from the bookmarks.')
+
+        $('#toast').addClass('show');
+    
+        setTimeout(function() {
+            $('#toast').removeClass('show');
+        }, 2000);
+    }
+}

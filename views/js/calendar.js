@@ -156,10 +156,6 @@ function viewEvent(event, religion, date) {
     $("#calendarEventModal").show();
 }
 
-function viewPersonalEvent() {
-    
-}
-
 function addToPersonalCalendar(event, religion, date) {
     var accountid = $("#accountidPlaceholder").text();
     var event = event;
@@ -180,9 +176,17 @@ function addToPersonalCalendar(event, religion, date) {
         contentType: false,
         processData: false,
         dataType: "text",
-        success: function(){
+        success: function(data){
             $("#calendarEventModal").removeClass("fade").modal("hide");
             $("#calendarEventModal").modal("dispose");
+
+            $("#toast").html('"' + data +  '" was added to your personal calendar.')
+
+            $('#toast').addClass('show');
+        
+            setTimeout(function() {
+                $('#toast').removeClass('show');
+            }, 2000);
         }
     });
 }
@@ -192,7 +196,7 @@ function removeFromPersonalCalendar(personaleventid) {
         url: '../../ajax/removeFromPersonalCalendar.ajax.php',
         method: "POST",
         data: {"personaleventid" : personaleventid},
-        success: function(){
+        success: function(data){
             $("#calendarEventModal").removeClass("fade").modal("hide");
             $("#calendarEventModal").modal("dispose");
             $("#calendarContainer").fadeOut(200, function() {
@@ -200,12 +204,19 @@ function removeFromPersonalCalendar(personaleventid) {
                     $("#calendarContainer").fadeIn(200);
                 });
             });
+
+            $("#toast").html('"' + data +  '" was removed from your personal calendar.')
+
+            $('#toast').addClass('show');
+        
+            setTimeout(function() {
+                $('#toast').removeClass('show');
+            }, 2000);
         }
     });
 }
 
 function learnMore(event) {
-    console.log(event);
     window.location.href = "../modules/library.php?search=" + encodeURIComponent(event);
 }
 

@@ -146,7 +146,6 @@ function reportContent(title) {
 
 function copyContent(file) {
     navigator.clipboard.writeText(file);
-    // $("#copyContent").text("Link Copied");
     $("#copyContent").attr("src", "../assets/img/check.png");
     $("#copyContent").attr("disabled", true);
 
