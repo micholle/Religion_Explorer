@@ -22,7 +22,7 @@
                         <h1>Library of Resources</h1>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
-                        <input type="search" id="" name="" placeholder="Search the Library">
+                        <input type="search" id="librarySearch" name="" placeholder="Search the Library">
                     </div>
                 </div>
 
@@ -96,26 +96,26 @@
                         <div class="row libraryRightContainer">
                             <div class="col-12 libraryRightContBox">
                                 <p>Religion:</p>
-                                <select id="" name="">
-                                    <option selected hidden disabled>Select a Religion</option>
-                                    <option value="">Buddhism</option>
-                                    <option value="">Christianity</option>
-                                    <option value="">Hinduism</option>
-                                    <option value="">Islam</option>
-                                    <option value="">Judaism</option>
+                                <select id="libraryReligionFilter">
+                                    <option selected value="All Religions">All Religions</option>
+                                    <option value="Buddhism">Buddhism</option>
+                                    <option value="Christianity">Christianity</option>
+                                    <option value="Hinduism">Hinduism</option>
+                                    <option value="Islam">Islam</option>
+                                    <option value="Judaism">Judaism</option>
                                 </select>
-                                <input type="checkbox" id="" name="" value="">
-                                <label for="">Religious Traditions</label><br>
-                                <input type="checkbox" id="" name="" value="">
-                                <label for="">Historical Context</label><br>
-                                <input type="checkbox" id="" name="" value="">
-                                <label for="">Theology</label><br>
-                                <input type="checkbox" id="" name="" value="">
-                                <label for="">Religious Practices</label><br>
-                                <input type="checkbox" id="" name="" value="">
-                                <label for="">Ethics</label><br>
-                                <input type="checkbox" id="" name="" value="">
-                                <label for="">Social Issues</label>
+                                <input type="checkbox" class="libraryCategoryFilter" id="Religious Traditions" value="Religious Traditions">
+                                <label for="Religious Traditions">Religious Traditions</label><br>
+                                <input type="checkbox" class="libraryCategoryFilter" id="Historical Context" value="Historical Context">
+                                <label for="Historical Context">Historical Context</label><br>
+                                <input type="checkbox" class="libraryCategoryFilter" id="Theology" value="Theology">
+                                <label for="Theology">Theology</label><br>
+                                <input type="checkbox" class="libraryCategoryFilter" id="Religious Practices" value="Religious Practices">
+                                <label for="Religious Practices">Religious Practices</label><br>
+                                <input type="checkbox" class="libraryCategoryFilter" id="Ethics" value="Ethics">
+                                <label for="Ethics">Ethics</label><br>
+                                <input type="checkbox" class="libraryCategoryFilter" id="Social Issues" value="Social Issues">
+                                <label for="Social Issues">Social Issues</label>
                             </div>
                         </div>
                         <div class="row libraryRightContainer">

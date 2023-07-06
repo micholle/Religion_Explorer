@@ -44,7 +44,7 @@ $(function() {
                 });
 
                 $libraryreadingMats =
-                        '<div class="libraryReadMatsBox"> <div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
+                        '<div id="' + readingMatDetails.resourceid +'" class="libraryReadMatsBox"> <div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
                             '<div class="libraryReadMatsType">[' + readingMatDetails.type + ']</div>' +
                             '<div class="libraryReadMatsTitle">' + readingMat + '</div>' +
                             tags + '</div> </div> ' +
@@ -87,5 +87,101 @@ $(function() {
         });
         $('#libraryBasicInfoModal').modal();
     });
+
+    $("#librarySearch").keyup(function () { 
+        var librarySearchVal = $("#librarySearch").val().toLowerCase();
+
+        $.ajax({
+            url: "../../ajax/getLibraryResources.ajax.php",
+            method: "POST",
+            success:function(data){
+                var libraryData = data;
+    
+                // for (let photo in libraryData["photos"]) {
+                //     var photoDetails = libraryData["photos"][photo];
+                // }
+    
+                // for (let video in libraryData["videos"]) {
+                //     var videoDetails = libraryData["videos"][video];
+                // }
+                
+                for (let readingMat in libraryData["readingMats"]) {
+                    var readingMatDetails = libraryData["readingMats"][readingMat];
+
+                    if ((readingMat.toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.type).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.author).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                        var resourceid = "#" + readingMatDetails.resourceid;
+                        $(resourceid).css("display", "block");
+                    } else {
+                        var resourceid = "#" + readingMatDetails.resourceid;
+                        $(resourceid).css("display", "none");
+                    }
+                }
+            }
+        });
+    });
+
+    function handleFilterChange() { 
+        var libraryReligion = $("#libraryReligionFilter").val();
+        var libraryFilters = $(".libraryCategoryFilter:checked").map(function() {
+          return $(this).val();
+        }).get();
+
+        $.ajax({
+            url: "../../ajax/getLibraryResources.ajax.php",
+            method: "POST",
+            success:function(data){
+                var libraryData = data;
+    
+                // for (let photo in libraryData["photos"]) {
+                //     var photoDetails = libraryData["photos"][photo];
+                // }
+    
+                // for (let video in libraryData["videos"]) {
+                //     var videoDetails = libraryData["videos"][video];
+                // }
+                
+                for (let readingMat in libraryData["readingMats"]) {
+                    var readingMatDetails = libraryData["readingMats"][readingMat];
+                    var resourceid = "#" + readingMatDetails.resourceid;
+                    
+                    if ($(".libraryCategoryFilter:checked").length == 0) {
+                        if (libraryReligion == "All Religions") {
+                            $(resourceid).css("display", "block");
+                        } else {
+                            if (libraryReligion == readingMatDetails.religion) {
+                                $(resourceid).css("display", "block");
+                            } else {
+                                $(resourceid).css("display", "none");
+                            }
+                        }
+                    } else {
+                        if (libraryReligion == "All Religions") {
+                            $.each(readingMatDetails.category, function(index, category) {
+                                if (libraryFilters.includes(category)) {
+                                    $(resourceid).css("display", "block");
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
+                            });
+                        } else {
+                            if (libraryReligion == readingMatDetails.religion) {
+                                $.each(readingMatDetails.category, function(index, category) {
+                                    if (libraryFilters.includes(category)) {
+                                        $(resourceid).css("display", "block");
+                                    } else {
+                                        $(resourceid).css("display", "none");
+                                    }
+                                });
+                            } else {
+                                $(resourceid).css("display", "none");
+                            }
+                        }
+                    }
+                }  
+            }
+        });
+    }
+
+    $("#libraryReligionFilter, .libraryCategoryFilter").on("change", handleFilterChange);
 
 });
