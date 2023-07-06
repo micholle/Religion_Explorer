@@ -188,14 +188,60 @@ class libraryData {
                     "religion" => "Christianity",
                     "category" => ["Historical Context"],
                     "description" => "Christians form the third largest religious community in India. How has this come about? There are many studies of separate groups: but there has so far been no major history of the three large groups."
-                ],    
-                // "Blog 5" => [
-                    // "resourceid" => "rm5",
+                ],  
+                "Dharma Day" => [
+                    "resourceid" => "rm5",
+                    "type" => "article",
+                    "author" => "Ottowa Humane Society - n.d.",
+                    "religion" => "Buddhism",
+                    "category" => ["Religious Traditions"],
+                    "description" => "Dharma Day, also known as “Asalha Puja” is one of the most important holidays in Theravada Buddhism. It commemorates the Buddha's first sermon following his attainment of enlightenment.",
+                    "source" => "https://ottawahumane.ca/dharma-day"
+                ],  
+                "Fast of the 17th of Tammuz" => [
+                    "resourceid" => "rm6",
+                    "type" => "article",
+                    "author" => "The Jerusalem Post - 2023",
+                    "religion" => "Judaism",
+                    "category" => ["Religious Traditions"],
+                    "description" => "Thursday marks the fast of the 17th of the Hebrew month of Tammuz, a day commemorating several tragedies in Jewish history and the start of a mourning period known as the Three Weeks.",
+                    "source" => "https://www.jpost.com/judaism/article-748996"
+                ],
+                "The Muharram Sermons" => [
+                    "resourceid" => "rm7",
+                    "type" => "book",
+                    "author" => "Mohammed Al-Hilli",
+                    "religion" => "Islam",
+                    "category" => ["Theology", "Religious Traditions"],
+                    "description" => "A compilation of lectures during the sacred month of Muharram in commemoration of the eternal sacrifice and the powerful movement of Imam Hussain (a) in the Battle of Ashura in Karbala.",
+                    "source" => "https://www.thriftbooks.com/w/the-muharram-sermons_mohammed-al-hilli/10792364/#edition=64661424&idiq=52566039"
+                ],
+                "Tisha B'Av: What's Worth Mourning For?" => [
+                    "resourceid" => "rm8",
+                    "type" => "article",
+                    "author" => "Y. Sheleg - 2019",
+                    "religion" => "Judaism",
+                    "category" => ["Social Issues"],
+                    "description" => "Strengthening the norms founded on our shared national traditions can help fortify our shared national identity but any attempt to impose religious norms on a public when the majority does not identify with them will only lead to division and hate.",
+                    "source" => "https://en.idi.org.il/articles/28380"
+                ],
+                "What is Ashura?" => [
+                    "resourceid" => "rm9",
+                    "type" => "article",
+                    "author" => "BBC News - 2011",
+                    "religion" => "Islam",
+                    "category" => ["Religious Traditions"],
+                    "description" => "The day of Ashura is marked by Muslims as a whole, but for Shia Muslims it is a major religious commemoration of the martyrdom at Karbala of Hussein, a grandson of the Prophet Muhammad.",
+                    "source" => "https://www.bbc.com/news/world-middle-east-16047713"
+                ],
+                // "Placeholder" => [
+                //     "resourceid" => "rm",
                 //     "type" => "",
                 //     "author" => "",
                 //     "religion" => "",
                 //     "category" => [""],
-                //     "description" => ""
+                //     "description" => "",
+                //     "source" => ""
                 // ]
             ]
         ];

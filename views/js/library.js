@@ -51,7 +51,7 @@ $(function() {
                             '<div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">' +
                             '<p>' + readingMatDetails.author + '</p> </div> </div>' +
                             '<div class="row libraryReadMatsSummary"> <div class="col-12">' +
-                            '<p>' + readingMatDetails.description + '</p><br>' +
+                            '<p>' + readingMatDetails.description + '</p>' +
                         '</div> </div> </div>';
 
                 $("#libraryReadMatsContainer").append($libraryreadingMats);
@@ -88,7 +88,24 @@ $(function() {
         $('#libraryBasicInfoModal').modal();
     });
 
+    var search = getUrlParameter("search");
+    if (search) {
+        $("#librarySearch").val(decodeURIComponent(search));
+        librarySearch();
+    }
+
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null ? "" : results[1].replace(/\+/g, " ");
+    }
+
     $("#librarySearch").keyup(function () { 
+        librarySearch();
+    });
+
+    function librarySearch() {
         var librarySearchVal = $("#librarySearch").val().toLowerCase();
 
         $.ajax({
@@ -118,7 +135,7 @@ $(function() {
                 }
             }
         });
-    });
+    }
 
     function handleFilterChange() { 
         var libraryReligion = $("#libraryReligionFilter").val();

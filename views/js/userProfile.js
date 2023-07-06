@@ -120,7 +120,7 @@ function enableFilter(religion) {
 
 function viewEvent(event, personaleventid) {
     $("#calendarEvent").text(event);
-    $("#calendarEventContent").html('<button onclick="removeFromPersonalCalendar(' + "'" + personaleventid + "'" + ')" type="button">Remove from Personal Calendar</button> <button type="button">Learn More</button>');
+    $("#calendarEventContent").html('<button onclick="removeFromPersonalCalendar(' + "'" + personaleventid + "'" + ')" type="button">Remove from Personal Calendar</button> <button onclick="learnMore(' + "'" + event + "'" + ')" type="button">Learn More</button>');
     $("#calendarEventModal").modal();
     $("#calendarEventModal").show();
 }
@@ -136,6 +136,11 @@ function removeFromPersonalCalendar(personaleventid) {
             $("#userProfileCalendar").load("userProfile.php" + "#userProfileCalendar");
         }
     });
+}
+
+function learnMore(event) {
+    console.log(event);
+    window.location.href = "../modules/library.php?search=" + encodeURIComponent(event);
 }
 
 function prevMonth(prevMonth, day) {

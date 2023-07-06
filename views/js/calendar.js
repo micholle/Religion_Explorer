@@ -144,9 +144,9 @@ function viewEvent(event, religion, date) {
             }
 
             if (personalEvent) {
-                $("#calendarEventContent").html('<button onclick="removeFromPersonalCalendar(' + "'" + eventDetails["personaleventid"] + "'" + ')" type="button">Remove from Personal Calendar</button> <button type="button">Learn More</button>');
+                $("#calendarEventContent").html('<button onclick="removeFromPersonalCalendar(' + "'" + eventDetails["personaleventid"] + "'" + ')" type="button">Remove from Personal Calendar</button> <button onclick="learnMore(' + "'" + event + "'" + ')" type="button">Learn More</button>');
             } else {
-                $("#calendarEventContent").html('<button onclick="addToPersonalCalendar(' + "'" + event + "', '" + religion + "', '" + date + "'" + ')" type="button">Add to Personal Calendar</button> <button type="button">Learn More</button>');
+                $("#calendarEventContent").html('<button onclick="addToPersonalCalendar(' + "'" + event + "', '" + religion + "', '" + date + "'" + ')" type="button">Add to Personal Calendar</button> <button onclick="learnMore(' + "'" + event + "'" + ')" type="button">Learn More</button>');
             }
 
         }
@@ -154,6 +154,10 @@ function viewEvent(event, religion, date) {
 
     $("#calendarEventModal").modal();
     $("#calendarEventModal").show();
+}
+
+function viewPersonalEvent() {
+    
 }
 
 function addToPersonalCalendar(event, religion, date) {
@@ -198,6 +202,11 @@ function removeFromPersonalCalendar(personaleventid) {
             });
         }
     });
+}
+
+function learnMore(event) {
+    console.log(event);
+    window.location.href = "../modules/library.php?search=" + encodeURIComponent(event);
 }
 
 function prevMonth(prevMonth, day) {
