@@ -22,47 +22,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
-  <section id="loginSignup">
-    <div class="container mw-100 mh-100">
-      <div class="row d-flex justify-content-center align-items-center loginSignupContainer">
-        <div class="col-4 mh-100 d-flex align-items-start loginSignupContainer">
-          <a href="splash.php"><img src="../assets/img/close.png" class="margin" height="20px" width="20px"></a>
-        </div>
-      
-        <div class="col-4 mh-100 d-flex justify-content-center align-items-center loginSignupForm">
-          <div class="container">
+    <section id="loginSignup">
+        <div class="container mw-100 mh-100">
+            <div class="row d-flex justify-content-center align-items-center loginSignupContainer">
 
-            <div class="row d-flex justify-content-center align-items-center">
-              <div class="col-12 mh-100 d-flex justify-content-center align-items-center">
-                <img src="../assets/img/applogo.png" height="110px" width="110px">
-              </div>
-            </div>
+                <div class="col-4 mh-100 d-flex align-items-start loginSignupContainer">
+                    <a href="splash.php"><img src="../assets/img/close.png" class="margin" height="20px" width="20px"></a>
+                </div>
             
-            <div class="row loginSignupHeader">
-              <h3>Log in</h3>
-            </div>
-            <?php if (isset($errorMessage)) : ?>
-            <div class="row d-flex justify-content-center align-items-center">
-              <p class="error-message"><?php echo $errorMessage; ?></p>
-            </div>
-            <?php endif; ?>
-            <form method="POST">
-            <div class="row d-flex justify-content-center align-items-center">
-              <input type="text" id="username" name="username" placeholder="Email or username">
-              <input type="password" id="password" name="password" placeholder="Password">
-              <p class="forgotLink">Forgot your password?</p>
-              <button type="submit" id="btn-login" name="btn-login">Login</button>
-            </div>
-            </form>
-            
-          </div>
-        </div>
+                <div class="col-4 mh-100 loginSignupForm">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                <img src="../assets/img/applogo.png" height="110px" width="110px">
+                                <h3>Log in</h3>
+                                    <?php if (isset($errorMessage)) : ?>
+                                    <div class="row d-flex justify-content-center align-items-center">
+                                        <p class="error-message"><?php echo $errorMessage; ?></p>
+                                    </div>
+                                    <?php endif; ?>
+                                <form method="POST">
+                                    <input type="text" id="username" name="username" placeholder="Email or username">
+                                    <input type="password" id="password" name="password" placeholder="Password">
+                                    <p class="forgotLink"><a href="forgotPassword.php">Forgot your password?</a></p>
+                                    <button type="submit" id="btn-login" name="btn-login" class="registrationSubmitButton">Login</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="col-4 mh-100 d-flex justify-content-end loginSignupContainer">
-          <a href="signup.php"><button class="signupButton">Sign Up</button></a>
+                <div class="col-4 mh-100 d-flex justify-content-end loginSignupContainer">
+                    <a href="signup.php"><button class="registrationNavButton">Sign Up</button></a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </body>
 </html>

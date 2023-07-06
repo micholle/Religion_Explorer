@@ -36,6 +36,11 @@ g:hover {
     cursor: pointer;
 }
 
+.redirectLink {
+    color: #2CA464;
+    text-decoration: none;
+}
+
 /* .main {
     position: relative;
     height: 90vh;
@@ -664,8 +669,12 @@ header {
     align-items: center;
     transition: 0.5s;
     padding: 0px 182px;
-    height: 100px;
+    height: 85px;
     z-index: 10000;
+}
+
+header img {
+    width: 200px;
 }
 
 header .logo {
@@ -921,10 +930,29 @@ p {
     font-family: Lexend;
     color: #3E3E3E;
     font-size: 13px;
+    margin-bottom: 10px;
 }
 
 #loginSignup .loginSignupContainer {
     height: 100vh;
+}
+
+#loginSignup .loginSignupContainer .registrationNavButton {
+    background-color: transparent;
+    color: #2CA464;
+    border: solid #298f58 2px;
+    border-radius: 15px;
+    font-family: Lexend;
+    font-size: 16px;
+    margin: 20px 10px;
+    padding: 7.5px 15px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+}
+
+#loginSignup .loginSignupContainer .registrationNavButton:hover {
+    background-color: rgb(220, 220, 220 , 0.3);
+    transition: background-color 0.5s ease;
 }
 
 #loginSignup .margin {
@@ -935,9 +963,9 @@ p {
     padding: 80px;
 }
 
-#loginSignup .loginSignupHeader {
-    text-align: center;
-} 
+#loginSignup .loginSignupForm h3 {
+    margin-bottom: 5px;
+}
 
 #loginSignup h3 {
     padding: 15px 0px;
@@ -945,10 +973,10 @@ p {
     font-family: Lexend;
     font-size: 28px;
     font-weight: 600;
-    margin: 0px 0px;
+    margin: -10px 0px;
 }
 
-#loginSignup input[type=text],input[type=password]{
+#loginSignup input[type=text]{
     background-color: #FAFAFA;
     color: #3E3E3E;
     border-radius: 15px;
@@ -956,16 +984,38 @@ p {
     font-family: Lexend;
     font-size: 16px;
     height: 45px;
-    margin: 5px 0px;
+    margin-bottom: 5px;
+    margin-top: 0 !important;
     padding: 0px 15px;
+    width: 325px;
+    display: flex;
+}
+
+#loginSignup input[type=password]{
+    background-color: #FAFAFA;
+    color: #3E3E3E;
+    border-radius: 15px;
+    border: solid #D6D6D6 2px;
+    font-family: Lexend;
+    font-size: 16px;
+    height: 45px;
+    margin-bottom: 5px;
+    margin-top: 0 !important;
+    padding: 0px 15px;
+    width: 325px;
+    display: flex;
 }
 
 #loginSignup .forgotLink {
     margin-bottom: 0px;
     font-family: Lexend;
     font-size: 13px;
-    color: #3E3E3E;
     text-align: right;
+}
+
+#loginSignup a {
+    text-decoration: none;
+    color: #2CA464;
 }
 
 #loginSignup input:focus {
@@ -988,9 +1038,9 @@ p {
     border-radius: 15px;
     font-family: Lexend;
     height: 45px;
-    margin: 5px 0px;
     padding: 0px 15px;
-    width: 100%;
+    width: 325px;
+    margin-bottom: 5px;
     color: #3E3E3E;
     background-color: #FAFAFA;
     font-size: 16px;
@@ -1000,48 +1050,105 @@ p {
     background-position: right 15px center;
 }
 
-#loginSignup input[type=submit] {
+#loginSignup input[type=submit]:hover {
+    background-color: #2e925c;
+}
+
+#loginSignup .terms {
+    text-align: center;
+    padding: 0px 10px;
+    line-height: 15px;
+}
+
+#loginSignup .signupLink {
+    color: #2CA464;
+    cursor: pointer;
+}
+
+.registrationButton {
+    background-color: white;
+    color: #2CA464;
+    border: solid #298f58 2px;
+    border-radius: 15px;
+    font-family: Lexend;
+    font-size: 16px;
+    margin: 0px 10px;
+    padding: 5px 15px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+}
+
+.registrationButton:hover {
+    background-color: rgb(225, 225, 225);
+}
+
+.registrationButtonVariant {
+    background-color: transparent;
+    color: white;
+    border: solid white 2px;
+    border-radius: 15px;
+    font-family: Lexend;
+    font-size: 16px;
+    margin: 0px -10px;
+    padding: 5px 15px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+}
+
+.registrationButtonVariant:hover {
+    background-color: rgb(236, 236, 236, 0.3);
+}
+
+.registrationHeader {
     background-color: #2CA464;
+}
+
+.registrationSubmitButton {
+    background-color: #2CA464 !important;
     color: white;
     border: none;
     border-radius: 15px;
     font-family: Lexend;
     font-size: 16px;
     height: 45px;
-    margin: 15px 0px;
+    margin: 5px 0px;
+    width: 325px;
     transition: background-color 0.5s ease;
 }
 
-#loginSignup input[type=submit]:hover {
-    background-color: #2e925c;
-}
-
-#loginSignup .signupButton {
-    background-color: white;
-    color: #2CA464;
-    border: solid #D6D6D6 2px;
+#verificationCodeModal input[type=text]{
+    background-color: #FAFAFA;
+    color: #3E3E3E;
     border-radius: 15px;
+    border: solid #D6D6D6 2px;
     font-family: Lexend;
     font-size: 16px;
     height: 45px;
-    margin: 30px 20px;
-    padding: 10px 15px;
-    text-align: center;
-    transition: background-color 0.5s ease;
+    margin-bottom: 5px;
+    margin-top: 0 !important;
+    padding: 0px 15px;
+    width: 325px;
+    display: flex;
 }
 
-#loginSignup .signupButton:hover {
-    background-color: rgb(240, 240, 240);
+#verificationCodeModal input[type=text]{
+    background-color: #FAFAFA;
+    color: #3E3E3E;
+    border-radius: 15px;
+    border: solid #D6D6D6 2px;
+    font-family: Lexend;
+    font-size: 16px;
+    height: 45px;
+    margin-bottom: 5px;
+    margin-top: 0 !important;
+    padding: 0px 15px;
+    width: 325px;
+    display: flex;
 }
 
-#loginSignup .terms {
-    text-align: center;
-    padding: 0px 10px;
-}
-
-#loginSignup .signupLink {
-    color: #2CA464;
-    cursor: pointer;
+#verificationCodeModal h5 {
+    margin: 10px 0;
 }
 
 /*sidebar*/

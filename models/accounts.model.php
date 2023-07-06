@@ -83,9 +83,9 @@ class ModelAccount{
                 $updateStmt->bindParam(":verificationCode", $data['verificationCode'], PDO::PARAM_STR);
                 $updateStmt->execute();
 
-                return true; // Email and verification code are correct
+                return true;
             } else {
-                return false; // Email or verification code is incorrect
+                return false;
             }
         } catch (Exception $e) {
             return false; // Error occurred while verifying email and code
@@ -94,5 +94,79 @@ class ModelAccount{
         $pdo = null;
         $stmt = null;
     }
+
+	static public function mdlCheckEmail($email) {
+		$db = new Connection();
+		$pdo = $db->connect();
+	  
+		try {
+		  $stmt = $pdo->prepare("SELECT COUNT(*) FROM accounts WHERE email = :email");
+		  $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+		  $stmt->execute();
+		  $count = $stmt->fetchColumn();
+	  
+		  if ($count > 0) {
+			session_start();
+			$_SESSION['email'] = $email;
+			try {
+			  $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+			  // SMTP configuration for Hostinger
+			  $mail->isSMTP();
+			  $mail->Host = 'smtp.hostinger.com'; // SMTP server address
+			  $mail->SMTPAuth = true;
+			  $mail->Username = 'religionexplorer@religionexplorer.uno'; // SMTP username (your email address)
+			  $mail->Password = 'Religion_explorer619'; // SMTP password
+			  $mail->SMTPSecure = 'tls'; // Enable TLS encryption
+			  $mail->Port = 587; // SMTP port number
+	  
+			  // Email Content
+			  $mail->setFrom('religionexplorer@religionexplorer.uno', 'Religion Explorer'); // Sender's email address and name
+			  $mail->addAddress($email); // Recipient's email address
+			  $mail->Subject = 'Reset Password'; // Email subject
+			  $mail->Body = 'Click the link to reset your password: http://localhost/religion_explorer/views/modules/resetPassword.php'; // Email body
+	  
+			  // Send the email
+			  $mail->send();
+			  return true; // Email sent successfully
+			} catch (Exception $e) {
+			  return false; // Error occurred while sending email
+			}
+		  } else {
+			return false; // Email not found in the database
+		  }
+		} catch (Exception $e) {
+		  return false; // Error occurred while verifying email
+		}
+	  
+		$pdo = null;
+		$stmt = null;
+	}
+
+	static public function mdlResetPassword($email, $password) {
+		$db = new Connection();
+		$pdo = $db->connect();
+	  
+		try {
+		  // Hash the password
+		  $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+	  
+		  $stmt = $pdo->prepare("UPDATE accounts SET password = :password WHERE email = :email");
+		  $stmt->bindParam(":password", $hashedPassword, PDO::PARAM_STR);
+		  $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+		  $stmt->execute();
+	  
+		  // Check the affected rows to determine if the password was updated successfully
+		  if ($stmt->rowCount() > 0) {
+			return true; // Password reset successfully
+		  } else {
+			return false; // Error occurred while resetting password
+		  }
+		} catch (Exception $e) {
+		  return false; // Error occurred while resetting password
+		}
+	  
+		$pdo = null;
+		$stmt = null;
+	}
 }
 ?>

@@ -13,60 +13,71 @@
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../assets/js/chart.umd.js"></script>
     <script type="text/javascript" src="../js/accounts.js"></script>
+    <script type="text/javascript" src="../js/signup.js"></script>
 </head>
 
 <body>
-  <section id="loginSignup">
-    <div class="container mw-100 mh-100">
-      <div class="row d-flex justify-content-center align-items-center loginSignupContainer">
-        <div class="col-4 mh-100 d-flex align-items-start loginSignupContainer">
-            <a href="splash.php"><img src="../assets/images/close.png" class="margin" height="20px" width="20px"></a>
-        </div>
-      
-        <div class="col-4 mh-100 d-flex justify-content-center align-items-center loginSignupForm">
-          <div class="container">
-
-            <div class="row d-flex justify-content-center align-items-center">
-              <div class="col-12 mh-100 d-flex justify-content-center align-items-center">
-                <img src="../assets/images/applogo.png" height="110px" width="110px">
-              </div>
-            </div>
+    <section id="loginSignup">
+        <div class="container mw-100 mh-100">
+            <div class="row d-flex justify-content-center align-items-center loginSignupContainer">
+                <div class="col-4 mh-100 d-flex align-items-start loginSignupContainer">
+                    <a href="splash.php"><img src="../assets/img/close.png" class="margin" height="20px" width="20px"></a>
+                </div>
             
-            <div class="row loginSignupHeader">
-              <h3>Sign Up</h3>
-            </div>
-            <form method="POST">
-            <div class="row d-flex justify-content-center align-items-center">
-                <input type="text" id="email" name="email" placeholder="Email">
-                <input type="text" id="username" name="username" placeholder="Username">
-                <input type="password" id="password" name="password" placeholder="Password">
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
-                <select id="religion" name="religion">
-                    <option value="" disabled selected hidden>Choose your religion</option>
-                    <option value="Buddhism">Buddhism</option>
-                    <option value="Christianity">Christianity</option>
-                    <option value="Hinduism">Hinduism</option>
-                    <option value="Islam">Islam</option>
-                    <option value="Judaism">Judaism</option>
-                    <option value="Non-religious">Non-religious</option>
-                    <option value="Other">Other</option>
-                </select>
-              <button type="submit" id="btn-signup" name="btn-signup">Sign Up</button>
-              <p class="terms">By signing up, you agree to Religion Explorer’s <span class="signupLink">Terms of Service</span> and have acknowledged our <span class="signupLink">Privacy Policy</span>.</p>
-            </div>
-            <form>
-            <input type="text" id="verificationCode" name="verificationCode" placeholder="Verification Code">
-            <button type="button" id="verify" name="verify">Verify Code</button>
+                <div class="col-4 mh-100 loginSignupForm">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 mh-100 d-flex justify-content-center align-items-center flex-column">
+                                <img src="../assets/img/applogo.png" height="110px" width="110px">
+                                <h3>Sign Up</h3>
+                                <form method="POST">
+                                    <input type="text" id="email" name="email" placeholder="Email">
+                                    <input type="text" id="username" name="username" placeholder="Username">
+                                    <input type="password" id="password" name="password" placeholder="Password">
+                                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+                                    <select id="religion" name="religion">
+                                        <option value="" disabled selected hidden>Choose your religion</option>
+                                        <option value="Buddhism">Buddhism</option>
+                                        <option value="Christianity">Christianity</option>
+                                        <option value="Hinduism">Hinduism</option>
+                                        <option value="Islam">Islam</option>
+                                        <option value="Judaism">Judaism</option>
+                                        <option value="Non-religious">Non-religious</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <!-- <button id="verificationCodeText" class="registrationSubmitButton">Test</button> -->
+                                    <button type="submit" id="btn-signup" name="btn-signup" class="registrationSubmitButton">Sign Up</button>
+                                    <p class="terms">By signing up, you agree to Religion Explorer’s <span class="signupLink">Terms of Service</span> and have acknowledged our <span class="signupLink">Privacy Policy</span>.</p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            
-          </div>
+                <div class="col-4 mh-100 d-flex justify-content-end loginSignupContainer">
+                    <a href="login.php"><button class="registrationNavButton">Log in</button></a>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="col-4 mh-100 d-flex justify-content-end loginSignupContainer">
-          <a href="login.php"><button class="signupButton">Log in</button></a>
+    <!--Modal-->
+    <div class="modal fade" id="verificationCodeModal">
+        <div class="modal-dialog modal-xs modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                <h5 class="modal-title w-100">Verification Code</h5>
+                                <input type="text" id="verificationCodeText" name="verificationCode" placeholder="Verification Code">
+                                <button type="button" id="verify" name="verify" class="registrationSubmitButton">Verify Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
 </body>
   
