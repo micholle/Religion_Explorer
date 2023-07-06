@@ -12,7 +12,37 @@ $(function() {
 
     const resetSubmitButton = document.getElementById("resetPasswordSubmit");
 
-    resetSubmitButton.addEventListener("click", () => {
-        resetContainer.innerHTML = resetNewContent;
+    resetSubmitButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const password = $("#password").val().trim(); // Get the entered password
+        const confirmPassword = $("#confirmPassword").val().trim();
+
+        if (password === "") {
+            alert("Please enter a new password.");
+            return;
+        } else if (password !== confirmPassword) {
+            alert("Passwords are not matching.");
+            return;
+        }
+
+        // Make an AJAX request to reset the password
+        $.ajax({
+            url: "../../ajax/resetPassword.ajax.php",
+            method: "POST",
+            data: { password: password },
+            dataType: "text",
+            success: function(response) {
+            // Handle the response from the server
+            if (response === "success") {
+                resetContainer.innerHTML = resetNewContent;
+            } else {
+                alert("Oops. Something went wrong!");
+            }
+            },
+            error: function() {
+            alert("Oops. Something went wrong!");
+            }
+        });
     });
 });
