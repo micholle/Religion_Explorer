@@ -59,6 +59,11 @@ $(function() {
         }
     });
 
+    $("#libraryReadMatsContainer").click(function(){
+        $('#readingMaterialOverview').modal();
+        $('#readingMaterialOverview').show();
+    });
+
     $(".libraryBasicInfoBox").click(function(){
         $.ajax({
             url: "../../ajax/getLibraryBasicInfo.ajax.php",
