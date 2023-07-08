@@ -2,14 +2,16 @@
 require_once "../models/accounts.model.php";
 
 class ControllerAccount{
-  static public function ctrAddAccount($data){
+  static public function ctrAddAccount($data) {
     $answer = (new ModelAccount)->mdlAddAccount($data);
+    return $answer;
   }
+  
 
   static public function ctrVerifyCode($data) {
     $answer = (new ModelAccount)->mdlVerifyCode($data);
     return $answer;
-  }
+  }  
 
   static public function ctrCheckEmail($email) {
     // Check if the email exists in the database
