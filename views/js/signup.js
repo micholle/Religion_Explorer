@@ -2,13 +2,23 @@ $(function() {
    // SAVE account
    $("form").submit(function(e) {
     e.preventDefault();
+   
   
     var email = $("#email").val();
     var acctype = "regular";
     var religion = $("#religion").val();
     var username = $("#username").val();
     var password = $("#password").val();
+    var password = $("#confirmPassword").val();
     var verificationCode = Math.floor(100000 + Math.random() * 900000);
+
+    if (password === "") {
+         alert("Please enter a new password.");
+         return;
+    } else if (password !== confirmPassword) {
+         alert("Passwords are not matching.");
+         return;
+    }
   
     var account = new FormData();
     account.append("email", email);
