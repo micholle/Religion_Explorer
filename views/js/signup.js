@@ -12,8 +12,11 @@ $(function() {
     var password = $("#confirmPassword").val();
     var verificationCode = Math.floor(100000 + Math.random() * 900000);
 
-    if (password === "") {
-         alert("Please enter a new password.");
+    if (username === "") {
+         alert("Please enter username.");
+         return;
+    } else if (password === "") {
+         alert("Please enter password.");
          return;
     } else if (password !== confirmPassword) {
          alert("Passwords are not matching.");
