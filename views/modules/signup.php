@@ -12,7 +12,6 @@
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../assets/js/chart.umd.js"></script>
-    <script type="text/javascript" src="../js/accounts.js"></script>
     <script type="text/javascript" src="../js/signup.js"></script>
 </head>
 
@@ -70,7 +69,7 @@
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                 <h5 class="modal-title w-100">Verification Code</h5>
-                                <input type="text" id="verificationCodeText" name="verificationCode" placeholder="Verification Code">
+                                <input type="text" id="verificationCode" name="verificationCode" placeholder="Verification Code">
                                 <button type="button" id="verify" name="verify" class="registrationSubmitButton">Verify Code</button>
                             </div>
                         </div>
