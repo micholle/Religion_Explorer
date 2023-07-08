@@ -7,7 +7,6 @@ class SaveAccount {
   public $religion;
   public $username;
   public $password;
-  public $verified;
   public $verificationCode;
 
   public function saveAccountRecord() {
@@ -16,7 +15,6 @@ class SaveAccount {
     $religion = $this->religion;
     $username = $this->username;
     $password = $this->password;
-    $verified = $this->verified;
     $verificationCode = $this->verificationCode;
 
     $data = array(
@@ -25,11 +23,18 @@ class SaveAccount {
       "religion" => $religion,
       "username" => $username,
       "password" => $password,
-      "verified" => $verified,
       "verificationCode" => $verificationCode
     );
 
     $answer = (new ControllerAccount)->ctrAddAccount($data);
+
+    if ($answer === "email_exists") {
+      echo "email_exists";
+    } elseif ($answer === "ok") {
+      echo "ok";
+    } else {
+      echo "error";
+    }
   }
 }
 
@@ -39,7 +44,6 @@ $save_account->acctype = $_POST["acctype"];
 $save_account->religion = $_POST["religion"];
 $save_account->username = $_POST["username"];
 $save_account->password = $_POST["password"];
-$save_account->verified = $_POST["verified"];
 $save_account->verificationCode = $_POST["verificationCode"];
 
 $save_account->saveAccountRecord();
