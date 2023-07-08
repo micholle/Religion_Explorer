@@ -31,6 +31,8 @@ $(function() {
           alert("Email already exists!");
         } else if (answer === "ok") {
           alert("Verification code sent, check your email!");
+          $('#verificationCodeModal').modal();
+          $('#verificationCodeModal').show();
         } else {
           alert("Oops. Something went wrong!");
         }
@@ -84,6 +86,7 @@ $(function() {
         contentType: false, // Add this line to prevent jQuery from automatically setting the content type
         success: function(answer) {
           if (answer === "ok") {
+            alert("Account verified successfully!");
             verifyContainer.innerHTML = verifyNewContent;
           } else {
             // Verification code is incorrect
@@ -96,9 +99,6 @@ $(function() {
       });
     });    
 
-    $("#btn-signup").click(function(){
-        $('#verificationCodeModal').modal();
-        $('#verificationCodeModal').show();
-    });
+
  });
  
