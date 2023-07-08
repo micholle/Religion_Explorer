@@ -9,7 +9,7 @@ $(function() {
     var religion = $("#religion").val();
     var username = $("#username").val();
     var password = $("#password").val();
-    var password = $("#confirmPassword").val();
+    var confirmPassword = $("#confirmPassword").val();
     var verificationCode = Math.floor(100000 + Math.random() * 900000);
 
     if (username === "") {
