@@ -99,7 +99,6 @@ $(function() {
         contentType: false, // Add this line to prevent jQuery from automatically setting the content type
         success: function(answer) {
           if (answer === "ok") {
-            alert("Account verified successfully!");
             verifyContainer.innerHTML = verifyNewContent;
           } else {
             // Verification code is incorrect
