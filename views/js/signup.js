@@ -1,6 +1,52 @@
 $(function() {
-    const signUpContainer = document.getElementById("verificationCodeModal");
-    const signUpNewContent = `
+   // SAVE account
+   $("form").submit(function(e) {
+    e.preventDefault();
+  
+    var email = $("#email").val();
+    var acctype = "regular";
+    var religion = $("#religion").val();
+    var username = $("#username").val();
+    var password = $("#password").val();
+    var verificationCode = Math.floor(100000 + Math.random() * 900000);
+  
+    var account = new FormData();
+    account.append("email", email);
+    account.append("acctype", acctype);
+    account.append("religion", religion);
+    account.append("username", username);
+    account.append("password", password);
+    account.append("verificationCode", verificationCode);
+  
+    $.ajax({
+      url: "../../ajax/accountSave.ajax.php",
+      method: "POST",
+      data: account,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: "text",
+      success: function(answer) {
+        if (answer === "email_exists") {
+          alert("Email already exists!");
+        } else if (answer === "ok") {
+          alert("Verification code sent, check your email!");
+        } else {
+          alert("Oops. Something went wrong!");
+        }
+      },
+      error: function() {
+        alert("Oops. Something went wrong!");
+      },
+      complete: function() {
+  
+      }
+    });
+  });
+  
+
+   const verifyContainer = document.getElementById("verificationCodeModal");
+    const verifyNewContent = `
     <div class="modal-dialog modal-xs modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
@@ -18,14 +64,42 @@ $(function() {
     </div>
     `;
 
-    const signUpSubmitButton = document.getElementById("verify");
+    const signUpVerifyButton = document.getElementById("verify");
 
-    signUpSubmitButton.addEventListener("click", () => {
-        signUpContainer.innerHTML = signUpNewContent;
-    });
+    signUpVerifyButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      var email = $("#email").val().trim();
+      var verificationCode = $("#verificationCode").val().trim();
+    
+      var verify = new FormData();
+      verify.append("email", email);
+      verify.append("verificationCode", verificationCode);
+    
+      $.ajax({
+        url: "../../ajax/verifyCode.ajax.php",
+        method: "POST",
+        data: verify,
+        dataType: "text",
+        processData: false, // Add this line to prevent jQuery from processing the FormData object
+        contentType: false, // Add this line to prevent jQuery from automatically setting the content type
+        success: function(answer) {
+          if (answer === "ok") {
+            alert("Account verified successfully!");
+            verifyContainer.innerHTML = verifyNewContent;
+          } else {
+            // Verification code is incorrect
+            alert("Verification code is incorrect. Please try again.");
+          }
+        },
+        error: function() {
+          alert("Oops. Something went wrong!");
+        }
+      });
+    });    
 
     $("#btn-signup").click(function(){
         $('#verificationCodeModal').modal();
         $('#verificationCodeModal').show();
     });
-});
+ });
+ 
