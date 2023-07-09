@@ -7,8 +7,8 @@ $(function() {
         }
     });
 
-    $("#").click(function(){
-        $('#').modal();
-        $('#').show();
+    $("#editAvatar").click(function(){
+        $('#editAvatarModal').modal();
+        $('#editAvatarModal').show();
     });
 });

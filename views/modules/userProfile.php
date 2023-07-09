@@ -25,7 +25,7 @@
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
                 <div class="col-3 d-flex justify-content-end align-items-end">
-                    <img src="../assets/img/lamb.png" width="175px">
+                    <img src="../assets/img/editProfile/lamb.png" width="175px">
                 </div>
 
                 <div class="col-4 userBasicStatsContainer">
@@ -33,14 +33,9 @@
                         <div class="col-12 mh-100 userBasicInfo">
 
                             <div class="row d-flex justify-content-center align-items-center">
-                                <div class="col-12 mh-100 d-flex justify-content-start">
+                                <div class="col-12 mh-100 d-flex justify-content-start flex-column">
                                     <h1><?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} else {echo "not logged in";}?></h1>
-                                </div>
-                            </div>
-
-                            <div class="row d-flex justify-content-center align-items-center">
-                                <div class="col-12 mh-100 d-flex justify-content-start">
-                                    <p class="nicknameText">aka Johnny</p>
+                                    <p class="nicknameText">aka [Placeholder]</p>
                                 </div>
                             </div>
 
@@ -49,37 +44,26 @@
 
                     <div class="row">
                         <div class="col-12 mh-100">
-
                             <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-1 d-flex justify-content-start align-items-center">
+                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                                     <img src="../assets/img/userBasicStats-clock.png" width="20px">
-                                </div>
-                                
-                                <div class="col-8 d-flex justify-content-start align-items-center">
-                                    <p>Joined April 2023</p>
+                                    <p>Joined [Placeholder Date]</p>
                                 </div>
                             </div>
 
                             <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-1 d-flex justify-content-start align-items-center">
+                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                                     <img src="../assets/img/userBasicStats-star.png" width="20px">
-                                </div>
-                                
-                                <div class="col-8 d-flex justify-content-start align-items-center">
-                                    <p>407 Explorer Points</p>
+                                    <p>[Placeholder] Explorer Points</p>
                                 </div>
                             </div>
 
                             <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-1 d-flex justify-content-start align-items-center">
+                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                                     <img src="../assets/img/userBasicStats-feather.png" width="20px">
-                                </div>
-                                
-                                <div class="col-8 d-flex justify-content-start align-items-center">
-                                    <p>Non-religious</p>
+                                    <p>[Placeholder Religion]</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -98,11 +82,10 @@
                 <button class="userProfileTabBtn">Personal Calendar</button>
                 <button class="userProfileTabBtn">Statistics</button>
                 <button class="userProfileTabBtn">Achievements</button>
-                <!-- <div class="userProfileLine"></div> -->
             </div>
             <div class="userProfileContentBox">
-                <div class="userProfileContent active">
-                    <div class="userContentContainer">
+                <div class="userProfileContent">
+                    <div class="userPostContainer">
                         <h1>Holy Week in the Philippines</h1><h2>by ReligionExplorer_User123 • May 12, 2023 • 8:43 P.M.</h2>
                         <p>Good day, everyone! Are there any Filipinos here who can share about why that week in particular is so significant in the country? I’m a non-practising Christian who is interested in learning more about religion again. Thanks in advance to those who will reply!<p>
                     </div>

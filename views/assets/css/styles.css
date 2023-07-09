@@ -153,6 +153,7 @@ h5 {
     font-size: 22px;
     font-weight: 600;
     color: #3E3E3E;
+    font-family: Lexend;
 }
 
 .modal-header {
@@ -1345,6 +1346,19 @@ p {
     font-family: Lexend;
     font-size: 16px;
     height: 35px;
+    padding: 0 30px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+}
+
+.roundedButtonVariant {
+    background-color: #B0BEC5;
+    color: white;
+    border-style: none;
+    border-radius: 30px;
+    font-family: Lexend;
+    font-size: 16px;
+    height: 35px;
     padding: 0 40px;
     text-align: center;
     transition: background-color 0.5s ease;
@@ -1380,45 +1394,6 @@ p {
 .userTabsContainer a {
     text-decoration: none;
     color: inherit;
-}
-
-.userContentContainer {
-    display: flex;
-    width: 100%;
-    font-family: Lexend;
-    padding: 15px;
-    margin-bottom: 20px;
-    background-color: white;
-    border: solid #3E3E3E 2px;
-    border-radius: 15px;
-}
-
-.userContentContainer p {
-    font-size: 14px;
-    margin: 0   ;
-    text-align: justify;
-}
-
-.userContentContainer h1 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #2CA464 !important;
-}
-
-.userContentContainer h2 {
-    font-size: 12px;
-    color: #9AD2B4;
-    margin-top: -5px;
-}
-
-.userContentContainer .col-1 {
-    background-color: yellow;
-    width: 3%;
-}
-
-.userContentContainer .col-11 {
-    background-color: violet;
-    width: 97%;
 }
 
 .tabs:hover {
@@ -1914,6 +1889,230 @@ p {
 /*notifications panel*/
 
 /*discussion forum*/
-.submitPost {
-    background-color: palevioletred;
+
+.forumSubmitContainer {
+    display: flex;
+    width: 100%;
+    font-family: Lexend;
+    padding: 15px;
+    margin: 20px 0;
+    background-color: white;
+    border: solid #3E3E3E 2px;
+    border-radius: 15px;
+}
+
+.forumSubmitContent {
+    width: 98%;
+    padding-left: 10px;
+}
+
+.forumSubmitContainer input[type=text] {
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    color: #2CA464;
+}
+
+.forumSubmitContainer input[type=text]:focus {
+    outline: none;
+}
+
+.forumSubmitContainer input[type=text]::placeholder {
+    color: #9AD1B4;
+}
+
+.forumSubmitContainer textarea {
+    width: 100%;
+    height: 125px;
+    resize: unset;
+    border: none;
+    border-bottom: solid #D0D0D0 2px;
+}
+
+.forumSubmitContainer textarea:focus {
+    outline: none;
+}
+
+.forumSubmitContainer p {
+    margin-top: 15px;
+    padding-right: 10px;
+    font-size: 14px;
+    color: #959595;
+}
+.forumSubmitContainer .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin-top: 8px;
+    margin-right: 16px;
+}
+
+.forumSubmitContainer .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.forumSubmitContainer .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: -4.5px;
+    right: 0;
+    bottom: 0;
+    background-color: #B0BEC5;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.forumSubmitContainer .slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 3.5px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.forumSubmitContainer input:checked + .slider {
+    background-color: #427995;
+}
+
+.forumSubmitContainer input:focus + .slider {
+    box-shadow: 0 0 1px #427995;
+}
+
+.forumSubmitContainer input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.forumSubmitContainer .slider.round {
+    border-radius: 34px;
+}
+
+.forumSubmitContainer .slider.round:before {
+    border-radius: 50%;
+}
+
+.forumSubmitContainer input:checked + .forumSlider {
+    background-color: #2196F3;
+}
+
+.forumSubmitContainer input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+.forumSubmitContainer input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.forumSubmitInteractions {
+    margin: -5px 0;
+}
+
+.forumPostContainer {
+    display: flex;
+    width: 100%;
+    font-family: Lexend;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: solid #3E3E3E 2px;
+    border-radius: 15px;
+}
+
+.forumPostContainer p {
+    font-size: 14px;
+    margin: 0   ;
+    text-align: justify;
+}
+
+.forumPostContainer h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2CA464 !important;
+}
+
+.forumPostContainer h2 {
+    font-size: 12px;
+    color: #9AD2B4;
+    margin-top: -10px;
+}
+
+.forumInteractions {
+    width: 2%;
+    padding-top: 5px;
+}
+
+.forumInteractions img {
+    width: 20px;
+}
+
+.forumContent {
+    width: 98%;
+    padding-left: 5px;
+}
+
+.forumInteractions .commentIcon {
+    margin-top: 10px;
+}
+
+/*edit profile*/
+.defaultAvatar {
+    width: 100px;
+    margin: 5px;
+}
+
+.editAvatarButton {
+    position: absolute;
+    top: 0px;
+    width: 40px;
+}
+
+#editAvatarModal h5 {
+    font-size: 26px;
+    font-family: Lexend;
+    font-weight: 600;
+}
+
+#editAvatarModal p {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0;
+    font-family: Lexend;
+}
+
+#editAvatarModal p:before, p:after{
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid;
+    margin: auto;
+}
+  
+#editAvatarModal p:before {
+    margin-right: 10px
+}
+
+#editAvatarModal p:after {
+    margin-left: 10px
+}
+
+#editAvatarModal .roundedButtonVariant {
+    width: 175px;
+}
+
+#editAvatarModal .roundedButton {
+    width: 175px;
+}
+
+#editAvatarModal .roundedButtonVariant {
+    margin-bottom: 15px;
 }
