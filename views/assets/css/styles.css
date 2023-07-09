@@ -1910,3 +1910,10 @@ p {
     text-decoration: none;
     color: #000000;
 }
+
+/*notifications panel*/
+
+/*discussion forum*/
+.submitPost {
+    background-color: palevioletred;
+}

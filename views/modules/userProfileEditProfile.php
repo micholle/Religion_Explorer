@@ -174,14 +174,64 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="userContent">
-                    <div class="userContentContainer">
-                        <h1>Holy Week in the Philippines</h1><h2>by ReligionExplorer_User123 • May 12, 2023 • 8:43 P.M.</h2>
-                        <p>Good day, everyone! Are there any Filipinos here who can share about why that week in particular is so significant in the country? I’m a non-practising Christian who is interested in learning more about religion again. Thanks in advance to those who will reply!<p>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
+
+    <!--Modal-->
+    <div class="modal fade" id="editProfileModal">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-0 text-center">
+                        <h5 class="modal-title w-100">Submit a Creation</h5>
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <form id="communityForm" method="post">
+                                <div class="communityUploadArea d-flex justify-content-center align-items-center flex-column">
+                                    <input type="file" class="communityUpload" id="communityUpload" multiple accept="image/*, video/*" onchange="handleFiles(this.files)">
+                                    <label class="button text-center" for="communityUpload">
+                                        <img src="../assets/img/community-upload.png" class="commUploadImg"><br>
+                                        <p>Choose a file or drag it here.</p>
+                                    </label>
+                                </div>
+                                <div class="row communityUploadDetails">
+                                    <div class="col-8 d-flex justify-content-center align-items-center">
+                                        <input id="communityTitle" name="communityTitle" placeholder="Title">
+                                    </div>
+                                    <div class="col-4 d-flex justify-content-center align-items-center">
+                                        <select id="communityCategory" name="communityCategory">
+                                            <option selected hidden disabled>Category</option>
+                                            <optgroup label="Religion">
+                                                <option value="">Buddhism</option>
+                                                <option value="">Christianity</option>
+                                                <option value="">Hinduism</option>
+                                                <option value="">Islam</option>
+                                                <option value="">Judaism</option>
+                                            </optgroup>
+                                            <optgroup label="Topic">
+                                                <option value="saab">Religious Traditions</option>
+                                                <option value="mercedes">Historical Context</option>
+                                                <option value="mercedes">Theology</option>
+                                                <option value="mercedes">Religious Practices</option>
+                                                <option value="mercedes">Ethics</option>
+                                                <option value="mercedes">Social Issues</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row communityUploadDetails">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <textarea id="communityDescription" name="communityDescription" placeholder="Description"></textarea>
+                                        <button type="button" id="communityPublish" class="roundedButton">Publish</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 </html>
