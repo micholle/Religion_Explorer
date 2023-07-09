@@ -22,7 +22,8 @@
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
                 <div class="col-3 d-flex justify-content-end align-items-end">
-                    <img src="../assets/img/lamb.png" width="175px">
+                    <img src="../assets/img/editProfile/lamb.png" width="175px">
+                    <img src="../assets/img/editProfile/edit.png" id="editAvatar" class="editAvatarButton">
                 </div>
 
                 <div class="col-4 userBasicStatsContainer">
@@ -31,13 +32,13 @@
 
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-start">
-                                    <h1>ReligionExplorer_123</h1>
+                                    <h1>[Placeholder]</h1>
                                 </div>
                             </div>
 
                             <div class="row d-flex justify-content-center align-items-center nicknameContainer">
                                 <div class="col-12 mh-100 d-flex justify-content-start">
-                                    <p class="nicknameText">aka Johnny</p>
+                                    <p class="nicknameText">aka [Placeholder]</p>
                                     <button class="editNicknameButton">Edit Nickname</button>
                                 </div>
                             </div>
@@ -47,44 +48,32 @@
 
                     <div class="row">
                         <div class="col-12 mh-100">
-
                             <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-1 d-flex justify-content-start align-items-center">
+                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                                     <img src="../assets/img/userBasicStats-clock.png" width="20px">
-                                </div>
-                                
-                                <div class="col-8 d-flex justify-content-start align-items-center">
-                                    <p>Joined April 2023</p>
+                                    <p>Joined [Placeholder Date]</p>
                                 </div>
                             </div>
 
                             <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-1 d-flex justify-content-start align-items-center">
+                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                                     <img src="../assets/img/userBasicStats-star.png" width="20px">
-                                </div>
-                                
-                                <div class="col-8 d-flex justify-content-start align-items-center">
-                                    <p>407 Explorer Points</p>
+                                    <p>[Placeholder] Explorer Points</p>
                                 </div>
                             </div>
 
                             <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-1 d-flex justify-content-start align-items-center">
+                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                                     <img src="../assets/img/userBasicStats-feather.png" width="20px">
-                                </div>
-                                
-                                <div class="col-8 d-flex justify-content-start align-items-center">
-                                    <p>Non-religious</p>
+                                    <p>[Placeholder Religion]</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-3 d-flex flex-column justify-content-start align-items-start buttonProfile">
-                    <a href="userprofile-editprofile"><button class="roundedButton">Save Changes</button></a>
+                    <a href="userProfile.php"><button class="roundedButton">Save Changes</button></a>
                 </div>
 
             </div>
@@ -174,14 +163,48 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="userContent">
-                    <div class="userContentContainer">
-                        <h1>Holy Week in the Philippines</h1><h2>by ReligionExplorer_User123 • May 12, 2023 • 8:43 P.M.</h2>
-                        <p>Good day, everyone! Are there any Filipinos here who can share about why that week in particular is so significant in the country? I’m a non-practising Christian who is interested in learning more about religion again. Thanks in advance to those who will reply!<p>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
+
+    <!--Modal-->
+    <div class="modal fade" id="editAvatarModal">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-0 text-center">
+                        <h5 class="modal-title w-100">Choose an Avatar</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center flex-row">
+                                    <img src="../assets/img/editProfile/lion.png" class="defaultAvatar">
+                                    <img src="../assets/img/editProfile/lamb.png" class="defaultAvatar">
+                                    <img src="../assets/img/editProfile/cow.png" class="defaultAvatar">
+                                    <img src="../assets/img/editProfile/cat.png" class="defaultAvatar">
+                                    <img src="../assets/img/editProfile/deer.png" class="defaultAvatar">
+                                    <img src="../assets/img/editProfile/robot.png" class="defaultAvatar">
+                                </div>
+                                <div class="col-12 d-flex justify-content-center align-items-center flex-row">
+                                    <img src="../assets/img/editProfile/woman1.png" class="defaultAvatar">
+                                    <img src="../assets/img/editProfile/man1.png" class="defaultAvatar">
+                                    <img src="../assets/img/editProfile/woman2.png" class="defaultAvatar">
+                                    <img src="../assets/img/editProfile/man2.png" class="defaultAvatar">
+                                    <img src="../assets/img/editProfile/woman3.png" class="defaultAvatar">
+                                    <img src="../assets/img/editProfile/man3.png" class="defaultAvatar">
+                                </div>
+                            </div>
+                            <p>OR</p>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                    <button class="roundedButtonVariant">Upload File</button>
+                                    <button class="roundedButton">Update Avatar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 </html>

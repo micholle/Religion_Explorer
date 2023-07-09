@@ -151,4 +151,7 @@ $(function() {
         $("#sidebarNotifications").removeAttr("data-toggle");
         $('.popover').popover('dispose');
     });
+
+    //notifications
+
 });

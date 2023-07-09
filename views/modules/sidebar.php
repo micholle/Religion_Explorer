@@ -16,7 +16,7 @@ function create_sidebar() {
             <ul>
                 <li>
                     <a href="userProfile.php">
-                        <img src="../assets/img/lamb.png">
+                        <img src="../assets/img/editProfile/lamb.png">
                         <span class="navItem">Profile</span>
                     </a>
                 </li>
@@ -50,7 +50,7 @@ function create_sidebar() {
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="discussionForum.php">
                         <img src="../assets/img/feat-chat.png">
                         <span class="navItem">Discussion Forum</span>
                     </a>

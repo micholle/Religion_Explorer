@@ -7,4 +7,8 @@ $(function() {
         }
     });
 
+    $("#editAvatar").click(function(){
+        $('#editAvatarModal').modal();
+        $('#editAvatarModal').show();
+    });
 });
