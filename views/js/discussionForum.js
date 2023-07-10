@@ -6,4 +6,8 @@ $(function() {
             $("#discussionForumSidebar").html(data);
         }
     });
+
+    $(".forumPostContainer").click(function(){
+        window.location.href = "discussionForumPost.php";
+    });
 });
