@@ -2,7 +2,7 @@
 <html lang="en">
     <head> 
         <title>Religion Explorer: Interactive Map</title>
-        <link rel="icon" type="image/x-icon" href="../assets/images/applogo.png">
+        <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
         <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
         <script type="text/javascript" src="../assets/js/chart.umd.js"></script>
@@ -125,9 +125,6 @@
 
         -->
         <div class="pageContainer">
-            <div class="mapHeader">
-                <div class="showSidebar"><a id="showSidebar">☰</a></div>
-            </div>
             <div class="mapKeys">
                 <p>Key:<br>
                     <div id="colorKeys">
@@ -1519,6 +1516,7 @@
                 </circle>
                 <circle cx="1798.2" cy="719.3" id="2">
                 </circle>
+                <!-- <image id="mapPin" href="" /> -->
             </svg>
             <div id="mapSlider" class="mapSlider">
                 <div id="sliderOptions" class="sliderOptions">

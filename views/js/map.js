@@ -7,6 +7,16 @@ $(function() {
         }
     });
 
+    var pathElement = document.getElementById("Brazil");
+    var boundingBox = pathElement.getBBox();
+    var x = boundingBox.x + (boundingBox.width / 2);
+    var y = boundingBox.y + (boundingBox.height / 2);
+
+    var pinType = "location";
+    var pinReligion = "buddhism";
+    var pinImg = "../assets/img/map/" + pinType + "-" + pinReligion +".png";     
+    $("#svgMap").html($("#svgMap").html() + '<image href="' + pinImg +'" x="' + x + '" y = "' + y + '" height="30" width="30"/>');
+
     //initiate colors
     var religionColors = {
         "Buddhism" : "#BAA400",
@@ -297,7 +307,6 @@ $(function() {
                 //loop through all countries
                 for (let country in religionByCountry) {
                     var countryData = religionByCountry[country];
-{}
                     if(religionFilter == "All Religions"){
                         //determine prevailing religion of each country
                         for (let religion in countryData) {
