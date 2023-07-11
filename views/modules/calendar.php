@@ -14,6 +14,7 @@
     </head>
     <body>
         <div id="calendarSidebar"></div>
+        
         <!-- Calendar -->
         <div class="pageContainer">
             <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>

@@ -41,11 +41,6 @@ g:hover {
     text-decoration: none;
 }
 
-/* .main {
-    position: relative;
-    height: 90vh;
-} */
-
 /*header styling*/
 h2 {
     font-family: Lexend;
@@ -1594,12 +1589,10 @@ p {
 }
 
 .sidebar.active ~ .pageContainer {
-    padding-left: 85px;
     transition: 0.5 ease;
 }
 
-.pageHeader {
-    margin: 0 20px;
+.pageHeader {    
     height: 90px;
     border-bottom: solid #D0D0D0 2px;
 }
@@ -1610,16 +1603,20 @@ p {
 }
 
 .pageHeader input {
-    background-color: #F5F5F5;
+    background-color: #ffffff;
     font-size: 16px;
     border-radius: 20px;
-    border: solid #3E3E3E 1px;
+    border: solid #D0D0D0 2px;
     padding: 5px 15px;
     width: 100%;
 }
 
+.pageHeader input:focus {
+    outline: solid #2CA464 2px;
+}
+
 .pageContent {
-    margin: 0 20px;
+    margin: 0 20px 20px 20px;
     padding: 0;
     height: 100%;
 }
@@ -1944,7 +1941,7 @@ p {
     margin-top: 20px;
     margin-bottom: 10px;
     background-color: white;
-    border: solid #3E3E3E 2px;
+    border: solid #D0D0D0 2px;
     border-radius: 15px;
 }
 
@@ -1969,9 +1966,9 @@ p {
 }
 
 .forumSubmitContainer textarea {
+    color: #3E3E3E;
     width: 100%;
-    height: 125px;
-    resize: unset;
+    min-height: 125px;
     border: none;
     border-bottom: solid #D0D0D0 2px;
 }
@@ -2069,16 +2066,17 @@ p {
     display: flex;
     width: 100%;
     font-family: Lexend;
-    padding: 15px;
+    padding: 20px;
     margin-top: 10px;
     background-color: white;
-    border: solid #3E3E3E 2px;
+    border: solid #D0D0D0 2px;
     border-radius: 15px;
+    cursor: pointer;
 }
 
 .forumPostContainer p {
-    font-size: 14px;
-    margin: 0   ;
+    font-size: 15px;
+    margin: 0;
     text-align: justify;
 }
 
@@ -2168,6 +2166,7 @@ p {
 /*discussion forum post view*/
 .forumPostViewContainer {
     margin-top: 20px;
+    font-size: 15px;
 }
 
 .forumPostViewBox {
@@ -2329,7 +2328,73 @@ p {
     font-size: 12px;
 }
 
-
 .forumPostViewContentBox .forumPostViewContentInt {
     padding-left: 0;
+}
+
+.forumCommentMargin {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.forumCommentContainer {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: Lexend;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: solid #D0D0D0 2px !important;
+    border-radius: 15px;
+}
+
+.forumCommentContainer textarea {
+    width: 100%;
+    min-height: 80px;
+    border: none;
+    color: #3E3E3E;
+}
+
+.forumCommentContainer .roundedButton {
+    font-size: 15px;
+}
+
+.forumCommentContent {
+    width: 100%;
+    padding: 10px;
+}
+
+.forumCommentContainer textarea:focus {
+    outline: none;
+}
+
+.threadReply {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.threadReply .threadReplyLine {
+    margin-left: 40px;
+    padding-left: 10px;
+    border-left: solid #D0D0D0 2px;
+}
+
+.threadReply .forumCommentContainer {
+    margin: 0 !important;
+    padding: 0 !important;
+    border-left: solid #D0D0D0 2px !important;
+}
+
+.threadReply .forumCommentContainer textarea {
+    min-height: 50px;
+    border: none;
+    color: #3E3E3E;
+}
+
+#forumPostViewCommentReply {
+    padding-inline-start: 2.75%;
+    width: 100%;
+    top: 100%;
 }

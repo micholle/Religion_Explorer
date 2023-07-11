@@ -5,9 +5,11 @@ $(function() {
         if ($(".sidebar").hasClass("active")) {
             $("#text").css("display", "none");
             $("#minmax").attr("src", "../assets/img/maximize.png");
+            $(".pageContainer").css("padding-left", "85px");
         } else {
             $("#text").css("display", "inline-block");
             $("#minmax").attr("src", "../assets/img/minimize.png");
+            $(".pageContainer").css("padding-left", "275px");
         }
     });
 

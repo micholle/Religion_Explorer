@@ -36,7 +36,7 @@
                         <div class="forumSubmitContent">
                             <form>
                                 <input type="text" class="forumSubmitContentTitle" placeholder="Start a Discussion">
-                                <textarea class="forumSubmitContentText" placeholder="What do you want to talk about?"></textarea>
+                                <textarea placeholder="What do you want to talk about?"></textarea>
                                 <div class="row forumSubmitInteractions">
                                     <div class="col-12 d-flex justify-content-end align-items-center flex-row">
                                         <p>Post anonymously</p>
