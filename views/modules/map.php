@@ -86,7 +86,7 @@
         </div>
         <div id="timelineOverlay" class="timelineOverlay">
             <div class="timelineOverlayText">
-                <h1 id="timelineOverlayYear">2020</h1>
+                <h1 id="timelineOverlayYear">2020 CE</h1>
                 <p>Click anywhere to continue</p>
             </div>
         </div>

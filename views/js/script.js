@@ -23,64 +23,6 @@ $(function() {
 
     //js functions below this line are temporary---------------------------------------------------------------
 
-    //timeline overlays
-    $("#timelineOverlay").click(function(){
-        $("#timelineOverlay").css("display", "none");
-    });
-
-    var timelineYear = "2020";
-    $("#sliderOptions").click(function(){
-        var timelineYears = document.getElementsByName("timelineValue");
-
-        for (i = 0; i < timelineYears.length; i++) {
-            if (timelineYears[i].checked){
-                if(timelineYears[i].value != timelineYear){
-                    timelineYear = timelineYears[i].value;
-                    $("#timelineOverlayYear").text(timelineYear);
-                    $("#timelineOverlay").css("display", "block");
-                }
-            }
-        }
-    });
-
-    //help overlay
-    $("#mapHelpButton").click(function(){
-        $("#helpOverlay").css("display", "block");
-
-        //display tooltip
-        $("#Brazil").attr("data-toggle", "popover");
-        $("#mapFilter").attr("data-toggle", "popover");
-        $("#1970").attr("data-toggle", "popover");
-
-        $("#Brazil").popover({
-            content: "Hover on a country to view its prevailing religion, and click on it for more information.",
-            placement: "top"
-        });
-
-        $("#mapFilter").popover({
-            content: "Filter the religion, geographic region, and pins on the map.",
-            placement: "left"
-        });
-
-        $("#1970").popover({
-            content: "Click on a year to change the year displayed on the map.",
-            placement: "top"
-        });
-
-        $('[data-toggle = "popover"]').popover("show");
-    })
-
-    $("#helpOverlay").click(function(){
-        //hide tooltip
-        $("#Brazil").removeAttr("data-toggle");
-        $("#mapFilter").removeAttr("data-toggle");
-        $("#1970").removeAttr("data-toggle");
-
-        $('.popover').popover('dispose');
-
-        $("#helpOverlay").css("display", "none");
-    });
-
     //sidebar tooltip    
     $("#sidebarProfile").hover(function(){
         $("#sidebarProfile").attr("data-toggle", "popover");
@@ -118,6 +60,18 @@ $(function() {
         $('.popover').popover('dispose');
     });
 
+    $("#sidebarCommunity").hover(function(){
+        $("#sidebarCommunity").attr("data-toggle", "popover");
+        $("#sidebarCommunity").popover({
+            content: "The Community Creations allows users to submit their religion-related creations to the platform for other users to see.",
+            placement: "right"
+        });
+        $('[data-toggle = "popover"]').popover("show");
+    }, function(){
+        $("#sidebarCommunity").removeAttr("data-toggle");
+        $('.popover').popover('dispose');
+    });
+
     $("#sidebarForum").hover(function(){
         $("#sidebarForum").attr("data-toggle", "popover");
         $("#sidebarForum").popover({
@@ -151,6 +105,18 @@ $(function() {
         $('[data-toggle = "popover"]').popover("show");
     }, function(){
         $("#sidebarNotifications").removeAttr("data-toggle");
+        $('.popover').popover('dispose');
+    });
+
+    $("#sidebarReport").hover(function(){
+        $("#sidebarReport").attr("data-toggle", "popover");
+        $("#sidebarReport").popover({
+            content: "This allows users to report other users who have violated the website's community guidelines.",
+            placement: "right"
+        });
+        $('[data-toggle = "popover"]').popover("show");
+    }, function(){
+        $("#sidebarReport").removeAttr("data-toggle");
         $('.popover').popover('dispose');
     });
 
