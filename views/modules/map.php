@@ -157,7 +157,7 @@
         THE SOFTWARE.
 
         -->
-        <div class="pageContainer d-flex justify-content-center align-items-center mapContainer" style="width:100%;height:100%;margin:0;">
+        <div class="pageContainer d-flex justify-content-center align-items-center mapContainer">
             <div class="container mw-100 mh-100">
                 <div class="mapKeys">
                     <p>Key:<br>
