@@ -15,14 +15,14 @@ function create_sidebar() {
             </div>
             <ul>
                 <li>
-                    <a href="userProfile.php">
+                    <a id="sidebarProfile" href="userProfile.php">
                         <img src="../assets/img/editProfile/lamb.png">
                         <span class="navItem">Profile</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="map.php">
+                    <a id="sidebarMap" href="map.php">
                         <img src="../assets/img/feat-worldwide.png">
                         <span class="navItem">World Map</span>
                     </a>
@@ -35,13 +35,13 @@ function create_sidebar() {
                     </a>
                     <ul class="dropdownMenu">
                         <li>
-                            <a href="library.php">
+                            <a id="sidebarLibrary" href="library.php">
                                 <img src="../assets/img/feat-book-stack.png">
                                 <span class="navItem">Main Library</span>
                             </a>
                         </li>
                         <li>
-                            <a href="community.php">
+                            <a id="sidebarCommunity" href="community.php">
                                 <img src="../assets/img/diversity.png">
                                 <span class="navItem">Community Creations</span>
                             </a>
@@ -50,21 +50,21 @@ function create_sidebar() {
                 </li>
 
                 <li>
-                    <a href="discussionForum.php">
+                    <a id="sidebarForum" href="discussionForum.php">
                         <img src="../assets/img/feat-chat.png">
                         <span class="navItem">Discussion Forum</span>
                     </a>
                 </li>
                 
                 <li>
-                    <a href="calendar.php">
+                    <a id="sidebarCalendar" href="calendar.php">
                         <img src="../assets/img/feat-calendar.png">
                         <span class="navItem">Calendar</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a id="sidebarNotifications" href="#">
                         <img src="../assets/img/bell.png">
                         <span class="navItem">Notifications</span>
                     </a>
@@ -83,7 +83,7 @@ function create_sidebar() {
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a id="sidebarReport" href="#">
                                 <img src="../assets/img/report.png">
                                 <span class="navItem">Report a User</span>
                             </a>

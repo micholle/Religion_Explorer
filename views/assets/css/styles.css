@@ -96,15 +96,15 @@ h5 {
     background: #FFFFFF;
     font-size: 14px;
     transform: scale(1.5);
-    color: #A6A6A6;
-    cursor: default;
+    cursor: pointer;
 }
 
 .sliderOptions .timelineNext {
     background: #FFFFFF;
     font-size: 14px;
     transform: scale(1.5);
-    cursor: pointer;
+    color: #A6A6A6;
+    cursor: default;
 }
 
 .sliderOptions input[type=radio]{
