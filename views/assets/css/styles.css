@@ -288,6 +288,10 @@ h5 {
     font-size: 12px;
 }
 
+.mapPin {
+    cursor: pointer;
+}
+
 /* overlays */
 .timelineOverlay {
     position: fixed;

@@ -7,15 +7,19 @@ $(function() {
         }
     });
 
+    //pins
     var pathElement = document.getElementById("Brazil");
     var boundingBox = pathElement.getBBox();
     var x = boundingBox.x + (boundingBox.width / 2);
     var y = boundingBox.y + (boundingBox.height / 2);
 
+    var pinTitle = "Sample Important Location";
+    var pinShortDesc = "Short Description";
+    var pinDesc = "Sample Important Location Description";
     var pinType = "location";
     var pinReligion = "buddhism";
     var pinImg = "../assets/img/map/" + pinType + "-" + pinReligion +".png";     
-    $("#svgMap").html($("#svgMap").html() + '<image href="' + pinImg +'" x="' + x + '" y = "' + y + '" height="30" width="30"/>');
+    $("#svgMap").html($("#svgMap").html() + '<image id="' + pinTitle + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinTitle + "', '" + pinShortDesc + "'" + ')" onmouseout="closePinOverview(' + "'" + pinTitle + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDesc + "'" + ')" href="' + pinImg +'" x="' + x + '" y = "' + y + '" height="30" width="30"/>');
 
     //initiate colors
     var religionColors = {
@@ -520,3 +524,23 @@ $(function() {
         }
     });
 });
+
+function openPin(pinTitle, pinDesc) {
+    alert(pinTitle + " - " + pinDesc + " : Insert pin overlay call function here");
+}
+
+function openPinOverview(pinTitle, pinShortDesc) {
+    document.getElementById(pinTitle).setAttribute("data-toggle", "popover");
+
+    $('[data-toggle = "popover"]').popover({
+        title: pinTitle, 
+        content: pinShortDesc,
+        placement: "top"
+    });
+    $('[data-toggle = "popover"]').popover("show");
+}
+
+function closePinOverview(pinTitle) {
+    document.getElementById(pinTitle).removeAttribute("data-toggle", "popover");
+    $('.popover').popover('dispose');
+}
