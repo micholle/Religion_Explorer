@@ -8,18 +8,32 @@ $(function() {
     });
 
     //pins
-    var pathElement = document.getElementById("Brazil");
-    var boundingBox = pathElement.getBBox();
-    var x = boundingBox.x + (boundingBox.width / 2);
-    var y = boundingBox.y + (boundingBox.height / 2);
+    $.ajax({
+        url: "../../ajax/getMapPinsData.ajax.php",
+        method: "POST",
+        success:function(data){
+            var allPins = data;
 
-    var pinTitle = "Sample Important Location";
-    var pinShortDesc = "Short Description";
-    var pinDesc = "Sample Important Location Description";
-    var pinType = "location";
-    var pinReligion = "buddhism";
-    var pinImg = "../assets/img/map/" + pinType + "-" + pinReligion +".png";     
-    $("#svgMap").html($("#svgMap").html() + '<image id="' + pinTitle + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinTitle + "', '" + pinShortDesc + "'" + ')" onmouseout="closePinOverview(' + "'" + pinTitle + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDesc + "'" + ')" href="' + pinImg +'" x="' + x + '" y = "' + y + '" height="30" width="30"/>');
+            for (pin in allPins) {
+                var pinDetails = allPins[pin];
+
+                var pathElement = document.getElementById(pinDetails.country);
+                var boundingBox = pathElement.getBBox();
+                // var x = boundingBox.x;
+                // var y = boundingBox.y;
+                var x = boundingBox.x + (boundingBox.width / 4);
+                var y = boundingBox.y + (boundingBox.height / 4);
+
+                var pinTitle = pin;
+                var pinShortDesc = pinDetails.shortDesc;
+                var pinDesc = pinDetails.description;
+                var pinType = pinDetails.pinType;
+                var pinReligion = (pinDetails.religion).toLowerCase();
+                var pinImg = "../assets/img/map/" + pinType + "-" + pinReligion +".png";     
+                $("#svgMap").html($("#svgMap").html() + '<image id="' + pinTitle + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinTitle + "', '" + pinShortDesc + "'" + ')" onmouseout="closePinOverview(' + "'" + pinTitle + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDesc + "'" + ')" href="' + pinImg +'" x="' + x + '" y = "' + y + '" height="15" width="15"/>');
+            }
+        }
+    });
 
     //initiate colors
     var religionColors = {

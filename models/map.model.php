@@ -1,10 +1,11 @@
 <?php
 require_once "connection.php";
+require_once "../views/assets/data/mapData.php";
 
 class mapModel{
 
     //Get data for map
-	static public function mdlGetMapData(){
+	static public function mdlGetMapData() {
         $stmt = (new Connection) -> connect() -> prepare("SELECT * FROM religionbycountry ORDER BY countryID");
 		$stmt -> execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -29,6 +30,34 @@ class mapModel{
         header('Content-Type: application/json');
         echo $jsonData;
 	}
+
+    static public function mdlGetMapPinsData() {
+        $mapPins = (new mapData) -> getMapPins();
+        $allPins = [];
+
+        foreach ($mapPins as $index => $pin) {
+            $data = [
+                "pinType" => $pin["pinType"],
+                "religion" => $pin["religion"],
+                "country" => $pin["country"],
+                "timelineDate" => $pin["timelineDate"],
+                "displayDate" => $pin["displayDate"],
+                "shortDesc" => $pin["shortDesc"],
+                "description" => $pin["description"],
+                "relatedPerson" => $pin["relatedPerson"],
+                "pinVid" => $pin["pinVid"],
+                "pinImg1" => $pin["pinImg1"],
+                "pinImg2" => $pin["pinImg2"],
+                "source" => $pin["source"]
+            ];
+
+            $allPins += [$index => $data];
+        }
+
+        $jsonData = json_encode($allPins);
+        header('Content-Type: application/json');
+        echo $jsonData;
+    }
 
 }
 
