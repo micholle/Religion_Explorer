@@ -4,6 +4,10 @@ $(function() {
         method: "POST",
         success:function(data){
             $("#mapSidebar").html(data);
+            $(".sidebar").toggleClass("active");
+            $("#text").css("display", "none");
+            $("#minmax").attr("src", "../assets/img/maximize.png");
+            $(".pageContainer").css("padding-left", "85px");
         }
     });
 

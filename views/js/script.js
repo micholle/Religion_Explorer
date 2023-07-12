@@ -1,6 +1,11 @@
 $(function() {
     //sidebar
     $("#minimize").click(function() {
+        var currentPage = window.location.pathname.split("/").pop();
+        if (currentPage === "map.php") {
+            return; // Exit the function without executing the code
+        }
+
         $(".sidebar").toggleClass("active");
         if ($(".sidebar").hasClass("active")) {
             $("#text").css("display", "none");
