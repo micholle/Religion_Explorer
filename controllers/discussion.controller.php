@@ -6,4 +6,9 @@ class ControllerDiscussion {
     $topics = (new ModelDiscussion)->mdlGetAllTopics();
     return $topics;
   }
+
+  public function ctrCreateDiscussion($data) {
+    $result = (new ModelDiscussion)->mdlCreateDiscussion($data);
+    return $result;
+  }
 }
