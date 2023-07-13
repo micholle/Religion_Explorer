@@ -22,7 +22,7 @@
                     <h1>Discussion Forum</h1>
                 </div>
                 <div class="col-8 d-flex justify-content-start align-items-center">
-                    <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community">
+                    <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Forum">
                 </div>
             </div>
         </div>
