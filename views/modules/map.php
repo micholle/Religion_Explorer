@@ -86,7 +86,7 @@
         </div>
         <div id="timelineOverlay" class="timelineOverlay">
             <div class="timelineOverlayText">
-                <h1 id="timelineOverlayYear">2020 CE</h1>
+                <h1 id="timelineOverlayYear"></h1>
                 <p>Click anywhere to continue</p>
             </div>
         </div>
@@ -94,40 +94,40 @@
             <div class="helpOverlayContent">
             </div>
         </div>
-        <!-- <div id="pinOverlay" class="pinOverlay d-flex justify-content-center align-items-center">
+        <div id="pinOverlay" class="pinOverlay d-flex invisible justify-content-center align-items-center">
             <div class="pinOverlayContainer">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-7">
-                        <h1>[Placeholder Title]</h1>
-                        <h3>[Placeholder Date]</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at metus felis. Morbi iaculis libero lorem, a lobortis massa commodo venenatis. Donec tincidunt lacus nec viverra bibendum. Integer ac sodales risus. In tincidunt felis nec porta luctus. Vestibulum sodales sagittis nisi sit amet pulvinar. Phasellus et est venenatis nunc auctor varius ac a eros. Cras eget fermentum purus. Curabitur vitae lacus ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+                        <h1 id="pinOverlayTitle"></h1>
+                        <h3 id="pinOverlayDate"></h3>
+                        <p id="pinOverlayDescription"></p>
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center flex-row">
                                 <div class="pinOverlayRelation d-flex justify-content-center align-items-center flex-column">
-                                    <img src="../assets/img/map/placeholder.png">
-                                    <p>[Placeholder Text]</p>
+                                    <img id="pinOverlayReligionImg" src="../assets/img/map/placeholder.png">
+                                    <p id="pinOverlayReligion"></p>
                                 </div>
                                 <div class="pinOverlayRelation d-flex justify-content-center align-items-center flex-column">
-                                    <img src="../assets/img/map/placeholder.png">
-                                    <p>[Placeholder Text]</p>
+                                    <img id="pinOverlayPersonImg" src="">
+                                    <p id="pinOverlayPerson"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-5">
-                        <img src="../assets/img/placeholder.png">
+                        <video controls id="pinOverlayVideo" class="pinOverlayVideo"> <source src=""> </video>
                         <div class="row">
                             <div class="col-6">
-                                <img src="../assets/img/placeholder.png">
+                                <img id="pinOverlayImg1" src="">
                             </div>
                             <div class="col-6">
-                                <img src="../assets/img/placeholder.png">
+                                <img id="pinOverlayImg2" src="">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <?xml version="1.0"?>
         <!--
         *************Map created by Simplemaps.com********************		
