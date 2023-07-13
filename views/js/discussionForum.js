@@ -7,7 +7,7 @@ $(function() {
         }
     });
 
-    $(".forumPostContainer").click(function(){
+    $(".forumContent").click(function(){
         window.location.href = "discussionForumPost.php";
     });
 });
