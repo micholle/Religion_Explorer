@@ -15,29 +15,29 @@ function create_sidebar() {
             </div>
             <ul>
                 <li>
-                    <a id="" href="">
+                    <a id="" href="dashboard.php">
                         <img src="../assets/img/editProfile/lamb.png">
                         <span class="navItem">Dashboard</span>
                     </a>
                 </li>
 
                 <li>
-                    <a id="" href="">
+                    <a id="" href="contentForReview.php">
                         <img src="../assets/img/admin/content-for-review.png">
                         <span class="navItem">Content for Review</span>
                     </a>
                 </li>
 
                 <li>
-                    <a id="" href="">
+                    <a id="" href="reportedUsers.php">
                         <img src="../assets/img/admin/reported-users.png">
                         <span class="navItem">Reported Users</span>
                     </a>
                 </li>
                 
                 <li>
-                    <a id="" href="">
-                        <img src="../assets/img/feat-calendar.png">
+                    <a id="minimize" href="#">
+                        <img src="../assets/img/minimize.png" id="minmax">
                         <span class="navItem">Minimize Sidebar</span>
                     </a>
                 </li>

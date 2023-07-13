@@ -1,5 +1,5 @@
 <?php
-require_once "../views/modules/sidebar.php";
+require_once "../views/modules/adminSidebar.php";
 
 class sidebarAjax{
     public function ajaxShowSidebar(){

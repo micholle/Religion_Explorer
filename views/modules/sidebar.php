@@ -77,7 +77,7 @@ function create_sidebar() {
                     </a>
                     <ul class="dropdownMenu">
                         <li>
-                            <a href="#" id="minimize">
+                            <a id="minimize" href="#">
                                 <img src="../assets/img/minimize.png" id="minmax">
                                 <span class="navItem">Minimize Sidebar</span>
                             </a>

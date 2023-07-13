@@ -44,21 +44,24 @@ $(function() {
         });
     }
 
-    function getTopics() {
-        $.ajax({
-            url: "../../ajax/discussionTopics.ajax.php",
-            method: "GET",
-            success: function(data) {
-                console.log(data);
-                $("#topicsContainer").html(data);
-            },
-            error: function(xhr, status, error) {
-                console.log(xhr.responseText);
-                console.log(status);
-                console.log(error);
-            }
-        });
+    function getTopics(sortCriteria) {
+      $.ajax({
+          url: "../../ajax/discussionTopics.ajax.php",
+          method: "GET",
+          data: { sort: sortCriteria }, // Pass the sort criteria to the server
+          success: function(data) {
+              console.log(data);
+              $("#topicsContainer").html(data);
+              shortenUpvotes();
+          },
+          error: function(xhr, status, error) {
+              console.log(xhr.responseText);
+              console.log(status);
+              console.log(error);
+          }
+      });
     }
+  
 
     $.ajax({
         url: "../../ajax/showSidebar.ajax.php",
@@ -68,8 +71,45 @@ $(function() {
         }
     });
 
-    $(document).on("click", ".forumContent", function(){
-        window.location.href = "discussionForumPost.php";
+    $(document).on("click", ".forumContent", function() {
+      var topicId = $(this).find("#topicId").val();
+      window.location.href = "discussionForumPost.php?topicId=" + topicId;
     });
+
+
+    $("#top").click(function() {
+      getTopics("top"); // Pass "top" as the sort criteria
+    });
+    
+    $("#new").click(function() {
+        getTopics("new"); // Pass "new" as the sort criteria
+    });
+
+    function shortenUpvotes() {
+      $(".upvotes").each(function() {
+          var upvotes = $(this).text().trim();
+          var upvotesShort = shortenNumber(upvotes);
+          $(this).text(upvotesShort);
+      });
+    }
+
+    function shortenNumber(number) {
+      var SI_POSTFIXES = ["", "K", "M", "B", "T"];
+      var tier = Math.log10(Math.abs(number)) / 3 | 0;
+    
+      if (tier === 0) return number;
+    
+      var postfix = SI_POSTFIXES[tier];
+      var scale = Math.pow(10, tier * 3);
+      var scaledNumber = number / scale;
+    
+      // Remove decimal if the number is a whole number
+      if (scaledNumber % 1 === 0) {
+        scaledNumber = Math.floor(scaledNumber);
+      }
+    
+      return scaledNumber.toFixed(0) + postfix;
+    }
+  
 });
     
