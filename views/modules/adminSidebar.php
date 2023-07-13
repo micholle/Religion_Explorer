@@ -36,8 +36,8 @@ function create_sidebar() {
                 </li>
                 
                 <li>
-                    <a id="" href="">
-                        <img src="../assets/img/feat-calendar.png">
+                    <a id="minimize" href="#">
+                        <img src="../assets/img/minimize.png" id="minmax">
                         <span class="navItem">Minimize Sidebar</span>
                     </a>
                 </li>

@@ -18,12 +18,9 @@
         <div class="pageContainer">
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
-                    <div class="col-4 d-flex justify-content-start align-items-center">
+                    <div class="col-12 d-flex justify-content-start align-items-center">
                         <h1>Discussion Forum</h1>
                     </div>  
-                    <div class="col-8 d-flex justify-content-start align-items-center">
-                        <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community">
-                    </div>
                 </div>
             </div>
 
@@ -56,6 +53,10 @@
                                     <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
                                         <img src="../assets/img/discussionForum/report.png" class="commentIcon">
                                         <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>
+                                    </div>
+                                    <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="forumDeletePost">
+                                        <img src="../assets/img/discussionForum/delete.png" class="commentIcon">
+                                        <p class="forumPostViewMainCount forumPostViewMainDelete">Delete</p>
                                     </div>
                                 </div>
                             </div>
@@ -108,6 +109,10 @@
                                             <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
                                                 <img src="../assets/img/discussionForum/report.png" class="commentIcon">
                                                 <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>
+                                            </div>
+                                            <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="forumDeleteComment">
+                                                <img src="../assets/img/discussionForum/delete.png" class="commentIcon">
+                                                <p class="forumPostViewMainCount forumPostViewMainDelete">Delete</p>
                                             </div>
                                         </div>
                                     </div>
@@ -168,7 +173,51 @@
                 </div>
             </div>
 
-            
+            <div class="modal fade" id="confirmDeleteModalPost">
+                <div class="modal-dialog modal-xs modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="modal-title w-100">Delete Post?</h5>
+                                        <p>Are you sure you want this gone?</p>
+                                        <div class="row">
+                                            <div class="col-12 d-flex flex-row">
+                                                <button type="button" class="roundedButtonVariant">Cancel</button>
+                                                <button type="button" class="roundedButton">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="confirmDeleteModalComment">
+                <div class="modal-dialog modal-xs modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="modal-title w-100">Delete Comment?</h5>
+                                        <p>Are you sure you want this gone?</p>
+                                        <div class="row">
+                                            <div class="col-12 d-flex flex-row">
+                                                <button type="button" class="roundedButtonVariant">Cancel</button>
+                                                <button type="button" class="roundedButton">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

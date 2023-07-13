@@ -6,6 +6,16 @@ $(function() {
             $("#discussionForumPostSidebar").html(data);
         }
     });
+
+    $("#forumDeletePost").click(function(){
+        $('#confirmDeleteModalPost').modal();
+        $('#confirmDeleteModalPost').show();
+    });
+
+    $("#forumDeleteComment").click(function(){
+        $('#confirmDeleteModalComment').modal();
+        $('#confirmDeleteModalComment').show();
+    });
     
     const replyButtons = document.querySelectorAll('.forumPostViewMainComment');
     replyButtons.forEach((replyButton) => {

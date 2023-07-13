@@ -61,6 +61,25 @@
             <div id="topicsContainer" class="col-12 d-flex justify-content-center flex-column align-items-center">
             </div>
         </div>
+
+        <!--Modal-->
+        <div class="modal fade" id="topicCreatedModal">
+            <div class="modal-dialog modal-xs modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                    <img src="../assets/img/verification-check.png" height="80px" width="80px">
+                                    <h5 class="modal-title w-100">Topic Created Successfully!</h5>
+                                    <button type="button" id="closeTopicCreatedModal" class="registrationSubmitButton" data-dismiss="modal">Nice!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

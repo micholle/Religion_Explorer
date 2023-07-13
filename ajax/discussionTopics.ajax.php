@@ -18,7 +18,7 @@ foreach ($topics as $topic) {
   $html .= '<h1>' . $topic['topicTitle'] . '</h1>';
   $html .= '<div class="row">';
   $html .= '<div class="col-12 d-flex flex-row">';
-  $html .= '<h2>by ' . $topic['accountid'] . '</h2>';
+  $html .= '<h2>by ' . $topic['username'] . '</h2>';
   $html .= '<h2>•</h2>';
   $html .= '<h2>' . $topic['topicDate'] . '</h2>';
   $html .= '</div>';
@@ -26,7 +26,6 @@ foreach ($topics as $topic) {
   $html .= '<p>' . $topic['topicContent'] . '</p>';
   $html .= '</div>';
   $html .= '</div>';
-
 }
 
 echo $html;
