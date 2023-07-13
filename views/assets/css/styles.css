@@ -1432,6 +1432,11 @@ p {
     padding: 0 30px;
     text-align: center;
     transition: background-color 0.5s ease;
+    cursor: pointer;
+}
+
+.roundedButton:focus {
+    outline: none;
 }
 
 .roundedButtonVariant {
@@ -1442,9 +1447,14 @@ p {
     font-family: Lexend;
     font-size: 16px;
     height: 35px;
-    padding: 0 40px;
+    padding: 0 30px;
     text-align: center;
     transition: background-color 0.5s ease;
+    cursor: pointer;
+}
+
+.roundedButtonVariant:focus {
+    outline: none;
 }
 
 .buttonProfile {
@@ -2306,6 +2316,7 @@ p {
 
 .forumPostViewMainComment {
     color: #416FBD;
+    cursor: pointer;
 }
 
 .forumPostViewMainReport {
@@ -2449,6 +2460,12 @@ p {
     font-size: 15px;
 }
 
+.forumCommentContainer .roundedButtonVariant {
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+
 .forumCommentContent {
     width: 100%;
     padding: 10px;
@@ -2485,4 +2502,13 @@ p {
     padding-inline-start: 2.75%;
     width: 100%;
     top: 100%;
+}
+
+#forumPostViewCommentReplySubmit {
+    width: 100%;
+    top: 100%;
+}
+
+.popover-content {
+    font-family: Lexend;
 }
