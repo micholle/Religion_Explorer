@@ -74,7 +74,14 @@ $(function() {
 
     //initialize default filter and timeline
     var religionFilter = "All Religions";
-    var timelineYear = "2020 CE";
+    var timelineYear = "2010 CE";
+
+    //initialize map
+    $("#timelineOverlayYear").text(timelineYear);
+    $("#timelineOverlay").css("display", "block");
+    mapTimeline(religionFilter);
+    mapColor(religionFilter, timelineYear);
+    mapPin(religionFilter, timelineYear);
 
     //change map data based on filter
     $('#religionFilterOptions').click(function(){
@@ -86,12 +93,9 @@ $(function() {
         }
     });
 
-    //initialize map
-    $("#timelineOverlayYear").text(timelineYear);
-    $("#timelineOverlay").css("display", "block");
-    mapTimeline(religionFilter);
-    mapColor(religionFilter, timelineYear);
-    mapPin(religionFilter, timelineYear);
+    $("#timelineOverlay").click(function () { 
+        $("#timelineOverlay").css("display", "none");
+    });
 
     //change map data based on timeline
     function changeTimeline() {
@@ -113,10 +117,6 @@ $(function() {
 
         //do not show overlay if the same year is clicked
     }
-
-    $("#timelineOverlay").click(function () { 
-        $("#timelineOverlay").css("display", "none");
-    });
 
     function mapTimeline(religionFilter) {
         //set timeline based on filter
@@ -163,7 +163,7 @@ $(function() {
         var timelineStart;
         var timelineEnd;
         var minYear;
-        var maxYear = 2020;
+        var maxYear = 2010;
 
         function createTimeline(yearStart, yearEnd) {
             for (var year = yearStart; year >= yearEnd; year -= 10) {
@@ -370,8 +370,6 @@ $(function() {
     
                 //highlight countries on hover and display content
                 const countryHover = country => {
-                    console.log(religionFilter);
-
                     var currentCountry = country.target.parentElement.id;
                     document.getElementById(currentCountry).style.opacity = 0.5; 
                     document.getElementById(currentCountry).setAttribute("data-toggle", "popover");
@@ -390,7 +388,7 @@ $(function() {
                             for (let religion in countryData) {
                                 totalPopulation += countryData[religion];
         
-                                if (religionFilter == "All Religions"){
+                                if ($('#religionFilterOptions').val() == "All Religions"){
                                     //prevailing religions
                                     if (countryData[religion] > religionVal) {
                                         religionVal = countryData[religion];
@@ -398,7 +396,7 @@ $(function() {
                                     }   
                                 } else {
                                     //religion filter
-                                    if(religionFilter == religion){
+                                    if($('#religionFilterOptions').val() == religion){
                                         religionVal = countryData[religion];
                                     }
                                 }
@@ -409,10 +407,10 @@ $(function() {
                     }
 
                     //set popover content
-                    if(religionFilter == "All Religions"){
+                    if($('#religionFilterOptions').val() == "All Religions"){
                         popoverContent = "The prevailing religion in " + currentCountry + " is " + prevailingReligion + ", comprising " + religionPercentage + "% of the population.";
                     } else {
-                        popoverContent = religionFilter + " comprises " + religionPercentage + "% of " + currentCountry +"'s population.";
+                        popoverContent = $('#religionFilterOptions').val() + " comprises " + religionPercentage + "% of " + currentCountry +"'s population.";
                     }
     
                     $('[data-toggle = "popover"]').popover({
@@ -433,7 +431,7 @@ $(function() {
     
                 const countryClick = country => {
                     var currentCountry = country.target.parentElement.id;
-    
+
                     //generate chart
                     // Chart.register(ChartDataLabels);
                     Chart.defaults.font.family = "Lexend Deca";
@@ -496,10 +494,9 @@ $(function() {
     
                     if (chart) {
                         chart.destroy();
-                        chart = new Chart(religionChart, configuration);
-                    } else {
-                        chart = new Chart(religionChart, configuration);
                     }
+                    
+                    chart = new Chart(religionChart, configuration);
     
                     $('#modalTitle').text(currentCountry);
                     $('#countryInformationModal').modal();
@@ -544,7 +541,7 @@ $(function() {
                         var pinImg2 = pinDetails.pinImg2;
                         
                         var pinImg = "../assets/img/map/" + pinType + "-" + (pinReligion.toLowerCase()) + ".png";     
-                        $("#svgMap").html($("#svgMap").html() + '<image id="' + pinTitle + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinTitle + "', '" + pinShortDesc + "'" + ')" onmouseout="closePinOverview(' + "'" + pinTitle + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDate + "', '" + pinDesc + "', '" + pinReligion + "', '" + pinPerson + "', '" + pinPersonImg + "', '" + pinVid + "', '" + pinImg1 + "', '" + pinImg2 + "'" + ')" href="' + pinImg +'" x="' + x + '" y="' + y + '" height="15" width="15"/>');
+                        $("#svgMap").html($("#svgMap").html() + '<image id="' + pinTitle + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinTitle + "', '" + pinShortDesc + "'" + ')" onmouseout="closePinOverview(' + "'" + pinTitle + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDate + "', '" + pinDesc + "', '" + pinReligion + "', '" + pinPerson + "', '" + pinPersonImg + "', '" + pinVid + "', '" + pinImg1 + "', '" + pinImg2 + "'" + ')" href="' + pinImg +'" x="' + x + '" y="' + y + '" height="30" width="30"/>');
                     }
                 }          
             }
