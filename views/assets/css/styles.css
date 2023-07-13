@@ -2642,3 +2642,78 @@ p {
     width: 100%;
     height: 375px;
 }
+
+/*content for review / reported users*/
+.adminReviewContainer {
+    border-radius: 5px;
+    border: solid #D0D0D0 2px;
+    background-color: white;
+    width: 100%;
+    padding: 15px !important;
+    overflow: hidden;
+}
+
+.adminReviewContainer .col-12 {
+    margin: 10px 0;
+}
+
+.adminReviewContainerHeader {
+    color: white;
+    width: 100%;
+    background-color: #2CA464;
+    margin: 0 !important;
+}
+
+.adminReviewContainerHeader p {
+    color: white;
+    padding: 10px 0;
+    margin: 0 !important;
+}
+
+.adminReviewContainerContent {
+    border-bottom: solid #D0D0D0 2px;
+    height: 150px;
+}
+
+.adminReviewContainerContent img {
+    width: 35px;
+    margin: 5px 0;
+}
+
+.adminReviewContainerContent p {
+    margin: 0 !important;
+    padding: 10px;
+    text-align: center;
+}
+
+.adminSearch {
+    width: 250px;
+    background-color: #ffffff;
+    font-size: 16px;
+    border-radius: 5px;
+    border: solid #D0D0D0 2px;
+    padding: 5px 15px;
+}
+
+.adminReviewContainer select:focus {
+    outline: none;
+    transition: 0.5s;
+}
+
+.adminReviewContainer select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: solid #D6D6D6 2px;
+    border-radius: 5px;
+    font-family: Lexend;
+    padding: 5px 15px;
+    width: 125px;
+    margin-bottom: 5px;
+    color: #3E3E3E;
+    font-size: 16px;
+    background-image: url("../img/dropdown.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+}
