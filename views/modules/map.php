@@ -67,7 +67,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalTitle">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
                         <!-- Chart -->
@@ -76,8 +75,8 @@
                         </div>
                         <div id="modalContent">
                             <p>
-                            The Philippines is a secular country, with a guaranteed separation of church and state by the Constitution and respect for all religious beliefs and rituals. That being said, the Philippines is not a very spiritually rich country. Albeit no religion is imposed, a significant majority of the population follows Christianity, followed by Islam. Other than these, there are no major religions in the nation.
-                            <br><br>The pre-Hispanic belief of Filipinos consisted of a pantheon of gods, spirits, creatures, and men that guarded the streams, fields, trees, mountains, forests, and houses. Bathala, who created earth and man, was superior to these other gods and spirits. Regular sacrifices and prayers were offered to placate these deities and spirits, some of which were benevolent, some malevolent. Wood and metal images represented ancestral spirits, and no distinction was made between the spirits and their physical symbol. Reward or punishment after death was dependent upon behavior in this life.
+                            The Philippines is a secular country, with a guaranteed separation of church and state by the Constitution and respect for all religious beliefs and rituals. That being said, the Philippines is not a very spiritually rich country. Albeit no religion is imposed, a significant majority of the population follows Christianity, followed by Islam.
+                            <br><br>The pre-Hispanic belief of Filipinos consisted of a pantheon of gods, spirits, creatures, and men that guarded the streams, fields, trees, mountains, forests, and houses. Bathala, who created earth and man, was superior to these other gods and spirits. Regular sacrifices and prayers were offered to placate these deities and spirits, some of which were benevolent, some malevolent.
                             </p>
                         </div>
                     </div>
@@ -87,7 +86,8 @@
         <div id="timelineOverlay" class="timelineOverlay">
             <div class="timelineOverlayText">
                 <h1 id="timelineOverlayYear"></h1>
-                <p>Click anywhere to continue</p>
+                <p id="mapDataNotice" hidden>Data on the religious population is from 2010.</p>
+                <p>(Click anywhere to continue)</p>
             </div>
         </div>
         <div id="helpOverlay" class="helpOverlay">
@@ -1552,7 +1552,6 @@
                             </circle>
                             <circle cx="1798.2" cy="719.3" id="2">
                             </circle>
-                            <!-- <image id="mapPin" href="" /> -->
                         </svg>
                     <div>
                 </div>

@@ -331,8 +331,12 @@ h5 {
     cursor: pointer;
 }
 
-.timelineOverlay h1 {
+.timelineOverlayText h1 {
     font-size: 150px;
+}
+
+.timelineOverlayText p {
+    color: #FFFFFF;
 }
 
 .helpOverlay{

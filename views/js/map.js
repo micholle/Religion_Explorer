@@ -11,6 +11,86 @@ $(function() {
         }
     });
 
+    var svgMap = $("#svgMap");
+    var viewBox = svgMap[0].getAttribute("viewBox");
+    var initialViewBox = viewBox.split(" ").map(parseFloat);
+    var zoomScale = 1.2;
+    var currentZoom = 0;
+    var minZoom = 0;
+    var maxZoom = 5;
+    
+    var isDragging = false;
+    var startDragX = 0;
+    var startDragY = 0;
+    var startViewBoxX = 0;
+    var startViewBoxY = 0;
+    var previousZoom = 0;
+    var prevMouseX = 0;
+    var prevMouseY = 0;
+    
+    svgMap.on("wheel", function(e) {
+        e.preventDefault();
+        var delta = e.originalEvent.deltaY;
+
+        var zoomDirection = delta > 0 ? -1 : 1;
+        currentZoom += zoomDirection;
+        currentZoom = Math.min(Math.max(currentZoom, minZoom), maxZoom);
+        var zoomFactor = Math.pow(zoomScale, currentZoom);
+    
+        var newWidth = initialViewBox[2] / zoomFactor;
+        var newHeight = initialViewBox[3] / zoomFactor;
+    
+        var mouseX = e.originalEvent.clientX - svgMap.offset().left;
+        var mouseY = e.originalEvent.clientY - svgMap.offset().top;
+    
+        var deltaMouseX = mouseX - prevMouseX;
+        var deltaMouseY = mouseY - prevMouseY;
+    
+        var currentViewBoxX = initialViewBox[0] + (deltaMouseX * initialViewBox[2]) / svgMap.width();
+        var currentViewBoxY = initialViewBox[1] + (deltaMouseY * initialViewBox[3]) / svgMap.height();
+
+        var newViewBoxX = currentViewBoxX - (newWidth - initialViewBox[2]) * (mouseX / svgMap.width());
+        var newViewBoxY = currentViewBoxY - (newHeight - initialViewBox[3]) * (mouseY / svgMap.height());
+    
+        var newViewBox = [newViewBoxX, newViewBoxY, newWidth, newHeight];
+        svgMap.attr("viewBox", newViewBox.join(" "));
+        prevMouseX = mouseX;
+        prevMouseY = mouseY;
+        previousZoom = currentZoom;
+    });
+    
+    svgMap.on("mousedown", function(e) {
+        e.preventDefault();
+        isDragging = true;
+        startDragX = e.pageX - svgMap.offset().left - initialViewBox[0] * (svgMap.width() / initialViewBox[2]);
+        startDragY = e.pageY - svgMap.offset().top - initialViewBox[1] * (svgMap.height() / initialViewBox[3]);
+        startViewBoxX = initialViewBox[0];
+        startViewBoxY = initialViewBox[1];
+    });
+    
+    
+    svgMap.on("mousemove", function(e) {
+        if (isDragging) {
+        var dragX = e.pageX - startDragX;
+        var dragY = e.pageY - startDragY;
+        var newViewBoxX = startViewBoxX - dragX;
+        var newViewBoxY = startViewBoxY - dragY;
+    
+        var newViewBox = [
+            newViewBoxX,
+            newViewBoxY,
+            initialViewBox[2] / Math.pow(zoomScale, previousZoom),
+            initialViewBox[3] / Math.pow(zoomScale, previousZoom)
+        ];
+        svgMap.attr("viewBox", newViewBox.join(" "));
+        }
+    });
+    
+    svgMap.on("mouseup mouseleave", function() {
+        isDragging = false;
+    });
+      
+
     //initiate colors
     var religionColors = {
         "Buddhism" : "#BAA400",
@@ -72,6 +152,8 @@ $(function() {
         "Judaism" : -2000
     }
 
+    var mapPlain = $("#svgMap").html();
+
     //initialize default filter and timeline
     var religionFilter = "All Religions";
     var timelineYear = "2010 CE";
@@ -86,11 +168,53 @@ $(function() {
     //change map data based on filter
     $('#religionFilterOptions').click(function(){
         if($('#religionFilterOptions').val() != religionFilter){
+            $("#svgMap").html(mapPlain);
+
             religionFilter = $('#religionFilterOptions').val();
             mapTimeline(religionFilter);
             mapColor(religionFilter, timelineYear);
             mapPin(religionFilter, timelineYear);
         }
+    });
+
+    var mapEvents = "show";
+    var mapPeople = "show";
+    var mapLocations = "show";
+
+    $("#mapEvents").click(function () { 
+        $("#svgMap").html(mapPlain);
+
+        if ($("#mapEvents").prop("checked")) {
+            mapEvents = "show";
+        } else {
+            mapEvents = "hide";
+        }
+
+        mapPin(religionFilter, timelineYear);
+    });
+
+    $("#mapPeople").click(function () { 
+        $("#svgMap").html(mapPlain);
+
+        if ($("#mapPeople").prop("checked")) {
+            mapPeople = "show";
+        } else {
+            mapPeople = "hide";
+        }
+
+        mapPin(religionFilter, timelineYear);
+    });
+
+    $("#mapLocations").click(function () { 
+        $("#svgMap").html(mapPlain);
+
+        if ($("#mapLocations").prop("checked")) {
+            mapLocations = "show";
+        } else {
+            mapLocations = "hide";
+        }
+
+        mapPin(religionFilter, timelineYear);
     });
 
     $("#timelineOverlay").click(function () { 
@@ -108,6 +232,8 @@ $(function() {
                 }
             }
         }
+
+        $("#svgMap").html(mapPlain);
     
         mapColor(religionFilter, timelineYear);
         mapPin(religionFilter, timelineYear);
@@ -294,71 +420,81 @@ $(function() {
                     $('#colorKeys').html(mapKeysText);
     
                     //loop through all countries
-                    for (let country in religionByCountry) {
-                        var countryData = religionByCountry[country];
-                        if(religionFilter == "All Religions"){
-                            //determine prevailing religion of each country
-                            for (let religion in countryData) {
-                                if (countryData[religion] > prevailingReligionVal) {
-                                    prevailingReligionVal = countryData[religion];
-                                    prevailingReligion = religion;
-    
-                                    //set color of country to assigned color of prevailing religion
-                                    for (let religionColor in religionColors){
-                                        if (prevailingReligion == religionColor){
-                                            countryColor = religionColors[religionColor];
+                    for (let year in religionByCountry) {
+                        if (year != timelineYear) {
+                            $("#mapDataNotice").removeAttr("hidden");
+                        } else {
+                            $("#mapDataNotice").attr("hidden", true);
+
+                        }
+                        var countryDetails = religionByCountry[year];
+                        for (let country in countryDetails) {
+                            var religionValues = countryDetails[country];
+                            
+                            if(religionFilter == "All Religions"){
+                                //determine prevailing religion of each country
+                                for (let religion in religionValues) {
+                                    if (religionValues[religion] > prevailingReligionVal) {
+                                        prevailingReligionVal = religionValues[religion];
+                                        prevailingReligion = religion;
+        
+                                        //set color of country to assigned color of prevailing religion
+                                        for (let religionColor in religionColors){
+                                            if (prevailingReligion == religionColor){
+                                                countryColor = religionColors[religionColor];
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            document.getElementById(country).style.fill = countryColor;
-                            document.getElementById(country).style.stroke = "#FFFFFF";
-    
-                            prevailingReligionVal = 0;
-    
-                        } else {
-                            //color
-                            var totalPopulation = 0;
-                            var religionPercentage = 0;
-                            var religionFilterVal = 0;
-                            var countryData = religionByCountry[country];
-    
-                            //determine percentage of religion filters
-                            for (let religion in countryData) {
-                                totalPopulation += countryData[religion];
-    
-                                if(religionFilter == religion){
-                                    religionFilterVal = countryData[religion];
-                                }
-                            }
-    
-                            religionPercentage = (Math.round(((religionFilterVal / totalPopulation) * 100) * 100) / 100).toFixed(2);
-    
-                            //set color of country depending on religion percentage
-                            if(religionPercentage <= 20){
-                                religionPercentage = "0% - 20%"
-                            } else if(religionPercentage > 20 && religionPercentage <=40){
-                                religionPercentage = "20% - 40%"
-                            } else if(religionPercentage > 40 && religionPercentage <=60){
-                                religionPercentage = "40% - 60%"
-                            } else if(religionPercentage > 60 && religionPercentage <=80){
-                                religionPercentage = "60% - 80%"
+                                document.getElementById(country).style.fill = countryColor;
+                                document.getElementById(country).style.stroke = "#FFFFFF";
+        
+                                prevailingReligionVal = 0;
+        
                             } else {
-                                religionPercentage = "80% - 100%"
-                            }
-    
-    
-                            for (let percentage in applyFilter){
-                                if (religionPercentage == percentage){
-                                    countryColor = applyFilter[percentage];
+                                //color
+                                var totalPopulation = 0;
+                                var religionPercentage = 0;
+                                var religionFilterVal = 0;
+                                // var religionValues = religionValues[religion];
+        
+                                //determine percentage of religion filters
+                                for (let religion in religionValues) {
+                                    totalPopulation += religionValues[religion];
+                                    
+                                    if(religionFilter == religion){
+                                        religionFilterVal = religionValues[religion];
+                                    }
                                 }
+        
+                                religionPercentage = (Math.round(((religionFilterVal / totalPopulation) * 100) * 100) / 100).toFixed(2);
+        
+                                //set color of country depending on religion percentage
+                                if(religionPercentage <= 20){
+                                    religionPercentage = "0% - 20%"
+                                } else if(religionPercentage > 20 && religionPercentage <=40){
+                                    religionPercentage = "20% - 40%"
+                                } else if(religionPercentage > 40 && religionPercentage <=60){
+                                    religionPercentage = "40% - 60%"
+                                } else if(religionPercentage > 60 && religionPercentage <=80){
+                                    religionPercentage = "60% - 80%"
+                                } else {
+                                    religionPercentage = "80% - 100%"
+                                }
+        
+        
+                                for (let percentage in applyFilter){
+                                    if (religionPercentage == percentage){
+                                        countryColor = applyFilter[percentage];
+                                    }
+                                }
+                                document.getElementById(country).style.fill = countryColor;
+                                document.getElementById(country).style.stroke = "#000000";
+                                totalPopulation = 0;
+                                religionPercentage = 0;
+                                religionFilterVal = 0;
+        
                             }
-                            document.getElementById(country).style.fill = countryColor;
-                            document.getElementById(country).style.stroke = "#000000";
-                            totalPopulation = 0;
-                            religionPercentage = 0;
-                            religionFilterVal = 0;
-    
                         }
                     }
                 }
@@ -381,28 +517,31 @@ $(function() {
                     var religionVal = 0;
                     var popoverContent = "";
     
-                    for (let country in religionByCountry) {
-                        if (country == currentCountry){
-                            var countryData = religionByCountry[country];
-    
-                            for (let religion in countryData) {
-                                totalPopulation += countryData[religion];
+                    for (let year in religionByCountry) {
+                        var countryDetails = religionByCountry[year];
+                        for (let country in countryDetails) {
+                            var religionValues = countryDetails[country];
+                            if (country == currentCountry){
         
-                                if ($('#religionFilterOptions').val() == "All Religions"){
-                                    //prevailing religions
-                                    if (countryData[religion] > religionVal) {
-                                        religionVal = countryData[religion];
-                                        prevailingReligion = religion;
-                                    }   
-                                } else {
-                                    //religion filter
-                                    if($('#religionFilterOptions').val() == religion){
-                                        religionVal = countryData[religion];
+                                for (let religion in religionValues) {
+                                    totalPopulation += religionValues[religion];
+            
+                                    if ($('#religionFilterOptions').val() == "All Religions"){
+                                        //prevailing religions
+                                        if (religionValues[religion] > religionVal) {
+                                            religionVal = religionValues[religion];
+                                            prevailingReligion = religion;
+                                        }   
+                                    } else {
+                                        //religion filter
+                                        if($('#religionFilterOptions').val() == religion){
+                                            religionVal = religionValues[religion];
+                                        }
                                     }
                                 }
+        
+                                religionPercentage = (Math.round(((religionVal / totalPopulation) * 100) * 100) / 100).toFixed(2);
                             }
-    
-                            religionPercentage = (Math.round(((religionVal / totalPopulation) * 100) * 100) / 100).toFixed(2);
                         }
                     }
 
@@ -441,16 +580,18 @@ $(function() {
                     var religionData = [];
                     var religionColors = ["#BAA400", "#56097A", "#A81315", "#018744", "#1334A8", "#B37100", "#242424"];
             
-                    for (let country in religionByCountry) {
-                        var countryData = religionByCountry[country];
-            
-                        if (country == currentCountry){
-                            for (let religion in countryData) {
-                                religions.push(religion);
-                                religionData.push(countryData[religion]);
+                    for (let year in religionByCountry) {
+                        var countryDetails = religionByCountry[year];
+                        for (let country in countryDetails) {
+                            var religionValues = countryDetails[country];
+                
+                            if (country == currentCountry){
+                                for (let religion in religionValues) {
+                                    religions.push(religion);
+                                    religionData.push(religionValues[religion]);
+                                }
                             }
                         }
-            
                     }
     
                     configuration = {
@@ -522,27 +663,45 @@ $(function() {
                 for (pin in allPins) {
                     var pinDetails = allPins[pin];
 
-                    if (pinDetails.timelineDate == timelineYear) {
-                        var pathElement = document.getElementById(pinDetails.country);
-                        var boundingBox = pathElement.getBBox();
-                        var x = boundingBox.x + (boundingBox.width / 4);
-                        var y = boundingBox.y + (boundingBox.height / 4);
-            
-                        var pinTitle = pin;
-                        var pinReligion = pinDetails.religion;
-                        var pinDate = pinDetails.displayDate;
-                        var pinShortDesc = pinDetails.shortDesc;
-                        var pinDesc = pinDetails.description;
-                        var pinType = pinDetails.pinType;
-                        var pinPerson = pinDetails.relatedPerson;
-                        var pinPersonImg = "../assets/data/map/img/" + pinPerson + ".jpg";
-                        var pinVid = pinDetails.pinVid;
-                        var pinImg1 = pinDetails.pinImg1;
-                        var pinImg2 = pinDetails.pinImg2;
-                        
-                        var pinImg = "../assets/img/map/" + pinType + "-" + (pinReligion.toLowerCase()) + ".png";     
-                        $("#svgMap").html($("#svgMap").html() + '<image id="' + pinTitle + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinTitle + "', '" + pinShortDesc + "'" + ')" onmouseout="closePinOverview(' + "'" + pinTitle + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDate + "', '" + pinDesc + "', '" + pinReligion + "', '" + pinPerson + "', '" + pinPersonImg + "', '" + pinVid + "', '" + pinImg1 + "', '" + pinImg2 + "'" + ')" href="' + pinImg +'" x="' + x + '" y="' + y + '" height="30" width="30"/>');
+                    var pathElement = document.getElementById(pinDetails.country);
+                    var boundingBox = pathElement.getBBox();
+                    var x = boundingBox.x + (boundingBox.width / 4);
+                    var y = boundingBox.y + (boundingBox.height / 4);
+        
+                    var pinid = pinDetails.pinid;
+                    var pinTitle = pin;
+                    var pinReligion = pinDetails.religion;
+                    var pinDate = pinDetails.displayDate;
+                    var pinShortDesc = pinDetails.shortDesc;
+                    var pinDesc = pinDetails.description;
+                    var pinType = pinDetails.pinType;
+                    var pinPerson = pinDetails.relatedPerson;
+                    var pinPersonImg = "../assets/data/map/img/" + pinPerson + ".jpg";
+                    var pinVid = pinDetails.pinVid;
+                    var pinImg1 = pinDetails.pinImg1;
+                    var pinImg2 = pinDetails.pinImg2;
+
+                    var pinImg = "../assets/img/map/" + pinType + "-" + (pinReligion.toLowerCase()) + ".png";
+                    $("#svgMap").html($("#svgMap").html() + '<image id="' + pinid + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinid + "', '" + pinTitle + "', '" + pinShortDesc + "'" + ')" onmouseout="closePinOverview(' + "'" + pinid + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDate + "', '" + pinDesc + "', '" + pinReligion + "', '" + pinPerson + "', '" + pinPersonImg + "', '" + pinVid + "', '" + pinImg1 + "', '" + pinImg2 + "'" + ')" href="' + pinImg +'" x="' + x + '" y="' + y + '" height="30" width="30"/>');
+                    
+                    var pinid = "#" + pinid;
+                    var pinTypeStatus = "";
+                    mapColor(religionFilter, timelineYear);
+
+                    if(pinType == "event") {
+                        pinTypeStatus = mapEvents;
+                    } else if(pinType == "person") {
+                        pinTypeStatus = mapPeople;
+                    } else {
+                        pinTypeStatus = mapLocations;
                     }
+
+                    if ((pinDetails.timelineDate == timelineYear) && (($('#religionFilterOptions').val() == "All Religions") || (pinReligion == $('#religionFilterOptions').val())) && (pinTypeStatus == "show")) {
+                        $(pinid).removeAttr("hidden");
+                    } else {
+                        $(pinid).attr("hidden", true);
+                    }
+                    
                 }          
             }
         });
@@ -634,7 +793,55 @@ $(function() {
     $("#pinOverlay").click(function () { 
         $("#pinOverlay").addClass("invisible");
     });
-    
+
+    //search country
+    $("#searchCountryInput").keyup(function () { 
+        $.ajax({
+            url: '../../ajax/getMapData.ajax.php',
+            method: "POST",
+            success:function(data){
+                var religionByCountry = data;
+
+                for (let year in religionByCountry) {
+                    var countryDetails = religionByCountry[year];
+                    for (let country in countryDetails) {
+                        if ($("#searchCountryInput").val() == "") {
+                            $("#svgMap").attr("viewBox", "0 0 2000 857");
+                            document.getElementById(country).style.opacity = 1; 
+                            document.getElementById(country).removeAttribute("data-toggle", "popover");
+                            $('.popover').popover('dispose');
+                        } else {
+                            if ((country.toLowerCase()).includes($("#searchCountryInput").val())) {
+                                var pathElement = document.getElementById(country);
+                                var boundingBox = pathElement.getBBox();
+                                var x = boundingBox.x - 1000;
+                                var y = boundingBox.y - 300;
+        
+                                $("#svgMap").attr("viewBox", x + " " + y + " 2000 857");
+                                document.getElementById(country).style.opacity = 0.5; 
+                                document.getElementById(country).setAttribute("data-toggle", "popover");
+                                document.getElementById(country).setAttribute("data-html", "true");
+
+                                $('[data-toggle = "popover"]').popover({
+                                    title: country, 
+                                    content: "Hover or click to learn more about " + country + ".",
+                                    placement: "top"
+                                });
+                                $('[data-toggle = "popover"]').popover("show");
+
+                                break;
+                            } else {
+                                $("#svgMap").attr("viewBox", "0 0 2000 857"); 
+                                document.getElementById(country).style.opacity = 1; 
+                                document.getElementById(country).removeAttribute("data-toggle", "popover");
+                                $('.popover').popover('dispose');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
 });
 
 function openPin(pinTitle, pinDate, pinDesc, pinReligion, pinPerson, pinPersonImg, pinVid, pinImg1, pinImg2) {
@@ -654,8 +861,8 @@ function openPin(pinTitle, pinDate, pinDesc, pinReligion, pinPerson, pinPersonIm
     $("#pinOverlay").removeClass("invisible");
 }
 
-function openPinOverview(pinTitle, pinShortDesc) {
-    document.getElementById(pinTitle).setAttribute("data-toggle", "popover");
+function openPinOverview(pinid, pinTitle, pinShortDesc) {
+    document.getElementById(pinid).setAttribute("data-toggle", "popover");
 
     $('[data-toggle = "popover"]').popover({
         title: pinTitle, 
