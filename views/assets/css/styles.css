@@ -2681,6 +2681,7 @@ p {
 }
 
 .adminReviewContainerContent {
+    display: flex;
     border-bottom: solid #D0D0D0 2px;
     height: 150px;
 }
@@ -2703,6 +2704,7 @@ p {
     border-radius: 5px;
     border: solid #D0D0D0 2px;
     padding: 5px 15px;
+    margin-right: 10px;
 }
 
 .adminReviewContainer select:focus {
@@ -2726,4 +2728,12 @@ p {
     background-size: 10px;
     background-repeat: no-repeat;
     background-position: right 15px center;
+}
+
+.adminFilter {
+    display: flex;
+}
+
+.reportButton {
+    cursor: pointer;
 }
