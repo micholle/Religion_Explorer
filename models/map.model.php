@@ -24,9 +24,10 @@ class mapModel{
                 "Non-Religious" => intval($row["nonReligious"])
             ];
             $allCountries += [$row["country"] => $data];
+            $religionPopulation = ["2010 CE" => $allCountries];
         } 
 
-        $jsonData = json_encode($allCountries);
+        $jsonData = json_encode($religionPopulation);
         header('Content-Type: application/json');
         echo $jsonData;
 	}
@@ -37,6 +38,7 @@ class mapModel{
 
         foreach ($mapPins as $index => $pin) {
             $data = [
+                "pinid" => $pin["pinid"],
                 "pinType" => $pin["pinType"],
                 "religion" => $pin["religion"],
                 "country" => $pin["country"],

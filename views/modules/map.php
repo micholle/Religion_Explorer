@@ -67,7 +67,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalTitle">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
                         <!-- Chart -->
@@ -76,8 +75,8 @@
                         </div>
                         <div id="modalContent">
                             <p>
-                            The Philippines is a secular country, with a guaranteed separation of church and state by the Constitution and respect for all religious beliefs and rituals. That being said, the Philippines is not a very spiritually rich country. Albeit no religion is imposed, a significant majority of the population follows Christianity, followed by Islam. Other than these, there are no major religions in the nation.
-                            <br><br>The pre-Hispanic belief of Filipinos consisted of a pantheon of gods, spirits, creatures, and men that guarded the streams, fields, trees, mountains, forests, and houses. Bathala, who created earth and man, was superior to these other gods and spirits. Regular sacrifices and prayers were offered to placate these deities and spirits, some of which were benevolent, some malevolent. Wood and metal images represented ancestral spirits, and no distinction was made between the spirits and their physical symbol. Reward or punishment after death was dependent upon behavior in this life.
+                            The Philippines is a secular country, with a guaranteed separation of church and state by the Constitution and respect for all religious beliefs and rituals. That being said, the Philippines is not a very spiritually rich country. Albeit no religion is imposed, a significant majority of the population follows Christianity, followed by Islam.
+                            <br><br>The pre-Hispanic belief of Filipinos consisted of a pantheon of gods, spirits, creatures, and men that guarded the streams, fields, trees, mountains, forests, and houses. Bathala, who created earth and man, was superior to these other gods and spirits. Regular sacrifices and prayers were offered to placate these deities and spirits, some of which were benevolent, some malevolent.
                             </p>
                         </div>
                     </div>
@@ -86,48 +85,49 @@
         </div>
         <div id="timelineOverlay" class="timelineOverlay">
             <div class="timelineOverlayText">
-                <h1 id="timelineOverlayYear">2020 CE</h1>
-                <p>Click anywhere to continue</p>
+                <h1 id="timelineOverlayYear"></h1>
+                <p id="mapDataNotice" hidden>Data on the religious population is from 2010.</p>
+                <p>(Click anywhere to continue)</p>
             </div>
         </div>
         <div id="helpOverlay" class="helpOverlay">
             <div class="helpOverlayContent">
             </div>
         </div>
-        <!-- <div id="pinOverlay" class="pinOverlay d-flex justify-content-center align-items-center">
+        <div id="pinOverlay" class="pinOverlay d-flex invisible justify-content-center align-items-center">
             <div class="pinOverlayContainer">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-7">
-                        <h1>[Placeholder Title]</h1>
-                        <h3>[Placeholder Date]</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at metus felis. Morbi iaculis libero lorem, a lobortis massa commodo venenatis. Donec tincidunt lacus nec viverra bibendum. Integer ac sodales risus. In tincidunt felis nec porta luctus. Vestibulum sodales sagittis nisi sit amet pulvinar. Phasellus et est venenatis nunc auctor varius ac a eros. Cras eget fermentum purus. Curabitur vitae lacus ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+                        <h1 id="pinOverlayTitle"></h1>
+                        <h3 id="pinOverlayDate"></h3>
+                        <p id="pinOverlayDescription"></p>
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center flex-row">
                                 <div class="pinOverlayRelation d-flex justify-content-center align-items-center flex-column">
-                                    <img src="../assets/img/map/placeholder.png">
-                                    <p>[Placeholder Text]</p>
+                                    <img id="pinOverlayReligionImg" src="../assets/img/map/placeholder.png">
+                                    <p id="pinOverlayReligion"></p>
                                 </div>
                                 <div class="pinOverlayRelation d-flex justify-content-center align-items-center flex-column">
-                                    <img src="../assets/img/map/placeholder.png">
-                                    <p>[Placeholder Text]</p>
+                                    <img id="pinOverlayPersonImg" src="">
+                                    <p id="pinOverlayPerson"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-5">
-                        <img src="../assets/img/placeholder.png">
+                        <video controls id="pinOverlayVideo" class="pinOverlayVideo"> <source src=""> </video>
                         <div class="row">
                             <div class="col-6">
-                                <img src="../assets/img/placeholder.png">
+                                <img id="pinOverlayImg1" src="">
                             </div>
                             <div class="col-6">
-                                <img src="../assets/img/placeholder.png">
+                                <img id="pinOverlayImg2" src="">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <?xml version="1.0"?>
         <!--
         *************Map created by Simplemaps.com********************		
@@ -1552,7 +1552,6 @@
                             </circle>
                             <circle cx="1798.2" cy="719.3" id="2">
                             </circle>
-                            <!-- <image id="mapPin" href="" /> -->
                         </svg>
                     <div>
                 </div>
