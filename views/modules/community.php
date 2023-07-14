@@ -161,8 +161,8 @@
                                         <input type="checkbox" id="spam" name="spam" value="spam">
                                         <label for="spam">Spam or Unwanted Content</label><br>
                                         <input type="checkbox" id="others" name="others" value="others">
-                                        <label for="others">Others, Specify:</label><br>
-                                        <input id="othersSpecify" name="othersSpecify"><br>
+                                        <label for="others">Others, specify:</label><br>
+                                        <input id="othersSpecify" class="inputVariant" name="othersSpecify"><br>
                                     </div>
                                 </div>
                                 <div class="row">

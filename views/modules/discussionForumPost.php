@@ -60,6 +60,10 @@ require_once "../../models/discussionForumPost.model.php";
                                         <p class="forumPostViewMainCount forumPostViewMainComment">0</p>
                                     </div>
                                     <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
+                                        <img src="../assets/img/discussionForum/edit.png" class="commentIcon">
+                                        <p class="forumPostViewMainCount forumPostViewMainVote">Edit</p>
+                                    </div>
+                                    <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
                                         <img src="../assets/img/discussionForum/report.png" class="commentIcon">
                                         <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>
                                     </div>
@@ -93,40 +97,6 @@ require_once "../../models/discussionForumPost.model.php";
                             </div>
                         </div>
                         <div id="postContainer"></div>
-                        
-                                <!-- <div class="forumPostViewComments">
-                                    <div class="d-flex justify-content-start align-items-center flex-column">
-                                        <img src="../assets/img/editProfile/lion.png">
-                                    </div>
-                                    <div class="forumPostViewContent">
-                                        <div class="row">
-                                            <div class="col-12 d-flex flex-row">
-                                            <h2>[Placeholder User]</h2><h2>•</h2><h2>[Placeholder Time]</h2>
-                                            </div>
-                                        </div>
-                                        <div class="forumPostViewContentBox">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies eros id malesuada porta. Sed id vulputate purus. Vestibulum non luctus nisi, vel tincidunt leo. Phasellus scelerisque metus sit amet est pulvinar, efficitur molestie elit laoreet.</p>
-                                            <div class="col-12 d-flex flex-row forumPostViewContentInt">
-                                                <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
-                                                    <img src="../assets/img/discussionForum/upvote.png">
-                                                    <p class="forumPostViewMainCount forumPostViewMainVote">0</p>
-                                                    <img src="../assets/img/discussionForum/downvote.png">
-                                                </div>
-                                                <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
-                                                    <img src="../assets/img/discussionForum/comments.png" class="commentIcon">
-                                                    <p class="forumPostViewMainCount forumPostViewMainComment">Reply</p>
-                                                </div>
-                                                <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
-                                                    <img src="../assets/img/discussionForum/report.png" class="commentIcon">
-                                                    <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
-                        
-
                     </div>
                 </div>
 
@@ -144,7 +114,51 @@ require_once "../../models/discussionForumPost.model.php";
                 </div>
             </div>
 
-            
+            <div class="modal fade" id="confirmDeleteModalPost">
+                <div class="modal-dialog modal-xs modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="modal-title w-100">Delete Post?</h5>
+                                        <p>Are you sure you want this gone?</p>
+                                        <div class="row">
+                                            <div class="col-12 d-flex flex-row">
+                                                <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                                <button type="button" class="roundedButton">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="modal fade" id="confirmDeleteModalComment">
+                <div class="modal-dialog modal-xs modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="modal-title w-100">Delete Comment?</h5>
+                                        <p>Are you sure you want this gone?</p>
+                                        <div class="row">
+                                            <div class="col-12 d-flex flex-row">
+                                                <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                                <button type="button" class="roundedButton">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

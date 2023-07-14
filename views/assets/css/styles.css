@@ -168,7 +168,7 @@ h5 {
     margin-top: -20px;
 }
 
-#reportContentModal input[id=othersSpecify] {
+.inputVariant {
     color: #3E3E3E;
     border-radius: 20px;
     border: solid #B0BEC5 2px;
@@ -177,6 +177,10 @@ h5 {
     height: 30px;
     padding: 0px 15px;
     width: 100%;
+}
+
+#reportContentModal {
+    font-family: Lexend;
 }
 
 #reportContentModal textarea {
@@ -192,9 +196,44 @@ h5 {
     margin-top: 10px;
 }
 
+#reportContentModal .reportContentHeader {
+    font-family: Lexend;
+}
+
 .commUploadImg {
     width: 40px;
     margin: 10px;
+}
+
+#reportUserModal {
+    font-family: Lexend;
+}
+
+#reportUserModal textarea {
+    color: #3E3E3E;
+    border-radius: 20px;
+    border: solid #B0BEC5 2px;
+    font-size: 16px;
+    height: 120px;
+    padding: 10px 15px;
+    width: 100%;
+    resize: none;
+    margin-top: 10px;
+}
+
+#reportUserModal .modal-header {
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#reportUserModal .modal-header .modal-title {
+    margin-top: 10px;
+}
+
+#reportUserModal .modal-header .inputVariant {
+    margin-top: 10px;
+    text-align: center;
 }
 
 /* map */
@@ -2036,6 +2075,87 @@ p {
 }
 
 /*notifications panel*/
+
+.notificationsPanel {
+    position: fixed;
+    background-color: white;
+    color: #3E3E3E;
+    height: 100vh !important;
+    width: 275px;
+    margin-left: -275px;
+    z-index: 4;
+    overflow-y: scroll;
+    transition: 0.5s ease;
+}
+  
+.notificationsPanel.show {
+    margin-left: 85px;
+}
+
+.notificationsPanelHeader {
+    padding: 15px 15px 0 15px;
+    margin: 0;
+}
+
+.notificationsPanelHeader h1 {
+    font-size: 22px;
+    font-weight: 600;
+    font-family: Lexend;
+}
+
+.notificationsPanelBody {
+    padding: 10px 15px;
+    display: flex;
+    background-color: white;
+    transition: 0.5s ease;
+}
+
+.notificationsPanelBody:hover {
+    background-color: #EAF7F0;
+}
+
+.notificationsPanelBody img {
+    height: 40px;
+}
+
+.notificationsPanelBody .col-2 {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.notificationsPanelBody .col-10 {
+    margin: 0 !important;
+    padding: 0 0 0 5px;
+    font-family: Lexend;
+    font-size: 15px;
+}
+
+.notificationsPanelBody .notificationsPanelMainText {
+    line-height: 20px;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: justify;
+    text-align-last: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.notificationsPanelBody .notificationsPanelSubtext {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+}
+
+.notificationsPanelBody .notificationsPanelBoldText {
+    color: #2CA464;
+    font-weight: 600;
+}
+
+
 
 /*discussion forum*/
 

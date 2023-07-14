@@ -15,7 +15,48 @@ $(function() {
             $("#text").css("display", "inline-block");
             $("#minmax").attr("src", "../assets/img/minimize.png");
             $(".pageContainer").css("padding-left", "275px");
+            $(".notificationsPanel").removeClass("show");
         }
+    });
+
+    $("#sidebarNotifications").click(function(event) {
+        event.preventDefault();
+    
+        // Check if the sidebar is already minimized
+        var isSidebarMinimized = $(".sidebar").hasClass("active");
+        var isNotificationsPanelVisible = $(".notificationsPanel").hasClass("show");
+    
+        if (isSidebarMinimized) {
+            if (isNotificationsPanelVisible) {
+                // Hide the notifications panel
+                $(".notificationsPanel").removeClass("show");
+            } else {
+                // Show the notifications panel
+                $(".notificationsPanel").addClass("show");
+            }
+        } else {
+            // Toggle the sidebar and notifications panel
+            $(".sidebar").toggleClass("active");
+            $(".notificationsPanel").toggleClass("show");
+            
+            // Update the sidebar appearance based on its current state
+            if ($(".sidebar").hasClass("active")) {
+                $("#text").css("display", "none");
+                $("#minmax").attr("src", "../assets/img/maximize.png");
+                $(".pageContainer").css("padding-left", "85px");
+            } else {
+                $("#text").css("display", "inline-block");
+                $("#minmax").attr("src", "../assets/img/minimize.png");
+                $(".pageContainer").css("padding-left", "275px");
+            }
+        }
+    });
+    
+    
+
+    $("#sidebarReport").click(function(){
+        $('#reportUserModal').modal();
+        $('#reportUserModal').show();
     });
 
     $("#termsOfService").click(function() {

@@ -245,4 +245,14 @@ $(function() {
       $("#new").click(function() {
           getTopics("new"); // Pass "new" as the sort criteria
       });
+
+    $("#forumDeletePost").click(function(){
+        $('#confirmDeleteModalPost').modal();
+        $('#confirmDeleteModalPost').show();
+    });
+
+    $("#forumDeleteComment").click(function(){
+        $('#confirmDeleteModalComment').modal();
+        $('#confirmDeleteModalComment').show();
+    });
 });
