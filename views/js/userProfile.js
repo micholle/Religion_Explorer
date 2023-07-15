@@ -79,9 +79,13 @@ $(function() {
                 var bookmarkDetails = bookmarksList[bookmark];
 
                 var $bookmarkDiv = 
-                '<div class="userContentContainer" onclick="viewBookmark(' + "'" + bookmarkDetails.resourceTitle + "'" + ')" style="cursor: pointer;">' +
-                    '<img src="../assets/img/bookmark.png" class="userProfBookmark">' +
-                    '<p>' + $("#accountUsernamePlaceholder").text() + ' has added "' + bookmarkDetails.resourceTitle + '" to their bookmarks.<p>' +
+                '<div class="bookmarkContainer" onclick="viewBookmark(' + "'" + bookmarkDetails.resourceTitle + "'" + ')">' +
+                    '<div class="bookmarkImgContainer d-flex justify-content-center align-items-center">' +
+                        '<img src="../assets/img/bookmark.png" class="userProfBookmark">' +
+                    '</div>' +
+                    '<div class="bookmarkContent d-flex justify-content-start align-items-center">' +
+                        '<p>' + $("#accountUsernamePlaceholder").text() + ' has added "' + bookmarkDetails.resourceTitle + '" to their bookmarks.<p>' +
+                    '</div>' +
                 '</div>';
 
                 $("#userProfileBookmarksList").append($bookmarkDiv);
