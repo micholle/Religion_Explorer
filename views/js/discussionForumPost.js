@@ -252,7 +252,12 @@ $(function() {
     });
 
     $("#forumDeleteComment").click(function(){
-        $('#confirmDeleteModalComment').modal();
-        $('#confirmDeleteModalComment').show();
+        alert("test")
+        // $('#confirmDeleteModalComment').modal();
+        // $('#confirmDeleteModalComment').show();
+    });
+
+    $(document).on('click', '#forumDeleteComment', function() {
+        $('#confirmDeleteModalComment').modal('show');
     });
 });

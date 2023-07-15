@@ -8,6 +8,7 @@
         <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
 
         <script type="text/javascript" src="../js/community.js"></script>
+        <script type="text/javascript" src="../js/communitySubmissions.js"></script>
         <script type="text/javascript" src="../js/script.js"></script>
 
         <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
@@ -21,7 +22,7 @@
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
                     <div class="col-4 d-flex justify-content-start align-items-center">
-                        <h1>Community Creations</h1>
+                        <a href="community.php" class="pageHeaderLink"><h1>Community Creations</h1></a>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
                         <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community">
@@ -58,7 +59,7 @@
                         <h1>Reading Materials</h1>
                         <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
                             <div id="communityReadingMaterials"></div>
-                            <button id="communityVideosMore" class="roundedButton">See More</button>
+                            <button id="communityBlogsMore" class="roundedButton">See More</button>
                         </div>
                     </div>
                 </div>
@@ -120,7 +121,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="communityDisplayModal">
+        <!-- <div class="modal fade" id="communityDisplayModal">
             <div class="modal-dialog modal-xs modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -129,7 +130,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="modal fade" id="reportContentModal">
             <div class="modal-dialog modal-xs modal-dialog-centered">
@@ -140,6 +141,7 @@
                             <div id="reportContentHeader"></div>
                         </div>
                     </div>
+
                     <div class="modal-body">
                         <div class="container">
                             <form id="reportContentForm" method="post">

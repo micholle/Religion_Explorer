@@ -19,7 +19,7 @@
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center pageHeader">
                 <div class="col-4 d-flex justify-content-start align-items-center">
-                    <h1>Discussion Forum</h1>
+                    <a href="discussionForum.php" class="pageHeaderLink"><h1>Discussion Forum</h1></a>
                 </div>
                 <div class="col-8 d-flex justify-content-start align-items-center">
                     <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Forum">

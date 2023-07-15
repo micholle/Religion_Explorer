@@ -30,8 +30,16 @@ foreach ($posts as $post) {
     $html .= '<p class="forumPostViewMainCount forumPostViewMainComment" onclick="handleReply(' . $post['postId'] . ')">Reply</p>'; // Added onclick event
     $html .= '</div>';
     $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
+    $html .= '<img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
+    $html .= '<p class="forumPostViewMainCount forumPostViewMainVote">Edit</p>';
+    $html .= '</div>';
+    $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
     $html .= '<img src="../assets/img/discussionForum/report.png" class="commentIcon">';
     $html .= '<p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
+    $html .= '</div>';
+    $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="forumDeleteComment">';
+    $html .= '<img src="../assets/img/discussionForum/delete.png" class="commentIcon">';
+    $html .= '<p class="forumPostViewMainCount forumPostViewMainDelete">Delete</p>';
     $html .= '</div>';
     $html .= '</div>';
     $html .= '</div>';
