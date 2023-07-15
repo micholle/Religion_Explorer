@@ -1719,15 +1719,6 @@ p {
     transition: 0.5s;
 }
 
-.achBlock {
-    margin-bottom: 20px;
-}
-
-.achContainer {
-    border: solid #D6D6D6 2px;
-    border-radius: 15px
-}
-
 .settingsContainer {
     border: solid #D6D6D6 2px;
     border-radius: 15px
@@ -1747,7 +1738,6 @@ p {
     transition: background-color 0.5s ease;
 } 
 
-/* Style the tab */
 .userProfileTab {
     width: 100%;
     display: flex;
@@ -1809,6 +1799,86 @@ p {
 .userProfileContentBox .userProfileContent h2 {
     margin-top: 0 !important;
     margin-bottom: 10px;
+}
+
+.userProfileStatsHeader {
+    width: 100%;
+    height: 75px;
+    padding: 20px 0;
+    border-bottom: solid #D0D0D0 2px;
+}
+
+.userProfileStatsHeader h1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.userProfileStatsHeader select:focus {
+    outline: none;
+    transition: 0.5s;
+}
+
+.userProfileStatsHeader select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: solid #D6D6D6 2px;
+    border-radius: 5px;
+    font-family: Lexend;
+    padding: 5px 15px;
+    width: 140px;
+    color: #3E3E3E;
+    font-size: 16px;
+    background-image: url("../img/dropdown.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+}
+
+.userProfileStatsContainer .col-8 {
+    padding-right: 5px !important;
+}
+
+.userProfileStatsContainer .col-4 {
+    padding-left: 5px !important;
+}
+
+.userProfileStatsMain {
+    width: 100%;
+    border: solid #D0D0D0 2px;
+    border-radius: 15px;
+    padding: 20px;
+    height: 500px;
+}
+
+.achievementsContainer {
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.achievementsBox {
+    width: 30%;
+    height: 200px;
+    display: block;
+    border: solid #D0D0D0 2px;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px;
+}
+
+.achievementsBox h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2CA464 !important;
+}
+
+.achievementsBox p {
+    font-size: 15px;
+}
+
+.achievementsBox img {
+    width: 75px;
 }
 
 .pageContainer {
@@ -2446,19 +2516,11 @@ p {
     margin-top: 10px;
 }
 
-#confirmDeleteModalPost .roundedButtonVariant {
-    margin-right: 10px;
+#confirmDeleteModal .roundedButtonVariant {
+    margin-right: 10px !important;
 }
 
-#confirmDeleteModalComment .roundedButtonVariant {
-    margin-right: 10px;
-}
-
-#confirmDeleteModalPost .modal-xs {
-    width: 400px;
-}
-
-#confirmDeleteModalComment .modal-xs {
+#confirmDeleteModal .modal-xs {
     width: 400px;
 }
 
@@ -2547,6 +2609,12 @@ p {
     margin-right: 10px;
     padding: 0 10px;
     height: 35px;
+    transition: 0.5s ease;
+}
+
+.forumPostViewMainInt:hover {
+    background-color: #eeeeee;
+    transition: 0.5s ease;
 }
 
 .forumPostViewMainInt img {
@@ -2569,7 +2637,6 @@ p {
 
 .forumPostViewMainComment {
     color: #416FBD;
-    cursor: pointer;
 }
 
 .forumPostViewMainReport {
@@ -2755,10 +2822,8 @@ p {
     color: #3E3E3E;
 }
 
-#forumPostViewCommentReply {
+.forumPostViewCommentReply {
     padding-inline-start: 2.75%;
-    width: 100%;
-    top: 100%;
 }
 
 #forumPostViewCommentReplySubmit {

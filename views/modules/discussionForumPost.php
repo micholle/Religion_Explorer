@@ -126,7 +126,7 @@ session_start();
                             <div class="container">
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="modal-title w-100">Delete Post?</h5>
+                                        <h5 class="modal-title w-100">Delete Content?</h5>
                                         <p>Are you sure you want this gone?</p>
                                         <div class="row">
                                             <div class="col-12 d-flex flex-row">

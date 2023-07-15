@@ -31,9 +31,14 @@ foreach ($posts as $post) {
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainComment" onclick="initializeReplyButtons(' . $post['postId'] . ')" value="' . $post['postId'] . '">Reply</p>';
     $html .= '          </div>';
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
+    $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
+    $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">Edit</p>';
+    $html .= '          </div>';
+    $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
     $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
     $html .= '          </div>';
+    
     
     // Add the delete button only if the account ID matches the session account ID
     if ($post['accountid'] === $_SESSION['accountid']) {
@@ -53,7 +58,7 @@ foreach ($posts as $post) {
     // Display replies
     $replies = $controller->ctrGetRepliesByPostId($post['postId']);
     foreach ($replies as $reply) {
-        $html .= '<div class="forumPostViewComments d-flex flex-column" style="margin-left: 20px;">'; // Start of reply container
+        $html .= '<div class="forumPostViewComments forumPostViewCommentReply d-flex flex-column">'; // Start of reply container
         $html .= '  <div class="d-flex justify-content-start align-items-start flex-row">';
         $html .= '    <img src="../assets/img/editProfile/lion.png">';
         $html .= '    <div class="forumPostViewContent">';
@@ -73,6 +78,10 @@ foreach ($posts as $post) {
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
         $html .= '            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainComment" onclick="initializeReplyButtons(' . $post['postId'] . ')" value="' . $post['postId'] . '">Reply</p>';
+        $html .= '          </div>';
+        $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
+        $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
+        $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">Edit</p>';
         $html .= '          </div>';
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
         $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';

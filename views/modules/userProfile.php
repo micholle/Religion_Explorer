@@ -158,17 +158,46 @@
                 <div class="userProfileContent" id="userProfileCalendar"></div>
 
                 <div class="userProfileContent">
-                    <h2>Statistics</h2>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend ligula nisl, ac aliquam felis faucibus id. Aenean vel lacinia massa.    
-                    </p>
+                    <div class="container mw-100 mh-100">
+                        <div class="row userProfileStatsContainer no-gutters">
+                            <div class="col-8">
+                                <div class="userProfileStatsMain">
+                                    <div class="userProfileStatsHeader">
+                                        <div class="row justify-content-center align-items-start">
+                                            <div class="col-6 d-flex justify-content-start">
+                                                <h1>[Date Range]</h1>
+                                            </div>
+                                            <div class="col-6 d-flex justify-content-end no-gutters">
+                                                <select id="" class="">
+                                                    <option value="week">Last 7 Days</option>
+                                                    <option value="month">Last Month</option>
+                                                    <option value="year">Last Year</option>
+                                                    <option value="year">All Time</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="userProfileStatsMain">
+                                <div class="userProfileStatsHeader">
+                                        <h1>Overview</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="userProfileContent">
-                    <h2>Achievements</h2>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend ligula nisl, ac aliquam felis faucibus id. Aenean vel lacinia massa.    
-                    </p>
+                    <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column">
+                            <img src="../assets/img/placeholder-medal.png">
+                            <h1>[Achievement Title]</h2>
+                            <p>[Achievement Description]</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
