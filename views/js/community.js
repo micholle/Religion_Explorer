@@ -12,6 +12,9 @@ $(function() {
         method: "POST",
         success:function(data){
             var communityData = data;
+            var photosCounter = 0;
+            var videosCounter = 0;
+            var readingMaterialsCounter = 0;
 
             for (let photo in communityData["photos"]) {
                 var photoList = communityData["photos"][photo];
@@ -28,6 +31,11 @@ $(function() {
                         // URL.revokeObjectURL(url);
                     });
 
+                    photosCounter++;
+
+                    if (photosCounter == 3) {
+                        break;
+                    }
                 }
             }
 
@@ -46,6 +54,11 @@ $(function() {
                         // URL.revokeObjectURL(url);
                     });
 
+                    videosCounter++
+
+                    if (videosCounter == 3) {
+                        break;
+                    }
                 }
             }
             
@@ -62,6 +75,12 @@ $(function() {
             
                     var showReadingMaterial = "<div onclick='viewContent(\"" + readingMaterialDetails.contentid + "\")'>" + readingMaterialData + " | " + readingMaterialDetails.topics + "<br>" + readingMaterialDetails.author + " | " + readingMaterialDetails.date + "<br>" + readingMaterialDetails.description + "</div> <br>"
                     $("#communityReadingMaterials").append(showReadingMaterial);
+
+                    readingMaterialsCounter++;
+
+                    if (readingMaterialsCounter == 3) {
+                        break;
+                    }
                 }
             }            
         }
