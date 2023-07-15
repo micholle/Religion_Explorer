@@ -14,26 +14,56 @@ $(function() {
             var communityData = data;
 
             for (let photo in communityData["photos"]) {
-                var photoDetails = communityData["photos"][photo];
-                $("#communityPhotos").append("<img onclick='viewContent(\"" + photoDetails.contentid + "\")' src=" + photoDetails.file +"> &nbsp;");
+                var photoList = communityData["photos"][photo];
+                for (photoData in photoList) {
+                    var photoDetails = photoList[photoData];
+
+                    fetch(photoDetails.file)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const url = URL.createObjectURL(blob);
+
+                        $("#communityPhotos").append("<img onclick='viewContent(\"" + photoDetails.creationid + "\")' src=" + url +"> &nbsp;");
+                        
+                        // URL.revokeObjectURL(url);
+                    });
+
+                }
             }
 
             for (let video in communityData["videos"]) {
-                var videoDetails = communityData["videos"][video];
-                $("#communityVideos").append("<video onclick='viewContent(\"" + videoDetails.contentid + "\")' width='200' autoplay muted controls> <source src=" + videoDetails.file +"> </video> &nbsp;");
+                var videoList = communityData["videos"][video];
+                for (videoData in videoList) {
+                    var videoDetails = videoList[videoData];
+
+                    fetch(videoDetails.file)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const url = URL.createObjectURL(blob);
+
+                        $("#communityVideos").append("<video onclick='viewContent(\"" + videoDetails.creationid + "\")' width='200' autoplay muted controls> <source src=" + url +"> </video> &nbsp;");
+                        
+                        // URL.revokeObjectURL(url);
+                    });
+
+                }
             }
             
-            for (let blog in communityData["blogs"]) {
-                var blogDetails = communityData["blogs"][blog];
-
-                var blogCategory = "";
-                for (let category in blogDetails.category) {
-                    blogCategory += blogDetails.category[category] + " ";
+            for (let readingMaterial in communityData["readingMaterials"]) {
+                var readingMaterialsList = communityData["readingMaterials"][readingMaterial];
+            
+                for (let readingMaterialData in readingMaterialsList) {
+                    var readingMaterialDetails = readingMaterialsList[readingMaterialData];
+            
+                    // var readingMaterialTopics = "";
+                    // for (let topic in readingMaterialDetails.topics) {
+                    //     readingMaterialTopics += readingMaterialDetails.topics[topic] + " ";
+                    // }
+            
+                    var showReadingMaterial = "<div onclick='viewContent(\"" + readingMaterialDetails.contentid + "\")'>" + readingMaterialData + " | " + readingMaterialDetails.topics + "<br>" + readingMaterialDetails.author + " | " + readingMaterialDetails.date + "<br>" + readingMaterialDetails.description + "</div> <br>"
+                    $("#communityReadingMaterials").append(showReadingMaterial);
                 }
-
-                var showBlog = "<div onclick='viewContent(\"" + blogDetails.contentid + "\")'>" + blog + " | " + blogCategory + "<br>" + blogDetails.author + " | " + blogDetails.date + "<br>" + blogDetails.description + "</div> <br>"
-                $("#communityBlogs").append(showBlog);
-            }
+            }            
         }
     });
 
@@ -43,21 +73,88 @@ $(function() {
     });
 
     $("#communityPublish").click(function(){
-        $("#communityModal").removeClass("fade").modal("hide");
-        $("#communityModal").modal("dispose");
+        var username = $("#usernamePlaceholder").text();
+        var title = $("#communityTitle").val();
+        var religion = "Christianity";
+        var topics = JSON.stringify(["sample1", "sample2"]);
+        var description = $("#communityDescription").val();
 
-        $("#communityNoticeHeader").html("Upload Complete");
-        $("#communityNoticeContent").html("Your file was uploaded successfully.");
-        $("#communityNoticeModal").modal();
-        $("#communityNoticeModal").show();
+        if ( $("#communityUpload")[0].files[0] != null){
+            var filedata = $("#communityUpload")[0].files[0];
+            var filename = filedata.name;
+            var filetype = filedata.type;
+            var filesize = filedata.size;
+        } else {
+            var filedata = "";
+            var filename = "";
+            var filetype = "";
+            var filesize = "";
+        }
 
-        setTimeout(function(){
-            $("#communityNoticeHeader").html("");
-            $("#communityNoticeContent").html("");
+        var status = "Published";
+        var date = new Date().toISOString().slice(0, 10);
 
-            $("#communityNoticeModal").removeClass("fade").modal("hide");
-            $("#communityNoticeModal").modal("dispose");
-        }, 1500);
+        var creation = new FormData();
+        creation.append("username", username);
+        creation.append("title", title);
+        creation.append("religion", religion);
+        creation.append("topics", topics);
+        creation.append("description", description);
+        creation.append("filedata", filedata);
+        creation.append("filename", filename);
+        creation.append("filetype", filetype);
+        creation.append("filesize", filesize);
+        creation.append("status", status);
+        creation.append("date", date);
+
+        $.ajax({
+          url: "../../ajax/submitCommunityCreations.ajax.php",
+          method: "POST",
+          data: creation,
+          dataType: "text",
+          processData: false,
+          contentType: false,
+          success: function(data) {
+            $("#communityModal").removeClass("fade").modal("hide");
+            $("#communityModal").modal("dispose");
+    
+            $("#communityNoticeHeader").html("Upload Complete");
+            $("#communityNoticeContent").html("Your file was uploaded successfully.");
+            $("#communityNoticeModal").modal();
+            $("#communityNoticeModal").show();
+    
+            setTimeout(function(){
+                $("#communityNoticeHeader").html("");
+                $("#communityNoticeContent").html("");
+    
+                $("#communityNoticeModal").removeClass("fade").modal("hide");
+                $("#communityNoticeModal").modal("dispose");
+            }, 1500);
+          },
+          error: function() {
+            $("#communityModal").removeClass("fade").modal("hide");
+            $("#communityModal").modal("dispose");
+
+            $("#communityNoticeHeader").html("Upload Failed");
+            $("#communityNoticeContent").html("Something went wrong.");
+            $("#communityNoticeModal").modal();
+            $("#communityNoticeModal").show();
+
+            setTimeout(function(){
+                $("#communityNoticeHeader").html("");
+                $("#communityNoticeContent").html("");
+
+                $("#communityNoticeModal").removeClass("fade").modal("hide");
+                $("#communityNoticeModal").modal("dispose");
+                }, 1500);
+            },
+            complete: function() {
+                $("#communityUpload").val("");
+                $("#communityTitle").val("");
+                $("#communityCategory").val("");
+                $("#communityDescription").val("");
+              }
+        });
     });
 
     $("#submitReportContent").click(function(){
@@ -84,15 +181,22 @@ function viewContent(contentid) {
             for (let fileType in communityData) {
                 for (let content in communityData[fileType]) {
                     for (let contentDetails in communityData[fileType][content]){
-                        if (contentDetails == "contentid" && communityData[fileType][content][contentDetails] == contentid) {
+                        if (contentDetails == "creationid" && communityData[fileType][content][contentDetails] == creationid) {
                             if (fileType == "photos") {
-                                var modalContent = "<div> <img src='../assets/img/community-download.png' onclick='downloadContent(\"" + communityData[fileType][content]["file"] + "\")'>" +
-                                "<img src='../assets/img/community-report.png' onclick='reportContent(\"" + content + "\")'>" + 
-                                "<img src='../assets/img/community-copy.png' id='copyContent' onclick='copyContent(\"" + communityData[fileType][content]["file"] + "\")'>" +
-                                "<img src='../assets/img/community-bookmark.png' id='bookmarkContent' onclick='bookmarkContent(\"" + contentid + "\")'>" + 
-                                "<img src=" + communityData[fileType][content]["file"] +">" + 
-                                "<br>" + content + "<br>" + communityData[fileType][content]["author"] + " | " + communityData[fileType][content]["date"] +
-                                "<br>" + communityData[fileType][content]["description"] + "</div>";
+                                for (let photo in communityData["photos"]) {
+                                    var photoList = communityData["photos"][photo];
+                                    for (photoData in photoList) {
+                                        var photoData = photoList[photoData];
+
+                                        var modalContent = "<div> <img src='../assets/img/community-download.png' onclick='downloadContent(\"" + photoData.file + "\")'>" +
+                                        "<img src='../assets/img/community-report.png' onclick='reportContent(\"" + photoData + "\")'>" + 
+                                        "<img src='../assets/img/community-copy.png' id='copyContent' onclick='copyContent(\"" + photoData.file + "\")'>" +
+                                        "<img src='../assets/img/community-bookmark.png' id='bookmarkContent' onclick='bookmarkContent(\"" + creationid + "\")'>" + 
+                                        "<img src=" + photoData.file +">" + 
+                                        "<br>" + photoData + "<br>" + photoData.accountid + " | " + photoData.date +
+                                        "<br>" + photoData.description + "</div>";
+                                    }
+                                }
                             } else if (fileType == "videos") {
                                 var modalContent = "<div> <img src='../assets/img/community-download.png' onclick='downloadContent(\"" + communityData[fileType][content]["file"] + "\")'>" +
                                 "<img src='../assets/img/community-report.png' onclick='reportContent(\"" + content + "\")'>" + 

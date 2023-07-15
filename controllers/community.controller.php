@@ -7,6 +7,10 @@ class communityController{
 		$answer = (new communityModel)->mdlGetCommunityData();
 	}
 
+	static public function ctrSubmitCreation($data){
+		$answer = (new communityModel)->mdlSubmitCreation($data);
+	}
+
 }
 
 ?>
