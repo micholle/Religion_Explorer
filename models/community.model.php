@@ -1,137 +1,106 @@
 <?php
+require_once "connection.php";
 
 class communityModel{
 	static public function mdlGetCommunityData(){
+		$db = new Connection();
+        $pdo = $db->connect();
+        
+        $stmt = $pdo->prepare("SELECT creationid, accountid, title, religion, topics, description, filename, filetype, filesize, LOAD_FILE(filedata) AS filedata, status, date FROM communitycreations");
+        $stmt->execute();
+        $creations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $creationPhotos = [];
+        $creationVideos = [];
+        $creationReadingMaterials = [];
+    
+        foreach ($creations as $creation) {
+            if (strpos($creation["filetype"], "image") !== false) {
+                $creationPhotos += [
+                    $creation["title"] => [
+                        "creationid" => $creation["creationid"],
+                        "author" => $creation["accountid"],
+                        "file" => "data:" . $creation["filetype"] . ";base64," .  base64_encode($creation["filedata"]),
+                        "religion" => $creation["religion"],
+                        "topics" => $creation["topics"],
+                        "description" => $creation["description"],
+                        "date" => $creation["date"]
+                    ]
+                ];
+            } else if (strpos($creation["filetype"], "video") !== false) {
+                $creationVideos += [
+                    $creation["title"] => [
+                        "creationid" => $creation["creationid"],
+                        "author" => $creation["accountid"],
+                        "file" => "data:" . $creation["filetype"] . ";base64," .  base64_encode($creation["filedata"]),
+                        "religion" => $creation["religion"],
+                        "topics" => $creation["topics"],
+                        "description" => $creation["description"],
+                        "date" => $creation["date"]
+                    ]
+                ];
+            } else if ($creation["filetype"] == ""){
+                $creationReadingMaterials += [
+                    $creation["title"] => [
+                        "creationid" => $creation["creationid"],
+                        "author" => $creation["accountid"],
+                        "religion" => $creation["religion"],
+                        "topics" => $creation["topics"],
+                        "description" => $creation["description"],
+                        "date" => $creation["date"]
+                    ]
+                ];
+            }
+        }
 
         //sample data only (will be updated once the database is ready)
         $communityData = [
-            "photos" => [
-                "Photo 1" => [
-                    "contentid" => "P1",
-                    "file" => "https://placehold.co/200x200",
-                    "category" => ["Buddhism", "Religious Traditions", "Social Issues"],
-                    "description" => "Description 1",
-                    "author" => "Author 1",
-                    "date" => "06-01-2023"
-                ],
-                "Photo 2" => [
-                    "contentid" => "P2",
-                    "file" => "https://placehold.co/200x200",
-                    "category" => ["Christianity", "Historical Context", "Social Issues"],
-                    "description" => "Description 2",
-                    "author" => "Author 2",
-                    "date" => "06-02-2023"
-                ],  
-                "Photo 3" => [
-                    "contentid" => "P3",
-                    "file" => "https://placehold.co/200x200",
-                    "category" => ["Hinduism", "Theology", "Social Issues"],
-                    "description" => "Description 3",
-                    "author" => "Author 3",
-                    "date" => "06-03-2023"
-                ],    
-                "Photo 4" => [
-                    "contentid" => "P4",
-                    "file" => "https://placehold.co/200x200",
-                    "category" => ["Islam", "Religious Practices", "Social Issues"],
-                    "description" => "Description 4",
-                    "author" => "Author 4",
-                    "date" => "06-04-2023"
-                ],    
-                "Photo 5" => [
-                    "contentid" => "P5",
-                    "file" => "https://placehold.co/200x200",
-                    "category" => ["Judaism", "Ethics", "Social Issues"],
-                    "description" => "Description 5",
-                    "author" => "Author 5",
-                    "date" => "06-05-2023"
-                ]  
-            ],
-            "videos" => [
-                "Video 1" => [
-                    "contentid" => "V1",
-                    "file" => "https://joy1.videvo.net/videvo_files/video/free/2016-12/large_watermarked/Binary_numbers_bg_01_Videvo_preview.mp4",
-                    "category" => ["Buddhism", "Religious Traditions", "Social Issues"],
-                    "description" => "Description 1",
-                    "author" => "Author 1",
-                    "date" => "06-01-2023"
-                ],
-                "Video 2" => [
-                    "contentid" => "V2",
-                    "file" => "https://joy1.videvo.net/videvo_files/video/free/2016-12/large_watermarked/Binary_numbers_bg_01_Videvo_preview.mp4",
-                    "category" => ["Christianity", "Historical Context", "Social Issues"],
-                    "description" => "Description 2",
-                    "author" => "Author 2",
-                    "date" => "06-02-2023"
-                ],  
-                "Video 3" => [
-                    "contentid" => "V3",
-                    "file" => "https://joy1.videvo.net/videvo_files/video/free/2016-12/large_watermarked/Binary_numbers_bg_01_Videvo_preview.mp4",
-                    "category" => ["Hinduism", "Theology", "Social Issues"],
-                    "description" => "Description 3",
-                    "author" => "Author 3",
-                    "date" => "06-03-2023"
-                ],    
-                "Video 4" => [
-                    "contentid" => "V4",
-                    "file" => "https://joy1.videvo.net/videvo_files/video/free/2016-12/large_watermarked/Binary_numbers_bg_01_Videvo_preview.mp4",
-                    "category" => ["Islam", "Religious Practices", "Social Issues"],
-                    "description" => "Description 4",
-                    "author" => "Author 4",
-                    "date" => "06-04-2023"
-                ],    
-                "Video 5" => [
-                    "contentid" => "V5",
-                    "file" => "https://joy1.videvo.net/videvo_files/video/free/2016-12/large_watermarked/Binary_numbers_bg_01_Videvo_preview.mp4",
-                    "category" => ["Judaism", "Ethics", "Social Issues"],
-                    "description" => "Description 5",
-                    "author" => "Author 5",
-                    "date" => "06-05-2023"
-                ]  
-            ],
-            "blogs" => [
-                "Blog 1" => [
-                    "contentid" => "B1",
-                    "category" => ["Buddhism", "Religious Traditions", "Social Issues"],
-                    "description" => "Blog Content 1",
-                    "author" => "Author 1",
-                    "date" => "06-01-2023"
-                ],
-                "Blog 2" => [
-                    "contentid" => "B2",
-                    "category" => ["Christianity", "Historical Context", "Social Issues"],
-                    "description" => "Blog Content 2",
-                    "author" => "Author 2",
-                    "date" => "06-02-2023"
-                ],  
-                "Blog 3" => [
-                    "contentid" => "B3",
-                    "category" => ["Hinduism", "Theology", "Social Issues"],
-                    "description" => "Blog Content 3",
-                    "author" => "Author 3",
-                    "date" => "06-03-2023"
-                ],    
-                "Blog 4" => [
-                    "contentid" => "B4",
-                    "category" => ["Islam", "Religious Practices", "Social Issues"],
-                    "description" => "Blog Content 4",
-                    "author" => "Author 4",
-                    "date" => "06-04-2023"
-                ],    
-                "Blog 5" => [
-                    "contentid" => "B5",
-                    "category" => ["Judaism", "Ethics", "Social Issues"],
-                    "description" => "Blog Content 5",
-                    "author" => "Author 5",
-                    "date" => "06-05-2023"
-                ]
-            ]
+            "photos" => [$creationPhotos],
+            "videos" => [$creationVideos],
+            "readingMaterials" => [$creationReadingMaterials]
         ];
 
         $jsonData = json_encode($communityData);
         header('Content-Type: application/json');
         echo $jsonData;
 	}
+
+    static public function mdlSubmitCreation($data){
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        $creationid = "CC" . rand(1111111111, 9999999999);
+
+		try {
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$pdo->beginTransaction();
+		
+			$stmt = $pdo->prepare("INSERT INTO communitycreations(creationid, username, title, religion, topics, description, filename, filetype, filesize, filedata, status, date) VALUES (:creationid, :username, :title, :religion, :topics, :description, :filename, :filetype, :filesize, :filedata, :status, :date)");
+	
+            $stmt->bindParam(":creationid", $creationid, PDO::PARAM_STR);
+            $stmt->bindParam(":username", $data["username"], PDO::PARAM_STR);
+            $stmt->bindParam(":title", $data["title"], PDO::PARAM_STR);
+            $stmt->bindParam(":religion", $data["religion"], PDO::PARAM_STR);
+            $stmt->bindParam(":topics", $data["topics"], PDO::PARAM_STR);
+            $stmt->bindParam(":description", $data["description"], PDO::PARAM_STR);
+            $stmt->bindParam(":filename", $data["filename"], PDO::PARAM_STR);
+            $stmt->bindParam(":filetype", $data["filetype"], PDO::PARAM_STR);
+            $stmt->bindParam(":filesize", $data["filesize"], PDO::PARAM_INT);
+            $stmt->bindParam(":filedata", $data['filedata'], PDO::PARAM_LOB);
+            $stmt->bindParam(":status", $data["status"], PDO::PARAM_STR);
+            $stmt->bindParam(":date", $data["date"], PDO::PARAM_STR);
+            
+			$stmt->execute();
+	
+			$pdo->commit();
+			return "success";
+		} catch (Exception $e) {
+			$pdo->rollBack();
+			return "error";
+		}
+
+		$pdo = null;
+		$stmt = null;
+    }
 
 }
 

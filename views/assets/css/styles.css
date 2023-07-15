@@ -617,7 +617,7 @@ h5 {
 
 /* community creations */
 .communityUpload {
-    display: none;
+    /* display: none; */
 }
 
 .communityUploadArea {

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -15,6 +16,7 @@
     </head>
     <body>
         <div id="communitySidebar"></div>
+        <div id="usernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
         <div class="pageContainer">
             <div class="container mw-100 mh-100">
@@ -27,12 +29,8 @@
                     </div>
                 </div>
             <div>
-                <!-- Community Creations
-                <input type="search" id="communitySearch" name="communitySearch" placeholder="Search">
-            </div> -->
             <div class="row pageContent">
                 <div class="col-12 d-flex justify-content-center align-items-center flex-column createSubmissionsBox">
-                    <!-- <div id="communityScreen"> -->
                     <img src="../assets/img/commcreations.png">
                     <h1>Start Creating Submissions</h1>
                     <p>Drafts expire after 30 days. After that, those drafts are deleted.</p>
@@ -60,7 +58,7 @@
                     <div>
                         <h1>Reading Materials</h1>
                         <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
-                            <div id="communityBlogs"></div>
+                            <div id="communityReadingMaterials"></div>
                             <button id="communityBlogsMore" class="roundedButton">See More</button>
                         </div>
                     </div>
@@ -74,13 +72,12 @@
                 <div class="modal-content">
                     <div class="modal-header border-0 text-center">
                         <h5 class="modal-title w-100">Submit a Creation</h5>
-                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
                     </div>
                     <div class="modal-body">
                         <div class="container">
-                            <form id="communityForm" method="post">
+                            <form id="communityForm" method="post" enctype="multipart/form-data">
                                 <div class="communityUploadArea d-flex justify-content-center align-items-center flex-column">
-                                    <input type="file" class="communityUpload" id="communityUpload" multiple accept="image/*, video/*" onchange="handleFiles(this.files)">
+                                    <input type="file" class="communityUpload" id="communityUpload" multiple accept="image/*, video/*">
                                     <label class="button text-center" for="communityUpload">
                                         <img src="../assets/img/community-upload.png" class="commUploadImg"><br>
                                         <p>Choose a file or drag it here.</p>
@@ -88,7 +85,7 @@
                                 </div>
                                 <div class="row communityUploadDetails">
                                     <div class="col-8 d-flex justify-content-center align-items-center">
-                                        <input id="communityTitle" name="communityTitle" placeholder="Title">
+                                        <input id="communityTitle" name="communityTitle" placeholder="Title" required>
                                     </div>
                                     <div class="col-4 d-flex justify-content-center align-items-center">
                                         <select id="communityCategory" name="communityCategory">
