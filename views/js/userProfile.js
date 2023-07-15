@@ -7,6 +7,19 @@ $(function() {
         }
     });
 
+    const tabs = document.querySelectorAll('.userProfileTabBtn')
+    const all_content = document.querySelectorAll('.userProfileContent')
+
+    tabs.forEach((tab, index)=>{
+        tab.addEventListener('click', (e)=>{
+        tabs.forEach(tab=>{tab.classList.remove('active')})
+        tab.classList.add('active');
+
+        all_content.forEach(content=>{content.classList.remove('active')});
+        all_content[index].classList.add('active');
+        })
+    })
+
     $.ajax({
         url: '../../ajax/createCalendar.ajax.php',
         method: "POST",

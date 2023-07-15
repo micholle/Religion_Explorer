@@ -21,7 +21,7 @@
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
                     <div class="col-4 d-flex justify-content-start align-items-center">
-                        <h1>Library of Resources</h1>
+                        <a href="library.php" class="pageHeaderLink"><h1>Library of Resources</h1></a>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
                         <input type="search" id="librarySearch" name="" placeholder="Search the Library">

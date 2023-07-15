@@ -70,6 +70,22 @@ $(function() {
         $("#communityNoticeModal").modal();
         $("#communityNoticeModal").show();
     });
+
+    document.getElementById("communityPhotosMore").addEventListener("click", function() {
+        window.location.href = "communitySubmissions.php?openTab=communitySubPhotos";
+    });
+
+    document.getElementById("communityVideosMore").addEventListener("click", function() {
+        window.location.href = "communitySubmissions.php?openTab=communitySubVideos";
+    });
+
+    document.getElementById("communityBlogsMore").addEventListener("click", function() {
+        window.location.href = "communitySubmissions.php?openTab=communitySubBlogs";
+    });  
+
+    // document.getElementById("communityPhotosMore").addEventListener("click", function() {
+    //     window.location.href = "communitySubmissions.php?openTab=communityPhotos";
+    // });  
 });
 
 function viewContent(contentid) {  

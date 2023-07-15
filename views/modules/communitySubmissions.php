@@ -19,61 +19,201 @@
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
                     <div class="col-4 d-flex justify-content-start align-items-center">
-                        <h1>Community Creations</h1>
+                        <a href="community.php" class="pageHeaderLink"><h1>Community Creations</h1></a>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
                         <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community">
                     </div>
                 </div>
-            </div>
+            <div>
 
             <div class="row pageContent">
-                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                    <div class="libraryMediaContainer d-flex flex-column">
-                        <div class="row d-flex justify-content-center align-items-center">
-                            <div class="col-2">
-                                <img src="../assets/img/lamb.png">
-                            </div>
-                            <div class="col-10 libraryMediaHeader">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h1>Placeholder Title</h1>
+                <div class="communitySubmissionsTab">
+                    <button class="communitySubmissionsTabBtn" data-tab="communitySubPhotos">Photos</button>
+                    <button class="communitySubmissionsTabBtn" data-tab="communitySubVideos">Videos</button>
+                    <button class="communitySubmissionsTabBtn" data-tab="communitySubBlogs">Reading Materials</button>
+                </div>
+                <div class="communitySubmissionsContentBox col-12 d-flex justify-content-center align-items-center flex-column">
+                    <!--Photos-->
+                    <div class="communitySubmissionsContent" id="communitySubPhotos">
+                        <div id="" class="d-flex flex-column libraryMediaContainer libraryWideContainer">
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="col-12 libraryMediaHeader">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h1>[Placeholder Title]</h1>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 d-flex flex-row">
+                                                    <p>[Placeholder User]</p><p>•<p>[Placeholder Date]</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12 d-flex flex-row">
-                                        <p>Placeholder User</p><p>•</p><p>Placeholder Date</p>
-                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center">
+                                    <img src="../assets/img/placeholder.png">
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">
+                                <div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">
+                                    <img class="libraryActions" src="../assets/img/download.png">
+                                    <img class="libraryActions" src="../assets/img/alert.png" id="reportPhotoSubmission">
+                                    <img class="libraryActions" src="../assets/img/broken-link.png">
+                                </div>
+                                <div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">
+                                    <img class="libraryActions" src="../assets/img/bookmark-white.png">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Placeholder Description.</p>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center align-items-center">
-                                <img src="../assets/img/placeholder.png">
+                    <!--Videos-->
+                    <div class="communitySubmissionsContent" id="communitySubVideos">
+                        <div id="" class="d-flex flex-column libraryMediaContainer libraryWideContainer">
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="col-12 libraryMediaHeader">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h1>[Placeholder Title]</h1>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 d-flex flex-row">
+                                                    <p>[Placeholder User]</p><p>•<p>[Placeholder Date]</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center">
+                                    <img src="../assets/img/placeholder.png">
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">
+                                <div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">
+                                    <img class="libraryActions" src="../assets/img/download.png">
+                                    <img class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">
+                                    <img class="libraryActions" src="../assets/img/broken-link.png">
+                                </div>
+                                <div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">
+                                    <img class="libraryActions" src="../assets/img/bookmark-white.png">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Placeholder Description.</p>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">
-                            <div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">
-                                <img src="../assets/img/download.png">
-                                <img src="../assets/img/alert.png">
-                                <img src="../assets/img/broken-link.png">
+                    <!--Reading Materials-->
+                    <div class="communitySubmissionsContent communitySubmissionsContentVariant" id="communitySubBlogs">
+                        <div id="" class="d-flex flex-column libraryMediaContainer libraryWideContainer">
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="col-12 libraryMediaHeader">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h1>[Placeholder Title]</h1>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 d-flex flex-row">
+                                                    <p>[Placeholder User]</p><p>•<p>[Placeholder Date]</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">
-                                <img src="../assets/img/bookmark-white.png">
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at leo sed justo dignissim viverra. Nulla facilisi. Aliquam efficitur at eros eget interdum. Nulla eget ipsum orci. Praesent varius non lacus ac cursus. Curabitur metus nibh, pellentesque maximus mi non, hendrerit fringilla purus.</p>
+                            <div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">
+                                <div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">
+                                    <img class="libraryActions" src="../assets/img/download.png">
+                                    <img class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">
+                                    <img class="libraryActions" src="../assets/img/broken-link.png">
+                                </div>
+                                <div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">
+                                    <img class="libraryActions" src="../assets/img/bookmark-white.png">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis ut quidem voluptatum quo nobis, aperiam ipsa ipsum fugiat quos, commodi mollitia officia porro unde et sint quae. Tenetur, vel ratione.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="modal fade" id="reportContentModal">
+            <div class="modal-dialog modal-xs modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <div class="container d-flex justify-content-center align-items-center flex-column">
+                            <h5 class="modal-title w-100">Report Content</h5>
+                            <div id="reportContentHeader"></div>
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container">
+                            <form id="reportContentForm" method="post">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="reportDescription">As accurately as you can, please tell us what happened.</p>
+                                        <input type="checkbox" id="privacy violation" name="privacy violation" value="privacy violation">
+                                        <label for="privacy violation">Privacy Violation</label><br>
+                                        <input type="checkbox" id="misinformation" name="misinformation" value="misinformation">
+                                        <label for="misinformation">Misinformation</label><br>
+                                        <input type="checkbox" id="graphic content" name="graphic content" value="graphic content">
+                                        <label for="graphic content">Graphic Content</label><br>
+                                        <input type="checkbox" id="offensive language" name="offensive language" value="offensive language">
+                                        <label for="offensive language">Offensive Language</label><br>
+                                        <input type="checkbox" id="spam" name="spam" value="spam">
+                                        <label for="spam">Spam or Unwanted Content</label><br>
+                                        <input type="checkbox" id="others" name="others" value="others">
+                                        <label for="others">Others, specify:</label><br>
+                                        <input id="othersSpecify" class="inputVariant" name="othersSpecify"><br>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <textarea id="reportContentAdditional" name="reportContentAdditional" placeholder="Give additional context."></textarea><br>
+                                        <button type="button" id="submitReportContent" class="roundedButton">Send</button>
+                                    </div>
+                                </div>
+                            </form>    
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

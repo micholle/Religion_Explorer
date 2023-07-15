@@ -14,6 +14,7 @@
 html {
     scroll-behavior: smooth;
     user-select: none;
+    overflow-x: hidden;
 } 
 
 * {
@@ -725,8 +726,75 @@ h5 {
     background-color: #018744;
 }
 
+.communitySubmissionsTab {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+  
+.communitySubmissionsTab .communitySubmissionsTabBtn {
+    font-size: 20px;
+    font-family: Lexend;
+    color: #3E3E3E;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: solid transparent 3px;
+    outline: none;
+    width: 200px;
+}
+
+.communitySubmissionsTab .communitySubmissionsTabBtn.active {
+    outline: none;
+    font-weight: 600;
+    border-bottom: solid #2CA464 3px;
+    transition: border-bottom-color 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        border-bottom-color: transparent;
+    }
+    to {
+        border-bottom-color: #2CA464;
+    }
+}
+
+.communitySubmissionsTab .communitySubmissionsTabBtn.active {
+    animation: slideIn 0.3s forwards;
+}
+
+.communityViewContentBox {
+    padding: 20px;
+    margin: 0 !important; 
+    padding: 0 !important;
+}
+
+.communitySubmissionsContentBox .communitySubmissionsContent {
+    display: none;
+    animation: moving 0.5s ease;
+}
+
+@keyframes moving {
+    from{transform: translateX(50px); opacity: 0;}
+    to{transform: translateX(0px); opacity: 1;}
+}
+
+.communitySubmissionsContentBox .communitySubmissionsContent.active {
+    display: block;
+}
+
+.communitySubmissionsContentVariant {
+    width: 100%;
+}
+
+/*library*/
+
 .libraryMediaContainer {
-    width: 45%;
+    width: 100%;
     border: solid #D0D0D0 2px;
     border-radius: 25px;
     padding: 50px;
@@ -741,16 +809,13 @@ h5 {
 }
 
 .libraryMediaContainer img {
-    margin: 10px 0;
-}
-
-.libraryMediaContainer img {
-    margin-top: 10px;
+    margin: 7.5px 0;
     width: 100%;
+    border-radius: 15px;
 }
 
 .libraryMediaContainer .libraryMediaHeader p {
-    margin-top: -15px;
+    margin-top: -10px;
     line-height: 20px;
 }
 
@@ -769,6 +834,7 @@ h5 {
 
 .libraryMediaContainer .libraryMediaInteractions img {
     width: 25px;
+    border-radius: 0px;
 }
 
 .libraryMediaInteractions .mediaInteractionsLeft img {
@@ -1672,12 +1738,14 @@ p {
     padding: 10px;
     cursor: pointer;
     border-bottom: solid transparent 3px;
+    outline: none;
 }
 
 .userProfileTab .userProfileTabBtn.active {
     font-weight: 600;
     border-bottom: solid #2CA464 3px;
     transition: border-bottom-color 0.3s ease-in-out;
+    outline: none;
 }
 
 @keyframes slideIn {
@@ -1711,7 +1779,7 @@ p {
     display: block;
 }
 
-.userProfileContentBox .userProfileContent h2{
+.userProfileContentBox .userProfileContent h2 {
     margin-bottom: 10px;
 }
 
@@ -1741,6 +1809,10 @@ p {
 .pageHeader h1 {
     font-size: 26px;
     font-weight: 600;
+}
+
+.pageHeader .pageHeaderLink {
+    text-decoration: none;
 }
 
 .pageHeader input {
@@ -1965,6 +2037,7 @@ p {
 .libraryVideo {
     width: 100%;
     border-radius: 15px;
+    margin: 7.5px;
 }
 
 .readingMaterialBg {

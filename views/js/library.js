@@ -35,7 +35,7 @@ $(function() {
 
                     '<div class="row">' +
                         '<div class="col-12 d-flex justify-content-center align-items-center">' +
-                            '<img style="border-radius:15px" src="' + photoDetails.file +'">' +
+                            '<img src="' + photoDetails.file +'">' +
                         '</div>' +
                     '</div>' +
 

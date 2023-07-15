@@ -6,62 +6,142 @@
         <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
 
-        <script type="text/javascript" src="../js/community.js"></script>
-        <script type="text/javascript" src="../js/communitySubmissions.js"></script>
+        <script type="text/javascript" src="../js/communityView.js"></script>
         <script type="text/javascript" src="../js/script.js"></script>
 
         <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
         <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
     </head>
     <body>
-        <div id="communitySidebar"></div>
+        <div id="communityViewSidebar"></div>
 
         <div class="pageContainer">
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
                     <div class="col-4 d-flex justify-content-start align-items-center">
-                        <a href="community.php" class="pageHeaderLink"><h1>Community Creations</h1></a>
+                        <h1>Community Creations</h1>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
                         <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community">
                     </div>
                 </div>
             <div>
-                <!-- Community Creations
-                <input type="search" id="communitySearch" name="communitySearch" placeholder="Search">
-            </div> -->
+
             <div class="row pageContent">
-                <div class="col-12 d-flex justify-content-center align-items-center flex-column createSubmissionsBox">
-                    <!-- <div id="communityScreen"> -->
-                    <img src="../assets/img/commcreations.png">
-                    <h1>Start Creating Submissions</h1>
-                    <p>Drafts expire after 30 days. After that, those drafts are deleted.</p>
-                    <button id="communityCreate" class="roundedButton">Create New</button>
+                <div class="communityViewTab">
+                    <button class="communityViewTabBtn">Photos</button>
+                    <button class="communityViewTabBtn">Videos</button>
+                    <button class="communityViewTabBtn">Reading Materials</button>
                 </div>
-                <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
-                    <div>
-                        <h1>Photos</h1>
-                        <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
-                            <div id="communityPhotos"></div>
-                            <button id="communityPhotosMore" class="roundedButton">See More</button>
+                <div class="communityViewContentBox col-12 d-flex justify-content-center align-items-center flex-column">
+                    <!--Photos-->
+                    <div class="communityViewContent">
+                        <div id="" class="d-flex flex-column libraryMediaContainer libraryWideContainer">
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="col-12 libraryMediaHeader">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h1>[Placeholder Title]</h1>
+                                            <p>[Placeholder User]</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center">
+                                    <img src="../assets/img/placeholder.png">
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">
+                                <div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">
+                                    <img class="libraryActions" src="../assets/img/download.png">
+                                    <img class="libraryActions" src="../assets/img/alert.png">
+                                    <img class="libraryActions" src="../assets/img/broken-link.png">
+                                </div>
+                                <div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">
+                                    <img class="libraryActions" src="../assets/img/bookmark-white.png">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Placeholder Description.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
-                    <div>
-                        <h1>Videos</h1>
-                        <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
-                            <div id="communityVideos"></div>
-                            <button id="communityVideosMore" class="roundedButton">See More</button>
+
+                    <!--Videos-->
+                    <div class="communityViewContent">
+                        <div id="" class="d-flex flex-column libraryMediaContainer libraryWideContainer">
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="col-12 libraryMediaHeader">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h1>[Placeholder Title]</h1>
+                                            <p>[Placeholder User]</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center">
+                                    <img src="../assets/img/placeholder.png">
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">
+                                <div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">
+                                    <img class="libraryActions" src="../assets/img/download.png">
+                                    <img class="libraryActions" src="../assets/img/alert.png">
+                                    <img class="libraryActions" src="../assets/img/broken-link.png">
+                                </div>
+                                <div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">
+                                    <img class="libraryActions" src="../assets/img/bookmark-white.png">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Placeholder Description.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
-                    <div>
-                        <h1>Reading Materials</h1>
-                        <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
-                            <div id="communityBlogs"></div>
-                            <button id="communityBlogsMore" class="roundedButton">See More</button>
+
+                    <!--Reading Materials-->
+                    <div class="communityViewContent communityViewContentVariant">
+                        <div id="" class="d-flex flex-column libraryMediaContainer libraryWideContainer">
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="col-12 libraryMediaHeader">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h1>[Placeholder Title]</h1>
+                                            <p>[Placeholder User]</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">
+                                <div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">
+                                    <img class="libraryActions" src="../assets/img/download.png">
+                                    <img class="libraryActions" src="../assets/img/alert.png">
+                                    <img class="libraryActions" src="../assets/img/broken-link.png">
+                                </div>
+                                <div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">
+                                    <img class="libraryActions" src="../assets/img/bookmark-white.png">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis ut quidem voluptatum quo nobis, aperiam ipsa ipsum fugiat quos, commodi mollitia officia porro unde et sint quae. Tenetur, vel ratione.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -124,7 +204,7 @@
             </div>
         </div>
 
-        <!-- <div class="modal fade" id="communityDisplayModal">
+        <div class="modal fade" id="communityDisplayModal">
             <div class="modal-dialog modal-xs modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -133,7 +213,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <div class="modal fade" id="reportContentModal">
             <div class="modal-dialog modal-xs modal-dialog-centered">
@@ -143,8 +223,8 @@
                             <h5 class="modal-title w-100">Report Content</h5>
                             <div id="reportContentHeader"></div>
                         </div>
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
                     </div>
-
                     <div class="modal-body">
                         <div class="container">
                             <form id="reportContentForm" method="post">
