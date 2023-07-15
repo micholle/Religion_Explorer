@@ -17,7 +17,7 @@ foreach ($topics as $topic) {
   $html .= '<p class="upvotes">' . $topic['upvotes'] . '</p>';
   $html .= '<img src="../assets/img/discussionForum/downvote.png">';
   $html .= '<img src="../assets/img/discussionForum/comments.png" class="commentIcon">';
-  $html .= '<p>0</p>';
+  $html .= '<p>' . $topic['commentCount'] . '</p>';
   $html .= '</div>';
   $html .= '<div class="forumContent">';
   $html .= '<h1>' . $topic['topicTitle'] . '</h1>';
