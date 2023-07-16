@@ -171,6 +171,51 @@ private function ctrUpdateVoteCountForPost($postId, $voteAction, $accountId, $mo
         return true; // Vote count updated successfully
     }
 
+    public function ctrUpdateVoteCountForTopic($topicId, $voteAction) {
+      $modelDiscussion = new ModelDiscussion();
+      $accountId = $_SESSION['accountid'];
+      $currentVote = $modelDiscussion->mdlGetTopicVoteByUser($topicId, $accountId); // check
+  
+      if ($currentVote === 'upvote') {
+          if ($voteAction === 'upvote') {
+              // Remove the upvote
+              $modelDiscussion->mdlRemoveTopicUpvote($topicId, $accountId); // check
+              $modelDiscussion->mdlUpdateTopicUpvotes($topicId, -1); // Decrease upvote count
+          } elseif ($voteAction === 'downvote') {
+              // Change the upvote to a downvote
+              $modelDiscussion->mdlRemoveTopicUpvote($topicId, $accountId); // check
+              $modelDiscussion->mdlAddTopicDownvote($topicId, $accountId); // check
+              $modelDiscussion->mdlUpdateTopicUpvotes($topicId, -1); // Decrease upvote count
+              $modelDiscussion->mdlUpdateTopicDownvotes($topicId, 1); // Increase downvote count
+          }
+      } elseif ($currentVote === 'downvote') {
+          if ($voteAction === 'upvote') {
+              // Change the downvote to an upvote
+              $modelDiscussion->mdlRemoveTopicDownvote($topicId, $accountId);
+              $modelDiscussion->mdlAddTopicUpvote($topicId, $accountId); // check
+              $modelDiscussion->mdlUpdateTopicUpvotes($topicId, 1); // Increase upvote count
+              $modelDiscussion->mdlUpdateTopicDownvotes($topicId, -1); // Decrease downvote count
+          } elseif ($voteAction === 'downvote') {
+              // Remove the downvote
+              $modelDiscussion->mdlRemoveTopicDownvote($topicId, $accountId);
+              $modelDiscussion->mdlUpdateTopicDownvotes($topicId, -1); // Decrease downvote count
+          }
+      } else {
+          if ($voteAction === 'upvote') {
+              // Add an upvote
+              $modelDiscussion->mdlAddTopicUpvote($topicId, $accountId); // check
+              $modelDiscussion->mdlUpdateTopicUpvotes($topicId, 1); // Increase upvote count
+          } elseif ($voteAction === 'downvote') {
+              // Add a downvote
+              $modelDiscussion->mdlAddTopicDownvote($topicId, $accountId); // check
+              $modelDiscussion->mdlUpdateTopicDownvotes($topicId, 1); // Increase downvote count
+          }
+      }
+  
+      return true; // Vote count updated successfully
+  }
+  
+
 
     public function ctrGetPostVoteByUser($postId, $accountId) {
       $model = new ModelDiscussion();
@@ -180,5 +225,10 @@ private function ctrUpdateVoteCountForPost($postId, $voteAction, $accountId, $mo
     public function ctrGetReplyVoteByUser($replyId, $accountId) {
       $model = new ModelDiscussion();
       return $model->mdlGetReplyVoteByUser($replyId, $accountId);
+    }
+
+    public function ctrGetTopicVoteByUser($topicId, $accountId) {
+      $model = new ModelDiscussion();
+      return $model->mdlGetTopicVoteByUser($topicId, $accountId);
     }
 }

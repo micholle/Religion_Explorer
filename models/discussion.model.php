@@ -734,5 +734,181 @@ class ModelDiscussion {
             $stmt = null;
         }
     }
+
+    //topics vote
+
+    public function mdlAddTopicUpvote($topicId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $stmt = $pdo->prepare("INSERT INTO topic_votes (topicId, accountid, voteType) VALUES (:topicId, :accountId, 'upvote')");
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return true; // Upvote added successfully
+        } catch (Exception $e) {
+            return false; // Error occurred while adding the upvote
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlAddTopicDownvote($topicId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $stmt = $pdo->prepare("INSERT INTO topic_votes (topicId, accountid, voteType) VALUES (:topicId, :accountId, 'downvote')");
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return true; // Downvote added successfully
+        } catch (Exception $e) {
+            return false; // Error occurred while adding the downvote
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlRemoveTopicUpvote($topicId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $stmt = $pdo->prepare("DELETE FROM topic_votes WHERE topicId = :topicId AND accountid = :accountId");
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return true; // Vote removed successfully
+        } catch (Exception $e) {
+            return false; // Error occurred while removing the vote
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlRemoveTopicDownvote($topicId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $stmt = $pdo->prepare("DELETE FROM topic_votes WHERE topicId = :topicId AND accountid = :accountId");
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return true; // Vote removed successfully
+        } catch (Exception $e) {
+            return false; // Error occurred while removing the vote
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlGetTopicVoteByUser($topicId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $stmt = $pdo->prepare("SELECT voteType FROM topic_votes WHERE topicId = :topicId AND accountid = :accountId");
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result) {
+                return $result['voteType'];
+            } else {
+                return ''; // User has not voted on the topic
+            }
+        } catch (Exception $e) {
+            return ''; // Error occurred while fetching the vote
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlGetTopicDownvoteCount($topicId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM topic_votes WHERE topicId = :topicId AND voteType = 'downvote'");
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return $stmt->fetchColumn();
+        } catch (Exception $e) {
+            return 0;
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlGetTopicUpvoteCount($topicId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM topic_votes WHERE topicId = :topicId AND voteType = 'upvote'");
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return $stmt->fetchColumn();
+        } catch (Exception $e) {
+            return 0;
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlUpdateTopicDownvotes($topicId, $value) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("UPDATE topics SET downvotes = downvotes + :value WHERE topicId = :topicId");
+            $stmt->bindParam(":value", $value, PDO::PARAM_INT);
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return true; // Downvotes updated successfully
+        } catch (Exception $e) {
+            return "Error occurred while updating the downvotes: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlUpdateTopicUpvotes($topicId, $value) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $stmt = $pdo->prepare("UPDATE topics SET upvotes = upvotes + :value WHERE topicId = :topicId");
+            $stmt->bindParam(":value", $value, PDO::PARAM_INT);
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return true; // Upvotes updated successfully
+        } catch (Exception $e) {
+            return "Error occurred while updating the upvotes: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
     
 }

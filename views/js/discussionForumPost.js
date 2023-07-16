@@ -371,8 +371,6 @@ $(function() {
         } else if (isDownvote) {
             voteAction = 'downvote';
         }
-
-        alert(voteAction + " " + id + " " + type);
     
         // Make an AJAX request to update the vote count
         updateVoteCount(type, id, voteAction, function(response) {
