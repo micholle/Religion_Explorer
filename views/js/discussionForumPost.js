@@ -140,6 +140,7 @@ $(function() {
                 // Call the initializeReplyButtons function after loading the AJAX response
                 initializeReplyButtons();
                 attachDeleteButtonListeners();
+                initializeEditButtons();
             },
             error: function(xhr, status, error) {
                 console.log(xhr.responseText);
@@ -296,6 +297,59 @@ $(function() {
             error: function(xhr, status, error) {
                 // Handle error
                 console.error(error);
+            }
+        });
+    }
+
+    //edit post or reply
+
+    // ...
+
+    function initializeEditButtons() {
+        // ...
+        // Edit post or reply
+        $(document).off('click', '.editButton').on('click', '.editButton', function() {
+            const targetElement = $(this);
+            const type = targetElement.closest('.forumPostViewComments').hasClass('forumPostViewCommentReply') ? 'reply' : 'post';
+            const id = $(this).attr('value');
+            const contentElement = targetElement.closest('.forumPostViewComments').find('.contentEditable');
+            
+            if (contentElement.attr('contenteditable') === 'false') {
+                contentElement.attr('contenteditable', 'true');
+                targetElement.text('Save');
+            } else {
+                contentElement.attr('contenteditable', 'false');
+                targetElement.text('Edit');
+                
+                const updatedContent = contentElement.text().trim();
+                
+                // Make an AJAX request to update the content
+                updateContent(type, id, updatedContent);
+                alert(id);
+            }
+        });
+
+    }
+
+    // ...
+
+    function updateContent(type, id, content) {
+        $.ajax({
+            url: "../../ajax/discussionUpdate.ajax.php",
+            method: "POST",
+            data: { type: type, id: id, content: content },
+            success: function(response) {
+                if (response === "success") {
+                    // Content updated successfully
+                    alert("Content updated successfully");
+                } else {
+                    // Error occurred while updating the content
+                    alert("Error occurred while updating the content");
+                }
+            },
+            error: function() {
+                // AJAX request failed
+                alert("Error occurred while making the AJAX request.");
             }
         });
     }

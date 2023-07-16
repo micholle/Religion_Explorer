@@ -357,6 +357,43 @@ class ModelDiscussion {
             $stmt = null;
         }
     }
+
+    public function mdlUpdatePost($postId, $updatedContent) {
+        $db = new Connection();
+        $pdo = $db->connect();
     
+        try {
+            $stmt = $pdo->prepare("UPDATE posts SET postContent = :updatedContent WHERE postId = :postId");
+            $stmt->bindParam(":updatedContent", $updatedContent, PDO::PARAM_STR);
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return true; // Post updated successfully
+        } catch (Exception $e) {
+            return false; // Error occurred while updating the post
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlUpdateReply($replyId, $updatedContent) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("UPDATE reply SET replyContent = :updatedContent WHERE replyId = :replyId");
+            $stmt->bindParam(":updatedContent", $updatedContent, PDO::PARAM_STR);
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return true; // Reply updated successfully
+        } catch (Exception $e) {
+            return false; // Error occurred while updating the reply
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
     
 }

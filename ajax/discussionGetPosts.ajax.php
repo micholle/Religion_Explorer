@@ -19,7 +19,7 @@ foreach ($posts as $post) {
     $html .= '        </div>';
     $html .= '      </div>';
     $html .= '      <div class="forumPostViewContentBox">';
-    $html .= '        <p>' . $post['postContent'] . '</p>';
+    $html .= '        <p class="contentEditable" contenteditable="false">' . $post['postContent'] . '</p>';
     $html .= '        <div class="col-12 d-flex flex-row forumPostViewContentInt">';
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
     $html .= '            <img src="../assets/img/discussionForum/upvote.png">';
@@ -31,10 +31,10 @@ foreach ($posts as $post) {
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainComment" onclick="initializeReplyButtons(' . $post['postId'] . ')" value="' . $post['postId'] . '">Reply</p>';
     $html .= '          </div>';
     if ($post['accountid'] === $_SESSION['accountid']) {
-    $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
-    $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
-    $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote" value="' . $post['postId'] . '">Edit</p>';
-    $html .= '          </div>';
+        $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
+        $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
+        $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote editButton" value="' . $post['postId'] . '">Edit</p>';
+        $html .= '          </div>';
     }
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
     $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
@@ -52,7 +52,6 @@ foreach ($posts as $post) {
     
     $html .= '        </div>';
     $html .= '      </div>';
-    
     $html .= '    </div>';
     $html .= '  </div>';
     $html .= '</div>';
@@ -70,7 +69,7 @@ foreach ($posts as $post) {
         $html .= '        </div>';
         $html .= '      </div>';
         $html .= '      <div class="forumPostViewContentBox">';
-        $html .= '        <p>' . $reply['replyContent'] . '</p>';
+        $html .= '        <p class="contentEditable" contenteditable="false">' . $reply['replyContent'] . '</p>';
         $html .= '        <div class="col-12 d-flex flex-row forumPostViewContentInt">';
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
         $html .= '            <img src="../assets/img/discussionForum/upvote.png">';
@@ -82,10 +81,10 @@ foreach ($posts as $post) {
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainComment" onclick="initializeReplyButtons(' . $post['postId'] . ')" value="' . $post['postId'] . '">Reply</p>';
         $html .= '          </div>';
         if ($reply['accountid'] === $_SESSION['accountid']) {
-        $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
-        $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
-        $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote" value="' . $reply['replyId'] . '">Edit</p>';
-        $html .= '          </div>';
+            $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
+            $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
+            $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote editButton" value="' . $reply['replyId'] . '">Edit</p>';
+            $html .= '          </div>';
         }
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
         $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
@@ -102,7 +101,6 @@ foreach ($posts as $post) {
         
         $html .= '        </div>';
         $html .= '      </div>';
-    
         $html .= '    </div>';
         $html .= '  </div>';
         $html .= '</div>'; // End of reply container

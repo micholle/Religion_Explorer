@@ -59,7 +59,16 @@ class ControllerDiscussion {
   public function ctrUpdateTopic($topicId, $updatedTitle, $updatedContent) {
     $result = (new ModelDiscussion)->mdlUpdateTopic($topicId, $updatedTitle, $updatedContent);
     return $result;
-}
+  }
 
+  public function ctrUpdatePost($postId, $updatedContent) {
+    $result = (new ModelDiscussion)->mdlUpdatePost($postId, $updatedContent);
+    return $result;
+  }
+
+  public function ctrUpdateReply($replyId, $updatedContent) {
+    $result = (new ModelDiscussion)->mdlUpdateReply($replyId, $updatedContent);
+    return $result;
+  }
 
 }
