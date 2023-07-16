@@ -141,17 +141,6 @@
                 </div>
 
                 <div class="col-6">
-                    <div class="row achBlock">
-                        <div class="col-12">
-                            <div class="row no-gutters justify-content-start">
-                                <h3>Achievements</h3>
-                            </div>
-                            <div class="row no-gutters justify-content-center achContainer">
-                                Placeholder
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="row settingsBlock">
                         <div class="col-12">
                             <div class="row no-gutters justify-content-start">

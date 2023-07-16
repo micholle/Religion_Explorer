@@ -1,5 +1,6 @@
 <?php
 require_once "../../models/discussionForumPost.model.php";
+session_start();
 ?>
 
 
@@ -48,6 +49,7 @@ require_once "../../models/discussionForumPost.model.php";
                                 </div>
                                 <div class="col-12">
                                     <p><?php echo $topicContent; ?></p>
+                                    <input type="hidden" class="topicId" id="topicId" value="<?php echo $topicId; ?>">
                                 </div>
                                 <div class="col-12 d-flex flex-row">
                                     <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
@@ -57,7 +59,7 @@ require_once "../../models/discussionForumPost.model.php";
                                     </div>
                                     <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
                                         <img src="../assets/img/discussionForum/comments.png" class="commentIcon">
-                                        <p class="forumPostViewMainCount forumPostViewMainComment">0</p>
+                                        <p class="forumPostViewMainCount forumPostViewMainComment"><?php echo $commentCount; ?></p>
                                     </div>
                                     <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
                                         <img src="../assets/img/discussionForum/edit.png" class="commentIcon">
@@ -67,11 +69,14 @@ require_once "../../models/discussionForumPost.model.php";
                                         <img src="../assets/img/discussionForum/report.png" class="commentIcon">
                                         <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>
                                     </div>
-                                    <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="forumDeletePost">
-                                        <img src="../assets/img/discussionForum/delete.png" class="commentIcon">
-                                        <p class="forumPostViewMainCount forumPostViewMainDelete">Delete</p>
-                                        <input type="hidden" class="topicId" id="topicId" value="<?php echo $topicId; ?>">
-                                    </div>
+                                    <?php 
+                                    if ($accountid === $_SESSION['accountid']) {
+                                        echo '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="forumDeletePost">';
+                                        echo     '<img src="../assets/img/discussionForum/delete.png" class="commentIcon">';
+                                        echo     '<p class="forumPostViewMainCount forumPostViewMainDelete" value="'.$topicId.'">Delete</p>';
+                                        echo '</div>';
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -114,42 +119,19 @@ require_once "../../models/discussionForumPost.model.php";
                 </div>
             </div>
 
-            <div class="modal fade" id="confirmDeleteModalPost">
+            <div class="modal fade" id="confirmDeleteModal">
                 <div class="modal-dialog modal-xs modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-body">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="modal-title w-100">Delete Post?</h5>
+                                        <h5 class="modal-title w-100">Delete Content?</h5>
                                         <p>Are you sure you want this gone?</p>
                                         <div class="row">
                                             <div class="col-12 d-flex flex-row">
                                                 <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
-                                                <button type="button" class="roundedButton">Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                
-            <div class="modal fade" id="confirmDeleteModalComment">
-                <div class="modal-dialog modal-xs modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="modal-title w-100">Delete Comment?</h5>
-                                        <p>Are you sure you want this gone?</p>
-                                        <div class="row">
-                                            <div class="col-12 d-flex flex-row">
-                                                <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
-                                                <button type="button" class="roundedButton">Delete</button>
+                                                <button type="button" class="roundedButton" id="confirmDelete">Delete</button>
                                             </div>
                                         </div>
                                     </div>

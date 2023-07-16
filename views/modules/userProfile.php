@@ -73,7 +73,6 @@
                     <a href="userProfileEditProfile.php"><button class="roundedButton">Edit Profile</button></a>
                 </div>
             </div>
-    
 
             <div class="userProfileTab">
                 <button class="userProfileTabBtn active">Overview</button>
@@ -85,25 +84,70 @@
                 <button class="userProfileTabBtn">Achievements</button>
             </div>
             <div class="userProfileContentBox">
-                <div class="userProfileContent">
+                <div class="userProfileContent active">
                     <div class="userPostContainer">
-                        <h1>Holy Week in the Philippines</h1><h2>by ReligionExplorer_User123 • May 12, 2023 • 8:43 P.M.</h2>
-                        <p>Good day, everyone! Are there any Filipinos here who can share about why that week in particular is so significant in the country? I’m a non-practising Christian who is interested in learning more about religion again. Thanks in advance to those who will reply!<p>
+                        <h1>[Placeholder Display]</h1>
                     </div>
                 </div>
 
                 <div class="userProfileContent">
-                    <h2>Posts</h2>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend ligula nisl, ac aliquam felis faucibus id. Aenean vel lacinia massa.    
-                    </p>
+                    <div class="forumPostContainer">
+                        <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">
+                            <img src="../assets/img/discussionForum/upvote.png">
+                            <p class="upvotes">0</p>
+                            <img src="../assets/img/discussionForum/downvote.png">
+                            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">
+                            <p>0</p>
+                        </div>
+                        <div class="forumContent">
+                            <h1>[Placeholder Title]</h1>
+                            <div class="row">
+                                <div class="col-12 d-flex flex-row">
+                                    <h2>[Placeholder User]</h2><h2>•</h2><h2>[Placeholder Date]</h2>
+                                </div>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae!</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="userProfileContent">
-                    <h2>Comments</h2>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend ligula nisl, ac aliquam felis faucibus id. Aenean vel lacinia massa.    
-                    </p>
+                    <div class="forumPostContainer">
+                        <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">
+                            <img src="../assets/img/discussionForum/upvote.png">
+                            <p class="upvotes">0</p>
+                            <img src="../assets/img/discussionForum/downvote.png">
+                            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">
+                            <p>0</p>
+                        </div>
+                        <div class="forumContentContainer">
+                            <div class="forumContent">
+                                <h1>[Placeholder Title]</h1>
+                                <div class="row">
+                                    <div class="col-12 d-flex flex-row">
+                                        <h2>[Placeholder User]</h2><h2>•</h2><h2>[Placeholder Date]</h2>
+                                    </div>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae!</p>
+                            </div>
+                            <div class="forumPostContainer">
+                                <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">
+                                    <img src="../assets/img/discussionForum/upvote.png">
+                                    <p class="upvotes">0</p>
+                                    <img src="../assets/img/discussionForum/downvote.png">
+                                </div>
+                                <div class="forumContent">
+                                    <h1>[Placeholder Title]</h1>
+                                    <div class="row">
+                                        <div class="col-12 d-flex flex-row">
+                                            <h2>[Placeholder User]</h2><h2>•</h2><h2>[Placeholder Date]</h2>
+                                        </div>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="userProfileContent">
@@ -114,17 +158,46 @@
                 <div class="userProfileContent" id="userProfileCalendar"></div>
 
                 <div class="userProfileContent">
-                    <h2>Statistics</h2>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend ligula nisl, ac aliquam felis faucibus id. Aenean vel lacinia massa.    
-                    </p>
+                    <div class="container mw-100 mh-100">
+                        <div class="row userProfileStatsContainer no-gutters">
+                            <div class="col-8">
+                                <div class="userProfileStatsMain">
+                                    <div class="userProfileStatsHeader">
+                                        <div class="row justify-content-center align-items-start">
+                                            <div class="col-6 d-flex justify-content-start">
+                                                <h1>[Date Range]</h1>
+                                            </div>
+                                            <div class="col-6 d-flex justify-content-end no-gutters">
+                                                <select id="" class="">
+                                                    <option value="week">Last 7 Days</option>
+                                                    <option value="month">Last Month</option>
+                                                    <option value="year">Last Year</option>
+                                                    <option value="year">All Time</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="userProfileStatsMain">
+                                <div class="userProfileStatsHeader">
+                                        <h1>Overview</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="userProfileContent">
-                    <h2>Achievements</h2>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend ligula nisl, ac aliquam felis faucibus id. Aenean vel lacinia massa.    
-                    </p>
+                    <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column">
+                            <img src="../assets/img/placeholder-medal.png">
+                            <h1>[Achievement Title]</h2>
+                            <p>[Achievement Description]</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
