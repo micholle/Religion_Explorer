@@ -61,10 +61,14 @@ session_start();
                                         <img src="../assets/img/discussionForum/comments.png" class="commentIcon">
                                         <p class="forumPostViewMainCount forumPostViewMainComment"><?php echo $commentCount; ?></p>
                                     </div>
-                                    <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
-                                        <img src="../assets/img/discussionForum/edit.png" class="commentIcon">
-                                        <p class="forumPostViewMainCount forumPostViewMainVote">Edit</p>
-                                    </div>
+                                    <?php 
+                                    if ($accountid === $_SESSION['accountid']) {
+                                        echo '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
+                                        echo    '<img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
+                                        echo    '<p class="forumPostViewMainCount forumPostViewMainVote" value="'.$topicId.'">Edit</p>';
+                                        echo '</div>';
+                                    }
+                                    ?>
                                     <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
                                         <img src="../assets/img/discussionForum/report.png" class="commentIcon">
                                         <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>

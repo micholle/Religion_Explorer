@@ -30,10 +30,12 @@ foreach ($posts as $post) {
     $html .= '            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">';
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainComment" onclick="initializeReplyButtons(' . $post['postId'] . ')" value="' . $post['postId'] . '">Reply</p>';
     $html .= '          </div>';
+    if ($post['accountid'] === $_SESSION['accountid']) {
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
     $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
-    $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">Edit</p>';
+    $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote" value="' . $post['postId'] . '">Edit</p>';
     $html .= '          </div>';
+    }
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
     $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
@@ -79,10 +81,12 @@ foreach ($posts as $post) {
         $html .= '            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainComment" onclick="initializeReplyButtons(' . $post['postId'] . ')" value="' . $post['postId'] . '">Reply</p>';
         $html .= '          </div>';
+        if ($reply['accountid'] === $_SESSION['accountid']) {
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
         $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
-        $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">Edit</p>';
+        $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote" value="' . $reply['replyId'] . '">Edit</p>';
         $html .= '          </div>';
+        }
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
         $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
