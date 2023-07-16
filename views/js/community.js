@@ -21,7 +21,7 @@ $(function() {
                 for (photoData in photoList) {
                     var photoDetails = photoList[photoData];
                     
-                    $("#communityPhotos").append("<img class='communityFile' onclick='viewContent(\"" + photoDetails.creationid + "\")' src='" + photoDetails.filedata +"'>");
+                    $("#communityPhotos").append("<div><img class='communityFile' onclick='viewContent(\"" + photoDetails.creationid + "\")' src='" + photoDetails.filedata +"'></div>");
 
                     photosCounter++;
 
@@ -36,7 +36,7 @@ $(function() {
                 for (videoData in videoList) {
                     var videoDetails = videoList[videoData];
 
-                    $("#communityVideos").append("<video class='communityFile' onclick='viewContent(\"" + videoDetails.creationid + "\")' autoplay muted controls> <source src='" + videoDetails.filedata +"'> </video>");
+                    $("#communityVideos").append("<div><video class='communityFile' onclick='viewContent(\"" + videoDetails.creationid + "\")' autoplay muted controls> <source src='" + videoDetails.filedata +"'> </video></div>");
 
                     videosCounter++
 
@@ -113,7 +113,9 @@ $(function() {
           dataType: "text",
           processData: false,
           contentType: false,
-          success: function(data) {            
+          success: function(data) {
+            alert(data);   
+
             $("#communityModal").removeClass("fade").modal("hide");
             $("#communityModal").modal("dispose");
     
@@ -186,51 +188,4 @@ $(function() {
 
 function viewContent(contentid) {
     //redirect to community creations submission page and filter to only show file with matching content id
-}
-
-function downloadContent(file) {
-    fetch(file)
-    .then(response => response.blob())
-    .then(blob => {
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = "image.jpg";
-      link.style.display = "none";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    });
-}
-
-function reportContent(title) {
-    $("#reportContentHeader").html("");
-    $("#communityDisplayModal").removeClass("fade").modal("hide");
-    $("#communityDisplayModal").modal("dispose");
-
-    $("#reportContentHeader").html("<br>" + title);
-    $("#reportContentModal").modal();
-}
-
-function copyContent(file) {
-    navigator.clipboard.writeText(file);
-    $("#copyContent").attr("src", "../assets/img/check.png");
-    $("#copyContent").attr("disabled", true);
-
-    setTimeout(function(){
-        $("#copyContent").attr("src", "../assets/img/community-copy.png");
-        $("#copyContent").attr("disabled", false);
-
-    }, 3000);
-}
-
-function bookmarkContent(contentid) {
-    if ($("#bookmarkContent").attr("src") == "../assets/img/community-bookmark.png") {
-        // add content to user profile bookmarks
-        $("#bookmarkContent").attr("src", "../assets/img/community-bookmarked.png");
-    } else {
-        // remove content from user profile bookmarks
-        $("#bookmarkContent").attr("src", "../assets/img/community-bookmark.png");
-    }
 }
