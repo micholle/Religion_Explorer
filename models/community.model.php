@@ -27,32 +27,6 @@ class communityModel{
                     ]
                 ];
 
-                // $binaryData = $creation["filedata"];
-                // $filePath = "../views/assets/data/img/" . $creation["filename"];
-                // file_put_contents($filePath, $binaryData);
-
-                // $binaryData = file_get_contents($filePath);
-                // $image = imagecreatefromstring($binaryData);
-                
-                // if ($image !== false) {
-                //     $outputImagePath = "../views/assets/data/img/" . $creation["filename"];
-                //     imagejpeg($image, $outputImagePath);
-                
-                //     $creationPhotos += [
-                //         $creation["title"] => [
-                //             "creationid" => $creation["creationid"],
-                //             "author" => $creation["accountid"],
-                //             "filename" => $creation["filename"],
-                //             "religion" => $creation["religion"],
-                //             "topics" => $creation["topics"],
-                //             "description" => $creation["description"],
-                //             "date" => $creation["date"]
-                //         ]
-                //     ];
-                    
-                // }
-
-                // imagedestroy($image);
             } else if (strpos($creation["filetype"], "video") !== false) {
                 $creationVideos += [
                     $creation["title"] => [
@@ -65,32 +39,7 @@ class communityModel{
                         "date" => $creation["date"]
                     ]
                 ];
-                // $binaryData = $creation["filedata"];
-                // $filePath = "../views/assets/data/img/" . $creation["filename"];
-                // file_put_contents($filePath, $binaryData);
 
-                // $binaryData = file_get_contents($filePath);
-                // $image = imagecreatefromstring($binaryData);
-                
-                // if ($image !== false) {
-                //     $outputImagePath = "../views/assets/data/img/" . $creation["filename"];
-                //     imagejpeg($image, $outputImagePath);
-                
-                //     $creationVideos += [
-                //         $creation["title"] => [
-                //             "creationid" => $creation["creationid"],
-                //             "author" => $creation["accountid"],
-                //             "filename" => $creation["filename"],
-                //             "religion" => $creation["religion"],
-                //             "topics" => $creation["topics"],
-                //             "description" => $creation["description"],
-                //             "date" => $creation["date"]
-                //         ]
-                //     ];
-                    
-                // }
-
-                // imagedestroy($image);
             } else if ($creation["filetype"] == ""){
                 $creationReadingMaterials += [
                     $creation["title"] => [
@@ -126,11 +75,11 @@ class communityModel{
 			$pdo->beginTransaction();
 
             //make the media quality lower
-            $image = imagecreatefromstring($data["filedata"]);
-            $quality = 50;
-            $outputImagePath = "file.jpg";
-            imagejpeg($image, $outputImagePath, $quality);
-            imagedestroy($image);
+            // $image = imagecreatefromstring($data["filedata"]);
+            // $quality = 50;
+            // $outputImagePath = "file.jpg";
+            // imagejpeg($image, $outputImagePath, $quality);
+            // imagedestroy($image);
 		
 			$stmt = $pdo->prepare("INSERT INTO communitycreations(creationid, username, title, religion, description, filename, filetype, filesize, filedata, status, date) VALUES (:creationid, :username, :title, :religion, :description, :filename, :filetype, :filesize, :filedata, :status, :date)");
 	
