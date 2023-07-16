@@ -5,7 +5,6 @@ class communityAjax {
   public $username;
   public $title;
   public $religion;
-  public $topics;
   public $description;
   public $filedata;
   public $filename;
@@ -18,7 +17,6 @@ class communityAjax {
     $username = $this->username;
     $title = $this->title;
     $religion = $this->religion;
-    $topics = $this->topics;
     $description = $this->description;
     $filedata = $this->filedata;
     $filename = $this->filename;
@@ -31,7 +29,6 @@ class communityAjax {
       "username" => $username,
       "title" => $title,
       "religion" => $religion,
-      "topics" => $topics,
       "description" => $description,
       "filedata" => $filedata,
       "filename" => $filename,
@@ -49,7 +46,6 @@ $submitCreation = new communityAjax();
 $submitCreation->username = $_POST["username"];
 $submitCreation->title = $_POST["title"];
 $submitCreation->religion = $_POST["religion"];
-$submitCreation->topics = $_POST["topics"];
 $submitCreation->description = $_POST["description"];
 $submitCreation->filedata = file_get_contents($_FILES["filedata"]["tmp_name"]);
 $submitCreation->filename = $_POST["filename"];

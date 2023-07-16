@@ -25,7 +25,7 @@
                         <a href="community.php" class="pageHeaderLink"><h1>Community Creations</h1></a>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
-                        <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community">
+                        <!-- <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community"> -->
                     </div>
                 </div>
             <div>
@@ -33,14 +33,13 @@
                 <div class="col-12 d-flex justify-content-center align-items-center flex-column createSubmissionsBox">
                     <img src="../assets/img/commcreations.png">
                     <h1>Start Creating Submissions</h1>
-                    <p>Drafts expire after 30 days. After that, those drafts are deleted.</p>
                     <button id="communityCreate" class="roundedButton">Create New</button>
                 </div>
                 <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
                     <div>
                         <h1>Photos</h1>
                         <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
-                            <div id="communityPhotos"></div>
+                            <div id="communityPhotos" class="communityPhotos"></div>
                             <button id="communityPhotosMore" class="roundedButton">See More</button>
                         </div>
                     </div>
@@ -88,23 +87,13 @@
                                         <input id="communityTitle" name="communityTitle" placeholder="Title" required>
                                     </div>
                                     <div class="col-4 d-flex justify-content-center align-items-center">
-                                        <select id="communityCategory" name="communityCategory">
-                                            <option selected hidden disabled>Category</option>
-                                            <optgroup label="Religion">
-                                                <option value="">Buddhism</option>
-                                                <option value="">Christianity</option>
-                                                <option value="">Hinduism</option>
-                                                <option value="">Islam</option>
-                                                <option value="">Judaism</option>
-                                            </optgroup>
-                                            <optgroup label="Topic">
-                                                <option value="saab">Religious Traditions</option>
-                                                <option value="mercedes">Historical Context</option>
-                                                <option value="mercedes">Theology</option>
-                                                <option value="mercedes">Religious Practices</option>
-                                                <option value="mercedes">Ethics</option>
-                                                <option value="mercedes">Social Issues</option>
-                                            </optgroup>
+                                        <select id="communityCategory">
+                                            <option selected hidden disabled>Religion</option>
+                                            <option value="Buddhism">Buddhism</option>
+                                            <option value="Christianity">Christianity</option>
+                                            <option value="Hinduism">Hinduism</option>
+                                            <option value="Islam">Islam</option>
+                                            <option value="Judaism">Judaism</option>
                                         </select>
                                     </div>
                                 </div>
