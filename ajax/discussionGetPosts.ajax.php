@@ -22,9 +22,11 @@ foreach ($posts as $post) {
     $html .= '        <p class="contentEditable" contenteditable="false">' . $post['postContent'] . '</p>';
     $html .= '        <div class="col-12 d-flex flex-row forumPostViewContentInt">';
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
-    $html .= '            <img src="../assets/img/discussionForum/upvote.png" class="upvoteButton" data-type="post" data-id="' . $post['postId'] . '">';
+    $hasUpvotedPost = $controller->ctrGetPostVoteByUser($post['postId'], $_SESSION['accountid']) === 'upvote';
+    $hasDownvotedPost = $controller->ctrGetPostVoteByUser($post['postId'], $_SESSION['accountid']) === 'downvote';
+    $html .= '            <img src="../assets/img/discussionForum/upvote' . ($hasUpvotedPost ? '-active' : '') . '.png" class="upvoteButton" data-type="post" data-id="' . $post['postId'] . '">';
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">' . $post['upvotes'] . '</p>';
-    $html .= '            <img src="../assets/img/discussionForum/downvote.png" class="downvoteButton" data-type="post" data-id="' . $post['postId'] . '">';
+    $html .= '            <img src="../assets/img/discussionForum/downvote' . ($hasDownvotedPost ? '-active' : '') . '.png" class="downvoteButton" data-type="post" data-id="' . $post['postId'] . '">';
     $html .= '          </div>';
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
     $html .= '            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">';
@@ -69,9 +71,11 @@ foreach ($posts as $post) {
         $html .= '        <p class="contentEditable" contenteditable="false">' . $reply['replyContent'] . '</p>';
         $html .= '        <div class="col-12 d-flex flex-row forumPostViewContentInt">';
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
-        $html .= '            <img src="../assets/img/discussionForum/upvote.png" class="upvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '">';
+        $hasUpvotedReply = $controller->ctrGetReplyVoteByUser($reply['replyId'], $_SESSION['accountid']) === 'upvote';
+        $hasDownvotedReply = $controller->ctrGetReplyVoteByUser($reply['replyId'], $_SESSION['accountid']) === 'downvote';
+        $html .= '            <img src="../assets/img/discussionForum/upvote' . ($hasUpvotedReply ? '-active' : '') . '.png" class="upvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '">';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">' . $reply['upvotes'] . '</p>';
-        $html .= '            <img src="../assets/img/discussionForum/downvote.png" class="downvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '">';
+        $html .= '            <img src="../assets/img/discussionForum/downvote' . ($hasDownvotedReply ? '-active' : '') . '.png" class="downvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '">';
         $html .= '          </div>';
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
         $html .= '            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">';
