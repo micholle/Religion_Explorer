@@ -50,12 +50,12 @@ $(function() {
 
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
-                                '<img class="libraryActions" src="../assets/img/download.png">' +
-                                '<img class="libraryActions" src="../assets/img/alert.png" id="reportPhotoSubmission">' +
-                                '<img class="libraryActions" src="../assets/img/broken-link.png">' +
+                                '<img onclick="downloadContent(' + "'" + photoDetails.filedata + '\', \'' + photoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
+                                '<img onclick="reportContent(' + "'" + photoData + "'" + ')" class="libraryActions" src="../assets/img/alert.png" id="reportPhotoSubmission">' +
+                                '<img onclick="copyContentLink(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                                '<img class="libraryActions" src="../assets/img/bookmark-white.png">' +
+                                '<img onclick="bookmarkContent(this, \'' + photoDetails.creationid + '\', \'' + photoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
                             '</div>' +
                         '</div>' +
 
@@ -101,18 +101,18 @@ $(function() {
 
                         '<div class="row">' +
                             '<div class="col-12 d-flex justify-content-center align-items-center" style="max-width: 100vw;">' +
-                                '<video class="communitySubVideo" muted controls> <source src=' + videoDetails.filedata + '> </video>' +
+                                '<video class="communitySubVideo" controls> <source src=' + videoDetails.filedata + '> </video>' +
                             '</div>' +
                         '</div>' +
 
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
-                                '<img class="libraryActions" src="../assets/img/download.png">' +
-                                '<img class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">' +
-                                '<img class="libraryActions" src="../assets/img/broken-link.png">' +
+                                '<img onclick="downloadContent(' + "'" + videoDetails.filedata + '\', \'' + videoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
+                                '<img onclick="reportContent(' + "'" + videoData + "'" + ')" class="libraryActions" class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">' +
+                                '<img onclick="copyContentLink(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                                '<img class="libraryActions" src="../assets/img/bookmark-white.png">' +
+                                '<img onclick="bookmarkContent(this, \'' + videoDetails.creationid + '\', \'' + photoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
                             '</div>' +
                         '</div>' +
 
@@ -160,12 +160,12 @@ $(function() {
 
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
-                                '<img class="libraryActions" src="../assets/img/download.png">' +
-                                '<img class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' +
-                                '<img class="libraryActions" src="../assets/img/broken-link.png">' +
+                                // '<img class="libraryActions" src="../assets/img/download.png">' +
+                                '<img onclick="reportContent(' + "'" + readingMaterialData + "'" + ')" class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' +
+                                '<img onclick="copyContentLink(' + "'" + readingMaterialDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                                '<img class="libraryActions" src="../assets/img/bookmark-white.png">' +
+                                '<img onclick="bookmarkContent(this, \'' + readingMaterialDetails.creationid + '\', \'' + readingMaterialData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
                             '</div>' +
                         '</div>' +
 
@@ -246,3 +246,112 @@ $(function() {
         activateTab(openTabParam);
     }      
 });
+
+function downloadContent(file, filename) {
+    fetch(file)
+    .then(response => response.blob())
+    .then(blob => {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    });
+}
+
+function reportContent(title) {
+    $("#reportContentHeader").html("");
+    $("#communityDisplayModal").removeClass("fade").modal("hide");
+    $("#communityDisplayModal").modal("dispose");
+
+    $("#reportContentHeader").html("<br>" + title);
+    $("#reportContentModal").modal();
+}
+
+function copyContentLink(file) {
+    var imageLink = ((window.location.href).substring(0, (window.location.href).indexOf("communitySubmissions.php") + "communitySubmissions.php".length)) + "/" + file.substring(file.indexOf("assets/"));
+    navigator.clipboard.writeText(imageLink);
+
+    $("#toast").html("Link copied to clipboard.")
+
+    $('#toast').addClass('show');
+
+    setTimeout(function() {
+        $('#toast').removeClass('show');
+    }, 2000);
+}
+
+function bookmarkContent(thisIcon, creationid, title) {
+    $.ajax({
+        url: "../../ajax/getBookmarksData.ajax.php",
+        method: "POST",
+        data: {"accountid" : $("#accountidPlaceholder").text()},
+        success:function(data){
+            var bookmarksList = data;
+            var bookmarks = [];
+
+            for (let bookmark in bookmarksList) {
+                var bookmarkDetails = bookmarksList[bookmark];
+                bookmarks.push(bookmarkDetails["resourceid"]);
+
+                if(bookmarkDetails["resourceid"] == creationid) { 
+                    var bookmarkid = bookmarkDetails["bookmarkid"];
+
+                    $.ajax({
+                        url: "../../ajax/removeFromBookmarks.ajax.php",
+                        method: "POST",
+                        data: {"bookmarkid" : bookmarkid},
+                        success:function(){
+                            $(thisIcon).attr("src", "../assets/img/bookmark-white.png");
+                            $("#toast").html('"' + title +  '" was removed from the bookmarks.')
+                            $('#toast').addClass('show');
+                        
+                            setTimeout(function() {
+                                $('#toast').removeClass('show');
+                            }, 2000);
+                        },
+                        error: function() {
+                            $(thisIcon).attr("src", "../assets/img/bookmark-black.png");
+                            $("#toast").html('Error removing "' + title +  '" from the bookmarks.')
+                            $('#toast').addClass('show');
+                    
+                            setTimeout(function() {
+                                $('#toast').removeClass('show');
+                            }, 2000);
+                        }
+                    });
+                }
+            }
+
+            if (!bookmarks.includes(creationid)) {
+                $.ajax({
+                    url: "../../ajax/addToBookmarks.ajax.php",
+                    method: "POST",
+                    data: {"accountid" : $("#accountidPlaceholder").text(), "resourceid" : creationid, "resourceTitle" : title},
+                    success:function(){
+                        $(thisIcon).attr("src", "../assets/img/bookmark-black.png");
+                        $("#toast").html('"' + title +  '" was added to the bookmarks.')
+                        $('#toast').addClass('show');
+                
+                        setTimeout(function() {
+                            $('#toast').removeClass('show');
+                        }, 2000);
+                    },
+                    error: function() {
+                        $(thisIcon).attr("src", "../assets/img/bookmark-white.png");
+                        $("#toast").html('Error adding "' + title +  '" to the bookmarks.')
+                        $('#toast').addClass('show');
+                
+                        setTimeout(function() {
+                            $('#toast').removeClass('show');
+                        }, 2000);
+                    }
+                });
+            }
+        }
+    });
+}

@@ -171,6 +171,7 @@ $(function() {
             $('#confirmDeleteModal').find('#confirmDelete').off('click').on('click', function() {
                 deleteTopic(topicId);
             });
+            alert(topicId);
         });
 
         // Delete post
@@ -180,6 +181,7 @@ $(function() {
             $('#confirmDeleteModal').find('#confirmDelete').off('click').on('click', function() {
                 deletePost(postId);
             });
+            alert(postId);
         });
     
         // Delete reply
@@ -189,6 +191,7 @@ $(function() {
             $('#confirmDeleteModal').find('#confirmDelete').off('click').on('click', function() {
                 deleteReply(replyId);
             });
+            alert(replyId);
         });
     }
     
@@ -350,6 +353,65 @@ $(function() {
             error: function() {
                 // AJAX request failed
                 alert("Error occurred while making the AJAX request.");
+            }
+        });
+    }
+
+
+    //upvotes or downvotes
+
+    $(document).off('click', '.upvoteButton, .downvoteButton').on('click', '.upvoteButton, .downvoteButton', function() {
+        const targetElement = $(this);
+        const type = targetElement.data('type');
+        const id = targetElement.data('id');
+        const isUpvote = targetElement.hasClass('upvoteButton');
+        const isDownvote = targetElement.hasClass('downvoteButton');
+    
+        // Determine the vote action based on the clicked button
+        let voteAction = '';
+        if (isUpvote) {
+            voteAction = 'upvote';
+        } else if (isDownvote) {
+            voteAction = 'downvote';
+        }
+    
+        // Make an AJAX request to update the vote count
+        updateVoteCount(type, id, voteAction, function(response) {
+            if (response === 'success') {
+                // Vote count updated successfully
+                
+                // Update the vote count display
+                if (isUpvote) {
+                    targetElement.attr('src', '../assets/img/discussionForum/upvote-active.png');
+                    targetElement.addClass('upvoted');
+                } else if (isDownvote) {
+                    targetElement.attr('src', '../assets/img/discussionForum/downvote-active.png');
+                    targetElement.addClass('downvoted');
+                }
+                getPosts("", $("#topicId").val());
+    
+                // Disable the clicked button to prevent multiple votes
+                targetElement.prop('disabled', true);
+            } else {
+                // Error occurred while updating the vote count
+                alert('Error occurred while updating the vote count');
+            }
+        });
+    });
+    
+    
+    // Function to update the vote count
+    function updateVoteCount(type, id, voteAction, callback) {
+        $.ajax({
+            url: '../../ajax/discussionVote.ajax.php',
+            method: 'POST',
+            data: { type, id, voteAction },
+            success: function(response) {
+                callback(response);
+            },
+            error: function() {
+                // AJAX request failed
+                alert('Error occurred while updating the vote count');
             }
         });
     }

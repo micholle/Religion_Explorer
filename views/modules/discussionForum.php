@@ -31,7 +31,7 @@
             <div class="col-12 d-flex justify-content-center align-items-center">
                 <div class="forumSubmitContainer">
                     <div class="d-flex justify-content-start align-items-center flex-column">
-                        <img src="../assets/img/editProfile/lamb.png" width="45px">
+                        <img src="../assets/img/editProfile/cow.png" width="45px">
                     </div>
                     <div class="forumSubmitContent">
                         <form>
