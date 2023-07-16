@@ -325,7 +325,6 @@ $(function() {
                 
                 // Make an AJAX request to update the content
                 updateContent(type, id, updatedContent);
-                alert(id);
             }
         });
 
