@@ -10,18 +10,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script> -->
     <header>
-      <li>
-        <img src="../assets/img/logo-and-text.png">
-      </li>
-      <ul>
-        <li><a href="#splash-page">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#developers">Developers</a></li>
-        <li><button class="splashButton navBarButton">Log in</button></li>
-      </ul>
+        <li>
+            <img src="../assets/img/logo-and-text.png">
+        </li>
+        <ul clas="d-flex justify-content-center align-items-center">
+            <li><a href="#splash-page">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#developers">Developers</a></li>
+            <li><a href="login.php"><button class="splashButton navBarButton">Log in</button></a></li>
+        </ul>
     </header>
     
     <section id="splash-page">

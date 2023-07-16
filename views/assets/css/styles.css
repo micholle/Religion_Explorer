@@ -940,7 +940,7 @@ header ul li {
 
 header ul li a {
     position: relative;
-    margin: 0 15px;
+    margin: 0 14.5px;
     text-decoration: none;
     color: white;
     letter-spacing: 2px;
@@ -1124,12 +1124,12 @@ p {
     border-radius: 16px;
     color: white;
     margin-bottom: 10px;
-    padding: 10px 20px;
+    padding: 7.5px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 15px;
-    margin: 4px 2px;    
+    margin: 4px 0 !important;    
     cursor: pointer;
     transition: 0.3s;
 }
