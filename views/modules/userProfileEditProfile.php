@@ -79,7 +79,7 @@
             </div>
 
             <div class="row no-gutters justify-content-center editProfileContainer">
-                <div class="col-6">
+                <div class="col-7">
                     <div class="row no-gutters justify-content-start">
                         <h3>Personal Information</h3>
                     </div>
@@ -113,7 +113,6 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-start align-items-start">
-                                            <button class="editPasswordButton">Edit Password</button>
                                             <button class="editPasswordButton">Forgot Password</button>
                                         </div>
                                     </div>
@@ -140,14 +139,36 @@
                     </div>
                 </div>
 
-                <div class="col-6">
-                    <div class="row settingsBlock">
+                <div class="col-5">
+                    <div class="row settingsBlock" style="background-color: orange">
                         <div class="col-12">
                             <div class="row no-gutters justify-content-start">
                                 <h3>Account Settings</h3>
                             </div>
                             <div class="row no-gutters justify-content-center settingsContainer">
-                                Placeholder
+                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
+                                    <input type="checkbox" id="">
+                                    <label for="">Notifications for new comments or replies</label>
+                                </div>
+                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
+                                    <input type="checkbox" id="">
+                                    <label for="">Display Personal Calendar</label>
+                                </div>
+                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
+                                    <input type="checkbox" id="">
+                                    <label for="">Display nickname/s</label>
+                                </div>
+                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
+                                    <input type="checkbox" id="">
+                                    <label for="">Display bookmarks</label>
+                                </div>
+                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
+                                    <input type="checkbox" id="">
+                                    <label for="">Display religious affiliation</label>
+                                </div>
+                                <div class="col-12 d-flex justify-content-start">
+                                    <p>Page display after login</p>
+                                </div>
                             </div>
                         </div>
                     </div>

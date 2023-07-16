@@ -1731,6 +1731,52 @@ p {
     background-position: right 15px center;
 }
 
+.settingsBlock input {
+    cursor: pointer;
+    position: relative;
+    width: 50px;
+    height: 25px;
+    border-radius: 25px;
+    outline: none;
+    background-color: #B0BEC5;
+    -webkit-appearance: none;
+    transition: 0.3s;
+}
+
+.settingsBlock input::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    height: 1.05rem;
+    width: 1.05rem;
+    background-color: white;
+    transition: left .3s;
+}
+
+.settingsBlock input:checked {
+    background-color: #2CA464;
+}
+
+.settingsBlock input:checked::after {
+    left: 70%;
+}
+
+.settingsContainer {
+    border: solid #D6D6D6 2px;
+    border-radius: 15px;
+}
+
+.settingsContainer .col-12 {
+    padding: 25px 25px 0px 25px !important;
+}
+
+.settingsBlock label {
+    margin: 1px 0 0 10px;
+}
+
 .personalInfoContainer input:focus {
     border-color: #2CA464 !important;
     outline: none;
@@ -1741,11 +1787,6 @@ p {
     border-color: #2CA464 !important;
     outline: none;
     transition: 0.5s;
-}
-
-.settingsContainer {
-    border: solid #D6D6D6 2px;
-    border-radius: 15px
 }
 
 .editPasswordButton {
