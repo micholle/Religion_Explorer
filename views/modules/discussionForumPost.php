@@ -38,9 +38,14 @@ session_start();
                 <div class="col-9 d-flex justify-content-center align-items-center">
                     <div class="forumPostViewBox">
                         <div class="forumPostViewMain">
+                            <input type="hidden" id="topicId" value="<?php echo $topicId; ?>">
                             <div class="row">
                             <div class="col-12 d-flex flex-column">
+                                <?php if ($accountid === $_SESSION['accountid']) { ?>
+                                    <h1 id="topicTitle" class="editable" contenteditable="false"><?php echo $topicTitle; ?></h1>
+                                <?php } else { ?>
                                     <h1><?php echo $topicTitle; ?></h1>
+                                <?php } ?>
                                     <div class="row">
                                         <div class="col-12 d-flex flex-row">
                                             <h2>by <?php echo $username; ?></h2><h2>•</h2><h2><?php echo $topicDate; ?></h2>
@@ -48,8 +53,11 @@ session_start();
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <p><?php echo $topicContent; ?></p>
-                                    <input type="hidden" class="topicId" id="topicId" value="<?php echo $topicId; ?>">
+                                <?php if ($accountid === $_SESSION['accountid']) { ?>
+                                    <p id="topicContent" class="editable" contenteditable="false"><?php echo $topicContent; ?></p>
+                                <?php } else { ?>
+                                    <p id="topicContent"><?php echo $topicContent; ?></p>
+                                <?php } ?>
                                 </div>
                                 <div class="col-12 d-flex flex-row">
                                     <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
@@ -65,7 +73,7 @@ session_start();
                                     if ($accountid === $_SESSION['accountid']) {
                                         echo '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
                                         echo    '<img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
-                                        echo    '<p class="forumPostViewMainCount forumPostViewMainVote" value="'.$topicId.'">Edit</p>';
+                                        echo    '<p class="forumPostViewMainCount forumPostViewMainVote" value="'.$topicId.'" class="editButton" id="editButton">Edit</p>';
                                         echo '</div>';
                                     }
                                     ?>

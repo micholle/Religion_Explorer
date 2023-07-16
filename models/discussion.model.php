@@ -335,5 +335,28 @@ class ModelDiscussion {
             $stmt = null;
         }
     }     
+
+    //edit
+
+    public function mdlUpdateTopic($topicId, $updatedTitle, $updatedContent) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("UPDATE topics SET topicTitle = :updatedTitle, topicContent = :updatedContent WHERE topicId = :topicId");
+            $stmt->bindParam(":updatedTitle", $updatedTitle, PDO::PARAM_STR);
+            $stmt->bindParam(":updatedContent", $updatedContent, PDO::PARAM_STR);
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return true; // Topic updated successfully
+        } catch (Exception $e) {
+            return false; // Error occurred while updating the topic
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
     
 }

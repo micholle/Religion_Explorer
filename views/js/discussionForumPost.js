@@ -249,5 +249,55 @@ $(function() {
             }
         });
     }
+
+    //edit
+
+    $(document).on('click', '#editButton', function() {
+        const topicTitle = $('#topicTitle');
+        const topicContent = $('#topicContent');
+        const editButton = $(this);
+    
+        if (topicTitle.attr('contenteditable') === 'false' && topicContent.attr('contenteditable') === 'false') {
+            topicTitle.attr('contenteditable', 'true');
+            topicContent.attr('contenteditable', 'true');
+            editButton.text('Save');
+        } else {
+            topicTitle.attr('contenteditable', 'false');
+            topicContent.attr('contenteditable', 'false');
+            editButton.text('Edit');
+    
+            const updatedTitle = topicTitle.text().trim();
+            const updatedContent = topicContent.text().trim();
+            const topicId = $('#topicId').val();
+    
+            // Make an AJAX request to update the post title and content
+            updateTopic(topicId, updatedTitle, updatedContent);
+        }
+    });
+    
+    function updateTopic(topicId, updatedTitle, updatedContent) {
+        $.ajax({
+            url: '../../ajax/discussionUpdateTopic.ajax.php', // Replace with the actual path to your updateTopic PHP file
+            method: 'POST',
+            data: {
+                topicId: topicId,
+                updatedTitle: updatedTitle,
+                updatedContent: updatedContent
+            },
+            success: function(response) {
+                if (response === 'success') {
+                    // Topic updated successfully
+                    alert('Topic updated successfully');
+                } else {
+                    // Error occurred while updating the topic
+                    alert('Error occurred while updating the topic');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.error(error);
+            }
+        });
+    }
     
 });

@@ -53,4 +53,13 @@ class ControllerDiscussion {
       return $result;
   }
 
+
+  //edit
+
+  public function ctrUpdateTopic($topicId, $updatedTitle, $updatedContent) {
+    $result = (new ModelDiscussion)->mdlUpdateTopic($topicId, $updatedTitle, $updatedContent);
+    return $result;
+}
+
+
 }
