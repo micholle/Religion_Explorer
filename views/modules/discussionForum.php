@@ -41,7 +41,7 @@
                                 <div class="col-12 d-flex justify-content-end align-items-center flex-row">
                                     <p>Post anonymously</p>
                                     <label class="switch">
-                                        <input type="checkbox">
+                                        <input id="anonymousCheckbox" type="checkbox">
                                         <span class="slider round"></span>
                                     </label>
                                     <button type="submit" class="roundedButton">Post</button>

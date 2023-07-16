@@ -45,12 +45,14 @@ class ModelDiscussion {
             $topicId = $this->generateTopicId();
     
             // Prepare and execute the SQL statement
-            $stmt = $pdo->prepare("INSERT INTO topics (topicId, topicTitle, accountid, topicDate, topicContent) VALUES (:topicId, :topicTitle, :accountid, NOW(), :topicContent)");
+            $stmt = $pdo->prepare("INSERT INTO topics (topicId, topicTitle, accountid, topicDate, topicContent, anonymous) VALUES (:topicId, :topicTitle, :accountid, NOW(), :topicContent, :anonymous)");
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
             $stmt->bindParam(":topicTitle", $data["topicTitle"], PDO::PARAM_STR);
             $stmt->bindParam(":accountid", $data["accountid"], PDO::PARAM_STR);
             $stmt->bindParam(":topicContent", $data["topicContent"], PDO::PARAM_STR);
+            $stmt->bindParam(":anonymous", $data["anonymous"], PDO::PARAM_INT); // Bind the anonymous value to the SQL statement
             $stmt->execute();
+
     
             return true; // Discussion created successfully
         } catch (Exception $e) {

@@ -26,6 +26,7 @@ try {
 
 // Check if the topic data exists
 if ($topicData) {
+  $anonymous = $topicData['anonymous'];
   $accountid = $topicData['accountid'];
   $topicId = $topicData['topicId'];
   $topicTitle = $topicData['topicTitle'];

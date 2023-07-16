@@ -26,7 +26,13 @@ foreach ($topics as $topic) {
     $html .= '        <h1>' . $topic['topicTitle'] . '</h1>';
     $html .= '        <div class="row">';
     $html .= '            <div class="col-12 d-flex flex-row">';
-    $html .= '                <h2>by ' . $topic['username'] . '</h2>';
+    
+    if ($topic['anonymous'] == 1) {
+        $html .= '                <h2>by Anonymous</h2>';
+    } else {
+        $html .= '                <h2>by ' . $topic['username'] . '</h2>';
+    }
+    
     $html .= '                <h2>•</h2>';
     $html .= '                <h2>' . $topic['topicDate'] . '</h2>';
     $html .= '            </div>';

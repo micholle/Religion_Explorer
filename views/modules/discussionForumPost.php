@@ -47,7 +47,14 @@ require_once "../../models/discussionForumPost.model.php";
                                 <?php } ?>
                                     <div class="row">
                                         <div class="col-12 d-flex flex-row">
-                                            <h2>by <?php echo $username; ?></h2><h2>•</h2><h2><?php echo $topicDate; ?></h2>
+                                            <?php
+                                            if ($anonymous == 1) {
+                                                echo '                <h2>by Anonymous</h2>';
+                                            } else {
+                                                echo '                <h2>by ' . $username . '</h2>';
+                                            }
+                                            ?>
+                                            <h2>•</h2><h2><?php echo $topicDate; ?></h2>
                                         </div>
                                     </div>
                                 </div>
