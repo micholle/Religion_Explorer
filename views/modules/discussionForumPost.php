@@ -62,7 +62,7 @@ require_once "../../models/discussionForumPost.model.php";
                                     <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="votes">
                                         <?php
                                         echo '<img src="../assets/img/discussionForum/upvote' . ($hasUpvotedTopic ? '-active' : '') . '.png" class="upvoteButton" data-type="topic" data-id="' . $topicId . '">';
-                                        echo '<p class="forumPostViewMainCount forumPostViewMainVote" id="upvotes" data-upvotes="' . $upvotes . '"></p>';
+                                        echo '<p class="forumPostViewMainCount forumPostViewMainVote upvotes" id="upvotes">'. $upvotes .'</p>';
                                         echo '<img src="../assets/img/discussionForum/downvote' . ($hasDownvotedTopic ? '-active' : '') . '.png" class="downvoteButton" data-type="topic" data-id="' . $topicId . '">';                                        
                                         ?>
                                     </div>

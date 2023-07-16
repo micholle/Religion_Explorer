@@ -141,6 +141,7 @@ $(function() {
                 initializeReplyButtons();
                 attachDeleteButtonListeners();
                 initializeEditButtons();
+                shortenUpvotes();
             },
             error: function(xhr, status, error) {
                 console.log(xhr.responseText);
@@ -415,5 +416,32 @@ $(function() {
             }
         });
     }
+
+
+    function shortenUpvotes() {
+        $(".upvotes").each(function() {
+            var upvotes = $(this).text().trim();
+            var upvotesShort = shortenNumber(upvotes);
+            $(this).text(upvotesShort);
+        });
+      }
+  
+      function shortenNumber(number) {
+        var SI_POSTFIXES = ["", "K", "M", "B", "T"];
+        var tier = Math.log10(Math.abs(number)) / 3 | 0;
+      
+        if (tier === 0) return number;
+      
+        var postfix = SI_POSTFIXES[tier];
+        var scale = Math.pow(10, tier * 3);
+        var scaledNumber = number / scale;
+      
+        // Remove decimal if the number is a whole number
+        if (scaledNumber % 1 === 0) {
+          scaledNumber = Math.floor(scaledNumber);
+        }
+      
+        return scaledNumber.toFixed(0) + postfix;
+      }
     
 });
