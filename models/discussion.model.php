@@ -270,6 +270,15 @@ class ModelDiscussion {
         $pdo = $db->connect();
         
         try {
+            // Disable foreign key checks
+            $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=0");
+            $stmt->execute();
+
+            // Delete post votes
+            $stmt = $pdo->prepare("DELETE FROM post_votes WHERE postId = :postId");
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->execute();
+            
             // Delete the post
             $stmt = $pdo->prepare("DELETE FROM posts WHERE postId = :postId");
             $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
@@ -280,8 +289,16 @@ class ModelDiscussion {
             $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
             $stmt->execute();
             
+            // Enable foreign key checks
+            $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=1");
+            $stmt->execute();
+            
             return true; // Post deleted successfully
         } catch (Exception $e) {
+            // Enable foreign key checks (in case of an error)
+            $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=1");
+            $stmt->execute();
+            
             return false; // Error occurred while deleting the post
         } finally {
             $pdo = null;
@@ -294,6 +311,15 @@ class ModelDiscussion {
         $pdo = $db->connect();
     
         try {
+            // Disable foreign key checks
+            $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=0");
+            $stmt->execute();
+
+            // Delete topic votes
+            $stmt = $pdo->prepare("DELETE FROM topic_votes WHERE topicId = :topicId");
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->execute();
+    
             // Delete the associated replies
             $stmt = $pdo->prepare("DELETE FROM reply WHERE postId IN (SELECT postId FROM posts WHERE topicId = :topicId)");
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
@@ -309,8 +335,16 @@ class ModelDiscussion {
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
             $stmt->execute();
     
+            // Enable foreign key checks
+            $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=1");
+            $stmt->execute();
+    
             return true; // Topic, posts, and replies deleted successfully
         } catch (Exception $e) {
+            // Enable foreign key checks (in case of an error)
+            $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=1");
+            $stmt->execute();
+    
             return false; // Error occurred while deleting the topic, posts, or replies
         } finally {
             $pdo = null;
@@ -323,18 +357,35 @@ class ModelDiscussion {
         $pdo = $db->connect();
         
         try {
+            // Disable foreign key checks
+            $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=0");
+            $stmt->execute();
+            
+            // Delete reply votes
+            $stmt = $pdo->prepare("DELETE FROM reply_votes WHERE replyId = :replyId");
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->execute();
+            
             $stmt = $pdo->prepare("DELETE FROM reply WHERE replyId = :replyId");
             $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
             $stmt->execute();
             
+            // Enable foreign key checks
+            $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=1");
+            $stmt->execute();
+            
             return true; // Reply deleted successfully
         } catch (Exception $e) {
+            // Enable foreign key checks (in case of an error)
+            $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=1");
+            $stmt->execute();
+            
             return false; // Error occurred while deleting the reply
         } finally {
             $pdo = null;
             $stmt = null;
         }
-    }     
+    }
 
     //edit
 

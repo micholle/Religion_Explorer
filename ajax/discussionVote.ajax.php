@@ -7,7 +7,12 @@ $id = $_POST['id'];
 $voteAction = $_POST['voteAction']; // Updated variable name to match the AJAX request
 
 $controller = new ControllerDiscussion();
-$result = $controller->ctrUpdateVoteCount($type, $id, $voteAction);
+if ($type === 'topic'){
+    $result = $controller->ctrUpdateVoteCountForTopic($id, $voteAction);
+}else {
+    $result = $controller->ctrUpdateVoteCount($type, $id, $voteAction);
+}
+
 
 if ($result) {
     echo "success";

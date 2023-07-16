@@ -1,6 +1,5 @@
 <?php
 require_once "../../models/discussionForumPost.model.php";
-session_start();
 ?>
 
 
@@ -60,12 +59,14 @@ session_start();
                                 <?php } ?>
                                 </div>
                                 <div class="col-12 d-flex flex-row">
-                                    <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
-                                        <img src="../assets/img/discussionForum/upvote.png">
-                                        <p class="forumPostViewMainCount forumPostViewMainVote" id="upvotes" data-upvotes="<?php echo $upvotes; ?>"></p>
-                                        <img src="../assets/img/discussionForum/downvote.png">
+                                    <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="votes">
+                                        <?php
+                                        echo '<img src="../assets/img/discussionForum/upvote' . ($hasUpvotedTopic ? '-active' : '') . '.png" class="upvoteButton" data-type="topic" data-id="' . $topicId . '">';
+                                        echo '<p class="forumPostViewMainCount forumPostViewMainVote" id="upvotes" data-upvotes="' . $upvotes . '"></p>';
+                                        echo '<img src="../assets/img/discussionForum/downvote' . ($hasDownvotedTopic ? '-active' : '') . '.png" class="downvoteButton" data-type="topic" data-id="' . $topicId . '">';                                        
+                                        ?>
                                     </div>
-                                    <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">
+                                    <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="comments">
                                         <img src="../assets/img/discussionForum/comments.png" class="commentIcon">
                                         <p class="forumPostViewMainCount forumPostViewMainComment"><?php echo $commentCount; ?></p>
                                     </div>

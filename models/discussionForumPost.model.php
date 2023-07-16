@@ -1,6 +1,6 @@
 <?php
 require_once "connection.php";
-
+session_start();
 // Retrieve the topic ID from the query parameter
 $topicId = isset($_GET['topicId']) ? $_GET['topicId'] : '';
 
@@ -9,7 +9,6 @@ $connection = new Connection();
 
 // Establish a database connection
 $db = $connection->connect();
-
 // Fetch the topic data from the database based on the topic ID
 try {
   $stmt = $db->prepare("SELECT t.*, a.username,
@@ -43,3 +42,30 @@ if ($topicData) {
   $topicContent = 'The requested topic could not be found.';
   $upvotes = 0;
 }
+
+function mdlGetTopicVoteByUser($topicId, $accountId) {
+  $db = new Connection();
+  $pdo = $db->connect();
+
+  try {
+      $stmt = $pdo->prepare("SELECT voteType FROM topic_votes WHERE topicId = :topicId AND accountid = :accountId");
+      $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+      $stmt->bindParam(":accountId", $accountId, PDO::PARAM_INT);
+      $stmt->execute();
+
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+      if ($result) {
+          return $result['voteType'];
+      } else {
+          return ''; // User has not voted on the topic
+      }
+  } catch (Exception $e) {
+      return ''; // Error occurred while fetching the vote
+  } finally {
+      $pdo = null;
+      $stmt = null;
+  }
+}
+
+$hasUpvotedTopic = mdlGetTopicVoteByUser($topicId, $_SESSION['accountid']) === 'upvote';
+$hasDownvotedTopic = mdlGetTopicVoteByUser($topicId, $_SESSION['accountid']) === 'downvote';
