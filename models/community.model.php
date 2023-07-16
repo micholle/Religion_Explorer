@@ -20,6 +20,7 @@ class communityModel{
                         "creationid" => $creation["creationid"],
                         "author" => $creation["accountid"],
                         "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
+                        "filename" => $creation["filename"],
                         "religion" => $creation["religion"],
                         "description" => $creation["description"],
                         "date" => $creation["date"]
@@ -58,6 +59,7 @@ class communityModel{
                         "creationid" => $creation["creationid"],
                         "author" => $creation["accountid"],
                         "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
+                        "filename" => $creation["filename"],
                         "religion" => $creation["religion"],
                         "description" => $creation["description"],
                         "date" => $creation["date"]
@@ -122,6 +124,13 @@ class communityModel{
 		try {
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->beginTransaction();
+
+            //make the media quality lower
+            $image = imagecreatefromstring($data["filedata"]);
+            $quality = 50;
+            $outputImagePath = "file.jpg";
+            imagejpeg($image, $outputImagePath, $quality);
+            imagedestroy($image);
 		
 			$stmt = $pdo->prepare("INSERT INTO communitycreations(creationid, username, title, religion, description, filename, filetype, filesize, filedata, status, date) VALUES (:creationid, :username, :title, :religion, :description, :filename, :filetype, :filesize, :filedata, :status, :date)");
 	

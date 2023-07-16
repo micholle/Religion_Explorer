@@ -48,7 +48,7 @@
                     <div>
                         <h1>Videos</h1>
                         <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
-                            <div id="communityVideos"></div>
+                            <div id="communityVideos" class="communityVideos"></div>
                             <button id="communityVideosMore" class="roundedButton">See More</button>
                         </div>
                     </div>
@@ -109,6 +109,8 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
+=======
 
         <!-- <div class="modal fade" id="communityDisplayModal">
             <div class="modal-dialog modal-xs modal-dialog-centered">
@@ -164,6 +166,7 @@
                 </div>
             </div>
         </div>
+>>>>>>> parent of b8e3b71 (community creations edits w/ database)
 
         <div class="modal fade" id="communityNoticeModal">
             <div class="modal-dialog modal-xs modal-dialog-centered">
