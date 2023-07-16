@@ -378,8 +378,6 @@ $(function() {
         updateVoteCount(type, id, voteAction, function(response) {
             if (response === 'success') {
                 // Vote count updated successfully
-                const voteCountElement = targetElement.siblings('.forumPostViewMainVote');
-                const voteCount = parseInt(voteCountElement.text());
     
                 // Update the vote count display
                 if (isUpvote) {
