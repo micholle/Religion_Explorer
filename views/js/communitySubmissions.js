@@ -112,7 +112,7 @@ $(function() {
                                 '<img onclick="copyContentLink(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                                '<img onclick="bookmarkContent(this, \'' + videoDetails.creationid + '\', \'' + photoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
+                                '<img onclick="bookmarkContent(this, \'' + videoDetails.creationid + '\', \'' + videoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
                             '</div>' +
                         '</div>' +
 
