@@ -31,43 +31,34 @@
                         <div class="col-12 mh-100 userBasicInfo">
 
                             <div class="row d-flex justify-content-center align-items-center">
-                                <div class="col-12 mh-100 d-flex justify-content-start">
+                                <div class="col-12 mh-100 d-flex justify-content-start flex-column">
                                     <h1>[Placeholder]</h1>
+                                    <div class="row">
+                                        <div class="col-12 d-flex flex-row">
+                                            <p class="nicknameText">aka [Placeholder]</p>
+                                            <button class="editNicknameButton">Edit Nickname</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="row d-flex justify-content-center align-items-center nicknameContainer">
-                                <div class="col-12 mh-100 d-flex justify-content-start">
-                                    <p class="nicknameText">aka [Placeholder]</p>
-                                    <button class="editNicknameButton">Edit Nickname</button>
-                                </div>
-                            </div>
-
+                            
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-12 mh-100">
-                            <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <img src="../assets/img/editProfile/userBasicStats-clock.png" width="20px">
-                                    <p>Joined [Placeholder Date]</p>
-                                </div>
-                            </div>
+                    <div class="userBasicStatsOverview userBasicStats row d-flex justify-content-start align-items-center flex-column">
+                        <div class="col-12 d-flex justify-content-start align-items-center flex-row">
+                            <img src="../assets/img/editProfile/userBasicStats-clock.png">
+                            <p>Joined [Placeholder Date]</p>
+                        </div>
 
-                            <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <img src="../assets/img/editProfile/userBasicStats-star.png" width="20px">
-                                    <p>[Placeholder] Explorer Points</p>
-                                </div>
-                            </div>
+                        <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
+                            <img src="../assets/img/editProfile/userBasicStats-star.png">
+                            <p>[Placeholder] Explorer Points</p>
+                        </div>
 
-                            <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <img src="../assets/img/editProfile/userBasicStats-feather.png" width="20px">
-                                    <p>[Placeholder Religion]</p>
-                                </div>
-                            </div>
+                        <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
+                            <img src="../assets/img/editProfile/userBasicStats-feather.png">
+                            <p>[Placeholder Religion]</p>
                         </div>
                     </div>
                 </div>
@@ -107,12 +98,8 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="row">
-                                        <div class="col-12 d-flex justify-content-start align-items-start">
+                                        <div class="col-12 d-flex justify-content-start align-items-start flex-column">
                                             <input type="password" id="" name="" placeholder="Placeholder">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 d-flex justify-content-start align-items-start">
                                             <button class="editPasswordButton" id="editPasswordButton">Edit Password</button>
                                         </div>
                                     </div>

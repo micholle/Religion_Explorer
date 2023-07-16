@@ -43,28 +43,20 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-12 mh-100">
-                            <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <img src="../assets/img/editProfile/userBasicStats-clock.png" width="20px">
-                                    <p>Joined [Placeholder Date]</p>
-                                </div>
-                            </div>
+                    <div class="userBasicStatsOverview userBasicStats row d-flex justify-content-start align-items-center flex-column">
+                        <div class="col-12 d-flex justify-content-start align-items-center flex-row">
+                            <img src="../assets/img/editProfile/userBasicStats-clock.png">
+                            <p>Joined [Placeholder Date]</p>
+                        </div>
 
-                            <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <img src="../assets/img/editProfile/userBasicStats-star.png" width="20px">
-                                    <p>[Placeholder] Explorer Points</p>
-                                </div>
-                            </div>
+                        <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
+                            <img src="../assets/img/editProfile/userBasicStats-star.png">
+                            <p>[Placeholder] Explorer Points</p>
+                        </div>
 
-                            <div class="row d-flex justify-content-start align-items-center userBasicStats">
-                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <img src="../assets/img/editProfile/userBasicStats-feather.png" width="20px">
-                                    <p>[Placeholder Religion]</p>
-                                </div>
-                            </div>
+                        <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
+                            <img src="../assets/img/editProfile/userBasicStats-feather.png">
+                            <p>[Placeholder Religion]</p>
                         </div>
                     </div>
                 </div>

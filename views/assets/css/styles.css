@@ -1546,6 +1546,14 @@ p {
     height: 170px;
 }
 
+.userBasicStatsContainer .userBasicStatsOverview {
+    margin-top: 5px;
+}
+
+.userBasicStatsContainer .userBasicStatsOverview img {
+    width: 20px;
+}
+
 .userBasicStats {
     margin: 5px 0;
 }
@@ -1959,7 +1967,7 @@ p {
     font-size: 12px;
     height: 25px;
     padding: 0 20px;
-    margin: 0 10px;
+    margin: -1px 10px 0 10px;
     text-align: center;
     transition: background-color 0.5s ease;
     cursor: pointer;
