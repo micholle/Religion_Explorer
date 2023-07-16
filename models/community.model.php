@@ -2,11 +2,11 @@
 require_once "connection.php";
 
 class communityModel{
-	static public function mdlGetCommunityData(){
+	static public function mdlGetCommunityData() {
 		$db = new Connection();
         $pdo = $db->connect();
         
-        $stmt = $pdo->prepare("SELECT creationid, accountid, title, religion, description, filename, filetype, filesize, filedata, status, date FROM communitycreations");
+        $stmt = $pdo->prepare("SELECT creationid, username, title, religion, description, filename, filetype, filesize, filedata, status, date FROM communitycreations");
         $stmt->execute();
         $creations = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $creationPhotos = [];
@@ -18,7 +18,7 @@ class communityModel{
                 $creationPhotos += [
                     $creation["title"] => [
                         "creationid" => $creation["creationid"],
-                        "author" => $creation["accountid"],
+                        "author" => $creation["username"],
                         "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
                         "filename" => $creation["filename"],
                         "religion" => $creation["religion"],
@@ -31,7 +31,7 @@ class communityModel{
                 $creationVideos += [
                     $creation["title"] => [
                         "creationid" => $creation["creationid"],
-                        "author" => $creation["accountid"],
+                        "author" => $creation["username"],
                         "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
                         "filename" => $creation["filename"],
                         "religion" => $creation["religion"],
@@ -44,7 +44,7 @@ class communityModel{
                 $creationReadingMaterials += [
                     $creation["title"] => [
                         "creationid" => $creation["creationid"],
-                        "author" => $creation["accountid"],
+                        "author" => $creation["username"],
                         "religion" => $creation["religion"],
                         "description" => $creation["description"],
                         "date" => $creation["date"]
@@ -75,11 +75,11 @@ class communityModel{
 			$pdo->beginTransaction();
 
             //make the media quality lower
-            // $image = imagecreatefromstring($data["filedata"]);
-            // $quality = 50;
-            // $outputImagePath = "file.jpg";
-            // imagejpeg($image, $outputImagePath, $quality);
-            // imagedestroy($image);
+            $image = imagecreatefromstring($data["filedata"]);
+            $quality = 50;
+            $outputImagePath = "file.jpg";
+            imagejpeg($image, $outputImagePath, $quality);
+            imagedestroy($image);
 		
 			$stmt = $pdo->prepare("INSERT INTO communitycreations(creationid, username, title, religion, description, filename, filetype, filesize, filedata, status, date) VALUES (:creationid, :username, :title, :religion, :description, :filename, :filetype, :filesize, :filedata, :status, :date)");
 	
@@ -91,21 +91,23 @@ class communityModel{
             $stmt->bindParam(":filename", $data["filename"], PDO::PARAM_STR);
             $stmt->bindParam(":filetype", $data["filetype"], PDO::PARAM_STR);
             $stmt->bindParam(":filesize", $data["filesize"], PDO::PARAM_INT);
-            $stmt->bindParam(":filedata", $data['filedata'], PDO::PARAM_LOB);
+            $stmt->bindParam(":filedata", $data["filedata"], PDO::PARAM_LOB);
             $stmt->bindParam(":status", $data["status"], PDO::PARAM_STR);
             $stmt->bindParam(":date", $data["date"], PDO::PARAM_STR);
             
 			$stmt->execute();
-	
 			$pdo->commit();
+            
 			return "success";
 		} catch (Exception $e) {
+            echo $e->getMessage();
 			$pdo->rollBack();
 			return "error";
 		}
 
 		$pdo = null;
 		$stmt = null;
+
     }
 
 }
