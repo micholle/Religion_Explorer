@@ -47,7 +47,6 @@ $save_account->password = $_POST["password"];
 $save_account->verificationCode = $_POST["verificationCode"];
 
 $save_account->saveAccountRecord();
-//hello
 ?>
 
 
