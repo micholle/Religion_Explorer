@@ -26,26 +26,29 @@
                 <div class="col-4 mh-100 loginSignupForm">
                     <div class="container">
                         <div class="row">
-                            <div class="col-12 mh-100 d-flex justify-content-center align-items-center flex-column">
+                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                 <img src="../assets/img/applogo.png" height="110px" width="110px">
                                 <h3>Sign Up</h3>
                                 <form method="POST">
-                                    <input type="text" id="email" name="email" placeholder="Email">
-                                    <input type="text" id="username" name="username" placeholder="Username">
-                                    <input type="password" id="password" name="password" placeholder="Password">
-                                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
-                                    <select id="religion" name="religion">
-                                        <option value="" disabled selected hidden>Choose your religion</option>
-                                        <option value="Buddhism">Buddhism</option>
-                                        <option value="Christianity">Christianity</option>
-                                        <option value="Hinduism">Hinduism</option>
-                                        <option value="Islam">Islam</option>
-                                        <option value="Judaism">Judaism</option>
-                                        <option value="Non-religious">Non-religious</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <!-- <button id="verificationCodeText" class="registrationSubmitButton">Test</button> -->
-                                    <button type="submit" id="btn-signup" name="btn-signup" class="registrationSubmitButton">Sign Up</button>
+                                    <div class="d-flex justify-content-center align-items-center flex-column">
+                                        <input type="text" id="email" name="email" placeholder="Email">
+                                        <input type="text" id="username" name="username" placeholder="Username">
+                                        <input type="password" id="password" name="password" placeholder="Password">
+                                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+                                        <select id="religion" name="religion">
+                                            <option value="" disabled selected hidden>Choose your religion</option>
+                                            <option value="Buddhism">Buddhism</option>
+                                            <option value="Christianity">Christianity</option>
+                                            <option value="Hinduism">Hinduism</option>
+                                            <option value="Islam">Islam</option>
+                                            <option value="Judaism">Judaism</option>
+                                            <option value="Non-religious">Non-religious</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" id="btn-signup" name="btn-signup" class="registrationSubmitButton">Sign Up</button>
+                                    </div>
                                     <p class="terms">By signing up, you agree to Religion Explorer’s <span class="signupLink">Terms of Service</span> and have acknowledged our <span class="signupLink">Privacy Policy</span>.</p>
                                 </form>
                             </div>
