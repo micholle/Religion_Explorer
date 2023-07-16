@@ -76,12 +76,27 @@ $(function() {
                 $("#reportedOnColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
                 $("#reportedByColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
                 $("#actionColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-check.png" onclick="resolveReport(' + contentid + ')">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-x.png" onclick="deleteContent(' + contentid + ')">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-exclamation.png" onclick="reportUser(' + contentid + ')"">' +
+                    '<img class="reportButton" id="resolveReportContentBtn" src="../assets/img/admin/action-check.png" onclick="resolveReport(' + contentid + ')">' +
+                    '<img class="reportButton" id="deleteContentBtn" src="../assets/img/admin/action-x.png" onclick="deleteContent(' + contentid + ')">' +
+                    '<img class="reportButton" id="reportUserBtn" src="../assets/img/admin/action-exclamation.png" onclick="reportUser(' + contentid + ')"">' +
                 '</div>');
             }
         }
+    });
+
+    $("#resolveReportContentBtn").click(function(){
+        $('#resolveReportContentModal').modal();
+        $('#resolveReportContentModal').show();
+    });
+
+    $("#deleteContentBtn").click(function(){
+        $('#deleteContentModal').modal();
+        $('#deleteContentModal').show();
+    });
+
+    $("#reportUserBtn").click(function(){
+        $('#reportUserModal').modal();
+        $('#reportUserModal').show();
     });
 
     $("#contentSearch").keyup(function () { 

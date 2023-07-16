@@ -81,12 +81,27 @@ $(function() {
                 $("#userReportedOnColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
                 $("#userReportedByColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
                 $("#userActionColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-check.png" onclick="resolveReport(' + userid + ')">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-slash.png" onclick="suspendUser(' + userid + ')">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-dash.png" onclick="banUser(' + userid + ')"">' +
+                    '<img class="reportButton" id="resolveReportUserBtn" src="../assets/img/admin/action-check.png" onclick="resolveReport(' + userid + ')">' +
+                    '<img class="reportButton" id="suspendUserBtn" src="../assets/img/admin/action-slash.png" onclick="suspendUser(' + userid + ')">' +
+                    '<img class="reportButton" id="banUserBtn" src="../assets/img/admin/action-dash.png" onclick="banUser(' + userid + ')"">' +
                 '</div>');
             }
         }
+    });
+        
+    $("#resolveReportUserBtn").click(function(){
+        $('#resolveReportUserModal').modal();
+        $('#resolveReportUserModal').show();
+    });
+
+    $("#suspendUserBtn").click(function(){
+        $('#suspendUserModal').modal();
+        $('#suspendUserModal').show();
+    });
+
+    $("#banUserBtn").click(function(){
+        $('#banUserModal').modal();
+        $('#banUserModal').show();
     });
 
     $("#userSearch").keyup(function () { 

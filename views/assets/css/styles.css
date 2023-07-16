@@ -211,6 +211,11 @@ h5 {
     font-family: Lexend;
 }
 
+#reportUserModal p {
+    margin-top: 10px;
+    text-align: center;
+}
+
 #reportUserModal textarea {
     color: #3E3E3E;
     border-radius: 20px;
@@ -237,6 +242,12 @@ h5 {
     margin-top: 10px;
     text-align: center;
 }
+
+#reportContentModal p {
+    margin-top: 10px;
+    text-align: center;
+}
+
 
 /* map */
 .mapContainer {
@@ -3362,4 +3373,53 @@ p {
 
 .reportButton {
     cursor: pointer;
+}
+
+.adminActionModal .modal-xs {
+    width: 350px;
+}
+
+.adminActionModal h5 {
+    margin-bottom: 10px;
+}
+
+.adminActionModal .roundedButtonVariant {
+    margin-right: 10px !important;
+}
+
+.adminActionModal input[type=text] {
+    background-color: #FAFAFA;
+    color: #3E3E3E;
+    border-radius: 15px;
+    border: solid #D6D6D6 2px;
+    font-family: Lexend;
+    font-size: 15px;
+    height: 45px;
+    margin-bottom: 5px;
+    margin-top: 0 !important;
+    padding: 0px 15px;
+    text-align: center;
+    display: flex;
+    width: 100%;
+}
+
+.adminActionModal select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: solid #D6D6D6 2px;
+    border-radius: 15px;
+    font-family: Lexend;
+    height: 45px;
+    width: 100%;
+    padding: 0px 15px;
+    margin-bottom: 15px;
+    color: #3E3E3E;
+    background-color: #FAFAFA;
+    font-size: 15px;
+    background-image: url("../img/dropdown.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    text-align: center;
 }

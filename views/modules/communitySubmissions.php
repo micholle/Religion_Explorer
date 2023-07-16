@@ -49,6 +49,7 @@
         </div>
         <div id="toast" class="toast"></div>
 
+        <!--Modals-->
         <div class="modal fade" id="reportContentModal">
             <div class="modal-dialog modal-xs modal-dialog-centered">
                 <div class="modal-content">
