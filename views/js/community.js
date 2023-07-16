@@ -1,4 +1,4 @@
-$(function() {
+$(function() {    
     $.ajax({
         url: "../../ajax/showSidebar.ajax.php",
         method: "POST",
@@ -20,20 +20,12 @@ $(function() {
                 var photoList = communityData["photos"][photo];
                 for (photoData in photoList) {
                     var photoDetails = photoList[photoData];
-
-                    fetch(photoDetails.file)
-                    .then(response => response.blob())
-                    .then(blob => {
-                        const url = URL.createObjectURL(blob);
-
-                        $("#communityPhotos").append("<img onclick='viewContent(\"" + photoDetails.creationid + "\")' src=" + url +"> &nbsp;");
-                        
-                        // URL.revokeObjectURL(url);
-                    });
+                    
+                    $("#communityPhotos").append("<img class='communityFile' onclick='viewContent(\"" + photoDetails.creationid + "\")' src='" + photoDetails.filedata +"'>");
 
                     photosCounter++;
 
-                    if (photosCounter == 3) {
+                    if (photosCounter == 5) {
                         break;
                     }
                 }
@@ -44,19 +36,11 @@ $(function() {
                 for (videoData in videoList) {
                     var videoDetails = videoList[videoData];
 
-                    fetch(videoDetails.file)
-                    .then(response => response.blob())
-                    .then(blob => {
-                        const url = URL.createObjectURL(blob);
-
-                        $("#communityVideos").append("<video onclick='viewContent(\"" + videoDetails.creationid + "\")' width='200' autoplay muted controls> <source src=" + url +"> </video> &nbsp;");
-                        
-                        // URL.revokeObjectURL(url);
-                    });
+                    $("#communityVideos").append("<video class='communityFile' onclick='viewContent(\"" + videoDetails.creationid + "\")' autoplay muted controls> <source src='" + videoDetails.filedata +"'> </video>");
 
                     videosCounter++
 
-                    if (videosCounter == 3) {
+                    if (videosCounter == 5) {
                         break;
                     }
                 }
@@ -67,13 +51,11 @@ $(function() {
             
                 for (let readingMaterialData in readingMaterialsList) {
                     var readingMaterialDetails = readingMaterialsList[readingMaterialData];
-            
-                    // var readingMaterialTopics = "";
-                    // for (let topic in readingMaterialDetails.topics) {
-                    //     readingMaterialTopics += readingMaterialDetails.topics[topic] + " ";
-                    // }
-            
-                    var showReadingMaterial = "<div onclick='viewContent(\"" + readingMaterialDetails.contentid + "\")'>" + readingMaterialData + " | " + readingMaterialDetails.topics + "<br>" + readingMaterialDetails.author + " | " + readingMaterialDetails.date + "<br>" + readingMaterialDetails.description + "</div> <br>"
+
+                    var [year, month, day] = readingMaterialDetails.date.split('-');
+                    var formattedDate = `${month}-${day}-${year}`;   
+
+                    var showReadingMaterial = "<div><div class='communityReadingMaterials' onclick='viewContent(\"" + readingMaterialDetails.contentid + "\")'>" + readingMaterialData + "<div class='libraryReadMatsTag' style='margin: 3px'>" + readingMaterialDetails.religion + "</div></div>" + readingMaterialDetails.author + " | " + formattedDate+ "<br>" + readingMaterialDetails.description + "</div> <br>"
                     $("#communityReadingMaterials").append(showReadingMaterial);
 
                     readingMaterialsCounter++;
@@ -94,8 +76,7 @@ $(function() {
     $("#communityPublish").click(function(){
         var username = $("#usernamePlaceholder").text();
         var title = $("#communityTitle").val();
-        var religion = "Christianity";
-        var topics = JSON.stringify(["sample1", "sample2"]);
+        var religion = $("#communityCategory").val();
         var description = $("#communityDescription").val();
 
         if ( $("#communityUpload")[0].files[0] != null){
@@ -117,7 +98,6 @@ $(function() {
         creation.append("username", username);
         creation.append("title", title);
         creation.append("religion", religion);
-        creation.append("topics", topics);
         creation.append("description", description);
         creation.append("filedata", filedata);
         creation.append("filename", filename);
@@ -133,7 +113,7 @@ $(function() {
           dataType: "text",
           processData: false,
           contentType: false,
-          success: function(data) {
+          success: function(data) {            
             $("#communityModal").removeClass("fade").modal("hide");
             $("#communityModal").modal("dispose");
     
@@ -170,7 +150,7 @@ $(function() {
             complete: function() {
                 $("#communityUpload").val("");
                 $("#communityTitle").val("");
-                $("#communityCategory").val("");
+                $("#communityCategory").val("Religion");
                 $("#communityDescription").val("");
               }
         });
@@ -204,58 +184,8 @@ $(function() {
     // });  
 });
 
-function viewContent(contentid) {  
-    $("#communityDisplayContent").html("");
-    
-    $.ajax({
-        url: "../../ajax/getCommunityData.ajax.php",
-        method: "POST",
-        success:function(data){
-            var communityData = data;
-
-            for (let fileType in communityData) {
-                for (let content in communityData[fileType]) {
-                    for (let contentDetails in communityData[fileType][content]){
-                        if (contentDetails == "creationid" && communityData[fileType][content][contentDetails] == creationid) {
-                            if (fileType == "photos") {
-                                for (let photo in communityData["photos"]) {
-                                    var photoList = communityData["photos"][photo];
-                                    for (photoData in photoList) {
-                                        var photoData = photoList[photoData];
-
-                                        var modalContent = "<div> <img src='../assets/img/community-download.png' onclick='downloadContent(\"" + photoData.file + "\")'>" +
-                                        "<img src='../assets/img/community-report.png' onclick='reportContent(\"" + photoData + "\")'>" + 
-                                        "<img src='../assets/img/community-copy.png' id='copyContent' onclick='copyContent(\"" + photoData.file + "\")'>" +
-                                        "<img src='../assets/img/community-bookmark.png' id='bookmarkContent' onclick='bookmarkContent(\"" + creationid + "\")'>" + 
-                                        "<img src=" + photoData.file +">" + 
-                                        "<br>" + photoData + "<br>" + photoData.accountid + " | " + photoData.date +
-                                        "<br>" + photoData.description + "</div>";
-                                    }
-                                }
-                            } else if (fileType == "videos") {
-                                var modalContent = "<div> <img src='../assets/img/community-download.png' onclick='downloadContent(\"" + communityData[fileType][content]["file"] + "\")'>" +
-                                "<img src='../assets/img/community-report.png' onclick='reportContent(\"" + content + "\")'>" + 
-                                "<img src='../assets/img/community-copy.png' id='copyContent' onclick='copyContent(\"" + communityData[fileType][content]["file"] + "\")'>" +
-                                "<img src='../assets/img/community-bookmark.png' id='bookmarkContent' onclick='bookmarkContent(\"" + contentid + "\")'>" + 
-                                "<video width='200' autoplay muted controls> <source src=" + communityData[fileType][content]["file"] +"> </video>" + 
-                                "<br>" + content + "<br>" + communityData[fileType][content]["author"] + " | " + communityData[fileType][content]["date"] +
-                                "<br>" + communityData[fileType][content]["description"] + "</div>";
-                            } else {
-                                var modalContent = "<div> <img src='../assets/img/community-report.png' onclick='reportContent(\"" + content + "\")'>" + 
-                                "<img src='../assets/img/community-copy.png' id='copyContent' onclick='copyContent(\"" + communityData[fileType][content]["file"] + "\")'>" +
-                                "<img src='../assets/img/community-bookmark.png' id='bookmarkContent' onclick='bookmarkContent(\"" + contentid + "\")'>" + 
-                                "<br>" + content + "<br>" + communityData[fileType][content]["author"] + " | " + communityData[fileType][content]["date"] +
-                                "<br>" + communityData[fileType][content]["description"] + "</div>";
-                            }
-                            $("#communityDisplayContent").append(modalContent);
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    $("#communityDisplayModal").modal();
+function viewContent(contentid) {
+    //redirect to community creations submission page and filter to only show file with matching content id
 }
 
 function downloadContent(file) {

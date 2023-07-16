@@ -687,6 +687,30 @@ h5 {
     margin-top: 10px;
 }
 
+.communityPhotos {
+    display: flex;
+}
+
+.communityFile {
+    width: 20%;
+    height: 150px;
+    padding: 5px;
+    border-radius: 10px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.communityReadingMaterials {
+    display: flex;
+    cursor: pointer;
+    font-size: 20px;
+    align-items: center;
+}
+
+.communitySubVideo {
+    width: 100%;
+    border-radius: 10px;
+}
 
 .createSubmissionsBox {
     border-bottom: solid #D0D0D0 2px;
