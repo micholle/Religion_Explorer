@@ -48,5 +48,3 @@ $save_account->verificationCode = $_POST["verificationCode"];
 
 $save_account->saveAccountRecord();
 ?>
-
-

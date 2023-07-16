@@ -74,9 +74,7 @@ class ModelAccount{
 			$pdo = null;
 			$stmt = null;
 		}
-	}
-	
-	  
+	}	 
 
 	static public function mdlVerifyCode($data) {
 		$db = new Connection();
