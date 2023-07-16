@@ -17,7 +17,7 @@ function create_sidebar() {
                 <ul>
                     <li>
                         <a id="sidebarProfile" href="userProfile.php">
-                            <img src="../assets/img/editProfile/lamb.png">
+                            <img src="../assets/img/editProfile/cow.png">
                             <span class="navItem">Profile</span>
                         </a>
                     </li>

@@ -26,7 +26,7 @@
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
                 <div class="col-3 d-flex justify-content-end align-items-end">
-                    <img src="../assets/img/editProfile/lamb.png" width="175px">
+                    <img src="../assets/img/editProfile/cow.png" width="175px">
                 </div>
 
                 <div class="col-4 userBasicStatsContainer">
@@ -47,21 +47,21 @@
                         <div class="col-12 mh-100">
                             <div class="row d-flex justify-content-start align-items-center userBasicStats">
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <img src="../assets/img/userBasicStats-clock.png" width="20px">
+                                    <img src="../assets/img/editProfile/userBasicStats-clock.png" width="20px">
                                     <p>Joined [Placeholder Date]</p>
                                 </div>
                             </div>
 
                             <div class="row d-flex justify-content-start align-items-center userBasicStats">
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <img src="../assets/img/userBasicStats-star.png" width="20px">
+                                    <img src="../assets/img/editProfile/userBasicStats-star.png" width="20px">
                                     <p>[Placeholder] Explorer Points</p>
                                 </div>
                             </div>
 
                             <div class="row d-flex justify-content-start align-items-center userBasicStats">
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <img src="../assets/img/userBasicStats-feather.png" width="20px">
+                                    <img src="../assets/img/editProfile/userBasicStats-feather.png" width="20px">
                                     <p>[Placeholder Religion]</p>
                                 </div>
                             </div>
@@ -177,12 +177,92 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="userProfileStatsContentBox">
+                                        <div class="row no-gutters">
+                                            <div class="col-3">
+                                                <div class="userProfileStatsContent d-flex">
+                                                    <div class="userProfileStatsContentImg" >
+                                                        <img src="../assets/img/discussionForum/upvote-active.png">
+                                                    </div>
+                                                    <div class="userProfileStatsContentNum">
+                                                        <h1>0%</h1>
+                                                        <p>upvote rate</p>
+                                                    </div>
+                                                </div>
+                                                <div class="userProfileStatsContent d-flex">
+                                                    <div class="userProfileStatsContentImg">
+                                                        <img src="../assets/img/discussionForum/downvote.png">
+                                                    </div>
+                                                    <div class="userProfileStatsContentNum">
+                                                        <h1>0%</h1>
+                                                        <p>downvote rate</p>
+                                                    </div>
+                                                </div>
+                                                <div class="userProfileStatsContent d-flex">
+                                                    <div class="userProfileStatsContentImg">
+                                                        <img src="../assets/img/discussionForum/comments.png">
+                                                    </div>
+                                                    <div class="userProfileStatsContentNum">
+                                                        <h1>0%</h1>
+                                                        <p>comment rate</p>
+                                                    </div>
+                                                </div>
+                                                <div class="userProfileStatsContent">
+                                                    <div class="userProfileStatsContentNumVar d-flex justify-content-center align-items-center flex-column">
+                                                        <h1>0%</h1>
+                                                        <p>total engagement rate</p>
+                                                    </div>
+                                                </div>
+                                                <div class="userProfileStatsBox">
+                                                    <div class="userProfileStatsContentNumVar d-flex justify-content-center align-items-center flex-column">
+                                                        <h1>0%</h1>
+                                                        <p>Your total engagement rate [increased/decreased] by this compared to the previous [placeholder time].</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="userProfileStatsInnerDiv">
+                                                    <img src="../assets/img/placeholder.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="userProfileStatsMain">
-                                <div class="userProfileStatsHeader">
+                                    <div class="userProfileStatsHeader">
                                         <h1>Overview</h1>
+                                    </div>
+                                    <div class="userProfileStatsOverviewBody justify-content-start">
+                                        <div class="userProfileStatsContent d-flex flex-row">
+                                            <div class="userProfileStatsContentImg">
+                                                <img src="../assets/img/editProfile/lion.png">
+                                            </div>
+                                            <div class="userProfileStatsContentNum">
+                                                <p>Profile Views</p>
+                                                <h1>[Number]<span class="userProfileStatsPercent">[Percentage]</span></h1>
+                                            </div>
+                                        </div>
+
+                                        <div class="userProfileStatsInnerDiv d-flex justify-content-center">
+                                            <img src="../assets/img/placeholder.png">
+                                        </div>
+                                    </div>
+                                    <div class="userProfileStatsOverviewBody justify-content-start">
+                                        <div class="userProfileStatsContent d-flex flex-row">
+                                            <div class="userProfileStatsContentImg">
+                                                <img src="../assets/img/editProfile/lion.png">
+                                            </div>
+                                            <div class="userProfileStatsContentNum">
+                                                <p>Video Views</p>
+                                                <h1>[Number]<span class="userProfileStatsPercent">[Percentage]</span></h1>
+                                            </div>
+                                        </div>
+
+                                        <div class="userProfileStatsInnerDiv d-flex justify-content-center">
+                                            <img src="../assets/img/placeholder.png">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -143,6 +143,7 @@ h5 {
 .modal-content {
     text-align: justify;
     padding: 30px;
+    transition: opacity 0.3s ease;
 }
 
 .modal-title {
@@ -158,7 +159,7 @@ h5 {
 }
 
 .reportDescription {
-    font-size: 16px;
+    font-size: 15px;
     color: #3E3E3E;
     text-align: center;
     line-height: 20px;
@@ -174,7 +175,7 @@ h5 {
     border-radius: 20px;
     border: solid #B0BEC5 2px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     height: 30px;
     padding: 0px 15px;
     width: 100%;
@@ -189,7 +190,7 @@ h5 {
     border-radius: 20px;
     border: solid #B0BEC5 2px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     height: 120px;
     padding: 10px 15px;
     width: 100%;
@@ -214,7 +215,7 @@ h5 {
     color: #3E3E3E;
     border-radius: 20px;
     border: solid #B0BEC5 2px;
-    font-size: 16px;
+    font-size: 15px;
     height: 120px;
     padding: 10px 15px;
     width: 100%;
@@ -596,7 +597,7 @@ h5 {
     color: white;
     margin: 5px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     width: 100%;
     cursor: pointer;
 }
@@ -610,7 +611,7 @@ h5 {
     margin-bottom: 10px;
     color: #2CA464;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     width: 100%;
     cursor: pointer;
 }
@@ -644,7 +645,7 @@ h5 {
     border-radius: 15px;
     border: solid #D6D6D6 2px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     height: 45px;
     padding: 0px 15px;
     width: 100%;
@@ -662,7 +663,7 @@ h5 {
     width: 100%;
     color: #3E3E3E;
     background-color: #FAFAFA;
-    font-size: 16px;
+    font-size: 15px;
     background-image: url("../img/dropdown.png");
     background-size: 10px;
     background-repeat: no-repeat;
@@ -675,7 +676,7 @@ h5 {
     border-radius: 15px;
     border: solid #D6D6D6 2px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     height: 125px;
     padding: 10px 15px;
     width: 100%;
@@ -974,7 +975,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 15px;
     margin: 4px 2px;    
     cursor: pointer;
     transition: 0.3s;
@@ -998,7 +999,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 15px;
     margin: 4px 2px;
     cursor: pointer;
     transition: 0.3s;
@@ -1160,7 +1161,7 @@ p {
     border: solid #298f58 2px;
     border-radius: 15px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     margin: 20px 10px;
     padding: 7.5px 15px;
     text-align: center;
@@ -1199,7 +1200,7 @@ p {
     border-radius: 15px;
     border: solid #D6D6D6 2px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     height: 45px;
     margin-bottom: 5px;
     margin-top: 0 !important;
@@ -1214,7 +1215,7 @@ p {
     border-radius: 15px;
     border: solid #D6D6D6 2px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     height: 45px;
     margin-bottom: 5px;
     margin-top: 0 !important;
@@ -1260,7 +1261,7 @@ p {
     margin-bottom: 5px;
     color: #3E3E3E;
     background-color: #FAFAFA;
-    font-size: 16px;
+    font-size: 15px;
     background-image: url("../img/dropdown.png");
     background-size: 10px;
     background-repeat: no-repeat;
@@ -1288,7 +1289,7 @@ p {
     border: solid #298f58 2px;
     border-radius: 15px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     margin: 0px 10px;
     padding: 5px 15px;
     text-align: center;
@@ -1305,7 +1306,7 @@ p {
     border: solid white 2px;
     border-radius: 15px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     margin: 0px -10px;
     padding: 5px 15px;
     text-align: center;
@@ -1327,7 +1328,7 @@ p {
     border: none;
     border-radius: 15px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     height: 45px;
     margin: 5px 0px;
     width: 325px;
@@ -1340,7 +1341,7 @@ p {
     border-radius: 15px;
     border: solid #D6D6D6 2px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     height: 45px;
     margin-bottom: 5px;
     margin-top: 0 !important;
@@ -1355,7 +1356,7 @@ p {
     border-radius: 15px;
     border: solid #D6D6D6 2px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     height: 45px;
     margin-bottom: 5px;
     margin-top: 0 !important;
@@ -1427,7 +1428,7 @@ p {
 }
 
 .sidebar ul li a {
-    font-size: 16px;
+    font-size: 15px;
     border: solid white 2px;
     color: #3E3E3E;
     background-color: white;
@@ -1511,14 +1512,14 @@ p {
 
 .sidebar .dropdown .dropdownMenu a {
     background-color: white;
-    font-size: 16px;
+    font-size: 15px;
     width: 245px;
     border: solid #D0D0D0 2px;
     transition: 0.5s ease;
 }
 
 .sidebar .dropdown .dropdownMenu a:hover {
-    font-size: 16px;
+    font-size: 15px;
     background-color: #f4f4f4;
 }
 
@@ -1534,7 +1535,7 @@ p {
 }
 
 .basicInfoContainer p {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .basicInfoContainer h1 {
@@ -1560,7 +1561,7 @@ p {
     border-style: none;
     border-radius: 30px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     height: 35px;
     padding: 0 30px;
     text-align: center;
@@ -1578,7 +1579,7 @@ p {
     border-style: none;
     border-radius: 30px;
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     height: 35px;
     padding: 0 30px;
     text-align: center;
@@ -1587,6 +1588,24 @@ p {
 }
 
 .roundedButtonVariant:focus {
+    outline: none;
+}
+
+.roundedButtonVariantTwo {
+    background-color: #F05454;
+    color: white;
+    border-style: none;
+    border-radius: 30px;
+    font-family: Lexend;
+    font-size: 15px;
+    height: 35px;
+    padding: 0 30px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+}
+
+.roundedButtonVariantTwo:focus {
     outline: none;
 }
 
@@ -1612,7 +1631,7 @@ p {
 
 .userTabsContainer .tabs {
     font-family: Lexend;
-    font-size: 16px;
+    font-size: 15px;
     margin-right: 30px;
     margin-top: 15px;
 }
@@ -1631,151 +1650,6 @@ p {
     border-bottom: solid #2CA464 2px;
 }
 
-.bookmarkContainer {
-    border-radius: 15px;
-    display: flex;
-    width: 100%;
-    font-family: Lexend;
-    background-color: white;
-    border: solid #D0D0D0 2px;
-    border-radius: 15px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-.bookmarkContainer p {
-    line-height: normal;
-    margin: 10px 0 10px 5px !important;
-    padding: 0 !important;
-}
-
-.bookmarkImgContainer {
-    width: 4%;
-}
-
-.bookmarkContent {
-    width: 96%;
-}
-
-.userProfBookmark {
-    width: 20px;
-    height: 20px;
-    margin: 5px 0px 5px 10px;
-}
-
-.postVotes {
-    width: 20px;
-    height: 20px;
-}
-
-.editNicknameButton {
-    background-color: #B3B3B3;
-    color: white;
-    border-style: none;
-    border-radius: 30px;
-    font-family: Lexend;
-    font-size: 12px;
-    height: 25px;
-    padding: 0 20px;
-    margin: 0 10px;
-    text-align: center;
-    transition: background-color 0.5s ease;
-}
-
-.nicknameContainer {
-    margin-bottom: 15px;
-    height: 25px;
-}
-
-.editProfileContainer {
-    font-family: Lexend;
-    padding: 20px 0;
-}
-
-.editProfileContainer p {
-    font-size: 16x;
-    margin: 10px 0;
-    text-align: center;
-}
-
-.editProfileContainer input[type=text],input[type=password] {
-    background-color: #FAFAFA;
-    width: 80%;
-    color: #3E3E3E;
-    border-radius: 15px;
-    border: solid #D6D6D6 2px;
-    font-family: Lexend;
-    font-size: 16px;
-    height: 45px;
-    margin: 5px 0px;
-    padding: 0px 15px;
-}
-
-.editProfileContainer select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    border: solid #D6D6D6 2px;
-    border-radius: 15PX;
-    font-family: Lexend;
-    height: 45px;
-    margin: 5px 0px;
-    padding: 0px 15px;
-    width: 80%;
-    color: #3E3E3E;
-    background-color: #FAFAFA;
-    font-size: 16px;
-    background-image: url("../img/dropdown.png");
-    background-size: 10px;
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-}
-
-.settingsBlock input {
-    cursor: pointer;
-    position: relative;
-    width: 50px;
-    height: 25px;
-    border-radius: 25px;
-    outline: none;
-    background-color: #B0BEC5;
-    -webkit-appearance: none;
-    transition: 0.3s;
-}
-
-.settingsBlock input::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 30%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    height: 1.05rem;
-    width: 1.05rem;
-    background-color: white;
-    transition: left .3s;
-}
-
-.settingsBlock input:checked {
-    background-color: #2CA464;
-}
-
-.settingsBlock input:checked::after {
-    left: 70%;
-}
-
-.settingsContainer {
-    border: solid #D6D6D6 2px;
-    border-radius: 15px;
-}
-
-.settingsContainer .col-12 {
-    padding: 25px 25px 0px 25px !important;
-}
-
-.settingsBlock label {
-    margin: 1px 0 0 10px;
-}
 
 .personalInfoContainer input:focus {
     border-color: #2CA464 !important;
@@ -1789,20 +1663,6 @@ p {
     transition: 0.5s;
 }
 
-.editPasswordButton {
-    background-color: #B3B3B3;
-    color: white;
-    border-style: none;
-    border-radius: 30px;
-    font-family: Lexend;
-    font-size: 12px;
-    height: 25px;
-    padding: 0 15px;
-    margin-right: 10px;
-    text-align: center;
-    transition: background-color 0.5s ease;
-} 
-
 .userProfileTab {
     width: 100%;
     display: flex;
@@ -1812,7 +1672,7 @@ p {
 }
   
 .userProfileTab .userProfileTabBtn {
-    font-size: 16px;
+    font-size: 15px;
     font-family: Lexend;
     color: #3E3E3E;
     background: none;
@@ -1893,7 +1753,7 @@ p {
     padding: 5px 15px;
     width: 140px;
     color: #3E3E3E;
-    font-size: 16px;
+    font-size: 15px;
     background-image: url("../img/dropdown.png");
     background-size: 10px;
     background-repeat: no-repeat;
@@ -1901,11 +1761,11 @@ p {
 }
 
 .userProfileStatsContainer .col-8 {
-    padding-right: 5px !important;
+    padding-right: 10px !important;
 }
 
 .userProfileStatsContainer .col-4 {
-    padding-left: 5px !important;
+    padding-left: 10px !important;
 }
 
 .userProfileStatsMain {
@@ -1913,7 +1773,111 @@ p {
     border: solid #D0D0D0 2px;
     border-radius: 15px;
     padding: 20px;
-    height: 500px;
+    height: 550px;
+}
+
+.userProfileStatsContent {
+    width: 100%;
+}
+
+.userProfileStatsContentBox {
+    margin-top: 20px;
+}
+
+.userProfileStatsContentImg {
+    width: 35%;
+}
+
+.userProfileStatsContentImg img {
+    width: 40px;
+}
+
+.userProfileStatsContentNum {
+    width: 65%;
+}
+
+.userProfileStatsContentNum h1 {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 28px;
+    color: #3E3E3E;
+}
+
+.userProfileStatsContentNum p {
+    margin-top: -7.5px !important;
+    padding: 0 !important;
+    font-size: 12px;
+    color: #9B9B9B;
+}
+
+.userProfileStatsContentNumVar h1 {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 40px;
+    color: #3E3E3E;
+}
+
+.userProfileStatsContentNumVar p {
+    font-size: 12px;
+    color: #9B9B9B;
+    text-align: center;
+}
+
+.userProfileStatsContentBox .col-9 {
+    padding: 0 0 0 15px !important;
+}
+
+.userProfileStatsInnerDiv {
+    border: solid #D0D0D0 2px;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.userProfileStatsInnerDiv img {
+    width: 100%;
+    height: 100%;
+}
+
+.userProfileStatsOverviewBody {
+    margin-top: 20px;
+}
+
+.userProfileStatsOverviewBody .userProfileStatsContentImg {
+    width: 10%;
+}
+
+.userProfileStatsOverviewBody .userProfileStatsContentNum {
+    width: 90%;
+}
+
+.userProfileStatsOverviewBody .userProfileStatsContentImg img {
+    width: 30px;
+}
+
+.userProfileStatsOverviewBody .userProfileStatsContentNum p {
+    margin-top: 0 !important;
+    color: #3E3E3E;
+}
+
+.userProfileStatsOverviewBody .userProfileStatsContentNum h1 {
+    margin-top: -25px !important;
+    font-size: 24px;
+}
+
+.userProfileStatsOverviewBody .userProfileStatsContentNum h1 span {
+    color: #D0D0D0;
+    font-size: 12px;
+    padding-left: 5px;
+}
+
+.userProfileStatsOverviewBody .userProfileStatsInnerDiv {
+    padding: 7.5px;
+    margin: 10px 0;
+}
+
+.userProfileStatsOverviewBody .userProfileStatsInnerDiv img {
+    width: 100%;
+    height: 130px;
 }
 
 .achievementsContainer {
@@ -1945,6 +1909,352 @@ p {
 .achievementsBox img {
     width: 75px;
 }
+
+.bookmarkContainer {
+    border-radius: 15px;
+    display: flex;
+    width: 100%;
+    font-family: Lexend;
+    background-color: white;
+    border: solid #D0D0D0 2px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.bookmarkContainer p {
+    line-height: normal;
+    margin: 10px 0 10px 5px !important;
+    padding: 0 !important;
+}
+
+.bookmarkImgContainer {
+    width: 4%;
+}
+
+.bookmarkContent {
+    width: 96%;
+}
+
+.userProfBookmark {
+    width: 20px;
+    height: 20px;
+    margin: 5px 0px 5px 10px;
+}
+
+.postVotes {
+    width: 20px;
+    height: 20px;
+}
+
+/*edit profile*/
+
+.editNicknameButton {
+    background-color: #B3BEC4;
+    color: white;
+    border-style: none;
+    border-radius: 30px;
+    font-family: Lexend;
+    font-size: 12px;
+    height: 25px;
+    padding: 0 20px;
+    margin: 0 10px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+}
+
+.editNicknameButton:focus {
+    outline: none;
+}
+
+.nicknameContainer {
+    margin-bottom: 15px;
+    height: 25px;
+}
+
+.editProfileContainer {
+    font-family: Lexend;
+    padding: 20px 0;
+}
+
+.editProfileContainer p {
+    font-size: 15x;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.editProfileContainer input[type=text],input[type=password] {
+    background-color: #FAFAFA;
+    width: 80%;
+    color: #3E3E3E;
+    border-radius: 15px;
+    border: solid #D6D6D6 2px;
+    font-family: Lexend;
+    font-size: 15px;
+    height: 45px;
+    margin: 5px 0px;
+    padding: 0px 15px;
+}
+
+.editProfileContainer select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: solid #D6D6D6 2px;
+    border-radius: 15PX;
+    font-family: Lexend;
+    height: 45px;
+    margin: 5px 0px;
+    padding: 0px 15px;
+    width: 80%;
+    color: #3E3E3E;
+    background-color: #FAFAFA;
+    font-size: 15px;
+    background-image: url("../img/dropdown.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+}
+
+.settingsBlock input {
+    cursor: pointer;
+    position: relative;
+    width: 50px;
+    height: 25px;
+    border-radius: 25px;
+    outline: none;
+    background-color: #B0BEC5;
+    -webkit-appearance: none;
+    transition: 0.3s;
+}
+
+.settingsBlock input::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    height: 1.05rem;
+    width: 1.05rem;
+    background-color: white;
+    transition: left .3s;
+}
+
+.settingsBlock input:checked {
+    background-color: #2CA464;
+}
+
+.settingsBlock input:checked::after {
+    left: 70%;
+}
+
+.settingsBlock label {
+    color: #3E3E3E;
+    margin: 1px 0 0 10px;
+}
+
+.settingsBlock p {
+    margin-top: 0 !important;
+}
+
+.settingsContainer {
+    border: solid #D6D6D6 2px;
+    border-radius: 15px;
+}
+
+.settingsContainer .col-12 {
+    padding: 20px 25px 0px 25px !important;
+}
+
+.settingsContainer select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: solid #D0D0D0 2px;
+    border-radius: 50px;
+    font-family: Lexend;
+    height: 30px;
+    padding: 0px 10px;
+    width: 100%;
+    color: #3E3E3E;
+    font-size: 15px;
+    background-image: url("../img/dropdown.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    margin-top: 0 !important;
+}
+
+.settingsContainer .roundedButtonVariantTwo {
+    margin: -5px 0 20px 0;
+}
+
+.editPasswordButton {
+    background-color: #B3BEC4;
+    color: white;
+    border-style: none;
+    border-radius: 30px;
+    font-family: Lexend;
+    font-size: 12px;
+    height: 25px;
+    padding: 0 15px;
+    margin-right: 10px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+} 
+
+.editPasswordButton:focus {
+    outline: none;
+} 
+
+#editPasswordModal input[type=password] {
+    margin-top: 0px;
+}
+
+#editPasswordModal .editPasswordModalBox {
+    margin: 20px 0 10px 0;
+}
+
+#editPasswordModal .roundedButtonVariant {
+    margin: 0 10px 20px 0;
+}
+
+#editPasswordModal .roundedButton {
+    width: 110px;
+    margin-bottom: 20px;
+}
+
+#editPasswordModal .modal-xs {
+    width: 500px;
+}
+
+#editPasswordModal .modal-xs .registrationSubmitButton {
+    margin-top: 15px;
+}
+
+#editPasswordModal .modal-xs img {
+    margin-bottom: 5px;
+}
+
+#deleteAccountModal .roundedButtonVariant {
+    margin-right: 10px !important;
+}
+
+#deleteAccountModal .deleteAccountDescription {
+    font-size: 15px;
+    color: #3E3E3E;
+    line-height: 20px;
+}
+
+#deleteAccountModal .deleteAccountDescriptionVar {
+    color: #F05454;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+#deleteAccountModal p {
+    text-align: justify;
+    text-align-last: center;
+    margin-bottom: -10px;
+}
+
+#deleteAccountModal input[type=text]{
+    background-color: #FAFAFA;
+    color: #3E3E3E;
+    border-radius: 15px;
+    border: solid #D6D6D6 2px;
+    font-family: Lexend;
+    font-size: 15px;
+    height: 45px;
+    margin-top: 15px !important;
+    padding: 0px 15px;
+    width: 325px;
+    display: flex;
+}
+
+#deleteAccountModal input[type=password]{
+    background-color: #FAFAFA;
+    color: #3E3E3E;
+    border-radius: 15px;
+    border: solid #D6D6D6 2px;
+    font-family: Lexend;
+    font-size: 15px;
+    height: 45px;
+    margin-bottom: 15px;
+    padding: 0px 15px;
+    width: 325px;
+    display: flex;
+}
+
+#deleteAccountModal .modal-xs {
+    width: 500px;
+}
+
+#deleteAccountModal .modal-xs .registrationSubmitButton {
+    margin-top: 15px;
+}
+
+#deleteAccountModal .modal-xs img {
+    margin-bottom: 5px;
+}
+
+.defaultAvatar {
+    width: 100px;
+    margin: 5px;
+}
+
+.editAvatarButton {
+    position: absolute;
+    top: 0px;
+    width: 40px;
+    cursor: pointer;
+}
+
+#editAvatarModal h5 {
+    font-size: 26px;
+    font-family: Lexend;
+    font-weight: 600;
+}
+
+#editAvatarModal p {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0;
+    font-family: Lexend;
+}
+
+#editAvatarModal p:before, p:after{
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid;
+    margin: auto;
+}
+  
+#editAvatarModal p:before {
+    margin-right: 10px
+}
+
+#editAvatarModal p:after {
+    margin-left: 10px
+}
+
+#editAvatarModal .roundedButtonVariant {
+    width: 175px;
+}
+
+#editAvatarModal .roundedButton {
+    width: 175px;
+}
+
+#editAvatarModal .roundedButtonVariant {
+    margin-bottom: 15px;
+}
+
+/*pages*/
 
 .pageContainer {
     margin: 0px 30px;
@@ -1980,7 +2290,7 @@ p {
 
 .pageHeader input {
     background-color: #ffffff;
-    font-size: 16px;
+    font-size: 15px;
     border-radius: 20px;
     border: solid #D0D0D0 2px;
     padding: 5px 15px;
@@ -2018,7 +2328,7 @@ p {
 }
 
 .libraryBasicInfoContainer p {
-    font-size: 16px;
+    font-size: 15px;
     margin: 0;
     padding: 0;
 }
@@ -2061,7 +2371,7 @@ p {
 }
 
 #libraryBasicInfoModal .basicItemsBox .basicItemsBoxTitle {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
 }
 
@@ -2125,7 +2435,7 @@ p {
     padding: 0px 10px;
     width: 100%;
     color: #3E3E3E;
-    font-size: 16px;
+    font-size: 15px;
     background-image: url("../img/dropdown.png");
     background-size: 10px;
     background-repeat: no-repeat;
@@ -2589,58 +2899,6 @@ p {
     width: 400px;
 }
 
-/*edit profile*/
-.defaultAvatar {
-    width: 100px;
-    margin: 5px;
-}
-
-.editAvatarButton {
-    position: absolute;
-    top: 0px;
-    width: 40px;
-}
-
-#editAvatarModal h5 {
-    font-size: 26px;
-    font-family: Lexend;
-    font-weight: 600;
-}
-
-#editAvatarModal p {
-    display: flex;
-    flex-direction: row;
-    margin: 15px 0;
-    font-family: Lexend;
-}
-
-#editAvatarModal p:before, p:after{
-    content: "";
-    flex: 1 1;
-    border-bottom: 1px solid;
-    margin: auto;
-}
-  
-#editAvatarModal p:before {
-    margin-right: 10px
-}
-
-#editAvatarModal p:after {
-    margin-left: 10px
-}
-
-#editAvatarModal .roundedButtonVariant {
-    width: 175px;
-}
-
-#editAvatarModal .roundedButton {
-    width: 175px;
-}
-
-#editAvatarModal .roundedButtonVariant {
-    margin-bottom: 15px;
-}
-
 /*discussion forum post view*/
 .forumPostViewContainer {
     margin-top: 20px;
@@ -2648,6 +2906,7 @@ p {
 }
 
 .forumPostViewBox {
+    width: 100%;
     padding: 0 0 0 15px;
 }
 
@@ -3059,7 +3318,7 @@ p {
 .adminSearch {
     width: 250px;
     background-color: #ffffff;
-    font-size: 16px;
+    font-size: 15px;
     border-radius: 5px;
     border: solid #D0D0D0 2px;
     padding: 5px 15px;
@@ -3082,7 +3341,7 @@ p {
     width: 125px;
     margin-bottom: 5px;
     color: #3E3E3E;
-    font-size: 16px;
+    font-size: 15px;
     background-image: url("../img/dropdown.png");
     background-size: 10px;
     background-repeat: no-repeat;
