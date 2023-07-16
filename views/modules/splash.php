@@ -20,33 +20,29 @@
         <li><a href="#about">About</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#developers">Developers</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><button class="splashButton navBarButton">Log in</button></li>
       </ul>
     </header>
     
     <section id="splash-page">
-      <div class="container mw-100 mh-100">
-        <div class="row" style="height: 100vh; background-image: url('../assets/img/try3.png'); background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover;">
-          
-          <div class="col-5 mh-100 d-flex justify-content-center align-items-center">
-            <img src="../assets/img/symbol.png" height="400px" width="400px">
-          </div>
-
-          <div class="col-7 mh-100 d-flex justify-content-center align-items-center">
-            <div class="container">
-              <div class="row homeHeader">
-                <h2>Navigate the world, befriend explorers, and discover religion!</h2>
-              </div>
-              <div class="row d-flex justify-content-center align-items-center">
-                <a href="login.php"><button class="button button1">Log In</button></a>
-              </div>
-              <div class="row d-flex justify-content-center align-items-center">
-              <a href="signup.php"><button class="button button2">Sign Up</button></a>
-              </div>
+        <div class="container mw-100 mh-100">
+            <div class="row" style="height: 100vh; background-image: url('../assets/img/try3.png'); background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover;">
+            
+            <div class="col-5 mh-100 d-flex justify-content-center align-items-center">
+                <img src="../assets/img/symbol.png" height="400px" width="400px">
             </div>
-          </div>
+
+            <div class="col-7 mh-100 d-flex justify-content-center align-items-center">
+                <div class="container">
+                    <div class="row d-flex justify-content-center align-items-center flex-column homeHeader">
+                        <h2>Navigate the world, befriend explorers, and discover religion!</h2>
+                        <a href="signup.php"><button class="splashButton splashMainButton">Sign Up</button></a>
+                        <p>View Religion Explorer as Guest</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </section>
+    </section>
 
       <div class="container mw-100 div-divider">
       </div>
@@ -174,14 +170,6 @@
           </div>
         </div>
       </section>
-
-      <section id="contact">
-        <div class="container mw-100">
-          <div class="row" style="height: 20px; background-color: #2CA464">
-          </div>
-        </div>
-      </section>
-
     </div>
 
     <!--javascript-->

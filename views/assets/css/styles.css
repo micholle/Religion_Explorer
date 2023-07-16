@@ -946,6 +946,7 @@ header ul li a {
     letter-spacing: 2px;
     font-weight: 500;
     transition: 0.5s;
+    font-size: 15px;
 }
 
 header .logo:hover, header ul li a:hover {
@@ -958,11 +959,12 @@ header.sticky{
     background: white;
 }
 
-header.sticky .logo, header.sticky ul li a{
-    color: black;
+
+header.sticky .logo, header.sticky ul li a, header.sticky ul li button {
+    color: #3E3E3E;
 }
 
-header.sticky .logo:hover, header.sticky ul li a:hover{
+header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li button:hover{
     color: #289a5d;
 }
 
@@ -972,57 +974,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover{
     width: 100%;
 }
 
-/*splash buttons*/
-
-.col-7 .button1 {
-    background-color: transparent;
-    border: 2px solid #668790;
-    font-family: Lexend;
-    width: 300px;
-    border-radius: 16px;
-    color: white;
-    margin-bottom: 10px;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    margin: 4px 2px;    
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.col-7 .button1:hover {
-    background-color: rgba(255,255,255,0.05);
-    color: white;
-    border: 2px solid #668790;
-}
-
-.col-7 .button2 {
-    background-color: #2ca464;
-    border: 2px solid #2ca464;
-    font-family: Lexend;
-    width: 300px;
-    border-radius: 16px;
-    color: white;
-    margin-bottom: 10px;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    margin: 4px 2px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.col-7 .button2:hover {
-    background-color: #34b972;
-    color: white;
-    border: 2px solid #34b972;
-}
-
-/*containers*/
+/*splash page*/
 
 .col-7 .container {
     width: 600px;
@@ -1036,6 +988,18 @@ header.sticky .logo:hover, header.sticky ul li a:hover{
     text-align: center;
     color: white;
     margin-bottom: 30px;
+}
+
+.col-7 .container .homeHeader p {
+    color: white;
+    transition: 0.3s ease;
+    cursor: pointer;
+    font-size: 12px;
+    width: auto;
+}
+
+.col-7 .container .homeHeader p:hover {
+    color: #2CA464;
 }
 
 .contentHeader {
@@ -1151,6 +1115,53 @@ p {
 .div-divider {
     height: 20px;
     background-color: #2ca464;
+}
+
+.navBarButton {
+    background-color: transparent;
+    border: 2px solid #668790;
+    font-family: Lexend;
+    border-radius: 16px;
+    color: white;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;    
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.navBarButton:hover {
+    background-color: rgba(255,255,255,0.05);
+    color: white;
+    border: 2px solid #668790;
+}
+
+.splashMainButton {
+    background-color: #2ca464;
+    border: 2px solid #2ca464;
+    font-family: Lexend;
+    width: 300px;
+    border-radius: 16px;
+    color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.splashMainButton:hover {
+    background-color: #34b972;
+    color: white;
+    border: 2px solid #34b972;
 }
 
 /*login signup*/
