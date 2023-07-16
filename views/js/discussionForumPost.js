@@ -342,6 +342,7 @@ $(function() {
                 if (response === "success") {
                     // Content updated successfully
                     alert("Content updated successfully");
+                    getPosts("", $("#topicId").val());
                 } else {
                     // Error occurred while updating the content
                     alert("Error occurred while updating the content");
