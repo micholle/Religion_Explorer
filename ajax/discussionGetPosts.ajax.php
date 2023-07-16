@@ -22,9 +22,9 @@ foreach ($posts as $post) {
     $html .= '        <p class="contentEditable" contenteditable="false">' . $post['postContent'] . '</p>';
     $html .= '        <div class="col-12 d-flex flex-row forumPostViewContentInt">';
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
-    $html .= '            <img src="../assets/img/discussionForum/upvote.png">';
+    $html .= '            <img src="../assets/img/discussionForum/upvote.png" class="upvoteButton" data-type="post" data-id="' . $post['postId'] . '">';
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">' . $post['upvotes'] . '</p>';
-    $html .= '            <img src="../assets/img/discussionForum/downvote.png">';
+    $html .= '            <img src="../assets/img/discussionForum/downvote.png" class="downvoteButton" data-type="post" data-id="' . $post['postId'] . '">';
     $html .= '          </div>';
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
     $html .= '            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">';
@@ -40,8 +40,6 @@ foreach ($posts as $post) {
     $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
     $html .= '          </div>';
-    
-    
     // Add the delete button only if the account ID matches the session account ID
     if ($post['accountid'] === $_SESSION['accountid']) {
         $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" data-post-id="' . $post['postId'] . '">';
@@ -49,13 +47,12 @@ foreach ($posts as $post) {
         $html .= '<p class="forumPostViewMainCount forumPostViewMainDeletePost" value="' . $post['postId'] . '">Delete</p>';
         $html .= '</div>';
     }
-    
     $html .= '        </div>';
     $html .= '      </div>';
     $html .= '    </div>';
     $html .= '  </div>';
     $html .= '</div>';
-    
+
     // Display replies
     $replies = $controller->ctrGetRepliesByPostId($post['postId']);
     foreach ($replies as $reply) {
@@ -72,9 +69,9 @@ foreach ($posts as $post) {
         $html .= '        <p class="contentEditable" contenteditable="false">' . $reply['replyContent'] . '</p>';
         $html .= '        <div class="col-12 d-flex flex-row forumPostViewContentInt">';
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
-        $html .= '            <img src="../assets/img/discussionForum/upvote.png">';
+        $html .= '            <img src="../assets/img/discussionForum/upvote.png" class="upvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '">';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">' . $reply['upvotes'] . '</p>';
-        $html .= '            <img src="../assets/img/discussionForum/downvote.png">';
+        $html .= '            <img src="../assets/img/discussionForum/downvote.png" class="downvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '">';
         $html .= '          </div>';
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
         $html .= '            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">';
@@ -90,7 +87,6 @@ foreach ($posts as $post) {
         $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
         $html .= '          </div>';
-        
         // Add the delete button only if the account ID matches the session account ID
         if ($reply['accountid'] === $_SESSION['accountid']) {
             $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" data-reply-id="' . $reply['replyId'] . '">';
@@ -98,7 +94,6 @@ foreach ($posts as $post) {
             $html .= '<p class="forumPostViewMainCount forumPostViewMainDeleteReply" value="' . $reply['replyId'] . '">Delete</p>';
             $html .= '</div>';
         }
-        
         $html .= '        </div>';
         $html .= '      </div>';
         $html .= '    </div>';

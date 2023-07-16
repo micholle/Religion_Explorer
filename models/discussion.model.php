@@ -395,5 +395,344 @@ class ModelDiscussion {
             $stmt = null;
         }
     }
+
+    //vote
+    public function mdlGetPostVoteByUser($postId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("SELECT voteType FROM post_votes WHERE postId = :postId AND accountId = :accountId");
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            return $stmt->fetchColumn();
+        } catch (Exception $e) {
+            return false; // Error occurred while retrieving the vote
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlGetReplyVoteByUser($replyId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("SELECT voteType FROM reply_votes WHERE replyId = :replyId AND accountId = :accountId");
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            return $stmt->fetchColumn();
+        } catch (Exception $e) {
+            return false; // Error occurred while retrieving the vote
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlAddPostUpvote($postId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("INSERT INTO post_votes (postId, accountid, voteType) VALUES (:postId, :accountId, 'upvote')");
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            return true; // Upvote added successfully
+        } catch (Exception $e) {
+            return "Error occurred while adding the upvote: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlAddPostDownvote($postId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("INSERT INTO post_votes (postId, accountid, voteType) VALUES (:postId, :accountId, 'downvote')");
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            return true; // Downvote added successfully
+        } catch (Exception $e) {
+            return "Error occurred while adding the downvote: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlAddReplyUpvote($replyId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("INSERT INTO reply_votes (replyId, accountid, voteType) VALUES (:replyId, :accountId, 'upvote')");
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            return true; // Upvote added successfully
+        } catch (Exception $e) {
+            return "Error occurred while adding the upvote: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlAddReplyDownvote($replyId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("INSERT INTO reply_votes (replyId, accountid, voteType) VALUES (:replyId, :accountId, 'downvote')");
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            return true; // Downvote added successfully
+        } catch (Exception $e) {
+            return "Error occurred while adding the downvote: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlRemovePostUpvote($postId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("DELETE FROM post_votes WHERE postId = :postId AND accountid = :accountId AND voteType = 'upvote'");
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            return true; // Upvote removed successfully
+        } catch (Exception $e) {
+            return "Error occurred while removing the upvote: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlRemovePostDownvote($postId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("DELETE FROM post_votes WHERE postId = :postId AND accountid = :accountId AND voteType = 'downvote'");
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            return true; // Downvote removed successfully
+        } catch (Exception $e) {
+            return "Error occurred while removing the downvote: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlRemoveReplyUpvote($replyId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("DELETE FROM reply_votes WHERE replyId = :replyId AND accountid = :accountId AND voteType = 'upvote'");
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            return true; // Upvote removed successfully
+        } catch (Exception $e) {
+            return "Error occurred while removing the upvote: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlRemoveReplyDownvote($replyId, $accountId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("DELETE FROM reply_votes WHERE replyId = :replyId AND accountid = :accountId AND voteType = 'downvote'");
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            return true; // Downvote removed successfully
+        } catch (Exception $e) {
+            return "Error occurred while removing the downvote: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlUpdatePostUpvotes($postId, $value) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("UPDATE posts SET upvotes = upvotes + :value WHERE postId = :postId");
+            $stmt->bindParam(":value", $value, PDO::PARAM_INT);
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return true; // Upvotes updated successfully
+        } catch (Exception $e) {
+            return "Error occurred while updating the upvotes: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlUpdatePostDownvotes($postId, $value) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("UPDATE posts SET downvotes = downvotes + :value WHERE postId = :postId");
+            $stmt->bindParam(":value", $value, PDO::PARAM_INT);
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return true; // Downvotes updated successfully
+        } catch (Exception $e) {
+            return "Error occurred while updating the downvotes: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlUpdateReplyUpvotes($replyId, $value) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("UPDATE reply SET upvotes = upvotes + :value WHERE replyId = :replyId");
+            $stmt->bindParam(":value", $value, PDO::PARAM_INT);
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return true; // Upvotes updated successfully
+        } catch (Exception $e) {
+            return "Error occurred while updating the upvotes: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlUpdateReplyDownvotes($replyId, $value) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("UPDATE reply SET downvotes = downvotes + :value WHERE replyId = :replyId");
+            $stmt->bindParam(":value", $value, PDO::PARAM_INT);
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return true; // Downvotes updated successfully
+        } catch (Exception $e) {
+            return "Error occurred while updating the downvotes: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlGetPostUpvoteCount($postId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM post_votes WHERE postId = :postId AND voteType = 'upvote'");
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return $stmt->fetchColumn();
+        } catch (Exception $e) {
+            return 0;
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlGetPostDownvoteCount($postId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM post_votes WHERE postId = :postId AND voteType = 'downvote'");
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return $stmt->fetchColumn();
+        } catch (Exception $e) {
+            return 0;
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlGetReplyUpvoteCount($replyId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM reply_votes WHERE replyId = :replyId AND voteType = 'upvote'");
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return $stmt->fetchColumn();
+        } catch (Exception $e) {
+            return 0;
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+    
+    public function mdlGetReplyDownvoteCount($replyId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM reply_votes WHERE replyId = :replyId AND voteType = 'downvote'");
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return $stmt->fetchColumn();
+        } catch (Exception $e) {
+            return 0;
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
     
 }
