@@ -3,66 +3,46 @@ require_once "connection.php";
 
 class reportContentModel{
 	static public function mdlGetReportedContent() {
-		// $db = new Connection();
-        // $pdo = $db->connect();
+        $db = new Connection();
+        $pdo = $db->connect();
         
-        // $stmt = $pdo->prepare("SELECT creationid, username, title, religion, description, filename, filetype, filesize, filedata, status, date FROM communitycreations");
-        // $stmt->execute();
-        // $creations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        // $creationPhotos = [];
-        // $creationVideos = [];
-        // $creationReadingMaterials = [];
+        $stmt = $pdo->prepare("SELECT * FROM reportedcontent");
+        $stmt->execute();
+        $reportedContent = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-        // foreach ($creations as $creation) {
-        //     if (strpos($creation["filetype"], "image") !== false) {
-        //         $creationPhotos += [
-        //             $creation["title"] => [
-        //                 "creationid" => $creation["creationid"],
-        //                 "author" => $creation["username"],
-        //                 "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
-        //                 "filename" => $creation["filename"],
-        //                 "religion" => $creation["religion"],
-        //                 "description" => $creation["description"],
-        //                 "date" => $creation["date"]
-        //             ]
-        //         ];
+        $reportedContents = [];
+        $contentLink = "";
+    
+        foreach ($reportedContent as $content) {  
+            
+            if ($content["reportStatus"] == "Pending") {
 
-        //     } else if (strpos($creation["filetype"], "video") !== false) {
-        //         $creationVideos += [
-        //             $creation["title"] => [
-        //                 "creationid" => $creation["creationid"],
-        //                 "author" => $creation["username"],
-        //                 "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
-        //                 "filename" => $creation["filename"],
-        //                 "religion" => $creation["religion"],
-        //                 "description" => $creation["description"],
-        //                 "date" => $creation["date"]
-        //             ]
-        //         ];
+                if (substr($content["contentid"], 0, 2) == "CC") {
+                    $stmt2 = $pdo->prepare("SELECT creationid, title FROM communitycreations");
+                    $stmt2->execute();
+                    $communityCreations = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        
+                    foreach ($communityCreations as $creation) {
+                        if ($creation["creationid"] == $content["contentid"]) {
+                            $contentLink = $creation["title"];
+                            break;
+                        }
+                    }
+                }
 
-        //     } else if ($creation["filetype"] == ""){
-        //         $creationReadingMaterials += [
-        //             $creation["title"] => [
-        //                 "creationid" => $creation["creationid"],
-        //                 "author" => $creation["username"],
-        //                 "religion" => $creation["religion"],
-        //                 "description" => $creation["description"],
-        //                 "date" => $creation["date"]
-        //             ]
-        //         ];
-        //     }
-        // }
-
-        // $communityData = [
-        //     "photos" => [$creationPhotos],
-        //     "videos" => [$creationVideos],
-        //     "readingMaterials" => [$creationReadingMaterials]
-        // ];
-
-        // $jsonData = json_encode($communityData);
-        // header('Content-Type: application/json');
-        // echo $jsonData;
-	}
+                $reportedContents[$content["contentid"]] = [
+                    "contentLink" => $contentLink,
+                    "violation" => $content["contentViolations"],
+                    "reportedOn" => $content["reportedOn"],
+                    "reportedBy" => $content["reportedBy"]
+                ];   
+            }
+        }
+    
+        $jsonData = json_encode($reportedContents);
+        header('Content-Type: application/json');
+        echo $jsonData;
+    }  
 
     static public function mdlSubmitReportContent($data){
         $db = new Connection();
