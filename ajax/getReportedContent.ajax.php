@@ -1,9 +1,9 @@
 <?php
-require_once "../controllers/contentForReview.controller.php";
+require_once "../controllers/report.controller.php";
 
 class contentAjax{
     public function ajaxGetContentForReview(){
-        $answer = (new contentController) -> ctrGetContentForReview();
+        $answer = (new reportContentController) -> ctrGetReportedContent();
     }
 }
 

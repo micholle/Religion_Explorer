@@ -20,7 +20,7 @@ $(function() {
                 var violationFilter = selectedValues[value];
             
                 $.ajax({
-                    url: "../../ajax/getContentForReview.ajax.php",
+                    url: "../../ajax/getReportedContent.ajax.php",
                     method: "POST",
                     success:function(data){
                         var contentForReview = data;
@@ -50,7 +50,7 @@ $(function() {
 
     
     $.ajax({    
-        url: "../../ajax/getContentForReview.ajax.php",
+        url: "../../ajax/getReportedContent.ajax.php",
         method: "POST",
         success:function(data){
             var contentForReview = data;
@@ -64,46 +64,34 @@ $(function() {
             for (content in contentForReview) {
                 var contentDetails = contentForReview[content];
 
+                var [year, month, day] = contentDetails.reportedOn.split('-');
+                var formattedDate = `${month}-${day}-${year}`;
+
                 contentid = content;
                 contentLink = contentDetails.contentLink;
-                violations = contentDetails.violation.join("<br><br>");
-                reportedOn = contentDetails.reportedOn;
+                violations = contentDetails.violation;
+                reportedOn = formattedDate;
                 reportedBy = contentDetails.reportedBy;
                 
                 $("#contentidColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + contentid + '</p> </div>');
-                $("#contentLinkColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <a href="' + contentLink + '">' + contentLink + '</a> </div>');
+                $("#contentLinkColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center text-center"> <a href="' + "http://localhost/religion_explorer/views/modules/communitySubmissions.php/" + contentid + '">' + contentLink + '</a> </div>');
                 $("#violationColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
                 $("#reportedOnColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
                 $("#reportedByColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
                 $("#actionColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
-                    '<img class="reportButton" id="resolveReportContentBtn" src="../assets/img/admin/action-check.png" onclick="resolveReport(' + contentid + ')">' +
-                    '<img class="reportButton" id="deleteContentBtn" src="../assets/img/admin/action-x.png" onclick="deleteContent(' + contentid + ')">' +
-                    '<img class="reportButton" id="reportUserBtn" src="../assets/img/admin/action-exclamation.png" onclick="reportUser(' + contentid + ')"">' +
+                    '<img class="reportButton" src="../assets/img/admin/action-check.png" onclick="resolveReport(' + "'" + contentid + "'" + ')">' +
+                    '<img class="reportButton" src="../assets/img/admin/action-x.png" onclick="deleteContent(' + "'" + contentid + "'" +')">' +
+                    '<img class="reportButton" src="../assets/img/admin/action-exclamation.png" onclick="reportUser(' + "'" + contentid + "'" +')"">' +
                 '</div>');
             }
         }
-    });
-
-    $("#resolveReportContentBtn").click(function(){
-        $('#resolveReportContentModal').modal();
-        $('#resolveReportContentModal').show();
-    });
-
-    $("#deleteContentBtn").click(function(){
-        $('#deleteContentModal').modal();
-        $('#deleteContentModal').show();
-    });
-
-    $("#reportUserBtn").click(function(){
-        $('#reportUserModal').modal();
-        $('#reportUserModal').show();
     });
 
     $("#contentSearch").keyup(function () { 
         var contentSearchVal = $("#contentSearch").val().toLowerCase();
 
         $.ajax({
-            url: "../../ajax/getContentForReview.ajax.php",
+            url: "../../ajax/getReportedContent.ajax.php",
             method: "POST",
             success:function(data){
                 var contentForReview = data;
@@ -127,13 +115,16 @@ $(function() {
 });
 
 function resolveReport(contentid) {
-    alert("Resolve report with content id: " + contentid);
+    $("#resolveReportContentModal").modal();
+    $("#resolveReportContentModal").show();
 }
 
 function deleteContent(contentid) {
-    alert("Delete content with content id: " + contentid);
+    $("#deleteContentModal").modal();
+    $("#deleteContentModal").show();
 }
 
 function reportUser(contentid) {
-    alert("Report user with content id: " + contentid);
+    $("#reportUserModal").modal();
+    $("#reportUserModal").show();
 }

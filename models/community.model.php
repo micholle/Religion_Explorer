@@ -75,11 +75,11 @@ class communityModel{
 			$pdo->beginTransaction();
 
             //make the media quality lower
-            $image = imagecreatefromstring($data["filedata"]);
-            $quality = 50;
-            $outputImagePath = "file.jpg";
-            imagejpeg($image, $outputImagePath, $quality);
-            imagedestroy($image);
+            // $image = imagecreatefromstring($data["filedata"]);
+            // $quality = 50;
+            // $outputImagePath = "file.jpg";
+            // imagejpeg($image, $outputImagePath, $quality);
+            // imagedestroy($image);
 		
 			$stmt = $pdo->prepare("INSERT INTO communitycreations(creationid, username, title, religion, description, filename, filetype, filesize, filedata, status, date) VALUES (:creationid, :username, :title, :religion, :description, :filename, :filetype, :filesize, :filedata, :status, :date)");
 	
