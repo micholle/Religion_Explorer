@@ -51,7 +51,7 @@ $(function() {
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 '<img onclick="downloadContent(' + "'" + photoDetails.filedata + '\', \'' + photoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
-                                '<img onclick="reportContent(' + "'" + photoData + "'" + ')" class="libraryActions" src="../assets/img/alert.png" id="reportPhotoSubmission">' +
+                                '<img onclick="reportContent(' + "'" + photoData + '\', \'' + photoDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png">' +
                                 '<img onclick="copyContentLink(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
@@ -108,7 +108,7 @@ $(function() {
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 '<img onclick="downloadContent(' + "'" + videoDetails.filedata + '\', \'' + videoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
-                                '<img onclick="reportContent(' + "'" + videoData + "'" + ')" class="libraryActions" class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">' +
+                                '<img onclick="reportContent(' + "'" + videoData + '\', \'' + videoDetails.creationid + '\')" class="libraryActions" class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">' +
                                 '<img onclick="copyContentLink(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
@@ -161,7 +161,7 @@ $(function() {
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 // '<img class="libraryActions" src="../assets/img/download.png">' +
-                                '<img onclick="reportContent(' + "'" + readingMaterialData + "'" + ')" class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' +
+                                '<img onclick="reportContent(' + "'" + readingMaterialData + '\', \'' + readingMaterialDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' +
                                 '<img onclick="copyContentLink(' + "'" + readingMaterialDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
@@ -193,45 +193,89 @@ $(function() {
             }            
         }
     });
+    
+    $("#submitReportContent").click(function(event) {
+        event.preventDefault();
+    
+        var atLeastOneCheckboxChecked = false;
+        $("input[type=checkbox]", "#reportContentForm").each(function() {
+            if (this.checked) {
+                atLeastOneCheckboxChecked = true;
+                return false;
+            }
+        });
+    
+        if (!atLeastOneCheckboxChecked && ($("#othersSpecify").val() == "")) {
+            $("#toast").html("Please fill out all required fields.")
+            $("#toast").css("background-color", "#E04F5F");
+            $('#toast').addClass('show');
+        
+            setTimeout(function() {
+                $('#toast').removeClass('show');
+            }, 2000);
+        } else {
+            var contentViolationsArray = []; 
+            var reportedContentid = $("#reportContentid").text();
+            var additionalContext = $("#reportContentAdditional").val();
+            var reportedBy = $("#accountUsernamePlaceholder").text();
+            
+            var currentDate = new Date();
+            var year = currentDate.getFullYear();
+            var month = String(currentDate.getMonth() + 1).padStart(2, '0');
+            var day = String(currentDate.getDate()).padStart(2, '0');
+            var reportedOn = `${year}-${month}-${day}`;
 
-    $("#reportPhotoSubmission").click(function(){
-        $('#reportContentModal').modal();
-        $('#reportContentModal').show();
-    });
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-    $("#reportVideoSubmission").click(function(){
-        $('#reportContentModal').modal();
-        $('#reportContentModal').show();
-    });
+            checkboxes.forEach(checkbox => {
+              if (checkbox.checked) {
+                contentViolationsArray.push(checkbox.value);
+              }
+            });
 
-    $("#reportReadMatSubmission").click(function(){
-        $('#reportContentModal').modal();
-        $('#reportContentModal').show();
-    });
+            if($("#othersSpecify").val() != "") {
+                contentViolationsArray.push($("#othersSpecify").val());
+            }
 
-    $('#submitReportContent').click(function() {
-        // Get a reference to the modal body element
-        var modalBody = $('#reportContentModal');
-      
-        // Change the content of the modal body
-        modalBody.html(`
-        <div class="modal-dialog modal-xs modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <img src="../assets/img/verification-check.png" height="80px" width="80px">
-                                <h5 class="modal-title w-100">Report Received</h5>
-                                <p>The team will review your complaint. Please expect a notification in 3-5 business days.</p>
-                                <button type="button" id="" class="roundedButton" data-dismiss="modal">Thanks!</button></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        `);
+            var contentViolations = contentViolationsArray.join(', ');
+
+            reportData = new FormData();
+            reportData.append("contentid" , reportedContentid);
+            reportData.append("contentViolations" , contentViolations);
+            reportData.append("additionalContext", additionalContext);
+            reportData.append("reportedOn", reportedOn);
+            reportData.append("reportedBy", reportedBy);
+    
+            $.ajax({
+                url: "../../ajax/submitReportContent.ajax.php",
+                method: "POST",
+                data: reportData,
+                dataType: "text",
+                processData: false,
+                contentType: false,
+                success: function() {
+                    $("#reportContentIcon").attr("src", "../assets/img/verification-check.png");
+                    $("#reportContentStatus").text("Report Received");
+                    $("#reportContentMessage").text("The team will review your complaint. Please expect a notification in 3-5 business days.");
+                },
+                error: function() {
+                    $("#reportContentIcon").attr("src", "../assets/img/verification-error.png");
+                    $("#reportContentStatus").text("Error");
+                    $("#reportContentMessage").text("There was an error processing your request. Please try again later.");
+                    $("#reportContentNoticeButton").css("background-color", "#E04F5F");
+                },
+                complete: function() {
+                    $("#reportContentModal").removeClass("fade").modal("hide");
+                    $("#reportContentModal").modal("dispose");
+            
+                    $("#reportContentNotice").modal();
+                    $("#reportContentNotice").show();
+
+                    $("#reportContentForm")[0].reset();
+                    $("#reportContentAdditional").val("");
+                }
+            });
+        }
     });
 
     const tabs = document.querySelectorAll('.communitySubmissionsTabBtn')
@@ -288,12 +332,13 @@ function downloadContent(file, filename) {
     });
 }
 
-function reportContent(title) {
+function reportContent(title, contentid) {
     $("#reportContentHeader").html("");
     $("#communityDisplayModal").removeClass("fade").modal("hide");
     $("#communityDisplayModal").modal("dispose");
 
     $("#reportContentHeader").html("<br>" + title);
+    $("#reportContentid").html("<br>" + contentid);
     $("#reportContentModal").modal();
 }
 
@@ -342,6 +387,7 @@ function bookmarkContent(thisIcon, creationid, title) {
                         error: function() {
                             $(thisIcon).attr("src", "../assets/img/bookmark-black.png");
                             $("#toast").html('Error removing "' + title +  '" from the bookmarks.')
+                            $("#toast").css("background-color", "#E04F5F");
                             $('#toast').addClass('show');
                     
                             setTimeout(function() {
@@ -359,7 +405,7 @@ function bookmarkContent(thisIcon, creationid, title) {
                     data: {"accountid" : $("#accountidPlaceholder").text(), "resourceid" : creationid, "resourceTitle" : title},
                     success:function(){
                         $(thisIcon).attr("src", "../assets/img/bookmark-black.png");
-                        $("#toast").html('"' + title +  '" was added to the bookmarks.')
+                        $("#toast").html('"' + title +  '" was added to the bookmarks.');
                         $('#toast').addClass('show');
                 
                         setTimeout(function() {
@@ -368,7 +414,8 @@ function bookmarkContent(thisIcon, creationid, title) {
                     },
                     error: function() {
                         $(thisIcon).attr("src", "../assets/img/bookmark-white.png");
-                        $("#toast").html('Error adding "' + title +  '" to the bookmarks.')
+                        $("#toast").html('Error adding "' + title +  '" to the bookmarks.');
+                        $("#toast").css("background-color", "#E04F5F");
                         $('#toast').addClass('show');
                 
                         setTimeout(function() {
