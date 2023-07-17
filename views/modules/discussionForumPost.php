@@ -28,7 +28,7 @@ require_once "../../models/discussionForumPost.model.php";
                         <a href="discussionForum.php" class="pageHeaderLink"><h1>Discussion Forum</h1></a>
                     </div>  
                     <div class="col-8 d-flex justify-content-start align-items-center">
-                        <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community">
+                        <input type="search" id="forumSearch" name="forumSearch" placeholder="Search the Forum">
                     </div>
                 </div>
             </div>
@@ -126,15 +126,8 @@ require_once "../../models/discussionForumPost.model.php";
                 </div>
 
                 <div class="col-3">
-                    <div class="forumPostRecoContainer">
-                        <div class="forumPostRecoBox">
-                            <h3>[Placeholder Title]</h3>
-                            <div class="row">
-                                <div class="col-12 d-flex flex-row">
-                                    <h2>[Upvotes]</h2><h2>•</h2><h2>[Comments]</h2>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="forumPostRecoContainer" id="forumPostRecoContainer">
+                    
                     </div>
                 </div>
             </div>

@@ -963,5 +963,33 @@ class ModelDiscussion {
             $stmt = null;
         }
     }
+
+
+    //search 
+    public function mdlSearchPosts($query) {
+        $db = new Connection();
+        $pdo = $db->connect();
+      
+        try {
+          $stmt = $pdo->prepare("SELECT posts.*, accounts.username, posts.postDate,
+                                        (SELECT COUNT(*) FROM reply WHERE reply.postId = posts.postId) AS replyCount
+                                   FROM posts 
+                                   INNER JOIN accounts ON posts.accountid = accounts.accountid
+                                   INNER JOIN topics ON posts.topicId = topics.topicId
+                                   WHERE posts.postContent LIKE :query
+                                   ORDER BY postId DESC");
+          $stmt->bindValue(':query', '%' . $query . '%', PDO::PARAM_STR);
+          $stmt->execute();
+          $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          
+          return $posts;
+        } catch (Exception $e) {
+          return array();
+        } finally {
+          $pdo = null;
+          $stmt = null;
+        }
+      }
+      
     
 }

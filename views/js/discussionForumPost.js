@@ -475,5 +475,50 @@ $(function() {
       
         return scaledNumber.toFixed(0) + postfix;
       }
+
+
+      //search
+      $("#forumSearch").on("search", function() {
+        var searchQuery = $(this).val(); // Retrieve search query
+        searchPosts(searchQuery); // Call the searchPosts function
+      });
+
+      function searchPosts(searchQuery) {
+        $.ajax({
+          url: "../../ajax/discussionSearchPosts.ajax.php", // Update URL to the PHP file handling the search functionality
+          method: "GET",
+          data: { query: searchQuery }, // Pass search query as data
+          success: function(data) {
+            $("#postContainer").html(data);
+            // Call the initializeReplyButtons function after loading the AJAX response
+            initializeReplyButtons();
+            attachDeleteButtonListeners();
+            initializeEditButtons();
+            shortenUpvotes();
+          },
+          error: function(xhr, status, error) {
+            console.log(xhr.responseText);
+            console.log(status);
+            console.log(error);
+          }
+        });
+      }
+
+      //Reommendations
+  
+        $.ajax({
+            url: "../../ajax/discussionGetTopics.ajax.php",
+            method: "GET",
+            success: function(data) {
+                console.log(data);
+                $("#forumPostRecoContainer").html(data);
+                shortenUpvotes();
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+                console.log(status);
+                console.log(error);
+            }
+        });
     
 });

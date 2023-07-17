@@ -54,8 +54,8 @@
             <div class="col-12">
                 <div class="forumPostFilter d-flex justify-content-end align-items-center flex-row">
                     <p>Sort by:</p>
-                    <button type="button">Top</button>
-                    <button type="button">New</button>
+                    <button type="button" id="top">Top</button>
+                    <button type="button" id="new">New</button>
                 </div>
             </div>
             <div id="topicsContainer" class="col-12 d-flex justify-content-center flex-column align-items-center">
