@@ -210,10 +210,8 @@ $(function() {
     });
 
     $('#submitReportContent').click(function() {
-        // Get a reference to the modal body element
         var modalBody = $('#reportContentModal');
       
-        // Change the content of the modal body
         modalBody.html(`
         <div class="modal-dialog modal-xs modal-dialog-centered">
             <div class="modal-content">
