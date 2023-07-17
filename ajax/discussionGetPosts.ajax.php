@@ -38,7 +38,7 @@ foreach ($posts as $post) {
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote editButton" value="' . $post['postId'] . '">Edit</p>';
         $html .= '          </div>';
     }
-    $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
+    $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="reportCommentBtn">';
     $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
     $html .= '          </div>';
@@ -87,7 +87,7 @@ foreach ($posts as $post) {
             $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote editButton" value="' . $reply['replyId'] . '">Edit</p>';
             $html .= '          </div>';
         }
-        $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
+        $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="reportCommentBtn">';
         $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
         $html .= '          </div>';

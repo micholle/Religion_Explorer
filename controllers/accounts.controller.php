@@ -2,14 +2,13 @@
 require_once "../models/accounts.model.php";
 
 class ControllerAccount{
-  static public function ctrAddAccount($data) {
-    $answer = (new ModelAccount)->mdlAddAccount($data);
+  static public function ctrVerifyEmail($data) {
+    $answer = (new ModelAccount)->mdlVerifyEmail($data);
     return $answer;
   }
   
-
-  static public function ctrVerifyCode($data) {
-    $answer = (new ModelAccount)->mdlVerifyCode($data);
+  static public function ctrAddAccount($data) {
+    $answer = (new ModelAccount)->mdlAddAccount($data);
     return $answer;
   }  
 

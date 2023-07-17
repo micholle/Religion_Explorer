@@ -1,5 +1,6 @@
 <?php
 require_once "../controllers/accounts.controller.php";
+session_start();
 
 class SaveAccount {
   public $email;
@@ -28,9 +29,7 @@ class SaveAccount {
 
     $answer = (new ControllerAccount)->ctrAddAccount($data);
 
-    if ($answer === "email_exists") {
-      echo "email_exists";
-    } elseif ($answer === "ok") {
+    if ($answer === "ok") {
       echo "ok";
     } else {
       echo "error";
@@ -46,5 +45,9 @@ $save_account->username = $_POST["username"];
 $save_account->password = $_POST["password"];
 $save_account->verificationCode = $_POST["verificationCode"];
 
-$save_account->saveAccountRecord();
+if ($_POST["verificationCode"] === $_SESSION["verificationCode"]) {
+  $save_account->saveAccountRecord();
+} else {
+  echo "verification_failed";
+}
 ?>
