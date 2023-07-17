@@ -59,6 +59,7 @@ $(function() {
             var violations = "";
             var reportedOn = "";
             var reportedBy = "";
+            var additionalContext = ""
 
             for (user in reportedUsers) {
                 userDetails = reportedUsers[user];
@@ -85,6 +86,7 @@ $(function() {
                     '<img class="reportButton" id="suspendUserBtn" src="../assets/img/admin/action-slash.png" onclick="suspendUser(' + userid + ')">' +
                     '<img class="reportButton" id="banUserBtn" src="../assets/img/admin/action-dash.png" onclick="banUser(' + userid + ')"">' +
                 '</div>');
+                $("#userAdditionalContextColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
             }
         }
     });

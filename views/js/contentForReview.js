@@ -60,6 +60,7 @@ $(function() {
             var violations = "";
             var reportedOn = "";
             var reportedBy = "";
+            var additionalContext = "";
 
             for (content in contentForReview) {
                 var contentDetails = contentForReview[content];
@@ -72,6 +73,7 @@ $(function() {
                 violations = contentDetails.violation;
                 reportedOn = formattedDate;
                 reportedBy = contentDetails.reportedBy;
+                additionalContext = contentDetails.additionalContext;
                 
                 $("#contentidColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + contentid + '</p> </div>');
                 $("#contentLinkColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center text-center"> <a href="' + "http://localhost/religion_explorer/views/modules/communitySubmissions.php/" + contentid + '">' + contentLink + '</a> </div>');
@@ -83,6 +85,7 @@ $(function() {
                     '<img class="reportButton" src="../assets/img/admin/action-x.png" onclick="deleteContent(' + "'" + contentid + "'" +')">' +
                     '<img class="reportButton" src="../assets/img/admin/action-exclamation.png" onclick="reportUser(' + "'" + contentid + "'" +')"">' +
                 '</div>');
+                $("#additionalContextColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
             }
         }
     });
