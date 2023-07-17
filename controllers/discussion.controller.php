@@ -242,6 +242,13 @@ private function ctrUpdateVoteCountForPost($postId, $voteAction, $accountId, $mo
         $topics = (new ModelDiscussion)->mdlSearchTopics($query);
         return $topics;
     }
+
+
+    //recommendations
+    public function ctrGetTopics() {
+        $topics = (new ModelDiscussion)->mdlGetTopics();
+        return $topics;
+      }
       
       
 }

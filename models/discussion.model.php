@@ -1015,6 +1015,30 @@ class ModelDiscussion {
           $stmt = null;
         }
       }
+
+      //recommended
+      public function mdlGetTopics() {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("SELECT topics.*, accounts.username,
+                                        (SELECT COUNT(*) FROM posts WHERE posts.topicId = topics.topicId) AS postCount,
+                                        (SELECT postCount + COUNT(*) FROM reply JOIN posts ON reply.postId = posts.postId WHERE posts.topicId = topics.topicId) AS commentCount
+                                   FROM topics 
+                                   INNER JOIN accounts ON topics.accountid = accounts.accountid
+                                   ORDER BY upvotes DESC");
+            $stmt->execute();
+            $topics = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $topics;
+        } catch (Exception $e) {
+            return array();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
       
       
     
