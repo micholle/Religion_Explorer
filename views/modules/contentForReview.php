@@ -64,7 +64,7 @@
                                     <p>Content Violation</p>
                                 </div>
                             </div>
-                            <div id="reportedOnColumn" class="col-2">
+                            <div id="reportedOnColumn" class="col-1">
                                 <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
                                     <p>Reported On</p>
                                 </div>
@@ -74,9 +74,14 @@
                                     <p>Reported By</p>
                                 </div>
                             </div>
-                            <div id="actionColumn" class="col-2">
+                            <div id="actionColumn" class="col-1">
                                 <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
                                     <p>Action</p>
+                                </div>
+                            </div>
+                            <div id="additionalContextColumn" class="col-2">
+                                <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
+                                    <p>Additional Context</p>
                                 </div>
                             </div>
                         </div>

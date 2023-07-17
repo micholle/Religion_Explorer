@@ -65,7 +65,7 @@
                                     <p>Violation</p>
                                 </div>
                             </div>
-                            <div id="userReportedOnColumn" class="col-2">
+                            <div id="userReportedOnColumn" class="col-1">
                                 <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
                                     <p>Reported On</p>
                                 </div>
@@ -75,9 +75,14 @@
                                     <p>Reported By</p>
                                 </div>
                             </div>
-                            <div id="userActionColumn" class="col-2">
+                            <div id="userActionColumn" class="col-1">
                                 <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
                                     <p>Action</p>
+                                </div>
+                            </div>
+                            <div id="userAdditionalContextColumn" class="col-2">
+                                <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
+                                    <p>Additional Context</p>
                                 </div>
                             </div>
                         </div>
