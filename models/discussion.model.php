@@ -797,7 +797,7 @@ class ModelDiscussion {
         try {
             $stmt = $pdo->prepare("INSERT INTO topic_votes (topicId, accountid, voteType) VALUES (:topicId, :accountId, 'upvote')");
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
-            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
 
             return true; // Upvote added successfully
@@ -816,7 +816,7 @@ class ModelDiscussion {
         try {
             $stmt = $pdo->prepare("INSERT INTO topic_votes (topicId, accountid, voteType) VALUES (:topicId, :accountId, 'downvote')");
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
-            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
 
             return true; // Downvote added successfully
@@ -835,7 +835,7 @@ class ModelDiscussion {
         try {
             $stmt = $pdo->prepare("DELETE FROM topic_votes WHERE topicId = :topicId AND accountid = :accountId");
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
-            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
 
             return true; // Vote removed successfully
@@ -854,7 +854,7 @@ class ModelDiscussion {
         try {
             $stmt = $pdo->prepare("DELETE FROM topic_votes WHERE topicId = :topicId AND accountid = :accountId");
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
-            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
 
             return true; // Vote removed successfully
@@ -873,7 +873,7 @@ class ModelDiscussion {
         try {
             $stmt = $pdo->prepare("SELECT voteType FROM topic_votes WHERE topicId = :topicId AND accountid = :accountId");
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
-            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_INT);
+            $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
 
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
