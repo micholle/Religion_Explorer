@@ -113,9 +113,7 @@ $(function() {
           dataType: "text",
           processData: false,
           contentType: false,
-          success: function(data) {
-            alert(data);   
-
+          success: function() {
             $("#communityModal").removeClass("fade").modal("hide");
             $("#communityModal").modal("dispose");
     

@@ -64,6 +64,11 @@
                                     <p>Content Violation</p>
                                 </div>
                             </div>
+                            <div id="additionalContextColumn" class="col-2">
+                                <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
+                                    <p>Additional Context</p>
+                                </div>
+                            </div>
                             <div id="reportedOnColumn" class="col-1">
                                 <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
                                     <p>Reported On</p>
@@ -79,16 +84,12 @@
                                     <p>Action</p>
                                 </div>
                             </div>
-                            <div id="additionalContextColumn" class="col-2">
-                                <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
-                                    <p>Additional Context</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div id="toast" class="toast"></div>
 
         <!--Modals-->
         <div class="modal fade adminActionModal" id="resolveReportContentModal">
@@ -100,8 +101,9 @@
                                 <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                     <h5 class="modal-title w-100">Resolve the Report?</h5>
                                     <div class="d-flex flex-row">
-                                        <button type="button" id="" name="" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
-                                        <button type="button" id="" name="" class="roundedButton">Confirm</button>
+                                        <div id="resolveReportContentid" hidden></div>
+                                        <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                        <button type="button" id="confirmResolveReportContent" class="roundedButton">Confirm</button>
                                     </div>
                                 </div>
                             </div>
@@ -120,8 +122,9 @@
                                 <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                     <h5 class="modal-title w-100">Delete the Content?</h5>
                                     <div class="d-flex flex-row">
-                                        <button type="button" id="" name="" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
-                                        <button type="button" id="" name="" class="roundedButton">Confirm</button>
+                                        <div id="deleteReportContentid" hidden></div>
+                                        <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                        <button type="button" id="confirmDeleteReportContent" class="roundedButton">Confirm</button>
                                     </div>
                                 </div>
                             </div>
@@ -140,8 +143,9 @@
                                 <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                     <h5 class="modal-title w-100">Report the User?</h5>
                                     <div class="d-flex flex-row">
-                                        <button type="button" id="" name="" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
-                                        <button type="button" id="" name="" class="roundedButton">Confirm</button>
+                                        <div id="reportUserContentid" hidden></div>
+                                        <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                        <button type="button" id="confirmReportUser" class="roundedButton">Confirm</button>
                                     </div>
                                 </div>
                             </div>

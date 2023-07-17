@@ -33,6 +33,7 @@ class reportContentModel{
                 $reportedContents[$content["contentid"]] = [
                     "contentLink" => $contentLink,
                     "violation" => $content["contentViolations"],
+                    "additionalContext" => $content["additionalContext"],
                     "reportedOn" => $content["reportedOn"],
                     "reportedBy" => $content["reportedBy"]
                 ];   
@@ -72,6 +73,57 @@ class reportContentModel{
 		$stmt = null;
 
     }
+
+    static public function mdlResolveReportContent($contentid) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
+    
+            $stmt = $pdo->prepare("DELETE FROM reportedcontent WHERE contentid = :contentid");
+            $stmt->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            $pdo->commit();
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return "error";
+        }
+    
+        $pdo = null;
+        $stmt = null;
+    } 
+    
+    static public function mdlDeleteReportedContent($contentid) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
+
+            if (substr($contentid, 0, 2) == "CC") {
+                $stmt = $pdo->prepare("DELETE FROM communitycreations WHERE creationid = :contentid");
+                $stmt->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+                $stmt->execute();
+            }
+    
+            $stmt2 = $pdo->prepare("DELETE FROM reportedcontent WHERE contentid = :contentid");
+            $stmt2->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+            $stmt2->execute();
+    
+            $pdo->commit();
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return "error";
+        }
+    
+        $pdo = null;
+        $stmt = null;
+        $stmt2 = null;
+    } 
 
 }
 

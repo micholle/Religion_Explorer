@@ -11,6 +11,14 @@ class reportContentController{
 		$answer = (new reportContentModel)->mdlSubmitReportContent($data);
   }
 
+  static public function ctrResolveReportContent($contentid) {
+		$answer = (new reportContentModel)->mdlResolveReportContent($contentid);
+  }
+
+  static public function ctrDeleteReportedContent($contentid) {
+		$answer = (new reportContentModel)->mdlDeleteReportedContent($contentid);
+  }
+
 }
 
 ?>

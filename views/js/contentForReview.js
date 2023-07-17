@@ -78,6 +78,7 @@ $(function() {
                 $("#contentidColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + contentid + '</p> </div>');
                 $("#contentLinkColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center text-center"> <a href="' + "http://localhost/religion_explorer/views/modules/communitySubmissions.php/" + contentid + '">' + contentLink + '</a> </div>');
                 $("#violationColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
+                $("#additionalContextColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
                 $("#reportedOnColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
                 $("#reportedByColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
                 $("#actionColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
@@ -85,7 +86,6 @@ $(function() {
                     '<img class="reportButton" src="../assets/img/admin/action-x.png" onclick="deleteContent(' + "'" + contentid + "'" +')">' +
                     '<img class="reportButton" src="../assets/img/admin/action-exclamation.png" onclick="reportUser(' + "'" + contentid + "'" +')"">' +
                 '</div>');
-                $("#additionalContextColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
             }
         }
     });
@@ -115,19 +115,102 @@ $(function() {
             }
         });
     });
+
+    $("#confirmResolveReportContent").click(function () { 
+        var contentid = $("#resolveReportContentid").text();
+        
+        $.ajax({
+            url: "../../ajax/resolveReportedContent.ajax.php",
+            method: "POST",
+            data: {"contentid" : contentid},
+            success:function(data){
+                $("#toast").html("Report resolved.");
+            }, error: function() {
+                $("#toast").html("There was an error processing your request. Please try again later.")
+                $("#toast").css("background-color", "#E04F5F");
+            },
+            complete: function() {
+                $("#resolveReportContentModal").removeClass("fade").modal("hide");
+                $("#resolveReportContentModal").modal("dispose");
+
+                $('#toast').addClass('show');
+    
+                setTimeout(function() {
+                    $('#toast').removeClass('show');
+                    location.reload();
+                }, 2000);
+            }
+        });
+    });
+
+    $("#confirmDeleteReportContent").click(function () { 
+        var contentid = $("#deleteReportContentid").text();
+        
+        $.ajax({
+            url: "../../ajax/deleteReportedContent.ajax.php",
+            method: "POST",
+            data: {"contentid" : contentid},
+            success:function(){
+                $("#toast").html("Content deleted.")
+            }, error: function() {
+                $("#toast").html("There was an error processing your request. Please try again later.")
+                $("#toast").css("background-color", "#E04F5F");
+            },
+            complete: function() {
+                $("#deleteContentModal").removeClass("fade").modal("hide");
+                $("#deleteContentModal").modal("dispose");
+
+                $('#toast').addClass('show');
+    
+                setTimeout(function() {
+                    $('#toast').removeClass('show');
+                    location.reload();
+                }, 2000);
+            }
+        });
+    });
+
+    $("#confirmReportUser").click(function () { 
+        var contentid = $("#resolveReportContentid").text();
+        
+        $.ajax({
+            url: "../../ajax/reportUserReportedContent.ajax.php",
+            method: "POST",
+            data: {"contentid" : contentid},
+            success:function(){
+                $("#toast").html("User reported.")
+            }, error: function() {
+                $("#toast").html("There was an error processing your request. Please try again later.")
+                $("#toast").css("background-color", "#E04F5F");
+            },
+            complete: function() {
+                $("#reportUserModal").removeClass("fade").modal("hide");
+                $("#reportUserModal").modal("dispose");
+
+                $('#toast').addClass('show');
+    
+                setTimeout(function() {
+                    $('#toast').removeClass('show');
+                }, 2000);
+            }
+        });
+    });
 });
 
 function resolveReport(contentid) {
+    $("#resolveReportContentid").html(contentid);
     $("#resolveReportContentModal").modal();
     $("#resolveReportContentModal").show();
 }
 
 function deleteContent(contentid) {
+    $("#deleteReportContentid").html(contentid);
     $("#deleteContentModal").modal();
     $("#deleteContentModal").show();
 }
 
 function reportUser(contentid) {
+    $("#reportUserContentid").html(contentid);
     $("#reportUserModal").modal();
     $("#reportUserModal").show();
 }
