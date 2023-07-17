@@ -84,20 +84,20 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--Modals-->
-    <div class="modal fade adminActionModal" id="resolveReportContentModal">
-        <div class="modal-dialog modal-xs modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <h5 class="modal-title w-100">Resolve the Report?</h5>
-                                <div class="d-flex flex-row">
-                                    <button type="button" id="" name="" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
-                                    <button type="button" id="" name="" class="roundedButton">Confirm</button>
+        <!--Modals-->
+        <div class="modal fade adminActionModal" id="resolveReportContentModal">
+            <div class="modal-dialog modal-xs modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                    <h5 class="modal-title w-100">Resolve the Report?</h5>
+                                    <div class="d-flex flex-row">
+                                        <button type="button" id="" name="" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                        <button type="button" id="" name="" class="roundedButton">Confirm</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -105,19 +105,19 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade adminActionModal" id="deleteContentModal">
-        <div class="modal-dialog modal-xs modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <h5 class="modal-title w-100">Delete the Content?</h5>
-                                <div class="d-flex flex-row">
-                                    <button type="button" id="" name="" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
-                                    <button type="button" id="" name="" class="roundedButton">Confirm</button>
+        <div class="modal fade adminActionModal" id="deleteContentModal">
+            <div class="modal-dialog modal-xs modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                    <h5 class="modal-title w-100">Delete the Content?</h5>
+                                    <div class="d-flex flex-row">
+                                        <button type="button" id="" name="" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                        <button type="button" id="" name="" class="roundedButton">Confirm</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -125,19 +125,19 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade adminActionModal" id="reportUserModal">
-        <div class="modal-dialog modal-xs modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <h5 class="modal-title w-100">Report the User?</h5>
-                                <div class="d-flex flex-row">
-                                    <button type="button" id="" name="" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
-                                    <button type="button" id="" name="" class="roundedButton">Confirm</button>
+        <div class="modal fade adminActionModal" id="reportUserModal">
+            <div class="modal-dialog modal-xs modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                    <h5 class="modal-title w-100">Report the User?</h5>
+                                    <div class="d-flex flex-row">
+                                        <button type="button" id="" name="" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                        <button type="button" id="" name="" class="roundedButton">Confirm</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
