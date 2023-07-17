@@ -22,7 +22,7 @@
                     <a href="discussionForum.php" class="pageHeaderLink"><h1>Discussion Forum</h1></a>
                 </div>
                 <div class="col-8 d-flex justify-content-start align-items-center">
-                    <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Forum">
+                    <input type="search" id="forumSearch" name="forumSearch" placeholder="Search the Forum">
                 </div>
             </div>
         </div>
