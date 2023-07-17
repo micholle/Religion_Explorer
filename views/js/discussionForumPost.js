@@ -478,7 +478,7 @@ $(function() {
 
 
       //search
-      $("#forumSearch").on("search", function() {
+      $("#forumSearch").on("input", function() {
         var searchQuery = $(this).val(); // Retrieve search query
         searchPosts(searchQuery); // Call the searchPosts function
       });
