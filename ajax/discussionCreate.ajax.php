@@ -35,7 +35,7 @@ $createDiscussion = new CreateDiscussion();
 $createDiscussion->topicTitle = $_POST["topicTitle"];
 $createDiscussion->topicContent = $_POST["topicContent"];
 $createDiscussion->accountid = $_SESSION["accountid"];
-$createDiscussion->anonymous = isset($_POST["anonymous"]) ? 1 : 0; // Set the value of the anonymous checkbox
+$createDiscussion->anonymous = $_POST["anonymous"]; // Set the value of the anonymous checkbox
 
 $createDiscussion->createDiscussionRecord();
 ?>

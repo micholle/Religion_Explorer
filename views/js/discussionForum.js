@@ -12,7 +12,7 @@ $(function() {
       // Retrieve the form data
       var topicTitle = $("#topicTitle").val();
       var topicContent = $("#topicContent").val();
-      var anonymous = $("#anonymousCheckbox").prop("checked"); // Get the value of the anonymous checkbox
+      var anonymous = $("#anonymousCheckbox").is(":checked") ? 1 : 0;
       
       // Create an object with the data
       var discussion = {
