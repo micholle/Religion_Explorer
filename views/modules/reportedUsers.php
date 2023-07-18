@@ -65,6 +65,11 @@
                                     <p>Violation</p>
                                 </div>
                             </div>
+                            <div id="userAdditionalContextColumn" class="col-2">
+                                <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
+                                    <p>Additional Context</p>
+                                </div>
+                            </div>
                             <div id="userReportedOnColumn" class="col-1">
                                 <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
                                     <p>Reported On</p>
@@ -80,19 +85,16 @@
                                     <p>Action</p>
                                 </div>
                             </div>
-                            <div id="userAdditionalContextColumn" class="col-2">
-                                <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
-                                    <p>Additional Context</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div id="toast" class="toast"></div>
 
         <!--Modals-->
         <div class="modal fade adminActionModal" id="resolveReportUserModal">
+            <div id="resolveReportUserid" hidden></div>
             <div class="modal-dialog modal-xs modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -101,8 +103,8 @@
                                 <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                     <h5 class="modal-title w-100">Resolve the Report?</h5>
                                     <div class="d-flex flex-row">
-                                        <button type="button" id="" name="" class="roundedButtonVariant">Cancel</button>
-                                        <button type="button" id="" name="" class="roundedButton">Confirm</button>
+                                        <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                        <button type="button" id="confirmResolveUserReport" class="roundedButton">Confirm</button>
                                     </div>
                                 </div>
                             </div>
@@ -113,6 +115,7 @@
         </div>
 
         <div class="modal fade adminActionModal" id="suspendUserModal">
+            <div id="suspendUserUserid" hidden></div>
             <div class="modal-dialog modal-xs modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -121,18 +124,18 @@
                                 <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                     <h5 class="modal-title w-100">Suspend User for:</h5>
                                     <div class="d-flex justify-content-center align-items-center flex-column">
-                                        <input type="text" id="" name="" placeholder="Number of">
-                                        <select id="" name="">
-                                            <option value="" selected>Hours</option>
-                                            <option value="">Days</option>
-                                            <option value="">Weeks</option>
-                                            <option value="">Months</option>
-                                            <option value="">Years</option>
+                                        <input type="number" min="1" id="suspendUserVal" placeholder="Number of">
+                                        <select id="suspendUserTime">
+                                            <option value="Hours" selected>Hours</option>
+                                            <option value="Days">Days</option>
+                                            <option value="Weeks">Weeks</option>
+                                            <option value="Months">Months</option>
+                                            <option value="Years">Years</option>
                                         </select>
                                     </div>
                                     <div class="d-flex flex-row">
-                                        <button type="button" id="" name="" class="roundedButtonVariant">Cancel</button>
-                                        <button type="button" id="" name="" class="roundedButton">Confirm</button>
+                                        <button type="button" id="" name="" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                        <button type="button" id="confirmSuspendUser" class="roundedButton">Confirm</button>
                                     </div>
                                 </div>
                             </div>
@@ -143,6 +146,7 @@
         </div>
 
         <div class="modal fade adminActionModal" id="banUserModal">
+            <div id="banUserUserid" hidden></div>
             <div class="modal-dialog modal-xs modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -151,8 +155,8 @@
                                 <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                     <h5 class="modal-title w-100">Ban the User?</h5>
                                     <div class="d-flex flex-row">
-                                        <button type="button" id="" name="" class="roundedButtonVariant">Cancel</button>
-                                        <button type="button" id="" name="" class="roundedButton">Confirm</button>
+                                        <button type="button" id="" name="" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                        <button type="button" id="confirmBanUser" class="roundedButton">Confirm</button>
                                     </div>
                                 </div>
                             </div>

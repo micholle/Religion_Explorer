@@ -167,6 +167,30 @@ $(function() {
           }
       });
   }
+
+  //search
+  $("#forumSearch").on("input", function() {
+    var searchQuery = $(this).val(); // Retrieve search query
+    searchPosts(searchQuery); // Call the searchPosts function
+  });
+
+  function searchPosts(searchQuery) {
+    $.ajax({
+      url: "../../ajax/discussionSearchTopics.ajax.php", // Update URL to the PHP file handling the search functionality
+      method: "GET",
+      data: { query: searchQuery }, // Pass search query as data
+      success: function(data) {
+        $("#topicsContainer").html(data);
+        // Call the initializeReplyButtons function after loading the AJAX response
+        shortenUpvotes();
+      },
+      error: function(xhr, status, error) {
+        console.log(xhr.responseText);
+        console.log(status);
+        console.log(error);
+      }
+    });
+  }
   
 });
     

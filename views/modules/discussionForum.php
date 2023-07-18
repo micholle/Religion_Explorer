@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,6 +15,7 @@
 </head>
 <body>
     <div id="discussionForumSidebar"></div>
+    <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
     <div class="pageContainer">
         <div class="container mw-100 mh-100">
@@ -22,7 +24,7 @@
                     <a href="discussionForum.php" class="pageHeaderLink"><h1>Discussion Forum</h1></a>
                 </div>
                 <div class="col-8 d-flex justify-content-start align-items-center">
-                    <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Forum">
+                    <input type="search" id="forumSearch" name="forumSearch" placeholder="Search the Forum">
                 </div>
             </div>
         </div>

@@ -117,6 +117,8 @@ function create_sidebar() {
                 </div>
             </div>
         </div>
+        
+        <div id="toast" class="toast"></div>
 
         <div class="modal fade" id="reportUserModal">
             <div class="modal-dialog modal-xs modal-dialog-centered">
@@ -124,7 +126,7 @@ function create_sidebar() {
                     <div class="modal-header text-center">
                         <div class="container d-flex justify-content-center align-items-center flex-column">
                             <h5 class="modal-title w-100">Report a User</h5>
-                            <input class="inputVariant" name="" placeholder="Enter username"><br>
+                            <input class="inputVariant" id="reportUserUsername" placeholder="Enter username"><br>
                         </div>
                     </div>
                     <div class="modal-body">
@@ -133,28 +135,46 @@ function create_sidebar() {
                                 <div class="row">
                                     <div class="col-12">
                                         <p class="reportDescription">As accurately as you can, please tell us what happened.</p>
-                                        <input type="checkbox" id="" name="" value="">
-                                        <label for="">Harrassment or Bullying</label><br>
-                                        <input type="checkbox" id="" name="" value="">
-                                        <label for="">Offensive Language</label><br>
-                                        <input type="checkbox" id="" name="" value="">
-                                        <label for="">Spam</label><br>
-                                        <input type="checkbox" id="" name="" value="">
-                                        <label for="">Community Guidelines Violation</label><br>
-                                        <input type="checkbox" id="" name="" value="">
-                                        <label for="">Suspicious or Fake Account</label><br>
-                                        <input type="checkbox" id="others" name="others" value="others">
+                                        <input type="checkbox" id="harrassmentOrBullying" name="harrassmentOrBullying" value="Harrassment or Bullying">
+                                        <label for="harrassmentOrBullying">Harrassment or Bullying</label><br>
+                                        <input type="checkbox" id="offensiveLanguage" name="offensiveLanguage" value="Offensive Language">
+                                        <label for="offensiveLanguage">Offensive Language</label><br>
+                                        <input type="checkbox" id="spam" name="spam" value="Spam">
+                                        <label for="spam">Spam</label><br>
+                                        <input type="checkbox" id="communityGuidelinesViolation" name="communityGuidelinesViolation" value="Community Guidelines Violation">
+                                        <label for="communityGuidelinesViolation">Community Guidelines Violation</label><br>
+                                        <input type="checkbox" id="suspiciousOrFakeAccount" name="suspiciousOrFakeAccount" value="Suspicious or Fake Account">
+                                        <label for="suspiciousOrFakeAccount">Suspicious or Fake Account</label><br>
                                         <label for="others">Others, specify:</label><br>
                                         <input id="othersSpecify" class="inputVariant" name="othersSpecify"><br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                        <textarea id="reportContentAdditional" name="reportContentAdditional" placeholder="Give additional context."></textarea><br>
+                                        <textarea id="reportUserAdditional" placeholder="Give additional context."></textarea><br>
                                         <button type="button" id="submitReportContent" class="roundedButton">Send</button>
                                     </div>
                                 </div>
                             </form>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="reportUserNotice" class="modal fade">
+            <div class="modal-dialog modal-xs modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                    <img id="reportUserIcon" src="../assets/img/verification-check.png" height="80px" width="80px">
+                                    <h5 id="reportUserStatus" class="modal-title w-100">Report Received</h5>
+                                    <p id="reportUserMessage" class="text-center">The team will review your complaint. Please expect a notification in 3-5 business days.</p>
+                                    <button type="button" id="reportUserNoticeButton" class="roundedButton" data-dismiss="modal">Thanks!</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

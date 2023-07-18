@@ -19,29 +19,87 @@ $(function() {
         }
     });
 
-    $('#submitReportContent').click(function() {
-        // Get a reference to the modal body element
-        var modalBody = $('#reportUserModal');
-      
-        // Change the content of the modal body
-        modalBody.html(`
-        <div class="modal-dialog modal-xs modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <img src="../assets/img/verification-check.png" height="80px" width="80px">
-                                <h5 class="modal-title w-100">Report Received</h5>
-                                <p>The team will review your complaint. Please expect a notification in 3-5 business days.</p>
-                                <button type="button" id="" class="roundedButton" data-dismiss="modal">Thanks!</button></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        `);
+    $('#submitReportContent').click(function() {        
+        var atLeastOneCheckboxChecked = false;
+        $("input[type=checkbox]", "#reportUserModal").each(function() {
+            if (this.checked) {
+                atLeastOneCheckboxChecked = true;
+                return false;
+            }
+        });
+    
+        if (!atLeastOneCheckboxChecked && ($("#othersSpecify").val() == "")) {
+            $("#toast").html("Please fill out all required fields.")
+            $("#toast").css("background-color", "#E04F5F");
+            $('#toast').addClass('show');
+        
+            setTimeout(function() {
+                $('#toast').removeClass('show');
+            }, 2000);
+        } else {
+            var userViolationsArray = []; 
+            var reportUserUsername = $("#reportUserUsername").val();
+            var additionalContext = $("#reportUserAdditional").val();
+            var accountUsername = $("#accountUsernamePlaceholder").text();
+            
+            var currentDate = new Date();
+            var year = currentDate.getFullYear();
+            var month = String(currentDate.getMonth() + 1).padStart(2, '0');
+            var day = String(currentDate.getDate()).padStart(2, '0');
+            var reportedOn = `${year}-${month}-${day}`;
+
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    userViolationsArray.push(checkbox.value);
+                }
+            });
+
+            if($("#othersSpecify").val() != "") {
+                userViolationsArray.push($("#othersSpecify").val());
+            }
+
+            var userViolations = userViolationsArray.join(', ');
+
+            reportData = new FormData();
+            reportData.append("username" , reportUserUsername);
+            reportData.append("userViolations" , userViolations);
+            reportData.append("additionalContext", additionalContext);
+            reportData.append("reportedOn", reportedOn);
+            reportData.append("reportedBy", accountUsername);
+    
+            $.ajax({
+                url: "../../ajax/submitReportUser.ajax.php",
+                method: "POST",
+                data: reportData,
+                dataType: "text",
+                processData: false,
+                contentType: false,
+                success: function() {
+                    $("#reportUserIcon").attr("src", "../assets/img/verification-check.png");
+                    $("#reportUserStatus").text("Report Received");
+                    $("#reportUserMessage").text("The team will review your complaint. Please expect a notification in 3-5 business days.");
+                },
+                error: function() {
+                    $("#reportUserIcon").attr("src", "../assets/img/verification-error.png");
+                    $("#reportUserStatus").text("Error");
+                    $("#reportUserMessage").text("There was an error processing your request. Please try again later.");
+                    $("#reportUserNoticeButton").css("background-color", "#E04F5F");
+                },
+                complete: function() {
+                    $("#reportUserNotice").modal();
+                    $("#reportUserNotice").show();
+
+                    $("#reportUserModal").removeClass("fade").modal("hide");
+                    $("#reportUserModal").modal("dispose");
+
+                    $("#reportUserUsername").val("");
+                    $("#reportUserForm")[0].reset();
+                    $("#reportUserAdditional").val("");
+                }
+            });
+        }
     });
 
     $("#sidebarNotifications").click(function(event) {
@@ -76,8 +134,6 @@ $(function() {
             }
         }
     });
-    
-    
 
     $("#sidebarReport").click(function(){
         $('#reportUserModal').modal();
@@ -91,8 +147,6 @@ $(function() {
     $("#privacyPolicy").click(function() {
         window.location.href = "../modules/privacyPolicy.php";
     });  
-
-    //js functions below this line are temporary---------------------------------------------------------------
 
     //sidebar tooltip    
     $("#sidebarProfile").hover(function(){

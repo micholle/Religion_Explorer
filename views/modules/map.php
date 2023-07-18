@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="en">
     <head> 
@@ -17,6 +18,7 @@
     <body style="width:100%;height:100%;margin:0;">
         <!-- Sidebar -->
         <div id="mapSidebar"></div>
+        <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
         <!-- Filter -->
         <div id="mapFilter" class="mapFilter">

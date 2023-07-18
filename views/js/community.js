@@ -74,7 +74,7 @@ $(function() {
     });
 
     $("#communityPublish").click(function(){
-        var username = $("#usernamePlaceholder").text();
+        var username = $("#accountUsernamePlaceholder").text();
         var title = $("#communityTitle").val();
         var religion = $("#communityCategory").val();
         var description = $("#communityDescription").val();
@@ -113,9 +113,7 @@ $(function() {
           dataType: "text",
           processData: false,
           contentType: false,
-          success: function(data) {
-            alert(data);   
-
+          success: function() {
             $("#communityModal").removeClass("fade").modal("hide");
             $("#communityModal").modal("dispose");
     

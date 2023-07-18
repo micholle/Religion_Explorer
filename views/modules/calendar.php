@@ -18,6 +18,7 @@
         <!-- Calendar -->
         <div class="pageContainer">
             <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
+            <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
             <div id="calendarDatePlaceHolder" hidden></div>
             <div id="calendarContainer" class="calendarContainer"></div>
         </div>

@@ -1,9 +1,9 @@
 <?php
-require_once "../controllers/reportedUsers.controller.php";
+require_once "../controllers/report.controller.php";
 
 class reportedUsersAjax{
     public function ajaxGetReportedUsers(){
-        $answer = (new reportedUsersController) -> ctrGetReportedUsers();
+        $answer = (new reportUserController) -> ctrGetReportedUsers();
     }
 }
 
