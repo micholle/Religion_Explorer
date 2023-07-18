@@ -192,27 +192,27 @@ require_once "../../models/explorerPoints.model.php";
                     <div class="container">
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center flex-row">
-                                <img src="../assets/img/editProfile/lion.png" class="defaultAvatar">
-                                <img src="../assets/img/editProfile/lamb.png" class="defaultAvatar">
-                                <img src="../assets/img/editProfile/cow.png" class="defaultAvatar">
-                                <img src="../assets/img/editProfile/cat.png" class="defaultAvatar">
-                                <img src="../assets/img/editProfile/deer.png" class="defaultAvatar">
-                                <img src="../assets/img/editProfile/robot.png" class="defaultAvatar">
+                                <img src="../assets/img/editProfile/lion.png" class="defaultAvatar" value="../views/assets/img/editProfile/lion.png">
+                                <img src="../assets/img/editProfile/lamb.png" class="defaultAvatar" value="../views/assets/img/editProfile/lamb.png">
+                                <img src="../assets/img/editProfile/cow.png" class="defaultAvatar" value="../views/assets/img/editProfile/cow.png">
+                                <img src="../assets/img/editProfile/cat.png" class="defaultAvatar" value="../views/assets/img/editProfile/cat.png">
+                                <img src="../assets/img/editProfile/deer.png" class="defaultAvatar" value="../views/assets/img/editProfile/deer.png">
+                                <img src="../assets/img/editProfile/robot.png" class="defaultAvatar" value="../views/assets/img/editProfile/robot.png">
                             </div>
                             <div class="col-12 d-flex justify-content-center align-items-center flex-row">
-                                <img src="../assets/img/editProfile/woman1.png" class="defaultAvatar">
-                                <img src="../assets/img/editProfile/man1.png" class="defaultAvatar">
-                                <img src="../assets/img/editProfile/woman2.png" class="defaultAvatar">
-                                <img src="../assets/img/editProfile/man2.png" class="defaultAvatar">
-                                <img src="../assets/img/editProfile/woman3.png" class="defaultAvatar">
-                                <img src="../assets/img/editProfile/man3.png" class="defaultAvatar">
+                                <img src="../assets/img/editProfile/woman1.png" class="defaultAvatar" value="../views/assets/img/editProfile/woman1.png">
+                                <img src="../assets/img/editProfile/man1.png" class="defaultAvatar" value="../views/assets/img/editProfile/man1.png">
+                                <img src="../assets/img/editProfile/woman2.png" class="defaultAvatar" value="../views/assets/img/editProfile/woman2.png">
+                                <img src="../assets/img/editProfile/man2.png" class="defaultAvatar" value="../views/assets/img/editProfile/man2.png">
+                                <img src="../assets/img/editProfile/woman3.png" class="defaultAvatar" value="../views/assets/img/editProfile/woman3.png">
+                                <img src="../assets/img/editProfile/man3.png" class="defaultAvatar" value="../views/assets/img/editProfile/man3.png">
                             </div>
-                        </div>
-                        <p>OR</p>
-                        <div class="row">
+                            </div>
+                            <p>OR</p>
+                            <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                 <button class="roundedButtonVariant">Upload File</button>
-                                <button class="roundedButton">Update Avatar</button>
+                                <button class="roundedButton" id="updateAvatarBtn">Update Avatar</button>
                             </div>
                         </div>
                     </div>

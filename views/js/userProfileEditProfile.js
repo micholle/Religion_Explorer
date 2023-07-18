@@ -117,4 +117,92 @@ $(function() {
           }
         });
       });
+
+      function updateAvatar(imagePath) {
+        // Send an AJAX request to update the avatar
+        $.ajax({
+          url: "../../ajax/updateAvatar.ajax.php",
+          method: "POST",
+          data: { avatar: imagePath },
+          success: function(response) {
+            if (response === "ok") {
+              // Avatar updated successfully
+              alert("Avatar updated successfully");
+            } else {
+              // Error occurred while updating the avatar
+              alert("Error updating the avatar");
+              alert(imagePath);
+            }
+          },
+          error: function() {
+            // AJAX request failed
+            alert("AJAX request failed");
+          }
+        });
+      }
+
+      // Handle click on avatar images
+      $(".defaultAvatar").click(function() {
+        // Remove the highlight from all avatar images
+        $(".defaultAvatar").removeClass("highlight");
+
+        // Add highlight class to the clicked avatar image
+        $(this).addClass("highlight");
+      });
+
+      // Handle click on "Update Avatar" button
+      $("#updateAvatarBtn").click(function() {
+        // Check if any avatar image is selected
+        if ($(".defaultAvatar.highlight").length > 0) {
+          // Get the value (image path) of the selected avatar image
+          var imagePath = $(".defaultAvatar.highlight").attr("value");
+
+          // Call the function to update the avatar
+          updateAvatar(imagePath);
+        } else {
+          // No avatar image selected, show an error message or take appropriate action
+          alert("Please select an avatar image");
+        }
+      });
+
+
+    // Function to handle file upload
+    function handleUpload() {
+      // Get the file input element
+      var fileInput = document.getElementById("fileInput");
+
+      // Get the selected file
+      var file = fileInput.files[0];
+
+      // Create a FormData object to store the file data
+      var formData = new FormData();
+      formData.append("file", file);
+
+      // Send an AJAX request to upload the file
+      $.ajax({
+        url: "upload.php",
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          if (response === "ok") {
+            // File uploaded successfully
+            console.log("File uploaded successfully");
+            // Get the file path or URL from the server response
+            var imagePath = "path_to_uploaded_image.jpg";
+            // Call the function to update the avatar in the database
+            updateAvatar(imagePath);
+          } else {
+            // Error occurred while uploading the file
+            console.log("Error uploading the file");
+          }
+        },
+        error: function() {
+          // AJAX request failed
+          console.log("AJAX request failed");
+        }
+      });
+    }
+
 });

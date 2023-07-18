@@ -260,6 +260,30 @@ class ModelAccount{
 			return "Error";
 		}
 	}
+
+	static public function mdlUpdateAvatar($avatar) {
+		// Update the avatar in the database for the current user
+		// Add your code here to perform the database update operation
+		$db = new Connection();
+		$pdo = $db->connect();
+		$imageData = file_get_contents($avatar);
+		try {
+			$stmt = $pdo->prepare("UPDATE accounts SET avatar = :avatar WHERE accountid = :accountid");
+		
+			$stmt->bindParam(":avatar", $imageData, PDO::PARAM_LOB);
+			$stmt->bindParam(":accountid", $_SESSION['accountid'], PDO::PARAM_STR);
+			$stmt->execute();
+		
+			$pdo->commit();
+			return "ok";
+		  } catch (Exception $e) {
+			$pdo->rollBack();
+			return "error";
+		  } finally {
+			$pdo = null;
+			$stmt = null;
+		  }
+	  }
 	
 }
 ?>
