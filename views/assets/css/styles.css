@@ -708,6 +708,10 @@ h5 {
     display: flex;
 }
 
+.communityVideos {
+    display: flex;
+}
+
 .communityFile {
     width: 200px !important;
     height: 200px;
@@ -835,6 +839,7 @@ h5 {
 /*library*/
 
 .libraryMediaContainer {
+    display: flex;
     width: 100%;
     border: solid #D0D0D0 2px;
     border-radius: 25px;
@@ -2950,6 +2955,13 @@ p {
     width: 400px;
 }
 
+#confirmDeleteCreationModal .roundedButtonVariant {
+    margin-right: 10px !important;
+}
+
+#confirmDeleteCreationModal .modal-xs {
+    width: 400px;
+}
 /*discussion forum post view*/
 .forumPostViewContainer {
     margin-top: 20px;
