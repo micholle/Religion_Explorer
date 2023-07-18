@@ -17,7 +17,7 @@ class ModelDiscussion {
         }
     
         try {
-            $stmt = $pdo->prepare("SELECT topics.*, accounts.username,
+            $stmt = $pdo->prepare("SELECT topics.*, accounts.username, accounts.avatar,
                                         (SELECT COUNT(*) FROM posts WHERE posts.topicId = topics.topicId) AS postCount,
                                         (SELECT postCount + COUNT(*) FROM reply JOIN posts ON reply.postId = posts.postId WHERE posts.topicId = topics.topicId) AS commentCount
                                    FROM topics 
@@ -30,6 +30,56 @@ class ModelDiscussion {
         } catch (Exception $e) {
             return array();
         } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlGetProfileTopics() {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("SELECT topics.*, accounts.username, accounts.avatar,
+                               (SELECT COUNT(*) FROM posts WHERE posts.topicId = topics.topicId) AS postCount,
+                               (SELECT postCount + COUNT(*) FROM reply JOIN posts ON reply.postId = posts.postId WHERE posts.topicId = topics.topicId) AS commentCount
+                        FROM topics 
+                        INNER JOIN accounts ON topics.accountid = accounts.accountid
+                        WHERE topics.accountid = :accountid
+                        ORDER BY topicDate DESC");
+                        $stmt->bindParam(":accountid", $_SESSION['accountid'], PDO::PARAM_STR);
+                        $stmt->execute();
+                        $topics = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $topics;
+        } catch (Exception $e) {
+            return array();
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    static public function mdlGetProfilePosts() {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $stmt = $pdo->prepare("SELECT posts.*, topics.*, accounts.username
+                                   FROM posts
+                                   INNER JOIN topics ON posts.topicId = topics.topicId
+                                   INNER JOIN accounts ON posts.accountid = accounts.accountid
+                                   WHERE posts.accountid = :accountid");
+            $stmt->bindParam(':accountid', $_SESSION['accountid'], PDO::PARAM_STR);
+            $stmt->execute();
+            $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $posts;
+        } catch (PDOException $e) {
+            // Handle the exception or return an error message
+            return [];
+        } finally {
+            // Close the connection and statement
             $pdo = null;
             $stmt = null;
         }
@@ -110,7 +160,7 @@ class ModelDiscussion {
         }
     
         try {
-            $stmt = $pdo->prepare("SELECT posts.*, accounts.username, posts.postDate,
+            $stmt = $pdo->prepare("SELECT posts.*, accounts.username, posts.postDate, accounts.avatar,
                                         (SELECT COUNT(*) FROM reply WHERE reply.postId = posts.postId) AS replyCount
                                    FROM posts 
                                    INNER JOIN accounts ON posts.accountid = accounts.accountid

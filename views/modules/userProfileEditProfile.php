@@ -27,7 +27,7 @@ require_once "../../models/explorerPoints.model.php";
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
                 <div class="col-3 d-flex justify-content-end align-items-end">
-                    <img src="../assets/img/editProfile/cow.png" width="175px">
+                    <img src="data:image/png;base64,<?php echo base64_encode($_SESSION['avatar']); ?>" width="175px">
                     <img src="../assets/img/editProfile/edit.png" id="editAvatar" class="editAvatarButton">
                 </div>
 

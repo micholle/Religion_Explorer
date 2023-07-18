@@ -29,7 +29,7 @@ require_once "../../models/explorerPoints.model.php";
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
                 <div class="col-3 d-flex justify-content-end align-items-end">
-                    <img src="../assets/img/editProfile/cow.png" width="175px">
+                    <img src="data:image/png;base64,<?php echo base64_encode($_SESSION['avatar']); ?>" width="175px">
                 </div>
 
                 <div class="col-4 userBasicStatsContainer">
@@ -86,28 +86,10 @@ require_once "../../models/explorerPoints.model.php";
                     </div>
                 </div>
 
-                <div class="userProfileContent">
-                    <div class="forumPostContainer">
-                        <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">
-                            <img src="../assets/img/discussionForum/upvote.png">
-                            <p class="upvotes">0</p>
-                            <img src="../assets/img/discussionForum/downvote.png">
-                            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">
-                            <p>0</p>
-                        </div>
-                        <div class="forumContent">
-                            <h1>[Placeholder Title]</h1>
-                            <div class="row">
-                                <div class="col-12 d-flex flex-row">
-                                    <h2>[Placeholder User]</h2><h2>•</h2><h2>[Placeholder Date]</h2>
-                                </div>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae!</p>
-                        </div>
-                    </div>
+                <div class="userProfileContent" id="profileTopics">
                 </div>
 
-                <div class="userProfileContent">
+                <div class="userProfileContent" id="profilePosts">
                     <div class="forumPostContainer">
                         <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">
                             <img src="../assets/img/discussionForum/upvote.png">

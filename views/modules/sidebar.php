@@ -1,4 +1,5 @@
 <?php
+session_start();
 function create_sidebar() {
     $sidebar_html = '
         <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
@@ -17,7 +18,7 @@ function create_sidebar() {
                 <ul>
                     <li>
                         <a id="sidebarProfile" href="userProfile.php">
-                            <img src="../assets/img/editProfile/cow.png">
+                            <img src="data:image/png;base64,'. base64_encode($_SESSION['avatar']) .'">
                             <span class="navItem">Profile</span>
                         </a>
                     </li>
