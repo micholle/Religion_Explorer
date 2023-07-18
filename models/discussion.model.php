@@ -69,7 +69,8 @@ class ModelDiscussion {
                                    FROM posts
                                    INNER JOIN topics ON posts.topicId = topics.topicId
                                    INNER JOIN accounts ON posts.accountid = accounts.accountid
-                                   WHERE posts.accountid = :accountid");
+                                   WHERE posts.accountid = :accountid
+                                   ORDER BY postDate DESC");
             $stmt->bindParam(':accountid', $_SESSION['accountid'], PDO::PARAM_STR);
             $stmt->execute();
             $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
