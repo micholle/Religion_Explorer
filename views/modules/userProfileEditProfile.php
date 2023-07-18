@@ -211,7 +211,7 @@ require_once "../../models/explorerPoints.model.php";
                             <p>OR</p>
                             <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <button class="roundedButtonVariant">Upload File</button>
+                                <button class="roundedButtonVariant" id="uploadButton">Upload File</button>
                                 <button class="roundedButton" id="updateAvatarBtn">Update Avatar</button>
                             </div>
                         </div>

@@ -159,43 +159,41 @@ $(function() {
       });
 
 
-    // Function to handle file upload
-    function handleUpload() {
-      // Get the file input element
-      var fileInput = document.getElementById("fileInput");
-
-      // Get the selected file
-      var file = fileInput.files[0];
-
-      // Create a FormData object to store the file data
-      var formData = new FormData();
-      formData.append("file", file);
-
-      // Send an AJAX request to upload the file
-      $.ajax({
-        url: "upload.php",
-        method: "POST",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-          if (response === "ok") {
-            // File uploaded successfully
-            console.log("File uploaded successfully");
-            // Get the file path or URL from the server response
-            var imagePath = "path_to_uploaded_image.jpg";
-            // Call the function to update the avatar in the database
-            updateAvatar(imagePath);
-          } else {
-            // Error occurred while uploading the file
-            console.log("Error uploading the file");
-          }
-        },
-        error: function() {
-          // AJAX request failed
-          console.log("AJAX request failed");
-        }
+      document.getElementById("uploadButton").addEventListener("click", function() {
+        // Create a hidden file input element
+        var fileInput = document.createElement("input");
+        fileInput.type = "file";
+        fileInput.style.display = "none";
+    
+        // Append the file input element to the body
+        document.body.appendChild(fileInput);
+    
+        // Trigger a click event on the file input element
+        fileInput.click();
+    
+        // Listen for file selection
+        fileInput.addEventListener("change", function(event) {
+          var file = event.target.files[0];
+          var formData = new FormData();
+          formData.append("file", file);
+    
+          // Send an AJAX request to upload the file
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "../../ajax/uploadAvatar.ajax.php", true);
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              // File uploaded successfully
+              alert("File uploaded successfully");
+            } else {
+              // Error occurred while uploading the file
+              alert("Error uploading the file");
+            }
+          };
+          xhr.send(formData);
+        });
+    
+        // Remove the file input element from the body
+        document.body.removeChild(fileInput);
       });
-    }
 
 });
