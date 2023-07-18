@@ -79,7 +79,7 @@
                                         <input type="checkbox" id="contentSpam" name="contentPrivacyViolation" value="Spam or Unwanted Content">
                                         <label for="contentSpam">Spam or Unwanted Content</label><br>
                                         <label for="contentOthers">Others, specify:</label><br>
-                                        <input id="othersSpecify" class="inputVariant" name="othersSpecify"><br>
+                                        <input id="othersSpecify" class="inputVariant"><br>
                                     </form>    
                                 </div>
                             </div>
