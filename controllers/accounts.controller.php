@@ -41,5 +41,11 @@ class ControllerAccount{
     $answer = (new ModelAccount)->mdlUpdateAccount($data);
     return $answer;
   }  
+
+  static public function ctrUpdateAvatar($avatar) {
+    // Call the model function to update the avatar
+    $response = ModelAccount::mdlUpdateAvatar($avatar);
+    return $response;
+  }
 }
 ?>

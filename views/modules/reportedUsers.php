@@ -31,21 +31,13 @@
                         <div class="row">
                             <div class="col-12 adminFilter">
                                 <input type="search" id="userSearch" name="" class="adminSearch" placeholder="Search">
-                                <select id="reportedUsersFilter" class="js-example-basic-multiple" multiple="multiple" data-placeholder="  Filter">
-                                    <optgroup label="Time">
-                                        <option>Today</option>
-                                        <option>This Week</option>
-                                        <option>This Month</option>
-                                        <option>This Year</option>
-                                        <option>All Time</option>
-                                    </optgroup>
-                                    <optgroup label="Category">
-                                        <option>Harrassment or Bullying</option>
-                                        <option>Offensive Language</option>
-                                        <option>Spam</option>
-                                        <option>Community Guidelines Violation</option>
-                                        <option>Suspicious or Fake Account</option>
-                                    </optgroup>
+                                <select id="reportedUsersFilter" class="js-example-basic-multiple" multiple="multiple" data-placeholder="  Violation">
+                                    <option>Harrassment or Bullying</option>
+                                    <option>Offensive Language</option>
+                                    <option>Spam</option>
+                                    <option>Community Guidelines Violation</option>
+                                    <option>Suspicious or Fake Account</option>
+                                    <option>Content Violations</option>
                                 </select>
                             </div>
                         </div>

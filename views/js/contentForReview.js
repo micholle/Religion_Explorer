@@ -13,12 +13,46 @@ $(function() {
 
     $('#contentFilter').on('select2:select', function() {
         var selectedValues = $('.js-example-basic-multiple').val();
-        var timeValues = ["today", "week", "month", "year"];
 
         for (value in selectedValues) {
-            if (!(timeValues.includes(selectedValues[value]))){
+            var violationFilter = selectedValues[value];
+        
+            $.ajax({
+                url: "../../ajax/getReportedContent.ajax.php",
+                method: "POST",
+                success:function(data){
+                    var contentForReview = data;
+        
+                    for (content in contentForReview) {
+                        var contentDetails = contentForReview[content];
+                        var contentid = content;
+                        var contentClass = "." + contentid;
+
+                        var violations = contentDetails.violation;
+
+                        if(violations.length == 0){
+                            $(contentClass).show();
+                        } else {
+                            if (violations.includes(violationFilter)) {
+                                $(contentClass).show();
+                            } else {
+                                $(contentClass).hide();
+                            }
+                        }
+                    }
+                }
+            });   
+        }
+    });
+
+    $('#contentFilter').on('select2:unselect', function() {
+        var selectedValues = $('.js-example-basic-multiple').val();
+
+        if (selectedValues == "") {
+            $(".adminReviewContainerContent").show();
+        } else {
+            for (value in selectedValues) {
                 var violationFilter = selectedValues[value];
-            
                 $.ajax({
                     url: "../../ajax/getReportedContent.ajax.php",
                     method: "POST",
@@ -29,9 +63,9 @@ $(function() {
                             var contentDetails = contentForReview[content];
                             var contentid = content;
                             var contentClass = "." + contentid;
-    
+
                             var violations = contentDetails.violation;
-    
+
                             if(violations.length == 0){
                                 $(contentClass).show();
                             } else {
@@ -47,7 +81,6 @@ $(function() {
             }
         }
     });
-
     
     $.ajax({    
         url: "../../ajax/getReportedContent.ajax.php",

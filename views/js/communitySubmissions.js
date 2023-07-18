@@ -202,24 +202,22 @@ $(function() {
         $('#confirmDeleteCreationModal').show();
     });
     
-    $("#submitReportContent").click(function(event) {
-        event.preventDefault();
-    
+    $("#submitReportContent").click(function() {    
         var atLeastOneCheckboxChecked = false;
-        $("input[type=checkbox]", "#reportContentForm").each(function() {
+        $("input[type=checkbox]", "#reportUserModal").each(function() {
             if (this.checked) {
                 atLeastOneCheckboxChecked = true;
                 return false;
             }
         });
     
-        if (!atLeastOneCheckboxChecked && ($("#othersSpecify").val() == "")) {
+        if (!atLeastOneCheckboxChecked && $("#othersSpecify").val() == "") {
             $("#toast").html("Please fill out all required fields.")
             $("#toast").css("background-color", "#E04F5F");
-            $('#toast').addClass('show');
+            $("#toast").addClass('show');
         
             setTimeout(function() {
-                $('#toast').removeClass('show');
+                $("#toast").removeClass('show');
             }, 2000);
         } else {
             var contentViolationsArray = []; 

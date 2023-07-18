@@ -13,12 +13,47 @@ $(function() {
 
     $('#reportedUsersFilter').on('select2:select', function() {
         var selectedValues = $('.js-example-basic-multiple').val();
-        var timeValues = ["today", "week", "month", "year"];
 
         for (value in selectedValues) {
-            if (!(timeValues.includes(selectedValues[value]))){
-                var violationFilter = selectedValues[value];
+            var violationFilter = selectedValues[value];
             
+            $.ajax({
+                url: "../../ajax/getReportedUsers.ajax.php",
+                method: "POST",
+                success:function(data){
+                    var reportedUsers = data;
+        
+                    for (user in reportedUsers) {
+                        var userDetails = reportedUsers[user];
+                        var userid = user;
+                        var userClass = "." + userid;
+
+                        var violations = userDetails.violation;
+
+                        if(violations.length == 0){
+                            $(userClass).show();
+                        } else {
+                            if (violations.includes(violationFilter)) {
+                                $(userClass).show();
+                            } else {
+                                $(userClass).hide();
+                            }
+                        }
+                    }
+                }
+            });   
+        }
+    });
+
+    $('#reportedUsersFilter').on('select2:unselect', function() {
+        var selectedValues = $('.js-example-basic-multiple').val();
+
+        if (selectedValues == "") {
+            $(".adminReviewContainerContent").show();
+        } else {
+            for (value in selectedValues) {
+                var violationFilter = selectedValues[value];
+                
                 $.ajax({
                     url: "../../ajax/getReportedUsers.ajax.php",
                     method: "POST",
@@ -44,7 +79,7 @@ $(function() {
                         }
                     }
                 });   
-            }
+            }   
         }
     });
 
