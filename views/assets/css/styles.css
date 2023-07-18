@@ -1576,6 +1576,15 @@ p {
     width: 20px;
 }
 
+.userBasicStatsSave {
+    width: 170px;
+}
+
+.userBasicStatsCancel {
+    margin-top: 10px !important;
+    width: 170px;
+}
+
 .userBasicStats {
     margin: 5px 0;
 }
