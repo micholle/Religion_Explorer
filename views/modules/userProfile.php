@@ -70,6 +70,7 @@
                 <button class="userProfileTabBtn active">Overview</button>
                 <button class="userProfileTabBtn">Posts</button>
                 <button class="userProfileTabBtn">Comments</button>
+                <button class="userProfileTabBtn">Creations</button>
                 <button class="userProfileTabBtn">Bookmarks</button>
                 <button class="userProfileTabBtn">Personal Calendar</button>
                 <button class="userProfileTabBtn">Statistics</button>
@@ -138,6 +139,33 @@
                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae!</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="userProfileContent">
+                    <div class="bookmarkContainer">
+                        <div class="bookmarkImgContainer d-flex justify-content-center align-items-center">
+                            <img src="../assets/img/userProfile/photo.png" class="userProfBookmark">
+                        </div>
+                        <div class="bookmarkContent d-flex justify-content-start align-items-center">
+                            <p>[Placeholder Title]<p>
+                        </div>
+                    </div>
+                    <div class="bookmarkContainer">
+                        <div class="bookmarkImgContainer d-flex justify-content-center align-items-center">
+                            <img src="../assets/img/userProfile/video.png" class="userProfBookmark">
+                        </div>
+                        <div class="bookmarkContent d-flex justify-content-start align-items-center">
+                            <p>[Placeholder Title]<p>
+                        </div>
+                    </div>
+                    <div class="bookmarkContainer">
+                        <div class="bookmarkImgContainer d-flex justify-content-center align-items-center">
+                            <img src="../assets/img/userProfile/readmat.png" class="userProfBookmark">
+                        </div>
+                        <div class="bookmarkContent d-flex justify-content-start align-items-center">
+                            <p>[Placeholder Title]<p>
                         </div>
                     </div>
                 </div>
