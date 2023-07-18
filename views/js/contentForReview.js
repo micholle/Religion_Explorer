@@ -58,9 +58,10 @@ $(function() {
             var contentid = "";
             var contentLink = "";
             var violations = "";
+            var additionalContext = "";
             var reportedOn = "";
             var reportedBy = "";
-            var additionalContext = "";
+            var contentCreator = "";
 
             for (content in contentForReview) {
                 var contentDetails = contentForReview[content];
@@ -71,9 +72,10 @@ $(function() {
                 contentid = content;
                 contentLink = contentDetails.contentLink;
                 violations = contentDetails.violation;
+                additionalContext = contentDetails.additionalContext;
                 reportedOn = formattedDate;
                 reportedBy = contentDetails.reportedBy;
-                additionalContext = contentDetails.additionalContext;
+                contentCreator = contentDetails.contentCreator;
                 
                 $("#contentidColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + contentid + '</p> </div>');
                 $("#contentLinkColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center text-center"> <a href="' + "http://localhost/religion_explorer/views/modules/communitySubmissions.php/" + contentid + '">' + contentLink + '</a> </div>');
@@ -84,7 +86,7 @@ $(function() {
                 $("#actionColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
                     '<img class="reportButton" src="../assets/img/admin/action-check.png" onclick="resolveReport(' + "'" + contentid + "'" + ')">' +
                     '<img class="reportButton" src="../assets/img/admin/action-x.png" onclick="deleteContent(' + "'" + contentid + "'" +')">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-exclamation.png" onclick="reportUser(' + "'" + contentid + "'" +')"">' +
+                    '<img class="reportButton" src="../assets/img/admin/action-exclamation.png" onclick="reportUser(' + "'" + contentid + '\', \'' + violations + '\', \'' + additionalContext + '\', \'' + contentCreator + '\')"">' +
                 '</div>');
             }
         }
@@ -151,7 +153,7 @@ $(function() {
             method: "POST",
             data: {"contentid" : contentid},
             success:function(){
-                $("#toast").html("Content deleted.")
+                $("#toast").html("Content deleted.");
             }, error: function() {
                 $("#toast").html("There was an error processing your request. Please try again later.")
                 $("#toast").css("background-color", "#E04F5F");
@@ -171,15 +173,46 @@ $(function() {
     });
 
     $("#confirmReportUser").click(function () { 
-        var contentid = $("#resolveReportContentid").text();
+        var contentid = $("#reportUserContentid").text();
+        var reportUserUsername =  $("#reportUserContentCreator").text();
+        var userViolations = $("#reportUserViolations").text();
+        var additionalContext = $("#reportUserAdditionalContext").text();
         
+        var currentDate = new Date();
+        var year = currentDate.getFullYear();
+        var month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        var day = String(currentDate.getDate()).padStart(2, '0');
+        var reportedOn = `${year}-${month}-${day}`;
+
+        reportData = new FormData();
+        reportData.append("username" , reportUserUsername);
+        reportData.append("userViolations" , "Content Violations: " + userViolations);
+        reportData.append("additionalContext", additionalContext);
+        reportData.append("reportedOn", reportedOn);
+        reportData.append("reportedBy", "Admin");
+
         $.ajax({
-            url: "../../ajax/reportUserReportedContent.ajax.php",
+            url: "../../ajax/submitReportUser.ajax.php",
             method: "POST",
-            data: {"contentid" : contentid},
-            success:function(){
-                $("#toast").html("User reported.")
-            }, error: function() {
+            data: reportData,
+            dataType: "text",
+            processData: false,
+            contentType: false,
+            success: function() {
+                $("#toast").html("User reported.");
+
+                $.ajax({
+                    url: "../../ajax/resolveReportedContent.ajax.php",
+                    method: "POST",
+                    data: {"contentid" : contentid},
+                    complete: function() {
+                        setTimeout(function() {
+                            location.reload();
+                        }, 500);
+                    }
+                });
+            },
+            error: function() {
                 $("#toast").html("There was an error processing your reque st. Please try again later.")
                 $("#toast").css("background-color", "#E04F5F");
             },
@@ -209,8 +242,12 @@ function deleteContent(contentid) {
     $("#deleteContentModal").show();
 }
 
-function reportUser(contentid) {
+function reportUser(contentid, violations, additionalContext, contentCreator) {
     $("#reportUserContentid").html(contentid);
+    $("#reportUserViolations").html(violations);
+    $("#reportUserAdditionalContext").html(additionalContext);
+    $("#reportUserContentCreator").html(contentCreator);
+
     $("#reportUserModal").modal();
     $("#reportUserModal").show();
 }

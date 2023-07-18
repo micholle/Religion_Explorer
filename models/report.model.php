@@ -12,25 +12,27 @@ class reportContentModel {
     
         $reportedContents = [];
         $contentLink = "";
+        $contentCreator = "";
     
         foreach ($reportedContent as $content) {  
-            
             if ($content["reportStatus"] == "Pending") {
 
                 if (substr($content["contentid"], 0, 2) == "CC") {
-                    $stmt2 = $pdo->prepare("SELECT creationid, title FROM communitycreations");
+                    $stmt2 = $pdo->prepare("SELECT creationid, title, username FROM communitycreations");
                     $stmt2->execute();
                     $communityCreations = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         
                     foreach ($communityCreations as $creation) {
                         if ($creation["creationid"] == $content["contentid"]) {
                             $contentLink = $creation["title"];
+                            $contentCreator = $creation["username"];
                             break;
                         }
                     }
                 }
 
                 $reportedContents[$content["contentid"]] = [
+                    "contentCreator" => $contentCreator,
                     "contentLink" => $contentLink,
                     "violation" => $content["contentViolations"],
                     "additionalContext" => $content["additionalContext"],
