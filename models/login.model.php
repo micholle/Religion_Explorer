@@ -22,6 +22,7 @@ class ModelLogin {
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['religion'] = $user['religion'];
                 $_SESSION['accountDate'] = $user['accountDate'];
+                $_SESSION['avatar'] = $user['avatar'];
                 return "Success";
             } else {
                 // Invalid credentials

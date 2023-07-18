@@ -66,6 +66,22 @@ class ModelAccount{
 	  static public function mdlAddAccount($data) {
 		$db = new Connection();
 		$pdo = $db->connect();
+
+		if($data['religion'] === 'Buddhism'){
+			$imagePath = '../views/assets/img/editProfile/lion.png';
+		} else if ($data['religion'] === 'Christianity'){
+			$imagePath = '../views/assets/img/editProfile/lamb.png';
+		} else if ($data['religion'] === 'Hinduism'){
+			$imagePath = '../views/assets/img/editProfile/cow.png';
+		} else if ($data['religion'] === 'Islam'){
+			$imagePath = '../views/assets/img/editProfile/cat.png';
+		} else if ($data['religion'] === 'Judaism'){
+			$imagePath = '../views/assets/img/editProfile/deer.png';
+		} else if ($data['religion'] === 'Non-religious' || $data['religion'] === 'Other'){
+			$imagePath = '../views/assets/img/editProfile/lion.png';
+		}
+		
+		$imageData = file_get_contents($imagePath);
 		try {
 		  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		  $pdo->beginTransaction();
@@ -77,7 +93,7 @@ class ModelAccount{
 	  
 		  $password = password_hash($data["password"], PASSWORD_DEFAULT);
 	  
-		  $stmt = $pdo->prepare("INSERT INTO accounts(accountid, email, acctype, username, password, religion) VALUES (:accountid, :email, :acctype, :username, :password, :religion)");
+		  $stmt = $pdo->prepare("INSERT INTO accounts(accountid, email, acctype, username, password, religion, avatar) VALUES (:accountid, :email, :acctype, :username, :password, :religion, :avatar)");
 	  
 		  $stmt->bindParam(":accountid", $accountid['gen_id'], PDO::PARAM_STR);
 		  $stmt->bindParam(":email", $data["email"], PDO::PARAM_STR);
@@ -85,6 +101,7 @@ class ModelAccount{
 		  $stmt->bindParam(":username", $data["username"], PDO::PARAM_STR);
 		  $stmt->bindParam(":password", $password, PDO::PARAM_STR);
 		  $stmt->bindParam(":religion", $data["religion"], PDO::PARAM_STR);
+		  $stmt->bindParam(":avatar", $imageData, PDO::PARAM_LOB);
 		  $stmt->execute();
 	  
 		  $pdo->commit();
@@ -176,49 +193,73 @@ class ModelAccount{
 	static public function mdlUpdateAccount($data) {
 		$db = new Connection();
 		$pdo = $db->connect();
+		
 		try {
-		  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		  $pdo->beginTransaction();
-	  
-		  // Generate account ID
-	  
-		  $stmt = $pdo->prepare("UPDATE accounts 
-                      SET email = CASE WHEN :email <> '' THEN :email ELSE email END, 
-                          username = CASE WHEN :username <> '' THEN :username ELSE username END, 
-                          religion = CASE WHEN :religion <> '' THEN :religion ELSE religion END, 
-                          notifications = :displayNotifications, 
-                          displayCalendar = :displayCalendar, 
-                          displayNickname = :displayNickname, 
-                          displayBookmark = :displayBookmark, 
-                          displayReligion = :displayReligion, 
-                          displayPage = :displayPage 
-                      WHERE accountid = :accountid");
-
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$pdo->beginTransaction();
+	
+			$stmt = $pdo->prepare("UPDATE accounts 
+								  SET email = CASE WHEN :email <> '' THEN :email ELSE email END, 
+									  username = CASE WHEN :username <> '' THEN :username ELSE username END, 
+									  religion = CASE WHEN :religion <> '' THEN :religion ELSE religion END, 
+									  notifications = :displayNotifications, 
+									  displayCalendar = :displayCalendar, 
+									  displayNickname = :displayNickname, 
+									  displayBookmark = :displayBookmark, 
+									  displayReligion = :displayReligion, 
+									  displayPage = :displayPage 
+								  WHERE accountid = :accountid");
+	
 			$stmt->bindValue(':email', $data['email'], PDO::PARAM_STR);
-			$stmt->bindParam(':username', $data['username'], PDO::PARAM_STR);
+			$stmt->bindValue(':username', $data['username'], PDO::PARAM_STR);
 			$stmt->bindValue(':religion', $data['religion'], PDO::PARAM_STR);
-			$stmt->bindParam(':displayNotifications', $data['displayNotifications'], PDO::PARAM_INT);
-			$stmt->bindParam(':displayCalendar', $data['displayCalendar'], PDO::PARAM_INT);
-			$stmt->bindParam(':displayNickname', $data['displayNickname'], PDO::PARAM_INT);
-			$stmt->bindParam(':displayBookmark', $data['displayBookmark'], PDO::PARAM_INT);
-			$stmt->bindParam(':displayReligion', $data['displayReligion'], PDO::PARAM_INT);
-			$stmt->bindParam(':displayPage', $data['displayPage'], PDO::PARAM_INT);
-			$stmt->bindParam(':accountid', $data['accountid'], PDO::PARAM_STR);
-		  $stmt->execute();
-
-		  $_SESSION['username'] = $data['username'];
-		  $_SESSION['religion'] = $data['religion'];
-		  $_SESSION['email'] = $data['email'];
-	  
-		  $pdo->commit();
-		  return "ok";
-		} catch (Exception $e) {
-		  $pdo->rollBack();
-		  return "error";
+			$stmt->bindValue(':displayNotifications', $data['displayNotifications'], PDO::PARAM_INT);
+			$stmt->bindValue(':displayCalendar', $data['displayCalendar'], PDO::PARAM_INT);
+			$stmt->bindValue(':displayNickname', $data['displayNickname'], PDO::PARAM_INT);
+			$stmt->bindValue(':displayBookmark', $data['displayBookmark'], PDO::PARAM_INT);
+			$stmt->bindValue(':displayReligion', $data['displayReligion'], PDO::PARAM_INT);
+			$stmt->bindValue(':displayPage', $data['displayPage'], PDO::PARAM_INT);
+			$stmt->bindValue(':accountid', $data['accountid'], PDO::PARAM_STR);
+	
+			$stmt->execute();
+	
+			$pdo->commit();
+			self::mdlUpdateSession($data['accountid']);
+			return "ok";
+		} catch (PDOException $e) {
+			$pdo->rollBack();
+			return "error";
 		} finally {
-		  $pdo = null;
-		  $stmt = null;
+			$pdo = null;
+			$stmt = null;
 		}
-	}		
+	}
+	
+	static public function mdlUpdateSession($accountid) {
+		$db = new Connection();
+		$pdo = $db->connect();
+	
+		try {
+			$stmt = $pdo->prepare("SELECT * FROM accounts WHERE accountid = :accountid");
+			$stmt->bindParam(":accountid", $accountid, PDO::PARAM_STR);
+			$stmt->execute();
+			$user = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+			if ($user) {
+				$_SESSION['accountid'] = $user['accountid'];
+				$_SESSION['username'] = $user['username'];
+				$_SESSION['email'] = $user['email'];
+				$_SESSION['religion'] = $user['religion'];
+				$_SESSION['accountDate'] = $user['accountDate'];
+			} else {
+				// User not found, handle accordingly
+				return "User not found";
+			}
+		} catch (PDOException $e) {
+			// Error occurred, handle accordingly
+			return "Error";
+		}
+	}
+	
 }
 ?>

@@ -17,7 +17,7 @@ class ModelDiscussion {
         }
     
         try {
-            $stmt = $pdo->prepare("SELECT topics.*, accounts.username,
+            $stmt = $pdo->prepare("SELECT topics.*, accounts.username, accounts.avatar,
                                         (SELECT COUNT(*) FROM posts WHERE posts.topicId = topics.topicId) AS postCount,
                                         (SELECT postCount + COUNT(*) FROM reply JOIN posts ON reply.postId = posts.postId WHERE posts.topicId = topics.topicId) AS commentCount
                                    FROM topics 
@@ -110,7 +110,7 @@ class ModelDiscussion {
         }
     
         try {
-            $stmt = $pdo->prepare("SELECT posts.*, accounts.username, posts.postDate,
+            $stmt = $pdo->prepare("SELECT posts.*, accounts.username, posts.postDate, accounts.avatar,
                                         (SELECT COUNT(*) FROM reply WHERE reply.postId = posts.postId) AS replyCount
                                    FROM posts 
                                    INNER JOIN accounts ON posts.accountid = accounts.accountid
