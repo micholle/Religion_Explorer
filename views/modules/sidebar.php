@@ -105,15 +105,7 @@ function create_sidebar() {
                     <div class="row notificationsPanelHeader">
                         <h1>Notifications</h1>
                     </div>
-                    <div class="row notificationsPanelBody d-flex justify-content-start align-items-top">
-                        <div class="col-2 d-flex justify-content-start align-items-start">
-                            <img src="../assets/img/editProfile/lion.png">
-                        </div>
-                        <div class="col-10 d-flex flex-column">
-                            <p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">[Username]</span> Proin eleifend velit eget leo suscipit malesuada. Proin mattis efficitur fermentum. Donec vitae placerat nisi.</p>
-                            <p class="notificationsPanelSubtext">[Placeholder Time]</p>
-                        </div>
-                    </div>
+                    <div id="notification"></div>
                 </div>
             </div>
         </div>

@@ -102,6 +102,43 @@ $(function() {
         }
     });
 
+    $.ajax({
+        url: "../../ajax/getNotifications.ajax.php",
+        method: "POST",
+            data : {"username" : $("#accountUsernamePlaceholder").text()},
+        success: function (data) {
+            var notificationData = data;
+    
+            var notification = "";
+            var notificationMessage = "";
+            var notificationIcon = "";
+            var notificationDate = "";
+            $("#notification").html("");
+
+            for (notif in notificationData) {
+                notificationDetails = notificationData[notif];
+    
+                notification = notificationDetails.notification;
+                notificationMessage = notificationDetails.notificationMessage;
+                notificationIcon = notificationDetails.notificationIcon;
+                notificationDate = notificationDetails.notificationDate;
+                
+                $("#notification").append(
+                    '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top">' +
+                        '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                            '<img src="' + notificationIcon + '">' +
+                        '</div>' +
+                        '<div class="col-10 d-flex flex-column">' +
+                            '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + notification + '</span>' + notificationMessage + '</p>' +
+                            '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                        '</div>' +
+                    '</div>'
+                );
+            
+            }
+        }
+    });
+
     $("#sidebarNotifications").click(function(event) {
         event.preventDefault();
     

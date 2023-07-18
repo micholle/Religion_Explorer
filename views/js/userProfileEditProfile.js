@@ -69,4 +69,52 @@ $(function() {
           </div>
         `);
       });
+
+      $('#saveEdit').click(function(e){
+        e.preventDefault();
+        var email = $("#email").val().trim();
+        var religion = $("#religion").val();
+        var username = $("#username").val().trim();
+        var displayNotification = $("#displayNotification").is(":checked") ? 1 : 0;
+        var displayCalendar = $("#displayCalendar").is(":checked") ? 1 : 0;
+        var displayNickname = $("#displayNickname").is(":checked") ? 1 : 0;
+        var displayBookmark = $("#displayBookmark").is(":checked") ? 1 : 0;
+        var displayReligion = $("#displayReligion").is(":checked") ? 1 : 0;
+        var displayPage = $("#libraryReligionFilter").val();
+    
+        var account = new FormData();
+        account.append("email", email);
+        account.append("religion", religion);
+        account.append("username", username);
+        account.append("displayNotification", displayNotification);
+        account.append("displayCalendar", displayCalendar);
+        account.append("displayNickname", displayNickname);
+        account.append("displayBookmark", displayBookmark);
+        account.append("displayReligion", displayReligion);
+        account.append("displayPage", displayPage);
+    
+        $.ajax({
+          url: "../../ajax/accountUpdate.ajax.php",
+          method: "POST",
+          data: account,
+          cache: false,
+          contentType: false,
+          processData: false,
+          dataType: "text",
+          success: function(answer) {
+            if (answer === "ok") {
+              alert("Saved successfully!");
+              window.location.href = "userProfile.php";
+            } else {
+              alert("Oops. Something went wrong!");
+            }
+          },
+          error: function() {
+            alert("Oops. Something went wrong!");
+          },
+          complete: function() {
+    
+          }
+        });
+      });
 });
