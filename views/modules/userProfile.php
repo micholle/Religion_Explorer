@@ -61,8 +61,8 @@
                     </div>
                 </div>
 
-                <div class="col-3 d-flex flex-column justify-content-start align-items-start buttonProfile">
-                    <a href="userProfileEditProfile.php"><button class="roundedButton">Edit Profile</button></a>
+                <div class="col-3 d-flex flex-column justify-content-start align-items-center buttonProfile">
+                    <a href="userProfileEditProfile.php"><button class="roundedButton userBasicStatsSave">Edit Profile</button></a>
                 </div>
             </div>
 

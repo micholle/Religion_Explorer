@@ -66,8 +66,9 @@
                     </div>
                 </div>
 
-                <div class="col-3 d-flex flex-column justify-content-start align-items-start buttonProfile">
-                    <a href="userProfile.php"><button class="roundedButton">Save Changes</button></a>
+                <div class="col-3 d-flex flex-column justify-content-start align-items-center buttonProfile flex-column">
+                    <a href="userProfile.php"><button class="roundedButton userBasicStatsSave">Save Changes</button></a>
+                    <a href="userProfile.php"><button class="roundedButtonVariant userBasicStatsCancel">Cancel</button></a>
                 </div>
 
             </div>
