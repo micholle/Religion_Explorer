@@ -113,6 +113,7 @@ $(function() {
             var notificationMessage = "";
             var notificationIcon = "";
             var notificationDate = "";
+            var notificationSource = "";
             $("#notification").html("");
 
             for (notif in notificationData) {
@@ -122,9 +123,10 @@ $(function() {
                 notificationMessage = notificationDetails.notificationMessage;
                 notificationIcon = notificationDetails.notificationIcon;
                 notificationDate = notificationDetails.notificationDate;
+                notificationSource = notificationDetails.notificationSource;
                 
                 $("#notification").append(
-                    '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top">' +
+                    '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick=notificationRedirect(' + "'" + notificationSource + "'" + ')>' +
                         '<div class="col-2 d-flex justify-content-start align-items-start">' +
                             '<img src="' + notificationIcon + '">' +
                         '</div>' +
@@ -281,7 +283,10 @@ $(function() {
         $("#sidebarReport").removeAttr("data-toggle");
         $('.popover').popover('dispose');
     });
-
-    //notifications
-
 });
+
+function notificationRedirect(notificationSource) {
+    if (notificationSource == "Calendar") {
+        window.location.replace("calendar.php");
+    }
+}

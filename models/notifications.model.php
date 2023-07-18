@@ -33,7 +33,8 @@ class notificationsModel {
                     "notification" => $notification,
                     "notificationMessage" => $notificationMessage,
                     "notificationIcon" => $notificationIcon,
-                    "notificationDate" => $notificationDate
+                    "notificationDate" => $notificationDate,
+                    "notificationSource" => $notif["notificationSource"]
                 ];
             }
         }
