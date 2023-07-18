@@ -102,6 +102,45 @@ $(function() {
         }
     });
 
+    $.ajax({
+        url: "../../ajax/getNotifications.ajax.php",
+        method: "POST",
+            data : {"username" : $("#accountUsernamePlaceholder").text()},
+        success: function (data) {
+            var notificationData = data;
+    
+            var notification = "";
+            var notificationMessage = "";
+            var notificationIcon = "";
+            var notificationDate = "";
+            var notificationSource = "";
+            $("#notification").html("");
+
+            for (notif in notificationData) {
+                notificationDetails = notificationData[notif];
+    
+                notification = notificationDetails.notification;
+                notificationMessage = notificationDetails.notificationMessage;
+                notificationIcon = notificationDetails.notificationIcon;
+                notificationDate = notificationDetails.notificationDate;
+                notificationSource = notificationDetails.notificationSource;
+                
+                $("#notification").append(
+                    '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick=notificationRedirect(' + "'" + notificationSource + "'" + ')>' +
+                        '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                            '<img src="' + notificationIcon + '">' +
+                        '</div>' +
+                        '<div class="col-10 d-flex flex-column">' +
+                            '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + notification + '</span>' + notificationMessage + '</p>' +
+                            '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                        '</div>' +
+                    '</div>'
+                );
+            
+            }
+        }
+    });
+
     $("#sidebarNotifications").click(function(event) {
         event.preventDefault();
     
@@ -244,7 +283,10 @@ $(function() {
         $("#sidebarReport").removeAttr("data-toggle");
         $('.popover').popover('dispose');
     });
-
-    //notifications
-
 });
+
+function notificationRedirect(notificationSource) {
+    if (notificationSource == "Calendar") {
+        window.location.replace("calendar.php");
+    }
+}
