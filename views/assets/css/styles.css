@@ -3249,7 +3249,7 @@ p {
 }
 
 
-.adminBasicStatsContainer .col-3 .adminBasicStatsBox {
+.adminBasicStatsContainer .col-4 .adminBasicStatsBox {
     width: 100%;
     border-radius: 15px;
     border: solid black 3px;
@@ -3311,11 +3311,11 @@ p {
    background-color: #3B97D3 !important;
 }
 
-.adminBasicStatsContainer .col-3 .adminBasicStatsBox .adminBasicStatsBoxContent {
+.adminBasicStatsContainer .col-4 .adminBasicStatsBox .adminBasicStatsBoxContent {
     margin: 20px 0 20px 20px;
 }
 
-.adminBasicStatsContainer .col-3 .adminBasicStatsBox .adminBasicStatsBoxFooter {
+.adminBasicStatsContainer .col-4 .adminBasicStatsBox .adminBasicStatsBoxFooter {
     display: block;
     bottom: 0;
     height: 10px;
