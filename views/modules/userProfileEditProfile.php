@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php 
+require_once "../../models/explorerPoints.model.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +58,7 @@
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-star.png">
-                            <p>[Placeholder] Explorer Points</p>
+                            <p><?php echo $explorerPoints; ?> Explorer Points</p>
                         </div>
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
@@ -67,7 +69,7 @@
                 </div>
 
                 <div class="col-3 d-flex flex-column justify-content-start align-items-center buttonProfile flex-column">
-                    <a href="userProfile.php"><button class="roundedButton userBasicStatsSave">Save Changes</button></a>
+                    <a href="userProfile.php"><button class="roundedButton userBasicStatsSave" id="saveEdit">Save Changes</button></a>
                     <a href="userProfile.php"><button class="roundedButtonVariant userBasicStatsCancel">Cancel</button></a>
                 </div>
 
@@ -85,7 +87,7 @@
                                     <p>Username</p>
                                 </div>
                                 <div class="col-9 d-flex justify-content-start align-items-center">
-                                    <input type="text" id="" name="" placeholder="Placeholder">
+                                    <input type="text" id="username" name="" placeholder="Placeholder">
                                 </div>
                             </div>
                             <div class="row">
@@ -93,7 +95,7 @@
                                     <p>Email</p>
                                 </div>
                                 <div class="col-9">
-                                    <input type="text" id="" name="" placeholder="Placeholder">
+                                    <input type="text" id="email" name="" placeholder="Placeholder">
                                 </div>
                             </div>
                             <div class="row">
@@ -114,15 +116,15 @@
                                     <p>Religious Affiliation</p>
                                 </div>
                                 <div class="col-9 d-flex justify-content-start align-items-center">
-                                    <select id="" name="">
-                                        <option value="" disabled selected hidden>Choose your religion</option>
-                                        <option value="">Buddhism</option>
-                                        <option value="">Christianity</option>
-                                        <option value="">Hinduism</option>
-                                        <option value="">Islam</option>
-                                        <option value="">Judaism</option>
-                                        <option value="">Non-religious</option>
-                                        <option value="">Other</option>
+                                    <select id="religion" name="religion">
+                                        <option value="<?php echo $_SESSION['religion']; ?>" disabled selected hidden>Choose your religion</option>
+                                        <option value="Buddhism">Buddhism</option>
+                                        <option value="Christianity">Christianity</option>
+                                        <option value="Hinduism">Hinduism</option>
+                                        <option value="Islam">Islam</option>
+                                        <option value="Judaism">Judaism</option>
+                                        <option value="Non-religious">Non-religious</option>
+                                        <option value="Other">Other</option>
                                     </select>
                                 </div>
                             </div>
@@ -138,33 +140,33 @@
                             </div>
                             <div class="row no-gutters settingsContainer">
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <input type="checkbox" id="">
+                                    <input type="checkbox" id="displayNotification">
                                     <label for="">Notifications for new comments or replies</label>
                                 </div>
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <input type="checkbox" id="">
+                                    <input type="checkbox" id="displayCalendar">
                                     <label for="">Display Personal Calendar</label>
                                 </div>
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <input type="checkbox" id="">
+                                    <input type="checkbox" id="displayNickname">
                                     <label for="">Display nickname/s</label>
                                 </div>
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <input type="checkbox" id="">
+                                    <input type="checkbox" id="displayBookmark">
                                     <label for="">Display bookmarks</label>
                                 </div>
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <input type="checkbox" id="">
+                                    <input type="checkbox" id="displayReligion">
                                     <label for="">Display religious affiliation</label>
                                 </div>
                                 <div class="col-12 d-flex justify-content-start align-items-start flex-column">
                                     <p>Page display after login:</p>
                                     <select id="libraryReligionFilter">
-                                        <option value="">User Profile</option>
-                                        <option selected value="">World Map</option>
-                                        <option value="">Library of Resources</option>
-                                        <option value="">Discussion Forum</option>
-                                        <option value="">Calendar</option>
+                                        <option value="1">User Profile</option>
+                                        <option selected value="0">World Map</option>
+                                        <option value="2">Library of Resources</option>
+                                        <option value="3">Discussion Forum</option>
+                                        <option value="4">Calendar</option>
                                     </select>
                                 </div>
                                 <div class="col-12 d-flex justify-content-center align-items-center flex-column">
@@ -229,9 +231,9 @@
                 </div>
                 <form id="" method="post">
                     <div class="editPasswordModalBox d-flex justify-content-center align-items-center flex-column">
-                        <input type="password" id="" name="" placeholder="Old Password">
-                        <input type="password" id="" name="" placeholder="New Password">
-                        <input type="password" id="" name="" placeholder="Confirm New Password">
+                        <input type="password" id="oldPassword" name="oldPassword" placeholder="Old Password">
+                        <input type="password" id="newPassword" name="newPassword" placeholder="New Password">
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm New Password">
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center align-items-center flex-row">
