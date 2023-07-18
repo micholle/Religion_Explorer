@@ -35,7 +35,7 @@
 
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-start flex-column">
-                                    <h1>[Placeholder]</h1>
+                                    <h1><?php echo $_SESSION['username']; ?></h1>
                                     <div class="row">
                                         <div class="col-12 d-flex flex-row">
                                             <p class="nicknameText">aka [Placeholder]</p>
@@ -51,7 +51,7 @@
                     <div class="userBasicStatsOverview userBasicStats row d-flex justify-content-start align-items-center flex-column">
                         <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-clock.png">
-                            <p>Joined [Placeholder Date]</p>
+                            <p>Joined <?php echo date('F d, Y', strtotime($_SESSION['accountDate'])); ?></p>
                         </div>
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
@@ -61,13 +61,14 @@
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-feather.png">
-                            <p>[Placeholder Religion]</p>
+                            <p><?php echo $_SESSION['religion']; ?></p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-3 d-flex flex-column justify-content-start align-items-start buttonProfile">
-                    <a href="userProfile.php"><button class="roundedButton">Save Changes</button></a>
+                <div class="col-3 d-flex flex-column justify-content-start align-items-center buttonProfile flex-column">
+                    <a href="userProfile.php"><button class="roundedButton userBasicStatsSave">Save Changes</button></a>
+                    <a href="userProfile.php"><button class="roundedButtonVariant userBasicStatsCancel">Cancel</button></a>
                 </div>
 
             </div>

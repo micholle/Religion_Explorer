@@ -46,7 +46,7 @@
                     <div class="userBasicStatsOverview userBasicStats row d-flex justify-content-start align-items-center flex-column">
                         <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-clock.png">
-                            <p>Joined [Placeholder Date]</p>
+                            <p>Joined <?php echo date('F d, Y', strtotime($_SESSION['accountDate'])); ?></p>
                         </div>
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
@@ -56,13 +56,13 @@
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-feather.png">
-                            <p>[Placeholder Religion]</p>
+                            <p><?php echo $_SESSION['religion']; ?></p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-3 d-flex flex-column justify-content-start align-items-start buttonProfile">
-                    <a href="userProfileEditProfile.php"><button class="roundedButton">Edit Profile</button></a>
+                <div class="col-3 d-flex flex-column justify-content-start align-items-center buttonProfile">
+                    <a href="userProfileEditProfile.php"><button class="roundedButton userBasicStatsSave">Edit Profile</button></a>
                 </div>
             </div>
 
