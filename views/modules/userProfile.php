@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+require_once "../../models/explorerPoints.model.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,17 +49,17 @@
                     <div class="userBasicStatsOverview userBasicStats row d-flex justify-content-start align-items-center flex-column">
                         <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-clock.png">
-                            <p>Joined [Placeholder Date]</p>
+                            <p>Joined <?php echo date('F d, Y', strtotime($_SESSION['accountDate'])); ?></p>
                         </div>
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-star.png">
-                            <p>[Placeholder] Explorer Points</p>
+                            <p><?php echo $explorerPoints;?> Explorer Points</p>
                         </div>
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-feather.png">
-                            <p>[Placeholder Religion]</p>
+                            <p><?php echo $_SESSION['religion']; ?></p>
                         </div>
                     </div>
                 </div>
