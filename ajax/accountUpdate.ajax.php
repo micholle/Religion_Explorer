@@ -30,7 +30,7 @@ class UpdateAccount {
       "email" => $email,
       "religion" => $religion,
       "username" => $username,
-      "displayNotification" => $displayNotification,
+      "displayNotifications" => $displayNotification,
       "displayCalendar" => $displayCalendar,
       "displayNickname" => $displayNickname,
       "displayBookmark" => $displayBookmark,
@@ -51,7 +51,11 @@ class UpdateAccount {
 
 $save_account = new UpdateAccount();
 $save_account->email = $_POST["email"];
-$save_account->religion = $_POST["religion"];
+if ($_POST["religion"] === "null"){
+    $save_account->religion = $_SESSION["religion"];
+} else {
+    $save_account->religion = $_POST["religion"];
+}
 $save_account->username = $_POST["username"];
 $save_account->displayNotification = $_POST["displayNotification"];
 $save_account->displayCalendar = $_POST["displayCalendar"];
