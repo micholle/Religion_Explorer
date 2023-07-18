@@ -53,6 +53,7 @@ $(function() {
                                 '<img onclick="downloadContent(' + "'" + photoDetails.filedata + '\', \'' + photoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
                                 '<img onclick="reportContent(' + "'" + photoData + '\', \'' + photoDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png">' +
                                 '<img onclick="copyContentLink(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
+                                '<img id="deleteCreationBtn" class="libraryActions" src="../assets/img/x-mark.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 '<img onclick="bookmarkContent(this, \'' + photoDetails.creationid + '\', \'' + photoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
@@ -110,6 +111,7 @@ $(function() {
                                 '<img onclick="downloadContent(' + "'" + videoDetails.filedata + '\', \'' + videoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
                                 '<img onclick="reportContent(' + "'" + videoData + '\', \'' + videoDetails.creationid + '\')" class="libraryActions" class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">' +
                                 '<img onclick="copyContentLink(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
+                                '<img id="deleteCreationBtn" class="libraryActions" src="../assets/img/x-mark.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 '<img onclick="bookmarkContent(this, \'' + videoDetails.creationid + '\', \'' + videoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
@@ -163,6 +165,7 @@ $(function() {
                                 // '<img class="libraryActions" src="../assets/img/download.png">' +
                                 '<img onclick="reportContent(' + "'" + readingMaterialData + '\', \'' + readingMaterialDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' +
                                 '<img onclick="copyContentLink(' + "'" + readingMaterialDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
+                                '<img id="deleteCreationBtn" class="libraryActions" src="../assets/img/x-mark.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 '<img onclick="bookmarkContent(this, \'' + readingMaterialDetails.creationid + '\', \'' + readingMaterialData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
@@ -192,6 +195,11 @@ $(function() {
                 }
             }            
         }
+    });
+
+    $("#deleteCreationBtn").click(function(){
+        $('#confirmDeleteCreationModal').modal();
+        $('#confirmDeleteCreationModal').show();
     });
     
     $("#submitReportContent").click(function(event) {
