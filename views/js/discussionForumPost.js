@@ -205,7 +205,6 @@ $(function() {
             $('#confirmDeleteModal').find('#confirmDelete').off('click').on('click', function() {
                 deleteTopic(topicId);
             });
-            alert(topicId);
         });
 
         // Delete post
@@ -215,7 +214,6 @@ $(function() {
             $('#confirmDeleteModal').find('#confirmDelete').off('click').on('click', function() {
                 deletePost(postId);
             });
-            alert(postId);
         });
     
         // Delete reply
@@ -225,7 +223,6 @@ $(function() {
             $('#confirmDeleteModal').find('#confirmDelete').off('click').on('click', function() {
                 deleteReply(replyId);
             });
-            alert(replyId);
         });
     }
     

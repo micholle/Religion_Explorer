@@ -268,7 +268,7 @@ class ModelDiscussion {
         $pdo = $db->connect();
     
         try {
-            $stmt = $pdo->prepare("SELECT r.*, a.username 
+            $stmt = $pdo->prepare("SELECT r.*, a.username, a.avatar 
                                    FROM reply AS r
                                    INNER JOIN accounts AS a ON r.accountid = a.accountid
                                    WHERE r.postId = :postId");

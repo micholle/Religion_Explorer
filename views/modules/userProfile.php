@@ -80,10 +80,7 @@ require_once "../../models/explorerPoints.model.php";
                 <button class="userProfileTabBtn">Achievements</button>
             </div>
             <div class="userProfileContentBox">
-                <div class="userProfileContent active">
-                    <div class="userPostContainer">
-                        <h1>[Placeholder Display]</h1>
-                    </div>
+                <div class="userProfileContent active" id="profileOverview">
                 </div>
 
                 <div class="userProfileContent" id="profileTopics">

@@ -47,5 +47,12 @@ class ControllerAccount{
     $response = ModelAccount::mdlUpdateAvatar($avatar);
     return $response;
   }
+
+  //delete
+
+  static public function ctrDeleteAccount($data) {
+    $answer = (new ModelAccount)->mdlDeleteAccount($data);
+    return $answer;
+  }  
 }
 ?>
