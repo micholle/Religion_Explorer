@@ -464,6 +464,7 @@ h5 {
 .pinOverlayContainer .col-5 img {
     width: 100%;
     padding: 12.5px 0;
+    object-fit: cover !important;
 }
 
 .pinOverlayVideo {
