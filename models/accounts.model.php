@@ -273,6 +273,8 @@ class ModelAccount{
 			$stmt->bindParam(":avatar", $imageData, PDO::PARAM_LOB);
 			$stmt->bindParam(":accountid", $_SESSION['accountid'], PDO::PARAM_STR);
 			$stmt->execute();
+
+			$_SESSION['avatar'] = $imageData;
 		
 			$pdo->commit();
 			return "ok";

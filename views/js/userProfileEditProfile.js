@@ -125,14 +125,7 @@ $(function() {
           method: "POST",
           data: { avatar: imagePath },
           success: function(response) {
-            if (response === "ok") {
-              // Avatar updated successfully
-              alert("Avatar updated successfully");
-            } else {
-              // Error occurred while updating the avatar
-              alert("Error updating the avatar");
-              alert(imagePath);
-            }
+            window.location.href = "userProfileEditProfile.php";
           },
           error: function() {
             // AJAX request failed
