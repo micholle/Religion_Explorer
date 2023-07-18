@@ -31,20 +31,12 @@
                         <div class="row">
                             <div class="col-12 adminFilter">
                                 <input type="search" id="contentSearch" name="" class="adminSearch" placeholder="Search">
-                                <select id="contentFilter" class="js-example-basic-multiple" multiple="multiple" data-placeholder="  Filter">
-                                    <optgroup id="timeOptgroup" label="Time">
-                                        <option value="today">Today</option>
-                                        <option value="week">This Week</option>
-                                        <option value="month">This Month</option>
-                                        <option value="year">This Year</option>
-                                    </optgroup>
-                                    <optgroup label="Category">
-                                        <option value="Privacy Violation">Privacy Violation</option>
-                                        <option value="Misinformation">Misinformation</option>
-                                        <option value="Graphic Content">Graphic Content</option>
-                                        <option value="Offensive Language">Offensive Language</option>
-                                        <option value="Spam or Unwanted Content">Spam or Unwanted Content</option>
-                                    </optgroup>
+                                <select id="contentFilter" class="js-example-basic-multiple" multiple="multiple" data-placeholder="  Violation">
+                                    <option value="Privacy Violation">Privacy Violation</option>
+                                    <option value="Misinformation">Misinformation</option>
+                                    <option value="Graphic Content">Graphic Content</option>
+                                    <option value="Offensive Language">Offensive Language</option>
+                                    <option value="Spam or Unwanted Content">Spam or Unwanted Content</option>
                                 </select>
                             </div>
                         </div>
