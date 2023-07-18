@@ -51,6 +51,29 @@
         <div id="toast" class="toast"></div>
 
         <!--Modals-->
+        <div class="modal fade" id="confirmDeleteCreationModal">
+            <div class="modal-dialog modal-xs modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                    <h5 class="modal-title w-100">Delete Content?</h5>
+                                    <p>Are you sure you want this gone?</p>
+                                    <div class="row">
+                                        <div class="col-12 d-flex flex-row">
+                                            <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="roundedButton" id="confirmDelete">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="reportContentModal">
             <div class="modal-dialog modal-xs modal-dialog-centered">
                 <div class="modal-content">
@@ -79,7 +102,7 @@
                                         <input type="checkbox" id="contentSpam" name="contentPrivacyViolation" value="Spam or Unwanted Content">
                                         <label for="contentSpam">Spam or Unwanted Content</label><br>
                                         <label for="contentOthers">Others, specify:</label><br>
-                                        <input id="othersSpecify" class="inputVariant" name="othersSpecify"><br>
+                                        <input id="othersSpecify" class="inputVariant"><br>
                                     </form>    
                                 </div>
                             </div>
