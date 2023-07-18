@@ -144,6 +144,9 @@
                                     <h5 class="modal-title w-100">Report the User?</h5>
                                     <div class="d-flex flex-row">
                                         <div id="reportUserContentid" hidden></div>
+                                        <div id="reportUserContentCreator" hidden></div>
+                                        <div id="reportUserViolations" hidden></div>
+                                        <div id="reportUserAdditionalContext" hidden></div>
                                         <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
                                         <button type="button" id="confirmReportUser" class="roundedButton">Confirm</button>
                                     </div>
