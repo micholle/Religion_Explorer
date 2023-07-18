@@ -4,7 +4,7 @@ require_once "../../models/discussionForumPost.model.php";
 
 
 
-<?php session_start(); ?>
+
 <!doctype html>
 <html lang="en">
     <head>

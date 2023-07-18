@@ -24,35 +24,45 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accounts`
+-- Table structure for table `post_votes`
 --
 
-CREATE TABLE `accounts` (
+CREATE TABLE `post_votes` (
+  `voteId` int(10) NOT NULL,
+  `postId` int(8) NOT NULL,
   `accountid` varchar(5) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `religion` varchar(15) NOT NULL,
-  `acctype` varchar(15) NOT NULL
+  `voteType` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `accounts`
---
-
-INSERT INTO `accounts` (`accountid`, `email`, `username`, `password`, `religion`, `acctype`) VALUES
-('R0001', 'jc.angelesmails@gmail.com', 'carl', '$2y$10$bRmBSRXTnl4/dR5MUjW3BePMMO1xOcIkoLmvSVpVXirl24Yl1V6uS', 'Christianity', 'regular'),
-('R0002', 'stonewolf1024@gmail.com', 'stone', '$2y$10$naMrbgWk8IK0ydpPRyVb5OxYXYUVnLKwkN7JDIyLCWqSh7mMBlVPO', 'Non-religious', 'regular');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `accounts`
+-- Indexes for table `post_votes`
 --
-ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`accountid`);
+ALTER TABLE `post_votes`
+  ADD PRIMARY KEY (`voteId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `post_votes`
+--
+ALTER TABLE `post_votes`
+  MODIFY `voteId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `post_votes`
+--
+ALTER TABLE `post_votes`
+  ADD CONSTRAINT `fk_post_votes_postId` FOREIGN KEY (`postId`) REFERENCES `posts` (`postId`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
