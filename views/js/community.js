@@ -74,7 +74,7 @@ $(function() {
     });
 
     $("#communityPublish").click(function(){
-        var username = $("#usernamePlaceholder").text();
+        var username = $("#accountUsernamePlaceholder").text();
         var title = $("#communityTitle").val();
         var religion = $("#communityCategory").val();
         var description = $("#communityDescription").val();

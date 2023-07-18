@@ -180,7 +180,7 @@ $(function() {
             success:function(){
                 $("#toast").html("User reported.")
             }, error: function() {
-                $("#toast").html("There was an error processing your request. Please try again later.")
+                $("#toast").html("There was an error processing your reque st. Please try again later.")
                 $("#toast").css("background-color", "#E04F5F");
             },
             complete: function() {

@@ -16,6 +16,7 @@
     <body>
         <div id="librarySidebar"></div>
         <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
+        <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
         <div class="pageContainer">
             <div class="container mw-100 mh-100">

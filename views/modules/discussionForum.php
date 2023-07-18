@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,6 +15,7 @@
 </head>
 <body>
     <div id="discussionForumSidebar"></div>
+    <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
     <div class="pageContainer">
         <div class="container mw-100 mh-100">

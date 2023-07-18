@@ -16,7 +16,7 @@
     </head>
     <body>
         <div id="communitySidebar"></div>
-        <div id="usernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
+        <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
         <div class="pageContainer">
             <div class="container mw-100 mh-100">

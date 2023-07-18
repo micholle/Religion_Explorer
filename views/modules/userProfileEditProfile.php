@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +19,8 @@
 
 <body>
     <div id="userProfileEditProfileSidebar"></div>
+    <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
+
     <div class="pageContainer">
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center basicInfoContainer">

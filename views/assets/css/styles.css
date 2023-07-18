@@ -3423,7 +3423,7 @@ p {
     margin-right: 10px !important;
 }
 
-.adminActionModal input[type=text] {
+.adminActionModal input[type=text],input[type=number] {
     background-color: #FAFAFA;
     color: #3E3E3E;
     border-radius: 15px;
