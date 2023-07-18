@@ -269,3 +269,23 @@ function getPosts() {
         }
     });
 }
+
+$(document).ready(function() {
+    getOverview();
+});
+function getOverview() {
+    $.ajax({
+        url: "../../ajax/profileOverview.ajax.php",
+        method: "GET", 
+        success: function(data) {
+            console.log(data);
+            $("#profileOverview").html(data);
+            shortenUpvotes();
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr.responseText);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}

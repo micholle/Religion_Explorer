@@ -261,8 +261,8 @@ require_once "../../models/explorerPoints.model.php";
                                 <p class="deleteAccountDescription">We're sorry to see you go. Once your Religion Explorer account is deleted, your profile and username will be removed. All of your site activity will be disassociated instead unless you delete them beforehand.</p>
                                 <br>
                                 <p class="deleteAccountDescriptionVar">Please verify your identity.</p>
-                                <input type="text" id="" name="" placeholder="Email or username">
-                                <input type="password" id="" name="" placeholder="Password">
+                                <input type="text" id="deleteEmail" name="" placeholder="Email">
+                                <input type="password" id="deletePassword" name="" placeholder="Password">
                                 </div>
                             </div>
                             <div class="row">
