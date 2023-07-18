@@ -35,5 +35,11 @@ class ControllerAccount{
       return false; // Error occurred while resetting password
     }
   }
+
+  //userProfile
+  static public function ctrUpdateAccount($data) {
+    $answer = (new ModelAccount)->mdlUpdateAccount($data);
+    return $answer;
+  }  
 }
 ?>

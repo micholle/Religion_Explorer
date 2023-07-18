@@ -171,5 +171,54 @@ class ModelAccount{
 		$pdo = null;
 		$stmt = null;
 	}
+
+	//update User Profile
+	static public function mdlUpdateAccount($data) {
+		$db = new Connection();
+		$pdo = $db->connect();
+		try {
+		  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		  $pdo->beginTransaction();
+	  
+		  // Generate account ID
+	  
+		  $stmt = $pdo->prepare("UPDATE accounts 
+                      SET email = CASE WHEN :email <> '' THEN :email ELSE email END, 
+                          username = CASE WHEN :username <> '' THEN :username ELSE username END, 
+                          religion = CASE WHEN :religion <> '' THEN :religion ELSE religion END, 
+                          notifications = :displayNotifications, 
+                          displayCalendar = :displayCalendar, 
+                          displayNickname = :displayNickname, 
+                          displayBookmark = :displayBookmark, 
+                          displayReligion = :displayReligion, 
+                          displayPage = :displayPage 
+                      WHERE accountid = :accountid");
+
+			$stmt->bindValue(':email', $data['email'], PDO::PARAM_STR);
+			$stmt->bindParam(':username', $data['username'], PDO::PARAM_STR);
+			$stmt->bindValue(':religion', $data['religion'], PDO::PARAM_STR);
+			$stmt->bindParam(':displayNotifications', $data['displayNotifications'], PDO::PARAM_INT);
+			$stmt->bindParam(':displayCalendar', $data['displayCalendar'], PDO::PARAM_INT);
+			$stmt->bindParam(':displayNickname', $data['displayNickname'], PDO::PARAM_INT);
+			$stmt->bindParam(':displayBookmark', $data['displayBookmark'], PDO::PARAM_INT);
+			$stmt->bindParam(':displayReligion', $data['displayReligion'], PDO::PARAM_INT);
+			$stmt->bindParam(':displayPage', $data['displayPage'], PDO::PARAM_INT);
+			$stmt->bindParam(':accountid', $data['accountid'], PDO::PARAM_STR);
+		  $stmt->execute();
+
+		  $_SESSION['username'] = $data['username'];
+		  $_SESSION['religion'] = $data['religion'];
+		  $_SESSION['email'] = $data['email'];
+	  
+		  $pdo->commit();
+		  return "ok";
+		} catch (Exception $e) {
+		  $pdo->rollBack();
+		  return "error";
+		} finally {
+		  $pdo = null;
+		  $stmt = null;
+		}
+	}		
 }
 ?>
