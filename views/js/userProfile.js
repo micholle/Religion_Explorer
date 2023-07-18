@@ -229,3 +229,43 @@ function nextMonth(nextMonth, day) {
         });
     }
 }
+
+$(document).ready(function() {
+    getTopics();
+});
+function getTopics() {
+    $.ajax({
+        url: "../../ajax/profileTopics.ajax.php",
+        method: "GET", 
+        success: function(data) {
+            console.log(data);
+            $("#profileTopics").html(data);
+            shortenUpvotes();
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr.responseText);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+$(document).ready(function() {
+    getPosts();
+});
+function getPosts() {
+    $.ajax({
+        url: "../../ajax/profilePosts.ajax.php",
+        method: "GET", 
+        success: function(data) {
+            console.log(data);
+            $("#profilePosts").html(data);
+            shortenUpvotes();
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr.responseText);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
