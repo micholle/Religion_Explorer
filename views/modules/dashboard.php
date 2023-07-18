@@ -24,7 +24,7 @@
             </div>
 
             <div class="row adminBasicStatsContainer">
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-4 d-flex justify-content-center align-items-center">
                     <div class="adminBasicStatsBox adminBasicStatsBoxUser">
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/user.png">
@@ -35,18 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3 d-flex justify-content-center align-items-center">
-                    <div class="adminBasicStatsBox adminBasicStatsBoxOnline">
-                        <div class="adminBasicStatsBoxContent d-flex flex-column">
-                            <img src="../assets/img/admin/online.png">
-                            <h3>Online Members</h3>
-                            <h1>0</h1>
-                        </div>
-                        <div class="adminBasicStatsBoxFooter">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-4 d-flex justify-content-center align-items-center">
                     <div class="adminBasicStatsBox adminBasicStatsBoxVisitor">
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/eyes.png">
@@ -57,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-4 d-flex justify-content-center align-items-center">
                     <div class="adminBasicStatsBox adminBasicStatsBoxRegister">
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/register.png">
