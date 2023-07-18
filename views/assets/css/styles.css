@@ -444,6 +444,7 @@ h5 {
 .pinOverlayContainer .col-7 img {
     border-radius: 100px;
     width: 110px;
+    object-fit: cover
 }
 
 .pinOverlayRelation {
