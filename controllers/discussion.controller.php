@@ -7,6 +7,16 @@ class ControllerDiscussion {
     return $topics;
   }
 
+  public function ctrGetProfileTopics() {
+    $topics = (new ModelDiscussion)->mdlGetProfileTopics();
+    return $topics;
+  }
+
+  public function ctrGetProfilePosts() {
+    $topics = (new ModelDiscussion)->mdlGetProfilePosts();
+    return $topics;
+  }
+
   public function ctrCreateDiscussion($data) {
     $result = (new ModelDiscussion)->mdlCreateDiscussion($data);
     return $result;
