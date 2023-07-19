@@ -29,7 +29,6 @@ $(function() {
           success: function(response) {
               if (response === "success") {
                   // Topic created successfully
-                  alert("Topic created successfully!");
                   $("#topicTitle").val("");
                   $("#topicContent").val("");
                   // Refresh the topics by calling the getTopics function

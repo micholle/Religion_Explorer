@@ -22,4 +22,21 @@ try {
 } catch (PDOException $e) {
     die("Error occurred while calculating explorer points: " . $e->getMessage());
 }
+
+// try {
+//     $stmt = $db->prepare("SELECT * FROM accounts WHERE accountid = :accountid");
+//     $stmt->bindValue(':accountid', $_SESSION['accountid']);
+//     $stmt->execute();
+//     $votesData = $stmt->fetch(PDO::FETCH_ASSOC);
+  
+//     $displayNotifications = $displayNotifications['notification'];
+//     $displayCalendar = $displayCalendar['displayCalendar'];
+//     $displayNickname = $displayNickname['displayNickname'];
+//     $displayBookmark = $displayBookmark['displayBookmark'];
+//     $displayReligion = $displayReligion['displayReligion'];
+  
+//     $explorerPoints = $topicUpvotes + $replyUpvotes + $postUpvotes;
+// } catch (PDOException $e) {
+//     die("Error occurred while calculating explorer points: " . $e->getMessage());
+// } 
 ?>

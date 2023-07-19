@@ -1022,7 +1022,7 @@ class ModelDiscussion {
         $pdo = $db->connect();
       
         try {
-          $stmt = $pdo->prepare("SELECT posts.*, accounts.username, posts.postDate,
+          $stmt = $pdo->prepare("SELECT posts.*, accounts.username, posts.postDate, accounts.avatar,
                                         (SELECT COUNT(*) FROM reply WHERE reply.postId = posts.postId) AS replyCount
                                    FROM posts 
                                    INNER JOIN accounts ON posts.accountid = accounts.accountid

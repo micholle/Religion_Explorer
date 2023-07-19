@@ -39,7 +39,7 @@ require_once "../../models/explorerPoints.model.php";
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-start flex-column">
                                     <h1><?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} else {echo "not logged in";}?></h1>
-                                    <p class="nicknameText">aka [Placeholder]</p>
+                                    <p class="nicknameText">aka <?php echo $_SESSION['username']; ?></p>
                                 </div>
                             </div>
 

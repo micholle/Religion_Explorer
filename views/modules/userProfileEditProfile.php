@@ -40,7 +40,7 @@ require_once "../../models/explorerPoints.model.php";
                                     <h1><?php echo $_SESSION['username']; ?></h1>
                                     <div class="row">
                                         <div class="col-12 d-flex flex-row">
-                                            <p class="nicknameText">aka [Placeholder]</p>
+                                            <p class="nicknameText">aka <?php echo $_SESSION['username']; ?></p>
                                             <button class="editNicknameButton">Edit Nickname</button>
                                         </div>
                                     </div>
@@ -105,7 +105,6 @@ require_once "../../models/explorerPoints.model.php";
                                 <div class="col-9">
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-start align-items-start flex-column">
-                                            <input type="password" id="" name="" placeholder="Placeholder">
                                             <button class="editPasswordButton" id="editPasswordButton">Edit Password</button>
                                         </div>
                                     </div>
