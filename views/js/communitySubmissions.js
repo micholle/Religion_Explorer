@@ -22,7 +22,7 @@ $(function() {
                     var formattedDate = `${month}-${day}-${year}`;
                     
                     var photoDisplay =
-                    '<div id="" class="d-flex flex-column libraryMediaContainer libraryWideContainer">' +
+                    '<div id="' + photoDetails.creationid + '" class="flex-column libraryMediaContainer libraryWideContainer">' +
                         '<div class="row d-flex justify-content-center align-items-center">' +
                             '<div class="col-12 libraryMediaHeader">' +
                                 '<div class="row">' +
@@ -53,7 +53,7 @@ $(function() {
                                 '<img onclick="downloadContent(' + "'" + photoDetails.filedata + '\', \'' + photoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
                                 '<img onclick="reportContent(' + "'" + photoData + '\', \'' + photoDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png">' +
                                 '<img onclick="copyContentLink(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
-                                '<img id="deleteCreationBtn" class="libraryActions" src="../assets/img/x-mark.png">' +
+                                '<img onclick="deleteContent(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/x-mark.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 '<img onclick="bookmarkContent(this, \'' + photoDetails.creationid + '\', \'' + photoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
@@ -80,7 +80,7 @@ $(function() {
                     var formattedDate = `${month}-${day}-${year}`;
 
                     var videoDisplay = 
-                    '<div id="" class="d-flex flex-column libraryMediaContainer libraryWideContainer">' +
+                    '<div id="' + videoDetails.creationid + '" class="flex-column libraryMediaContainer libraryWideContainer">' +
                         '<div class="row d-flex justify-content-center align-items-center">' +
                             '<div class="col-12 libraryMediaHeader">' +
                                 '<div class="row">' +
@@ -111,7 +111,7 @@ $(function() {
                                 '<img onclick="downloadContent(' + "'" + videoDetails.filedata + '\', \'' + videoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
                                 '<img onclick="reportContent(' + "'" + videoData + '\', \'' + videoDetails.creationid + '\')" class="libraryActions" class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">' +
                                 '<img onclick="copyContentLink(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
-                                '<img id="deleteCreationBtn" class="libraryActions" src="../assets/img/x-mark.png">' +
+                                '<img onclick="deleteContent(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/x-mark.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 '<img onclick="bookmarkContent(this, \'' + videoDetails.creationid + '\', \'' + videoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
@@ -139,7 +139,7 @@ $(function() {
                     var formattedDate = `${month}-${day}-${year}`;   
 
                     var readingMaterialsDisplay =
-                    '<div id="" class="d-flex flex-column libraryMediaContainer libraryWideContainer">' +
+                    '<div id="' + readingMaterialDetails.creationid + '" class="flex-column libraryMediaContainer libraryWideContainer">' +
                         '<div class="row d-flex justify-content-center align-items-center">' +
                             '<div class="col-12 libraryMediaHeader">' +
                                 '<div class="row">' +
@@ -165,7 +165,7 @@ $(function() {
                                 // '<img class="libraryActions" src="../assets/img/download.png">' +
                                 '<img onclick="reportContent(' + "'" + readingMaterialData + '\', \'' + readingMaterialDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' +
                                 '<img onclick="copyContentLink(' + "'" + readingMaterialDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
-                                '<img id="deleteCreationBtn" class="libraryActions" src="../assets/img/x-mark.png">' +
+                                '<img onclick="deleteContent(' + "'" + readingMaterialDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/x-mark.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 '<img onclick="bookmarkContent(this, \'' + readingMaterialDetails.creationid + '\', \'' + readingMaterialData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
@@ -197,11 +197,6 @@ $(function() {
         }
     });
 
-    $("#deleteCreationBtn").click(function(){
-        $('#confirmDeleteCreationModal').modal();
-        $('#confirmDeleteCreationModal').show();
-    });
-    
     $("#submitReportContent").click(function() {    
         var atLeastOneCheckboxChecked = false;
         $("input[type=checkbox]", "#reportUserModal").each(function() {
@@ -284,6 +279,173 @@ $(function() {
         }
     });
 
+    $("#confirmDelete").click(function () { 
+        $.ajax({
+            url: "../../ajax/deleteReportedContent.ajax.php",
+            method: "POST",
+            data: {"contentid" : $("#deleteContentid").text()},
+            success:function(){
+                $("#toast").html("Content deleted.");
+            }, error: function() {
+                $("#toast").html("There was an error processing your request. Please try again later.")
+                $("#toast").css("background-color", "#E04F5F");
+            },
+            complete: function() {
+                $("#deleteContentModal").removeClass("fade").modal("hide");
+                $("#deleteContentModal").modal("dispose");
+
+                $('#toast').addClass('show');
+    
+                setTimeout(function() {
+                    $('#toast').removeClass('show');
+                    location.reload();
+                }, 2000);
+            }
+        });
+    });
+
+    var view = getUrlParameter("view");
+    if (view) {
+        $("#viewContent").html(decodeURIComponent(view));
+        communitySearch();
+    }
+
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null ? "" : results[1].replace(/\+/g, " ");
+    }
+
+    $("#communitySearch").keyup(function () { 
+        communitySearch();
+    });
+
+    function communitySearch() {
+        if (view) {
+            var communitySearchVal = view;
+
+            $.ajax({
+                url: "../../ajax/getCommunityData.ajax.php",
+                method: "POST",
+                success:function(data){
+                    var communityData = data;
+
+                    if ((window.location.href).includes("communitySubPhotos")) {
+                        for (let photo in communityData["photos"]) {
+                            var photoList = communityData["photos"][photo];
+                            for (photoData in photoList) {
+                                var photoDetails = photoList[photoData];
+        
+                                if (photoDetails.creationid == communitySearchVal) {
+                                    var creationid = "#" + photoDetails.creationid;
+                                    $(creationid).css("display", "block");
+                                } else {
+                                    var creationid = "#" + photoDetails.creationid;
+                                    $(creationid).css("display", "none");
+                                }
+                            }
+                        }
+                    }
+
+                    if ((window.location.href).includes("communitySubVideos")) {
+                        for (let video in communityData["videos"]) {
+                            var videoList = communityData["videos"][video];
+                            for (videoData in videoList) {
+                                var videoDetails = videoList[videoData];
+        
+                                if (((videoDetails.contentid).toLowerCase()).includes(communitySearchVal)) {
+                                    var creationid = "#" + videoDetails.creationid;
+                                    $(creationid).css("display", "block");
+                                } else {
+                                    var creationid = "#" + videoDetails.creationid;
+                                    $(creationid).css("display", "none");
+                                }
+                            }
+                        }
+                    }
+                    
+                    if ((window.location.href).includes("communitySubBlogs")) {
+                        for (let readingMaterial in communityData["readingMaterials"]) {
+                            var readingMaterialList = communityData["readingMaterials"][readingMaterial];
+                            for (readingMaterialData in readingMaterialList) {
+                                var readingMaterialDetails = readingMaterialsLit[readingMaterialData];
+        
+                                if (((readingMaterialDetails.contentid).toLowerCase()).includes(communitySearchVal)) {
+                                    var creationid = "#" + readingMaterialDetails.creationid;
+                                    $(creationid).css("display", "block");
+                                } else {
+                                    var creationid = "#" + readingMaterialDetails.creationid;
+                                    $(creationid).css("display", "none");
+                                }
+                            }
+                        }
+                    }  
+                }
+            });
+        } else {
+            var communitySearchVal = $("#communitySearch").val().toLowerCase();
+            $.ajax({
+                url: "../../ajax/getCommunityData.ajax.php",
+                method: "POST",
+                success:function(data){
+                    var communityData = data;
+
+                    if ((window.location.href).includes("communitySubPhotos")) {
+                        for (let photo in communityData["photos"]) {
+                            var photoList = communityData["photos"][photo];
+                            for (photoData in photoList) {
+                                var photoDetails = photoList[photoData];
+        
+                                if ((photoData).includes(communitySearchVal) || ((photoDetails.religion).toLowerCase()).includes(communitySearchVal) || ((photoDetails.description).toLowerCase()).includes(communitySearchVal) || ((photoDetails.author).toLowerCase()).includes(communitySearchVal)) {
+                                    var creationid = "#" + photoDetails.creationid;
+                                    $(creationid).css("display", "block");
+                                } else {
+                                    var creationid = "#" + photoDetails.creationid;
+                                    $(creationid).css("display", "none");
+                                }
+                            }
+                        }
+                    }
+
+                    if ((window.location.href).includes("communitySubVideos")) {
+                        for (let video in communityData["videos"]) {
+                            var videoList = communityData["videos"][video];
+                            for (videoData in videoList) {
+                                var videoDetails = videoList[videoData];
+        
+                                if ((videoData).includes(communitySearchVal) || ((videoDetails.religion).toLowerCase()).includes(communitySearchVal) || ((videoDetails.description).toLowerCase()).includes(communitySearchVal) || ((videoDetails.author).toLowerCase()).includes(communitySearchVal)) {
+                                    var creationid = "#" + videoDetails.creationid;
+                                    $(creationid).css("display", "block");
+                                } else {
+                                    var creationid = "#" + videoDetails.creationid;
+                                    $(creationid).css("display", "none");
+                                }
+                            }
+                        }
+                    }
+                    
+                    if ((window.location.href).includes("communitySubBlogs")) {
+                        for (let readingMaterial in communityData["readingMaterials"]) {
+                            var readingMaterialList = communityData["readingMaterials"][readingMaterial];
+                            for (readingMaterialData in readingMaterialList) {
+                                var readingMaterialDetails = readingMaterialsLit[readingMaterialData];
+        
+                                if ((readingMaterialData).includes(communitySearchVal) || ((readingMaterialDetails.religion).toLowerCase()).includes(communitySearchVal) || ((readingMaterialDetails.description).toLowerCase()).includes(communitySearchVal) || ((readingMaterialDetails.author).toLowerCase()).includes(communitySearchVal)) {
+                                    var creationid = "#" + readingMaterialDetails.creationid;
+                                    $(creationid).css("display", "block");
+                                } else {
+                                    var creationid = "#" + readingMaterialDetails.creationid;
+                                    $(creationid).css("display", "none");
+                                }
+                            }
+                        }
+                    }  
+                }
+            });
+        }
+    }
+
     const tabs = document.querySelectorAll('.communitySubmissionsTabBtn')
     const all_content = document.querySelectorAll('.communitySubmissionsContent')
 
@@ -349,7 +511,7 @@ function reportContent(title, contentid) {
 }
 
 function copyContentLink(file) {
-    var imageLink = ((window.location.href).substring(0, (window.location.href).indexOf("communitySubmissions.php") + "communitySubmissions.php".length)) + "/" + file.substring(file.indexOf("assets/"));
+    var imageLink = ((window.location.href).substring(0, (window.location.href).indexOf("communitySubmissions.php") + "communitySubmissions.php?openTab=communitySubPhotos".length)) + "&view=" +  encodeURIComponent(file.substring(file.indexOf("assets/")));
     navigator.clipboard.writeText(imageLink);
 
     $("#toast").html("Link copied to clipboard.")
@@ -432,4 +594,11 @@ function bookmarkContent(thisIcon, creationid, title) {
             }
         }
     });
+}
+
+function deleteContent(contentid) {
+    $("#deleteContentid").html(contentid);
+
+    $('#confirmDeleteCreationModal').modal();
+    $('#confirmDeleteCreationModal').show();
 }

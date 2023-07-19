@@ -14,8 +14,8 @@ $(function() {
             var dashboardData = data;
     
             var todayNewUsers = dashboardData.todayNewUsers;
-            var visitors = dashboardData.todayNewUsers;
-            var registeredUsers = dashboardData.todayNewUsers;
+            var visitors = dashboardData.visitors;
+            var registeredUsers = dashboardData.registeredUsers;
         
             $("#todaysNewUsers").text(todayNewUsers);
             $("#visitors").text(visitors);
