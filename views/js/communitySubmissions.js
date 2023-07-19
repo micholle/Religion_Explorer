@@ -199,7 +199,7 @@ $(function() {
 
     $("#submitReportContent").click(function() {    
         var atLeastOneCheckboxChecked = false;
-        $("input[type=checkbox]", "#reportUserModal").each(function() {
+        $("input[type=checkbox]", "#reportContentForm").each(function() {
             if (this.checked) {
                 atLeastOneCheckboxChecked = true;
                 return false;
