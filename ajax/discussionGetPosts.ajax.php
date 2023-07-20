@@ -9,6 +9,7 @@ $posts = $controller->ctrGetAllPosts($sort, $topicId);
 
 $html = '';
 foreach ($posts as $post) {
+    if ($post['downvotes'] < 50){
     $html .= '<div class="forumPostViewComments d-flex flex-column" data-post-id="' . $post['postId'] . '">';
     $html .= '  <div class="d-flex justify-content-start align-items-start flex-row">';
     $html .= '    <img src="data:image/png;base64,'.base64_encode($post['avatar']).'" class="discussionForumAvatarComment">';
@@ -54,10 +55,12 @@ foreach ($posts as $post) {
     $html .= '    </div>';
     $html .= '  </div>';
     $html .= '</div>';
+    }
 
     // Display replies
     $replies = $controller->ctrGetRepliesByPostId($post['postId']);
     foreach ($replies as $reply) {
+        if ($reply['downvotes'] < 50){
         $html .= '<div class="forumPostViewComments forumPostViewCommentReply d-flex flex-column">'; // Start of reply container
         $html .= '  <div class="d-flex justify-content-start align-items-start flex-row">';
         $html .= '    <img src="data:image/png;base64,'.base64_encode($reply['avatar']).'" class="discussionForumAvatarComment">';
@@ -103,6 +106,7 @@ foreach ($posts as $post) {
         $html .= '    </div>';
         $html .= '  </div>';
         $html .= '</div>'; // End of reply container
+        }
     }
 }
 
