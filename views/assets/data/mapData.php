@@ -2571,7 +2571,7 @@ class mapData {
                 "shortDesc" => "Khmer kings build Angkor Wat around the year 1110 - 1150, the world\'s largest religious monument",
                 "description" => "After a horrifying period of war, the Hindu temple complex of Angkor Wat and the Buddhist Angkor Thom are again accessible. Angkor Thom was the creation of the Khmer &#8220;god-king&#8220; Jayavarman VII (1181-1219), who converted to Mahayana following the destruction of Angkor by the Cham (Vietnamese) during his father\'s reign. Jayavarman\'s Buddhism seems to have been a revised version of the Brahmanical religion which previous Khmer kings had exploited to deify their own persons. The central deity in Jayavarman\'s religion was Lokeshvara, &#8220;Lord of the Worlds&#8220;, and rebuilding Angkor Thom on a stupendously grand scale, the king created a &#8220;Buddhist&#8220; city as a monument to Lokeshvara, who was an aspect of Jayavarman\'s divine self. This convergence of king and deity is still visible in the portrait masks of Jayavarman carved on the four faces of the Bayon temple towers of Angkor Thorn.",
                 "relatedPerson" => "Khmer Jayavarman VII",
-                "pinVid" => "../assets/data/map/vid/angkor-wat.mp4",
+                "pinVid" => "https://www.shutterstock.com/shutterstock/videos/1029323123/preview/stock-footage-famous-colonnade-of-st-peter-s-basilica-in-vatic.webm",
                 "pinImg1" => "../assets/data/map/img/angkor-wat1.jpg",
                 "pinImg2" => "../assets/data/map/img/angkor-wat2.jpg",
                 "source" => ["https://www.buddhanet.net/e-learning/history/b_chron-txt.htm"]

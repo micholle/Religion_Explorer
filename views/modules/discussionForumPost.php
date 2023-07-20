@@ -36,7 +36,7 @@ require_once "../../models/discussionForumPost.model.php";
             </div>
 
             <div class="row pageContent forumPostViewContainer">
-                <div class="col-9 d-flex justify-content-center align-items-center">
+                <div class="col-9 d-flex justify-content-center align-items-start">
                     <div class="forumPostViewBox">
                         <div class="forumPostViewMain">
                             <input type="hidden" id="topicId" value="<?php echo $topicId; ?>">
