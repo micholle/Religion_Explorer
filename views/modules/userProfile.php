@@ -126,30 +126,9 @@ require_once "../../models/explorerPoints.model.php";
                 </div>
 
                 <div class="userProfileContent">
-                    <div class="bookmarkContainer">
-                        <div class="bookmarkImgContainer d-flex justify-content-center align-items-center">
-                            <img src="../assets/img/userProfile/photo.png" class="userProfBookmark">
-                        </div>
-                        <div class="bookmarkContent d-flex justify-content-start align-items-center">
-                            <p>[Placeholder Title]<p>
-                        </div>
-                    </div>
-                    <div class="bookmarkContainer">
-                        <div class="bookmarkImgContainer d-flex justify-content-center align-items-center">
-                            <img src="../assets/img/userProfile/video.png" class="userProfBookmark">
-                        </div>
-                        <div class="bookmarkContent d-flex justify-content-start align-items-center">
-                            <p>[Placeholder Title]<p>
-                        </div>
-                    </div>
-                    <div class="bookmarkContainer">
-                        <div class="bookmarkImgContainer d-flex justify-content-center align-items-center">
-                            <img src="../assets/img/userProfile/readmat.png" class="userProfBookmark">
-                        </div>
-                        <div class="bookmarkContent d-flex justify-content-start align-items-center">
-                            <p>[Placeholder Title]<p>
-                        </div>
-                    </div>
+                    <div class="creationsBar"><div class="creationsFill"></div></div>
+                    <p id="creationsDescription"></p>
+                    <div id="userProfileCreationsList"></div>
                 </div>
 
                 <div class="userProfileContent">
@@ -294,6 +273,30 @@ require_once "../../models/explorerPoints.model.php";
                     <h5 class="modal-title w-100" id="calendarEvent"></h5>
                 </div>
                 <div class="modal-body" id="calendarEventContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmDeleteCreationModal">
+        <div class="modal-dialog modal-xs modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                <div id="deleteContentid" hidden></div>
+                                <h5 class="modal-title w-100">Delete Content?</h5>
+                                <p>Are you sure you want this gone?</p>
+                                <div class="row">
+                                    <div class="col-12 d-flex flex-row">
+                                        <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="roundedButton" id="confirmDelete">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

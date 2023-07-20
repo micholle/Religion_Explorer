@@ -20,6 +20,295 @@ $(function() {
         })
     })
 
+    getOverview();
+    getPosts();
+    getTopics();
+    createCalendar();
+    getPersonalCalendar();
+    getBookmarks();
+    getCreations();
+
+    $("#confirmDelete").click(function () { 
+        $.ajax({
+            url: "../../ajax/deleteReportedContent.ajax.php",
+            method: "POST",
+            data: {"contentid" : $("#deleteContentid").text()},
+            success:function(){
+                $("#toast").html("Content deleted.");
+            }, error: function() {
+                $("#toast").html("There was an error processing your request. Please try again later.")
+                $("#toast").css("background-color", "#E04F5F");
+            },
+            complete: function() {
+                $("#confirmDeleteCreationModal").removeClass("fade").modal("hide");
+                $("#confirmDeleteCreationModal").modal("dispose");
+
+                $('#toast').addClass('show');
+    
+                setTimeout(function() {
+                    $('#toast').removeClass('show');
+                }, 2000);
+
+                var deletedid = "#" + $("#deleteContentid").text();
+                $(deletedid).css("display", "none");
+                updateCreationsFill();
+
+                $("#userProfileBookmarksList").html("");
+                getBookmarks()
+
+                $("#profileOverview").html("");
+                getOverview();
+            }
+        });
+    });
+});
+
+function getCreations() {
+    $.ajax({
+        url: "../../ajax/getCommunityData.ajax.php",
+        method: "POST",
+        success:function(data){
+            var communityData = data;
+            var creationsMade = "";
+            var dataUsed = 0.00;
+
+            for (let photo in communityData["photos"]) {
+                var photoList = communityData["photos"][photo];
+                for (photoData in photoList) {
+                    var photoDetails = photoList[photoData];
+                    var imageSize = 0.00;
+
+                    if (photoDetails.author == $("#accountUsernamePlaceholder").text()) {
+                        imageSize = photoDetails.filesize  / (1024 * 1024);
+                        dataUsed += imageSize;
+
+                        creationsMade =
+                        '<div id="' + photoDetails.creationid + '" class="bookmarkContainer">' +
+                            '<div class="d-flex" onclick="viewCreationImage(' + "'" + photoDetails.creationid + "'" + ')" style="width:100% !important">' +
+                                '<div class="bookmarkImgContainer d-flex justify-content-center align-items-center">' +
+                                    '<img src="../assets/img/userProfile/photo.png" class="userProfBookmark">' +
+                                '</div>' +
+                                '<div class="bookmarkContent d-flex justify-content-start align-items-center">' +
+                                    '<p>' + photoData + '<p>' +
+                                '</div>' +
+                                '<p>' + imageSize.toFixed(2) + 'MB <p>' +
+                            '</div>' +
+                            '<img class="userProfileCreationsActions" src="../assets/img/x-mark.png" onclick="deleteCreation(' + "'" + photoDetails.creationid + "'" + ')">' +
+                        '</div>';
+
+                        $("#userProfileCreationsList").append(creationsMade);
+                    }
+                }
+            }
+
+            for (let video in communityData["videos"]) {
+                var videoList = communityData["videos"][video];
+                for (videoData in videoList) {
+                    var videoDetails = videoList[videoData];
+                    var videoSize = 0.00;
+
+                    if (videoDetails.author == $("#accountUsernamePlaceholder").text()) {
+                        videoSize = videoDetails.filesize / (1024 * 1024);
+                        dataUsed += videoSize;
+
+                        creationsMade =
+                        '<div id="' + videoDetails.creationid + '" class="bookmarkContainer">' +
+                            '<div class="d-flex" onclick="viewCreationVideo(' + "'" + videoDetails.creationid + "'" + ')" style="width:100% !important">' +
+                                '<div class="bookmarkImgContainer d-flex justify-content-center align-items-center">' +
+                                    '<img src="../assets/img/userProfile/video.png" class="userProfBookmark">' +
+                                '</div>' +
+                                '<div class="bookmarkContent d-flex justify-content-start align-items-center">' +
+                                    '<p>' + videoData + '<p>' +
+                                '</div>' +
+                                '<p>' + videoSize.toFixed(2) + 'MB <p>' +
+                            '</div>' +
+                            '<img class="userProfileCreationsActions" src="../assets/img/x-mark.png" onclick="deleteCreation(' + "'" + videoDetails.creationid + "'" + ')">' +
+                        '</div>';
+
+                        $("#userProfileCreationsList").append(creationsMade);
+                    }
+                }
+            }
+            
+            for (let readingMaterial in communityData["readingMaterials"]) {
+                var readingMaterialList = communityData["readingMaterials"][readingMaterial];
+                for (readingMaterialData in readingMaterialList) {
+                    var readingMaterialDetails = readingMaterialList[readingMaterialData];
+                    var readingMaterialSize = 0.00;
+
+                    if (readingMaterialDetails.author == $("#accountUsernamePlaceholder").text()) {
+                        readingMaterialSize = readingMaterialDetails.filesize / 1024;
+                        dataUsed += readingMaterialDetails.filesize / (1024 * 1024);
+
+                        creationsMade =
+                        '<div id="' + readingMaterialDetails.creationid + '" class="bookmarkContainer">' +
+                            '<div class="d-flex" onclick="viewCreationReadingMaterial(' + "'" + readingMaterialDetails.creationid + "'" + ')" style="width:100% !important">' +
+                                '<div class="bookmarkImgContainer d-flex justify-content-center align-items-center">' +
+                                    '<img src="../assets/img/userProfile/readmat.png" class="userProfBookmark">' +
+                                '</div>' +
+                                '<div class="bookmarkContent d-flex justify-content-start align-items-center">' +
+                                    '<p>' + readingMaterialData + '<p>' +
+                                '</div>' +
+                                '<p>' + readingMaterialSize.toFixed(2) + 'KB <p>' +
+                            '</div>' +
+                            '<img class="userProfileCreationsActions" src="../assets/img/x-mark.png" onclick="deleteCreation(' + "'" + readingMaterialDetails.creationid + "'" + ')">' +
+                        '</div>';
+    
+                        $("#userProfileCreationsList").append(creationsMade);
+                    }
+                }
+            }
+
+            updateFill(dataUsed);
+            $("#creationsDescription").text(dataUsed.toFixed(2) + " MB of 100 MB used");
+        }
+    });
+}
+
+function updateCreationsFill() {
+    $.ajax({
+        url: "../../ajax/getCommunityData.ajax.php",
+        method: "POST",
+        success:function(data){
+            var communityData = data;
+            var dataUsed = 0.00;
+
+            for (let photo in communityData["photos"]) {
+                var photoList = communityData["photos"][photo];
+                for (photoData in photoList) {
+                    var photoDetails = photoList[photoData];
+                    var imageSize = 0.00;
+
+                    if (photoDetails.author == $("#accountUsernamePlaceholder").text()) {
+                        imageSize = photoDetails.filesize  / (1024 * 1024);
+                        dataUsed += imageSize;
+                    }
+                }
+            }
+
+            for (let video in communityData["videos"]) {
+                var videoList = communityData["videos"][video];
+                for (videoData in videoList) {
+                    var videoDetails = videoList[videoData];
+                    var videoSize = 0.00;
+
+                    if (videoDetails.author == $("#accountUsernamePlaceholder").text()) {
+                        videoSize = videoDetails.filesize / (1024 * 1024);
+                        dataUsed += videoSize;
+                    }
+                }
+            }
+            
+            for (let readingMaterial in communityData["readingMaterials"]) {
+                var readingMaterialList = communityData["readingMaterials"][readingMaterial];
+                for (readingMaterialData in readingMaterialList) {
+                    var readingMaterialDetails = readingMaterialList[readingMaterialData];
+                    var readingMaterialSize = 0.00;
+
+                    if (readingMaterialDetails.author == $("#accountUsernamePlaceholder").text()) {
+                        readingMaterialSize = readingMaterialDetails.filesize / 1024;
+                        dataUsed += readingMaterialDetails.filesize / (1024 * 1024);
+                    }
+                }
+            }
+
+            updateFill(dataUsed);
+            $("#creationsDescription").text(dataUsed.toFixed(2) + " MB of 100 MB used");
+        }
+    });
+}
+
+function updateFill(percentage) {
+    const fillElement = document.querySelector('.creationsFill');
+    fillElement.style.width = percentage + '%';
+    fillElement.style.backgroundColor = '#2CA464';
+}
+
+function viewCreationImage(creationid) {
+    var imageLink = "http://localhost/religion_explorer/views/modules/communitySubmissions.php?openTab=communitySubPhotos" + "&view=" +  encodeURIComponent(creationid);
+    window.location.href = imageLink;
+}
+
+function viewCreationVideo(creationid) {
+    var videoLink = "http://localhost/religion_explorer/views/modules/communitySubmissions.php?openTab=communitySubVideos" + "&view=" +  encodeURIComponent(creationid);
+    window.location.href = videoLink;
+}
+
+function viewCreationReadingMaterial(creationid) {
+    var readingMaterialLink = "http://localhost/religion_explorer/views/modules/communitySubmissions.php?openTab=communitySubBlogs" + "&view=" +  encodeURIComponent(creationid);
+    window.location.href = readingMaterialLink;
+}
+
+function deleteCreation(creationid) {
+    $("#deleteContentid").html(creationid);
+
+    $('#confirmDeleteCreationModal').modal();
+    $('#confirmDeleteCreationModal').show();
+}
+
+function getBookmarks() {
+    $.ajax({
+        url: '../../ajax/getBookmarksData.ajax.php',
+        method: "POST",
+        data: {"accountid" : $("#accountidPlaceholder").text()},
+        success: function(data){
+            var bookmarksList = data;
+            for (let bookmark in bookmarksList) {
+                var bookmarkDetails = bookmarksList[bookmark];
+
+                var $bookmarkDiv = 
+                '<div class="bookmarkContainer" onclick="viewBookmark(' + "'" + bookmarkDetails.resourceid + "'" + ')">' +
+                    '<div class="bookmarkImgContainer d-flex justify-content-center align-items-center">' +
+                        '<img src="../assets/img/bookmark.png" class="userProfBookmark">' +
+                    '</div>' +
+                    '<div class="bookmarkContent d-flex justify-content-start align-items-center">' +
+                        '<p>' + bookmarkDetails.resourceTitle + '<p>' +
+                    '</div>' +
+                '</div>';
+
+                $("#userProfileBookmarksList").append($bookmarkDiv);
+            }
+        }
+    }); 
+}
+  
+function viewBookmark(resourceid) {
+    var link = "";
+
+    if (resourceid.startsWith("CC")) {
+        $.ajax({
+            url: "../../ajax/getCommunityData.ajax.php",
+            method: "POST",
+            success:function(data){
+                var communityData = data;
+    
+                for (let materialType in communityData) {
+                    for (let type in communityData[materialType]) {
+                        var list = communityData[materialType][type];
+                        for (item in list) {
+                            var details = list[item];
+                            if (details.creationid == resourceid) {
+                                if ((details.filetype).includes("image")) {
+                                    link = "../modules/communitySubmissions.php?openTab=communitySubPhotos&view=";
+                                } else if ((details.filetype).includes("video")) {
+                                    link = "../modules/communitySubmissions.php?openTab=communitySubVideos&view=";
+                                } else if (details.filetype == ""){
+                                    link = "../modules/communitySubmissions.php?openTab=communitySubBlogs&view=";
+                                }
+                                window.location.href = link + encodeURIComponent(resourceid);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    } else {
+        link = "../modules/library.php?view=";
+        window.location.href = link + encodeURIComponent(resourceid);
+    }
+}
+
+function createCalendar() {
     $.ajax({
         url: '../../ajax/createCalendar.ajax.php',
         method: "POST",
@@ -48,7 +337,9 @@ $(function() {
             });
         }
     });
+}
 
+function getPersonalCalendar() {
     $.ajax({
         url: '../../ajax/getPersonalCalendarData.ajax.php',
         method: "POST",
@@ -68,35 +359,6 @@ $(function() {
             }
         }
     });
-
-    $.ajax({
-        url: '../../ajax/getBookmarksData.ajax.php',
-        method: "POST",
-        data: {"accountid" : $("#accountidPlaceholder").text()},
-        success: function(data){
-            var bookmarksList = data;
-            for (let bookmark in bookmarksList) {
-                var bookmarkDetails = bookmarksList[bookmark];
-
-                var $bookmarkDiv = 
-                '<div class="bookmarkContainer" onclick="viewBookmark(' + "'" + bookmarkDetails.resourceTitle + "'" + ')">' +
-                    '<div class="bookmarkImgContainer d-flex justify-content-center align-items-center">' +
-                        '<img src="../assets/img/bookmark.png" class="userProfBookmark">' +
-                    '</div>' +
-                    '<div class="bookmarkContent d-flex justify-content-start align-items-center">' +
-                        '<p>' + $("#accountUsernamePlaceholder").text() + ' has added "' + bookmarkDetails.resourceTitle + '" to their bookmarks.<p>' +
-                    '</div>' +
-                '</div>';
-
-                $("#userProfileBookmarksList").append($bookmarkDiv);
-            }
-        }
-    });    
-    
-});
-
-function viewBookmark(resourceTitle) {
-    window.location.href = "../modules/library.php?search=" + encodeURIComponent(resourceTitle);
 }
 
 var activeFilter = "";
@@ -205,12 +467,10 @@ function prevMonth(prevMonth, day) {
         $("#prevMonthButton").css("color", "#A6A6A6");
         $("#prevMonthButton").css("cursor", "auto");
     } else {
-        $("#userProfileCalendar").fadeOut(200, function() {
-            $("#calendarDatePlaceHolder").html(date);
-            $("#userProfileCalendar").load("#userProfileCalendar", function() {
-                $("#userProfileCalendar").fadeIn(200);
-            });
-        });
+        $("#calendarDatePlaceHolder").html(date);
+        $("#userProfileCalendar").html("");
+        createCalendar();
+        getPersonalCalendar();
     }
 }
 
@@ -221,18 +481,13 @@ function nextMonth(nextMonth, day) {
         $("#nextMonthButton").css("color", "#A6A6A6");
         $("#nextMonthButton").css("cursor", "auto");
     } else {
-        $("#userProfileCalendar").fadeOut(200, function() {
-            $("#calendarDatePlaceHolder").html(date);
-            $("#userProfileCalendar").load("#userProfileCalendar", function() {
-                $("#userProfileCalendar").fadeIn(200);
-            });
-        });
+        $("#calendarDatePlaceHolder").html(date);
+        $("#userProfileCalendar").html("");
+        createCalendar();
+        getPersonalCalendar();
     }
 }
 
-$(document).ready(function() {
-    getTopics();
-});
 function getTopics() {
     $.ajax({
         url: "../../ajax/profileTopics.ajax.php",
@@ -250,9 +505,7 @@ function getTopics() {
     });
 }
 
-$(document).ready(function() {
-    getPosts();
-});
+
 function getPosts() {
     $.ajax({
         url: "../../ajax/profilePosts.ajax.php",
@@ -270,9 +523,6 @@ function getPosts() {
     });
 }
 
-$(document).ready(function() {
-    getOverview();
-});
 function getOverview() {
     $.ajax({
         url: "../../ajax/profileOverview.ajax.php",
@@ -293,7 +543,7 @@ function getOverview() {
                                 '<img src="../assets/img/bookmark.png" class="userProfBookmark">' +
                             '</div>' +
                             '<div class="bookmarkContent d-flex justify-content-start align-items-center">' +
-                                '<p>' + $("#accountUsernamePlaceholder").text() + ' has added "' + bookmarkDetails.resourceTitle + '" to their bookmarks.<p>' +
+                                '<p>' + bookmarkDetails.resourceTitle + '<p>' +
                             '</div>' +
                         '</div>';
         

@@ -21,6 +21,8 @@ class communityModel{
                         "author" => $creation["username"],
                         "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
                         "filename" => $creation["filename"],
+                        "filetype" => $creation["filetype"],
+                        "filesize" => $creation["filesize"],
                         "religion" => $creation["religion"],
                         "description" => $creation["description"],
                         "date" => $creation["date"]
@@ -34,6 +36,8 @@ class communityModel{
                         "author" => $creation["username"],
                         "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
                         "filename" => $creation["filename"],
+                        "filetype" => $creation["filetype"],
+                        "filesize" => $creation["filesize"],
                         "religion" => $creation["religion"],
                         "description" => $creation["description"],
                         "date" => $creation["date"]
@@ -45,6 +49,8 @@ class communityModel{
                     $creation["title"] => [
                         "creationid" => $creation["creationid"],
                         "author" => $creation["username"],
+                        "filesize" => $creation["filesize"],
+                        "filetype" => "",
                         "religion" => $creation["religion"],
                         "description" => $creation["description"],
                         "date" => $creation["date"]
@@ -73,13 +79,6 @@ class communityModel{
 		try {
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->beginTransaction();
-
-            //make the media quality lower
-            // $image = imagecreatefromstring($data["filedata"]);
-            // $quality = 50;
-            // $outputImagePath = "file.jpg";
-            // imagejpeg($image, $outputImagePath, $quality);
-            // imagedestroy($image);
 		
 			$stmt = $pdo->prepare("INSERT INTO communitycreations(creationid, username, title, religion, description, filename, filetype, filesize, filedata, status, date) VALUES (:creationid, :username, :title, :religion, :description, :filename, :filetype, :filesize, :filedata, :status, :date)");
 	

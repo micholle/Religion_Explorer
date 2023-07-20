@@ -53,7 +53,6 @@ $(function() {
                                 '<img onclick="downloadContent(' + "'" + photoDetails.filedata + '\', \'' + photoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
                                 '<img onclick="reportContent(' + "'" + photoData + '\', \'' + photoDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png">' +
                                 '<img onclick="copyContentLink(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
-                                '<img onclick="deleteContent(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/x-mark.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 '<img onclick="bookmarkContent(this, \'' + photoDetails.creationid + '\', \'' + photoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
@@ -111,7 +110,6 @@ $(function() {
                                 '<img onclick="downloadContent(' + "'" + videoDetails.filedata + '\', \'' + videoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
                                 '<img onclick="reportContent(' + "'" + videoData + '\', \'' + videoDetails.creationid + '\')" class="libraryActions" class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">' +
                                 '<img onclick="copyContentLink(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
-                                '<img onclick="deleteContent(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/x-mark.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 '<img onclick="bookmarkContent(this, \'' + videoDetails.creationid + '\', \'' + videoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
@@ -165,7 +163,6 @@ $(function() {
                                 // '<img class="libraryActions" src="../assets/img/download.png">' +
                                 '<img onclick="reportContent(' + "'" + readingMaterialData + '\', \'' + readingMaterialDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' +
                                 '<img onclick="copyContentLink(' + "'" + readingMaterialDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
-                                '<img onclick="deleteContent(' + "'" + readingMaterialDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/x-mark.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 '<img onclick="bookmarkContent(this, \'' + readingMaterialDetails.creationid + '\', \'' + readingMaterialData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
@@ -279,31 +276,6 @@ $(function() {
         }
     });
 
-    $("#confirmDelete").click(function () { 
-        $.ajax({
-            url: "../../ajax/deleteReportedContent.ajax.php",
-            method: "POST",
-            data: {"contentid" : $("#deleteContentid").text()},
-            success:function(){
-                $("#toast").html("Content deleted.");
-            }, error: function() {
-                $("#toast").html("There was an error processing your request. Please try again later.")
-                $("#toast").css("background-color", "#E04F5F");
-            },
-            complete: function() {
-                $("#deleteContentModal").removeClass("fade").modal("hide");
-                $("#deleteContentModal").modal("dispose");
-
-                $('#toast').addClass('show');
-    
-                setTimeout(function() {
-                    $('#toast').removeClass('show');
-                    location.reload();
-                }, 2000);
-            }
-        });
-    });
-
     var view = getUrlParameter("view");
     if (view) {
         $("#viewContent").html(decodeURIComponent(view));
@@ -354,7 +326,7 @@ $(function() {
                             for (videoData in videoList) {
                                 var videoDetails = videoList[videoData];
         
-                                if (((videoDetails.contentid).toLowerCase()).includes(communitySearchVal)) {
+                                if (videoDetails.creationid == communitySearchVal) {
                                     var creationid = "#" + videoDetails.creationid;
                                     $(creationid).css("display", "block");
                                 } else {
@@ -369,9 +341,9 @@ $(function() {
                         for (let readingMaterial in communityData["readingMaterials"]) {
                             var readingMaterialList = communityData["readingMaterials"][readingMaterial];
                             for (readingMaterialData in readingMaterialList) {
-                                var readingMaterialDetails = readingMaterialsLit[readingMaterialData];
+                                var readingMaterialDetails = readingMaterialList[readingMaterialData];
         
-                                if (((readingMaterialDetails.contentid).toLowerCase()).includes(communitySearchVal)) {
+                                if (readingMaterialDetails.creationid == communitySearchVal) {
                                     var creationid = "#" + readingMaterialDetails.creationid;
                                     $(creationid).css("display", "block");
                                 } else {
@@ -429,7 +401,7 @@ $(function() {
                         for (let readingMaterial in communityData["readingMaterials"]) {
                             var readingMaterialList = communityData["readingMaterials"][readingMaterial];
                             for (readingMaterialData in readingMaterialList) {
-                                var readingMaterialDetails = readingMaterialsLit[readingMaterialData];
+                                var readingMaterialDetails = readingMaterialList[readingMaterialData];
         
                                 if ((readingMaterialData).includes(communitySearchVal) || ((readingMaterialDetails.religion).toLowerCase()).includes(communitySearchVal) || ((readingMaterialDetails.description).toLowerCase()).includes(communitySearchVal) || ((readingMaterialDetails.author).toLowerCase()).includes(communitySearchVal)) {
                                     var creationid = "#" + readingMaterialDetails.creationid;
@@ -594,11 +566,4 @@ function bookmarkContent(thisIcon, creationid, title) {
             }
         }
     });
-}
-
-function deleteContent(contentid) {
-    $("#deleteContentid").html(contentid);
-
-    $('#confirmDeleteCreationModal').modal();
-    $('#confirmDeleteCreationModal').show();
 }

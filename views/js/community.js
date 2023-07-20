@@ -85,10 +85,12 @@ $(function() {
             var filetype = filedata.type;
             var filesize = filedata.size;
         } else {
+            var readingMaterial = new Blob([description], { type: 'text/plain' });
+
             var filedata = "";
             var filename = "";
             var filetype = "";
-            var filesize = "";
+            var filesize = readingMaterial.size;
         }
 
         var status = "Published";

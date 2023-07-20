@@ -203,6 +203,12 @@ $(function() {
         librarySearch();
     }
 
+    var view = getUrlParameter("view");
+    if (view) {
+        $("#viewContent").html(decodeURIComponent(view));
+        librarySearch();
+    }
+
     function getUrlParameter(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
@@ -215,51 +221,100 @@ $(function() {
     });
 
     function librarySearch() {
-        var librarySearchVal = $("#librarySearch").val().toLowerCase();
+        if (view) {
+            var librarySearchVal = view;
 
-        $.ajax({
-            url: "../../ajax/getLibraryResources.ajax.php",
-            method: "POST",
-            success:function(data){
-                var libraryData = data;
+            $.ajax({
+                url: "../../ajax/getLibraryResources.ajax.php",
+                method: "POST",
+                success:function(data){
+                    var libraryData = data;
+        
+                    // for (let photo in libraryData["photos"]) {
+                    //     var photoDetails = libraryData["photos"][photo];
     
-                // for (let photo in libraryData["photos"]) {
-                //     var photoDetails = libraryData["photos"][photo];
-
-                //     if ((photo.toLowerCase()).includes(librarySearchVal) || ((photoDetails.author).toLowerCase()).includes(librarySearchVal) || ((readinphotoDetailsgMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
-                //         var resourceid = "#" + photoDetails.resourceid;
-                //         $(resourceid).css("display", "block");
-                //     } else {
-                //         var resourceid = "#" + photoDetails.resourceid;
-                //         $(resourceid).css("display", "none");
-                //     }
-                // }
+                    //     if ((photo.toLowerCase()).includes(librarySearchVal) || ((photoDetails.author).toLowerCase()).includes(librarySearchVal) || ((readinphotoDetailsgMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                    //         var resourceid = "#" + photoDetails.resourceid;
+                    //         $(resourceid).css("display", "block");
+                    //     } else {
+                    //         var resourceid = "#" + photoDetails.resourceid;
+                    //         $(resourceid).css("display", "none");
+                    //     }
+                    // }
+        
+                    // for (let video in libraryData["videos"]) {
+                    //     var videoDetails = libraryData["videos"][video];
     
-                // for (let video in libraryData["videos"]) {
-                //     var videoDetails = libraryData["videos"][video];
-
-                //     if ((video.toLowerCase()).includes(librarySearchVal) || ((videoDetails.author).toLowerCase()).includes(librarySearchVal) || ((videoDetails.description).toLowerCase()).includes(librarySearchVal)) {
-                //         var resourceid = "#" + videoDetails.resourceid;
-                //         $(resourceid).css("display", "block");
-                //     } else {
-                //         var resourceid = "#" + videoDetails.resourceid;
-                //         $(resourceid).css("display", "none");
-                //     }
-                // }
-                
-                for (let readingMat in libraryData["readingMats"]) {
-                    var readingMatDetails = libraryData["readingMats"][readingMat];
-
-                    if ((readingMat.toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.type).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.author).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
-                        var resourceid = "#" + readingMatDetails.resourceid;
-                        $(resourceid).css("display", "block");
-                    } else {
-                        var resourceid = "#" + readingMatDetails.resourceid;
-                        $(resourceid).css("display", "none");
+                    //     if ((video.toLowerCase()).includes(librarySearchVal) || ((videoDetails.author).toLowerCase()).includes(librarySearchVal) || ((videoDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                    //         var resourceid = "#" + videoDetails.resourceid;
+                    //         $(resourceid).css("display", "block");
+                    //     } else {
+                    //         var resourceid = "#" + videoDetails.resourceid;
+                    //         $(resourceid).css("display", "none");
+                    //     }
+                    // }
+                    
+                    for (let readingMat in libraryData["readingMats"]) {
+                        var readingMatDetails = libraryData["readingMats"][readingMat];
+    
+                        if (readingMatDetails.resourceid == librarySearchVal) {
+                            var resourceid = "#" + readingMatDetails.resourceid;
+                            $(resourceid).css("display", "block");
+                            $(resourceid).click();
+                        } else {
+                            var resourceid = "#" + readingMatDetails.resourceid;
+                            $(resourceid).css("display", "none");
+                        }
                     }
                 }
-            }
-        });
+            });            
+        } else {
+            var librarySearchVal = $("#librarySearch").val().toLowerCase();
+
+            $.ajax({
+                url: "../../ajax/getLibraryResources.ajax.php",
+                method: "POST",
+                success:function(data){
+                    var libraryData = data;
+        
+                    // for (let photo in libraryData["photos"]) {
+                    //     var photoDetails = libraryData["photos"][photo];
+    
+                    //     if ((photo.toLowerCase()).includes(librarySearchVal) || ((photoDetails.author).toLowerCase()).includes(librarySearchVal) || ((readinphotoDetailsgMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                    //         var resourceid = "#" + photoDetails.resourceid;
+                    //         $(resourceid).css("display", "block");
+                    //     } else {
+                    //         var resourceid = "#" + photoDetails.resourceid;
+                    //         $(resourceid).css("display", "none");
+                    //     }
+                    // }
+        
+                    // for (let video in libraryData["videos"]) {
+                    //     var videoDetails = libraryData["videos"][video];
+    
+                    //     if ((video.toLowerCase()).includes(librarySearchVal) || ((videoDetails.author).toLowerCase()).includes(librarySearchVal) || ((videoDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                    //         var resourceid = "#" + videoDetails.resourceid;
+                    //         $(resourceid).css("display", "block");
+                    //     } else {
+                    //         var resourceid = "#" + videoDetails.resourceid;
+                    //         $(resourceid).css("display", "none");
+                    //     }
+                    // }
+                    
+                    for (let readingMat in libraryData["readingMats"]) {
+                        var readingMatDetails = libraryData["readingMats"][readingMat];
+    
+                        if ((readingMat.toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.type).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.author).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                            var resourceid = "#" + readingMatDetails.resourceid;
+                            $(resourceid).css("display", "block");
+                        } else {
+                            var resourceid = "#" + readingMatDetails.resourceid;
+                            $(resourceid).css("display", "none");
+                        }
+                    }
+                }
+            });
+        }
     }
 
     function handleFilterChange() { 

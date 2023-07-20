@@ -110,11 +110,15 @@ class reportContentModel {
                 $stmt = $pdo->prepare("DELETE FROM communitycreations WHERE creationid = :contentid");
                 $stmt->bindParam(":contentid", $contentid, PDO::PARAM_STR);
                 $stmt->execute();
-            }
-    
-            $stmt2 = $pdo->prepare("UPDATE reportedcontent SET actionTaken = 'Delete', reportStatus = 'Completed' WHERE contentid = :contentid");
-            $stmt2->bindParam(":contentid", $contentid, PDO::PARAM_STR);
-            $stmt2->execute();
+            }        
+            
+            $stmt3 = $pdo->prepare("DELETE FROM bookmarks WHERE resourceid = :contentid");
+            $stmt3->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+            $stmt3->execute();
+
+            $stmt4 = $pdo->prepare("UPDATE reportedcontent SET actionTaken = 'Delete', reportStatus = 'Completed' WHERE contentid = :contentid");
+            $stmt4->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+            $stmt4->execute();
     
             $pdo->commit();
         } catch (Exception $e) {
