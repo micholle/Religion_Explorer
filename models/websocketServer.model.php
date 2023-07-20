@@ -1,5 +1,10 @@
 <?php
 
+use Ratchet\Http\HttpServer;
+use Ratchet\WebSocket\WsServer;
+use Ratchet\Server\IoServer;
+use React\EventLoop\Factory;
+use React\Socket\Server;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
@@ -63,3 +68,19 @@ class ForumWebSocketServer implements MessageComponentInterface
     }
 }
 // websocket-server.php
+$loop = Factory::create();
+
+// Replace 8080 with the desired port number for your WebSocket server
+$socket = new Server('0.0.0.0:8080', $loop);
+$server = new IoServer(
+    new HttpServer(
+        new WsServer(
+            new ForumWebSocketServer()
+        )
+    ),
+    $socket,
+    $loop
+);
+
+echo "WebSocket server is running on port 8080...\n";
+$server->run();
