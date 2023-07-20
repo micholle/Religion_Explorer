@@ -12,6 +12,7 @@ $topics = $controller->ctrGetAllTopics($sort);
 
 $html = '';
 foreach ($topics as $topic) {
+    if ($topic['downvotes'] < 50){
     $hasUpvotedReply = $controller->ctrGetTopicVoteByUser($topic['topicId'], $_SESSION['accountid']) === 'upvote';
     $hasDownvotedReply = $controller->ctrGetTopicVoteByUser($topic['topicId'], $_SESSION['accountid']) === 'downvote';
     $html .= '<div class="forumPostContainer">';
@@ -41,6 +42,7 @@ foreach ($topics as $topic) {
     $html .= '        <input type="hidden" class="topicId" id="topicId" value="' . $topic['topicId'] . '">';
     $html .= '    </div>';
     $html .= '</div>';
+    }
 }
 
 echo $html;
