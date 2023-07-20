@@ -12,6 +12,7 @@ $html = '';
 $counter = 0; // Counter variable to limit the loop
 
 foreach ($topics as $topic) {
+    if ($topic['downvotes'] < 50){
     $html .= '<div class="forumPostRecoBox">';
     $html .= '  <h3>' . $topic['topicTitle'] . '</h3>';
     $html .= '  <p>' . substr($topic['topicContent'], 0, 100) . '... <a href="discussionForumPost.php?topicId='. $topic['topicId'] .'">See more</a></p>';
@@ -27,6 +28,7 @@ foreach ($topics as $topic) {
 
     if ($counter >= 10) {
         break; // Break the loop when the counter reaches 10
+    }
     }
 }
 

@@ -25,40 +25,43 @@
                         <a href="community.php" class="pageHeaderLink"><h1>Community Creations</h1></a>
                     </div>
                     <div class="col-8 d-flex justify-content-start align-items-center">
-                        <!-- <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community"> -->
                     </div>
                 </div>
-            <div>
-            <div class="row pageContent">
-                <div class="col-12 d-flex justify-content-center align-items-center flex-column createSubmissionsBox">
-                    <img src="../assets/img/commcreations.png">
-                    <h1>Start Creating Submissions</h1>
-                    <button id="communityCreate" class="roundedButton">Create New</button>
-                </div>
-                <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
-                    <div>
-                        <h1>Photos</h1>
-                        <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
-                            <div id="communityPhotos" class="communityPhotos"></div>
-                            <button id="communityPhotosMore" class="roundedButton">See More</button>
+
+                <div class="row pageContent">
+                    <div class="col-12 d-flex justify-content-center align-items-center flex-column createSubmissionsBox">
+                        <img src="../assets/img/commcreations.png">
+                        <h1>Start Creating Submissions</h1>
+                        <button id="communityCreate" class="roundedButton">Create New</button>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer"> 
+                        <div class="submissionsWidth">
+                            <h1>Photos</h1>
+                            <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
+                                <div id="communityPhotos" class="communityPhotos"></div>
+                                <button id="communityPhotosMore" class="roundedButton">See More</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
-                    <div>
-                        <h1>Videos</h1>
-                        <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
-                            <div id="communityVideos" class="communityVideos"></div>
-                            <button id="communityVideosMore" class="roundedButton">See More</button>
+
+                    <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
+                        <div class="submissionsWidth">
+                            <h1>Videos</h1>
+                            <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
+                                <div id="communityVideos" class="communityVideos"></div>
+                                <button id="communityVideosMore" class="roundedButton">See More</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
-                    <div>
-                        <h1>Reading Materials</h1>
-                        <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
-                            <div id="communityReadingMaterials"></div>
-                            <button id="communityBlogsMore" class="roundedButton">See More</button>
+
+                    <div class="col-12 d-flex justify-content-center align-items-center submissionsContainer">
+                        <div class="submissionsWidth">
+                            <h1>Reading Materials</h1>
+                            <div class="col-12 d-flex justify-content-center align-items-center flex-column submissionsBox">
+                                <div id="communityReadingMaterials"></div>
+                                <button id="communityBlogsMore" class="roundedButton">See More</button>
+                            </div>
                         </div>
                     </div>
                 </div>

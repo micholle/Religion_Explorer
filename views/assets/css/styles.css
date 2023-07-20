@@ -11,8 +11,9 @@
 
 /*global*/
 .highlight {
-    border: 2px solid blue;
-  }
+    border: 2px solid #2CA464;
+    border-radius: 10px;
+}
   
 html {
     scroll-behavior: smooth;
@@ -250,7 +251,6 @@ h5 {
     margin-top: 10px;
     text-align: center;
 }
-
 
 /* map */
 .mapContainer {
@@ -633,10 +633,6 @@ h5 {
 }
 
 /* community creations */
-.communityUpload {
-    /* display: none; */
-}
-
 .communityUploadArea {
     border-style: dashed;
     border-radius: 15px;
@@ -654,6 +650,9 @@ h5 {
     cursor: pointer;
 }
 
+.communitySubmissionsContentVariant {
+    width: 100%;
+}
 
 .communityUploadDetails input[id=communityTitle] {
     background-color: #FAFAFA;
@@ -713,8 +712,8 @@ h5 {
 }
 
 .communityFile {
-    width: 200px !important;
-    height: 200px;
+    width: 225px !important;
+    height: 225px;
     padding: 5px;
     border-radius: 10px;
     object-fit: cover;
@@ -731,6 +730,10 @@ h5 {
 .communitySubVideo {
     width: 100%;
     border-radius: 10px;
+}
+
+.communityReadingMaterialsWidth {
+    width: 1115px;
 }
 
 .createSubmissionsBox {
@@ -751,11 +754,19 @@ h5 {
     border: solid #D0D0D0 2px;
     border-radius: 15px;
     padding: 20px;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box; /* Add this line to include padding in width calculation */
+}
+
+.submissionsWidth {
+    width: 100%;
 }
 
 .submissionsContainer {
     margin-top: 20px;
     padding-bottom: 20px;
+    width: 100% !important;
 }
 
 .submissionsContainer .roundedButton {
@@ -830,10 +841,6 @@ h5 {
 
 .communitySubmissionsContentBox .communitySubmissionsContent.active {
     display: block;
-}
-
-.communitySubmissionsContentVariant {
-    width: 100%;
 }
 
 /*library*/
@@ -985,6 +992,21 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /*splash page*/
+#splash-gif {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+#splash-gif img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Set initial opacity to 0 */
+}
 
 .col-7 .container {
     width: 600px;
@@ -1602,6 +1624,20 @@ p {
 .userBasicStats p {
     padding-left: 5px;
     margin: 0;
+}
+
+.userProfileAvatar {
+    width: 175px;
+    height: 175px;
+    border-radius: 100px;
+    object-fit: cover;
+}
+
+.userSidebarAvatar {
+    border-radius: 100px;
+    width: 40px !important;
+    height: 40px !important;
+    object-fit: cover;
 }
 
 .roundedButton {
@@ -2331,6 +2367,48 @@ p {
     margin-bottom: 15px;
 }
 
+/*view profile*/
+#reportViewUserModal {
+    font-family: Lexend;
+}
+
+#reportViewUserModal p {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#reportViewUserModal textarea {
+    color: #3E3E3E;
+    border-radius: 20px;
+    border: solid #B0BEC5 2px;
+    font-size: 15px;
+    height: 120px;
+    padding: 10px 15px;
+    width: 100%;
+    resize: none;
+    margin-top: 10px;
+}
+
+#reportViewUserModal .modal-header {
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#reportViewUserModal .modal-header .modal-title {
+    margin-top: 10px;
+}
+
+#reportViewUserModal .modal-header .inputVariant {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#reportViewUserModal p {
+    margin-top: 10px;
+    text-align: center;
+}
+
 /*pages*/
 
 .pageContainer {
@@ -2788,6 +2866,19 @@ p {
 
 
 /*discussion forum*/
+.discussionForumAvatarPost {
+    border-radius: 100px;
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+}
+
+.discussionForumAvatarComment {
+    border-radius: 100px;
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+}
 
 .forumSubmitContainer {
     display: flex;
@@ -2990,6 +3081,7 @@ p {
 #confirmDeleteCreationModal .modal-xs {
     width: 400px;
 }
+
 /*discussion forum post view*/
 .forumPostViewContainer {
     margin-top: 20px;
@@ -3138,10 +3230,6 @@ p {
     font-family: Lexend;
 }
 
-.forumPostViewComments img {
-    width: 35px;
-}
-
 .forumPostViewComments h2 {
     margin-top: 0;
     color: #3E3E3E;
@@ -3149,7 +3237,7 @@ p {
 }
 
 .forumPostViewContent {
-    padding-left: 5px;
+    padding-left: 12.5px;
     padding-top: 10px;
 }
 
@@ -3255,7 +3343,7 @@ p {
 }
 
 .forumPostViewCommentReply {
-    padding-inline-start: 2.75%;
+    padding-inline-start: 3.5%;
 }
 
 #forumPostViewCommentReplySubmit {

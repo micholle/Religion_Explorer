@@ -6,8 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Religion Explorer</title>
     <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript" src="../js/splash.js"></script>
+    <script type="text/javascript" src="../js/script.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
     <header>
@@ -28,7 +34,13 @@
             <div class="row" style="height: 100vh; background-image: url('../assets/img/try3.png'); background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover;">
             
             <div class="col-5 mh-100 d-flex justify-content-center align-items-center">
-                <img src="../assets/img/symbol.png" height="400px" width="400px">
+              <div id="splash-gif">
+                  <img src="../assets/img/splash/frame1.png" alt="Frame 1">
+                  <img src="../assets/img/splash/frame2.png" alt="Frame 2">
+                  <img src="../assets/img/splash/frame3.png" alt="Frame 3">
+                  <img src="../assets/img/splash/frame4.png" alt="Frame 4">
+                  <img src="../assets/img/splash/frame5.png" alt="Frame 5">
+              </div>
             </div>
 
             <div class="col-7 mh-100 d-flex justify-content-center align-items-center">
@@ -170,13 +182,5 @@
         </div>
       </section>
     </div>
-
-    <!--javascript-->
-    <script type="text/javascript">
-      window.addEventListener("scroll", function(){
-        var header = document.querySelector("header");
-        header.classList.toggle("sticky", window.scrollY > 0);
-      })
-    </script>
 </body>
 </html>
