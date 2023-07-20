@@ -1628,11 +1628,16 @@ p {
 
 .userProfileAvatar {
     width: 175px;
+    height: 175px;
     border-radius: 100px;
+    object-fit: cover;
 }
 
 .userSidebarAvatar {
     border-radius: 100px;
+    width: 40px !important;
+    height: 40px !important;
+    object-fit: cover;
 }
 
 .roundedButton {
@@ -2836,11 +2841,15 @@ p {
 .discussionForumAvatarPost {
     border-radius: 100px;
     width: 45px;
+    height: 45px;
+    object-fit: cover;
 }
 
 .discussionForumAvatarComment {
     border-radius: 100px;
     width: 35px;
+    height: 35px;
+    object-fit: cover;
 }
 
 .forumSubmitContainer {
