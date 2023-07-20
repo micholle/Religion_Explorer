@@ -273,6 +273,8 @@ class ModelAccount{
 			$stmt->bindParam(":avatar", $imageData, PDO::PARAM_LOB);
 			$stmt->bindParam(":accountid", $_SESSION['accountid'], PDO::PARAM_STR);
 			$stmt->execute();
+
+			$_SESSION['avatar'] = $imageData;
 		
 			$pdo->commit();
 			return "ok";
@@ -284,6 +286,63 @@ class ModelAccount{
 			$stmt = null;
 		  }
 	  }
-	
+
+
+	  //delete
+	  static public function mdlDeleteAccount($data) {
+		$db = new Connection();
+		$pdo = $db->connect();
+	  
+		$imagePath = '../views/assets/img/editProfile/anonymous.png';
+		$imageData = file_get_contents($imagePath);
+	  
+		try {
+		  // Verify the email and password
+		  $stmtVerify = $pdo->prepare("SELECT password FROM accounts WHERE email = :email");
+		  $stmtVerify->bindParam(":email", $data['email'], PDO::PARAM_STR);
+		  $stmtVerify->execute();
+		  $result = $stmtVerify->fetch(PDO::FETCH_ASSOC);
+	  
+		  if ($result) {
+			$hashedPassword = $result['password'];
+	  
+			// Verify the password
+			if (password_verify($data['password'], $hashedPassword)) {
+			  // Delete the account
+			  $stmtDelete = $pdo->prepare("UPDATE accounts SET
+				email = '',
+				acctype = '',
+				username = '[Deleted_Account]',
+				password = '',
+				religion = '',
+				avatar = :avatar
+				WHERE accountid = :accountid"
+			  );
+			  $stmtDelete->bindParam(":accountid", $_SESSION['accountid'], PDO::PARAM_STR);
+			  $stmtDelete->bindParam(":avatar", $imageData, PDO::PARAM_LOB);
+			  $stmtDelete->execute();
+	  
+			  $pdo->commit();
+			  return "ok";
+			} else {
+			  return "invalid_password";
+			}
+		  } else {
+			return "invalid_email";
+		  }
+		} catch (Exception $e) {
+		  $pdo->rollBack();
+		  return "error";
+		} finally {
+		  $pdo = null;
+		  $stmtVerify = null;
+		  $stmtDelete = null;
+		}
+	  }
+	  
+		
+
+
+	  
 }
 ?>

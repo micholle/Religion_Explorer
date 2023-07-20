@@ -39,7 +39,7 @@ require_once "../../models/explorerPoints.model.php";
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-start flex-column">
                                     <h1><?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} else {echo "not logged in";}?></h1>
-                                    <p class="nicknameText">aka [Placeholder]</p>
+                                    <p class="nicknameText">aka <?php echo $_SESSION['username']; ?></p>
                                 </div>
                             </div>
 
@@ -80,10 +80,7 @@ require_once "../../models/explorerPoints.model.php";
                 <button class="userProfileTabBtn">Achievements</button>
             </div>
             <div class="userProfileContentBox">
-                <div class="userProfileContent active">
-                    <div class="userPostContainer">
-                        <h1>[Placeholder Display]</h1>
-                    </div>
+                <div class="userProfileContent active" id="profileOverview">
                 </div>
 
                 <div class="userProfileContent" id="profileTopics">

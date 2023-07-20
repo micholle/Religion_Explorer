@@ -27,6 +27,7 @@
                     <div class="col-8 d-flex justify-content-start align-items-center">
                         <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community">
                     </div>
+                    <div id="viewContent" hidden></div>
                 </div>
             <div>
 
@@ -58,6 +59,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                    <div id="deleteContentid" hidden></div>
                                     <h5 class="modal-title w-100">Delete Content?</h5>
                                     <p>Are you sure you want this gone?</p>
                                     <div class="row">

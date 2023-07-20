@@ -109,6 +109,10 @@ $(function() {
             data: postData,
             success: function(response) {
                 if (response === "success") {
+                    const message = {
+                        type: 'discussion'
+                    };
+                    ws.send(JSON.stringify(message));
                     getPosts("", $("#topicId").val());
                 } else {
                     alert("Error occurred while creating the reply.");
@@ -148,6 +152,10 @@ $(function() {
             success: function(response) {
                 if (response === "success") {
                     // Topic created successfully
+                    const message = {
+                        type: 'discussion'
+                    };
+                    ws.send(JSON.stringify(message));
                     $("#postContent").val("");
                     // Refresh the topics by calling the getTopics function
                     getPosts("", $("#topicId").val());
@@ -205,7 +213,6 @@ $(function() {
             $('#confirmDeleteModal').find('#confirmDelete').off('click').on('click', function() {
                 deleteTopic(topicId);
             });
-            alert(topicId);
         });
 
         // Delete post
@@ -215,7 +222,6 @@ $(function() {
             $('#confirmDeleteModal').find('#confirmDelete').off('click').on('click', function() {
                 deletePost(postId);
             });
-            alert(postId);
         });
     
         // Delete reply
@@ -225,7 +231,6 @@ $(function() {
             $('#confirmDeleteModal').find('#confirmDelete').off('click').on('click', function() {
                 deleteReply(replyId);
             });
-            alert(replyId);
         });
     }
     
@@ -239,6 +244,10 @@ $(function() {
                 if (response === "success") {
                     getPosts("", $("#topicId").val());
                     $('#confirmDeleteModal').modal('hide');
+                    const message = {
+                        type: 'discussion'
+                    };
+                    ws.send(JSON.stringify(message));
                 } else {
                     alert("Error occurred while deleting the post.");
                 }
@@ -259,6 +268,10 @@ $(function() {
                 if (response === "success") {
                     getPosts("", $("#topicId").val());
                     $('#confirmDeleteModal').modal('hide');
+                    const message = {
+                        type: 'discussion'
+                    };
+                    ws.send(JSON.stringify(message));
                 } else {
                     alert("Error occurred while deleting the reply.");
                 }
@@ -278,6 +291,10 @@ $(function() {
                 if (response === "success") {
                     window.location.href = 'discussionForum.php';
                     $('#confirmDeleteModal').modal('hide');
+                    const message = {
+                        type: 'topicDelete'
+                    };
+                    ws.send(JSON.stringify(message));
                 } else {
                     alert("Error occurred while deleting the reply.");
                 }
@@ -326,6 +343,10 @@ $(function() {
                 if (response === 'success') {
                     // Topic updated successfully
                     alert('Topic updated successfully');
+                    const message = {
+                        type: 'discussion'
+                    };
+                    ws.send(JSON.stringify(message));
                 } else {
                     // Error occurred while updating the topic
                     alert('Error occurred while updating the topic');
@@ -378,6 +399,10 @@ $(function() {
                 if (response === "success") {
                     // Content updated successfully
                     getPosts("", $("#topicId").val());
+                    const message = {
+                        type: 'discussion'
+                    };
+                    ws.send(JSON.stringify(message));
                 } else {
                     // Error occurred while updating the content
                     alert("Error occurred while updating the content");
@@ -422,6 +447,10 @@ $(function() {
                     targetElement.addClass('downvoted');
                 }
                 getPosts("", $("#topicId").val());
+                const message = {
+                    type: 'discussion'
+                };
+                ws.send(JSON.stringify(message));
     
                 // Disable the clicked button to prevent multiple votes
                 targetElement.prop('disabled', true);
@@ -520,5 +549,24 @@ $(function() {
                 console.log(error);
             }
         });
-    
+
+        // websocket
+        const ws = new WebSocket('ws://localhost:8080');
+
+        ws.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+
+            switch (data.type) {
+                case 'discussion':
+                    getPosts("", $("#topicId").val());
+                    break;
+                case 'topicDelete':
+                    window.location.href = "discussionForum.php"; // Redirect to the desired page when 'topicDelete' is received
+                    break;    
+                default:
+                    break;
+            }
+        };
+
+
 });

@@ -268,7 +268,7 @@ class ModelDiscussion {
         $pdo = $db->connect();
     
         try {
-            $stmt = $pdo->prepare("SELECT r.*, a.username 
+            $stmt = $pdo->prepare("SELECT r.*, a.username, a.avatar 
                                    FROM reply AS r
                                    INNER JOIN accounts AS a ON r.accountid = a.accountid
                                    WHERE r.postId = :postId");
@@ -1022,7 +1022,7 @@ class ModelDiscussion {
         $pdo = $db->connect();
       
         try {
-          $stmt = $pdo->prepare("SELECT posts.*, accounts.username, posts.postDate,
+          $stmt = $pdo->prepare("SELECT posts.*, accounts.username, posts.postDate, accounts.avatar,
                                         (SELECT COUNT(*) FROM reply WHERE reply.postId = posts.postId) AS replyCount
                                    FROM posts 
                                    INNER JOIN accounts ON posts.accountid = accounts.accountid

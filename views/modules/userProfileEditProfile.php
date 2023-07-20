@@ -40,7 +40,7 @@ require_once "../../models/explorerPoints.model.php";
                                     <h1><?php echo $_SESSION['username']; ?></h1>
                                     <div class="row">
                                         <div class="col-12 d-flex flex-row">
-                                            <p class="nicknameText">aka [Placeholder]</p>
+                                            <p class="nicknameText">aka <?php echo $_SESSION['username']; ?></p>
                                             <button class="editNicknameButton">Edit Nickname</button>
                                         </div>
                                     </div>
@@ -105,7 +105,6 @@ require_once "../../models/explorerPoints.model.php";
                                 <div class="col-9">
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-start align-items-start flex-column">
-                                            <input type="password" id="" name="" placeholder="Placeholder">
                                             <button class="editPasswordButton" id="editPasswordButton">Edit Password</button>
                                         </div>
                                     </div>
@@ -211,7 +210,7 @@ require_once "../../models/explorerPoints.model.php";
                             <p>OR</p>
                             <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <button class="roundedButtonVariant">Upload File</button>
+                                <button class="roundedButtonVariant" id="uploadButton">Upload File</button>
                                 <button class="roundedButton" id="updateAvatarBtn">Update Avatar</button>
                             </div>
                         </div>
@@ -261,8 +260,8 @@ require_once "../../models/explorerPoints.model.php";
                                 <p class="deleteAccountDescription">We're sorry to see you go. Once your Religion Explorer account is deleted, your profile and username will be removed. All of your site activity will be disassociated instead unless you delete them beforehand.</p>
                                 <br>
                                 <p class="deleteAccountDescriptionVar">Please verify your identity.</p>
-                                <input type="text" id="" name="" placeholder="Email or username">
-                                <input type="password" id="" name="" placeholder="Password">
+                                <input type="text" id="deleteEmail" name="" placeholder="Email">
+                                <input type="password" id="deletePassword" name="" placeholder="Password">
                                 </div>
                             </div>
                             <div class="row">

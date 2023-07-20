@@ -269,3 +269,47 @@ function getPosts() {
         }
     });
 }
+
+$(document).ready(function() {
+    getOverview();
+});
+function getOverview() {
+    $.ajax({
+        url: "../../ajax/profileOverview.ajax.php",
+        method: "GET", 
+        success: function(data) {
+            $.ajax({
+                url: '../../ajax/getBookmarksData.ajax.php',
+                method: "POST",
+                data: {"accountid" : $("#accountidPlaceholder").text()},
+                success: function(data){
+                    var bookmarksList = data;
+                    for (let bookmark in bookmarksList) {
+                        var bookmarkDetails = bookmarksList[bookmark];
+        
+                        var $bookmarkDiv = 
+                        '<div class="bookmarkContainer" onclick="viewBookmark(' + "'" + bookmarkDetails.resourceTitle + "'" + ')">' +
+                            '<div class="bookmarkImgContainer d-flex justify-content-center align-items-center">' +
+                                '<img src="../assets/img/bookmark.png" class="userProfBookmark">' +
+                            '</div>' +
+                            '<div class="bookmarkContent d-flex justify-content-start align-items-center">' +
+                                '<p>' + $("#accountUsernamePlaceholder").text() + ' has added "' + bookmarkDetails.resourceTitle + '" to their bookmarks.<p>' +
+                            '</div>' +
+                        '</div>';
+        
+                        $("#profileOverview").append($bookmarkDiv);
+                    }
+                }
+            }); 
+            console.log(data);
+            $("#profileOverview").html(data);
+            shortenUpvotes();
+            
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr.responseText);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
