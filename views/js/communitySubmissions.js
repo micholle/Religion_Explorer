@@ -194,25 +194,24 @@ $(function() {
         }
     });
 
-    $("#submitReportContent").click(function() {    
-        var atLeastOneCheckboxChecked = false;
-        $("input[type=checkbox]", "#reportContentForm").each(function() {
-            if (this.checked) {
-                atLeastOneCheckboxChecked = true;
-                return false;
+    $("#submitReportContent").click(function(event) {    
+        event.preventDefault();
+        
+        var contentViolationsArray = []; 
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                contentViolationsArray.push(checkbox.value);
             }
         });
     
-        if (!atLeastOneCheckboxChecked && $("#othersSpecify").val() == "") {
-            $("#toast").html("Please fill out all required fields.")
-            $("#toast").css("background-color", "#E04F5F");
-            $("#toast").addClass('show');
-        
-            setTimeout(function() {
-                $("#toast").removeClass('show');
-            }, 2000);
-        } else {
-            var contentViolationsArray = []; 
+        if ($("#contentOthers").val() != "") {
+            contentViolationsArray.push($("#contentOthers").val());
+        }
+    
+        if (contentViolationsArray.length != 0) {
+            console.log("Content Violations Array is not empty!");
             var reportedContentid = $("#reportContentid").text();
             var additionalContext = $("#reportContentAdditional").val();
             var reportedBy = $("#accountUsernamePlaceholder").text();
@@ -222,19 +221,6 @@ $(function() {
             var month = String(currentDate.getMonth() + 1).padStart(2, '0');
             var day = String(currentDate.getDate()).padStart(2, '0');
             var reportedOn = `${year}-${month}-${day}`;
-
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-            checkboxes.forEach(checkbox => {
-              if (checkbox.checked) {
-                contentViolationsArray.push(checkbox.value);
-              }
-            });
-
-            if($("#othersSpecify").val() != "") {
-                contentViolationsArray.push($("#othersSpecify").val());
-            }
-
             var contentViolations = contentViolationsArray.join(', ');
 
             reportData = new FormData();
@@ -273,6 +259,15 @@ $(function() {
                     $("#reportContentAdditional").val("");
                 }
             });
+        } else {
+            console.log(contentViolationsArray.length);
+            $("#toast").html("Please fill out all required fields.")
+            $("#toast").css("background-color", "#E04F5F");
+            $("#toast").addClass('show');
+        
+            setTimeout(function() {
+                $("#toast").removeClass('show');
+            }, 2000);
         }
     });
 
@@ -423,11 +418,16 @@ $(function() {
 
     tabs.forEach((tab, index)=>{
         tab.addEventListener('click', (e)=>{
-        tabs.forEach(tab=>{tab.classList.remove('active')})
-        tab.classList.add('active');
+            tabs.forEach(tab=>{tab.classList.remove('active')})
+            tab.classList.add('active');
 
-        all_content.forEach(content=>{content.classList.remove('active')});
-        all_content[index].classList.add('active');
+            all_content.forEach(content=>{content.classList.remove('active')});
+            all_content[index].classList.add('active');
+
+            const dataTab = tab.getAttribute('data-tab');
+            const currentURL = new URL(window.location.href);
+            currentURL.searchParams.set('openTab', dataTab);
+            window.history.pushState({}, '', currentURL.toString());
         })
     })
 
@@ -451,7 +451,7 @@ $(function() {
       // Check the URL for the "openTab" parameter and activate the corresponding tab
     const urlParams = new URLSearchParams(window.location.search);
     const openTabParam = urlParams.get("openTab");
-        if (openTabParam) {
+    if (openTabParam) {
         activateTab(openTabParam);
     }      
 });

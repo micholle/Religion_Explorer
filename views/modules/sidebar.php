@@ -138,14 +138,14 @@ function create_sidebar() {
                                         <label for="communityGuidelinesViolation">Community Guidelines Violation</label><br>
                                         <input type="checkbox" id="suspiciousOrFakeAccount" name="suspiciousOrFakeAccount" value="Suspicious or Fake Account">
                                         <label for="suspiciousOrFakeAccount">Suspicious or Fake Account</label><br>
-                                        <label for="others">Others, specify:</label><br>
-                                        <input id="othersSpecify" class="inputVariant" name="othersSpecify"><br>
+                                        <label for="userOthers">Others, specify:</label><br>
+                                        <input id="userOthers" class="inputVariant" name="userOthers"><br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                         <textarea id="reportUserAdditional" placeholder="Give additional context."></textarea><br>
-                                        <button type="button" id="submitReportContent" class="roundedButton">Send</button>
+                                        <button type="button" id="submitReportUser" class="roundedButton">Send</button>
                                     </div>
                                 </div>
                             </form>    

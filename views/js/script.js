@@ -19,25 +19,23 @@ $(function() {
         }
     });
 
-    $('#submitReportContent').click(function() {        
-        var atLeastOneCheckboxChecked = false;
-        $("input[type=checkbox]", "#reportUserModal").each(function() {
-            if (this.checked) {
-                atLeastOneCheckboxChecked = true;
-                return false;
+    $('#submitReportUser').click(function(event) {    
+        event.preventDefault();
+
+        var userViolationsArray = []; 
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                userViolationsArray.push(checkbox.value);
             }
         });
+
+        if($("#userOthers").val() != "") {
+            userViolationsArray.push($("#userOthers").val());
+        }
     
-        if (!atLeastOneCheckboxChecked && ($("#othersSpecify").val() == "")) {
-            $("#toast").html("Please fill out all required fields.")
-            $("#toast").css("background-color", "#E04F5F");
-            $('#toast').addClass('show');
-        
-            setTimeout(function() {
-                $('#toast').removeClass('show');
-            }, 2000);
-        } else {
-            var userViolationsArray = []; 
+        if (userViolationsArray.length != 0) {
             var reportUserUsername = $("#reportUserUsername").val();
             var additionalContext = $("#reportUserAdditional").val();
             var accountUsername = $("#accountUsernamePlaceholder").text();
@@ -47,19 +45,6 @@ $(function() {
             var month = String(currentDate.getMonth() + 1).padStart(2, '0');
             var day = String(currentDate.getDate()).padStart(2, '0');
             var reportedOn = `${year}-${month}-${day}`;
-
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    userViolationsArray.push(checkbox.value);
-                }
-            });
-
-            if($("#othersSpecify").val() != "") {
-                userViolationsArray.push($("#othersSpecify").val());
-            }
-
             var userViolations = userViolationsArray.join(', ');
 
             reportData = new FormData();
@@ -99,6 +84,14 @@ $(function() {
                     $("#reportUserAdditional").val("");
                 }
             });
+        } else {
+            $("#toast").html("Please fill out all required fields.")
+            $("#toast").css("background-color", "#E04F5F");
+            $('#toast').addClass('show');
+        
+            setTimeout(function() {
+                $('#toast').removeClass('show');
+            }, 2000);
         }
     });
 

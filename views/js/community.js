@@ -21,7 +21,7 @@ $(function() {
                 for (photoData in photoList) {
                     var photoDetails = photoList[photoData];
                     
-                    $("#communityPhotos").append("<div><img class='communityFile' onclick='viewContent(\"" + photoDetails.creationid + "\")' src='" + "../" + photoDetails.filedata +"'></div>");
+                    $("#communityPhotos").append("<div><img class='communityFile' onclick='viewCreationImage(\"" + photoDetails.creationid + "\")' src='" + "../" + photoDetails.filedata +"'></div>");
 
                     photosCounter++;
 
@@ -36,7 +36,7 @@ $(function() {
                 for (videoData in videoList) {
                     var videoDetails = videoList[videoData];
 
-                    $("#communityVideos").append("<div><video class='communityFile' onclick='viewContent(\"" + videoDetails.creationid + "\")' autoplay muted controls> <source src='" + "../" + videoDetails.filedata +"'> </video></div>");
+                    $("#communityVideos").append("<div><video class='communityFile' onclick='viewCreationVideo(\"" + videoDetails.creationid + "\")' autoplay muted controls> <source src='" + "../" + videoDetails.filedata +"'> </video></div>");
 
                     videosCounter++
 
@@ -55,7 +55,7 @@ $(function() {
                     var [year, month, day] = readingMaterialDetails.date.split('-');
                     var formattedDate = `${month}-${day}-${year}`;   
 
-                    var showReadingMaterial = "<div class='communityReadingMaterialsWidth'><div class='communityReadingMaterials' onclick='viewContent(\"" + readingMaterialDetails.contentid + "\")'>" + readingMaterialData + "<div class='libraryReadMatsTag' style='margin-left: 10px'>" + readingMaterialDetails.religion + "</div></div>" + readingMaterialDetails.author + " | " + formattedDate+ "<br>" + readingMaterialDetails.description + "</div> <br>"
+                    var showReadingMaterial = "<div class='communityReadingMaterialsWidth'><div class='communityReadingMaterials' onclick='viewCreationReadingMaterial(\"" + readingMaterialDetails.creationid + "\")'>" + readingMaterialData + "<div class='libraryReadMatsTag' style='margin-left: 10px'>" + readingMaterialDetails.religion + "</div></div>" + readingMaterialDetails.author + " | " + formattedDate+ "<br>" + readingMaterialDetails.description + "</div> <br>"
                     $("#communityReadingMaterials").append(showReadingMaterial);
 
                     readingMaterialsCounter++;
@@ -244,6 +244,17 @@ $(function() {
     // });  
 });
 
-function viewContent(contentid) {
-    //redirect to community creations submission page and filter to only show file with matching content id
+function viewCreationImage(creationid) {
+    var imageLink = "http://localhost/religion_explorer/views/modules/communitySubmissions.php?openTab=communitySubPhotos" + "&view=" +  encodeURIComponent(creationid);
+    window.location.href = imageLink;
+}
+
+function viewCreationVideo(creationid) {
+    var videoLink = "http://localhost/religion_explorer/views/modules/communitySubmissions.php?openTab=communitySubVideos" + "&view=" +  encodeURIComponent(creationid);
+    window.location.href = videoLink;
+}
+
+function viewCreationReadingMaterial(creationid) {
+    var readingMaterialLink = "http://localhost/religion_explorer/views/modules/communitySubmissions.php?openTab=communitySubBlogs" + "&view=" +  encodeURIComponent(creationid);
+    window.location.href = readingMaterialLink;
 }

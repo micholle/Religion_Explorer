@@ -104,14 +104,14 @@
                                         <input type="checkbox" id="contentSpam" name="contentPrivacyViolation" value="Spam or Unwanted Content">
                                         <label for="contentSpam">Spam or Unwanted Content</label><br>
                                         <label for="contentOthers">Others, specify:</label><br>
-                                        <input id="othersSpecify" class="inputVariant"><br>
+                                        <input id="contentOthers" class="inputVariant"><br>
                                     </form>    
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                     <textarea id="reportContentAdditional" placeholder="Give additional context."></textarea><br>
-                                    <button type="button" id="submitReportContent" class="roundedButton">Send</button>
+                                    <button type="submit" id="submitReportContent" class="roundedButton">Send</button>
                                 </div>
                             </div>
                         </div>
