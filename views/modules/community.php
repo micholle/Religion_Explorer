@@ -76,7 +76,7 @@
                         <div class="container">
                             <form id="communityForm" method="post" enctype="multipart/form-data">
                                 <div class="communityUploadArea d-flex justify-content-center align-items-center flex-column">
-                                    <input type="file" class="communityUpload" id="communityUpload" multiple accept="image/*, video/*">
+                                    <input type="file" class="communityUpload" id="communityUpload" name="communityUpload" multiple accept="image/*, video/*">
                                     <label class="button text-center" for="communityUpload">
                                         <img src="../assets/img/community-upload.png" class="commUploadImg"><br>
                                         <p>Choose a file or drag it here.</p>
@@ -110,11 +110,21 @@
             </div>
         </div>
 
-        <div class="modal fade" id="communityNoticeModal">
+        <div id="communityNoticeModal" class="modal fade">
             <div class="modal-dialog modal-xs modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header" id="communityNoticeHeader"></div>
-                    <div class="modal-body" id="communityNoticeContent"></div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                    <img id="communityNoticeIcon" src="../assets/img/verification-check.png" height="80px" width="80px">
+                                    <h5 id="communityNoticeHeader" class="modal-title w-100"></h5>
+                                    <p id="communityNoticeContent" class="text-center"></p>
+                                    <button type="button" id="communityNoticeButton" class="roundedButton" data-dismiss="modal" style="display: none">Thanks!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

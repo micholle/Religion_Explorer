@@ -107,9 +107,15 @@ class reportContentModel {
             $pdo->beginTransaction();
 
             if (substr($contentid, 0, 2) == "CC") {
-                $stmt = $pdo->prepare("DELETE FROM communitycreations WHERE creationid = :contentid");
+                $stmt = $pdo->prepare("SELECT filedata FROM communitycreations WHERE creationid = :contentid");
                 $stmt->bindParam(":contentid", $contentid, PDO::PARAM_STR);
                 $stmt->execute();
+                $filepath = $stmt->fetch(PDO::FETCH_ASSOC);
+                if (file_exists($filepath["filedata"])) {unlink($filepath["filedata"]);}
+
+                $stmt2 = $pdo->prepare("DELETE FROM communitycreations WHERE creationid = :contentid");
+                $stmt2->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+                $stmt2->execute();
             }        
             
             $stmt3 = $pdo->prepare("DELETE FROM bookmarks WHERE resourceid = :contentid");
@@ -119,6 +125,7 @@ class reportContentModel {
             $stmt4 = $pdo->prepare("UPDATE reportedcontent SET actionTaken = 'Delete', reportStatus = 'Completed' WHERE contentid = :contentid");
             $stmt4->bindParam(":contentid", $contentid, PDO::PARAM_STR);
             $stmt4->execute();
+
     
             $pdo->commit();
         } catch (Exception $e) {

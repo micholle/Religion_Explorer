@@ -44,7 +44,7 @@ $(function() {
 
                         '<div class="row">' +
                             '<div class="col-12 d-flex justify-content-center align-items-center">' +
-                                '<img src="' + photoDetails.filedata + '">' +
+                                '<img src="' + "../" + photoDetails.filedata + '">' +
                             '</div>' +
                         '</div>' +
 
@@ -101,7 +101,7 @@ $(function() {
 
                         '<div class="row">' +
                             '<div class="col-12 d-flex justify-content-center align-items-center" style="max-width: 100vw;">' +
-                                '<video class="communitySubVideo" controls> <source src=' + videoDetails.filedata + '> </video>' +
+                                '<video class="communitySubVideo" controls> <source src=' + "../" + videoDetails.filedata + '> </video>' +
                             '</div>' +
                         '</div>' +
 

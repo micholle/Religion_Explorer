@@ -2,6 +2,7 @@
 require_once "../controllers/community.controller.php";
 
 class communityAjax {
+  public $creationid;
   public $username;
   public $title;
   public $religion;
@@ -14,6 +15,7 @@ class communityAjax {
   public $date;
 
   public function ajaxSubmitCreation() {
+    $creationid = $this->creationid;
     $username = $this->username;
     $title = $this->title;
     $religion = $this->religion;
@@ -26,6 +28,7 @@ class communityAjax {
     $date = $this->date;
 
     $data = array(
+      "creationid" => $creationid,
       "username" => $username,
       "title" => $title,
       "religion" => $religion,
@@ -42,12 +45,20 @@ class communityAjax {
   }
 }
 
+$creationid = "CC" . uniqid();
+$tname = $_FILES["filedata"]["tmp_name"];
+$directory = "../views/assets/data/community";
+$filepath = $directory . "/" . $creationid . "." . pathinfo($_FILES["filedata"]["name"], PATHINFO_EXTENSION);
+move_uploaded_file($tname, $filepath);
+
 $submitCreation = new communityAjax();
+$submitCreation->creationid = $creationid;
 $submitCreation->username = $_POST["username"];
 $submitCreation->title = $_POST["title"];
 $submitCreation->religion = $_POST["religion"];
 $submitCreation->description = $_POST["description"];
-$submitCreation->filedata = file_get_contents($_FILES["filedata"]["tmp_name"]);
+// $submitCreation->filedata = file_get_contents($_FILES["filedata"]["tmp_name"]);
+$submitCreation->filedata = $filepath;
 $submitCreation->filename = $_POST["filename"];
 $submitCreation->filetype = $_POST["filetype"];
 $submitCreation->filesize = $_POST["filesize"];

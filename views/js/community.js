@@ -21,7 +21,7 @@ $(function() {
                 for (photoData in photoList) {
                     var photoDetails = photoList[photoData];
                     
-                    $("#communityPhotos").append("<div><img class='communityFile' onclick='viewContent(\"" + photoDetails.creationid + "\")' src='" + photoDetails.filedata +"'></div>");
+                    $("#communityPhotos").append("<div><img class='communityFile' onclick='viewContent(\"" + photoDetails.creationid + "\")' src='" + "../" + photoDetails.filedata +"'></div>");
 
                     photosCounter++;
 
@@ -36,7 +36,7 @@ $(function() {
                 for (videoData in videoList) {
                     var videoDetails = videoList[videoData];
 
-                    $("#communityVideos").append("<div><video class='communityFile' onclick='viewContent(\"" + videoDetails.creationid + "\")' autoplay muted controls> <source src='" + videoDetails.filedata +"'> </video></div>");
+                    $("#communityVideos").append("<div><video class='communityFile' onclick='viewContent(\"" + videoDetails.creationid + "\")' autoplay muted controls> <source src='" + "../" + videoDetails.filedata +"'> </video></div>");
 
                     videosCounter++
 
@@ -78,95 +78,153 @@ $(function() {
         var title = $("#communityTitle").val();
         var religion = $("#communityCategory").val();
         var description = $("#communityDescription").val();
+        var filedata = "";
+        var filename = "";
+        var filetype = "";
+        var filesize = 0;
 
         if ( $("#communityUpload")[0].files[0] != null){
-            var filedata = $("#communityUpload")[0].files[0];
-            var filename = filedata.name;
-            var filetype = filedata.type;
-            var filesize = filedata.size;
+            filedata = $("#communityUpload")[0].files[0];
+            filename = filedata.name;
+            filetype = filedata.type;
+            filesize = filedata.size;
         } else {
             var readingMaterial = new Blob([description], { type: 'text/plain' });
-
-            var filedata = "";
-            var filename = "";
-            var filetype = "";
-            var filesize = readingMaterial.size;
+            filesize = readingMaterial.size;
         }
 
         var status = "Published";
         var date = new Date().toISOString().slice(0, 10);
 
-        var creation = new FormData();
-        creation.append("username", username);
-        creation.append("title", title);
-        creation.append("religion", religion);
-        creation.append("description", description);
-        creation.append("filedata", filedata);
-        creation.append("filename", filename);
-        creation.append("filetype", filetype);
-        creation.append("filesize", filesize);
-        creation.append("status", status);
-        creation.append("date", date);
+        if (filedata == "" || (filedata && (filetype.includes("image") || filetype.includes("video")))) {
+            var dataUsed = 0.00;
 
-        $.ajax({
-          url: "../../ajax/submitCommunityCreations.ajax.php",
-          method: "POST",
-          data: creation,
-          dataType: "text",
-          processData: false,
-          contentType: false,
-          success: function() {
+            $.ajax({
+                url: "../../ajax/getCommunityData.ajax.php",
+                method: "POST",
+                success:function(data){
+                    var communityData = data;
+        
+                    for (let photo in communityData["photos"]) {
+                        var photoList = communityData["photos"][photo];
+                        for (photoData in photoList) {
+                            var photoDetails = photoList[photoData];
+                            var imageSize = 0.00;
+        
+                            if (photoDetails.author == $("#accountUsernamePlaceholder").text()) {
+                                imageSize = photoDetails.filesize  / (1024 * 1024);
+                                dataUsed += imageSize;
+                            }
+                        }
+                    }
+        
+                    for (let video in communityData["videos"]) {
+                        var videoList = communityData["videos"][video];
+                        for (videoData in videoList) {
+                            var videoDetails = videoList[videoData];
+                            var videoSize = 0.00;
+        
+                            if (videoDetails.author == $("#accountUsernamePlaceholder").text()) {
+                                videoSize = videoDetails.filesize / (1024 * 1024);
+                                dataUsed += videoSize;
+                            }
+                        }
+                    }
+                    
+                    for (let readingMaterial in communityData["readingMaterials"]) {
+                        var readingMaterialList = communityData["readingMaterials"][readingMaterial];
+                        for (readingMaterialData in readingMaterialList) {
+                            var readingMaterialDetails = readingMaterialList[readingMaterialData];
+                            var readingMaterialSize = 0.00;
+        
+                            if (readingMaterialDetails.author == $("#accountUsernamePlaceholder").text()) {
+                                readingMaterialSize = readingMaterialDetails.filesize / 1024;
+                                dataUsed += readingMaterialDetails.filesize / (1024 * 1024);
+                            }
+                        }
+                    }
+    
+                    var filesizeMB = filesize / (1024 * 1024);
+                    if ((dataUsed + filesizeMB) >= 100) {
+                        $("#communityModal").removeClass("fade").modal("hide");
+                        $("#communityModal").modal("dispose");
+            
+                        $("#communityNoticeIcon").attr("src", "../assets/img/verification-error.png");
+                        $("#communityNoticeHeader").html("Upload Failed");
+                        $("#communityNoticeContent").html("You have exceeded your maximum total upload file size of 100 MB.");
+                        $("#communityNoticeModal").modal();
+                        $("#communityNoticeModal").show();
+    
+                        $("#communityUpload").val("");
+                        $("#communityTitle").val("");
+                        $("#communityCategory").val("Religion");
+                        $("#communityDescription").val("");
+                        
+                    } else {
+                        var creation = new FormData();
+                        creation.append("username", username);
+                        creation.append("title", title);
+                        creation.append("religion", religion);
+                        creation.append("description", description);
+                        creation.append("filedata", filedata);
+                        creation.append("filename", filename);
+                        creation.append("filetype", filetype);
+                        creation.append("filesize", filesize);
+                        creation.append("status", status);
+                        creation.append("date", date);
+                
+                        $.ajax({
+                            url: "../../ajax/submitCommunityCreations.ajax.php",
+                            method: "POST",
+                            data: creation,
+                            dataType: "text",
+                            processData: false,
+                            contentType: false,
+                            success: function() {
+                                $("#communityModal").removeClass("fade").modal("hide");
+                                $("#communityModal").modal("dispose");
+                        
+                                $("#communityNoticeIcon").attr("src", "../assets/img/verification-check.png");
+                                $("#communityNoticeHeader").html("Upload Complete");
+                                $("#communityNoticeContent").html("Your content was uploaded successfully.");
+                                $("#communityNoticeModal").modal();
+                                $("#communityNoticeModal").show();
+                            },
+                            error: function() {
+                                $("#communityModal").removeClass("fade").modal("hide");
+                                $("#communityModal").modal("dispose");
+                    
+                                $("#communityNoticeIcon").attr("src", "../assets/img/verification-error.png");
+                                $("#communityNoticeHeader").html("Upload Failed");
+                                $("#communityNoticeContent").html("Something went wrong.");
+                                $("#communityNoticeModal").modal();
+                                $("#communityNoticeModal").show();
+                            },
+                            complete: function() {
+                                $("#communityUpload").val("");
+                                $("#communityTitle").val("");
+                                $("#communityCategory").val("Religion");
+                                $("#communityDescription").val("");
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
             $("#communityModal").removeClass("fade").modal("hide");
             $("#communityModal").modal("dispose");
-    
-            $("#communityNoticeHeader").html("Upload Complete");
-            $("#communityNoticeContent").html("Your file was uploaded successfully.");
-            $("#communityNoticeModal").modal();
-            $("#communityNoticeModal").show();
-    
-            setTimeout(function(){
-                $("#communityNoticeHeader").html("");
-                $("#communityNoticeContent").html("");
-    
-                $("#communityNoticeModal").removeClass("fade").modal("hide");
-                $("#communityNoticeModal").modal("dispose");
-            }, 1500);
-          },
-          error: function() {
-            $("#communityModal").removeClass("fade").modal("hide");
-            $("#communityModal").modal("dispose");
 
+            $("#communityNoticeIcon").attr("src", "../assets/img/verification-error.png");
             $("#communityNoticeHeader").html("Upload Failed");
-            $("#communityNoticeContent").html("Something went wrong.");
+            $("#communityNoticeContent").html("Invalid file type.");
             $("#communityNoticeModal").modal();
             $("#communityNoticeModal").show();
 
-            setTimeout(function(){
-                $("#communityNoticeHeader").html("");
-                $("#communityNoticeContent").html("");
-
-                $("#communityNoticeModal").removeClass("fade").modal("hide");
-                $("#communityNoticeModal").modal("dispose");
-                }, 1500);
-            },
-            complete: function() {
-                $("#communityUpload").val("");
-                $("#communityTitle").val("");
-                $("#communityCategory").val("Religion");
-                $("#communityDescription").val("");
-              }
-        });
-    });
-
-    $("#submitReportContent").click(function(){
-        $("#reportContentModal").removeClass("fade").modal("hide");
-        $("#reportContentModal").modal("dispose");
-
-        $("#communityNoticeHeader").html("Report Received");
-        $("#communityNoticeContent").html("The team will review your complaint. Please expect a notification in 3-5 business days. <br>");
-        $("#communityNoticeContent").append("<button data-dismiss='modal'>Thanks!</button>");
-        $("#communityNoticeModal").modal();
-        $("#communityNoticeModal").show();
+            $("#communityUpload").val("");
+            $("#communityTitle").val("");
+            $("#communityCategory").val("Religion");
+            $("#communityDescription").val("");
+        }
     });
 
     document.getElementById("communityPhotosMore").addEventListener("click", function() {

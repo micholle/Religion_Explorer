@@ -19,7 +19,8 @@ class communityModel{
                     $creation["title"] => [
                         "creationid" => $creation["creationid"],
                         "author" => $creation["username"],
-                        "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
+                        "filedata" => $creation["filedata"],
+                        // "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
                         "filename" => $creation["filename"],
                         "filetype" => $creation["filetype"],
                         "filesize" => $creation["filesize"],
@@ -34,7 +35,8 @@ class communityModel{
                     $creation["title"] => [
                         "creationid" => $creation["creationid"],
                         "author" => $creation["username"],
-                        "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
+                        "filedata" => $creation["filedata"],
+                        // "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
                         "filename" => $creation["filename"],
                         "filetype" => $creation["filetype"],
                         "filesize" => $creation["filesize"],
@@ -73,16 +75,14 @@ class communityModel{
     static public function mdlSubmitCreation($data){
         $db = new Connection();
         $pdo = $db->connect();
-
-        $creationid = "CC" . rand(1111111111, 9999999999);
-
+        
 		try {
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->beginTransaction();
 		
 			$stmt = $pdo->prepare("INSERT INTO communitycreations(creationid, username, title, religion, description, filename, filetype, filesize, filedata, status, date) VALUES (:creationid, :username, :title, :religion, :description, :filename, :filetype, :filesize, :filedata, :status, :date)");
 	
-            $stmt->bindParam(":creationid", $creationid, PDO::PARAM_STR);
+            $stmt->bindParam(":creationid", $data["creationid"], PDO::PARAM_STR);
             $stmt->bindParam(":username", $data["username"], PDO::PARAM_STR);
             $stmt->bindParam(":title", $data["title"], PDO::PARAM_STR);
             $stmt->bindParam(":religion", $data["religion"], PDO::PARAM_STR);
@@ -90,7 +90,7 @@ class communityModel{
             $stmt->bindParam(":filename", $data["filename"], PDO::PARAM_STR);
             $stmt->bindParam(":filetype", $data["filetype"], PDO::PARAM_STR);
             $stmt->bindParam(":filesize", $data["filesize"], PDO::PARAM_INT);
-            $stmt->bindParam(":filedata", $data["filedata"], PDO::PARAM_LOB);
+            $stmt->bindParam(":filedata", $data["filedata"], PDO::PARAM_STR);
             $stmt->bindParam(":status", $data["status"], PDO::PARAM_STR);
             $stmt->bindParam(":date", $data["date"], PDO::PARAM_STR);
             

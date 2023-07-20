@@ -33,7 +33,7 @@ $(function() {
             url: "../../ajax/deleteReportedContent.ajax.php",
             method: "POST",
             data: {"contentid" : $("#deleteContentid").text()},
-            success:function(){
+            success:function(data){
                 $("#toast").html("Content deleted.");
             }, error: function() {
                 $("#toast").html("There was an error processing your request. Please try again later.")
