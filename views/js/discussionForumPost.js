@@ -1,4 +1,9 @@
 $(function() {
+    const pusher = new Pusher('a314fc475591f42fbafc', {
+        cluster: 'ap1',
+        // Add any other options you might need
+      });
+
     $.ajax({
         url: "../../ajax/showSidebar.ajax.php",
         method: "POST",
@@ -551,22 +556,27 @@ $(function() {
         });
 
         // websocket
-        const ws = new WebSocket('ws://localhost:8080');
+        // const ws = new WebSocket('ws://localhost:8080');
 
-        ws.onmessage = function (event) {
-            const data = JSON.parse(event.data);
+        // ws.onmessage = function (event) {
+        //     const data = JSON.parse(event.data);
 
-            switch (data.type) {
-                case 'discussion':
-                    getPosts("", $("#topicId").val());
-                    break;
-                case 'topicDelete':
-                    window.location.href = "discussionForum.php"; // Redirect to the desired page when 'topicDelete' is received
-                    break;    
-                default:
-                    break;
-            }
-        };
+        //     switch (data.type) {
+        //         case 'discussion':
+        //             getPosts("", $("#topicId").val());
+        //             break;
+        //         case 'topicDelete':
+        //             window.location.href = "discussionForum.php"; // Redirect to the desired page when 'topicDelete' is received
+        //             break;    
+        //         default:
+        //             break;
+        //     }
+        // };
 
+        const channel = pusher.subscribe('religionExplorer');
 
+        channel.bind('new-post-event', function (data) {
+            // Run the getPosts() function when the event is received
+            getPosts("", $("#topicId").val());
+          });
 });
