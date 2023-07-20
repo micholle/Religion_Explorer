@@ -11,7 +11,7 @@ $html = '';
 foreach ($posts as $post) {
     $html .= '<div class="forumPostViewComments d-flex flex-column" data-post-id="' . $post['postId'] . '">';
     $html .= '  <div class="d-flex justify-content-start align-items-start flex-row">';
-    $html .= '    <img src="data:image/png;base64,'.base64_encode($post['avatar']).'">';
+    $html .= '    <img src="data:image/png;base64,'.base64_encode($post['avatar']).'" class="discussionForumAvatarComment">';
     $html .= '    <div class="forumPostViewContent">';
     $html .= '      <div class="row">';
     $html .= '        <div class="col-12 d-flex flex-row">';
@@ -60,7 +60,7 @@ foreach ($posts as $post) {
     foreach ($replies as $reply) {
         $html .= '<div class="forumPostViewComments forumPostViewCommentReply d-flex flex-column">'; // Start of reply container
         $html .= '  <div class="d-flex justify-content-start align-items-start flex-row">';
-        $html .= '    <img src="data:image/png;base64,'.base64_encode($reply['avatar']).'">';
+        $html .= '    <img src="data:image/png;base64,'.base64_encode($reply['avatar']).'" class="discussionForumAvatarComment">';
         $html .= '    <div class="forumPostViewContent">';
         $html .= '      <div class="row">';
         $html .= '        <div class="col-12 d-flex flex-row">';

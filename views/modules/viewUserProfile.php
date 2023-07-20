@@ -13,7 +13,7 @@ require_once "../../models/explorerPoints.model.php";
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
 
-    <script type="text/javascript" src="../js/userProfile.js"></script>
+    <script type="text/javascript" src="../js/viewUserProfile.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>
 
     <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
@@ -21,7 +21,7 @@ require_once "../../models/explorerPoints.model.php";
 </head>
 
 <body>
-    <div id="userProfileSidebar"></div>
+    <div id="viewUserProfileSidebar"></div>
     <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
     <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
@@ -29,7 +29,7 @@ require_once "../../models/explorerPoints.model.php";
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
                 <div class="col-3 d-flex justify-content-end align-items-end">
-                    <img src="data:image/png;base64,<?php echo base64_encode($_SESSION['avatar']); ?>" width="175px">
+                    <img src="data:image/png;base64,<?php echo base64_encode($_SESSION['avatar']); ?>" class="userProfileAvatar">
                 </div>
 
                 <div class="col-4 userBasicStatsContainer">
@@ -39,7 +39,7 @@ require_once "../../models/explorerPoints.model.php";
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-start flex-column">
                                     <h1><?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} else {echo "not logged in";}?></h1>
-                                    <p class="nicknameText">aka [Placeholder]</p>
+                                    <p class="nicknameText">aka <?php echo $_SESSION['username']; ?></p>
                                 </div>
                             </div>
 
@@ -65,7 +65,7 @@ require_once "../../models/explorerPoints.model.php";
                 </div>
 
                 <div class="col-3 d-flex flex-column justify-content-start align-items-center buttonProfile">
-                    <a href="userProfileEditProfile.php"><button class="roundedButton userBasicStatsSave">Edit Profile</button></a>
+                    <button button id="viewUserReport" class="roundedButtonVariantTwo userBasicStatsSave">Report User</button></a>
                 </div>
             </div>
 
@@ -80,10 +80,7 @@ require_once "../../models/explorerPoints.model.php";
                 <button class="userProfileTabBtn">Achievements</button>
             </div>
             <div class="userProfileContentBox">
-                <div class="userProfileContent active">
-                    <div class="userPostContainer">
-                        <h1>[Placeholder Display]</h1>
-                    </div>
+                <div class="userProfileContent active" id="profileOverview">
                 </div>
 
                 <div class="userProfileContent" id="profileTopics">
@@ -290,6 +287,67 @@ require_once "../../models/explorerPoints.model.php";
     <div id="toast" class="toast"></div>
 
     <!-- Modal -->
+    <div class="modal fade" id="reportViewUserModal">
+        <div class="modal-dialog modal-xs modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <div class="container d-flex justify-content-center align-items-center flex-column">
+                        <h5 class="modal-title w-100">Report a User</h5>
+                        <p><?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} else {echo "not logged in";}?></p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <form id="reportUserForm" method="post">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="reportDescription">As accurately as you can, please tell us what happened.</p>
+                                    <input type="checkbox" id="harrassmentOrBullying" name="harrassmentOrBullying" value="Harrassment or Bullying">
+                                    <label for="harrassmentOrBullying">Harrassment or Bullying</label><br>
+                                    <input type="checkbox" id="offensiveLanguage" name="offensiveLanguage" value="Offensive Language">
+                                    <label for="offensiveLanguage">Offensive Language</label><br>
+                                    <input type="checkbox" id="spam" name="spam" value="Spam">
+                                    <label for="spam">Spam</label><br>
+                                    <input type="checkbox" id="communityGuidelinesViolation" name="communityGuidelinesViolation" value="Community Guidelines Violation">
+                                    <label for="communityGuidelinesViolation">Community Guidelines Violation</label><br>
+                                    <input type="checkbox" id="suspiciousOrFakeAccount" name="suspiciousOrFakeAccount" value="Suspicious or Fake Account">
+                                    <label for="suspiciousOrFakeAccount">Suspicious or Fake Account</label><br>
+                                    <label for="others">Others, specify:</label><br>
+                                    <input id="othersSpecify" class="inputVariant" name="othersSpecify"><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                    <textarea id="reportUserAdditional" placeholder="Give additional context."></textarea><br>
+                                    <button type="button" id="submitReportContent" class="roundedButton">Send</button>
+                                </div>
+                            </div>
+                        </form>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reportUserNotice" class="modal fade">
+        <div class="modal-dialog modal-xs modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                <img id="reportUserIcon" src="../assets/img/verification-check.png" height="80px" width="80px">
+                                <h5 id="reportUserStatus" class="modal-title w-100">Report Received</h5>
+                                <p id="reportUserMessage" class="text-center">The team will review your complaint. Please expect a notification in 3-5 business days.</p>
+                                <button type="button" id="reportUserNoticeButton" class="roundedButton" data-dismiss="modal">Thanks!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="calendarEventModal">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">

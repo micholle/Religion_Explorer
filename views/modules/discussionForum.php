@@ -33,7 +33,7 @@
             <div class="col-12 d-flex justify-content-center align-items-center">
                 <div class="forumSubmitContainer">
                     <div class="d-flex justify-content-start align-items-center flex-column">
-                        <img src="data:image/png;base64,<?php echo base64_encode($_SESSION['avatar']); ?>" width="45px">
+                        <img src="data:image/png;base64,<?php echo base64_encode($_SESSION['avatar']); ?>" class="discussionForumAvatarPost">
                     </div>
                     <div class="forumSubmitContent">
                         <form>

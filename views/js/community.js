@@ -55,7 +55,7 @@ $(function() {
                     var [year, month, day] = readingMaterialDetails.date.split('-');
                     var formattedDate = `${month}-${day}-${year}`;   
 
-                    var showReadingMaterial = "<div><div class='communityReadingMaterials' onclick='viewContent(\"" + readingMaterialDetails.contentid + "\")'>" + readingMaterialData + "<div class='libraryReadMatsTag' style='margin: 3px'>" + readingMaterialDetails.religion + "</div></div>" + readingMaterialDetails.author + " | " + formattedDate+ "<br>" + readingMaterialDetails.description + "</div> <br>"
+                    var showReadingMaterial = "<div class='communityReadingMaterialsWidth'><div class='communityReadingMaterials' onclick='viewContent(\"" + readingMaterialDetails.contentid + "\")'>" + readingMaterialData + "<div class='libraryReadMatsTag' style='margin-left: 10px'>" + readingMaterialDetails.religion + "</div></div>" + readingMaterialDetails.author + " | " + formattedDate+ "<br>" + readingMaterialDetails.description + "</div> <br>"
                     $("#communityReadingMaterials").append(showReadingMaterial);
 
                     readingMaterialsCounter++;

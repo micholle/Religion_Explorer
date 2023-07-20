@@ -251,7 +251,6 @@ h5 {
     text-align: center;
 }
 
-
 /* map */
 .mapContainer {
     width: 100%; 
@@ -633,10 +632,6 @@ h5 {
 }
 
 /* community creations */
-.communityUpload {
-    /* display: none; */
-}
-
 .communityUploadArea {
     border-style: dashed;
     border-radius: 15px;
@@ -654,6 +649,9 @@ h5 {
     cursor: pointer;
 }
 
+.communitySubmissionsContentVariant {
+    width: 100%;
+}
 
 .communityUploadDetails input[id=communityTitle] {
     background-color: #FAFAFA;
@@ -713,8 +711,8 @@ h5 {
 }
 
 .communityFile {
-    width: 200px !important;
-    height: 200px;
+    width: 225px !important;
+    height: 225px;
     padding: 5px;
     border-radius: 10px;
     object-fit: cover;
@@ -731,6 +729,10 @@ h5 {
 .communitySubVideo {
     width: 100%;
     border-radius: 10px;
+}
+
+.communityReadingMaterialsWidth {
+    width: 1115px;
 }
 
 .createSubmissionsBox {
@@ -751,11 +753,19 @@ h5 {
     border: solid #D0D0D0 2px;
     border-radius: 15px;
     padding: 20px;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box; /* Add this line to include padding in width calculation */
+}
+
+.submissionsWidth {
+    width: 100%;
 }
 
 .submissionsContainer {
     margin-top: 20px;
     padding-bottom: 20px;
+    width: 100% !important;
 }
 
 .submissionsContainer .roundedButton {
@@ -830,10 +840,6 @@ h5 {
 
 .communitySubmissionsContentBox .communitySubmissionsContent.active {
     display: block;
-}
-
-.communitySubmissionsContentVariant {
-    width: 100%;
 }
 
 /*library*/
@@ -1619,6 +1625,15 @@ p {
     margin: 0;
 }
 
+.userProfileAvatar {
+    width: 175px;
+    border-radius: 100px;
+}
+
+.userSidebarAvatar {
+    border-radius: 100px;
+}
+
 .roundedButton {
     background-color: #2CA464;
     color: white;
@@ -2318,6 +2333,48 @@ p {
     margin-bottom: 15px;
 }
 
+/*view profile*/
+#reportViewUserModal {
+    font-family: Lexend;
+}
+
+#reportViewUserModal p {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#reportViewUserModal textarea {
+    color: #3E3E3E;
+    border-radius: 20px;
+    border: solid #B0BEC5 2px;
+    font-size: 15px;
+    height: 120px;
+    padding: 10px 15px;
+    width: 100%;
+    resize: none;
+    margin-top: 10px;
+}
+
+#reportViewUserModal .modal-header {
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#reportViewUserModal .modal-header .modal-title {
+    margin-top: 10px;
+}
+
+#reportViewUserModal .modal-header .inputVariant {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#reportViewUserModal p {
+    margin-top: 10px;
+    text-align: center;
+}
+
 /*pages*/
 
 .pageContainer {
@@ -2775,6 +2832,15 @@ p {
 
 
 /*discussion forum*/
+.discussionForumAvatarPost {
+    border-radius: 100px;
+    width: 45px;
+}
+
+.discussionForumAvatarComment {
+    border-radius: 100px;
+    width: 35px;
+}
 
 .forumSubmitContainer {
     display: flex;
