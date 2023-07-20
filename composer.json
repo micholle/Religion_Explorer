@@ -1,0 +1,17 @@
+{
+    "name": "corl/religion_explorer",
+    "autoload": {
+        "psr-4": {
+            "Corl\\ReligionExplorer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "JcAngeles1024",
+            "email": "jc.angelesmails@gmail.com"
+        }
+    ],
+    "require": {
+        "cboden/ratchet": "^0.4.4"
+    }
+}
