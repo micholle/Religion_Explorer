@@ -292,7 +292,7 @@ $(function() {
                     window.location.href = 'discussionForum.php';
                     $('#confirmDeleteModal').modal('hide');
                     const message = {
-                        type: 'discussion'
+                        type: 'topicDelete'
                     };
                     ws.send(JSON.stringify(message));
                 } else {
@@ -550,20 +550,23 @@ $(function() {
             }
         });
 
-        //websocket
+        // websocket
         const ws = new WebSocket('ws://localhost:8080');
-        
+
         ws.onmessage = function (event) {
             const data = JSON.parse(event.data);
-        
-            // Handle the received WebSocket message and update the UI
+
             switch (data.type) {
                 case 'discussion':
-                    // Handle new post
                     getPosts("", $("#topicId").val());
                     break;
+                case 'topicDelete':
+                    window.location.href = "discussionForum.php"; // Redirect to the desired page when 'topicDelete' is received
+                    break;    
                 default:
                     break;
             }
         };
+
+
 });
