@@ -3043,6 +3043,7 @@ p {
 #confirmDeleteCreationModal .modal-xs {
     width: 400px;
 }
+
 /*discussion forum post view*/
 .forumPostViewContainer {
     margin-top: 20px;
@@ -3191,10 +3192,6 @@ p {
     font-family: Lexend;
 }
 
-.forumPostViewComments img {
-    width: 35px;
-}
-
 .forumPostViewComments h2 {
     margin-top: 0;
     color: #3E3E3E;
@@ -3202,7 +3199,7 @@ p {
 }
 
 .forumPostViewContent {
-    padding-left: 5px;
+    padding-left: 12.5px;
     padding-top: 10px;
 }
 
@@ -3308,7 +3305,7 @@ p {
 }
 
 .forumPostViewCommentReply {
-    padding-inline-start: 2.75%;
+    padding-inline-start: 3.5%;
 }
 
 #forumPostViewCommentReplySubmit {
