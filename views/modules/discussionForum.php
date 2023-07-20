@@ -6,6 +6,7 @@
     <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/7.0.3/pusher.min.js"></script>
 
     <script type="text/javascript" src="../js/discussionForum.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>
