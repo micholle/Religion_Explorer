@@ -8,7 +8,7 @@ use React\Socket\Server;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
-require __DIR__ . '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 class ForumWebSocketServer implements MessageComponentInterface
 {
