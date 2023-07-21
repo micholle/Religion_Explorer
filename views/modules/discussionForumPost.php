@@ -119,7 +119,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 
                         <div class="forumPostFilter d-flex justify-content-end align-items-center flex-row">
                             <p >Sort comments by:</p>
-                            <button type="button" id="top">Top</button>
+                            <button type="button" id="top">Popularity</button>
                             <button type="button" id="new">New</button>
                         </div>
                         <?php

@@ -7,6 +7,7 @@ $(function() {
     var username = $("#username").val();
     var password = $("#password").val();
     var confirmPassword = $("#confirmPassword").val();
+    var religion = $("#religion").val();
 
     if (username === "") {
       $("#toast").html("Please enter a username.")
@@ -40,6 +41,16 @@ $(function() {
       return;
     } else if (password.length < 8) {
       $("#toast").html("Password must be at least 8 characters long.")
+      $("#toast").css("background-color", "#E04F5F");
+      $("#toast").addClass('show');
+
+      setTimeout(function() {
+          $("#toast").removeClass('show');
+      }, 2000);
+
+      return;
+    } else if (religion === null || religion === "") {
+      $("#toast").html("Select a religion.");
       $("#toast").css("background-color", "#E04F5F");
       $("#toast").addClass('show');
 

@@ -8,7 +8,20 @@ class ControllerLogin {
 
         if ($result === "Success") {
             if ($_SESSION['acctype'] === 'regular'){
-                header("Location: map.php");
+                // Redirect to the appropriate page based on user settings
+                if ($_SESSION['displayPage'] === '1') {
+                    $displayPage = "userProfile.php";
+                } elseif ($_SESSION['displayPage'] === '2') {
+                    $displayPage = "library.php";
+                } elseif ($_SESSION['displayPage'] === '3') {
+                    $displayPage = "discussionForum.php";
+                } elseif ($_SESSION['displayPage'] === '4') {
+                    $displayPage = "calendar.php";
+                } elseif ($_SESSION['displayPage'] === '0') {
+                    $displayPage = "map.php";
+                }
+
+                header("Location: " . $displayPage);
                 exit();
             } else if ($_SESSION['acctype'] === 'admin'){
                 header("Location: dashboard.php");
@@ -24,3 +37,4 @@ class ControllerLogin {
     }
 }
 ?>
+

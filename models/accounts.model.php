@@ -199,8 +199,7 @@ class ModelAccount{
 			$pdo->beginTransaction();
 	
 			$stmt = $pdo->prepare("UPDATE accounts 
-								  SET email = CASE WHEN :email <> '' THEN :email ELSE email END, 
-									  username = CASE WHEN :username <> '' THEN :username ELSE username END, 
+								  SET username = CASE WHEN :username <> '' THEN :username ELSE username END, 
 									  religion = CASE WHEN :religion <> '' THEN :religion ELSE religion END, 
 									  notifications = :displayNotifications, 
 									  displayCalendar = :displayCalendar, 
@@ -209,8 +208,7 @@ class ModelAccount{
 									  displayReligion = :displayReligion, 
 									  displayPage = :displayPage 
 								  WHERE accountid = :accountid");
-	
-			$stmt->bindValue(':email', $data['email'], PDO::PARAM_STR);
+
 			$stmt->bindValue(':username', $data['username'], PDO::PARAM_STR);
 			$stmt->bindValue(':religion', $data['religion'], PDO::PARAM_STR);
 			$stmt->bindValue(':displayNotifications', $data['displayNotifications'], PDO::PARAM_INT);
@@ -252,11 +250,9 @@ class ModelAccount{
 				$_SESSION['religion'] = $user['religion'];
 				$_SESSION['accountDate'] = $user['accountDate'];
 			} else {
-				// User not found, handle accordingly
 				return "User not found";
 			}
 		} catch (PDOException $e) {
-			// Error occurred, handle accordingly
 			return "Error";
 		}
 	}
@@ -339,10 +335,44 @@ class ModelAccount{
 		  $stmtDelete = null;
 		}
 	  }
+
+	  static public function mdlEditPassword($accountid, $password, $oldPassword) {
+		$db = new Connection();
+		$pdo = $db->connect();
 	  
-		
-
-
+		try {
+			// Retrieve the current password from the database
+			$stmt = $pdo->prepare("SELECT password FROM accounts WHERE accountid = :accountid");
+			$stmt->bindParam(":accountid", $accountid, PDO::PARAM_STR);
+			$stmt->execute();
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+			// Check if the old password matches the current password
+			if (password_verify($oldPassword, $result['password'])) {
+				// Hash the new password
+				$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+		  
+				$stmt = $pdo->prepare("UPDATE accounts SET password = :password WHERE accountid = :accountid");
+				$stmt->bindParam(":password", $hashedPassword, PDO::PARAM_STR);
+				$stmt->bindParam(":accountid", $accountid, PDO::PARAM_STR);
+				$stmt->execute();
+		  
+				// Check the affected rows to determine if the password was updated successfully
+				if ($stmt->rowCount() > 0) {
+					return 'ok'; // Password reset successfully
+				} else {
+					return 'error'; // Error occurred while resetting password
+				}
+			} else {
+				return 'incorrect_oldPass'; // Old password does not match the current password
+			}
+		} catch (Exception $e) {
+			return 'error'; // Error occurred while resetting password
+		}
+	  
+		$pdo = null;
+		$stmt = null;
+	}
 	  
 }
 ?>

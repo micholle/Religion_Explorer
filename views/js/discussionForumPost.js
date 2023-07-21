@@ -275,6 +275,7 @@ $(function() {
                 attachDeleteButtonListeners();
                 initializeEditButtons();
                 shortenUpvotes();
+                attachProfilePictureListeners();
             },
             error: function(xhr, status, error) {
                 console.log(xhr.responseText);
@@ -754,4 +755,16 @@ $(function() {
             // Run the getPosts() function when the event is received
             getPosts("user_priority", $("#topicId").val());
           });
+
+
+          //visit profile of user
+          function attachProfilePictureListeners() {
+            // Click event for user profile pictures in posts
+            $(document).off('click', '.discussionForumAvatarComment').on('click', '.discussionForumAvatarComment', function() {
+                const accountId = $(this).data('accountid');
+                // Redirect to viewUserProfile.php with the accountId
+                window.location.href = 'viewUserProfile.php?accountid=' + accountId;
+            });
+        }
+        
 });

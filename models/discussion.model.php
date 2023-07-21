@@ -43,7 +43,7 @@ class ModelDiscussion {
     
     
 
-    public function mdlGetProfileTopics() {
+    public function mdlGetProfileTopics($accountid) {
         $db = new Connection();
         $pdo = $db->connect();
     
@@ -55,7 +55,7 @@ class ModelDiscussion {
                         INNER JOIN accounts ON topics.accountid = accounts.accountid
                         WHERE topics.accountid = :accountid
                         ORDER BY topicDate DESC");
-                        $stmt->bindParam(":accountid", $_SESSION['accountid'], PDO::PARAM_STR);
+                        $stmt->bindParam(":accountid", $accountid, PDO::PARAM_STR);
                         $stmt->execute();
                         $topics = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
@@ -68,7 +68,7 @@ class ModelDiscussion {
         }
     }
 
-    static public function mdlGetProfilePosts() {
+    static public function mdlGetProfilePosts($accountid) {
         $db = new Connection();
         $pdo = $db->connect();
     
@@ -79,7 +79,7 @@ class ModelDiscussion {
                                    INNER JOIN accounts ON posts.accountid = accounts.accountid
                                    WHERE posts.accountid = :accountid
                                    ORDER BY postDate DESC");
-            $stmt->bindParam(':accountid', $_SESSION['accountid'], PDO::PARAM_STR);
+            $stmt->bindParam(':accountid', $accountid, PDO::PARAM_STR);
             $stmt->execute();
             $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
