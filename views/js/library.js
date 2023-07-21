@@ -7,6 +7,14 @@ $(function() {
             $("#librarySidebar").html(data);
         }
     });
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const openParam = urlParams.get("open");
+    if (openParam) {
+        openWideView(openParam);
+    } else {
+        changeLink();
+    }
 
     $.ajax({
         url: "../../ajax/getLibraryResources.ajax.php",
@@ -22,12 +30,12 @@ $(function() {
 
                 // Wide
                 $libraryPhotosMats =
-                '<div id="' + photoDetails.resourceid +'" class="d-flex flex-column libraryMediaContainer libraryWideContainer">' +
+                '<div id="' + photo +'" class="flex-column libraryMediaContainer libraryWideContainer">' +
                     '<div class="row d-flex justify-content-center align-items-center">' +
                         '<div class="col-12 libraryMediaHeader">' +
                             '<div class="row">' +
                                 '<div class="col-12">' +
-                                    '<h1>' + photo + '</h1>' +
+                                    '<h1>' + photoDetails.title + '</h1>' +
                                     '<p>' + photoDetails.author + '</p>' +
                                 '</div>' +
                             '</div>' +
@@ -43,10 +51,10 @@ $(function() {
                     '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                         '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                             '<img class="libraryActions" src="../assets/img/download.png" onclick="downloadPhoto(\'' + photoDetails.file + '\')">' +
-                            '<img class="libraryActions" src="../assets/img/broken-link.png" onclick="copyResourceLink(this, \'' + photoDetails.file + '\')">' +
+                            '<img class="libraryActions" src="../assets/img/broken-link.png" onclick="copyResourceLink(\'' + photo + '\')">' +
                         '</div>' +
                         '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                        (acctype === 'regular' ? '<img class="libraryActions" src="../assets/img/bookmark-white.png" onclick="bookmarkResource(this, \'' + photoDetails.resourceid + '\', \'' + photo + '\')">' : '') +
+                        (acctype === 'regular' ? '<img id="' + photo + "Bookmark" +'" class="libraryActions" src="../assets/img/bookmark-white.png" onclick="bookmarkResource(this, \'' + photo + '\', \'' + photoDetails.title + '\')">' : '') +
                         '</div>' +
                     '</div>' +
 
@@ -61,7 +69,7 @@ $(function() {
 
                 // Small
                 if (photoPreviewCounter <= 1) {
-                    $("#libraryPhotosPreview").append("<img onclick='searchContent(\"" + photo + "\")' src=" + photoDetails.file +" class='libraryPreview'> &nbsp;");
+                    $("#libraryPhotosPreview").append("<img id='" + photo + "' src=" + photoDetails.file +" class='libraryPreview' data-identifier='libraryPreview'> &nbsp;");
                     photoPreviewCounter++;
                 }
             }
@@ -71,12 +79,12 @@ $(function() {
 
                 // Wide
                 $libraryVideosMats = 
-                '<div id="' + videoDetails.resourceid +'" class="d-flex flex-column libraryMediaContainer libraryWideContainer">' +
+                '<div id="' + video +'" class="flex-column libraryMediaContainer libraryWideContainer">' +
                     '<div class="row d-flex justify-content-center align-items-center">' +
                         '<div class="col-12 libraryMediaHeader">' +
                            ' <div class="row">' +
                                 '<div class="col-12">' +
-                                    '<h1>' + video + '</h1>' +
+                                    '<h1>' + videoDetails.title + '</h1>' +
                                     '<p>' + videoDetails.author + '</p>' +
                                 '</div>' +
                             '</div>' +
@@ -92,10 +100,10 @@ $(function() {
                     '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                         '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                             '<img class="libraryActions" src="../assets/img/download.png" onclick="downloadVideo(\'' + videoDetails.file + '\')">' +
-                            '<img class="libraryActions" src="../assets/img/broken-link.png" onclick="copyResourceLink(this, \'' + videoDetails.file + '\')">' +
+                            '<img class="libraryActions" src="../assets/img/broken-link.png" onclick="copyResourceLink(\'' + video + '\')">' +
                         '</div>' +
                         '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                        (acctype === 'regular' ? '<img class="libraryActions" src="../assets/img/bookmark-white.png" onclick="bookmarkResource(this, \'' + videoDetails.resourceid + '\', \'' + video + '\')">' : '') +
+                        (acctype === 'regular' ? '<img id="' + video + "Bookmark" +'"  class="libraryActions" src="../assets/img/bookmark-white.png" onclick="bookmarkResource(this, \'' + video + '\', \'' + videoDetails.title + '\')">' : '') +
                         '</div>' +
                     '</div>' +
 
@@ -111,7 +119,7 @@ $(function() {
                 // Small
                 
                 if (videoPreviewCounter <= 1) {
-                    $("#libraryVideosPreview").append("<video onclick='searchContent(\"" + video + "\")' class='libraryPreview' controls> <source src=" + videoDetails.file +"> </video> &nbsp;");
+                    $("#libraryVideosPreview").append("<video id='" + video + "' class='libraryPreview' data-identifier='libraryPreview' controls> <source src=" + videoDetails.file +"> </video> &nbsp;");
                     videoPreviewCounter++;
                 }
 
@@ -128,12 +136,12 @@ $(function() {
                 });
 
                 $libraryReadingMats =
-                        '<div id="' + readingMatDetails.resourceid +'" class="libraryReadMatsBox" onclick="showReadingMaterialModal(' + "'" + readingMatDetails.resourceid + "', '" + readingMatDetails.resourceImg + "', '" + readingMat + "', '" + readingMatDetails.author + "', '" + readingMatDetails.date + "', '" + readingMatDetails.source + "', '" + readingMatDetails.mainPoint1 + "', '" + readingMatDetails.mainPoint2 + "', '" + readingMatDetails.mainPoint3 + "' " + ')"> <div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
+                        '<div id="' + readingMat +'" class="libraryReadMatsBox" onclick="showReadingMaterialModal(' + "'" + readingMat + "', '" + readingMatDetails.resourceImg + "', '" + readingMatDetails.title + "', '" + readingMatDetails.author + "', '" + readingMatDetails.date + "', '" + readingMatDetails.source + "', '" + readingMatDetails.mainPoint1 + "', '" + readingMatDetails.mainPoint2 + "', '" + readingMatDetails.mainPoint3 + "' " + ')"> <div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
                             '<div class="libraryReadMatsType">[' + readingMatDetails.type + ']</div>' +
-                            '<div class="libraryReadMatsTitle">' + readingMat + '</div>' +
+                            '<div class="libraryReadMatsTitle">' + readingMatDetails.title + '</div>' +
                             tags + '</div> </div> ' +
                             '<div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">' +
-                            '<p>' + readingMatDetails.author + '</p> </div> </div>' +
+                            '<p>' + readingMatDetails.author + ' - ' + readingMatDetails.date + '</p> </div> </div>' +
                             '<div class="row libraryReadMatsSummary"> <div class="col-12">' +
                             '<p>' + readingMatDetails.description + '</p>' +
                         '</div> </div> </div>';
@@ -142,11 +150,11 @@ $(function() {
 
                 // Small
                 $libraryReadingMatsPreview =
-                '<div onclick="searchContent(\'' + readingMat + '\')" style="cursor: pointer;">' +
+                '<div id="' + readingMat + '" data-identifier="libraryPreview" style="cursor: pointer;">' +
                     '<div class="row">' +
                         '<div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
                             '<div class="libraryReadMatsType">[' + readingMatDetails.type + ']</div>' +
-                            '<div class="libraryReadMatsTitle">' + readingMat + '</div>' +
+                            '<div class="libraryReadMatsTitle">' + readingMatDetails.title + '</div>' +
                         '</div>' +
                     '</div>' + 
                     '<div class="row">' +
@@ -168,6 +176,8 @@ $(function() {
             }
         }
     });
+
+    setBookmark();
 
     $(".libraryBasicInfoBox").click(function(){
         $.ajax({
@@ -221,6 +231,19 @@ $(function() {
         librarySearch();
     });
 
+    $(document).on("click", '[data-identifier="libraryPreview"]', function() {
+        var resourceId = $(this).attr("id");
+        if(resourceId.startsWith("LP")) {
+            window.location.href = "http://localhost/religion_explorer/views/modules/library.php?open=photos&view=" + resourceId;
+        } else if(resourceId.startsWith("LV")) {
+            window.location.href = "http://localhost/religion_explorer/views/modules/library.php?open=videos&view=" + resourceId;
+        } else if(resourceId.startsWith("LR")) {
+            window.location.href = "http://localhost/religion_explorer/views/modules/library.php?open=reading-materials&view=" + resourceId;
+        }
+        $("#viewContent").html(decodeURIComponent(resourceId));
+        librarySearch();
+    });
+
     function librarySearch() {
         if (view) {
             var librarySearchVal = view;
@@ -230,41 +253,42 @@ $(function() {
                 method: "POST",
                 success:function(data){
                     var libraryData = data;
+                    const currentURL = window.location.href;
         
-                    // for (let photo in libraryData["photos"]) {
-                    //     var photoDetails = libraryData["photos"][photo];
-    
-                    //     if ((photo.toLowerCase()).includes(librarySearchVal) || ((photoDetails.author).toLowerCase()).includes(librarySearchVal) || ((readinphotoDetailsgMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
-                    //         var resourceid = "#" + photoDetails.resourceid;
-                    //         $(resourceid).css("display", "block");
-                    //     } else {
-                    //         var resourceid = "#" + photoDetails.resourceid;
-                    //         $(resourceid).css("display", "none");
-                    //     }
-                    // }
+                    if (currentURL.includes("photos")) {
+                        for (let photo in libraryData["photos"]) {        
+                            if (photo == librarySearchVal) {
+                                var resourceid = "#" + photo;
+                                $(resourceid).css("display", "block");
+                            } else {
+                                var resourceid = "#" + photo;
+                                $(resourceid).css("display", "none");
+                            }
+                        }
+                    }
         
-                    // for (let video in libraryData["videos"]) {
-                    //     var videoDetails = libraryData["videos"][video];
-    
-                    //     if ((video.toLowerCase()).includes(librarySearchVal) || ((videoDetails.author).toLowerCase()).includes(librarySearchVal) || ((videoDetails.description).toLowerCase()).includes(librarySearchVal)) {
-                    //         var resourceid = "#" + videoDetails.resourceid;
-                    //         $(resourceid).css("display", "block");
-                    //     } else {
-                    //         var resourceid = "#" + videoDetails.resourceid;
-                    //         $(resourceid).css("display", "none");
-                    //     }
-                    // }
+                    if (currentURL.includes("videos")) {
+                        for (let video in libraryData["videos"]) {
+                            if (video == librarySearchVal) {
+                                var resourceid = "#" + video;
+                                $(resourceid).css("display", "block");
+                            } else {
+                                var resourceid = "#" + video;
+                                $(resourceid).css("display", "none");
+                            }
+                        }
+                    }
                     
-                    for (let readingMat in libraryData["readingMats"]) {
-                        var readingMatDetails = libraryData["readingMats"][readingMat];
-    
-                        if (readingMatDetails.resourceid == librarySearchVal) {
-                            var resourceid = "#" + readingMatDetails.resourceid;
-                            $(resourceid).css("display", "block");
-                            $(resourceid).click();
-                        } else {
-                            var resourceid = "#" + readingMatDetails.resourceid;
-                            $(resourceid).css("display", "none");
+                    if (currentURL.includes("reading-materials")) {
+                        for (let readingMat in libraryData["readingMats"]) {        
+                            if (readingMat == librarySearchVal) {
+                                var resourceid = "#" + readingMat;
+                                $(resourceid).css("display", "block");
+                                $(resourceid).click();
+                            } else {
+                                var resourceid = "#" + readingMat;
+                                $(resourceid).css("display", "none");
+                            }
                         }
                     }
                 }
@@ -277,40 +301,43 @@ $(function() {
                 method: "POST",
                 success:function(data){
                     var libraryData = data;
-        
-                    for (let photo in libraryData["photos"]) {
-                        var photoDetails = libraryData["photos"][photo];
-    
-                        if ((photo.toLowerCase()).includes(librarySearchVal) || ((photoDetails.author).toLowerCase()).includes(librarySearchVal) || ((readinphotoDetailsgMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
-                            var resourceid = "#" + photoDetails.resourceid;
-                            $(resourceid).css("display", "block");
-                        } else {
-                            var resourceid = "#" + photoDetails.resourceid;
-                            $(resourceid).css("display", "none");
-                        }
-                    }
-        
-                    for (let video in libraryData["videos"]) {
-                        var videoDetails = libraryData["videos"][video];
-    
-                        if ((video.toLowerCase()).includes(librarySearchVal) || ((videoDetails.author).toLowerCase()).includes(librarySearchVal) || ((videoDetails.description).toLowerCase()).includes(librarySearchVal)) {
-                            var resourceid = "#" + videoDetails.resourceid;
-                            $(resourceid).css("display", "block");
-                        } else {
-                            var resourceid = "#" + videoDetails.resourceid;
-                            $(resourceid).css("display", "none");
-                        }
-                    }
+                    const currentURL = window.location.href;
                     
-                    for (let readingMat in libraryData["readingMats"]) {
-                        var readingMatDetails = libraryData["readingMats"][readingMat];
-    
-                        if ((readingMat.toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.type).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.author).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
-                            var resourceid = "#" + readingMatDetails.resourceid;
-                            $(resourceid).css("display", "block");
-                        } else {
-                            var resourceid = "#" + readingMatDetails.resourceid;
-                            $(resourceid).css("display", "none");
+                    if (currentURL.includes("photos")) {
+                        for (let photo in libraryData["photos"]) {
+                            var photoDetails = libraryData["photos"][photo];
+        
+                            if (((photoDetails.title).toLowerCase()).includes(librarySearchVal) || ((photoDetails.author).toLowerCase()).includes(librarySearchVal) || ((photoDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                                var resourceid = "#" + photo;
+                                $(resourceid).css("display", "block");
+                            } else {
+                                var resourceid = "#" + photo;
+                                $(resourceid).css("display", "none");
+                            }
+                        }
+                    } else if (currentURL.includes("videos")) {
+                        for (let video in libraryData["videos"]) {
+                            var videoDetails = libraryData["videos"][video];
+        
+                            if (((videoDetails.title).toLowerCase()).includes(librarySearchVal) || ((videoDetails.author).toLowerCase()).includes(librarySearchVal) || ((videoDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                                var resourceid = "#" + video;
+                                $(resourceid).css("display", "block");
+                            } else {
+                                var resourceid = "#" + video;
+                                $(resourceid).css("display", "none");
+                            }
+                        }
+                    } else if (currentURL.includes("reading-materials")) {
+                        for (let readingMat in libraryData["readingMats"]) {
+                            var readingMatDetails = libraryData["readingMats"][readingMat];
+        
+                            if (((readingMatDetails.title).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.type).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.author).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                                var resourceid = "#" + readingMat;
+                                $(resourceid).css("display", "block");
+                            } else {
+                                var resourceid = "#" + readingMat;
+                                $(resourceid).css("display", "none");
+                            }
                         }
                     }
                 }
@@ -329,40 +356,107 @@ $(function() {
             method: "POST",
             success:function(data){
                 var libraryData = data;
-    
-                // for (let photo in libraryData["photos"]) {
-                //     var photoDetails = libraryData["photos"][photo];
-                // }
-    
-                // for (let video in libraryData["videos"]) {
-                //     var videoDetails = libraryData["videos"][video];
-                // }
-                
-                for (let readingMat in libraryData["readingMats"]) {
-                    var readingMatDetails = libraryData["readingMats"][readingMat];
-                    var resourceid = "#" + readingMatDetails.resourceid;
-                    
-                    if ($(".libraryCategoryFilter:checked").length == 0) {
-                        if (libraryReligion == "All Religions") {
-                            $(resourceid).css("display", "block");
-                        } else {
-                            if (libraryReligion == readingMatDetails.religion) {
+                const currentURL = window.location.href;
+
+                if (currentURL.includes("photos")) {
+                    for (let photo in libraryData["photos"]) {
+                        var photoDetails = libraryData["photos"][photo];
+                        var resourceid = "#" + photo;
+
+                        if ($(".libraryCategoryFilter:checked").length == 0) {
+                            if (libraryReligion == "All Religions") {
                                 $(resourceid).css("display", "block");
                             } else {
-                                $(resourceid).css("display", "none");
-                            }
-                        }
-                    } else {
-                        if (libraryReligion == "All Religions") {
-                            $.each(readingMatDetails.category, function(index, category) {
-                                if (libraryFilters.includes(category)) {
+                                if (libraryReligion == photoDetails.religion) {
                                     $(resourceid).css("display", "block");
                                 } else {
                                     $(resourceid).css("display", "none");
                                 }
-                            });
+                            }
                         } else {
-                            if (libraryReligion == readingMatDetails.religion) {
+                            if (libraryReligion == "All Religions") {
+                                $.each(photoDetails.category, function(index, category) {
+                                    if (libraryFilters.includes(category)) {
+                                        $(resourceid).css("display", "block");
+                                    } else {
+                                        $(resourceid).css("display", "none");
+                                    }
+                                });
+                            } else {
+                                if (libraryReligion == photoDetails.religion) {
+                                    $.each(photoDetails.category, function(index, category) {
+                                        if (libraryFilters.includes(category)) {
+                                            $(resourceid).css("display", "block");
+                                        } else {
+                                            $(resourceid).css("display", "none");
+                                        }
+                                    });
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                if (currentURL.includes("videos")) {
+                    for (let video in libraryData["videos"]) {
+                        var videoDetails = libraryData["videos"][video];
+                        var resourceid = "#" + video;
+
+                        if ($(".libraryCategoryFilter:checked").length == 0) {
+                            if (libraryReligion == "All Religions") {
+                                $(resourceid).css("display", "block");
+                            } else {
+                                if (libraryReligion == videoDetails.religion) {
+                                    $(resourceid).css("display", "block");
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        } else {
+                            if (libraryReligion == "All Religions") {
+                                $.each(videoDetails.category, function(index, category) {
+                                    if (libraryFilters.includes(category)) {
+                                        $(resourceid).css("display", "block");
+                                    } else {
+                                        $(resourceid).css("display", "none");
+                                    }
+                                });
+                            } else {
+                                if (libraryReligion == videoDetails.religion) {
+                                    $.each(videoDetails.category, function(index, category) {
+                                        if (libraryFilters.includes(category)) {
+                                            $(resourceid).css("display", "block");
+                                        } else {
+                                            $(resourceid).css("display", "none");
+                                        }
+                                    });
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                if (currentURL.includes("reading-materials")) {
+                    for (let readingMat in libraryData["readingMats"]) {
+                        var readingMatDetails = libraryData["readingMats"][readingMat];
+                        var resourceid = "#" + readingMat;
+                        
+                        if ($(".libraryCategoryFilter:checked").length == 0) {
+                            if (libraryReligion == "All Religions") {
+                                $(resourceid).css("display", "block");
+                            } else {
+                                if (libraryReligion == readingMatDetails.religion) {
+                                    $(resourceid).css("display", "block");
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        } else {
+                            if (libraryReligion == "All Religions") {
                                 $.each(readingMatDetails.category, function(index, category) {
                                     if (libraryFilters.includes(category)) {
                                         $(resourceid).css("display", "block");
@@ -371,11 +465,22 @@ $(function() {
                                     }
                                 });
                             } else {
-                                $(resourceid).css("display", "none");
+                                if (libraryReligion == readingMatDetails.religion) {
+                                    $.each(readingMatDetails.category, function(index, category) {
+                                        if (libraryFilters.includes(category)) {
+                                            $(resourceid).css("display", "block");
+                                        } else {
+                                            $(resourceid).css("display", "none");
+                                        }
+                                    });
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
                             }
                         }
-                    }
-                }  
+                    }  
+                }
+
             }
         });
     }
@@ -383,36 +488,97 @@ $(function() {
     $("#libraryReligionFilter, .libraryCategoryFilter").on("change", handleFilterChange);
 
     $("#libraryPhotosSeeMore").click(function () { 
-        $("#libraryReadingMaterialsWide").attr("hidden", true);
-        $("#libraryPhotosWide").removeAttr("hidden");
-        $("#libraryVideosWide").attr("hidden", true);
-
-        $("#libraryPhotosSmall").attr("hidden", true);
-        $("#libraryVideosSmall").removeAttr("hidden");
-        $("#libraryReadingMaterialsSmall").removeAttr("hidden");
+        viewPhotos();
     });
 
     $("#libraryVideosSeeMore").click(function () { 
-        $("#libraryReadingMaterialsWide").attr("hidden", true);
-        $("#libraryPhotosWide").attr("hidden", true);
-        $("#libraryVideosWide").removeAttr("hidden");
-
-        $("#libraryPhotosSmall").removeAttr("hidden");
-        $("#libraryVideosSmall").attr("hidden", true);
-        $("#libraryReadingMaterialsSmall").removeAttr("hidden");
+        viewVideos();
     });
 
     $("#libraryReadingMaterialsSeeMore").click(function () { 
-        $("#libraryReadingMaterialsWide").removeAttr("hidden");
-        $("#libraryPhotosWide").attr("hidden", true);
-        $("#libraryVideosWide").attr("hidden", true);
-
-        $("#libraryPhotosSmall").removeAttr("hidden");
-        $("#libraryVideosSmall").removeAttr("hidden");
-        $("#libraryReadingMaterialsSmall").attr("hidden", true);
+        viewReadingMaterials();
     });
 
 });
+
+function viewPhotos() {
+    $("#libraryReadingMaterialsWide").attr("hidden", true);
+    $("#libraryPhotosWide").removeAttr("hidden");
+    $("#libraryVideosWide").attr("hidden", true);
+
+    $("#libraryPhotosSmall").attr("hidden", true);
+    $("#libraryVideosSmall").removeAttr("hidden");
+    $("#libraryReadingMaterialsSmall").removeAttr("hidden");
+
+    changeLink();
+}
+
+function viewVideos() {
+    $("#libraryReadingMaterialsWide").attr("hidden", true);
+    $("#libraryPhotosWide").attr("hidden", true);
+    $("#libraryVideosWide").removeAttr("hidden");
+
+    $("#libraryPhotosSmall").removeAttr("hidden");
+    $("#libraryVideosSmall").attr("hidden", true);
+    $("#libraryReadingMaterialsSmall").removeAttr("hidden");
+
+    changeLink();
+}
+
+function viewReadingMaterials() {
+    $("#libraryReadingMaterialsWide").removeAttr("hidden");
+    $("#libraryPhotosWide").attr("hidden", true);
+    $("#libraryVideosWide").attr("hidden", true);
+
+    $("#libraryPhotosSmall").removeAttr("hidden");
+    $("#libraryVideosSmall").removeAttr("hidden");
+    $("#libraryReadingMaterialsSmall").attr("hidden", true);
+
+    changeLink();
+}
+
+function changeLink() {
+    var open = "";
+    if (!$("#libraryReadingMaterialsWide").is(":hidden")) {
+        open = "reading-materials";
+    } else if (!$("#libraryPhotosWide").is(":hidden")) {
+        open = "photos";
+    } else if (!$("#libraryVideosWide").is(":hidden")) {
+        open = "videos";
+    } 
+
+    const currentURL = new URL(window.location.href);
+    currentURL.searchParams.set("open", open);
+    window.history.pushState({}, '', currentURL.toString());
+}
+
+function setBookmark() {
+    $.ajax({
+        url: "../../ajax/getBookmarksData.ajax.php",
+        method: "POST",
+        data: {"accountid" : $("#accountidPlaceholder").text()},
+        success:function(data){
+            var bookmarksList = data;
+
+            for (let bookmark in bookmarksList) {
+                var bookmarkDetails = bookmarksList[bookmark];
+                
+                var creationid = "#" + bookmarkDetails["resourceid"] + "Bookmark";
+                $(creationid).attr("src", "../assets/img/bookmark-black.png");
+            }
+        }
+    });
+}
+
+function openWideView(openParam) {
+    if (openParam == "reading-materials") {
+        viewReadingMaterials();
+    } else if (openParam == "photos") {
+        viewPhotos();
+    } else if (openParam == "videos") {
+        viewVideos();
+    }
+}
 
 function showReadingMaterialModal(resourceid, resourceImg, title, author, date, source, mainPoint1, mainPoint2, mainPoint3) {
     $("#readingMaterialTitle").text(title);
@@ -450,10 +616,6 @@ function showReadingMaterialModal(resourceid, resourceImg, title, author, date, 
     $('#readingMaterialOverview').show();
 }
 
-function searchContent(resourceTitle) {
-    window.location.href = "../modules/library.php?search=" + encodeURIComponent(resourceTitle);
-}
-
 function downloadPhoto(file) {
     fetch(file)
     .then(response => response.blob())
@@ -486,9 +648,15 @@ function downloadVideo(file) {
     });
 }
 
-function copyResourceLink(thisIcon, file) {
-    var imageLink = window.location.href.substring(0, window.location.href.indexOf("views/") + "views/".length) + file.substring(file.indexOf("assets/"));
-    navigator.clipboard.writeText(imageLink);
+function copyResourceLink(resourceid) {
+    var link = "";
+    if(resourceid.startsWith("LP")) {
+        link = "http://localhost/religion_explorer/views/modules/library.php?open=photos&view=" + resourceid;
+    } else if(resourceid.startsWith("LV")) {
+        link = "http://localhost/religion_explorer/views/modules/library.php?open=videos&view=" + resourceid;
+    }
+
+    navigator.clipboard.writeText(link);
 
     $("#toast").html("Link copied to clipboard.")
 

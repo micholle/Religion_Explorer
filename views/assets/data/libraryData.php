@@ -83,15 +83,16 @@ class libraryData {
 
         $libraryResources = [
             "photos" => [
-                "Ceiling Frescoes" => [
-                    "resourceid" => "p1",
+                "LP1" => [
+                    "title" => "Ceiling Frescoes",
                     "file" => "../assets/data/img/library/Ceiling_Frescoes.png",
                     "religion" => "Christianity",
                     "category" => ["Historical Context"],
                     "description" => "This monumental fresco portrays various episodes from the life of St. Charles Borromeo and the triumph of the Catholic Church. It showcases the glory of the Baroque era and the spiritual power of the Catholic faith.",
                     "author" => "Johann Michael Rottmayr"
                 ],
-                "Gautama Buddha" => [
+                "LP2" => [
+                    "title" => "Gautama Buddha",
                     "file" => "../assets/data/img/library/Gautama_Buddha.png",
                     "religion" => "Buddhism",
                     "category" => ["Religious Practices"],
@@ -121,14 +122,16 @@ class libraryData {
                 // ]  
             ],
             "videos" => [
-                "Mosque" => [
+                "LV1" => [
+                    "title" => "Mosque",
                     "file" => "../assets/data/vid/library/Mosque.mp4",
                     "religion" => "Islam",
                     "category" => ["Religious Practices"],
                     "description" => "A mosque is a place of worship and community for followers of Islam. It is typically a building where Muslims gather for congregational prayers, engage in spiritual activities, seek religious guidance, and foster community bonds. ",
                     "author" => "Ali Karim"
                 ],
-                "Hindu Event" => [
+                "LV2" => [
+                    "title" => "Hindu Event",
                     "file" => "../assets/data/vid/library/Hindu_Event.mp4",
                     "religion" => "Hinduism",
                     "category" => ["Religious Practices"],
@@ -158,8 +161,8 @@ class libraryData {
                 // ]  
             ],
             "readingMats" => [
-                "What is Ashura?" => [
-                    "resourceid" => "rm9",
+                "LR1" => [
+                    "title" => "What is Ashura?",
                     "resourceImg" => "../assets/data/img/library/rm9.jpg",
                     "type" => "article",
                     "author" => "BBC News",
@@ -172,8 +175,8 @@ class libraryData {
                     "mainPoint3" => "Mourning and Rituals: Ashura is a solemn day for Shia Muslims, marked by mourning rituals and passion plays that re-enact the martyrdom of Hussein. Shia men and women dressed in black participate in processions, slapping their chests and chanting.",
                     "source" => "https://www.bbc.com/news/world-middle-east-16047713"
                 ],
-                "Dharma Day" => [
-                    "resourceid" => "rm5",
+                "LR2" => [
+                    "title" => "Dharma Day",
                     "resourceImg" => "",
                     "type" => "article",
                     "author" => "Ottowa Humane Society",
@@ -186,8 +189,8 @@ class libraryData {
                     "mainPoint3" => "",
                     "source" => "https://ottawahumane.ca/dharma-day"
                 ],
-                "Being Christian in Western Europe" => [
-                    "resourceid" => "rm1",
+                "LR3" => [
+                    "title" => "Being Christian in Western Europe",
                     "resourceImg" => "",
                     "type" => "article",
                     "author" => "Pew Research Center",
@@ -200,8 +203,8 @@ class libraryData {
                     "mainPoint3" => "",
                     "source" => ""
                 ],
-                "What it means to be a Christian in America" => [
-                    "resourceid" => "rm2",
+                "LR4" => [
+                    "title" => "What it means to be a Christian in America",
                     "resourceImg" => "",
                     "type" => "article",
                     "author" => "M. Bowman",
@@ -214,8 +217,8 @@ class libraryData {
                     "mainPoint3" => "",
                     "source" => ""
                 ],  
-                "African Christianity: Its public role" => [
-                    "resourceid" => "rm3",
+                "LR5" => [
+                    "title" => "African Christianity: Its public role",
                     "resourceImg" => "",
                     "type" => "book",
                     "author" => "P. Gifford",
@@ -228,8 +231,8 @@ class libraryData {
                     "mainPoint3" => "",
                     "source" => ""
                 ],    
-                "A History of Christianity in India: 1707 - 1858" => [
-                    "resourceid" => "rm4",
+                "LR6" => [
+                    "title" => "A History of Christianity in India: 1707 - 1858",
                     "resourceImg" => "",
                     "type" => "book",
                     "author" => "S. Neil",
@@ -242,8 +245,8 @@ class libraryData {
                     "mainPoint3" => "",
                     "source" => ""
                 ],
-                "Fast of the 17th of Tammuz" => [
-                    "resourceid" => "rm6",
+                "LR7" => [
+                    "title" => "Fast of the 17th of Tammuz",
                     "resourceImg" => "",
                     "type" => "article",
                     "author" => "The Jerusalem Post",
@@ -256,8 +259,8 @@ class libraryData {
                     "mainPoint3" => "",
                     "source" => "https://www.jpost.com/judaism/article-748996"
                 ],
-                "The Muharram Sermons" => [
-                    "resourceid" => "rm7",
+                "LR8" => [
+                    "title" => "The Muharram Sermons",
                     "resourceImg" => "",
                     "type" => "book",
                     "author" => "Mohammed Al-Hilli",
@@ -270,8 +273,8 @@ class libraryData {
                     "mainPoint3" => "",
                     "source" => "https://www.thriftbooks.com/w/the-muharram-sermons_mohammed-al-hilli/10792364/#edition=64661424&idiq=52566039"
                 ],
-                "Tisha B'Av: What's Worth Mourning For?" => [
-                    "resourceid" => "rm8",
+                "LR9" => [
+                    "title" => "Tisha B'Av: What's Worth Mourning For?",
                     "resourceImg" => "",
                     "type" => "article",
                     "author" => "Y. Sheleg",
