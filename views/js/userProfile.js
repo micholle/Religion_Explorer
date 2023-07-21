@@ -437,11 +437,9 @@ function removeFromPersonalCalendar(personaleventid) {
         success: function(data){
             $("#calendarEventModal").removeClass("fade").modal("hide");
             $("#calendarEventModal").modal("dispose");
-            $("#userProfileCalendar").fadeOut(200, function() {
-                $("#userProfileCalendar").load("#userProfileCalendar", function() {
-                    $("#userProfileCalendar").fadeIn(200);
-                });
-            });
+            $("#userProfileCalendar").html("");
+            createCalendar();
+            getPersonalCalendar();
 
             $("#toast").html('"' + data +  '" was removed from your personal calendar.')
 
@@ -538,7 +536,7 @@ function getOverview() {
                         var bookmarkDetails = bookmarksList[bookmark];
         
                         var $bookmarkDiv = 
-                        '<div class="bookmarkContainer" onclick="viewBookmark(' + "'" + bookmarkDetails.resourceTitle + "'" + ')">' +
+                        '<div class="bookmarkContainer" onclick="viewBookmark(' + "'" + bookmarkDetails.resourceid + "'" + ')">' +
                             '<div class="bookmarkImgContainer d-flex justify-content-center align-items-center">' +
                                 '<img src="../assets/img/bookmark.png" class="userProfBookmark">' +
                             '</div>' +

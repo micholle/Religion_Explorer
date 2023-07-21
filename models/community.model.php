@@ -25,7 +25,7 @@ class communityModel{
                         "filetype" => $creation["filetype"],
                         "filesize" => $creation["filesize"],
                         "religion" => $creation["religion"],
-                        "description" => $creation["description"],
+                        "description" => nl2br(htmlspecialchars_decode($creation["description"])),
                         "date" => $creation["date"]
                     ]
                 ];
@@ -41,7 +41,7 @@ class communityModel{
                         "filetype" => $creation["filetype"],
                         "filesize" => $creation["filesize"],
                         "religion" => $creation["religion"],
-                        "description" => $creation["description"],
+                        "description" => nl2br(htmlspecialchars_decode($creation["description"])),
                         "date" => $creation["date"]
                     ]
                 ];
@@ -54,7 +54,7 @@ class communityModel{
                         "filesize" => $creation["filesize"],
                         "filetype" => "",
                         "religion" => $creation["religion"],
-                        "description" => $creation["description"],
+                        "description" => nl2br(htmlspecialchars_decode($creation["description"])),
                         "date" => $creation["date"]
                     ]
                 ];
@@ -86,7 +86,7 @@ class communityModel{
             $stmt->bindParam(":username", $data["username"], PDO::PARAM_STR);
             $stmt->bindParam(":title", $data["title"], PDO::PARAM_STR);
             $stmt->bindParam(":religion", $data["religion"], PDO::PARAM_STR);
-            $stmt->bindParam(":description", $data["description"], PDO::PARAM_STR);
+            $stmt->bindParam(":description", nl2br(htmlspecialchars($data["description"])), PDO::PARAM_STR);
             $stmt->bindParam(":filename", $data["filename"], PDO::PARAM_STR);
             $stmt->bindParam(":filetype", $data["filetype"], PDO::PARAM_STR);
             $stmt->bindParam(":filesize", $data["filesize"], PDO::PARAM_INT);

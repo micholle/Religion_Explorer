@@ -238,10 +238,6 @@ $(function() {
     document.getElementById("communityBlogsMore").addEventListener("click", function() {
         window.location.href = "communitySubmissions.php?openTab=communitySubBlogs";
     });  
-
-    // document.getElementById("communityPhotosMore").addEventListener("click", function() {
-    //     window.location.href = "communitySubmissions.php?openTab=communityPhotos";
-    // });  
 });
 
 function viewCreationImage(creationid) {

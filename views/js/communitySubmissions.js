@@ -1,4 +1,8 @@
 $(function() {
+    var bookmarksData = localStorage.getItem("bookmarksData");
+    var bookmarks = bookmarksData ? JSON.parse(bookmarksData) : [];
+    $("#bookmarksPlaceholder").html(bookmarks.join(" "));
+
     $.ajax({
         url: "../../ajax/showSidebar.ajax.php",
         method: "POST",
@@ -12,15 +16,21 @@ $(function() {
         method: "POST",
         success:function(data){
             var communityData = data;
-
             for (let photo in communityData["photos"]) {
                 var photoList = communityData["photos"][photo];
                 for (photoData in photoList) {
                     var photoDetails = photoList[photoData];
+                    var bookmarkIcon = "";
 
                     var [year, month, day] = photoDetails.date.split('-');
                     var formattedDate = `${month}-${day}-${year}`;
                     
+                    if(($("#bookmarksPlaceholder").text()).includes(photoDetails.creationid)) {
+                        bookmarkIcon = "../assets/img/bookmark-black.png";
+                    } else {
+                        bookmarkIcon = "../assets/img/bookmark-white.png";
+                    }
+
                     var photoDisplay =
                     '<div id="' + photoDetails.creationid + '" class="flex-column libraryMediaContainer libraryWideContainer">' +
                         '<div class="row d-flex justify-content-center align-items-center">' +
@@ -55,7 +65,7 @@ $(function() {
                                 '<img onclick="copyContentLink(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                                '<img onclick="bookmarkContent(this, \'' + photoDetails.creationid + '\', \'' + photoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
+                                '<img onclick="bookmarkContent(this, \'' + photoDetails.creationid + '\', \'' + photoData + '\')" class="libraryActions" src="' + bookmarkIcon + '">' +
                             '</div>' +
                         '</div>' +
 
