@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once "connection.php";
 
 class ModelLogin {
@@ -24,6 +23,7 @@ class ModelLogin {
                 $_SESSION['accountDate'] = $user['accountDate'];
                 $_SESSION['acctype'] = $user['acctype'];
                 $_SESSION['avatar'] = $user['avatar'];
+                $_SESSION['displayPage'] = $user['displayPage'];
                 return "Success";
             } else {
                 // Invalid credentials

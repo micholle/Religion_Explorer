@@ -1,4 +1,8 @@
 $(function() {
+    var fullEmail = $("#email").attr("placeholder");
+    var maskedEmail = maskEmail(fullEmail);
+    $("#email").val(maskedEmail);
+
     $.ajax({
         url: "../../ajax/showSidebar.ajax.php",
         method: "POST",
@@ -22,7 +26,7 @@ $(function() {
         $('#deleteAccountModal').show();
     });
 
-      $('#confirmEditPasswordBtn').click(function() {
+      function successEditPassword() {
         // Get a reference to the modal body element
         var modalBody = $('#editPasswordModal');
       
@@ -44,11 +48,10 @@ $(function() {
             </div>
           </div>
         `);
-      });
+      }
 
       $('#saveEdit').click(function(e){
         e.preventDefault();
-        var email = $("#email").val().trim();
         var religion = $("#religion").val();
         var username = $("#username").val().trim();
         var displayNotification = $("#displayNotification").is(":checked") ? 1 : 0;
@@ -59,7 +62,6 @@ $(function() {
         var displayPage = $("#libraryReligionFilter").val();
     
         var account = new FormData();
-        account.append("email", email);
         account.append("religion", religion);
         account.append("username", username);
         account.append("displayNotification", displayNotification);
@@ -78,12 +80,7 @@ $(function() {
           processData: false,
           dataType: "text",
           success: function(answer) {
-            if (answer === "ok") {
-              alert("Saved successfully!");
-              window.location.href = "userProfile.php";
-            } else {
-              alert("Oops. Something went wrong!");
-            }
+            window.location.href = "userProfile.php";
           },
           error: function() {
             alert("Oops. Something went wrong!");
@@ -182,6 +179,11 @@ $(function() {
           method: "POST",
           data: { email: email, password: password },
           success: function(response) {
+            if (response === 'invalid_password' || response === 'invalid_email'){
+              $('#deleteEmail').val("");
+              $('#deletePassword').val("");
+              alert('Invalid credentials!');
+            } else {
               var modalBody = $('#deleteAccountModal');
       
               // Change the content of the modal body
@@ -202,6 +204,7 @@ $(function() {
                   </div>
                 </div>
               `);
+            }
           },
           error: function() {
             // AJAX request failed, show an error message or take appropriate action
@@ -209,6 +212,68 @@ $(function() {
           }
         });
       });
-      
+
+
+
+      //edit password
+      $('#confirmEditPasswordBtn').click(function(e){
+        e.preventDefault();
+        var oldPassword = $("#oldPassword").val().trim();
+        var newPassword = $("#newPassword").val().trim();
+        var confirmPassword = $("#confirmPassword").val().trim();
+    
+        if (oldPassword === '' || newPassword === '' || confirmPassword === '') {
+            alert("Please fill in all fields.");
+            return;
+        }
+    
+        if (newPassword !== confirmPassword) {
+            alert("New password and confirm password do not match.");
+            return;
+        }
+    
+        var account = new FormData();
+        account.append("oldPassword", oldPassword);
+        account.append("newPassword", newPassword);
+    
+        $.ajax({
+            url: "../../ajax/editPassword.ajax.php",
+            method: "POST",
+            data: account,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "text",
+            success: function(answer) {
+                if (answer === "incorrect_oldPass"){
+                  $("#oldPassword").val("");
+                  $("#newPassword").val("");
+                  $("#confirmPassword").val("");
+                  alert("Old password did not match.");
+                } else {
+                  successEditPassword();
+                }
+            },
+            error: function() {
+                alert("Oops. Something went wrong with the ajax!");
+            },
+            complete: function() {
+    
+            }
+        });
+    });    
+
+    function maskEmail(email) {
+      var [username, domain] = email.split("@");
+      var maskedUsername = username.substring(0, 2);
+
+      for (var i = 2; i < username.length; i++) {
+          maskedUsername += "*";
+      }
+        var maskedEmail = maskedUsername + "@" + domain;
+  
+      return maskedEmail;
+  }
+     
 
 });

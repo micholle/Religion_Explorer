@@ -53,6 +53,12 @@ class ControllerAccount{
   static public function ctrDeleteAccount($data) {
     $answer = (new ModelAccount)->mdlDeleteAccount($data);
     return $answer;
+  }
+
+  static public function ctrEditPassword($accountid, $password, $oldPassword) {
+    // Update the password in the database for the given email
+    $result = (new ModelAccount)->mdlEditPassword($accountid, $password, $oldPassword);
+    return $result;
   }  
 }
 ?>

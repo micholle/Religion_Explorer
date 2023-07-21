@@ -3,7 +3,6 @@ require_once "../controllers/accounts.controller.php";
 session_start();
 
 class UpdateAccount {
-  public $email;
   public $religion;
   public $username;
   public $displayNotification;
@@ -15,7 +14,6 @@ class UpdateAccount {
   public $accountid;
 
   public function updateAccountRecord() {
-    $email = $this->email;
     $religion = $this->religion;
     $username = $this->username;
     $displayNotification = $this->displayNotification;
@@ -27,7 +25,6 @@ class UpdateAccount {
     $accountid = $this->accountid;
 
     $data = array(
-      "email" => $email,
       "religion" => $religion,
       "username" => $username,
       "displayNotifications" => $displayNotification,
@@ -50,7 +47,6 @@ class UpdateAccount {
 }
 
 $save_account = new UpdateAccount();
-$save_account->email = $_POST["email"];
 if ($_POST["religion"] === "null"){
     $save_account->religion = $_SESSION["religion"];
 } else {

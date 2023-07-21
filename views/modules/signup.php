@@ -31,8 +31,8 @@
                                 <h3>Sign Up</h3>
                                 <form method="POST">
                                     <div class="d-flex justify-content-center align-items-center flex-column">
-                                        <input type="text" id="email" name="email" placeholder="Email">
-                                        <input type="text" id="username" name="username" placeholder="Username">
+                                        <input type="text" id="email" name="email" placeholder="Email" autocomplete="off">
+                                        <input type="text" id="username" name="username" placeholder="Username" autocomplete="off">
                                         <input type="password" id="password" name="password" placeholder="Password">
                                         <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
                                         <select id="religion" name="religion">
