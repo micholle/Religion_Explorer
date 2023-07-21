@@ -5,6 +5,18 @@ $(function() {
         method: "POST",
         success:function(data){
             $("#communitySubmissionsSidebar").html(data);
+            var currentPage = window.location.pathname.split("/").pop();
+
+            $("#communitySubmissionsSidebar ul.dropdownMenu li a").each(function() {
+                var tabPage = $(this).attr("href");
+                if (currentPage.includes("community") || tabPage === currentPage) {
+                    $("#communitySubmissionsSidebar li.dropdown a span.navItem:contains('Library of Resources')").parent().css({
+                        "background-color": "#EAF7F0",
+                        "border": "solid #75C884 2px",
+                        "font-weight": "600",
+                    });
+                }
+            });
         }
     });
 

@@ -3,13 +3,28 @@ $(function() {
     var maskedEmail = maskEmail(fullEmail);
     $("#email").val(maskedEmail);
 
-    $.ajax({
-        url: "../../ajax/showSidebar.ajax.php",
-        method: "POST",
-        success:function(data){
-            $("#userProfileEditProfileSidebar").html(data);
-        }
-    });
+  $.ajax({
+    url: "../../ajax/showSidebar.ajax.php",
+    method: "POST",
+    success: function(data) {
+        $("#userProfileEditProfileSidebar").html(data);
+        var currentPage = window.location.pathname.split("/").pop();
+
+        $("#userProfileEditProfileSidebar li a").each(function() {
+            var tabPage = $(this).attr("href");
+            
+            if (currentPage.includes("userProfile") || tabPage === currentPage) {
+                $("#sidebarProfile").css({
+                    "background-color": "#EAF7F0",
+                    "border": "solid #75C884 2px",
+                    "font-weight": "600",
+                });
+            }
+        });
+    }
+});
+
+
 
     $("#editAvatar").click(function(){
         $('#editAvatarModal').modal();
