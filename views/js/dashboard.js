@@ -4,6 +4,13 @@ $(function() {
         method: "POST",
         success:function(data){
             $("#dashboardSidebar").html(data);
+
+            $("#dashboardSidebar li a").each(function() {
+                var tabPage = $(this).attr("href");
+                if (tabPage === currentPage) {
+                   $(this).addClass("active");
+                }
+            });
         }
     });
 

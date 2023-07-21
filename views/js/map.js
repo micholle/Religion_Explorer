@@ -8,6 +8,15 @@ $(function() {
             $("#text").css("display", "none");
             $("#minmax").attr("src", "../assets/img/maximize.png");
             $(".pageContainer").css("padding-left", "85px");
+
+            var currentPage = window.location.pathname.split("/").pop();
+
+            $("#mapSidebar li a").each(function() {
+                var tabPage = $(this).attr("href");
+                if (tabPage === currentPage) {
+                    $(this).addClass("active");
+                }
+            });
         }
     });
 

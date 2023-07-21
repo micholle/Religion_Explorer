@@ -7,13 +7,13 @@ class ControllerDiscussion {
     return $topics;
   }
 
-  public function ctrGetProfileTopics() {
-    $topics = (new ModelDiscussion)->mdlGetProfileTopics();
+  public function ctrGetProfileTopics($accountid) {
+    $topics = (new ModelDiscussion)->mdlGetProfileTopics($accountid);
     return $topics;
   }
 
-  public function ctrGetProfilePosts() {
-    $topics = (new ModelDiscussion)->mdlGetProfilePosts();
+  public function ctrGetProfilePosts($accountid) {
+    $topics = (new ModelDiscussion)->mdlGetProfilePosts($accountid);
     return $topics;
   }
 

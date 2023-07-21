@@ -140,6 +140,14 @@ $(function() {
         method: "POST",
         success:function(data){
             $("#discussionForumSidebar").html(data);
+            var currentPage = window.location.pathname.split("/").pop();
+
+            $("#discussionForumSidebar li a").each(function() {
+                var tabPage = $(this).attr("href");
+                if (tabPage === currentPage) {
+                    $(this).addClass("active");
+                }
+            });
         }
     });
 

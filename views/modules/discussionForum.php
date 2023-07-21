@@ -46,7 +46,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         echo        '</div>';
                         echo        '<div class="forumSubmitContent">';
                         echo            '<form>';
-                        echo                '<input type="text" id="topicTitle" class="forumSubmitContentTitle" placeholder="Start a Discussion">';
+                        echo                '<input type="text" id="topicTitle" class="forumSubmitContentTitle" placeholder="Start a Discussion" autocomplete="off">';
                         echo                '<textarea id="topicContent" placeholder="What do you want to talk about?"></textarea>';
                         echo                '<div class="row forumSubmitInteractions">';
                         echo                     '<div class="col-12 d-flex justify-content-end align-items-center flex-row">';
@@ -67,7 +67,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
             <div class="col-12">
                 <div class="forumPostFilter d-flex justify-content-end align-items-center flex-row">
                     <p>Sort by:</p>
-                    <button type="button" id="top">Top</button>
+                    <button type="button" id="top">Popularity</button>
                     <button type="button" id="new">New</button>
                 </div>
             </div>

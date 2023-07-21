@@ -19,6 +19,10 @@ class DeleteAccount {
 
     if ($answer === "ok") {
       echo "ok";
+    } else if ($answer === "invalid_password") {
+      echo "invalid_password";
+    } else if ($answer === "invalid_email") {
+      echo "invalid_email";
     } else {
       echo "error";
     }

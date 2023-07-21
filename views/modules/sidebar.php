@@ -218,7 +218,7 @@ function create_sidebar() {
                                     </a>
                                 </li>
                                 <li>
-                                    <a id="sidebarCommunity" href="community.php">
+                                    <a id="sidebarCommunity" href="communitySubmissions.php">
                                         <img src="../assets/img/diversity.png">
                                         <span class="navItem">Community Creations</span>
                                     </a>

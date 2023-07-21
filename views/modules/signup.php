@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Religion Explorer</title>
+    <title>Religion Explorer: Sign Up</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
     
@@ -31,8 +32,8 @@
                                 <h3>Sign Up</h3>
                                 <form method="POST">
                                     <div class="d-flex justify-content-center align-items-center flex-column">
-                                        <input type="text" id="email" name="email" placeholder="Email">
-                                        <input type="text" id="username" name="username" placeholder="Username">
+                                        <input type="text" id="email" name="email" placeholder="Email" autocomplete="off">
+                                        <input type="text" id="username" name="username" placeholder="Username" autocomplete="off">
                                         <input type="password" id="password" name="password" placeholder="Password">
                                         <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
                                         <select id="religion" name="religion">

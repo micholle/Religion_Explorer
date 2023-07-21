@@ -12,7 +12,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Religion Explorer: Library of Resources</title>
+    <title>Religion Explorer: Edit Profile</title>
     <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
@@ -100,7 +100,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     <p>Email</p>
                                 </div>
                                 <div class="col-9">
-                                    <input type="text" id="email" name="" placeholder="Placeholder">
+                                    <input type="text" id="email" name="" placeholder="<?php echo $_SESSION['email']; ?>" readonly>
                                 </div>
                             </div>
                             <div class="row">
@@ -143,36 +143,40 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                 <h3>Account Settings</h3>
                             </div>
                             <div class="row no-gutters settingsContainer">
+                                <!-- Checkboxes -->
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <input type="checkbox" id="displayNotification">
+                                    <input type="checkbox" id="displayNotification" <?php echo $displayNotifications == 1 ? "checked" : ""; ?>>
                                     <label for="">Notifications for new comments or replies</label>
                                 </div>
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <input type="checkbox" id="displayCalendar">
+                                    <input type="checkbox" id="displayCalendar" <?php echo $displayCalendar == 1 ? "checked" : ""; ?>>
                                     <label for="">Display Personal Calendar</label>
                                 </div>
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <input type="checkbox" id="displayNickname">
+                                    <input type="checkbox" id="displayNickname" <?php echo $displayNickname == 1 ? "checked" : ""; ?>>
                                     <label for="">Display nickname/s</label>
                                 </div>
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <input type="checkbox" id="displayBookmark">
+                                    <input type="checkbox" id="displayBookmark" <?php echo $displayBookmark == 1 ? "checked" : ""; ?>>
                                     <label for="">Display bookmarks</label>
                                 </div>
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <input type="checkbox" id="displayReligion">
+                                    <input type="checkbox" id="displayReligion" <?php echo $displayReligion == 1 ? "checked" : ""; ?>>
                                     <label for="">Display religious affiliation</label>
                                 </div>
+
+                                <!-- Dropdown -->
                                 <div class="col-12 d-flex justify-content-start align-items-start flex-column">
                                     <p>Page display after login:</p>
                                     <select id="libraryReligionFilter">
-                                        <option value="1">User Profile</option>
-                                        <option selected value="0">World Map</option>
-                                        <option value="2">Library of Resources</option>
-                                        <option value="3">Discussion Forum</option>
-                                        <option value="4">Calendar</option>
+                                        <option value="1" <?php echo $pageDisplayAfterLogin == 1 ? "selected" : ""; ?>>User Profile</option>
+                                        <option value="0" <?php echo $pageDisplayAfterLogin == 0 ? "selected" : ""; ?>>World Map</option>
+                                        <option value="2" <?php echo $pageDisplayAfterLogin == 2 ? "selected" : ""; ?>>Library of Resources</option>
+                                        <option value="3" <?php echo $pageDisplayAfterLogin == 3 ? "selected" : ""; ?>>Discussion Forum</option>
+                                        <option value="4" <?php echo $pageDisplayAfterLogin == 4 ? "selected" : ""; ?>>Calendar</option>
                                     </select>
                                 </div>
+
                                 <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                     <button class="roundedButtonVariantTwo" id="deleteAccountButton">Delete Account</button>
                                 </div>
@@ -265,7 +269,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                 <p class="deleteAccountDescription">We're sorry to see you go. Once your Religion Explorer account is deleted, your profile and username will be removed. All of your site activity will be disassociated instead unless you delete them beforehand.</p>
                                 <br>
                                 <p class="deleteAccountDescriptionVar">Please verify your identity.</p>
-                                <input type="text" id="deleteEmail" name="" placeholder="Email">
+                                <input type="text" id="deleteEmail" name="deleteEmail" placeholder="Email" autocomplete="off">
                                 <input type="password" id="deletePassword" name="" placeholder="Password">
                                 </div>
                             </div>

@@ -17,9 +17,10 @@ $(function() {
             $("#minmax").attr("src", "../assets/img/minimize.png");
             $(".pageContainer").css("padding-left", "275px");
             $(".notificationsPanel").removeClass("show");
+            $("#sidebarNotifications").removeClass("active");
         }
     });
-
+    
     $('#submitReportUser').click(function(event) {    
         event.preventDefault();
 
@@ -153,6 +154,9 @@ $(function() {
     $("#sidebarNotifications").click(function(event) {
         event.preventDefault();
     
+        // Remove the "active" class from all tab links
+        $("#sidebarUsername li a").removeClass("active");
+    
         // Check if the sidebar is already minimized
         var isSidebarMinimized = $(".sidebar").hasClass("active");
         var isNotificationsPanelVisible = $(".notificationsPanel").hasClass("show");
@@ -161,16 +165,18 @@ $(function() {
             if (isNotificationsPanelVisible) {
                 // Hide the notifications panel
                 $(".notificationsPanel").removeClass("show");
+                $("#sidebarNotifications").removeClass("active");
             } else {
                 // Show the notifications panel
                 $(".notificationsPanel").addClass("show");
+                $("#sidebarNotifications").addClass("active");
             }
         } else {
             // Toggle the sidebar and notifications panel
             $(".sidebar").toggleClass("active");
             $(".notificationsPanel").toggleClass("show");
-            
-            // Update the sidebar appearance based on its current state
+            $("#sidebarNotifications").toggleClass("active");
+    
             if ($(".sidebar").hasClass("active")) {
                 $("#text").css("display", "none");
                 $("#minmax").attr("src", "../assets/img/maximize.png");
@@ -182,6 +188,8 @@ $(function() {
             }
         }
     });
+    
+    
 
     $("#sidebarReport").click(function(){
         $('#reportUserModal').modal();

@@ -7,10 +7,27 @@ $(function() {
     $.ajax({
         url: "../../ajax/showSidebar.ajax.php",
         method: "POST",
-        success:function(data){
+        success: function(data) {
             $("#discussionForumPostSidebar").html(data);
+            var currentPage = window.location.pathname.split("/").pop();
+    
+            $("#discussionForumPostSidebar li a").each(function() {
+                var tabPage = $(this).attr("href");
+                
+                if (currentPage.includes("discussionForum") || tabPage === currentPage) {
+                    $("#sidebarForum").css({
+                        "background-color": "#EAF7F0",
+                        "border": "solid #75C884 2px",
+                        "font-weight": "600",
+                    });
+                }
+            });
         }
     });
+    
+    
+    
+    
     
     //report content modal
     $("#reportPostBtn").click(function(){
@@ -258,6 +275,7 @@ $(function() {
                 attachDeleteButtonListeners();
                 initializeEditButtons();
                 shortenUpvotes();
+                attachProfilePictureListeners();
             },
             error: function(xhr, status, error) {
                 console.log(xhr.responseText);
@@ -737,4 +755,16 @@ $(function() {
             // Run the getPosts() function when the event is received
             getPosts("user_priority", $("#topicId").val());
           });
+
+
+          //visit profile of user
+          function attachProfilePictureListeners() {
+            // Click event for user profile pictures in posts
+            $(document).off('click', '.discussionForumAvatarComment').on('click', '.discussionForumAvatarComment', function() {
+                const accountId = $(this).data('accountid');
+                // Redirect to viewUserProfile.php with the accountId
+                window.location.href = 'viewUserProfile.php?accountid=' + accountId;
+            });
+        }
+        
 });

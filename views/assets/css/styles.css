@@ -1581,6 +1581,96 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     width: 65px;
 }
 
+#userProfileNotifications li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#sidebarNotifications li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#userProfileEditProfileSidebar li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#userProfileSidebar li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#mapSidebar li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#librarySidebar li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#communitySidebar li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#communitySubmissionsSidebar li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#discussionForumSidebar li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#sidebarForum li a.active {
+    background-color: #EAF7F0 !important;
+    border: solid #75C884 2px !important;
+    font-weight: 600 !important;
+}
+
+#calendarSidebar li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#sidebarNotifications li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#dashboardSidebar li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#contentForReviewSidebar li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
+#reportedUsersSidebar li a.active {
+    background-color: #EAF7F0;
+    border: solid #75C884 2px;
+    font-weight: 600;
+}
+
 /*user profile*/
 .basicInfoContainer {
     height: 275px;
