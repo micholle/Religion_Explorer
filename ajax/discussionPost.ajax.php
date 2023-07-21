@@ -38,7 +38,7 @@ class CreatePost {
 
 $createPost = new CreatePost();
 $createPost->topicId = $_POST["topicId"];
-$createPost->postContent = $_POST["postContent"];
+$createPost->postContent = nl2br(htmlspecialchars_decode($_POST["postContent"]));
 $createPost->accountid = $_SESSION["accountid"];
 
 $createPost->createPostRecord();

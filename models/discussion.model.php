@@ -13,7 +13,7 @@ class ModelDiscussion {
         } elseif ($sortCriteria === 'new') {
             $orderBy = 'topicDate DESC';
         } else {
-            $orderBy = 'topicId DESC';
+            $orderBy = "CASE WHEN topics.accountid = :accountid THEN 0 ELSE 1 END, topicDate DESC";
         }
     
         try {
@@ -23,9 +23,15 @@ class ModelDiscussion {
                                    FROM topics 
                                    INNER JOIN accounts ON topics.accountid = accounts.accountid
                                    ORDER BY $orderBy");
+    
+            // Bind the accountid parameter if it's needed for the custom sort criteria
+            if ($sortCriteria === 'user_priority') {
+                $stmt->bindParam(":accountid", $_SESSION["accountid"], PDO::PARAM_STR);
+            }
+    
             $stmt->execute();
             $topics = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+    
             return $topics;
         } catch (Exception $e) {
             return array();
@@ -34,6 +40,8 @@ class ModelDiscussion {
             $stmt = null;
         }
     }
+    
+    
 
     public function mdlGetProfileTopics() {
         $db = new Connection();

@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the POST parameters
     $topicId = $_POST['topicId'];
     $updatedTitle = $_POST['updatedTitle'];
-    $updatedContent = $_POST['updatedContent'];
+    $updatedContent = nl2br(htmlspecialchars_decode($_POST['updatedContent']));
 
     // Create an instance of the ControllerDiscussion class
     $controller = new ControllerDiscussion();

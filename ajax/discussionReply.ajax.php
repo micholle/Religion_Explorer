@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $createReply = new CreateReply();
     $createReply->postId = $_POST["postId"];
-    $createReply->replyContent = $_POST["replyContent"];
+    $createReply->replyContent = nl2br(htmlspecialchars_decode($_POST["replyContent"]));
     $createReply->accountid = $_SESSION["accountid"];
 
     $createReply->createReplyRecord();

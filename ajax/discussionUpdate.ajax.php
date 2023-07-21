@@ -6,7 +6,7 @@ session_start();
 
 $type = $_POST['type'];
 $id = $_POST['id'];
-$content = $_POST['content'];
+$content = nl2br(htmlspecialchars_decode($_POST['content']));
 
 $controller = new ControllerDiscussion();
 $response = '';

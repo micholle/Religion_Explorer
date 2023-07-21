@@ -161,20 +161,23 @@ $(function() {
             postContent: postContent
         };
     
-        // Make the AJAX request to create the topic
         $.ajax({
             url: "../../ajax/discussionPost.ajax.php",
             method: "POST",
             data: discussion,
             success: function(response) {
                 if (response === "success") {
-                    // Topic created successfully
+                    $("#postContent").val("");
+                    $("#toast").html("Comment posted.")
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                     const message = {
                         type: 'discussion'
                     };
                     ws.send(JSON.stringify(message));
-                    $("#postContent").val("");
-                    // Refresh the topics by calling the getTopics function
                     getPosts("", $("#topicId").val());
                 } else {
                     // Error occurred while creating the topic
@@ -272,6 +275,12 @@ $(function() {
             success: function(response) {
                 if (response === "success") {
                     getPosts("", $("#topicId").val());
+                    $("#toast").html("Comment deleted.")
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                     $('#confirmDeleteModal').modal('hide');
                     const message = {
                         type: 'discussion'
@@ -308,6 +317,12 @@ $(function() {
             success: function(response) {
                 if (response === "success") {
                     getPosts("", $("#topicId").val());
+                    $("#toast").html("Comment deleted.")
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                     $('#confirmDeleteModal').modal('hide');
                     const message = {
                         type: 'discussion'
@@ -343,6 +358,12 @@ $(function() {
             success: function(response) {
                 if (response === "success") {
                     window.location.href = 'discussionForum.php';
+                    $("#toast").html("Topic deleted.")
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                     $('#confirmDeleteModal').modal('hide');
                     const message = {
                         type: 'topicDelete'
@@ -476,6 +497,12 @@ $(function() {
                 if (response === "success") {
                     // Content updated successfully
                     getPosts("", $("#topicId").val());
+                    $("#toast").html("Comment edited successfully.")
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                     const message = {
                         type: 'discussion'
                     };

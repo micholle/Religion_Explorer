@@ -4,9 +4,32 @@ $(function() {
         // Add any other options you might need
       });
 
+    // JavaScript code
     $(document).ready(function() {
-        getTopics();
+        var currentSort = "user_priority";
+        getTopics(currentSort);
+
+        $("#top").click(function() {
+            if (currentSort === "top") {
+                currentSort = "user_priority";
+                $(this).blur(); // Remove focus and highlight from the clicked button
+            } else {
+                currentSort = "top";
+            }
+            getTopics(currentSort);
+        });
+
+        $("#new").click(function() {
+            if (currentSort === "new") {
+                currentSort = "user_priority";
+                $(this).blur(); // Remove focus and highlight from the clicked button
+            } else {
+                currentSort = "new";
+            }
+            getTopics(currentSort);
+        });
     });
+
 
     $("form").submit(function(e) {
         e.preventDefault();
@@ -34,10 +57,16 @@ $(function() {
           success: function(response) {
               if (response === "success") {
                   // Topic created successfully
+                  $("#toast").html("Topic created.")
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                   $("#topicTitle").val("");
                   $("#topicContent").val("");
                   // Refresh the topics by calling the getTopics function
-                  getTopics();
+                  getTopics('user_priority');
                   const message = {
                     type: 'topics'
                   };
@@ -98,15 +127,6 @@ $(function() {
       window.location.href = "discussionForumPost.php?topicId=" + topicId;
     });
 
-
-    $("#top").click(function() {
-      getTopics("top"); // Pass "top" as the sort criteria
-    });
-    
-    $("#new").click(function() {
-        getTopics("new"); // Pass "new" as the sort criteria
-    });
-
     function shortenUpvotes() {
       $(".upvotes").each(function() {
           var upvotes = $(this).text().trim();
@@ -162,7 +182,7 @@ $(function() {
                   targetElement.attr('src', '../assets/img/discussionForum/downvote-active.png');
                   targetElement.addClass('downvoted');
               }
-              getTopics();
+              getTopics('user_priority');
               const message = {
                 type: 'topics'
             };
