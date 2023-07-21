@@ -41,6 +41,26 @@ $(function() {
       var topicTitle = $("#topicTitle").val();
       var topicContent = $("#topicContent").val();
       var anonymous = $("#anonymousCheckbox").is(":checked") ? 1 : 0;
+
+      if (topicTitle.trim() === '') {
+        $("#toast").html("Title is empty. Please provide a title for your topic.")
+        $("#toast").css("background-color", "#E04F5F");
+        $("#toast").addClass('show');
+    
+        setTimeout(function() {
+            $("#toast").removeClass('show');
+        }, 2000);
+        return;
+    } else if (topicContent.trim() === '') {
+        $("#toast").html("Content is empty. Please provide content for your topic.")
+        $("#toast").css("background-color", "#E04F5F");
+        $("#toast").addClass('show');
+    
+        setTimeout(function() {
+            $("#toast").removeClass('show');
+        }, 2000);
+        return
+    }
       
       // Create an object with the data
       var discussion = {
@@ -57,7 +77,8 @@ $(function() {
           success: function(response) {
               if (response === "success") {
                   // Topic created successfully
-                  $("#toast").html("Topic created.")
+                    $("#toast").html("Topic created.")
+                    $("#toast").css("background-color", "");
                     $("#toast").addClass('show');
                 
                     setTimeout(function() {
@@ -269,7 +290,7 @@ $(function() {
 
         channel.bind('new-post-event', function (data) {
             // Run the getPosts() function when the event is received
-            getTopics();
+            getTopics('user_priority');
           });
   
 });

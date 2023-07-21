@@ -52,6 +52,7 @@ $(function() {
 
     var verify = new FormData();
     verify.append("email", email);
+    verify.append("username", username);
     verify.append("verificationCode", verificationCode);
 
     $.ajax({
@@ -70,6 +71,7 @@ $(function() {
           $("#toast").css("background-color", "#E04F5F");
         } else if (answer === "ok") {
           $("#toast").html("Verification code sent, check your email!")
+          $("#toast").css("background-color", "");
           $('#verificationCodeModal').modal();
           $('#verificationCodeModal').show();
         } else {

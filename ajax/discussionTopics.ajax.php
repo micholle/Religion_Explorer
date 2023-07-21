@@ -35,7 +35,7 @@ foreach ($topics as $topic) {
     }
     
     $html .= '                <h2>•</h2>';
-    $html .= '                <h2>' . $topic['topicDate'] . '</h2>';
+    $html .= '                <h2>' . date('F d, Y', strtotime($topic['topicDate'])) . ' • ' . date('H:i', strtotime($topic['topicDate'])) . '</h2>';
     $html .= '            </div>';
     $html .= '        </div>';
     $html .= '        <p>' . $topic['topicContent'] . '</p>';

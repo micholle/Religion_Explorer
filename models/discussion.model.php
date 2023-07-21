@@ -165,7 +165,7 @@ class ModelDiscussion {
         } elseif ($sortCriteria === 'new') {
             $orderBy = 'postDate DESC';
         } else {
-            $orderBy = 'postId DESC';
+            $orderBy = 'CASE WHEN topics.accountid = :accountid THEN 0 ELSE 1 END, topicDate DESC';
         }
     
         try {
@@ -177,6 +177,9 @@ class ModelDiscussion {
                                    WHERE topics.topicId = :topicId
                                    ORDER BY $orderBy");
             $stmt->bindParam(':topicId', $topicId, PDO::PARAM_INT);
+            if ($sortCriteria === 'user_priority') {
+                $stmt->bindParam(":accountid", $_SESSION["accountid"], PDO::PARAM_STR);
+            }
             $stmt->execute();
             $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             

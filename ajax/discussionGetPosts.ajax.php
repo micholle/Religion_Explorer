@@ -16,7 +16,7 @@ foreach ($posts as $post) {
     $html .= '    <div class="forumPostViewContent">';
     $html .= '      <div class="row">';
     $html .= '        <div class="col-12 d-flex flex-row">';
-    $html .= '          <h2>' . $post['username'] . '</h2><h2>•</h2><h2>' . $post['postDate'] . '</h2>';
+    $html .= '          <h2>' . $post['username'] . '</h2><h2>•</h2><h2>' . date('F d, Y', strtotime($post['postDate'])) . ' • ' . date('H:i', strtotime($post['postDate'])) . '</h2>';
     $html .= '        </div>';
     $html .= '      </div>';
     $html .= '      <div class="forumPostViewContentBox">';
@@ -67,7 +67,7 @@ foreach ($posts as $post) {
         $html .= '    <div class="forumPostViewContent">';
         $html .= '      <div class="row">';
         $html .= '        <div class="col-12 d-flex flex-row">';
-        $html .= '          <h2>' . $reply['username'] . '</h2><h2>•</h2><h2>' . $reply['replyDate'] . '</h2>';
+        $html .= '          <h2>' . $reply['username'] . '</h2><h2>•</h2><h2>' . date('F d, Y', strtotime($reply['replyDate'])) . ' • ' . date('H:i', strtotime($reply['replyDate'])) . '</h2>';
         $html .= '        </div>';
         $html .= '      </div>';
         $html .= '      <div class="forumPostViewContentBox">';

@@ -103,6 +103,17 @@ $(function() {
 
     // Create a new reply
     function createReply(postId, replyContent) {
+        if (replyContent.trim() === '') {
+            $("#toast").html("Content is empty. Please provide content for your comment.")
+            $("#toast").css("background-color", "#E04F5F");
+            $("#toast").addClass('show');
+        
+            setTimeout(function() {
+                $("#toast").removeClass('show');
+            }, 2000);
+            return
+        }
+
         const postData = {
             postId: postId,
             replyContent: replyContent
@@ -118,7 +129,7 @@ $(function() {
                         type: 'discussion'
                     };
                     ws.send(JSON.stringify(message));
-                    getPosts("", $("#topicId").val());
+                    getPosts("user_priority", $("#topicId").val());
                 } else {
                     $("#toast").html("Error occurred while creating the reply.")
                     $("#toast").css("background-color", "#E04F5F");
@@ -140,9 +151,29 @@ $(function() {
             }
         });
     }
-
     $(document).ready(function() {
-        getPosts("", $("#topicId").val());
+        var currentSort = "user_priority";
+        getPosts(currentSort, $("#topicId").val());
+
+        $("#top").click(function() {
+            if (currentSort === "top") {
+                currentSort = "user_priority";
+                $(this).blur(); // Remove focus and highlight from the clicked button
+            } else {
+                currentSort = "top";
+            }
+            getPosts(currentSort, $("#topicId").val());
+        });
+
+        $("#new").click(function() {
+            if (currentSort === "new") {
+                currentSort = "user_priority";
+                $(this).blur(); // Remove focus and highlight from the clicked button
+            } else {
+                currentSort = "new";
+            }
+            getPosts(currentSort, $("#topicId").val());
+        });
     });
 
     $("form").submit(function(e) {
@@ -154,6 +185,17 @@ $(function() {
         // Retrieve the form data
         var topicId = $("#topicId").val();
         var postContent = $("#postContent").val();
+
+        if (postContent.trim() === '') {
+            $("#toast").html("Content is empty. Please provide content for your comment.")
+            $("#toast").css("background-color", "#E04F5F");
+            $("#toast").addClass('show');
+        
+            setTimeout(function() {
+                $("#toast").removeClass('show');
+            }, 2000);
+            return
+        }
     
         // Create an object with the data
         var discussion = {
@@ -169,6 +211,7 @@ $(function() {
                 if (response === "success") {
                     $("#postContent").val("");
                     $("#toast").html("Comment posted.")
+                    $("#toast").css("background-color", "");
                     $("#toast").addClass('show');
                 
                     setTimeout(function() {
@@ -178,7 +221,7 @@ $(function() {
                         type: 'discussion'
                     };
                     ws.send(JSON.stringify(message));
-                    getPosts("", $("#topicId").val());
+                    getPosts("user_priority", $("#topicId").val());
                 } else {
                     // Error occurred while creating the topic
                     $("#toast").html("Error occurred while creating the post.")
@@ -224,14 +267,6 @@ $(function() {
         });
     }
 
-    $("#top").click(function() {
-        getTopics("top"); // Pass "top" as the sort criteria
-    });
-      
-    $("#new").click(function() {
-        getTopics("new"); // Pass "new" as the sort criteria
-    });
-
     $(document).on('click', '#forumDeleteComment', function() {
         $('#confirmDeleteModalComment').modal('show');
     });
@@ -274,7 +309,7 @@ $(function() {
             data: { postId: postId },
             success: function(response) {
                 if (response === "success") {
-                    getPosts("", $("#topicId").val());
+                    getPosts("user_priority", $("#topicId").val());
                     $("#toast").html("Comment deleted.")
                     $("#toast").addClass('show');
                 
@@ -316,7 +351,7 @@ $(function() {
             data: { replyId: replyId },
             success: function(response) {
                 if (response === "success") {
-                    getPosts("", $("#topicId").val());
+                    getPosts("user_priority", $("#topicId").val());
                     $("#toast").html("Comment deleted.")
                     $("#toast").addClass('show');
                 
@@ -496,7 +531,7 @@ $(function() {
             success: function(response) {
                 if (response === "success") {
                     // Content updated successfully
-                    getPosts("", $("#topicId").val());
+                    getPosts("user_priority", $("#topicId").val());
                     $("#toast").html("Comment edited successfully.")
                     $("#toast").addClass('show');
                 
@@ -562,7 +597,7 @@ $(function() {
                     targetElement.attr('src', '../assets/img/discussionForum/downvote-active.png');
                     targetElement.addClass('downvoted');
                 }
-                getPosts("", $("#topicId").val());
+                getPosts("user_priority", $("#topicId").val());
                 const message = {
                     type: 'discussion'
                 };
@@ -700,6 +735,6 @@ $(function() {
 
         channel.bind('new-post-event', function (data) {
             // Run the getPosts() function when the event is received
-            getPosts("", $("#topicId").val());
+            getPosts("user_priority", $("#topicId").val());
           });
 });

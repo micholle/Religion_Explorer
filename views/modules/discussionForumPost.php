@@ -106,8 +106,8 @@ require_once "../../models/discussionForumPost.model.php";
 
                         <div class="forumPostFilter d-flex justify-content-end align-items-center flex-row">
                             <p >Sort comments by:</p>
-                            <button type="button">Top</button>
-                            <button type="button">New</button>
+                            <button type="button" id="top">Top</button>
+                            <button type="button" id="new">New</button>
                         </div>
 
                         <div class="col-12 d-flex justify-content-center align-items-center forumCommentMargin">
