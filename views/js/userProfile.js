@@ -311,7 +311,13 @@ function viewBookmark(resourceid) {
             }
         });
     } else {
-        link = "../modules/library.php?view=";
+        if (resourceid.startsWith("LP")) {
+            link = "../modules/library.php?open=photos&view=";
+        } else if (resourceid.startsWith("LV")) {
+            link = "../modules/library.php?open=videos&view=";
+        } else if (resourceid.startsWith("LR")) {
+            link = "../modules/library.php?open=reading-materials&view=";
+        }
         window.location.href = link + encodeURIComponent(resourceid);
     }
 }
