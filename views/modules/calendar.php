@@ -23,6 +23,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         
         <!-- Calendar -->
         <div class="pageContainer">
+            <div id="acctype" hidden><?php echo $_SESSION['acctype']; ?></div>
             <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
             <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
             <div id="calendarDatePlaceHolder" hidden></div>

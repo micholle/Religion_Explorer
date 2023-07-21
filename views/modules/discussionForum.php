@@ -37,29 +37,33 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         </div>
 
         <div class="row pageContent">
-            <div class="col-12 d-flex justify-content-center align-items-center">
-                <div class="forumSubmitContainer">
-                    <div class="d-flex justify-content-start align-items-center flex-column">
-                        <img src="data:image/png;base64,<?php echo base64_encode($_SESSION['avatar']); ?>" class="discussionForumAvatarPost">
-                    </div>
-                    <div class="forumSubmitContent">
-                        <form>
-                            <input type="text" id="topicTitle" class="forumSubmitContentTitle" placeholder="Start a Discussion">
-                            <textarea id="topicContent" placeholder="What do you want to talk about?"></textarea>
-                            <div class="row forumSubmitInteractions">
-                                <div class="col-12 d-flex justify-content-end align-items-center flex-row">
-                                    <p>Post anonymously</p>
-                                    <label class="switch">
-                                        <input id="anonymousCheckbox" type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                    <button type="submit" class="roundedButton">Post</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <?php
+            if ($_SESSION['acctype'] === 'regular'){
+                        echo'<div class="col-12 d-flex justify-content-center align-items-center">';
+                        echo    '<div class="forumSubmitContainer">';
+                        echo        '<div class="d-flex justify-content-start align-items-center flex-column">';
+                        echo            '<img src="data:image/png;base64,' . base64_encode($_SESSION['avatar']) . '" class="discussionForumAvatarPost">';
+                        echo        '</div>';
+                        echo        '<div class="forumSubmitContent">';
+                        echo            '<form>';
+                        echo                '<input type="text" id="topicTitle" class="forumSubmitContentTitle" placeholder="Start a Discussion">';
+                        echo                '<textarea id="topicContent" placeholder="What do you want to talk about?"></textarea>';
+                        echo                '<div class="row forumSubmitInteractions">';
+                        echo                     '<div class="col-12 d-flex justify-content-end align-items-center flex-row">';
+                        echo                         '<p>Post anonymously</p>';
+                        echo                         '<label class="switch">';
+                        echo                             '<input id="anonymousCheckbox" type="checkbox">';
+                        echo                             '<span class="slider round"></span>';
+                        echo                         '</label>';
+                        echo                         '<button type="submit" class="roundedButton">Post</button>';
+                        echo                     '</div>';
+                        echo                 '</div>';
+                        echo            '</form>';
+                        echo        '</div>';
+                        echo    '</div>';
+                        echo'</div>';
+            }
+            ?>
             <div class="col-12">
                 <div class="forumPostFilter d-flex justify-content-end align-items-center flex-row">
                     <p>Sort by:</p>

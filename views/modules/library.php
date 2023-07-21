@@ -21,6 +21,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     </head>
     <body>
         <div id="librarySidebar"></div>
+        <div id="acctype" hidden><?php echo $_SESSION['acctype']; ?></div>
         <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
         <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
@@ -279,7 +280,11 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     <div class="col-10 d-flex justify-content-center align-items-center flex-row readingMaterialTitle">
                                         <h1 id="readingMaterialTitle"></h1>
                                     </div>
-                                    <div id="readingMaterialBookmark" class="col-1 d-flex justify-content-end align-items-center flex-row readingMaterialTitle"></div>
+                                    <?php
+                                    if ($_SESSION['acctype'] === 'regular'){
+                                    echo '<div id="readingMaterialBookmark" class="col-1 d-flex justify-content-end align-items-center flex-row readingMaterialTitle"></div>';
+                                    }
+                                    ?>
 
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-center align-items-center flex-row">

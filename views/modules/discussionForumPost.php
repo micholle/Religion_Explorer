@@ -75,11 +75,18 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                 <?php } ?>
                                 </div>
                                 <div class="col-12 d-flex flex-row">
+                                    
                                     <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="votes">
                                         <?php
+                                        if ($_SESSION['acctype'] === 'regular'){
                                         echo '<img src="../assets/img/discussionForum/upvote' . ($hasUpvotedTopic ? '-active' : '') . '.png" class="upvoteButton" data-type="topic" data-id="' . $topicId . '">';
                                         echo '<p class="forumPostViewMainCount forumPostViewMainVote upvotes" id="upvotes">'. $upvotes .'</p>';
                                         echo '<img src="../assets/img/discussionForum/downvote' . ($hasDownvotedTopic ? '-active' : '') . '.png" class="downvoteButton" data-type="topic" data-id="' . $topicId . '">';                                        
+                                        } else {
+                                        echo '<img src="../assets/img/discussionForum/upvote' . ($hasUpvotedTopic ? '-active' : '') . '.png" class="upvoteButton" data-type="topic" data-id="' . $topicId . '" style="pointer-events: none;">';
+                                        echo '<p class="forumPostViewMainCount forumPostViewMainVote upvotes" id="upvotes">'. $upvotes .'</p>';
+                                        echo '<img src="../assets/img/discussionForum/downvote' . ($hasDownvotedTopic ? '-active' : '') . '.png" class="downvoteButton" data-type="topic" data-id="' . $topicId . '" style="pointer-events: none;">';       
+                                        }
                                         ?>
                                     </div>
                                     <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="comments">
@@ -93,12 +100,12 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                         echo    '<p class="forumPostViewMainCount forumPostViewMainVote" value="'.$topicId.'" class="editButton" id="editButton">Edit</p>';
                                         echo '</div>';
                                     }
-                                    ?>
-                                    <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="reportPostBtn">
-                                        <img src="../assets/img/discussionForum/report.png" class="commentIcon">
-                                        <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>
-                                    </div>
-                                    <?php 
+                                    if ($_SESSION['acctype'] === 'regular') {
+                                        echo '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="reportPostBtn">';
+                                        echo '<img src="../assets/img/discussionForum/report.png" class="commentIcon">';
+                                        echo '<p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
+                                        echo '</div>';
+                                    }
                                     if ($accountid === $_SESSION['accountid']) {
                                         echo '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="forumDeletePost">';
                                         echo     '<img src="../assets/img/discussionForum/delete.png" class="commentIcon">';
@@ -115,21 +122,24 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                             <button type="button" id="top">Top</button>
                             <button type="button" id="new">New</button>
                         </div>
-
-                        <div class="col-12 d-flex justify-content-center align-items-center forumCommentMargin">
-                            <div class="forumCommentContainer">
-                                <div class="forumCommentContent">
-                                    <form>
-                                        <textarea placeholder="What are your thoughts?" id="postContent"></textarea>
-                                        <div class="row">
-                                            <div class="col-12 d-flex justify-content-end align-items-center flex-row">
-                                                <button type="submit" class="roundedButton">Comment</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        <?php
+                        if ($_SESSION['acctype'] === 'regular'){
+                        echo'<div class="col-12 d-flex justify-content-center align-items-center forumCommentMargin">';
+                        echo    '<div class="forumCommentContainer">';
+                        echo        '<div class="forumCommentContent">';
+                        echo            '<form>';
+                        echo                '<textarea placeholder="What are your thoughts?" id="postContent"></textarea>';
+                        echo                '<div class="row">';
+                        echo                    '<div class="col-12 d-flex justify-content-end align-items-center flex-row">';
+                        echo                        '<button type="submit" class="roundedButton">Comment</button>';
+                        echo                    '</div>';
+                        echo                '</div>';
+                        echo            '</form>';
+                        echo        '</div>';
+                        echo    '</div>';
+                        echo'</div>';
+                        }
+                        ?>
                         <div id="postContainer"></div>
                     </div>
                 </div>

@@ -2,6 +2,14 @@
 require_once "../controllers/discussion.controller.php";
 session_start();
 
+if ($_SESSION['acctype'] === "guest") {
+    // Apply the "pointer-events: none;" style
+    $pointerEventsStyle = 'style="pointer-events: none;"';
+} else {
+    // Do not apply the "pointer-events: none;" style
+    $pointerEventsStyle = '';
+}
+
 $sort = isset($_GET['sort']) ? $_GET['sort'] : ''; // Get the sort criteria from the request
 
 // Create an instance of the ControllerDiscussion class
@@ -17,9 +25,9 @@ foreach ($topics as $topic) {
     $hasDownvotedReply = $controller->ctrGetTopicVoteByUser($topic['topicId'], $_SESSION['accountid']) === 'downvote';
     $html .= '<div class="forumPostContainer">';
     $html .= '    <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">';
-    $html .= '        <img src="../assets/img/discussionForum/upvote' . ($hasUpvotedReply ? '-active' : '') . '.png" class="upvoteButton" data-type="reply" data-id="' . $topic['topicId'] . '">';
+    $html .= '        <img src="../assets/img/discussionForum/upvote' . ($hasUpvotedReply ? '-active' : '') . '.png" class="upvoteButton" data-type="reply" data-id="' . $topic['topicId'] . '" '. $pointerEventsStyle .'>';
     $html .= '        <p class="upvotes">' . $topic['upvotes'] . '</p>';
-    $html .= '        <img src="../assets/img/discussionForum/downvote' . ($hasDownvotedReply ? '-active' : '') . '.png" class="downvoteButton" data-type="reply" data-id="' . $topic['topicId'] . '">';
+    $html .= '        <img src="../assets/img/discussionForum/downvote' . ($hasDownvotedReply ? '-active' : '') . '.png" class="downvoteButton" data-type="reply" data-id="' . $topic['topicId'] . '" '. $pointerEventsStyle .'>';
     $html .= '        <img src="../assets/img/discussionForum/comments.png" class="commentIcon">';
     $html .= '        <p>' . $topic['commentCount'] . '</p>';
     $html .= '    </div>';

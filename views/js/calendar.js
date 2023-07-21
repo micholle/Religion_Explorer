@@ -43,13 +43,20 @@ $(function() {
             var eventsList = data;
 
             var calendarDays = document.getElementsByClassName("day_num");
-
+            var acctype = $('#acctype').text();
             for (let day of calendarDays) {
                 for (let event in eventsList) {
                     var eventDetails = eventsList[event];
-                    if (eventDetails["date"] == day.getAttribute("id")){
-                        var dayWithEvent = "#" + eventDetails["date"];
-                        $(dayWithEvent).append('<div class="calendarEvent ' + eventDetails["religion"] + '" data-religion="' + eventDetails["religion"] + '" onclick="viewEvent(' + "'" + event + "', '" + eventDetails["religion"] + "', '"+ eventDetails["date"] + "'" + ')">' + event +'</div>');
+                    if (acctype === 'regular'){
+                        if (eventDetails["date"] == day.getAttribute("id")){
+                            var dayWithEvent = "#" + eventDetails["date"];
+                            $(dayWithEvent).append('<div class="calendarEvent ' + eventDetails["religion"] + '" data-religion="' + eventDetails["religion"] + '" onclick="viewEvent(' + "'" + event + "', '" + eventDetails["religion"] + "', '"+ eventDetails["date"] + "'" + ')">' + event +'</div>');
+                        }
+                    } else {
+                        if (eventDetails["date"] == day.getAttribute("id")){
+                            var dayWithEvent = "#" + eventDetails["date"];
+                            $(dayWithEvent).append('<div class="calendarEvent ' + eventDetails["religion"] + '" data-religion="' + eventDetails["religion"] + '" onclick="viewEvent(' + "'" + event + "', '" + eventDetails["religion"] + "', '"+ eventDetails["date"] + "'" + ')" style="pointer-events: none;">' + event +'</div>');
+                        }
                     }
                 }
             }

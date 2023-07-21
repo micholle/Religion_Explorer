@@ -1,6 +1,14 @@
 <?php
 require_once "../controllers/discussion.controller.php";
 session_start();
+if ($_SESSION['acctype'] === "guest") {
+    // Apply the "pointer-events: none;" style
+    $pointerEventsStyle = 'style="pointer-events: none;"';
+} else {
+    // Do not apply the "pointer-events: none;" style
+    $pointerEventsStyle = '';
+}
+
 
 $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
 $topicId = isset($_GET['topicId']) ? $_GET['topicId'] : '';
@@ -25,24 +33,28 @@ foreach ($posts as $post) {
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
     $hasUpvotedPost = $controller->ctrGetPostVoteByUser($post['postId'], $_SESSION['accountid']) === 'upvote';
     $hasDownvotedPost = $controller->ctrGetPostVoteByUser($post['postId'], $_SESSION['accountid']) === 'downvote';
-    $html .= '            <img src="../assets/img/discussionForum/upvote' . ($hasUpvotedPost ? '-active' : '') . '.png" class="upvoteButton" data-type="post" data-id="' . $post['postId'] . '">';
+    $html .= '            <img src="../assets/img/discussionForum/upvote' . ($hasUpvotedPost ? '-active' : '') . '.png" class="upvoteButton" data-type="post" data-id="' . $post['postId'] . '" '. $pointerEventsStyle .'>';
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">' . $post['upvotes'] . '</p>';
-    $html .= '            <img src="../assets/img/discussionForum/downvote' . ($hasDownvotedPost ? '-active' : '') . '.png" class="downvoteButton" data-type="post" data-id="' . $post['postId'] . '">';
+    $html .= '            <img src="../assets/img/discussionForum/downvote' . ($hasDownvotedPost ? '-active' : '') . '.png" class="downvoteButton" data-type="post" data-id="' . $post['postId'] . '" '. $pointerEventsStyle .'>';
     $html .= '          </div>';
+    if ($_SESSION['acctype'] === 'regular') {
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
     $html .= '            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">';
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainComment" onclick="initializeReplyButtons(' . $post['postId'] . ')" value="' . $post['postId'] . '">Reply</p>';
     $html .= '          </div>';
+    }
     if ($post['accountid'] === $_SESSION['accountid']) {
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
         $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote editButton" value="' . $post['postId'] . '">Edit</p>';
         $html .= '          </div>';
     }
+    if ($_SESSION['acctype'] === 'regular') {
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="reportCommentBtn">';
     $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
     $html .= '          </div>';
+    }
     // Add the delete button only if the account ID matches the session account ID
     if ($post['accountid'] === $_SESSION['accountid']) {
         $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" data-post-id="' . $post['postId'] . '">';
@@ -76,24 +88,28 @@ foreach ($posts as $post) {
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
         $hasUpvotedReply = $controller->ctrGetReplyVoteByUser($reply['replyId'], $_SESSION['accountid']) === 'upvote';
         $hasDownvotedReply = $controller->ctrGetReplyVoteByUser($reply['replyId'], $_SESSION['accountid']) === 'downvote';
-        $html .= '            <img src="../assets/img/discussionForum/upvote' . ($hasUpvotedReply ? '-active' : '') . '.png" class="upvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '">';
+        $html .= '            <img src="../assets/img/discussionForum/upvote' . ($hasUpvotedReply ? '-active' : '') . '.png" class="upvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '" '. $pointerEventsStyle .'>';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">' . $reply['upvotes'] . '</p>';
-        $html .= '            <img src="../assets/img/discussionForum/downvote' . ($hasDownvotedReply ? '-active' : '') . '.png" class="downvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '">';
+        $html .= '            <img src="../assets/img/discussionForum/downvote' . ($hasDownvotedReply ? '-active' : '') . '.png" class="downvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '" '. $pointerEventsStyle .'>';
         $html .= '          </div>';
+        if ($_SESSION['acctype'] === 'regular') {
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
         $html .= '            <img src="../assets/img/discussionForum/comments.png" class="commentIcon">';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainComment" onclick="initializeReplyButtons(' . $post['postId'] . ')" value="' . $post['postId'] . '">Reply</p>';
         $html .= '          </div>';
+        }
         if ($reply['accountid'] === $_SESSION['accountid']) {
             $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
             $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
             $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote editButton" value="' . $reply['replyId'] . '">Edit</p>';
             $html .= '          </div>';
         }
+        if ($_SESSION['acctype'] === 'regular') {
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="reportCommentBtn">';
         $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
         $html .= '          </div>';
+        }
         // Add the delete button only if the account ID matches the session account ID
         if ($reply['accountid'] === $_SESSION['accountid']) {
             $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" data-reply-id="' . $reply['replyId'] . '">';

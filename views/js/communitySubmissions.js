@@ -1,4 +1,5 @@
 $(function() {
+    var acctype = $('#acctype').text();
     $.ajax({
         url: "../../ajax/showSidebar.ajax.php",
         method: "POST",
@@ -54,7 +55,7 @@ $(function() {
                                 '<img onclick="copyContentLink(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                                '<img id="' + photoDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + photoDetails.creationid + '\', \'' + photoDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
+                                (acctype === 'regular' ? '<img id="' + photoDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + photoDetails.creationid + '\', \'' + photoDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' : '') +
                             '</div>' +
                         '</div>' +
 
@@ -111,7 +112,7 @@ $(function() {
                                 '<img onclick="copyContentLink(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                                '<img id="' + videoDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + videoDetails.creationid + '\', \'' + videoDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
+                                (acctype === 'regular' ? '<img id="' + videoDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + videoDetails.creationid + '\', \'' + videoDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' : '') +
                             '</div>' +
                         '</div>' +
 
@@ -164,7 +165,7 @@ $(function() {
                                 '<img onclick="copyContentLink(' + "'" + readingMaterialDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                                '<img id="' + readingMaterialDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + readingMaterialDetails.creationid + '\', \'' + readingMaterialDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
+                                (acctype === 'regular' ? '<img id="' + readingMaterialDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + readingMaterialDetails.creationid + '\', \'' + readingMaterialDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' :'') +
                             '</div>' +
                         '</div>' +
 
