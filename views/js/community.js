@@ -126,7 +126,7 @@ $(function() {
             filetype = filedata.type;
             filesize = filedata.size;
 
-            $("#uploadedFilename").text(filename + <button>"X"</button>);
+            $("#uploadedFilename").text(filename);
         } else {
             var readingMaterial = new Blob([description], { type: 'text/plain' });
             filesize = readingMaterial.size;
