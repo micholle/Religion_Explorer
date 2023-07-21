@@ -31,7 +31,7 @@ $userData = getUserProfileInfo($accountid);
 <body>
     <div id="viewUserProfileSidebar"></div>
     <div id="accountidPlaceholder" hidden><?php echo $accountid; ?></div>
-    <div id="accountUsernamePlaceholder" hidden><?php echo $userData['username']; ?></div>
+    <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
     <div class="pageContainer">
         <div class="container mw-100 mh-100">
