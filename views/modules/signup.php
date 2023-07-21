@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Religion Explorer</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
     
     <!-- scripts -->
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
@@ -49,7 +49,7 @@
                                     <div class="d-flex justify-content-center">
                                         <button type="submit" id="btn-signup" name="btn-signup" class="registrationSubmitButton">Sign Up</button>
                                     </div>
-                                    <p class="terms">By signing up, you agree to Religion Explorer’s <span class="signupLink">Terms of Service</span> and have acknowledged our <span class="signupLink">Privacy Policy</span>.</p>
+                                    <p class="terms">By signing up, you agree to Religion Explorer’s <span class="signupLink" id="termsOfService">Terms of Service</span> and have acknowledged our <span class="signupLink" id="privacyPolicy">Privacy Policy</span>.</p>
                                 </form>
                             </div>
                         </div>
@@ -62,6 +62,7 @@
             </div>
         </div>
     </section>
+    <div id="toast" class="toast"></div>
 
     <!--Modal-->
     <div class="modal fade" id="verificationCodeModal">

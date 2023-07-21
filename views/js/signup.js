@@ -9,16 +9,44 @@ $(function() {
     var confirmPassword = $("#confirmPassword").val();
 
     if (username === "") {
-      alert("Please enter a username.");
+      $("#toast").html("Please enter a username.")
+      $("#toast").css("background-color", "#E04F5F");
+      $("#toast").addClass('show');
+
+      setTimeout(function() {
+          $("#toast").removeClass('show');
+      }, 2000);
+
       return;
     } else if (password === "") {
-      alert("Please enter a password.");
+      $("#toast").html("Please enter a password.")
+      $("#toast").css("background-color", "#E04F5F");
+      $("#toast").addClass('show');
+
+      setTimeout(function() {
+          $("#toast").removeClass('show');
+      }, 2000);
+      
       return;
     } else if (password !== confirmPassword) {
-      alert("Passwords do not match.");
+      $("#toast").html("Passwords do not match.")
+      $("#toast").css("background-color", "#E04F5F");
+      $("#toast").addClass('show');
+
+      setTimeout(function() {
+          $("#toast").removeClass('show');
+      }, 2000);
+
       return;
     } else if (password.length < 8) {
-      alert("Password must be at least 8 characters long.");
+      $("#toast").html("Password must be at least 8 characters long.")
+      $("#toast").css("background-color", "#E04F5F");
+      $("#toast").addClass('show');
+
+      setTimeout(function() {
+          $("#toast").removeClass('show');
+      }, 2000);
+
       return;
     }
 
@@ -35,19 +63,29 @@ $(function() {
       contentType: false,
       success: function(answer) {
         if (answer === "email_exists") {
-          alert("Email already exists!");
+          $("#toast").html("Email already exists!")
+          $("#toast").css("background-color", "#E04F5F");
         } else if (answer === "username_exists") {
-          alert("Username already exists!");
+          $("#toast").html("Username already exists!")
+          $("#toast").css("background-color", "#E04F5F");
         } else if (answer === "ok") {
-          alert("Verification code sent, check your email!");
+          $("#toast").html("Verification code sent, check your email!")
           $('#verificationCodeModal').modal();
           $('#verificationCodeModal').show();
         } else {
-          alert("Oops. Something went wrong!");
+          $("#toast").html("Oops. Something went wrong!")
+          $("#toast").css("background-color", "#E04F5F");
         }
       },
       error: function() {
-        alert("Oops. Something went wrong!");
+        $("#toast").html("Oops. Something went wrong!")
+        $("#toast").css("background-color", "#E04F5F");
+      }, complete: function() {
+        $("#toast").addClass('show');
+    
+        setTimeout(function() {
+            $("#toast").removeClass('show');
+        }, 2000);
       }
     });
   });
@@ -100,19 +138,34 @@ $(function() {
       dataType: "text",
       success: function(answer) {
         if (answer === "verification_failed") {
-          alert("Verification Code did not match.");
+          $("#toast").html("Verification Code did not match.")
+          $("#toast").css("background-color", "#E04F5F");
         } else if (answer === "ok") {
           verifyContainer.innerHTML = verifyNewContent;
         } else {
-          alert("Oops. Something went wrong!");
+          $("#toast").html("Oops. Something went wrong!")
+          $("#toast").css("background-color", "#E04F5F");
         }
       },
       error: function() {
-        alert("Oops. Something went wrong!");
+        $("#toast").html("Oops. Something went wrong!")
+        $("#toast").css("background-color", "#E04F5F");
       },
       complete: function() {
-
+        $("#toast").addClass('show');
+    
+        setTimeout(function() {
+            $("#toast").removeClass('show');
+        }, 2000);
       }
     });
   });
+
+  $("#termsOfService").click(function() {
+      window.location.href = "../modules/termsOfService.php";
+  });
+
+  $("#privacyPolicy").click(function() {
+      window.location.href = "../modules/privacyPolicy.php";
+  });  
 });

@@ -172,14 +172,6 @@ $(function() {
         $('#reportUserModal').show();
     });
 
-    $("#termsOfService").click(function() {
-        window.location.href = "../modules/termsOfService.php";
-    });
-
-    $("#privacyPolicy").click(function() {
-        window.location.href = "../modules/privacyPolicy.php";
-    });  
-
     //sidebar tooltip    
     $("#sidebarProfile").hover(function(){
         $("#sidebarProfile").attr("data-toggle", "popover");
