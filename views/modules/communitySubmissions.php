@@ -21,6 +21,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     </head>
     <body>
         <div id="communitySubmissionsSidebar"></div>
+        <div id="acctype" hidden><?php echo $_SESSION['acctype']; ?></div>
         <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
         <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
         <div id="bookmarksPlaceholder" hidden></div>
