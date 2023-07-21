@@ -4,6 +4,18 @@ $(function() {
         method: "POST",
         success:function(data){
             $("#calendarSidebar").html(data);
+            var currentPage = window.location.pathname.split("/").pop();
+
+            $("#calendarSidebar li a").each(function() {
+                var tabPage = $(this).attr("href");
+                if (tabPage === currentPage) {
+                    $(this).css({
+                        "background-color": "#EAF7F0",
+                        "border": "solid #75C884 2px",
+                        "font-weight": "600",
+                    });
+                }
+            });
         }
     });
 

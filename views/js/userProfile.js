@@ -4,6 +4,14 @@ $(function() {
         method: "POST",
         success:function(data){
             $("#userProfileSidebar").html(data);
+            var currentPage = window.location.pathname.split("/").pop();
+
+            $("#userProfileSidebar li a").each(function() {
+                var tabPage = $(this).attr("href");
+                if (tabPage === currentPage) {
+                   $(this).addClass("active");
+                }
+            });
         }
     });
 

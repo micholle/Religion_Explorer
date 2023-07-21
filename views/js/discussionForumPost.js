@@ -7,10 +7,27 @@ $(function() {
     $.ajax({
         url: "../../ajax/showSidebar.ajax.php",
         method: "POST",
-        success:function(data){
+        success: function(data) {
             $("#discussionForumPostSidebar").html(data);
+            var currentPage = window.location.pathname.split("/").pop();
+    
+            $("#discussionForumPostSidebar li a").each(function() {
+                var tabPage = $(this).attr("href");
+                
+                if (currentPage.includes("discussionForum") || tabPage === currentPage) {
+                    $("#sidebarForum").css({
+                        "background-color": "#EAF7F0",
+                        "border": "solid #75C884 2px",
+                        "font-weight": "600",
+                    });
+                }
+            });
         }
     });
+    
+    
+    
+    
     
     //report content modal
     $("#reportPostBtn").click(function(){

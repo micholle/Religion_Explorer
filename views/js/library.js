@@ -5,6 +5,14 @@ $(function() {
         method: "POST",
         success:function(data){
             $("#librarySidebar").html(data);
+            var currentPage = window.location.pathname.split("/").pop();
+
+            $("#librarySidebar ul.dropdownMenu li a").each(function() {
+                var tabPage = $(this).attr("href");
+                if (tabPage === currentPage) {
+                    $(this).closest("ul.dropdownMenu").siblings("a").addClass("active");
+                }
+            });
         }
     });
 
