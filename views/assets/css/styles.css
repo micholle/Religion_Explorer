@@ -19,6 +19,7 @@ html {
     scroll-behavior: smooth;
     user-select: none;
     overflow-x: hidden;
+    font-family: Lexend;
 } 
 
 * {
@@ -28,6 +29,8 @@ html {
 
 p {
     margin: 0;
+    font-family: Lexend;
+    color: #3E3E3E;
 }
 
 g {
@@ -640,6 +643,7 @@ h5 {
     height: 200px;
     margin-bottom: 20px;
     cursor: pointer;
+    font-family: Lexend;
 }
 
 .communityUploadArea img {
@@ -1034,6 +1038,10 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     color: #2CA464;
 }
 
+.col-7 .container .homeHeader a {
+    text-decoration: none;
+}
+
 .contentHeader {
     text-align: center;
     padding: 60px 0px 20px 0;
@@ -1042,6 +1050,8 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 #about h2 {
     font-weight: 600;
     color: #3E3E3E;
+    text-align: center;
+    padding-top: 20px;
 }
 
 #about .container hr {
@@ -1053,8 +1063,10 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 
 #about .content {
     height: 20vh;
-    padding: 20px 60px 60px;
+    padding-top: 20px;
+    margin-bottom: 30px;
 }
+
 #about hr {
     border: 1px solid #D0D0D0;
     opacity: 100;
@@ -1066,24 +1078,15 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     line-height: 1.25em;
 }
 
+#features .container {
+    padding-bottom: 70px;
+}
+
 #features h2 {
     font-weight: 600;
     color: #3E3E3E;
-}
-
-#features .content {
-    height: 60vh;
-    padding: 20px 60px 60px;
-}
-
-#features .featuresRow {
-    height: 50%;
-    margin: 0px 16px 0px;
-}
-
-#features .featuresCol {
-    height: 100%;
-    padding-top: 25px;
+    text-align: center;
+    padding-bottom: 40px;
 }
 
 #features h5 {
@@ -1097,14 +1100,13 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     line-height: 1.25em;
 }
 
-#features .featuresText {
-    padding: 25px 0 0 12px;
-    height: 100%;
+#features .featuresTopSpacing {
+    padding-top: 50px;
 }
 
-p { 
-    font-family: Lexend;
-    color: #3E3E3E;
+#features hr {
+    border: 1px solid #D0D0D0;
+    opacity: 100;
 }
 
 #developers .row {
@@ -1120,6 +1122,7 @@ p {
     font-weight: 600;
     color: #3E3E3E;
     text-align: center;
+    padding-top: 10px;
 }
 
 #developers p {
@@ -1138,10 +1141,7 @@ p {
 
 #developers img {
     border-radius: 50%;
-}
-
-#developers .developersRow {
-    margin: 20px 0;
+    width: 215px;
 }
 
 .div-divider {
@@ -3052,6 +3052,10 @@ p {
     width: 20px;
 }
 
+.forumContentContainer {
+    width: 100%;
+}
+
 .forumContent {
     width: 97%;
     padding-left: 5px;
@@ -3325,7 +3329,7 @@ p {
 }
 
 .threadReply .threadReplyLine {
-    margin-left: 40px;
+    margin-left: 47px;
     padding-left: 10px;
     border-left: solid #D0D0D0 2px;
 }
