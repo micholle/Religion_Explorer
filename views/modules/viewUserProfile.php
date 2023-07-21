@@ -1,6 +1,5 @@
 <?php 
 require_once "../../models/explorerPoints.model.php";
-session_start(); 
 if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     // Redirect the user to splash.php
     header("Location: splash.php");
