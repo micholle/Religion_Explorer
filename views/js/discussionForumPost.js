@@ -120,11 +120,23 @@ $(function() {
                     ws.send(JSON.stringify(message));
                     getPosts("", $("#topicId").val());
                 } else {
-                    alert("Error occurred while creating the reply.");
+                    $("#toast").html("Error occurred while creating the reply.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                 }
             },
             error: function() {
-                alert("Error occurred while making the AJAX request.");
+                $("#toast").html("Error occurred while making the AJAX request.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             }
         });
     }
@@ -166,12 +178,24 @@ $(function() {
                     getPosts("", $("#topicId").val());
                 } else {
                     // Error occurred while creating the topic
-                    alert("Error occurred while creating the post.");
+                    $("#toast").html("Error occurred while creating the post.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                 }
             },
             error: function() {
                 // AJAX request failed
-                alert("Error occurred while making the AJAX request.");
+                $("#toast").html("Error occurred while making the AJAX request.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             }
         });
     }
@@ -254,11 +278,23 @@ $(function() {
                     };
                     ws.send(JSON.stringify(message));
                 } else {
-                    alert("Error occurred while deleting the post.");
+                    $("#toast").html("Error occurred while deleting the post.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                 }
             },
             error: function() {
-                alert("Error occurred while making the AJAX request.");
+                $("#toast").html("Error occurred while making the AJAX request.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             }
         });
     }
@@ -278,11 +314,23 @@ $(function() {
                     };
                     ws.send(JSON.stringify(message));
                 } else {
-                    alert("Error occurred while deleting the reply.");
+                    $("#toast").html("Error occurred while deleting the reply.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                 }
             },
             error: function() {
-                alert("Error occurred while making the AJAX request.");
+                $("#toast").html("Error occurred while making the AJAX request.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             }
         });
     }
@@ -301,11 +349,23 @@ $(function() {
                     };
                     ws.send(JSON.stringify(message));
                 } else {
-                    alert("Error occurred while deleting the reply.");
+                    $("#toast").html("Error occurred while deleting the reply.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                 }
             },
             error: function() {
-                alert("Error occurred while making the AJAX request.");
+                $("#toast").html("Error occurred while making the AJAX request.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             }
         });
     }
@@ -347,14 +407,26 @@ $(function() {
             success: function(response) {
                 if (response === 'success') {
                     // Topic updated successfully
-                    alert('Topic updated successfully');
+                    $("#toast").html("Topic updated successfully.")
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
+
                     const message = {
                         type: 'discussion'
                     };
                     ws.send(JSON.stringify(message));
                 } else {
                     // Error occurred while updating the topic
-                    alert('Error occurred while updating the topic');
+                    $("#toast").html("Error occurred while updating the topic.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                 }
             },
             error: function(xhr, status, error) {
@@ -410,12 +482,24 @@ $(function() {
                     ws.send(JSON.stringify(message));
                 } else {
                     // Error occurred while updating the content
-                    alert("Error occurred while updating the content");
+                    $("#toast").html("Error occurred while updating the content.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
                 }
             },
             error: function() {
                 // AJAX request failed
-                alert("Error occurred while making the AJAX request.");
+                $("#toast").html("Error occurred while making the AJAX request.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             }
         });
     }
@@ -461,7 +545,13 @@ $(function() {
                 targetElement.prop('disabled', true);
             } else {
                 // Error occurred while updating the vote count
-                alert('Error occurred while updating the vote count');
+                $("#toast").html("Error occurred while updating the vote count.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             }
         });
     });
@@ -478,7 +568,13 @@ $(function() {
             },
             error: function() {
                 // AJAX request failed
-                alert('Error occurred while updating the vote count');
+                $("#toast").html("Error occurred while updating the vote count.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             }
         });
     }

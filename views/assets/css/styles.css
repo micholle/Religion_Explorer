@@ -3133,6 +3133,7 @@ p {
     padding: 0 10px;
     height: 35px;
     transition: 0.5s ease;
+    cursor: pointer;
 }
 
 .forumPostViewMainInt:hover {

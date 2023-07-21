@@ -270,7 +270,6 @@ $(function() {
                 }
             });
         } else {
-            console.log(contentViolationsArray.length);
             $("#toast").html("Please fill out all required fields.")
             $("#toast").css("background-color", "#E04F5F");
             $("#toast").addClass('show');

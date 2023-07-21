@@ -44,12 +44,24 @@ $(function() {
                   ws.send(JSON.stringify(message));
               } else {
                   // Error occurred while creating the topic
-                  alert("Error occurred while creating the topic.");
+                  $("#toast").html("Error occurred while creating the topic.")
+                  $("#toast").css("background-color", "#E04F5F");
+                  $("#toast").addClass('show');
+              
+                  setTimeout(function() {
+                      $("#toast").removeClass('show');
+                  }, 2000);
               }
           },
           error: function() {
               // AJAX request failed
-              alert("Error occurred while making the AJAX request.");
+              $("#toast").html("Error occurred while making the AJAX request.")
+              $("#toast").css("background-color", "#E04F5F");
+              $("#toast").addClass('show');
+          
+              setTimeout(function() {
+                  $("#toast").removeClass('show');
+              }, 2000);
           }
       });
   }
@@ -160,7 +172,13 @@ $(function() {
               targetElement.prop('disabled', true);
           } else {
               // Error occurred while updating the vote count
-              alert('Error occurred while updating the vote count');
+              $("#toast").html("Error occurred while updating the vote count.")
+              $("#toast").css("background-color", "#E04F5F");
+              $("#toast").addClass('show');
+          
+              setTimeout(function() {
+                  $("#toast").removeClass('show');
+              }, 2000);
           }
       });
   });
@@ -175,7 +193,13 @@ $(function() {
           },
           error: function() {
               // AJAX request failed
-              alert('Error occurred while updating the vote count');
+              $("#toast").html("Error occurred while updating the vote count.")
+              $("#toast").css("background-color", "#E04F5F");
+              $("#toast").addClass('show');
+          
+              setTimeout(function() {
+                  $("#toast").removeClass('show');
+              }, 2000);
           }
       });
   }

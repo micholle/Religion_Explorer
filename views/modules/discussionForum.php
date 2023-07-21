@@ -83,6 +83,8 @@
                 </div>
             </div>
         </div>
+
+        <div id="toast" class="toast"></div>
     </div>
 </body>
 </html>

@@ -202,6 +202,8 @@ require_once "../../models/discussionForumPost.model.php";
                     </div>
                 </div>
             </div>
+
+            <div id="toast" class="toast"></div>
         </div>
     </body>
 </html>
