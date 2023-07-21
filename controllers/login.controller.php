@@ -7,9 +7,13 @@ class ControllerLogin {
         $result = $model->checkCredentials($username, $password);
 
         if ($result === "Success") {
-            // Redirect to map.php
-            header("Location: map.php");
-            exit();
+            if ($_SESSION['acctype'] === 'regular'){
+                header("Location: map.php");
+                exit();
+            } else if ($_SESSION['acctype'] === 'admin'){
+                header("Location: dashboard.php");
+                exit();
+            }
         } elseif ($result === "Invalid credentials") {
             $errorMessage = "Invalid credentials";
         } else {
