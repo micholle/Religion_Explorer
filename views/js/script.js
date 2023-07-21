@@ -1,5 +1,6 @@
 $(function() {
     //sidebar
+    $("#sidebarUsername").text($("#accountUsernamePlaceholder").text());
     $("#minimize").click(function() {
         var currentPage = window.location.pathname.split("/").pop();
         if (currentPage === "map.php") {

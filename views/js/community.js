@@ -73,7 +73,44 @@ $(function() {
         $('#communityModal').show();
     });
 
+    const dropZone = document.getElementById("communityUploadArea");
+    const fileInput = document.getElementById("communityUpload");
+
+    dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZone.classList.add("dragover");
+    });
+
+    dropZone.addEventListener("dragleave", () => {
+        dropZone.classList.remove("dragover");
+    });
+
+    dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropZone.classList.remove("dragover");
+        const files = e.dataTransfer.files;
+        fileInput.files = files;
+
+        handleFileSelection(files);
+    });
+
+    fileInput.addEventListener("change", (e) => {
+        e.preventDefault();
+        const files = e.dataTransfer.files;
+        fileInput.files = files;
+        handleFileSelection(files);
+    });
+
+    function handleFileSelection(files) {
+        const fileName = files[0].name;
+        $("#uploadedFilename").text(fileName);
+    }
+
     $("#communityPublish").click(function(){
+        uploadFile();
+    });
+
+    function uploadFile() {
         var username = $("#accountUsernamePlaceholder").text();
         var title = $("#communityTitle").val();
         var religion = $("#communityCategory").val();
@@ -83,11 +120,13 @@ $(function() {
         var filetype = "";
         var filesize = 0;
 
-        if ( $("#communityUpload")[0].files[0] != null){
+        if ($("#communityUpload")[0].files[0] != null){
             filedata = $("#communityUpload")[0].files[0];
             filename = filedata.name;
             filetype = filedata.type;
             filesize = filedata.size;
+
+            $("#uploadedFilename").text(filename + <button>"X"</button>);
         } else {
             var readingMaterial = new Blob([description], { type: 'text/plain' });
             filesize = readingMaterial.size;
@@ -202,6 +241,7 @@ $(function() {
                             },
                             complete: function() {
                                 $("#communityUpload").val("");
+                                $("#communityUpload").val("");
                                 $("#communityTitle").val("");
                                 $("#communityCategory").val("Religion");
                                 $("#communityDescription").val("");
@@ -225,7 +265,7 @@ $(function() {
             $("#communityCategory").val("Religion");
             $("#communityDescription").val("");
         }
-    });
+    }
 
     document.getElementById("communityPhotosMore").addEventListener("click", function() {
         window.location.href = "communitySubmissions.php?openTab=communitySubPhotos";

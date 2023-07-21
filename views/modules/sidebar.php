@@ -19,7 +19,7 @@ function create_sidebar() {
                     <li>
                         <a id="sidebarProfile" href="userProfile.php">
                             <img src="data:image/png;base64,'. base64_encode($_SESSION['avatar']) .'" class="userSidebarAvatar">
-                            <span class="navItem">Profile</span>
+                            <span id="sidebarUsername" class="navItem"></span>
                         </a>
                     </li>
 

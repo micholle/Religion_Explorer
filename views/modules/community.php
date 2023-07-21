@@ -78,12 +78,13 @@
                     <div class="modal-body">
                         <div class="container">
                             <form id="communityForm" method="post" enctype="multipart/form-data">
-                                <div class="communityUploadArea d-flex justify-content-center align-items-center flex-column">
-                                    <input type="file" class="communityUpload" id="communityUpload" name="communityUpload" multiple accept="image/*, video/*">
+                                <div id="communityUploadArea" class="communityUploadArea d-flex justify-content-center align-items-center flex-column">
+                                    <input type="file" class="communityUpload" id="communityUpload" name="communityUpload" accept="image/*, video/*" hidden>
                                     <label class="button text-center" for="communityUpload">
                                         <img src="../assets/img/community-upload.png" class="commUploadImg"><br>
                                         <p>Choose a file or drag it here.</p>
                                     </label>
+                                    <div id="uploadedFilename">&nbsp;</div>
                                 </div>
                                 <div class="row communityUploadDetails">
                                     <div class="col-8 d-flex justify-content-center align-items-center">
