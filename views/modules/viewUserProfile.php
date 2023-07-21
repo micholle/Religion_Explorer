@@ -1,11 +1,13 @@
 <?php 
-require_once "../../models/explorerPoints.model.php";
+require_once "../../models/viewUserProfile.model.php";
+session_start();
 if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     // Redirect the user to splash.php
     header("Location: splash.php");
     exit(); // Terminate the script to prevent further execution
 }
-
+$accountid = $_GET['accountid'];
+$userData = getUserProfileInfo($accountid);
 ?>
 
 <!DOCTYPE html>
@@ -28,14 +30,14 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 
 <body>
     <div id="viewUserProfileSidebar"></div>
-    <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
-    <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
+    <div id="accountidPlaceholder" hidden><?php echo $accountid; ?></div>
+    <div id="accountUsernamePlaceholder" hidden><?php echo $userData['username']; ?></div>
 
     <div class="pageContainer">
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
                 <div class="col-3 d-flex justify-content-end align-items-end">
-                    <img src="data:image/png;base64,<?php echo base64_encode($_SESSION['avatar']); ?>" class="userProfileAvatar">
+                    <img src="data:image/png;base64,<?php echo base64_encode($userData['avatar']); ?>" class="userProfileAvatar">
                 </div>
 
                 <div class="col-4 userBasicStatsContainer">
@@ -44,8 +46,8 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-start flex-column">
-                                    <h1><?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} else {echo "not logged in";}?></h1>
-                                    <p class="nicknameText">aka <?php echo $_SESSION['username']; ?></p>
+                                    <h1><?php echo $userData['username']; ?></h1>
+                                    <p class="nicknameText">aka <?php echo $userData['nickname']; ?></p>
                                 </div>
                             </div>
 
@@ -55,17 +57,17 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <div class="userBasicStatsOverview userBasicStats row d-flex justify-content-start align-items-center flex-column">
                         <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-clock.png">
-                            <p>Joined <?php echo date('F d, Y', strtotime($_SESSION['accountDate'])); ?></p>
+                            <p>Joined <?php echo date('F d, Y', strtotime($userData['accountDate'])); ?></p>
                         </div>
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-star.png">
-                            <p><?php echo $explorerPoints;?> Explorer Points</p>
+                            <p><?php echo $userData['explorerPoints'];?> Explorer Points</p>
                         </div>
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-feather.png">
-                            <p><?php echo $_SESSION['religion']; ?></p>
+                            <p><?php echo $userData['religion']; ?></p>
                         </div>
                     </div>
                 </div>
@@ -80,8 +82,12 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                 <button class="userProfileTabBtn">Posts</button>
                 <button class="userProfileTabBtn">Comments</button>
                 <button class="userProfileTabBtn">Creations</button>
-                <button class="userProfileTabBtn">Bookmarks</button>
-                <button class="userProfileTabBtn">Personal Calendar</button>
+                <?php if ($userData['displayBookmark'] === '1') { ?>
+                    <button class="userProfileTabBtn">Bookmarks</button>
+                <?php } ?>
+                <?php if ($userData['displayCalendar'] === '1') { ?>
+                    <button class="userProfileTabBtn">Personal Calendar</button>
+                <?php } ?>
                 <button class="userProfileTabBtn">Statistics</button>
                 <button class="userProfileTabBtn">Achievements</button>
             </div>
@@ -158,12 +164,16 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     </div>
                 </div>
 
+                <?php if ($userData['displayBookmark'] === '1') { ?>
                 <div class="userProfileContent">
                     <div id="userProfileBookmarksList"></div>
                 </div>
+                <?php } ?>
 
+                <?php if ($userData['displayCalendar'] === '1') { ?>
                 <div id="calendarDatePlaceHolder" hidden></div>
                 <div class="userProfileContent" id="userProfileCalendar"></div>
+                <?php } ?>
 
                 <div class="userProfileContent">
                     <div class="container mw-100 mh-100">

@@ -487,9 +487,11 @@ function nextMonth(nextMonth, day) {
 }
 
 function getTopics() {
+    const accountId = $("#accountidPlaceholder").text().trim();
     $.ajax({
         url: "../../ajax/profileTopics.ajax.php",
         method: "GET", 
+        data: { accountid: accountId },
         success: function(data) {
             console.log(data);
             $("#profileTopics").html(data);
@@ -505,9 +507,12 @@ function getTopics() {
 
 
 function getPosts() {
+    const accountId = $("#accountidPlaceholder").text().trim();
+
     $.ajax({
         url: "../../ajax/profilePosts.ajax.php",
         method: "GET", 
+        data: { accountid: accountId },
         success: function(data) {
             console.log(data);
             $("#profilePosts").html(data);
@@ -525,6 +530,7 @@ function getOverview() {
     $.ajax({
         url: "../../ajax/profileOverview.ajax.php",
         method: "GET", 
+        data: {"accountid" : $("#accountidPlaceholder").text()},
         success: function(data) {
             $.ajax({
                 url: '../../ajax/getBookmarksData.ajax.php',
