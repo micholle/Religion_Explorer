@@ -89,7 +89,7 @@ function getCreations() {
                                     '<img src="../assets/img/userProfile/photo.png" class="userProfBookmark">' +
                                 '</div>' +
                                 '<div class="bookmarkContent d-flex justify-content-start align-items-center">' +
-                                    '<p>' + photoData + '<p>' +
+                                    '<p>' + photoDetails.title + '<p>' +
                                 '</div>' +
                                 '<p>' + imageSize.toFixed(2) + 'MB <p>' +
                             '</div>' +
@@ -118,7 +118,7 @@ function getCreations() {
                                     '<img src="../assets/img/userProfile/video.png" class="userProfBookmark">' +
                                 '</div>' +
                                 '<div class="bookmarkContent d-flex justify-content-start align-items-center">' +
-                                    '<p>' + videoData + '<p>' +
+                                    '<p>' + videoDetails.title + '<p>' +
                                 '</div>' +
                                 '<p>' + videoSize.toFixed(2) + 'MB <p>' +
                             '</div>' +
@@ -147,7 +147,7 @@ function getCreations() {
                                     '<img src="../assets/img/userProfile/readmat.png" class="userProfBookmark">' +
                                 '</div>' +
                                 '<div class="bookmarkContent d-flex justify-content-start align-items-center">' +
-                                    '<p>' + readingMaterialData + '<p>' +
+                                    '<p>' + readingMaterialDetails.title + '<p>' +
                                 '</div>' +
                                 '<p>' + readingMaterialSize.toFixed(2) + 'KB <p>' +
                             '</div>' +
