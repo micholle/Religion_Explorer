@@ -19,21 +19,28 @@ class notificationsModel {
             if (($notif["username"] == $username) && ($notif["notificationDate"] <= $today)) {
     
                 $notification = "";
-                $notificationMessage = "";
                 $notificationIcon = "";
     
                 if ($notif["notificationSource"] == "Calendar") {
                     $notification = $notif["calendarEvent"];
-                    $notificationMessage = " starts today.";
                     $notificationIcon = "../assets/img/feat-calendar.png";
+                } else if ($notif["notificationSource"] == "Community Creations") {
+                    $stmt2 = $pdo->prepare("SELECT title FROM communitycreations WHERE creationid = :creationid");
+                    $stmt2->bindParam(":creationid", $notif["creationid"], PDO::PARAM_STR);
+                    $stmt2->execute();
+                    $title = $stmt2->fetchColumn();
+
+                    $notification = $title;
+                    $notificationIcon = "../assets/img/diversity.png";
                 }
     
                 $notificationDate = date('m-d-Y', strtotime($notif["notificationDate"]));
-                $notificationsList[$notificationDate] = [
+                $notificationsList[$notif["notificationid"]] = [
+                    "uniqueid" => $notif["creationid"],
                     "notification" => $notification,
-                    "notificationMessage" => $notificationMessage,
                     "notificationIcon" => $notificationIcon,
                     "notificationDate" => $notificationDate,
+                    "personInvolved" => $notif["personInvolved"],
                     "notificationSource" => $notif["notificationSource"]
                 ];
             }

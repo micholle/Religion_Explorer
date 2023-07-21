@@ -277,29 +277,29 @@ $(function() {
                 success:function(data){
                     var libraryData = data;
         
-                    // for (let photo in libraryData["photos"]) {
-                    //     var photoDetails = libraryData["photos"][photo];
+                    for (let photo in libraryData["photos"]) {
+                        var photoDetails = libraryData["photos"][photo];
     
-                    //     if ((photo.toLowerCase()).includes(librarySearchVal) || ((photoDetails.author).toLowerCase()).includes(librarySearchVal) || ((readinphotoDetailsgMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
-                    //         var resourceid = "#" + photoDetails.resourceid;
-                    //         $(resourceid).css("display", "block");
-                    //     } else {
-                    //         var resourceid = "#" + photoDetails.resourceid;
-                    //         $(resourceid).css("display", "none");
-                    //     }
-                    // }
+                        if ((photo.toLowerCase()).includes(librarySearchVal) || ((photoDetails.author).toLowerCase()).includes(librarySearchVal) || ((readinphotoDetailsgMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                            var resourceid = "#" + photoDetails.resourceid;
+                            $(resourceid).css("display", "block");
+                        } else {
+                            var resourceid = "#" + photoDetails.resourceid;
+                            $(resourceid).css("display", "none");
+                        }
+                    }
         
-                    // for (let video in libraryData["videos"]) {
-                    //     var videoDetails = libraryData["videos"][video];
+                    for (let video in libraryData["videos"]) {
+                        var videoDetails = libraryData["videos"][video];
     
-                    //     if ((video.toLowerCase()).includes(librarySearchVal) || ((videoDetails.author).toLowerCase()).includes(librarySearchVal) || ((videoDetails.description).toLowerCase()).includes(librarySearchVal)) {
-                    //         var resourceid = "#" + videoDetails.resourceid;
-                    //         $(resourceid).css("display", "block");
-                    //     } else {
-                    //         var resourceid = "#" + videoDetails.resourceid;
-                    //         $(resourceid).css("display", "none");
-                    //     }
-                    // }
+                        if ((video.toLowerCase()).includes(librarySearchVal) || ((videoDetails.author).toLowerCase()).includes(librarySearchVal) || ((videoDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                            var resourceid = "#" + videoDetails.resourceid;
+                            $(resourceid).css("display", "block");
+                        } else {
+                            var resourceid = "#" + videoDetails.resourceid;
+                            $(resourceid).css("display", "none");
+                        }
+                    }
                     
                     for (let readingMat in libraryData["readingMats"]) {
                         var readingMatDetails = libraryData["readingMats"][readingMat];

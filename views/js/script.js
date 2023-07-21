@@ -1,5 +1,6 @@
 $(function() {
     //sidebar
+    $("#sidebarUsername").text($("#accountUsernamePlaceholder").text());
     $("#minimize").click(function() {
         var currentPage = window.location.pathname.split("/").pop();
         if (currentPage === "map.php") {
@@ -102,34 +103,49 @@ $(function() {
         success: function (data) {
             var notificationData = data;
     
+            var uniqueid = "";
             var notification = "";
-            var notificationMessage = "";
             var notificationIcon = "";
             var notificationDate = "";
+            var personInvolved = "";
             var notificationSource = "";
             $("#notification").html("");
 
             for (notif in notificationData) {
                 notificationDetails = notificationData[notif];
     
+                uniqueid = notificationDetails.uniqueid;
                 notification = notificationDetails.notification;
-                notificationMessage = notificationDetails.notificationMessage;
                 notificationIcon = notificationDetails.notificationIcon;
                 notificationDate = notificationDetails.notificationDate;
+                personInvolved = notificationDetails.personInvolved;
                 notificationSource = notificationDetails.notificationSource;
                 
-                $("#notification").append(
-                    '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick=notificationRedirect(' + "'" + notificationSource + "'" + ')>' +
-                        '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                            '<img src="' + notificationIcon + '">' +
-                        '</div>' +
-                        '<div class="col-10 d-flex flex-column">' +
-                            '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + notification + '</span>' + notificationMessage + '</p>' +
-                            '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
-                        '</div>' +
-                    '</div>'
-                );
-            
+                if (notificationSource == "Calendar") {
+                    $("#notification").append(
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="' + notificationIcon + '">' +
+                            '</div>' +
+                            '<div class="col-10 d-flex flex-column">' +
+                                '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + notification + '</span> starts today.</p>' +
+                                '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                } else if (notificationSource == "Community Creations") {
+                    $("#notification").append(
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="' + notificationIcon + '">' +
+                            '</div>' +
+                            '<div class="col-10 d-flex flex-column">' +
+                                '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span>  has added <span class="notificationsPanelBoldText">"' + notification + '"</span> to their bookmarks.</p>' +
+                                '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                }
             }
         }
     });
@@ -171,14 +187,6 @@ $(function() {
         $('#reportUserModal').modal();
         $('#reportUserModal').show();
     });
-
-    $("#termsOfService").click(function() {
-        window.location.href = "../modules/termsOfService.php";
-    });
-
-    $("#privacyPolicy").click(function() {
-        window.location.href = "../modules/privacyPolicy.php";
-    });  
 
     //sidebar tooltip    
     $("#sidebarProfile").hover(function(){
@@ -278,8 +286,35 @@ $(function() {
     });
 });
 
-function notificationRedirect(notificationSource) {
+function notificationRedirect(uniqueid, notificationSource) {
     if (notificationSource == "Calendar") {
         window.location.replace("calendar.php");
+    } else if (notificationSource == "Community Creations") {
+        $.ajax({
+            url: "../../ajax/getCommunityData.ajax.php",
+            method: "POST",
+            success:function(data){
+                var communityData = data;
+    
+                for (let materialType in communityData) {
+                    for (let type in communityData[materialType]) {
+                        var list = communityData[materialType][type];
+                        for (item in list) {
+                            var details = list[item];
+                            if (details.creationid == uniqueid) {
+                                if ((details.filetype).includes("image")) {
+                                    link = "../modules/communitySubmissions.php?openTab=communitySubPhotos&view=";
+                                } else if ((details.filetype).includes("video")) {
+                                    link = "../modules/communitySubmissions.php?openTab=communitySubVideos&view=";
+                                } else if (details.filetype == ""){
+                                    link = "../modules/communitySubmissions.php?openTab=communitySubBlogs&view=";
+                                }
+                                window.location.href = link + encodeURIComponent(uniqueid);
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
 }

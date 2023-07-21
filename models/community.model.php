@@ -16,8 +16,9 @@ class communityModel{
         foreach ($creations as $creation) {
             if (strpos($creation["filetype"], "image") !== false) {
                 $creationPhotos += [
-                    $creation["title"] => [
+                    $creation["creationid"] => [
                         "creationid" => $creation["creationid"],
+                        "title" => $creation["title"],
                         "author" => $creation["username"],
                         "filedata" => $creation["filedata"],
                         // "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
@@ -32,8 +33,9 @@ class communityModel{
 
             } else if (strpos($creation["filetype"], "video") !== false) {
                 $creationVideos += [
-                    $creation["title"] => [
+                    $creation["creationid"] => [
                         "creationid" => $creation["creationid"],
+                        "title" => $creation["title"],
                         "author" => $creation["username"],
                         "filedata" => $creation["filedata"],
                         // "filedata" => "data:" . $creation["filetype"] . ";base64," . base64_encode($creation["filedata"]),
@@ -48,8 +50,9 @@ class communityModel{
 
             } else if ($creation["filetype"] == ""){
                 $creationReadingMaterials += [
-                    $creation["title"] => [
+                    $creation["creationid"] => [
                         "creationid" => $creation["creationid"],
+                        "title" => $creation["title"],
                         "author" => $creation["username"],
                         "filesize" => $creation["filesize"],
                         "filetype" => "",

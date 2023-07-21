@@ -1,8 +1,4 @@
 $(function() {
-    var bookmarksData = localStorage.getItem("bookmarksData");
-    var bookmarks = bookmarksData ? JSON.parse(bookmarksData) : [];
-    $("#bookmarksPlaceholder").html(bookmarks.join(" "));
-
     $.ajax({
         url: "../../ajax/showSidebar.ajax.php",
         method: "POST",
@@ -20,16 +16,9 @@ $(function() {
                 var photoList = communityData["photos"][photo];
                 for (photoData in photoList) {
                     var photoDetails = photoList[photoData];
-                    var bookmarkIcon = "";
 
                     var [year, month, day] = photoDetails.date.split('-');
                     var formattedDate = `${month}-${day}-${year}`;
-                    
-                    if(($("#bookmarksPlaceholder").text()).includes(photoDetails.creationid)) {
-                        bookmarkIcon = "../assets/img/bookmark-black.png";
-                    } else {
-                        bookmarkIcon = "../assets/img/bookmark-white.png";
-                    }
 
                     var photoDisplay =
                     '<div id="' + photoDetails.creationid + '" class="flex-column libraryMediaContainer libraryWideContainer">' +
@@ -39,7 +28,7 @@ $(function() {
                                     '<div class="col-12">' +
                                         '<div class="row">' +
                                             '<div class="col-12">' +
-                                                '<h1>' + photoData + '</h1>' +
+                                                '<h1>' + photoDetails.title + '</h1>' +
                                             '</div>' +
                                         '</div>' +
                                         '<div class="row">' +
@@ -61,11 +50,11 @@ $(function() {
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 '<img onclick="downloadContent(' + "'" + photoDetails.filedata + '\', \'' + photoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
-                                '<img onclick="reportContent(' + "'" + photoData + '\', \'' + photoDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png">' +
+                                '<img onclick="reportContent(' + "'" + photoDetails.title + '\', \'' + photoDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png">' +
                                 '<img onclick="copyContentLink(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                                '<img onclick="bookmarkContent(this, \'' + photoDetails.creationid + '\', \'' + photoData + '\')" class="libraryActions" src="' + bookmarkIcon + '">' +
+                                '<img id="' + photoDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + photoDetails.creationid + '\', \'' + photoDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
                             '</div>' +
                         '</div>' +
 
@@ -96,7 +85,7 @@ $(function() {
                                     '<div class="col-12">' +
                                         '<div class="row">' +
                                             '<div class="col-12">' +
-                                                '<h1>' + videoData + '</h1>' +
+                                                '<h1>' + videoDetails.title + '</h1>' +
                                             '</div>' +
                                         '</div>' +
                                         '<div class="row">' +
@@ -118,11 +107,11 @@ $(function() {
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 '<img onclick="downloadContent(' + "'" + videoDetails.filedata + '\', \'' + videoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
-                                '<img onclick="reportContent(' + "'" + videoData + '\', \'' + videoDetails.creationid + '\')" class="libraryActions" class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">' +
+                                '<img onclick="reportContent(' + "'" + videoDetails.title + '\', \'' + videoDetails.creationid + '\')" class="libraryActions" class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">' +
                                 '<img onclick="copyContentLink(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                                '<img onclick="bookmarkContent(this, \'' + videoDetails.creationid + '\', \'' + videoData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
+                                '<img id="' + videoDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + videoDetails.creationid + '\', \'' + videoDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
                             '</div>' +
                         '</div>' +
 
@@ -154,7 +143,7 @@ $(function() {
                                     '<div class="col-12">' +
                                         '<div class="row">' +
                                             '<div class="col-12 d-flex">' +
-                                                '<h1>' + readingMaterialData + '</h1>' +
+                                                '<h1>' + readingMaterialDetails.title + '</h1>' +
                                                 '<div class="libraryReadMatsTag" style="margin-left: 5px">' + readingMaterialDetails.religion + '</div>' +
                                             '</div>' +
                                         '</div>' +
@@ -171,11 +160,11 @@ $(function() {
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 // '<img class="libraryActions" src="../assets/img/download.png">' +
-                                '<img onclick="reportContent(' + "'" + readingMaterialData + '\', \'' + readingMaterialDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' +
+                                '<img onclick="reportContent(' + "'" + readingMaterialDetails.title + '\', \'' + readingMaterialDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' +
                                 '<img onclick="copyContentLink(' + "'" + readingMaterialDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
-                                '<img onclick="bookmarkContent(this, \'' + readingMaterialDetails.creationid + '\', \'' + readingMaterialData + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
+                                '<img id="' + readingMaterialDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + readingMaterialDetails.creationid + '\', \'' + readingMaterialDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' +
                             '</div>' +
                         '</div>' +
 
@@ -189,20 +178,12 @@ $(function() {
 
                     $("#communitySubBlogs").append(readingMaterialsDisplay);
 
-                    // var jsonTopics = JSON.parse(readingMaterialDetails.topics)
-
-                    // var formattedTopics = "";
-                    // jsonTopics.forEach(topic => {
-                    //     formattedTopics += '<div class="libraryReadMatsTag" style="margin: 3px">' + topic + '</div>';
-                    // });
-
-                    // var showReadingMaterial = "<div class='communityReadingMaterials' onclick='viewContent(\"" + readingMaterialDetails.contentid + "\")'>" + readingMaterialData + " | " + "<div class='libraryReadMatsTag' style='margin: 3px'>" + readingMaterialDetails.religion + "</div>" + formattedTopics + "</div><div>" + readingMaterialDetails.author + " | " + formattedDate+ "<br>" + readingMaterialDetails.description + "</div> <br>"
-                    // $("#communityReadingMaterials").append(showReadingMaterial);
-
                 }
             }            
         }
     });
+
+    setBookmark();
 
     $("#submitReportContent").click(function(event) {    
         event.preventDefault();
@@ -373,7 +354,7 @@ $(function() {
                             for (photoData in photoList) {
                                 var photoDetails = photoList[photoData];
         
-                                if ((photoData).includes(communitySearchVal) || ((photoDetails.religion).toLowerCase()).includes(communitySearchVal) || ((photoDetails.description).toLowerCase()).includes(communitySearchVal) || ((photoDetails.author).toLowerCase()).includes(communitySearchVal)) {
+                                if ((photoDetails.title).includes(communitySearchVal) || ((photoDetails.religion).toLowerCase()).includes(communitySearchVal) || ((photoDetails.description).toLowerCase()).includes(communitySearchVal) || ((photoDetails.author).toLowerCase()).includes(communitySearchVal)) {
                                     var creationid = "#" + photoDetails.creationid;
                                     $(creationid).css("display", "block");
                                 } else {
@@ -390,7 +371,7 @@ $(function() {
                             for (videoData in videoList) {
                                 var videoDetails = videoList[videoData];
         
-                                if ((videoData).includes(communitySearchVal) || ((videoDetails.religion).toLowerCase()).includes(communitySearchVal) || ((videoDetails.description).toLowerCase()).includes(communitySearchVal) || ((videoDetails.author).toLowerCase()).includes(communitySearchVal)) {
+                                if ((photoDetails.title).includes(communitySearchVal) || ((videoDetails.religion).toLowerCase()).includes(communitySearchVal) || ((videoDetails.description).toLowerCase()).includes(communitySearchVal) || ((videoDetails.author).toLowerCase()).includes(communitySearchVal)) {
                                     var creationid = "#" + videoDetails.creationid;
                                     $(creationid).css("display", "block");
                                 } else {
@@ -407,7 +388,7 @@ $(function() {
                             for (readingMaterialData in readingMaterialList) {
                                 var readingMaterialDetails = readingMaterialList[readingMaterialData];
         
-                                if ((readingMaterialData).includes(communitySearchVal) || ((readingMaterialDetails.religion).toLowerCase()).includes(communitySearchVal) || ((readingMaterialDetails.description).toLowerCase()).includes(communitySearchVal) || ((readingMaterialDetails.author).toLowerCase()).includes(communitySearchVal)) {
+                                if ((readingMaterialDetails.title).includes(communitySearchVal) || ((readingMaterialDetails.religion).toLowerCase()).includes(communitySearchVal) || ((readingMaterialDetails.description).toLowerCase()).includes(communitySearchVal) || ((readingMaterialDetails.author).toLowerCase()).includes(communitySearchVal)) {
                                     var creationid = "#" + readingMaterialDetails.creationid;
                                     $(creationid).css("display", "block");
                                 } else {
@@ -502,6 +483,24 @@ function copyContentLink(file) {
     setTimeout(function() {
         $('#toast').removeClass('show');
     }, 2000);
+}
+
+function setBookmark() {
+    $.ajax({
+        url: "../../ajax/getBookmarksData.ajax.php",
+        method: "POST",
+        data: {"accountid" : $("#accountidPlaceholder").text()},
+        success:function(data){
+            var bookmarksList = data;
+
+            for (let bookmark in bookmarksList) {
+                var bookmarkDetails = bookmarksList[bookmark];
+                
+                var creationid = "#" + bookmarkDetails["resourceid"] + "Bookmark";
+                $(creationid).attr("src", "../assets/img/bookmark-black.png");
+            }
+        }
+    });
 }
 
 function bookmarkContent(thisIcon, creationid, title) {

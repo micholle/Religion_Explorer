@@ -7,9 +7,9 @@
         <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
 
+        <script type="text/javascript" src="../js/script.js"></script>
         <script type="text/javascript" src="../js/community.js"></script>
         <script type="text/javascript" src="../js/communitySubmissions.js"></script>
-        <script type="text/javascript" src="../js/script.js"></script>
 
         <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
         <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
@@ -67,6 +67,7 @@
                 </div>
             </div>
         </div>
+        <div id="toast" class="toast"></div>
 
         <!-- Modal -->
         <div class="modal fade" id="communityModal">
@@ -78,12 +79,13 @@
                     <div class="modal-body">
                         <div class="container">
                             <form id="communityForm" method="post" enctype="multipart/form-data">
-                                <div class="communityUploadArea d-flex justify-content-center align-items-center flex-column">
-                                    <input type="file" class="communityUpload" id="communityUpload" name="communityUpload" multiple accept="image/*, video/*">
+                                <div id="communityUploadArea" class="communityUploadArea d-flex justify-content-center align-items-center flex-column">
+                                    <input type="file" class="communityUpload" id="communityUpload" name="communityUpload" onchange="handleFiles()" accept="image/*, video/*" hidden>
                                     <label class="button text-center" for="communityUpload">
                                         <img src="../assets/img/community-upload.png" class="commUploadImg"><br>
                                         <p>Choose a file or drag it here.</p>
                                     </label>
+                                    <div id="uploadedFilename">&nbsp;</div>
                                 </div>
                                 <div class="row communityUploadDetails">
                                     <div class="col-8 d-flex justify-content-center align-items-center">
@@ -133,3 +135,10 @@
         </div>
     </body>
 </html>
+
+<script>
+        function handleFiles() {
+        const fileName = $("#communityUpload")[0].files[0].name;
+        $("#uploadedFilename").text(fileName);
+    }
+</script>
