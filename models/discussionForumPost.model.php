@@ -1,6 +1,5 @@
 <?php
 require_once "connection.php";
-session_start();
 // Retrieve the topic ID from the query parameter
 $topicId = isset($_GET['topicId']) ? $_GET['topicId'] : '';
 

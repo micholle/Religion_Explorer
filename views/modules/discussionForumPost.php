@@ -1,5 +1,11 @@
 <?php
+session_start();
 require_once "../../models/discussionForumPost.model.php";
+if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
+    // Redirect the user to splash.php
+    header("Location: splash.php");
+    exit(); // Terminate the script to prevent further execution
+}
 ?>
 
 
