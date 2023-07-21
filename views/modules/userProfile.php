@@ -102,7 +102,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                             <p>0</p>
                         </div>
                         <div class="forumContentContainer">
-                            <div class="forumContent">
+                            <!-- <div class="forumContent">
                                 <h1>[Placeholder Title]</h1>
                                 <div class="row">
                                     <div class="col-12 d-flex flex-row">
@@ -110,9 +110,9 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     </div>
                                 </div>
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae!</p>
-                            </div>
+                            </div> -->
                             <div class="forumPostContainer">
-                                <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">
+                                <!-- <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">
                                     <img src="../assets/img/discussionForum/upvote.png">
                                     <p class="upvotes">0</p>
                                     <img src="../assets/img/discussionForum/downvote.png">
@@ -125,7 +125,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                         </div>
                                     </div>
                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae! Nisi, officiis nihil veritatis cumque aspernatur error. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, culpa sed cumque facilis doloremque aliquam sint labore natus amet earum totam aperiam quae!</p>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
