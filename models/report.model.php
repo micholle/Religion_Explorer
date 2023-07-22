@@ -248,6 +248,133 @@ class reportUserModel {
 		$pdo = null;
 		$stmt = null;
     }
+
+    //report action
+    static public function mdlSuspendUser($data) {
+        $db = new Connection();
+        $pdo = $db->connect();
+        switch ($data["suspendusertime"]) {
+            case "Hours":
+                $interval = "HOUR";
+                break;
+            case "Days":
+                $interval = "DAY";
+                break;
+            case "Weeks":
+                $interval = "WEEK";
+                break;
+            case "Months":
+                $interval = "MONTH";
+                break;
+            case "Years":
+                $interval = "YEAR";
+                break;
+            default:
+                // Default to hours if the unit is not recognized
+                $interval = "HOUR";
+                break;
+        }
+    
+        try {
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
+    
+            // Check if the user already has a status record in the table
+            $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM accounts_status WHERE accountid = :accountid");
+            $stmtCheck->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
+            $stmtCheck->execute();
+            $recordExists = $stmtCheck->fetchColumn();
+    
+            if ($recordExists) {
+                // If the user already has a status record, update it
+                $stmt = $pdo->prepare("UPDATE accounts_status SET status = 'Suspended', startDate = NOW(), endDate = DATE_ADD(NOW(), INTERVAL :suspenduserval $interval) WHERE accountid = :accountid");
+            } else {
+                // If the user doesn't have a status record, insert a new one
+                $stmt = $pdo->prepare("INSERT INTO accounts_status (accountid, status, startDate, endDate) VALUES (:accountid, 'Suspended', NOW(), DATE_ADD(NOW(), INTERVAL :suspenduserval $interval))");
+            }
+    
+            $stmt->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
+            $stmt->bindParam(":suspenduserval", $data["suspenduserval"], PDO::PARAM_INT);
+            $stmt->execute();
+    
+            $username = self::mdlGetUsernameByUserID($data["userid"]);
+    
+            // Update the reportedusers table with actionTaken and reportStatus
+            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Suspend', reportStatus = 'Completed' WHERE username = :username");
+            $updateStmt->bindParam(":username", $username, PDO::PARAM_STR);
+            $updateStmt->execute();
+    
+            $pdo->commit();
+            return "ok";
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return "error";
+        } finally {
+            $pdo = null;
+            $stmt = null;
+            $stmtCheck = null;
+        }
+    }
+    
+    
+
+    static public function mdlBanUser($data) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
+
+            $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM accounts_status WHERE accountid = :accountid");
+            $stmtCheck->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
+            $stmtCheck->execute();
+            $recordExists = $stmtCheck->fetchColumn();
+
+            if ($recordExists) {
+                $stmt = $pdo->prepare("UPDATE accounts_status SET status = 'Banned', startDate = NOW() WHERE accountid = :accountid");
+            } else {
+                $stmt = $pdo->prepare("INSERT INTO accounts_status (accountid, status, startDate) VALUES (:accountid, 'Banned', NOW())");
+            }
+
+            $stmt->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
+            $stmt->execute();
+
+            $username = self::mdlGetUsernameByUserID($data["userid"]);
+
+            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Ban', reportStatus = 'Completed' WHERE username = :username");
+            $updateStmt->bindParam(":username", $username, PDO::PARAM_STR);
+            $updateStmt->execute();
+
+            $pdo->commit();
+            return "ok";
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return "error";
+        }
+
+        $pdo = null;
+        $stmt = null;
+    }
+
+    static public function mdlGetUsernameByUserID($userid) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $stmt = $pdo->prepare("SELECT username FROM accounts WHERE accountid = :userid");
+            $stmt->bindParam(":userid", $userid, PDO::PARAM_STR);
+            $stmt->execute();
+            $username = $stmt->fetchColumn();
+
+            return $username;
+        } catch (Exception $e) {
+            return null;
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
 }
 
 ?>
