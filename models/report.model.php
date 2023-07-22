@@ -11,30 +11,66 @@ class reportContentModel {
         $reportedContent = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
         $reportedContents = [];
-        $contentCreator = "";
-        $contentLink = "";
     
         foreach ($reportedContent as $content) {  
             if ($content["reportStatus"] == "Pending") {
-
+                $contentCreator = "";
+                $contentLink = "";
+                
                 if (substr($content["contentid"], 0, 2) == "CC") {
-                    $stmt2 = $pdo->prepare("SELECT creationid, title, accountid, filetype FROM communitycreations");
+                    $stmt2 = $pdo->prepare("SELECT accountid, filetype FROM communitycreations WHERE creationid = :creationid");
+                    $stmt2->bindParam(":creationid", $content["contentid"], PDO::PARAM_STR);
                     $stmt2->execute();
                     $communityCreations = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-                    // contentLink
-        
+                    
                     foreach ($communityCreations as $creation) {
-                        if ($creation["creationid"] == $content["contentid"]) {
-                            $contentCreator = $creation["accountid"];
-                            break;
+                        $contentCreator = $creation["accountid"];
+                    
+                        if ($creation["filetype"] == "") {
+                            $contentLink = "communitySubmissions.php?openTab=communitySubBlogs&view=";
+                        } else {
+                            if (strpos($creation["filetype"], "image") !== false) {
+                                $contentLink = "communitySubmissions.php?openTab=communitySubPhotos&view=";
+                            } else if (strpos($creation["filetype"], "video") !== false) {
+                                $contentLink = "communitySubmissions.php?openTab=communitySubVideos&view=";
+                            }
                         }
-                    }
+                    } 
+                } else {
+                    $forum_stmt = $pdo->prepare("SELECT t.accountid AS topic_accountid, p.accountid AS post_accountid, r.accountid AS reply_accountid
+                                                    FROM topics AS t
+                                                    JOIN posts AS p ON t.topicId = p.topicId
+                                                    JOIN reply AS r ON p.postId = r.postId
+                                                    WHERE t.topicId = :topicId");
+                    $forum_stmt->bindParam(":topicId", $content["contentid"], PDO::PARAM_INT);
+                    $forum_stmt->execute();
+                    $forumInfo = $forum_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    $topicAccountID = "";
+                    $postAccountID = "";
+                    $replyAccountID = "";
+
+                    foreach ($forumInfo as $info) {
+                        $topicAccountID = $info["topic_accountid"];
+                        $postAccountID = $info["post_accountid"];
+                        $replyAccountID = $info["reply_accountid"];
+
+                        if($topicAccountID != "") {
+                            $contentCreator = $topicAccountID;
+                        } else if ($postAccountID != "") {
+                            $contentCreator = $postAccountID;
+                        } else if ($replyAccountID != "") {
+                            $contentCreator = $replyAccountID;
+                        }
+                    } 
+                    
+                    $contentLink = "discussionForumPost.php?topicId=";
                 }
 
-                $stmt3 = $pdo->prepare("SELECT username FROM accounts WHERE accountid = :accountid");
-                $stmt3->bindParam(":accountid", $content["reportedBy"], PDO::PARAM_STR);
-                $stmt3->execute();
-                $reportedBy = $stmt3->fetchColumn();
+                $accounts_stmt = $pdo->prepare("SELECT username FROM accounts WHERE accountid = :accountid");
+                $accounts_stmt->bindParam(":accountid", $content["reportedBy"], PDO::PARAM_STR);
+                $accounts_stmt->execute();
+                $reportedBy = $accounts_stmt->fetchColumn();
 
                 $reportedContents[$content["reportid"]] = [
                     "contentid" => $content["contentid"],

@@ -97,7 +97,6 @@ $(function() {
             var contentForReview = data;
 
             var contentid = "";
-            var contentLink = "";
             var violations = "";
             var additionalContext = "";
             var reportedOn = "";
@@ -119,7 +118,7 @@ $(function() {
                 contentCreator = contentDetails.contentCreator;
                 contentLink = contentDetails.contentLink;
                 
-                $("#contentidColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center text-center"> <a href="' + "http://localhost/religion_explorer/views/modules/communitySubmissions.php/" + contentid + '">' + contentid + '</a> </div>');
+                $("#contentidColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center text-center"> <a href="' + contentLink + contentid + '">' + contentid + '</a> </div>');
                 $("#violationColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
                 $("#additionalContextColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
                 $("#reportedOnColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
