@@ -103,6 +103,7 @@ $(function() {
             var reportedOn = "";
             var reportedBy = "";
             var contentCreator = "";
+            var contentLink = "";
 
             for (content in contentForReview) {
                 var contentDetails = contentForReview[content];
@@ -110,16 +111,15 @@ $(function() {
                 var [year, month, day] = contentDetails.reportedOn.split('-');
                 var formattedDate = `${month}-${day}-${year}`;
 
-                contentid = content;
-                contentLink = contentDetails.contentLink;
+                contentid = contentDetails.contentid;
                 violations = contentDetails.violation;
                 additionalContext = contentDetails.additionalContext;
                 reportedOn = formattedDate;
                 reportedBy = contentDetails.reportedBy;
                 contentCreator = contentDetails.contentCreator;
+                contentLink = contentDetails.contentLink;
                 
-                $("#contentidColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + contentid + '</p> </div>');
-                $("#contentLinkColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center text-center"> <a href="' + "http://localhost/religion_explorer/views/modules/communitySubmissions.php/" + contentid + '">' + contentLink + '</a> </div>');
+                $("#contentidColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center text-center"> <a href="' + "http://localhost/religion_explorer/views/modules/communitySubmissions.php/" + contentid + '">' + contentid + '</a> </div>');
                 $("#violationColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
                 $("#additionalContextColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
                 $("#reportedOnColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');

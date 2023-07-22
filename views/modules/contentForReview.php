@@ -54,11 +54,6 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     <p>Content ID</p>
                                 </div>
                             </div>
-                            <div id="contentLinkColumn" class="col-2">
-                                <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
-                                    <p>Content Link</p>
-                                </div>
-                            </div>
                             <div id="violationColumn" class="col-2">
                                 <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
                                     <p>Content Violation</p>
@@ -69,7 +64,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     <p>Additional Context</p>
                                 </div>
                             </div>
-                            <div id="reportedOnColumn" class="col-1">
+                            <div id="reportedOnColumn" class="col-2">
                                 <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
                                     <p>Reported On</p>
                                 </div>
@@ -79,7 +74,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     <p>Reported By</p>
                                 </div>
                             </div>
-                            <div id="actionColumn" class="col-1">
+                            <div id="actionColumn" class="col-2">
                                 <div class="adminReviewContainerHeader d-flex justify-content-center align-items-center">
                                     <p>Action</p>
                                 </div>

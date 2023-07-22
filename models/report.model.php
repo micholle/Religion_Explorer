@@ -11,33 +11,39 @@ class reportContentModel {
         $reportedContent = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
         $reportedContents = [];
-        $contentLink = "";
         $contentCreator = "";
+        $contentLink = "";
     
         foreach ($reportedContent as $content) {  
             if ($content["reportStatus"] == "Pending") {
 
                 if (substr($content["contentid"], 0, 2) == "CC") {
-                    $stmt2 = $pdo->prepare("SELECT creationid, title, username FROM communitycreations");
+                    $stmt2 = $pdo->prepare("SELECT creationid, title, accountid, filetype FROM communitycreations");
                     $stmt2->execute();
                     $communityCreations = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                    // contentLink
         
                     foreach ($communityCreations as $creation) {
                         if ($creation["creationid"] == $content["contentid"]) {
-                            $contentLink = $creation["title"];
-                            $contentCreator = $creation["username"];
+                            $contentCreator = $creation["accountid"];
                             break;
                         }
                     }
                 }
 
-                $reportedContents[$content["contentid"]] = [
+                $stmt3 = $pdo->prepare("SELECT username FROM accounts WHERE accountid = :accountid");
+                $stmt3->bindParam(":accountid", $content["reportedBy"], PDO::PARAM_STR);
+                $stmt3->execute();
+                $reportedBy = $stmt3->fetchColumn();
+
+                $reportedContents[$content["reportid"]] = [
+                    "contentid" => $content["contentid"],
                     "contentCreator" => $contentCreator,
                     "contentLink" => $contentLink,
                     "violation" => $content["contentViolations"],
                     "additionalContext" => $content["additionalContext"],
                     "reportedOn" => $content["reportedOn"],
-                    "reportedBy" => $content["reportedBy"]
+                    "reportedBy" => $reportedBy
                 ];   
             }
         }

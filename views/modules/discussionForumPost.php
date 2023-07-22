@@ -20,7 +20,6 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/7.0.3/pusher.min.js"></script>
 
-        <script type="text/javascript" src="../js/discussionForumPost.js"></script>
         <script type="text/javascript" src="../js/script.js"></script>
 
         <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
@@ -102,7 +101,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                         echo '</div>';
                                     }
                                     if ($_SESSION['acctype'] === 'regular') {
-                                        echo '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="reportPostBtn">';
+                                        echo '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" onclick="reportContent(\'' . $topicId . '\')">';
                                         echo '<img src="../assets/img/discussionForum/report.png" class="commentIcon">';
                                         echo '<p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
                                         echo '</div>';
@@ -151,6 +150,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     </div>
                 </div>
             </div>
+            <div id="toast" class="toast"></div>
             
             <!--Modals-->
             <div class="modal fade" id="confirmDeleteModal">
@@ -183,44 +183,63 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                             <div class="container d-flex justify-content-center align-items-center flex-column">
                                 <h5 class="modal-title w-100">Report Content</h5>
                                 <div id="reportContentHeader"></div>
+                                <div id="reportContentid" hidden></div>
                             </div>
                         </div>
 
                         <div class="modal-body">
                             <div class="container">
-                                <form id="reportContentForm" method="post">
-                                    <div class="row">
-                                        <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form id="reportContentForm" method="post" required>
                                             <p class="reportDescription">As accurately as you can, please tell us what happened.</p>
-                                            <input type="checkbox" id="privacy violation" name="privacy violation" value="privacy violation">
-                                            <label for="privacy violation">Privacy Violation</label><br>
-                                            <input type="checkbox" id="misinformation" name="misinformation" value="misinformation">
-                                            <label for="misinformation">Misinformation</label><br>
-                                            <input type="checkbox" id="graphic content" name="graphic content" value="graphic content">
-                                            <label for="graphic content">Graphic Content</label><br>
-                                            <input type="checkbox" id="offensive language" name="offensive language" value="offensive language">
-                                            <label for="offensive language">Offensive Language</label><br>
-                                            <input type="checkbox" id="spam" name="spam" value="spam">
-                                            <label for="spam">Spam or Unwanted Content</label><br>
-                                            <input type="checkbox" id="others" name="others" value="others">
-                                            <label for="others">Others, specify:</label><br>
-                                            <input id="othersSpecify" class="inputVariant" name="othersSpecify"><br>
-                                        </div>
+                                            <input type="checkbox" id="contentPrivacyViolation" name="contentPrivacyViolation" value="Privacy Violation">
+                                            <label for="contentPrivacyViolation">Privacy Violation</label><br>
+                                            <input type="checkbox" id="contentMisinformation" name="contentPrivacyViolation" value="Misinformation">
+                                            <label for="contentMisinformation">Misinformation</label><br>
+                                            <input type="checkbox" id="contentGraphicContent" name="contentPrivacyViolation" value="Graphic Content">
+                                            <label for="contentGraphicContent">Graphic Content</label><br>
+                                            <input type="checkbox" id="contentOffensiveLanguage" name="contentPrivacyViolation" value="Offensive Language">
+                                            <label for="contentOffensiveLanguage">Offensive Language</label><br>
+                                            <input type="checkbox" id="contentSpam" name="contentPrivacyViolation" value="Spam or Unwanted Content">
+                                            <label for="contentSpam">Spam or Unwanted Content</label><br>
+                                            <label for="contentOthers">Others, specify:</label><br>
+                                            <input id="contentOthers" class="inputVariant"><br>
+                                        </form>    
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                            <textarea id="reportContentAdditional" name="reportContentAdditional" placeholder="Give additional context."></textarea><br>
-                                            <button type="button" id="submitReportContent" class="roundedButton">Send</button>
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <textarea id="reportContentAdditional" placeholder="Give additional context."></textarea><br>
+                                        <button type="submit" id="submitReportContent" class="roundedButton">Send</button>
                                     </div>
-                                </form>    
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="toast" class="toast"></div>
+            <div class="modal fade" id="reportContentNotice">
+                <div id class="modal-dialog modal-xs modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <img id="reportContentIcon" src="" height="80px" width="80px">
+                                        <h5 id="reportContentStatus" class="modal-title w-100"></h5>
+                                        <p  id="reportContentMessage" class="text-center"></p>
+                                        <button type="button" id="reportContentNoticeButton" class="roundedButton" data-dismiss="modal">Thanks!</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+        <script type="text/javascript" src="../js/discussionForumPost.js"></script>
     </body>
 </html>

@@ -215,10 +215,9 @@ $(function() {
         }
     
         if (contentViolationsArray.length != 0) {
-            console.log("Content Violations Array is not empty!");
             var reportedContentid = $("#reportContentid").text();
             var additionalContext = $("#reportContentAdditional").val();
-            var reportedBy = $("#accountUsernamePlaceholder").text();
+            var reportedBy = $("#accountidPlaceholder").text();
             
             var currentDate = new Date();
             var year = currentDate.getFullYear();
