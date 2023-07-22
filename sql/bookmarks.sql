@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2023 at 06:16 PM
+-- Generation Time: Jul 22, 2023 at 10:40 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bookmarks` (
   `bookmarkid` int(11) NOT NULL,
-  `accountid` text NOT NULL,
+  `accountid` varchar(5) NOT NULL,
   `resourceid` text NOT NULL,
   `resourceTitle` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -42,7 +42,8 @@ CREATE TABLE `bookmarks` (
 -- Indexes for table `bookmarks`
 --
 ALTER TABLE `bookmarks`
-  ADD PRIMARY KEY (`bookmarkid`);
+  ADD PRIMARY KEY (`bookmarkid`),
+  ADD KEY `accountid` (`accountid`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -53,6 +54,16 @@ ALTER TABLE `bookmarks`
 --
 ALTER TABLE `bookmarks`
   MODIFY `bookmarkid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bookmarks`
+--
+ALTER TABLE `bookmarks`
+  ADD CONSTRAINT `bookmarks_ibfk_1` FOREIGN KEY (`accountid`) REFERENCES `accounts` (`accountid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2023 at 03:24 PM
+-- Generation Time: Jul 22, 2023 at 10:42 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `personalcalendar` (
-  `personaleventid` int(11) NOT NULL,
+  `personaleventid` varchar(19) NOT NULL,
   `accountid` varchar(5) NOT NULL,
-  `event` varchar(255) NOT NULL,
+  `event` text NOT NULL,
   `religion` varchar(15) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -43,17 +43,8 @@ CREATE TABLE `personalcalendar` (
 -- Indexes for table `personalcalendar`
 --
 ALTER TABLE `personalcalendar`
-  ADD PRIMARY KEY (`personaleventid`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `personalcalendar`
---
-ALTER TABLE `personalcalendar`
-  MODIFY `personaleventid` int(11) NOT NULL AUTO_INCREMENT;
+  ADD PRIMARY KEY (`personaleventid`),
+  ADD KEY `accountid` (`accountid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

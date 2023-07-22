@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2023 at 09:55 PM
+-- Generation Time: Jul 22, 2023 at 10:41 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -29,10 +29,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `notifications` (
   `notificationid` int(11) NOT NULL,
-  `username` text NOT NULL,
-  `calendarEvent` text DEFAULT NULL,
+  `accountid` varchar(5) NOT NULL,
+  `personaleventid` varchar(19) DEFAULT NULL,
+  `creationid` varchar(19) DEFAULT NULL,
+  `topicid` int(8) DEFAULT NULL,
+  `postid` int(8) DEFAULT NULL,
+  `replyid` int(8) DEFAULT NULL,
+  `personInvolved` varchar(5) DEFAULT NULL,
   `notificationSource` text NOT NULL,
-  `notificationDate` date NOT NULL
+  `notificationDate` date NOT NULL,
+  `notificationStatus` text NOT NULL DEFAULT 'Unread'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -43,7 +49,13 @@ CREATE TABLE `notifications` (
 -- Indexes for table `notifications`
 --
 ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`notificationid`);
+  ADD PRIMARY KEY (`notificationid`),
+  ADD KEY `accountid` (`accountid`),
+  ADD KEY `postId` (`postid`),
+  ADD KEY `replyId` (`replyid`),
+  ADD KEY `personInvolved` (`personInvolved`),
+  ADD KEY `creationid` (`creationid`),
+  ADD KEY `personaleventid` (`personaleventid`);
 
 --
 -- AUTO_INCREMENT for dumped tables
