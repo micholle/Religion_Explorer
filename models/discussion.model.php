@@ -660,6 +660,7 @@ class ModelDiscussion {
     public function mdlAddReplyUpvote($replyId, $accountId) {
         $db = new Connection();
         $pdo = $db->connect();
+        $notificationDate = date('Y-m-d');
     
         try {
             $stmt = $pdo->prepare("INSERT INTO reply_votes (replyId, accountid, voteType) VALUES (:replyId, :accountId, 'upvote')");
@@ -681,7 +682,7 @@ class ModelDiscussion {
             $notifications_stmt->bindParam(":replyid", $replyId, PDO::PARAM_STR);
             $notifications_stmt->bindParam(":personInvolved", $accountId, PDO::PARAM_STR);
             $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Posts Upvote", PDO::PARAM_STR);
-            $notifications_stmt->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":notificationDate", $notificationDate, PDO::PARAM_STR);
             $notifications_stmt->execute();
     
             return true; // Upvote added successfully
