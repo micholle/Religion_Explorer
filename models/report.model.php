@@ -11,24 +11,33 @@ class reportContentModel {
         $reportedContent = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
         $reportedContents = [];
-        $contentCreator = "";
-        $contentLink = "";
     
         foreach ($reportedContent as $content) {  
-            if ($content["reportStatus"] == "Pending") {
+            $contentCreator = "";
+            $contentLink = "";
 
-                if (substr($content["contentid"], 0, 2) == "CC") {
-                    $stmt2 = $pdo->prepare("SELECT creationid, title, accountid, filetype FROM communitycreations");
+            if ($content["reportStatus"] == "Pending") {
+                if (substr($content["contentid"], 0, 2) === "CC") {
+                    $stmt2 = $pdo->prepare("SELECT * FROM communitycreations WHERE creationid = :creationid");
+                    $stmt2->bindParam(":creationid", $content["contentid"], PDO::PARAM_STR);
                     $stmt2->execute();
                     $communityCreations = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-                    // contentLink
         
                     foreach ($communityCreations as $creation) {
-                        if ($creation["creationid"] == $content["contentid"]) {
-                            $contentCreator = $creation["accountid"];
-                            break;
+                        $contentCreator = $creation["accountid"];
+
+                        if ($creation["filetype"] == "") {
+                            $contentLink = "communitySubmissions.php?openTab=communitySubBlogs&view=";
+                        } else {
+                            if (strpos($creation["filetype"], "image") != false) {
+                                $contentLink = "communitySubmissions.php?openTab=communitySubPhotos&view=";
+                            } else if (strpos($creation["filetype"], "video") != false) {
+                                $contentLink = "communitySubmissions.php?openTab=communitySubVideos&view=";
+                            }
                         }
                     }
+                } else {
+                    $contentLink = "discussionForumPost.php?topicId=";
                 }
 
                 $stmt3 = $pdo->prepare("SELECT username FROM accounts WHERE accountid = :accountid");
