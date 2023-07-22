@@ -22,6 +22,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 </head>
 <body>
     <div id="discussionForumSidebar"></div>
+    <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
     <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
     <div class="pageContainer">

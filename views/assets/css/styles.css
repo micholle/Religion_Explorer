@@ -76,6 +76,10 @@ h5 {
     background: rgba(255, 255, 255, 0.5);
 }
 
+.custom-popover-content {
+    font-family: "Lexend" !important;
+}
+
 /* map slider */
 
 .mapSlider {

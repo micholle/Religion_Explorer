@@ -24,42 +24,84 @@ $(function() {
             });
         }
     });
-    
-    
-    
-    
-    
-    //report content modal
-    $("#reportPostBtn").click(function(){
-        $('#reportContentModal').modal();
-        $('#reportContentModal').show();
-    });
 
     $(document).on('click', '#reportCommentBtn', function() {
         $('#reportContentModal').modal('show');
     });
 
-    $('#submitReportContent').click(function() {
-        var modalBody = $('#reportContentModal');
-      
-        modalBody.html(`
-        <div class="modal-dialog modal-xs modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <img src="../assets/img/verification-check.png" height="80px" width="80px">
-                                <h5 class="modal-title w-100">Report Received</h5>
-                                <p>The team will review your complaint. Please expect a notification in 3-5 business days.</p>
-                                <button type="button" id="" class="roundedButton" data-dismiss="modal">Thanks!</button></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        `);
+    $('#submitReportContent').click(function(event) {
+        event.preventDefault();
+        
+        var contentViolationsArray = []; 
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                contentViolationsArray.push(checkbox.value);
+            }
+        });
+    
+        if ($("#contentOthers").val() != "") {
+            contentViolationsArray.push($("#contentOthers").val());
+        }
+    
+        if (contentViolationsArray.length != 0) {
+            var reportedContentid = $("#reportContentid").text();
+            var additionalContext = $("#reportContentAdditional").val();
+            var reportedBy = $("#accountidPlaceholder").text();
+            
+            var currentDate = new Date();
+            var year = currentDate.getFullYear();
+            var month = String(currentDate.getMonth() + 1).padStart(2, '0');
+            var day = String(currentDate.getDate()).padStart(2, '0');
+            var reportedOn = `${year}-${month}-${day}`;
+            var contentViolations = contentViolationsArray.join(', ');
+
+            reportData = new FormData();
+            reportData.append("contentid" , reportedContentid);
+            reportData.append("contentViolations" , contentViolations);
+            reportData.append("additionalContext", additionalContext);
+            reportData.append("reportedOn", reportedOn);
+            reportData.append("reportedBy", reportedBy);
+    
+            $.ajax({
+                url: "../../ajax/submitReportContent.ajax.php",
+                method: "POST",
+                data: reportData,
+                dataType: "text",
+                processData: false,
+                contentType: false,
+                success: function() {
+                    $("#reportContentIcon").attr("src", "../assets/img/verification-check.png");
+                    $("#reportContentStatus").text("Report Received");
+                    $("#reportContentMessage").text("The team will review your complaint. Please expect a notification in 3-5 business days.");
+                },
+                error: function() {
+                    $("#reportContentIcon").attr("src", "../assets/img/verification-error.png");
+                    $("#reportContentStatus").text("Error");
+                    $("#reportContentMessage").text("There was an error processing your request. Please try again later.");
+                    $("#reportContentNoticeButton").css("background-color", "#E04F5F");
+                },
+                complete: function() {
+                    $("#reportContentModal").removeClass("fade").modal("hide");
+                    $("#reportContentModal").modal("dispose");
+            
+                    $("#reportContentNotice").modal();
+                    $("#reportContentNotice").show();
+
+                    $("#reportContentForm")[0].reset();
+                    $("#reportContentAdditional").val("");
+                }
+            });
+        } else {
+            $("#toast").html("Please fill out all required fields.")
+            $("#toast").css("background-color", "#E04F5F");
+            $("#toast").addClass('show');
+        
+            setTimeout(function() {
+                $("#toast").removeClass('show');
+            }, 2000);
+        }
     });
 
     function initializeReplyButtons() {
@@ -765,6 +807,11 @@ $(function() {
                 // Redirect to viewUserProfile.php with the accountId
                 window.location.href = 'viewUserProfile.php?accountid=' + accountId;
             });
-        }
-        
+        }   
 });
+
+function reportContent(contentid) {
+    $("#reportContentid").text(contentid);
+    $('#reportContentModal').modal();
+    $('#reportContentModal').show();
+}

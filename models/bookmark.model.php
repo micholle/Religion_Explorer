@@ -41,23 +41,20 @@ class bookmarkModel{
 			$stmt->bindParam(":resourceTitle", $resourceTitle, PDO::PARAM_STR);
 			$stmt->execute();
 
-            $stmt2 = $pdo->prepare("SELECT username FROM accounts WHERE accountid = :accountid");
-            $stmt2->bindParam(":accountid", $accountid, PDO::PARAM_STR);
-            $stmt2->execute();
-            $username = $stmt2->fetchColumn();
-
-            $stmt3 = $pdo->prepare("SELECT username FROM communitycreations WHERE creationid = :creationid");
-            $stmt3->bindParam(":creationid", $resourceid, PDO::PARAM_STR);
-            $stmt3->execute();
-            $personInvolved = $stmt3->fetchColumn();
-    
-            $stmt4 = $pdo->prepare("INSERT INTO notifications(username, creationid, personInvolved, notificationSource, notificationDate) VALUES (:username, :creationid, :personInvolved, :notificationSource, :notificationDate)");
-            $stmt4->bindParam(":username", $username, PDO::PARAM_STR);
-            $stmt4->bindParam(":creationid", $resourceid, PDO::PARAM_STR);
-            $stmt4->bindParam(":personInvolved", $personInvolved, PDO::PARAM_STR);
-            $stmt4->bindValue(":notificationSource", "Community Creations", PDO::PARAM_STR);
-            $stmt4->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
-            $stmt4->execute();
+            if (substr($resourceid, 0, 2) == "CC") {
+                $stmt3 = $pdo->prepare("SELECT accountid FROM communitycreations WHERE creationid = :creationid");
+                $stmt3->bindParam(":creationid", $resourceid, PDO::PARAM_STR);
+                $stmt3->execute();
+                $personInvolved = $stmt3->fetchColumn();
+        
+                $stmt4 = $pdo->prepare("INSERT INTO notifications(accountid, creationid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :creationid, :personInvolved, :notificationSource, :notificationDate)");
+                $stmt4->bindParam(":accountid", $personInvolved, PDO::PARAM_STR);
+                $stmt4->bindParam(":creationid", $resourceid, PDO::PARAM_STR);
+                $stmt4->bindParam(":personInvolved", $accountid, PDO::PARAM_STR);
+                $stmt4->bindValue(":notificationSource", "Community Creations", PDO::PARAM_STR);
+                $stmt4->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
+                $stmt4->execute();
+            }
 	
 			$pdo->commit();
 			return "success";

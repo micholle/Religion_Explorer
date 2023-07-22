@@ -207,6 +207,23 @@ class ModelDiscussion {
             $stmt->bindParam(":postContent", $data["postContent"], PDO::PARAM_STR);
             $stmt->bindParam(":topicId", $data["topicId"], PDO::PARAM_STR);
             $stmt->execute();
+
+            //Notify owner of topic that someone posted a comment
+
+            //get accountid of topic owner
+            $topic_stmt = $pdo->prepare("SELECT accountid FROM topics WHERE topicId = :topicId");
+            $topic_stmt->bindParam(":topicId", $data["topicId"], PDO::PARAM_STR);
+            $topic_stmt->execute();
+            $topicOwner = $topic_stmt->fetchColumn();
+            
+            //add to notifications
+            $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, postid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :postid, :personInvolved, :notificationSource, :notificationDate)");
+            $notifications_stmt->bindParam(":accountid", $topicOwner, PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":postid", $postId, PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":personInvolved", $data["accountid"], PDO::PARAM_STR);
+            $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Posts", PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
+            $notifications_stmt->execute();
     
             return true; // Discussion created successfully
         } catch (Exception $e) {
@@ -264,6 +281,23 @@ class ModelDiscussion {
             $stmt->bindParam(":replyContent", $data["replyContent"], PDO::PARAM_STR);
             $stmt->bindParam(":postId", $data["postId"], PDO::PARAM_STR);
             $stmt->execute();
+
+            //Notify owner of topic that someone posted a reply to their comment
+
+            //get accountid of post owner
+            $post_stmt = $pdo->prepare("SELECT accountid FROM posts WHERE postId = :postId");
+            $post_stmt->bindParam(":postId", $data["postId"], PDO::PARAM_STR);
+            $post_stmt->execute();
+            $postOwner = $post_stmt->fetchColumn();
+            
+            //add to notifications
+            $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, replyid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :replyid, :personInvolved, :notificationSource, :notificationDate)");
+            $notifications_stmt->bindParam(":accountid", $postOwner, PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":replyid", $replyId, PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":personInvolved", $data["accountid"], PDO::PARAM_STR);
+            $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Replies", PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
+            $notifications_stmt->execute();
     
             return true; // Reply created successfully
         } catch (Exception $e) {
@@ -356,6 +390,11 @@ class ModelDiscussion {
             // Enable foreign key checks
             $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=1");
             $stmt->execute();
+
+            // Delete from notifications
+            $stmt = $pdo->prepare("DELETE FROM notifications WHERE postid = :postid");
+            $stmt->bindParam(":postid", $postId, PDO::PARAM_INT);
+            $stmt->execute();
             
             return true; // Post deleted successfully
         } catch (Exception $e) {
@@ -402,6 +441,11 @@ class ModelDiscussion {
             // Enable foreign key checks
             $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=1");
             $stmt->execute();
+
+            // Delete from notifications
+            $stmt = $pdo->prepare("DELETE FROM notifications WHERE topicid = :topicid");
+            $stmt->bindParam(":topicid", $topicId, PDO::PARAM_INT);
+            $stmt->execute();
     
             return true; // Topic, posts, and replies deleted successfully
         } catch (Exception $e) {
@@ -436,6 +480,11 @@ class ModelDiscussion {
             
             // Enable foreign key checks
             $stmt = $pdo->prepare("SET FOREIGN_KEY_CHECKS=1");
+            $stmt->execute();
+
+            // Delete from notifications
+            $stmt = $pdo->prepare("DELETE FROM notifications WHERE replyid = :replyid");
+            $stmt->bindParam(":replyid", $replyId, PDO::PARAM_INT);
             $stmt->execute();
             
             return true; // Reply deleted successfully
@@ -559,6 +608,23 @@ class ModelDiscussion {
             $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
+
+            //Notify owner of post that someone upvoted
+
+            //get accountid of post owner
+            $post_stmt = $pdo->prepare("SELECT accountid FROM posts WHERE postId = :postId");
+            $post_stmt->bindParam(":postId", $postId, PDO::PARAM_STR);
+            $post_stmt->execute();
+            $postOwner = $post_stmt->fetchColumn();
+            
+            //add to notifications
+            $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, postid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :postid, :personInvolved, :notificationSource, :notificationDate)");
+            $notifications_stmt->bindParam(":accountid", $postOwner, PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":postid", $postId, PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":personInvolved", $accountId, PDO::PARAM_STR);
+            $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Posts Upvote", PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
+            $notifications_stmt->execute();
     
             return true; // Upvote added successfully
         } catch (Exception $e) {
@@ -597,6 +663,23 @@ class ModelDiscussion {
             $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
+
+            //Notify owner of reply that someone upvoted
+
+            //get accountid of reply owner
+            $reply_stmt = $pdo->prepare("SELECT accountid FROM reply WHERE replyId = :replyId");
+            $reply_stmt->bindParam(":replyId", $replyId, PDO::PARAM_STR);
+            $reply_stmt->execute();
+            $replyOwner = $reply_stmt->fetchColumn();
+            
+            //add to notifications
+            $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, replyid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :replyid, :personInvolved, :notificationSource, :notificationDate)");
+            $notifications_stmt->bindParam(":accountid", $replyOwner, PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":replyid", $replyId, PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":personInvolved", $accountId, PDO::PARAM_STR);
+            $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Posts Upvote", PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
+            $notifications_stmt->execute();
     
             return true; // Upvote added successfully
         } catch (Exception $e) {
@@ -635,6 +718,11 @@ class ModelDiscussion {
             $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
+
+            // Delete from notifications
+            $stmt = $pdo->prepare("DELETE FROM notifications WHERE postid = :postid AND notificationSource = 'Discussion Forum Topics Upvote' ");
+            $stmt->bindParam(":postid", $postId, PDO::PARAM_INT);
+            $stmt->execute();
     
             return true; // Upvote removed successfully
         } catch (Exception $e) {
@@ -672,6 +760,11 @@ class ModelDiscussion {
             $stmt = $pdo->prepare("DELETE FROM reply_votes WHERE replyId = :replyId AND accountid = :accountId AND voteType = 'upvote'");
             $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+
+            // Delete from notifications
+            $stmt = $pdo->prepare("DELETE FROM notifications WHERE replyid = :replyid AND notificationSource = 'Discussion Forum Replies Upvote' ");
+            $stmt->bindParam(":replyid", $replyId, PDO::PARAM_INT);
             $stmt->execute();
     
             return true; // Upvote removed successfully
@@ -862,6 +955,23 @@ class ModelDiscussion {
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
 
+            //Notify owner of topic that someone upvoted
+
+            //get accountid of topic owner
+            $topic_stmt = $pdo->prepare("SELECT accountid FROM topics WHERE topicId = :topicId");
+            $topic_stmt->bindParam(":topicId", $topicId, PDO::PARAM_STR);
+            $topic_stmt->execute();
+            $topicOwner = $topic_stmt->fetchColumn();
+            
+            //add to notifications
+            $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, topicid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :topicid, :personInvolved, :notificationSource, :notificationDate)");
+            $notifications_stmt->bindParam(":accountid", $topicOwner, PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":topicid", $topicId, PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":personInvolved", $accountId, PDO::PARAM_STR);
+            $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Posts Upvote", PDO::PARAM_STR);
+            $notifications_stmt->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
+            $notifications_stmt->execute();
+
             return true; // Upvote added successfully
         } catch (Exception $e) {
             return false; // Error occurred while adding the upvote
@@ -898,6 +1008,11 @@ class ModelDiscussion {
             $stmt = $pdo->prepare("DELETE FROM topic_votes WHERE topicId = :topicId AND accountid = :accountId");
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
+            $stmt->execute();
+
+            // Delete from notifications
+            $stmt = $pdo->prepare("DELETE FROM notifications WHERE topicid = :topicid AND notificationSource = 'Discussion Forum Topics Upvote' ");
+            $stmt->bindParam(":topicid", $topicId, PDO::PARAM_INT);
             $stmt->execute();
 
             return true; // Vote removed successfully
