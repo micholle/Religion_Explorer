@@ -3,7 +3,7 @@ require_once "../controllers/community.controller.php";
 
 class communityAjax {
   public $creationid;
-  public $username;
+  public $accountid;
   public $title;
   public $religion;
   public $description;
@@ -16,7 +16,7 @@ class communityAjax {
 
   public function ajaxSubmitCreation() {
     $creationid = $this->creationid;
-    $username = $this->username;
+    $accountid = $this->accountid;
     $title = $this->title;
     $religion = $this->religion;
     $description = $this->description;
@@ -29,7 +29,7 @@ class communityAjax {
 
     $data = array(
       "creationid" => $creationid,
-      "username" => $username,
+      "accountid" => $accountid,
       "title" => $title,
       "religion" => $religion,
       "description" => $description,
@@ -53,7 +53,7 @@ move_uploaded_file($tname, $filepath);
 
 $submitCreation = new communityAjax();
 $submitCreation->creationid = $creationid;
-$submitCreation->username = $_POST["username"];
+$submitCreation->accountid = $_POST["accountid"];
 $submitCreation->title = $_POST["title"];
 $submitCreation->religion = $_POST["religion"];
 $submitCreation->description = $_POST["description"];

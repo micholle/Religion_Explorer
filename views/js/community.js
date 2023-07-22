@@ -108,7 +108,7 @@ $(function() {
     }
 
     $("#communityPublish").click(function(){
-        var username = $("#accountUsernamePlaceholder").text();
+        var accountid = $("#accountidPlaceholder").text();
         var title = $("#communityTitle").val();
         var religion = $("#communityCategory").val();
         var description = $("#communityDescription").val();
@@ -209,7 +209,7 @@ $(function() {
                             
                         } else {
                             var creation = new FormData();
-                            creation.append("username", username);
+                            creation.append("accountid", accountid);
                             creation.append("title", title);
                             creation.append("religion", religion);
                             creation.append("description", description);

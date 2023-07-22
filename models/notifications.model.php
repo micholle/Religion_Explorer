@@ -3,44 +3,97 @@ require_once "connection.php";
 
 class notificationsModel {
 
-    static public function mdlGetNotifications($username) {
+    static public function mdlGetNotifications($accountid) {
         $db = new Connection();
         $pdo = $db->connect();
-    
-        $stmt = $pdo->prepare("SELECT * FROM notifications ORDER BY notificationDate DESC");
-        $stmt->execute();
-        $userNotifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $notifications_stmt = $pdo->prepare("SELECT * FROM notifications WHERE accountid = :accountid");
+        $notifications_stmt->bindParam(":accountid", $accountid, PDO::PARAM_STR);
+        $notifications_stmt->execute();
+        $userNotifications = $notifications_stmt->fetchAll(PDO::FETCH_ASSOC);
         $notificationsList = [];
     
-        $currentTimestamp = time();
-        $today = date('Y-m-d', $currentTimestamp);
-    
+        $today = date("Y-m-d");
+
         foreach ($userNotifications as $notif) {
-            if (($notif["username"] == $username) && ($notif["notificationDate"] <= $today)) {
-    
+            if ($notif["notificationDate"] <= $today) {
+                $uniqueid = "";
                 $notification = "";
                 $notificationIcon = "";
+                $personInvolved = "";
     
                 if ($notif["notificationSource"] == "Calendar") {
-                    $notification = $notif["calendarEvent"];
+                    $stmt = $pdo->prepare("SELECT c.event, cc.title, a.username
+                                          FROM notifications AS n
+                                          JOIN personalcalendar AS c ON n.personaleventid = c.personaleventid
+                                          LEFT JOIN communitycreations AS cc ON n.creationid = cc.creationid
+                                          LEFT JOIN accounts AS a ON n.personInvolved = a.accountid
+                                          WHERE n.notificationid = :notificationid");
+                    $stmt->bindParam(":notificationid", $notif["notificationid"], PDO::PARAM_STR);
+                    $stmt->execute();
+                    $notificationInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+                    
+                    $notification = $notificationInfo["event"];
                     $notificationIcon = "../assets/img/feat-calendar.png";
                 } else if ($notif["notificationSource"] == "Community Creations") {
-                    $stmt2 = $pdo->prepare("SELECT title FROM communitycreations WHERE creationid = :creationid");
-                    $stmt2->bindParam(":creationid", $notif["creationid"], PDO::PARAM_STR);
-                    $stmt2->execute();
-                    $title = $stmt2->fetchColumn();
-
-                    $notification = $title;
+                    $uniqueid = $notif["creationid"];
+                    
+                    $stmt = $pdo->prepare("SELECT cc.title, a.username
+                                          FROM notifications AS n
+                                          LEFT JOIN personalcalendar AS c ON n.personaleventid = c.personaleventid
+                                          JOIN communitycreations AS cc ON n.creationid = cc.creationid
+                                          LEFT JOIN accounts AS a ON n.personInvolved = a.accountid
+                                          WHERE n.notificationid = :notificationid");
+                    $stmt->bindParam(":notificationid", $notif["notificationid"], PDO::PARAM_STR);
+                    $stmt->execute();
+                    $notificationInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+                    
+                    $notification = $notificationInfo["title"];
                     $notificationIcon = "../assets/img/diversity.png";
+                    
+                    $personInvolved = $notificationInfo["username"];
+                } else if ($notif["notificationSource"] == "Discussion Forum Posts") {
+                    $stmt = $pdo->prepare("SELECT p.topicId, t.topicTitle, a.username
+                                            FROM notifications AS n
+                                            LEFT JOIN posts AS p ON n.postid = p.postId
+                                            LEFT JOIN topics AS t ON p.topicId = t.topicId
+                                            LEFT JOIN accounts AS a ON n.personInvolved = a.accountid
+                                            WHERE n.notificationid = :notificationid");
+                    $stmt->bindParam(":notificationid", $notif["notificationid"], PDO::PARAM_STR);
+                    $stmt->execute();
+                    $notificationInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+                    
+                    $uniqueid = $notificationInfo["topicId"];
+                    $notification = $notificationInfo["topicTitle"];
+                    $notificationIcon = "../assets/img/discussionForum/comments.png";
+                    $personInvolved = $notificationInfo["username"];
+                } else if ($notif["notificationSource"] == "Discussion Forum Replies") {
+                    $stmt = $pdo->prepare("SELECT p.topicId, t.topicTitle, a.username
+                                            FROM notifications AS n
+                                            LEFT JOIN reply AS r ON n.replyid = r.replyId
+                                            LEFT JOIN posts AS p ON r.postid = p.postId
+                                            LEFT JOIN topics AS t ON p.topicId = t.topicId
+                                            LEFT JOIN accounts AS a ON n.personInvolved = a.accountid
+                                            WHERE n.notificationid = :notificationid");
+                    $stmt->bindParam(":notificationid", $notif["notificationid"], PDO::PARAM_STR);
+                    $stmt->execute();
+                    $notificationInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+                    
+                    $uniqueid = $notificationInfo["topicId"];
+                    $notification = $notificationInfo["topicTitle"];
+                    $notificationIcon = "../assets/img/discussionForum/comments.png";
+                    $personInvolved = $notificationInfo["username"];
                 }
+                
+                
     
                 $notificationDate = date('m-d-Y', strtotime($notif["notificationDate"]));
                 $notificationsList[$notif["notificationid"]] = [
-                    "uniqueid" => $notif["creationid"],
+                    "uniqueid" => $uniqueid,
                     "notification" => $notification,
                     "notificationIcon" => $notificationIcon,
                     "notificationDate" => $notificationDate,
-                    "personInvolved" => $notif["personInvolved"],
+                    "personInvolved" => $personInvolved,
                     "notificationSource" => $notif["notificationSource"]
                 ];
             }

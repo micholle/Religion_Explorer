@@ -40,25 +40,23 @@ class personalCalendarModel{
     static public function mdlAddToPersonalCalendar($data) {
         $db = new Connection();
         $pdo = $db->connect();
+        $personaleventid = "PC" . uniqid();
+
         try {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->beginTransaction();
         
-            $stmt = $pdo->prepare("INSERT INTO personalCalendar(accountid, event, religion, date) VALUES (:accountid, :event, :religion, :date)");
+            $stmt = $pdo->prepare("INSERT INTO personalCalendar(personaleventid, accountid, event, religion, date) VALUES (:personaleventid, :accountid, :event, :religion, :date)");
+            $stmt->bindParam(":personaleventid", $personaleventid, PDO::PARAM_STR);
             $stmt->bindParam(":accountid", $data["accountid"], PDO::PARAM_STR);
             $stmt->bindParam(":event", $data["event"], PDO::PARAM_STR);
             $stmt->bindParam(":religion", $data["religion"], PDO::PARAM_STR);
             $stmt->bindParam(":date", $data["date"], PDO::PARAM_STR);
             $stmt->execute();
     
-            $stmt2 = $pdo->prepare("SELECT username FROM accounts WHERE accountid = :accountid");
-            $stmt2->bindParam(":accountid", $data["accountid"], PDO::PARAM_STR);
-            $stmt2->execute();
-            $username = $stmt2->fetchColumn();
-    
-            $stmt3 = $pdo->prepare("INSERT INTO notifications(username, calendarEvent, notificationSource, notificationDate) VALUES (:username, :calendarEvent, :notificationSource, :notificationDate)");
-            $stmt3->bindParam(":username", $username, PDO::PARAM_STR);
-            $stmt3->bindParam(":calendarEvent", $data["event"], PDO::PARAM_STR);
+            $stmt3 = $pdo->prepare("INSERT INTO notifications(accountid, personaleventid, notificationSource, notificationDate) VALUES (:accountid, :personaleventid, :notificationSource, :notificationDate)");
+            $stmt3->bindParam(":accountid", $data["accountid"], PDO::PARAM_STR);
+            $stmt3->bindParam(":personaleventid", $personaleventid, PDO::PARAM_STR);
             $stmt3->bindValue(":notificationSource", "Calendar", PDO::PARAM_STR);
             $stmt3->bindParam(":notificationDate", $data["date"], PDO::PARAM_STR);
             $stmt3->execute();
@@ -79,20 +77,20 @@ class personalCalendarModel{
         $pdo = $db->connect();
     
         try {
-            $stmt = $pdo->prepare("SELECT event FROM personalcalendar WHERE personaleventid = :personaleventid");
-            $stmt->bindParam(":personaleventid", $personaleventid, PDO::PARAM_INT);
-            $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt3 = $pdo->prepare("DELETE FROM notifications WHERE personaleventid = :personaleventid");
+            $stmt3->bindParam(":personaleventid", $personaleventid, PDO::PARAM_STR);
+            $stmt3->execute();
 
-            echo $row["event"];            
+            $stmt = $pdo->prepare("SELECT event FROM personalcalendar WHERE personaleventid = :personaleventid");
+            $stmt->bindParam(":personaleventid", $personaleventid, PDO::PARAM_STR);
+            $stmt->execute();
+            $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $stmt2 = $pdo->prepare("DELETE FROM personalcalendar WHERE personaleventid = :personaleventid");
-            $stmt2->bindParam(":personaleventid", $personaleventid, PDO::PARAM_INT);
+            $stmt2->bindParam(":personaleventid", $personaleventid, PDO::PARAM_STR);
             $stmt2->execute();
 
-            $stmt3 = $pdo->prepare("DELETE FROM notifications WHERE calendarEvent = :calendarEvent");
-            $stmt3->bindParam(":calendarEvent", $row["event"], PDO::PARAM_INT);
-            $stmt3->execute();
+            echo $event["event"];
 
             return "success";
         } catch (Exception $e) {

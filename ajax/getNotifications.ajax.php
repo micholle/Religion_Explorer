@@ -2,16 +2,16 @@
 require_once "../controllers/notifications.controller.php";
 
 class notificationsAjax{
-    public $username;
+    public $accountid;
 
     public function ajaxGetNotifications(){
-        $username = $this->username;
-        $answer = (new notificationsController) -> ctrGetNotifications($username);
+        $accountid = $this->accountid;
+        $answer = (new notificationsController) -> ctrGetNotifications($accountid);
     }
 }
 
 $getMapData = new notificationsAjax();
-$getMapData->username = $_POST["username"];
+$getMapData->accountid = $_POST["accountid"];
 $getMapData -> ajaxGetNotifications();
 
 ?>

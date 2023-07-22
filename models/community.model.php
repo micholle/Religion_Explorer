@@ -6,7 +6,9 @@ class communityModel{
 		$db = new Connection();
         $pdo = $db->connect();
         
-        $stmt = $pdo->prepare("SELECT creationid, username, title, religion, description, filename, filetype, filesize, filedata, status, date FROM communitycreations");
+        $stmt = $pdo->prepare("SELECT cc.creationid, a.username, cc.title, cc.religion, cc.description, cc.filename, cc.filetype, cc.filesize, cc.filedata, cc.status, cc.date 
+                                FROM communitycreations cc
+                                INNER JOIN accounts a ON cc.accountid = a.accountid");
         $stmt->execute();
         $creations = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $creationPhotos = [];
@@ -83,10 +85,10 @@ class communityModel{
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->beginTransaction();
 		
-			$stmt = $pdo->prepare("INSERT INTO communitycreations(creationid, username, title, religion, description, filename, filetype, filesize, filedata, status, date) VALUES (:creationid, :username, :title, :religion, :description, :filename, :filetype, :filesize, :filedata, :status, :date)");
+			$stmt = $pdo->prepare("INSERT INTO communitycreations(creationid, accountid, title, religion, description, filename, filetype, filesize, filedata, status, date) VALUES (:creationid, :accountid, :title, :religion, :description, :filename, :filetype, :filesize, :filedata, :status, :date)");
 	
             $stmt->bindParam(":creationid", $data["creationid"], PDO::PARAM_STR);
-            $stmt->bindParam(":username", $data["username"], PDO::PARAM_STR);
+            $stmt->bindParam(":accountid", $data["accountid"], PDO::PARAM_STR);
             $stmt->bindParam(":title", $data["title"], PDO::PARAM_STR);
             $stmt->bindParam(":religion", $data["religion"], PDO::PARAM_STR);
             $stmt->bindParam(":description", nl2br(htmlspecialchars($data["description"])), PDO::PARAM_STR);
