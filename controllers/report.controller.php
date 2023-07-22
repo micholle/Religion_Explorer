@@ -30,6 +30,14 @@ class reportUserController {
   static public function ctrSubmitReportUser($data){
 	  $answer = (new reportUserModel)->mdlSubmitReportUser($data);
   }
+
+  static public function ctrSuspendUser($data) {
+    $answer = (new reportUserModel)->mdlSuspendUser($data);
+  }
+
+  static public function ctrBanUser($data) {
+      $answer = (new reportUserModel)->mdlBanUser($data);
+  }
 }
 
 ?>
