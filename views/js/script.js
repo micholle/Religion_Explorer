@@ -172,6 +172,42 @@ $(function() {
                                 '</div>' +
                             '</div>'
                         );
+                    } else if (notificationSource == "Discussion Forum Topics Upvote") {
+                        $("#notification").append(
+                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                    '<img src="' + notificationIcon + '">' +
+                                '</div>' +
+                                '<div class="col-10 d-flex flex-column">' +
+                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and [] others upvoted your post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                                '</div>' +
+                            '</div>'
+                        );
+                    } else if (notificationSource == "Discussion Forum Posts Upvote") {
+                        $("#notification").append(
+                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                    '<img src="' + notificationIcon + '">' +
+                                '</div>' +
+                                '<div class="col-10 d-flex flex-column">' +
+                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and [] others upvoted your comment: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                                '</div>' +
+                            '</div>'
+                        );
+                    } else if (notificationSource == "Discussion Forum Replies Upvote") {
+                        $("#notification").append(
+                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                    '<img src="' + notificationIcon + '">' +
+                                '</div>' +
+                                '<div class="col-10 d-flex flex-column">' +
+                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and [] others upvoted your reply: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                                '</div>' +
+                            '</div>'
+                        );
                     }
                 } 
             }
@@ -353,7 +389,7 @@ function notificationRedirect(uniqueid, notificationSource) {
                 }
             }
         });
-    } else if ((notificationSource == "Discussion Forum Posts") || (notificationSource == "Discussion Forum Replies")) {
+    } else if (notificationSource.includes("Discussion Forum")) {
         window.location.replace("discussionForumPost.php?topicId=" + uniqueid);
     }
 }
