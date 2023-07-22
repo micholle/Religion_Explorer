@@ -20,13 +20,30 @@ class ControllerLogin {
                 } elseif ($_SESSION['displayPage'] === '0') {
                     $displayPage = "map.php";
                 }
-
+                
                 header("Location: " . $displayPage);
                 exit();
             } else if ($_SESSION['acctype'] === 'admin'){
                 header("Location: dashboard.php");
                 exit();
             }
+        } elseif ($result === "Account suspended") {
+            $errorMessage = "Your account is currently suspended. You can log in again in ";
+
+            if ($_SESSION['daysLeft'] > 0) {
+                $errorMessage .= $_SESSION['daysLeft'] . " days";
+            } elseif ($_SESSION['hoursLeft'] > 0) {
+                $errorMessage .= $_SESSION['hoursLeft'] . " hours";
+            } elseif ($_SESSION['minutesLeft'] > 0) {
+                $errorMessage .= $_SESSION['minutesLeft'] . " minutes";
+            } else {
+                $errorMessage .= $_SESSION['secondsLeft'] . " seconds";
+            }
+
+            $errorMessage .= ".";
+
+        } elseif ($result === "Account banned") {
+            $errorMessage = "Account was banned";
         } elseif ($result === "Invalid credentials") {
             $errorMessage = "Invalid credentials";
         } else {

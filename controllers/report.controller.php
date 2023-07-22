@@ -38,6 +38,10 @@ class reportUserController {
   static public function ctrBanUser($data) {
       $answer = (new reportUserModel)->mdlBanUser($data);
   }
+
+  static public function ctrResolveUser($data) {
+    $answer = (new reportUserModel)->mdlResolveUser($data);
+}
 }
 
 ?>

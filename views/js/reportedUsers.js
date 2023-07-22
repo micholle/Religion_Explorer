@@ -174,13 +174,19 @@ $(function() {
     });
 
     $("#confirmResolveUserReport").click(function () { 
-        var userid = $("#resolveReportUserid").text();
+        var userID = $("#resolveReportUserid").text();
         
         $.ajax({
-            url: "../../ajax/sample.ajax.php", //insert ajax
-            method: "POST",
-            data: {},
+            type: "POST",
+            url: "../../ajax/reportAction.ajax.php",
+            data: {
+                action: "resolve",
+                userid: userID
+            },
             success:function(){
+                getReportedUsers();
+                $("#resolveUserModal").removeClass("fade").modal("hide");
+                $("#resolveUserModal").modal("dispose");
                 $("#toast").html("Report resolved.");
             }, error: function() {
                 $("#toast").html("There was an error processing your request. Please try again later.")

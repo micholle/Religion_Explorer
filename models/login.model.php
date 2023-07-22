@@ -5,16 +5,49 @@ class ModelLogin {
     public function checkCredentials($username, $password) {
         $db = new Connection();
         $pdo = $db->connect();
-
+    
         try {
+            // Check if the user is suspended or banned
+            $statusStmt = $pdo->prepare("SELECT status, endDate FROM accounts_status WHERE accountid IN (SELECT accountid FROM accounts WHERE username = :username OR email = :email)");
+            $statusStmt->bindParam(":username", $username, PDO::PARAM_STR);
+            $statusStmt->bindParam(":email", $username, PDO::PARAM_STR);
+            $statusStmt->execute();
+            $statusResult = $statusStmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($statusResult) {
+                if ($statusResult['status'] === 'Suspended') {
+                    // Check if the user's suspension period has expired
+                    date_default_timezone_set('Asia/Manila');
+                    $endDate = new DateTime($statusResult['endDate']);
+                    $currentTime = new DateTime();
+                    if ($currentTime < $endDate) {
+                        session_start();
+                        $timeLeft = $endDate->diff($currentTime);
+
+                        $_SESSION['daysLeft'] = $timeLeft->d;
+                        $_SESSION['hoursLeft'] = $timeLeft->h;
+                        $_SESSION['minutesLeft'] = $timeLeft->i;
+                        $_SESSION['secondsLeft'] = $timeLeft->s;
+
+                        // The user is still suspended
+                        return "Account suspended";
+                    } else {
+                        // The suspension period has expired, continue with login check
+                    }
+                } elseif ($statusResult['status'] === 'Banned') {
+                    // The user is banned
+                    return "Account banned";
+                }
+            }            
+    
             $stmt = $pdo->prepare("SELECT * FROM accounts WHERE (username = :username OR email = :email)");
             $stmt->bindParam(":username", $username, PDO::PARAM_STR);
             $stmt->bindParam(":email", $username, PDO::PARAM_STR);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    
             if ($user && password_verify($password, $user['password'])) {
-                // Credentials are valid
+                // Credentials are valid, and the user is not suspended or banned
                 session_start();
                 $_SESSION['accountid'] = $user['accountid'];
                 $_SESSION['username'] = $user['username'];
@@ -33,5 +66,5 @@ class ModelLogin {
             // Error occurred
             return "Error";
         }
-    }
+    }    
 }

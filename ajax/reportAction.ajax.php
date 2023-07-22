@@ -42,6 +42,24 @@ if (isset($_POST["action"])) {
         } else {
             echo "error";
         }
+    } elseif ($_POST["action"] === "resolve") {
+        if (isset($_POST["userid"])) {
+            $userID = $_POST["userid"];
+
+            $data = array(
+                "userid" => $userID
+            );
+
+            $answer = reportUserController::ctrResolveUser($data);
+
+            if ($answer === "ok") {
+                echo "ok";
+            } else {
+                echo "error";
+            }
+        } else {
+            echo "error";
+        }
     } else {
         echo "invalid_action";
     }
