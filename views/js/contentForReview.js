@@ -97,7 +97,6 @@ $(function() {
             var contentForReview = data;
 
             var contentid = "";
-            var contentLink = "";
             var violations = "";
             var additionalContext = "";
             var reportedOn = "";
