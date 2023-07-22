@@ -107,7 +107,6 @@ $(function() {
       });
 
       function updateAvatar(imagePath) {
-        // Send an AJAX request to update the avatar
         $.ajax({
           url: "../../ajax/updateAvatar.ajax.php",
           method: "POST",
@@ -116,64 +115,48 @@ $(function() {
             window.location.href = "userProfileEditProfile.php";
           },
           error: function() {
-            // AJAX request failed
             alert("AJAX request failed");
           }
         });
       }
 
-      // Handle click on avatar images
       $(".defaultAvatar").click(function() {
-        // Remove the highlight from all avatar images
         $(".defaultAvatar").removeClass("highlight");
 
-        // Add highlight class to the clicked avatar image
         $(this).addClass("highlight");
       });
 
-      // Handle click on "Update Avatar" button
       $("#updateAvatarBtn").click(function() {
-        // Check if any avatar image is selected
         if ($(".defaultAvatar.highlight").length > 0) {
-          // Get the value (image path) of the selected avatar image
           var imagePath = $(".defaultAvatar.highlight").attr("value");
 
-          // Call the function to update the avatar
           updateAvatar(imagePath);
         } else {
-          // No avatar image selected, show an error message or take appropriate action
           alert("Please select an avatar image");
         }
       });
 
 
       document.getElementById("uploadButton").addEventListener("click", function() {
-        // Create a hidden file input element
         var fileInput = document.createElement("input");
         fileInput.type = "file";
         fileInput.style.display = "none";
       
-        // Append the file input element to the body
         document.body.appendChild(fileInput);
       
-        // Trigger a click event on the file input element
         fileInput.click();
       
-        // Listen for file selection
         fileInput.addEventListener("change", function(event) {
           var file = event.target.files[0];
           var formData = new FormData();
           formData.append("avatar", file);
       
-          // Send an AJAX request to upload the file
           var xhr = new XMLHttpRequest();
           xhr.open("POST", "../../ajax/uploadAvatar.ajax.php", true);
           xhr.onload = function() {
             if (xhr.status === 200) {
-              // File uploaded successfully
               window.location.href = "userProfileEditProfile.php";
             } else {
-              // Error occurred while uploading the file
               alert("Error uploading the file");
             }
           };
