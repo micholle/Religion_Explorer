@@ -21,6 +21,7 @@ class notificationsModel {
                 $notification = "";
                 $notificationIcon = "";
                 $personInvolved = "";
+                $upvotesCount = 0;
     
                 if ($notif["notificationSource"] == "Calendar") {
                     $stmt = $pdo->prepare("SELECT c.event, cc.title, a.username
@@ -84,7 +85,7 @@ class notificationsModel {
                     $notificationIcon = "../assets/img/discussionForum/comments.png";
                     $personInvolved = $notificationInfo["username"];
                 } else if ($notif["notificationSource"] == "Discussion Forum Topics Upvote") {
-                    $stmt = $pdo->prepare("SELECT n.topicid, t.topicTitle, a.username
+                    $stmt = $pdo->prepare("SELECT n.topicid, t.topicTitle, t.upvotes, a.username
                                             FROM notifications AS n
                                             LEFT JOIN topics AS t ON n.topicid = t.topicId
                                             LEFT JOIN accounts AS a ON n.personInvolved = a.accountid
@@ -97,8 +98,9 @@ class notificationsModel {
                     $notification = $notificationInfo["topicTitle"];
                     $notificationIcon = "../assets/img/discussionForum/upvote-active.png";
                     $personInvolved = $notificationInfo["username"];
+                    $upvotesCount = $notificationInfo["upvotes"];
                 } else if ($notif["notificationSource"] == "Discussion Forum Posts Upvote") {
-                    $stmt = $pdo->prepare("SELECT p.topicId, p.postContent, a.username
+                    $stmt = $pdo->prepare("SELECT p.topicId, p.postContent, p.upvotes, a.username
                                             FROM notifications AS n
                                             LEFT JOIN posts AS p ON n.postid = p.postId
                                             LEFT JOIN accounts AS a ON n.personInvolved = a.accountid
@@ -111,8 +113,9 @@ class notificationsModel {
                     $notification = $notificationInfo["postContent"];
                     $notificationIcon = "../assets/img/discussionForum/upvote-active.png";
                     $personInvolved = $notificationInfo["username"];
+                    $upvotesCount = $notificationInfo["upvotes"];
                 } else if ($notif["notificationSource"] == "Discussion Forum Replies Upvote") {
-                    $stmt = $pdo->prepare("SELECT p.topicId, r.replyContent, a.username
+                    $stmt = $pdo->prepare("SELECT p.topicId, r.replyContent, r.upvotes, a.username
                                             FROM notifications AS n
                                             LEFT JOIN reply AS r ON n.replyid = r.replyId
                                             LEFT JOIN posts AS p ON r.postId = p.postId
@@ -126,6 +129,7 @@ class notificationsModel {
                     $notification = $notificationInfo["replyContent"];
                     $notificationIcon = "../assets/img/discussionForum/upvote-active.png";
                     $personInvolved = $notificationInfo["username"];
+                    $upvotesCount = $notificationInfo["upvotes"];
                 }
                 
                 $notificationDate = date('m-d-Y', strtotime($notif["notificationDate"]));
@@ -135,18 +139,16 @@ class notificationsModel {
                     "notificationIcon" => $notificationIcon,
                     "notificationDate" => $notificationDate,
                     "personInvolved" => $personInvolved,
-                    "notificationSource" => $notif["notificationSource"]
+                    "notificationSource" => $notif["notificationSource"],
+                    "upvotesCount" => $upvotesCount
                 ];
             }
         }
-    
-        krsort($notificationsList);
         
         $jsonData = json_encode($notificationsList);
         header('Content-Type: application/json');
         echo $jsonData;
-    }     
-
+    }   
 }
 
 ?>

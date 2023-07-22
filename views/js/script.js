@@ -105,13 +105,15 @@ $(function() {
             method: "POST",
                 data : {"accountid" : $("#accountidPlaceholder").text()},
             success: function (data) {
-                var notificationData = data;                
+                var notificationData = data;  
+
                 var uniqueid = "";
                 var notification = "";
                 var notificationIcon = "";
                 var notificationDate = "";
                 var personInvolved = "";
                 var notificationSource = "";
+                var upvotesCount = 0;
                 $("#notification").html("");
     
                 for (notif in notificationData) {
@@ -123,6 +125,7 @@ $(function() {
                     notificationDate = notificationDetails.notificationDate;
                     personInvolved = notificationDetails.personInvolved;
                     notificationSource = notificationDetails.notificationSource;
+                    upvotesCount = notificationDetails.upvotesCount;
                     
                     if (notificationSource == "Calendar") {
                         $("#notification").append(
@@ -179,7 +182,7 @@ $(function() {
                                     '<img src="' + notificationIcon + '">' +
                                 '</div>' +
                                 '<div class="col-10 d-flex flex-column">' +
-                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and [] others upvoted your post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
                                     '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
                                 '</div>' +
                             '</div>'
@@ -191,7 +194,7 @@ $(function() {
                                     '<img src="' + notificationIcon + '">' +
                                 '</div>' +
                                 '<div class="col-10 d-flex flex-column">' +
-                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and [] others upvoted your comment: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your comment: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
                                     '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
                                 '</div>' +
                             '</div>'
@@ -203,7 +206,7 @@ $(function() {
                                     '<img src="' + notificationIcon + '">' +
                                 '</div>' +
                                 '<div class="col-10 d-flex flex-column">' +
-                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and [] others upvoted your reply: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your reply: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
                                     '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
                                 '</div>' +
                             '</div>'
