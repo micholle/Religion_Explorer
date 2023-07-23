@@ -7,6 +7,10 @@ class notificationsController {
         $answer = (new notificationsModel)->mdlGetNotifications($username);
     }
 
+    static public function ctrUpdateNotifications($accountid) {
+        $answer = (new notificationsModel)->mdlUpdateNotifications($accountid);
+    }
+
 }
 
 ?>

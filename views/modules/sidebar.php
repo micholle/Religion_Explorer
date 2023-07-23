@@ -73,7 +73,7 @@ function create_sidebar() {
 
                         <li>
                             <a id="sidebarNotifications" href="#">
-                                <img src="../assets/img/bell.png">
+                                <img id="notificationsIcon" src="../assets/img/bell.png">
                                 <span class="navItem">Notifications</span>
                             </a>
                         </li>

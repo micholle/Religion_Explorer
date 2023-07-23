@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2023 at 10:41 AM
+-- Generation Time: Jul 23, 2023 at 05:50 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -35,6 +35,7 @@ CREATE TABLE `notifications` (
   `topicid` int(8) DEFAULT NULL,
   `postid` int(8) DEFAULT NULL,
   `replyid` int(8) DEFAULT NULL,
+  `reportid` int(11) DEFAULT NULL,
   `personInvolved` varchar(5) DEFAULT NULL,
   `notificationSource` text NOT NULL,
   `notificationDate` date NOT NULL,
