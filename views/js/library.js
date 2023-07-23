@@ -134,54 +134,77 @@ $(function() {
             }
             
             for (let readingMat in libraryData["readingMats"]) {
-                var readingMatDetails = libraryData["readingMats"][readingMat];
-
-                // Wide
-                var tags = "";
-
-                $.each(readingMatDetails.category, function(index, category) {
-                    tags += '<div class="libraryReadMatsTag"><p style="color: #FFFFFF">' + category + '</p></div>&nbsp;';
-                });
-
-                $libraryReadingMats =
-                        '<div id="' + readingMat +'" class="libraryReadMatsBox" onclick="showReadingMaterialModal(' + "'" + readingMat + "', '" + readingMatDetails.resourceImg + "', '" + readingMatDetails.title + "', '" + readingMatDetails.author + "', '" + readingMatDetails.date + "', '" + readingMatDetails.source + "', '" + readingMatDetails.mainPoint1 + "', '" + readingMatDetails.mainPoint2 + "', '" + readingMatDetails.mainPoint3 + "' " + ')"> <div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
+                (function (readingMat) {
+                    var readingMatDetails = libraryData["readingMats"][readingMat];
+            
+                    async function getDescription(source) {
+                        var summary = await summarize(source);
+                        var summaryKeys = Object.keys(summary);
+            
+                        if (summaryKeys.length > 0) {
+                            var firstPoint = summaryKeys[0];
+                            return summary[firstPoint];
+                        }
+                    }
+            
+                    var promises = [];
+                    promises.push(getDescription(readingMatDetails.source));
+            
+                    var tags = "";
+                    $.each(readingMatDetails.category, function (index, category) {
+                        tags += '<div class="libraryReadMatsTag"><p style="color: #FFFFFF">' + category + '</p></div>&nbsp;';
+                    });
+            
+                    Promise.all(promises)
+                        .then(descriptions => {
+                            var description = descriptions[0];
+            
+                            $libraryReadingMats =
+                                '<div id="' + readingMat + '" class="libraryReadMatsBox" onclick="showReadingMaterialModal(' + "'" + readingMat + "', '" + readingMatDetails.resourceImg + "', '" + readingMatDetails.title + "', '" + readingMatDetails.author + "', '" + readingMatDetails.date + "', '" + readingMatDetails.source + "' " + ')"> <div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
+                                '<div class="libraryReadMatsType">[' + readingMatDetails.type + ']</div>' +
+                                '<div class="libraryReadMatsTitle">' + readingMatDetails.title + '</div>' +
+                                tags + '</div> </div> ' +
+                                '<div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">' +
+                                '<p>' + readingMatDetails.author + ' - ' + readingMatDetails.date + '</p> </div> </div>' +
+                                '<div class="row libraryReadMatsSummary"> <div class="col-12">' +
+                                '<p>' + description + '</p>' +
+                                '</div> </div> </div>';
+            
+                        $("#libraryReadMatsContainer").append($libraryReadingMats);
+            
+                        // Small
+                        $libraryReadingMatsPreview =
+                            '<div id="' + readingMat + '" data-identifier="libraryPreview" style="cursor: pointer;">' +
+                            '<div class="row">' +
+                            '<div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
                             '<div class="libraryReadMatsType">[' + readingMatDetails.type + ']</div>' +
                             '<div class="libraryReadMatsTitle">' + readingMatDetails.title + '</div>' +
-                            tags + '</div> </div> ' +
-                            '<div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">' +
-                            '<p>' + readingMatDetails.author + ' - ' + readingMatDetails.date + '</p> </div> </div>' +
-                            '<div class="row libraryReadMatsSummary"> <div class="col-12">' +
-                            '<p>' + readingMatDetails.description + '</p>' +
-                        '</div> </div> </div>';
-
-                $("#libraryReadMatsContainer").append($libraryReadingMats);
-
-                // Small
-                $libraryReadingMatsPreview =
-                '<div id="' + readingMat + '" data-identifier="libraryPreview" style="cursor: pointer;">' +
-                    '<div class="row">' +
-                        '<div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
-                            '<div class="libraryReadMatsType">[' + readingMatDetails.type + ']</div>' +
-                            '<div class="libraryReadMatsTitle">' + readingMatDetails.title + '</div>' +
-                        '</div>' +
-                    '</div>' + 
-                    '<div class="row">' +
-                        '<div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="row">' +
+                            '<div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">' +
                             '<p>' + readingMatDetails.author + '</p>' +
-                        '</div>' +
-                ' </div>' +
-                    '<div class="row libraryReadMatsSummary">' +
-                        '<div class="col-12">' +
-                            '<p>' + readingMatDetails.description + '</p>' +
-                        '</div>' +
-                    '</div>' +
-                '</div><br>';
-
-                if (readingMarsPreviewCounter <= 1) {
-                    $("#libraryReadingMatsPreview").append($libraryReadingMatsPreview);
-                    readingMarsPreviewCounter++;
-                }
+                            '</div>' +
+                            ' </div>' +
+                            '<div class="row libraryReadMatsSummary">' +
+                            '<div class="col-12">' +
+                            '<p>' + description + '</p>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div><br>';
+            
+                        if (readingMarsPreviewCounter <= 1) {
+                            $("#libraryReadingMatsPreview").append($libraryReadingMatsPreview);
+                            readingMarsPreviewCounter++;
+                        }
+            
+                        })
+                        .catch(error => {
+                            console.error("Error fetching data from the proxy:", error);
+                        });
+                })(readingMat);
             }
+                        
         }
     });
 
@@ -242,11 +265,11 @@ $(function() {
     $(document).on("click", '[data-identifier="libraryPreview"]', function() {
         var resourceId = $(this).attr("id");
         if(resourceId.startsWith("LP")) {
-            window.location.href = "http://localhost/religion_explorer/views/modules/library.php?open=photos&view=" + resourceId;
+            window.location.href = "library.php?open=photos&view=" + resourceId;
         } else if(resourceId.startsWith("LV")) {
-            window.location.href = "http://localhost/religion_explorer/views/modules/library.php?open=videos&view=" + resourceId;
+            window.location.href = "library.php?open=videos&view=" + resourceId;
         } else if(resourceId.startsWith("LR")) {
-            window.location.href = "http://localhost/religion_explorer/views/modules/library.php?open=reading-materials&view=" + resourceId;
+            window.location.href = "library.php?open=reading-materials&view=" + resourceId;
         }
         $("#viewContent").html(decodeURIComponent(resourceId));
         librarySearch();
@@ -339,7 +362,7 @@ $(function() {
                         for (let readingMat in libraryData["readingMats"]) {
                             var readingMatDetails = libraryData["readingMats"][readingMat];
         
-                            if (((readingMatDetails.title).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.type).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.author).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.description).toLowerCase()).includes(librarySearchVal)) {
+                            if (((readingMatDetails.title).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.type).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.author).toLowerCase()).includes(librarySearchVal)) {
                                 var resourceid = "#" + readingMat;
                                 $(resourceid).css("display", "block");
                             } else {
@@ -588,15 +611,43 @@ function openWideView(openParam) {
     }
 }
 
-function showReadingMaterialModal(resourceid, resourceImg, title, author, date, source, mainPoint1, mainPoint2, mainPoint3) {
+async function summarize(url) {
+    const apiUrl = "../../models/proxy.php?url=" + url;
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.text();
+
+        var summarizer = new JsSummarize();
+        var summary = summarizer.summarize("Dharma Day", data);
+        
+        return summary;
+    } catch (error) {
+        console.error('Error fetching data from the proxy:', error);
+        return null; // Return null or handle the error appropriately
+    }
+}
+
+async function showReadingMaterialModal(resourceid, resourceImg, title, author, date, source) {
     $("#readingMaterialTitle").text(title);
     $("#readingMaterialBg").attr("src", resourceImg);
     $("#readingMaterialAuthor").text(author);
     $("#readingMaterialDate").text(date);
     $("#readingMaterialSource").html("<p><a href=" + source +">[External Link]</a></p>");
-    $("#readingMaterial1").text(mainPoint1);
-    $("#readingMaterial2").text(mainPoint2);
-    $("#readingMaterial3").text(mainPoint3);
+
+    //Main points
+    var summary = "";
+    summary = await summarize(source);
+
+    var matCounter = 1;
+    var summaryKeys = Object.keys(summary);
+    
+    for (var i = 0; i < summaryKeys.length; i++) {
+        var point = summaryKeys[i];
+    
+        $("#readingMaterial" + matCounter).text(summary[point]);
+        matCounter++;
+    }
 
     $.ajax({
         url: "../../ajax/getBookmarksData.ajax.php",
