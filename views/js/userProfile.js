@@ -168,7 +168,7 @@ function getCreations() {
             }
 
             updateFill(dataUsed);
-            $("#creationsDescription").text(dataUsed.toFixed(2) + " MB of 100 MB used");
+            $("#creationsDescription").text(dataUsed.toFixed(2) + " MB of 500 MB used");
         }
     });
 }
@@ -221,14 +221,14 @@ function updateCreationsFill() {
             }
 
             updateFill(dataUsed);
-            $("#creationsDescription").text(dataUsed.toFixed(2) + " MB of 100 MB used");
+            $("#creationsDescription").text(dataUsed.toFixed(2) + " MB of 500 MB used");
         }
     });
 }
 
-function updateFill(percentage) {
+function updateFill(used) {
     const fillElement = document.querySelector('.creationsFill');
-    fillElement.style.width = percentage + '%';
+    fillElement.style.width = (used / 500) * 100 + '%';
     fillElement.style.backgroundColor = '#2CA464';
 }
 
