@@ -34,10 +34,22 @@ $(function() {
                 forgotContainer.innerHTML = forgotNewContent;
             } else if (response === "notfound") {
                 // Email not found in the database
-                alert("Email not found. Please try again.");
+                $("#toast").html("Email does not exist.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             } else {
                 // Error occurred while sending email
-                alert("Oops. Something went wrong!");
+                $("#toast").html("Something went wrong.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             }
             },
             error: function() {

@@ -1,5 +1,6 @@
 <?php 
 require_once "../../models/explorerPoints.model.php";
+require_once "../../models/achievements.model.php";
 
 if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     // Redirect the user to splash.php
@@ -246,10 +247,118 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 
                 <div class="userProfileContent">
                     <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $postBadge10; ?>>
+                            <img src="../assets/img/userProfile/achievements/forum-10.png">
+                            <h1>10 posts badge</h2>
+                            <p></p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $postBadge50; ?>>
+                            <img src="../assets/img/userProfile/achievements/forum-50.png">
+                            <h1>50 posts badge</h2>
+                            <p></p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $postBadge100; ?>>
+                            <img src="../assets/img/userProfile/achievements/forum-100.png">
+                            <h1>100 posts badge</h2>
+                            <p></p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $postBadge250; ?>>
+                            <img src="../assets/img/userProfile/achievements/forum-250.png">
+                            <h1>250 posts badge</h2>
+                            <p></p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $postBadge500; ?>>
+                            <img src="../assets/img/userProfile/achievements/forum-500.png">
+                            <h1>500 posts badge</h2>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row" <?Php echo $explorerBadge250; ?>>
                         <div class="achievementsBox d-flex justify-content-center align-items-center flex-column">
-                            <img src="../assets/img/placeholder-medal.png">
-                            <h1>[Achievement Title]</h2>
-                            <p>[Achievement Description]</p>
+                            <img src="../assets/img/userProfile/achievements/explorer-tier1.png">
+                            <h1>Tier 1 Explorer Badge</h2>
+                            <p>250 explorer points</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $explorerBadge500; ?>>
+                            <img src="../assets/img/userProfile/achievements/explorer-tier2.png">
+                            <h1>Tier 2 Explorer Badge</h2>
+                            <p>500 explorer points</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $explorerBadge1000; ?>>
+                            <img src="../assets/img/userProfile/achievements/explorer-tier3.png">
+                            <h1>Tier 3 Explorer Badge</h2>
+                            <p>1000 explorer points</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $explorerBadge2500; ?>>
+                            <img src="../assets/img/userProfile/achievements/explorer-tier4.png">
+                            <h1>Tier 4 Explorer Badge</h2>
+                            <p>2500 explorer points</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $explorerBadge5000; ?>>
+                            <img src="../assets/img/userProfile/achievements/explorer-tier5.png">
+                            <h1>Tier 5 Explorer Badge</h2>
+                            <p>5000 explorer points</p>
+                        </div>
+                    </div>
+                    <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge10; ?>>
+                            <img src="../assets/img/userProfile/achievements/scholar-tier1.png">
+                            <h1>Tier 1 Scholar Badge</h2>
+                            <p>Bookmarked 10 materials</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge50; ?>>
+                            <img src="../assets/img/userProfile/achievements/scholar-tier2.png">
+                            <h1>Tier 2 Scholar Badge</h2>
+                            <p>Bookmarked 50 materials</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge100; ?>>
+                            <img src="../assets/img/userProfile/achievements/scholar-tier3.png">
+                            <h1>Tier 3 Scholar Badge</h2>
+                            <p>Bookmarked 100 materials</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge250; ?>>
+                            <img src="../assets/img/userProfile/achievements/scholar-tier4.png">
+                            <h1>Tier 4 Scholar Badge</h2>
+                            <p>Bookmarked 250 materials</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge500; ?>>
+                            <img src="../assets/img/userProfile/achievements/scholar-tier5.png">
+                            <h1>Tier 5 Scholar Badge</h2>
+                            <p>Bookmarked 500 materials</p>
+                        </div>
+                    </div>
+                    <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $creationBadge5; ?>>
+                            <img src="../assets/img/userProfile/achievements/creator-tier1.png">
+                            <h1>Tier 1 Creator Badge</h2>
+                            <p>contributed 5 creations</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $creationBadge25; ?>>
+                            <img src="../assets/img/userProfile/achievements/creator-tier2.png">
+                            <h1>Tier 2 Creator Badge</h2>
+                            <p>contributed 25 creations</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $creationBadge50; ?>>
+                            <img src="../assets/img/userProfile/achievements/creator-tier3.png">
+                            <h1>Tier 3 Creator Badge</h2>
+                            <p>contributed 50 creations</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $creationBadge75; ?>>
+                            <img src="../assets/img/userProfile/achievements/creator-tier4.png">
+                            <h1>Tier 4 Creator Badge</h2>
+                            <p>contributed 75 creations</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $creationBadge100; ?>>
+                            <img src="../assets/img/userProfile/achievements/creator-tier5.png">
+                            <h1>Tier 5 Creator Badge</h2>
+                            <p>contributed 100 creations</p>
+                        </div>
+                    </div>
+                    <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $accountDateBadge; ?>>
+                            <img src="../assets/img/userProfile/achievements/1-year-anniv.png">
+                            <h1 style="text-align: center;">1-year anniversary badge</h2>
+                            <p></p>
                         </div>
                     </div>
                 </div>
