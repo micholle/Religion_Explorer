@@ -162,6 +162,11 @@ class notificationsModel {
                     $contentViolations = $notificationInfo["contentViolations"];
                     $notificationStatus = $notificationInfo["notificationStatus"];
                 }
+
+                $stmt = $pdo->prepare("SELECT notifications FROM accounts WHERE accountid = :accountid");
+                $stmt->bindParam(':accountid', $accountid, PDO::PARAM_STR);
+                $stmt->execute();
+                $displayNotifications = $stmt->fetch(PDO::FETCH_ASSOC)['notifications'];
                 
                 $notificationDate = date('m-d-Y', strtotime($notif["notificationDate"]));
                 $notificationsList[$notif["notificationid"]] = [
@@ -173,7 +178,8 @@ class notificationsModel {
                     "notificationSource" => $notif["notificationSource"],
                     "upvotesCount" => $upvotesCount,
                     "contentViolations" => $contentViolations,
-                    "notificationStatus" => $notificationStatus
+                    "notificationStatus" => $notificationStatus,
+                    "displayNotifications" => $displayNotifications
                 ];
             }
         }
