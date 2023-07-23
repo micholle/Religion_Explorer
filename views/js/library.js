@@ -1,4 +1,7 @@
 $(function() {
+    var view = "";
+    checkURL();
+    
     var acctype = $('#acctype').text();
     $.ajax({
         url: "../../ajax/showSidebar.ajax.php",
@@ -167,36 +170,37 @@ $(function() {
                                 '<div class="row"> <div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">' +
                                 '<p>' + readingMatDetails.author + ' - ' + readingMatDetails.date + '</p> </div> </div>' +
                                 '<div class="row libraryReadMatsSummary"> <div class="col-12">' +
-                                '<p>' + description + '</p>' +
+                                '<p id="' + readingMat + 'Description' + '">' + description + '</p>' +
                                 '</div> </div> </div>';
             
-                        $("#libraryReadMatsContainer").append($libraryReadingMats);
-            
-                        // Small
-                        $libraryReadingMatsPreview =
-                            '<div id="' + readingMat + '" data-identifier="libraryPreview" style="cursor: pointer;">' +
-                            '<div class="row">' +
-                            '<div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
-                            '<div class="libraryReadMatsType">[' + readingMatDetails.type + ']</div>' +
-                            '<div class="libraryReadMatsTitle">' + readingMatDetails.title + '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="row">' +
-                            '<div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">' +
-                            '<p>' + readingMatDetails.author + '</p>' +
-                            '</div>' +
-                            ' </div>' +
-                            '<div class="row libraryReadMatsSummary">' +
-                            '<div class="col-12">' +
-                            '<p>' + description + '</p>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div><br>';
-            
-                        if (readingMarsPreviewCounter <= 1) {
-                            $("#libraryReadingMatsPreview").append($libraryReadingMatsPreview);
-                            readingMarsPreviewCounter++;
-                        }
+                            $("#libraryReadMatsContainer").append($libraryReadingMats);
+                            checkURL();
+                
+                            // Small
+                            $libraryReadingMatsPreview =
+                                '<div id="' + readingMat + '" data-identifier="libraryPreview" style="cursor: pointer;">' +
+                                '<div class="row">' +
+                                '<div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsHeader">' +
+                                '<div class="libraryReadMatsType">[' + readingMatDetails.type + ']</div>' +
+                                '<div class="libraryReadMatsTitle">' + readingMatDetails.title + '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="row">' +
+                                '<div class="col-12 d-flex justify-content-start align-items-center flex-row libraryReadMatsSubheader">' +
+                                '<p>' + readingMatDetails.author + '</p>' +
+                                '</div>' +
+                                ' </div>' +
+                                '<div class="row libraryReadMatsSummary">' +
+                                '<div class="col-12">' +
+                                '<p>' + description + '</p>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div><br>';
+                
+                            if (readingMarsPreviewCounter <= 1) {
+                                $("#libraryReadingMatsPreview").append($libraryReadingMatsPreview);
+                                readingMarsPreviewCounter++;
+                            }
             
                         })
                         .catch(error => {
@@ -245,12 +249,6 @@ $(function() {
         librarySearch();
     }
 
-    var view = getUrlParameter("view");
-    if (view) {
-        $("#viewContent").html(decodeURIComponent(view));
-        librarySearch();
-    }
-
     function getUrlParameter(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
@@ -259,6 +257,7 @@ $(function() {
     }
 
     $("#librarySearch").keyup(function () { 
+        clearViewParameter();
         librarySearch();
     });
 
@@ -275,55 +274,68 @@ $(function() {
         librarySearch();
     });
 
+    function checkURL() {
+        view = getUrlParameter("view");
+        if (view) {
+            $("#viewContent").html(decodeURIComponent(view));
+            librarySearch();
+        }
+    }
+
     function librarySearch() {
         if (view) {
-            var librarySearchVal = view;
+            const hasViewParameter = () => new URLSearchParams(window.location.search).has("view");
+            if (hasViewParameter()) {
+                var librarySearchVal = view;
 
-            $.ajax({
-                url: "../../ajax/getLibraryResources.ajax.php",
-                method: "POST",
-                success:function(data){
-                    var libraryData = data;
-                    const currentURL = window.location.href;
-        
-                    if (currentURL.includes("photos")) {
-                        for (let photo in libraryData["photos"]) {        
-                            if (photo == librarySearchVal) {
-                                var resourceid = "#" + photo;
-                                $(resourceid).css("display", "block");
-                            } else {
-                                var resourceid = "#" + photo;
-                                $(resourceid).css("display", "none");
+                $.ajax({
+                    url: "../../ajax/getLibraryResources.ajax.php",
+                    method: "POST",
+                    success:function(data){
+                        var libraryData = data;
+                        const currentURL = window.location.href;
+            
+                        if (currentURL.includes("photos")) {
+                            for (let photo in libraryData["photos"]) {        
+                                if (photo == librarySearchVal) {
+                                    var resourceid = "#" + photo;
+                                    $(resourceid).css("display", "block");
+                                } else {
+                                    var resourceid = "#" + photo;
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        }
+            
+                        if (currentURL.includes("videos")) {
+                            for (let video in libraryData["videos"]) {
+                                if (video == librarySearchVal) {
+                                    var resourceid = "#" + video;
+                                    $(resourceid).css("display", "block");
+                                } else {
+                                    var resourceid = "#" + video;
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        }
+                        
+                        if (currentURL.includes("reading-materials")) {
+                            for (let readingMat in libraryData["readingMats"]) {        
+                                if (readingMat == librarySearchVal) {
+                                    var resourceid = "#" + readingMat;
+                                    $(resourceid).css("display", "block");
+                                    $(resourceid).click();
+                                } else {
+                                    var resourceid = "#" + readingMat;
+                                    $(resourceid).css("display", "none");
+                                }
                             }
                         }
                     }
-        
-                    if (currentURL.includes("videos")) {
-                        for (let video in libraryData["videos"]) {
-                            if (video == librarySearchVal) {
-                                var resourceid = "#" + video;
-                                $(resourceid).css("display", "block");
-                            } else {
-                                var resourceid = "#" + video;
-                                $(resourceid).css("display", "none");
-                            }
-                        }
-                    }
-                    
-                    if (currentURL.includes("reading-materials")) {
-                        for (let readingMat in libraryData["readingMats"]) {        
-                            if (readingMat == librarySearchVal) {
-                                var resourceid = "#" + readingMat;
-                                $(resourceid).css("display", "block");
-                                $(resourceid).click();
-                            } else {
-                                var resourceid = "#" + readingMat;
-                                $(resourceid).css("display", "none");
-                            }
-                        }
-                    }
-                }
-            });            
+                });
+            } else {
+                location.reload();
+            }           
         } else {
             var librarySearchVal = $("#librarySearch").val().toLowerCase();
 
@@ -361,8 +373,9 @@ $(function() {
                     } else if (currentURL.includes("reading-materials")) {
                         for (let readingMat in libraryData["readingMats"]) {
                             var readingMatDetails = libraryData["readingMats"][readingMat];
-        
-                            if (((readingMatDetails.title).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.type).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.author).toLowerCase()).includes(librarySearchVal)) {
+
+                            var descriptionid = "#" + readingMat + "Description";
+                            if (((readingMatDetails.title).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.type).toLowerCase()).includes(librarySearchVal) || ((readingMatDetails.author).toLowerCase()).includes(librarySearchVal) || (($(descriptionid).text().toLowerCase()).includes(librarySearchVal))) {
                                 var resourceid = "#" + readingMat;
                                 $(resourceid).css("display", "block");
                             } else {
@@ -374,6 +387,12 @@ $(function() {
                 }
             });
         }
+    }
+
+    function clearViewParameter() {
+        const currentURL = new URL(window.location.href);
+        currentURL.searchParams.delete('view');
+        window.history.pushState({}, '', currentURL.toString());
     }
 
     function handleFilterChange() { 
