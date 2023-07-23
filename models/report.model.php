@@ -147,12 +147,14 @@ class reportContentModel {
         try {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->beginTransaction();
+            $accountid = "";
 
             if (substr($contentid, 0, 2) == "CC") {
-                $stmt = $pdo->prepare("SELECT filedata FROM communitycreations WHERE creationid = :contentid");
+                $stmt = $pdo->prepare("SELECT accountid, filedata FROM communitycreations WHERE creationid = :contentid");
                 $stmt->bindParam(":contentid", $contentid, PDO::PARAM_STR);
                 $stmt->execute();
                 $filepath = $stmt->fetch(PDO::FETCH_ASSOC);
+                $accountid = $filepath["accountid"];
                 if (file_exists($filepath["filedata"])) {unlink($filepath["filedata"]);}
 
                 $stmt2 = $pdo->prepare("DELETE FROM communitycreations WHERE creationid = :contentid");
@@ -160,14 +162,49 @@ class reportContentModel {
                 $stmt2->execute();
             }        
             
-            $stmt3 = $pdo->prepare("DELETE FROM bookmarks WHERE resourceid = :contentid");
-            $stmt3->bindParam(":contentid", $contentid, PDO::PARAM_STR);
-            $stmt3->execute();
+            $bookmark_delete = $pdo->prepare("DELETE FROM bookmarks WHERE resourceid = :contentid");
+            $bookmark_delete->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+            $bookmark_delete->execute();
 
-            $stmt4 = $pdo->prepare("UPDATE reportedcontent SET actionTaken = 'Delete', reportStatus = 'Completed' WHERE contentid = :contentid");
-            $stmt4->bindParam(":contentid", $contentid, PDO::PARAM_STR);
-            $stmt4->execute();
+            $delete_content = $pdo->prepare("UPDATE reportedcontent SET actionTaken = 'Delete', reportStatus = 'Completed' WHERE contentid = :contentid");
+            $delete_content->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+            $delete_content->execute();
 
+            $get_reportid = $pdo->prepare("SELECT accountid FROM reportedcontent WHERE contentid = :contentid");
+            $get_reportid->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+            $get_reportid->execute();
+            $reportids = $get_reportid->fetch(PDO::FETCH_ASSOC);
+            $reportid = $reportids["reportid"];
+
+            $notify_user = $pdo->prepare("INSERT INTO notifications(accountid, reportid, notificationSource, notificationDate) VALUES (:accountid, :reportid, :notificationSource, :notificationDate)");
+            $notify_user->bindParam(":accountid", $accountid, PDO::PARAM_STR);
+            $notify_user->bindParam(":reportid", $reportid, PDO::PARAM_STR);
+            $notify_user->bindValue(":notificationSource", "Reported Content", PDO::PARAM_STR);
+            $notify_user->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
+            $notify_user->execute();
+    
+            $pdo->commit();
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return "error";
+        }
+    
+        $pdo = null;
+        $stmt = null;
+        $stmt2 = null;
+    }
+    
+    static public function mdlReportUserOfContent($contentid) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
+
+            // report user then delete reported content
+            // mdlSubmitReportUser($data);
+            // mdlDeleteReportedContent($contentid);
     
             $pdo->commit();
         } catch (Exception $e) {

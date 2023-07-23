@@ -12,6 +12,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
         <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="../assets/plugins/js-summarize-master/lib/lodash/lodash.js"></script>
+        <script type="text/javascript" src="../assets/plugins/js-summarize-master/lib/tokenizer/tokenizer.js"></script>
+        <script type="text/javascript" src="../assets/plugins/js-summarize-master/js-summarize.js"></script>
+        <script type="text/javascript" src="../assets/plugins/axios/axios.min.js"></script>
 
         <script type="text/javascript" src="../js/library.js"></script>
         <script type="text/javascript" src="../js/script.js"></script>

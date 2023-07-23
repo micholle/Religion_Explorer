@@ -114,6 +114,7 @@ $(function() {
                 var personInvolved = "";
                 var notificationSource = "";
                 var upvotesCount = 0;
+                var contentViolations = "";
                 $("#notification").html("");
     
                 for (notif in notificationData) {
@@ -126,6 +127,7 @@ $(function() {
                     personInvolved = notificationDetails.personInvolved;
                     notificationSource = notificationDetails.notificationSource;
                     upvotesCount = notificationDetails.upvotesCount;
+                    contentViolations = notificationDetails.contentViolations;
                     
                     if (notificationSource == "Calendar") {
                         $("#notification").append(
@@ -207,6 +209,18 @@ $(function() {
                                 '</div>' +
                                 '<div class="col-10 d-flex flex-column">' +
                                     '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your reply: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                                '</div>' +
+                            '</div>'
+                        );
+                    } else if (notificationSource == "Reported Content") {
+                        $("#notification").append(
+                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="reportedContentDetails(\'' + notification + '\', \'' + contentViolations + '\')">' +
+                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                    '<img src="' + notificationIcon + '">' +
+                                '</div>' +
+                                '<div class="col-10 d-flex flex-column">' +
+                                    '<p class="notificationsPanelMainText">Your post was taken down because it goes against our community guidelines.</p>' +
                                     '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
                                 '</div>' +
                             '</div>'
@@ -395,4 +409,11 @@ function notificationRedirect(uniqueid, notificationSource) {
     } else if (notificationSource.includes("Discussion Forum")) {
         window.location.replace("discussionForumPost.php?topicId=" + uniqueid);
     }
+}
+
+function reportedContentDetails(title, violations) {
+    $("#reportedContentTitle").text(title);
+    $("#reportedContentViolations").text(violations);
+    $("#reportDetails").modal();
+    $("#reportDetails").show();
 }

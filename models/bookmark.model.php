@@ -46,14 +46,16 @@ class bookmarkModel{
                 $stmt3->bindParam(":creationid", $resourceid, PDO::PARAM_STR);
                 $stmt3->execute();
                 $personInvolved = $stmt3->fetchColumn();
-        
-                $stmt4 = $pdo->prepare("INSERT INTO notifications(accountid, creationid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :creationid, :personInvolved, :notificationSource, :notificationDate)");
-                $stmt4->bindParam(":accountid", $personInvolved, PDO::PARAM_STR);
-                $stmt4->bindParam(":creationid", $resourceid, PDO::PARAM_STR);
-                $stmt4->bindParam(":personInvolved", $accountid, PDO::PARAM_STR);
-                $stmt4->bindValue(":notificationSource", "Community Creations", PDO::PARAM_STR);
-                $stmt4->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
-                $stmt4->execute();
+
+                if($accountid != $personInvolved) {
+                    $stmt4 = $pdo->prepare("INSERT INTO notifications(accountid, creationid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :creationid, :personInvolved, :notificationSource, :notificationDate)");
+                    $stmt4->bindParam(":accountid", $personInvolved, PDO::PARAM_STR);
+                    $stmt4->bindParam(":creationid", $resourceid, PDO::PARAM_STR);
+                    $stmt4->bindParam(":personInvolved", $accountid, PDO::PARAM_STR);
+                    $stmt4->bindValue(":notificationSource", "Community Creations", PDO::PARAM_STR);
+                    $stmt4->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
+                    $stmt4->execute();
+                }
             }
 	
 			$pdo->commit();

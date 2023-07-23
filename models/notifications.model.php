@@ -22,6 +22,7 @@ class notificationsModel {
                 $notificationIcon = "";
                 $personInvolved = "";
                 $upvotesCount = 0;
+                $contentViolations = "";
     
                 if ($notif["notificationSource"] == "Calendar") {
                     $stmt = $pdo->prepare("SELECT c.event, cc.title, a.username
@@ -130,6 +131,28 @@ class notificationsModel {
                     $notificationIcon = "../assets/img/discussionForum/upvote-active.png";
                     $personInvolved = $notificationInfo["username"];
                     $upvotesCount = $notificationInfo["upvotes"];
+                } else if ($notif["notificationSource"] == "Reported Content") {
+                    $stmt = $pdo->prepare("SELECT n.reportid, r.contentid, r.contentViolations
+                                            FROM notifications AS n
+                                            LEFT JOIN reportedcontent AS r ON n.reportid = r.reportid
+                                            WHERE n.notificationid = :notificationid AND r.actionTaken = :actionTaken");
+                    $stmt->bindParam(":notificationid", $notif["notificationid"], PDO::PARAM_STR);
+                    $stmt->bindValue(":actionTaken", "Delete", PDO::PARAM_STR);
+                    $stmt->execute();
+                    $notificationInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    if (substr($notificationInfo["contentid"], 0, 2) === "CC") {                        
+                        $get_title = $pdo->prepare("SELECT title FROM communitycreations WHERE creationid = :creationid");
+                        $get_title->bindParam(":creationid", $notificationInfo["contentid"], PDO::PARAM_STR);
+                        $get_title->execute();
+                        $notification = $get_title->fetchColumn();
+                    }
+                     else {
+                        //discussion forum
+                    }
+                    
+                    $notificationIcon = "../assets/img/discussionForum/report.png";
+                    $contentViolations = $notificationInfo["contentViolations"];
                 }
                 
                 $notificationDate = date('m-d-Y', strtotime($notif["notificationDate"]));
@@ -140,7 +163,8 @@ class notificationsModel {
                     "notificationDate" => $notificationDate,
                     "personInvolved" => $personInvolved,
                     "notificationSource" => $notif["notificationSource"],
-                    "upvotesCount" => $upvotesCount
+                    "upvotesCount" => $upvotesCount,
+                    "contentViolations" => $contentViolations
                 ];
             }
         }
