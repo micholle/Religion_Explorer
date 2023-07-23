@@ -375,6 +375,31 @@ class reportUserModel {
             $stmt = null;
         }
     }
+
+    static public function mdlResolveUser($data) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
+
+            $username = self::mdlGetUsernameByUserID($data["userid"]);
+    
+            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Resolve', reportStatus = 'Completed' WHERE username = :username");
+            $updateStmt->bindParam(":username", $username, PDO::PARAM_STR);
+            $updateStmt->execute();
+    
+            $pdo->commit();
+            return "ok"; // Return "ok" if the resolution is successful
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return "error"; // Return "error" if there is an error
+        }
+    
+        $pdo = null;
+        $stmt = null;
+    }    
 }
 
 ?>
