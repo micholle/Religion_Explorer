@@ -131,8 +131,7 @@ $(function() {
                 reportedBy = userDetails.reportedBy;
 
                 
-                $("#useridColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + userid + '</p> </div>');
-                $("#userLinkColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <a href="' + ("http://localhost/religion_explorer/views/modules/userProfile.php/" + userid)  + '">' + userLink + '</a> </div>');
+                $("#useridColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p> <a href="' + ("viewUserProfile.php?accountid=" + userid)  + '">' + userid + '</a></p> </div>');
                 $("#userViolationColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
                 $("#userAdditionalContextColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
                 $("#userReportedOnColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');

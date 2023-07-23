@@ -179,6 +179,23 @@ function create_sidebar() {
                     </div>
                 </div>
             </div>
+
+            <div id="reportDetails" class="modal fade">
+                <div class="modal-dialog modal-xs modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <h5 id="reportedContentTitle" class="modal-title w-100"></h5>
+                                        <p id="reportedContentViolations" class="text-center"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             ';
 
         return $sidebar_html;
