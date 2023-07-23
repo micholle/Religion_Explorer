@@ -30,7 +30,11 @@ class ControllerLogin {
         } elseif ($result === "Account suspended") {
             $errorMessage = "Your account is currently suspended. You can log in again in ";
 
-            if ($_SESSION['daysLeft'] > 0) {
+            if ($_SESSION['yearsLeft'] > 0) {
+                $errorMessage .= $_SESSION['yearsLeft'] . " years";
+            } else if ($_SESSION['monthsLeft'] > 0) {
+                $errorMessage .= $_SESSION['monthsLeft'] . " months";
+            } else if ($_SESSION['daysLeft'] > 0) {
                 $errorMessage .= $_SESSION['daysLeft'] . " days";
             } elseif ($_SESSION['hoursLeft'] > 0) {
                 $errorMessage .= $_SESSION['hoursLeft'] . " hours";

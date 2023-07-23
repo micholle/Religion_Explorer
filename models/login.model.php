@@ -24,6 +24,8 @@ class ModelLogin {
                         session_start();
                         $timeLeft = $endDate->diff($currentTime);
 
+                        $_SESSION['yearsLeft'] = $timeLeft->y;
+                        $_SESSION['monthsLeft'] = $timeLeft->m;
                         $_SESSION['daysLeft'] = $timeLeft->d;
                         $_SESSION['hoursLeft'] = $timeLeft->h;
                         $_SESSION['minutesLeft'] = $timeLeft->i;
