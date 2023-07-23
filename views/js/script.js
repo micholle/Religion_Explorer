@@ -97,139 +97,155 @@ $(function() {
         }
     });
 
+    $.ajax({
+        url: "../../ajax/getNotifications.ajax.php",
+        method: "POST",
+            data : {"accountid" : $("#accountidPlaceholder").text()},
+        success: function (data) {
+            var notificationData = data;  
+
+            var uniqueid = "";
+            var notification = "";
+            var notificationIcon = "";
+            var notificationDate = "";
+            var personInvolved = "";
+            var notificationSource = "";
+            var upvotesCount = 0;
+            var contentViolations = "";
+            var notificationStatus = "";
+            $("#notification").html("");
+
+            for (notif in notificationData) {
+                notificationDetails = notificationData[notif];
+
+                uniqueid = notificationDetails.uniqueid;
+                notification = notificationDetails.notification;
+                notificationIcon = notificationDetails.notificationIcon;
+                notificationDate = notificationDetails.notificationDate;
+                personInvolved = notificationDetails.personInvolved;
+                notificationSource = notificationDetails.notificationSource;
+                upvotesCount = notificationDetails.upvotesCount;
+                contentViolations = notificationDetails.contentViolations;
+                notificationStatus = notificationDetails.notificationStatus;
+
+                if (notificationStatus == "Unread") {
+                    $("#notificationsIcon").attr("src", "../assets/img/bell-alert.png");
+                }
+                
+                if (notificationSource == "Calendar") {
+                    $("#notification").append(
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="' + notificationIcon + '">' +
+                            '</div>' +
+                            '<div class="col-10 d-flex flex-column">' +
+                                '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + notification + '</span> starts today.</p>' +
+                                '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                } else if (notificationSource == "Community Creations") {
+                    $("#notification").append(
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="' + notificationIcon + '">' +
+                            '</div>' +
+                            '<div class="col-10 d-flex flex-column">' +
+                                '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span>  has added <span class="notificationsPanelBoldText">"' + notification + '"</span> to their bookmarks.</p>' +
+                                '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                } else if (notificationSource == "Discussion Forum Posts") {
+                    $("#notification").append(
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="' + notificationIcon + '">' +
+                            '</div>' +
+                            '<div class="col-10 d-flex flex-column">' +
+                                '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span>  commented on your post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                } else if (notificationSource == "Discussion Forum Replies") {
+                    $("#notification").append(
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="' + notificationIcon + '">' +
+                            '</div>' +
+                            '<div class="col-10 d-flex flex-column">' +
+                                '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span>  replied to your comment on the post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                } else if (notificationSource == "Discussion Forum Topics Upvote") {
+                    $("#notification").append(
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="' + notificationIcon + '">' +
+                            '</div>' +
+                            '<div class="col-10 d-flex flex-column">' +
+                                '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                } else if (notificationSource == "Discussion Forum Posts Upvote") {
+                    $("#notification").append(
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="' + notificationIcon + '">' +
+                            '</div>' +
+                            '<div class="col-10 d-flex flex-column">' +
+                                '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your comment: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                } else if (notificationSource == "Discussion Forum Replies Upvote") {
+                    $("#notification").append(
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="' + notificationIcon + '">' +
+                            '</div>' +
+                            '<div class="col-10 d-flex flex-column">' +
+                                '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your reply: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
+                                '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                } else if (notificationSource == "Reported Content") {
+                    $("#notification").append(
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="reportedContentDetails(\'' + notification + '\', \'' + contentViolations + '\')">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="' + notificationIcon + '">' +
+                            '</div>' +
+                            '<div class="col-10 d-flex flex-column">' +
+                                '<p class="notificationsPanelMainText">Your post was taken down because it goes against our community guidelines.</p>' +
+                                '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                }
+            } 
+        }
+    });
+
     $("#sidebarNotifications").click(function(event) {
         event.preventDefault();
-
-        $.ajax({
-            url: "../../ajax/getNotifications.ajax.php",
-            method: "POST",
-                data : {"accountid" : $("#accountidPlaceholder").text()},
-            success: function (data) {
-                var notificationData = data;  
-
-                var uniqueid = "";
-                var notification = "";
-                var notificationIcon = "";
-                var notificationDate = "";
-                var personInvolved = "";
-                var notificationSource = "";
-                var upvotesCount = 0;
-                var contentViolations = "";
-                $("#notification").html("");
     
-                for (notif in notificationData) {
-                    notificationDetails = notificationData[notif];
-        
-                    uniqueid = notificationDetails.uniqueid;
-                    notification = notificationDetails.notification;
-                    notificationIcon = notificationDetails.notificationIcon;
-                    notificationDate = notificationDetails.notificationDate;
-                    personInvolved = notificationDetails.personInvolved;
-                    notificationSource = notificationDetails.notificationSource;
-                    upvotesCount = notificationDetails.upvotesCount;
-                    contentViolations = notificationDetails.contentViolations;
-                    
-                    if (notificationSource == "Calendar") {
-                        $("#notification").append(
-                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                    '<img src="' + notificationIcon + '">' +
-                                '</div>' +
-                                '<div class="col-10 d-flex flex-column">' +
-                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + notification + '</span> starts today.</p>' +
-                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
-                                '</div>' +
-                            '</div>'
-                        );
-                    } else if (notificationSource == "Community Creations") {
-                        $("#notification").append(
-                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                    '<img src="' + notificationIcon + '">' +
-                                '</div>' +
-                                '<div class="col-10 d-flex flex-column">' +
-                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span>  has added <span class="notificationsPanelBoldText">"' + notification + '"</span> to their bookmarks.</p>' +
-                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
-                                '</div>' +
-                            '</div>'
-                        );
-                    } else if (notificationSource == "Discussion Forum Posts") {
-                        $("#notification").append(
-                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                    '<img src="' + notificationIcon + '">' +
-                                '</div>' +
-                                '<div class="col-10 d-flex flex-column">' +
-                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span>  commented on your post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
-                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
-                                '</div>' +
-                            '</div>'
-                        );
-                    } else if (notificationSource == "Discussion Forum Replies") {
-                        $("#notification").append(
-                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                    '<img src="' + notificationIcon + '">' +
-                                '</div>' +
-                                '<div class="col-10 d-flex flex-column">' +
-                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span>  replied to your comment on the post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
-                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
-                                '</div>' +
-                            '</div>'
-                        );
-                    } else if (notificationSource == "Discussion Forum Topics Upvote") {
-                        $("#notification").append(
-                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                    '<img src="' + notificationIcon + '">' +
-                                '</div>' +
-                                '<div class="col-10 d-flex flex-column">' +
-                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
-                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
-                                '</div>' +
-                            '</div>'
-                        );
-                    } else if (notificationSource == "Discussion Forum Posts Upvote") {
-                        $("#notification").append(
-                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                    '<img src="' + notificationIcon + '">' +
-                                '</div>' +
-                                '<div class="col-10 d-flex flex-column">' +
-                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your comment: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
-                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
-                                '</div>' +
-                            '</div>'
-                        );
-                    } else if (notificationSource == "Discussion Forum Replies Upvote") {
-                        $("#notification").append(
-                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                    '<img src="' + notificationIcon + '">' +
-                                '</div>' +
-                                '<div class="col-10 d-flex flex-column">' +
-                                    '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your reply: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
-                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
-                                '</div>' +
-                            '</div>'
-                        );
-                    } else if (notificationSource == "Reported Content") {
-                        $("#notification").append(
-                            '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="reportedContentDetails(\'' + notification + '\', \'' + contentViolations + '\')">' +
-                                '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                    '<img src="' + notificationIcon + '">' +
-                                '</div>' +
-                                '<div class="col-10 d-flex flex-column">' +
-                                    '<p class="notificationsPanelMainText">Your post was taken down because it goes against our community guidelines.</p>' +
-                                    '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
-                                '</div>' +
-                            '</div>'
-                        );
-                    }
-                } 
+        //Set the notification status to read
+        $.ajax({
+            url: "../../ajax/updateNotificationStatus.ajax.php",
+            method: "POST",
+            data: {"accountid" : $("#accountidPlaceholder").text()},
+            success:function(){
+                $("#notificationsIcon").attr("src", "../assets/img/bell.png");
             }
         });
-    
+
         // Remove the "active" class from all tab links
         $("#sidebarUsername li a").removeClass("active");
     
