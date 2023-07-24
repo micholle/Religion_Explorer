@@ -1,4 +1,18 @@
 $(function() {
+    getReportedUsers();
+    $(document).on("click", ".reportButton", function() {
+        var userID = $(this).data("userid");
+        var action = $(this).data("action");
+
+        if (action === "resolve") {
+            resolveReport(userID);
+        } else if (action === "suspend") {
+            suspendUser(userID);
+        } else if (action === "ban") {
+            banUser(userID);
+        }
+    });
+
     $.ajax({
         url: "../../ajax/showAdminSidebar.ajax.php",
         method: "POST",
@@ -90,12 +104,15 @@ $(function() {
         }
     });
 
+    function getReportedUsers(){
     $.ajax({
         url: "../../ajax/getReportedUsers.ajax.php",
         method: "POST",
         success: function (data) {
             var reportedUsers = data;
-    
+            
+            $(".adminReviewContainerContent").remove();
+
             var userid = "";
             var userLink = "";
             var violations = "";
@@ -114,20 +131,20 @@ $(function() {
                 reportedBy = userDetails.reportedBy;
 
                 
-                $("#useridColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + userid + '</p> </div>');
-                $("#userLinkColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <a href="' + ("http://localhost/religion_explorer/views/modules/userProfile.php/" + userid)  + '">' + userLink + '</a> </div>');
+                $("#useridColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p> <a href="' + ("viewUserProfile.php?accountid=" + userid)  + '">' + userid + '</a></p> </div>');
                 $("#userViolationColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
                 $("#userAdditionalContextColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
                 $("#userReportedOnColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
                 $("#userReportedByColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
                 $("#userActionColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-check.png" onclick="resolveReport(' + userid + ')">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-slash.png" onclick="suspendUser(' + userid + ')">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-dash.png" onclick="banUser(' + userid + ')"">' +
+                    '<img class="reportButton" src="../assets/img/admin/action-check.png" data-userid="' + userid + '" data-action="resolve">' +
+                    '<img class="reportButton" src="../assets/img/admin/action-slash.png" data-userid="' + userid + '" data-action="suspend">' +
+                    '<img class="reportButton" src="../assets/img/admin/action-dash.png" data-userid="' + userid + '" data-action="ban">' +
                 '</div>');
             }
         }
     });
+    }
 
     $("#userSearch").keyup(function () { 
         var userSearchVal = $("#userSearch").val().toLowerCase();
@@ -156,13 +173,19 @@ $(function() {
     });
 
     $("#confirmResolveUserReport").click(function () { 
-        var userid = $("#resolveReportUserid").text();
+        var userID = $("#resolveReportUserid").text();
         
         $.ajax({
-            url: "../../ajax/sample.ajax.php", //insert ajax
-            method: "POST",
-            data: {},
+            type: "POST",
+            url: "../../ajax/reportAction.ajax.php",
+            data: {
+                action: "resolve",
+                userid: userID
+            },
             success:function(){
+                getReportedUsers();
+                $("#resolveUserModal").removeClass("fade").modal("hide");
+                $("#resolveUserModal").modal("dispose");
                 $("#toast").html("Report resolved.");
             }, error: function() {
                 $("#toast").html("There was an error processing your request. Please try again later.")
@@ -182,62 +205,66 @@ $(function() {
         });
     });
 
-    $("#confirmSuspendUser").click(function () { 
-        var userid = $("#suspendUserUserid").text();
+    $("#confirmSuspendUser").click(function() {
+        var userID = $("#suspendUserUserid").text();
         var suspendUserVal = $("#suspendUserVal").val();
         var suspendUserTime = $("#suspendUserTime").val();
-
-        alert("User suspended for " + suspendUserVal + " " + suspendUserTime);
-
-        $.ajax({
-            url: "../../ajax/sample.ajax.php", //insert ajax
-            method: "POST",
-            data: {},
-            success:function(){
-                $("#toast").html("User suspended for " + suspendUserVal + " " + suspendUserTime)
-            }, error: function() {
-                $("#toast").html("There was an error processing your request. Please try again later.")
-                $("#toast").css("background-color", "#E04F5F");
-            },
-            complete: function() {
-                $("#deleteContentModal").removeClass("fade").modal("hide");
-                $("#deleteContentModal").modal("dispose");
-
-                $('#toast').addClass('show');
     
-                setTimeout(function() {
-                    $('#toast').removeClass('show');
-                    location.reload();
-                }, 2000);
-            }
-        });
-    });
-
-    $("#confirmBanUser").click(function () { 
-        var userid = $("#banUserUserid").text();
-        
         $.ajax({
-            url: "../../ajax/sample.ajax.php", //insert ajax
-            method: "POST",
-            data: {},
-            success:function(){
-                $("#toast").html("User banned.");
-            }, error: function() {
+            type: "POST",
+            url: "../../ajax/reportAction.ajax.php",
+            data: {
+                action: "suspend",
+                userid: userID,
+                duration: suspendUserVal,
+                unit: suspendUserTime
+            },
+            success: function(response) {
+                    getReportedUsers();
+                    $("#toast").html("User suspended for " + suspendUserVal + " " + suspendUserTime);
+                    $("#suspendUserModal").removeClass("fade").modal("hide");
+                    $("#suspendUserModal").modal("dispose");
+                    $('#toast').addClass('show');
+                    setTimeout(function() {
+                        $('#toast').removeClass('show');
+                        location.reload();
+                    }, 2000);
+            },
+            error: function() {
                 $("#toast").html("There was an error processing your request. Please try again later.");
                 $("#toast").css("background-color", "#E04F5F");
-            },
-            complete: function() {
-                $("#reportUserModal").removeClass("fade").modal("hide");
-                $("#reportUserModal").modal("dispose");
-
-                $('#toast').addClass('show');
-    
-                setTimeout(function() {
-                    $('#toast').removeClass('show');
-                }, 2000);
             }
         });
     });
+    
+    // Event listener for "Confirm Ban User" button
+    $("#confirmBanUser").click(function() {
+        var userID = $("#banUserUserid").text();
+    
+        $.ajax({
+            type: "POST",
+            url: "../../ajax/reportAction.ajax.php",
+            data: {
+                action: "ban",
+                userid: userID
+            },
+            success: function(response) {
+                    getReportedUsers();
+                    $("#toast").html("User banned.");
+                    $("#banUserModal").removeClass("fade").modal("hide");
+                    $("#banUserModal").modal("dispose");
+                    $('#toast').addClass('show');
+                    setTimeout(function() {
+                        $('#toast').removeClass('show');
+                    }, 2000);
+            },
+            error: function() {
+                $("#toast").html("There was an error processing your request. Please try again later.");
+                $("#toast").css("background-color", "#E04F5F");
+            }
+        });
+    });    
+    
 });
 
 function resolveReport(userid) {
@@ -257,5 +284,3 @@ function banUser(userid) {
     $('#banUserModal').modal();
     $('#banUserModal').show();
 }
-
-

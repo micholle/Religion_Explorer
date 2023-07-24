@@ -383,7 +383,7 @@ $(function() {
                             for (videoData in videoList) {
                                 var videoDetails = videoList[videoData];
         
-                                if ((photoDetails.title).includes(communitySearchVal) || ((videoDetails.religion).toLowerCase()).includes(communitySearchVal) || ((videoDetails.description).toLowerCase()).includes(communitySearchVal) || ((videoDetails.author).toLowerCase()).includes(communitySearchVal)) {
+                                if ((videoDetails.title).includes(communitySearchVal) || ((videoDetails.religion).toLowerCase()).includes(communitySearchVal) || ((videoDetails.description).toLowerCase()).includes(communitySearchVal) || ((videoDetails.author).toLowerCase()).includes(communitySearchVal)) {
                                     var creationid = "#" + videoDetails.creationid;
                                     $(creationid).css("display", "block");
                                 } else {

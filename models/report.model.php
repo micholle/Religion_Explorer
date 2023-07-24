@@ -11,30 +11,66 @@ class reportContentModel {
         $reportedContent = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
         $reportedContents = [];
-        $contentCreator = "";
-        $contentLink = "";
     
         foreach ($reportedContent as $content) {  
             if ($content["reportStatus"] == "Pending") {
-
+                $contentCreator = "";
+                $contentLink = "";
+                
                 if (substr($content["contentid"], 0, 2) == "CC") {
-                    $stmt2 = $pdo->prepare("SELECT creationid, title, accountid, filetype FROM communitycreations");
+                    $stmt2 = $pdo->prepare("SELECT accountid, filetype FROM communitycreations WHERE creationid = :creationid");
+                    $stmt2->bindParam(":creationid", $content["contentid"], PDO::PARAM_STR);
                     $stmt2->execute();
                     $communityCreations = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-                    // contentLink
-        
+                    
                     foreach ($communityCreations as $creation) {
-                        if ($creation["creationid"] == $content["contentid"]) {
-                            $contentCreator = $creation["accountid"];
-                            break;
+                        $contentCreator = $creation["accountid"];
+                    
+                        if ($creation["filetype"] == "") {
+                            $contentLink = "communitySubmissions.php?openTab=communitySubBlogs&view=";
+                        } else {
+                            if (strpos($creation["filetype"], "image") !== false) {
+                                $contentLink = "communitySubmissions.php?openTab=communitySubPhotos&view=";
+                            } else if (strpos($creation["filetype"], "video") !== false) {
+                                $contentLink = "communitySubmissions.php?openTab=communitySubVideos&view=";
+                            }
                         }
-                    }
+                    } 
+                } else {
+                    $forum_stmt = $pdo->prepare("SELECT t.accountid AS topic_accountid, p.accountid AS post_accountid, r.accountid AS reply_accountid
+                                                    FROM topics AS t
+                                                    JOIN posts AS p ON t.topicId = p.topicId
+                                                    JOIN reply AS r ON p.postId = r.postId
+                                                    WHERE t.topicId = :topicId");
+                    $forum_stmt->bindParam(":topicId", $content["contentid"], PDO::PARAM_INT);
+                    $forum_stmt->execute();
+                    $forumInfo = $forum_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    $topicAccountID = "";
+                    $postAccountID = "";
+                    $replyAccountID = "";
+
+                    foreach ($forumInfo as $info) {
+                        $topicAccountID = $info["topic_accountid"];
+                        $postAccountID = $info["post_accountid"];
+                        $replyAccountID = $info["reply_accountid"];
+
+                        if($topicAccountID != "") {
+                            $contentCreator = $topicAccountID;
+                        } else if ($postAccountID != "") {
+                            $contentCreator = $postAccountID;
+                        } else if ($replyAccountID != "") {
+                            $contentCreator = $replyAccountID;
+                        }
+                    } 
+                    
+                    $contentLink = "discussionForumPost.php?topicId=";
                 }
 
-                $stmt3 = $pdo->prepare("SELECT username FROM accounts WHERE accountid = :accountid");
-                $stmt3->bindParam(":accountid", $content["reportedBy"], PDO::PARAM_STR);
-                $stmt3->execute();
-                $reportedBy = $stmt3->fetchColumn();
+                $accounts_stmt = $pdo->prepare("SELECT username FROM accounts WHERE accountid = :accountid");
+                $accounts_stmt->bindParam(":accountid", $content["reportedBy"], PDO::PARAM_STR);
+                $accounts_stmt->execute();
+                $reportedBy = $accounts_stmt->fetchColumn();
 
                 $reportedContents[$content["reportid"]] = [
                     "contentid" => $content["contentid"],
@@ -111,12 +147,14 @@ class reportContentModel {
         try {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->beginTransaction();
+            $accountid = "";
 
             if (substr($contentid, 0, 2) == "CC") {
-                $stmt = $pdo->prepare("SELECT filedata FROM communitycreations WHERE creationid = :contentid");
+                $stmt = $pdo->prepare("SELECT accountid, filedata FROM communitycreations WHERE creationid = :contentid");
                 $stmt->bindParam(":contentid", $contentid, PDO::PARAM_STR);
                 $stmt->execute();
                 $filepath = $stmt->fetch(PDO::FETCH_ASSOC);
+                $accountid = $filepath["accountid"];
                 if (file_exists($filepath["filedata"])) {unlink($filepath["filedata"]);}
 
                 $stmt2 = $pdo->prepare("DELETE FROM communitycreations WHERE creationid = :contentid");
@@ -124,14 +162,49 @@ class reportContentModel {
                 $stmt2->execute();
             }        
             
-            $stmt3 = $pdo->prepare("DELETE FROM bookmarks WHERE resourceid = :contentid");
-            $stmt3->bindParam(":contentid", $contentid, PDO::PARAM_STR);
-            $stmt3->execute();
+            $bookmark_delete = $pdo->prepare("DELETE FROM bookmarks WHERE resourceid = :contentid");
+            $bookmark_delete->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+            $bookmark_delete->execute();
 
-            $stmt4 = $pdo->prepare("UPDATE reportedcontent SET actionTaken = 'Delete', reportStatus = 'Completed' WHERE contentid = :contentid");
-            $stmt4->bindParam(":contentid", $contentid, PDO::PARAM_STR);
-            $stmt4->execute();
+            $delete_content = $pdo->prepare("UPDATE reportedcontent SET actionTaken = 'Delete', reportStatus = 'Completed' WHERE contentid = :contentid");
+            $delete_content->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+            $delete_content->execute();
 
+            $get_reportid = $pdo->prepare("SELECT accountid FROM reportedcontent WHERE contentid = :contentid");
+            $get_reportid->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+            $get_reportid->execute();
+            $reportids = $get_reportid->fetch(PDO::FETCH_ASSOC);
+            $reportid = $reportids["reportid"];
+
+            $notify_user = $pdo->prepare("INSERT INTO notifications(accountid, reportid, notificationSource, notificationDate) VALUES (:accountid, :reportid, :notificationSource, :notificationDate)");
+            $notify_user->bindParam(":accountid", $accountid, PDO::PARAM_STR);
+            $notify_user->bindParam(":reportid", $reportid, PDO::PARAM_STR);
+            $notify_user->bindValue(":notificationSource", "Reported Content", PDO::PARAM_STR);
+            $notify_user->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
+            $notify_user->execute();
+    
+            $pdo->commit();
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return "error";
+        }
+    
+        $pdo = null;
+        $stmt = null;
+        $stmt2 = null;
+    }
+    
+    static public function mdlReportUserOfContent($contentid) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
+
+            // report user then delete reported content
+            // mdlSubmitReportUser($data);
+            // mdlDeleteReportedContent($contentid);
     
             $pdo->commit();
         } catch (Exception $e) {
@@ -212,6 +285,158 @@ class reportUserModel {
 		$pdo = null;
 		$stmt = null;
     }
+
+    //report action
+    static public function mdlSuspendUser($data) {
+        $db = new Connection();
+        $pdo = $db->connect();
+        switch ($data["suspendusertime"]) {
+            case "Hours":
+                $interval = "HOUR";
+                break;
+            case "Days":
+                $interval = "DAY";
+                break;
+            case "Weeks":
+                $interval = "WEEK";
+                break;
+            case "Months":
+                $interval = "MONTH";
+                break;
+            case "Years":
+                $interval = "YEAR";
+                break;
+            default:
+                // Default to hours if the unit is not recognized
+                $interval = "HOUR";
+                break;
+        }
+    
+        try {
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
+    
+            // Check if the user already has a status record in the table
+            $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM accounts_status WHERE accountid = :accountid");
+            $stmtCheck->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
+            $stmtCheck->execute();
+            $recordExists = $stmtCheck->fetchColumn();
+    
+            if ($recordExists) {
+                // If the user already has a status record, update it
+                $stmt = $pdo->prepare("UPDATE accounts_status SET status = 'Suspended', startDate = NOW(), endDate = DATE_ADD(NOW(), INTERVAL :suspenduserval $interval) WHERE accountid = :accountid");
+            } else {
+                // If the user doesn't have a status record, insert a new one
+                $stmt = $pdo->prepare("INSERT INTO accounts_status (accountid, status, startDate, endDate) VALUES (:accountid, 'Suspended', NOW(), DATE_ADD(NOW(), INTERVAL :suspenduserval $interval))");
+            }
+    
+            $stmt->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
+            $stmt->bindParam(":suspenduserval", $data["suspenduserval"], PDO::PARAM_INT);
+            $stmt->execute();
+    
+            $username = self::mdlGetUsernameByUserID($data["userid"]);
+    
+            // Update the reportedusers table with actionTaken and reportStatus
+            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Suspend', reportStatus = 'Completed' WHERE username = :username");
+            $updateStmt->bindParam(":username", $username, PDO::PARAM_STR);
+            $updateStmt->execute();
+    
+            $pdo->commit();
+            return "ok";
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return "error";
+        } finally {
+            $pdo = null;
+            $stmt = null;
+            $stmtCheck = null;
+        }
+    }
+    
+    
+
+    static public function mdlBanUser($data) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
+
+            $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM accounts_status WHERE accountid = :accountid");
+            $stmtCheck->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
+            $stmtCheck->execute();
+            $recordExists = $stmtCheck->fetchColumn();
+
+            if ($recordExists) {
+                $stmt = $pdo->prepare("UPDATE accounts_status SET status = 'Banned', startDate = NOW() WHERE accountid = :accountid");
+            } else {
+                $stmt = $pdo->prepare("INSERT INTO accounts_status (accountid, status, startDate) VALUES (:accountid, 'Banned', NOW())");
+            }
+
+            $stmt->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
+            $stmt->execute();
+
+            $username = self::mdlGetUsernameByUserID($data["userid"]);
+
+            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Ban', reportStatus = 'Completed' WHERE username = :username");
+            $updateStmt->bindParam(":username", $username, PDO::PARAM_STR);
+            $updateStmt->execute();
+
+            $pdo->commit();
+            return "ok";
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return "error";
+        }
+
+        $pdo = null;
+        $stmt = null;
+    }
+
+    static public function mdlGetUsernameByUserID($userid) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $stmt = $pdo->prepare("SELECT username FROM accounts WHERE accountid = :userid");
+            $stmt->bindParam(":userid", $userid, PDO::PARAM_STR);
+            $stmt->execute();
+            $username = $stmt->fetchColumn();
+
+            return $username;
+        } catch (Exception $e) {
+            return null;
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    static public function mdlResolveUser($data) {
+        $db = new Connection();
+        $pdo = $db->connect();
+    
+        try {
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
+
+            $username = self::mdlGetUsernameByUserID($data["userid"]);
+    
+            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Resolve', reportStatus = 'Completed' WHERE username = :username");
+            $updateStmt->bindParam(":username", $username, PDO::PARAM_STR);
+            $updateStmt->execute();
+    
+            $pdo->commit();
+            return "ok"; // Return "ok" if the resolution is successful
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return "error"; // Return "error" if there is an error
+        }
+    
+        $pdo = null;
+        $stmt = null;
+    }    
 }
 
 ?>

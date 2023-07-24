@@ -1,5 +1,6 @@
 <?php 
 require_once "../../models/explorerPoints.model.php";
+require_once "../../models/achievements.model.php";
 
 if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     // Redirect the user to splash.php
@@ -152,14 +153,14 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     <div class="userProfileStatsHeader">
                                         <div class="row justify-content-center align-items-start">
                                             <div class="col-6 d-flex justify-content-start">
-                                                <h1>[Date Range]</h1>
+                                                <h1>July 23, 2023 - July 29, 2023</h1>
                                             </div>
                                             <div class="col-6 d-flex justify-content-end no-gutters">
                                                 <select id="" class="">
                                                     <option value="week">Last 7 Days</option>
                                                     <option value="month">Last Month</option>
                                                     <option value="year">Last Year</option>
-                                                    <option value="year">All Time</option>
+                                                    <option value="all">All Time</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -172,8 +173,8 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                                         <img src="../assets/img/discussionForum/upvote-active.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>0%</h1>
-                                                        <p>upvote rate</p>
+                                                        <h1>54</h1>
+                                                        <p>upvotes</p>
                                                     </div>
                                                 </div>
                                                 <div class="userProfileStatsContent d-flex">
@@ -181,8 +182,8 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                                         <img src="../assets/img/discussionForum/downvote.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>0%</h1>
-                                                        <p>downvote rate</p>
+                                                        <h1>11</h1>
+                                                        <p>downvotes</p>
                                                     </div>
                                                 </div>
                                                 <div class="userProfileStatsContent d-flex">
@@ -190,20 +191,14 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                                         <img src="../assets/img/discussionForum/comments.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>0%</h1>
-                                                        <p>comment rate</p>
+                                                        <h1>7</h1>
+                                                        <p>comments</p>
                                                     </div>
                                                 </div>
                                                 <div class="userProfileStatsContent">
                                                     <div class="userProfileStatsContentNumVar d-flex justify-content-center align-items-center flex-column">
-                                                        <h1>0%</h1>
-                                                        <p>total engagement rate</p>
-                                                    </div>
-                                                </div>
-                                                <div class="userProfileStatsBox">
-                                                    <div class="userProfileStatsContentNumVar d-flex justify-content-center align-items-center flex-column">
-                                                        <h1>0%</h1>
-                                                        <p>Your total engagement rate [increased/decreased] by this compared to the previous [placeholder time].</p>
+                                                        <h1>72</h1>
+                                                        <p>total engagements</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -223,12 +218,9 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     </div>
                                     <div class="userProfileStatsOverviewBody justify-content-start">
                                         <div class="userProfileStatsContent d-flex flex-row">
-                                            <div class="userProfileStatsContentImg">
-                                                <img src="../assets/img/editProfile/lion.png">
-                                            </div>
                                             <div class="userProfileStatsContentNum">
-                                                <p>Profile Views</p>
-                                                <h1>[Number]<span class="userProfileStatsPercent">[Percentage]</span></h1>
+                                                <p>Total Uploads</p>
+                                                <h1>15</h1>
                                             </div>
                                         </div>
 
@@ -238,12 +230,8 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     </div>
                                     <div class="userProfileStatsOverviewBody justify-content-start">
                                         <div class="userProfileStatsContent d-flex flex-row">
-                                            <div class="userProfileStatsContentImg">
-                                                <img src="../assets/img/editProfile/lion.png">
-                                            </div>
                                             <div class="userProfileStatsContentNum">
-                                                <p>Video Views</p>
-                                                <h1>[Number]<span class="userProfileStatsPercent">[Percentage]</span></h1>
+                                                <p>Uploads per File Type</p>
                                             </div>
                                         </div>
 
@@ -259,10 +247,118 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 
                 <div class="userProfileContent">
                     <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $postBadge10; ?>>
+                            <img src="../assets/img/userProfile/achievements/forum-10.png">
+                            <h1>10 posts badge</h2>
+                            <p></p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $postBadge50; ?>>
+                            <img src="../assets/img/userProfile/achievements/forum-50.png">
+                            <h1>50 posts badge</h2>
+                            <p></p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $postBadge100; ?>>
+                            <img src="../assets/img/userProfile/achievements/forum-100.png">
+                            <h1>100 posts badge</h2>
+                            <p></p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $postBadge250; ?>>
+                            <img src="../assets/img/userProfile/achievements/forum-250.png">
+                            <h1>250 posts badge</h2>
+                            <p></p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $postBadge500; ?>>
+                            <img src="../assets/img/userProfile/achievements/forum-500.png">
+                            <h1>500 posts badge</h2>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row" <?Php echo $explorerBadge250; ?>>
                         <div class="achievementsBox d-flex justify-content-center align-items-center flex-column">
-                            <img src="../assets/img/placeholder-medal.png">
-                            <h1>[Achievement Title]</h2>
-                            <p>[Achievement Description]</p>
+                            <img src="../assets/img/userProfile/achievements/explorer-tier1.png">
+                            <h1>Tier 1 Explorer Badge</h2>
+                            <p>250 explorer points</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $explorerBadge500; ?>>
+                            <img src="../assets/img/userProfile/achievements/explorer-tier2.png">
+                            <h1>Tier 2 Explorer Badge</h2>
+                            <p>500 explorer points</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $explorerBadge1000; ?>>
+                            <img src="../assets/img/userProfile/achievements/explorer-tier3.png">
+                            <h1>Tier 3 Explorer Badge</h2>
+                            <p>1000 explorer points</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $explorerBadge2500; ?>>
+                            <img src="../assets/img/userProfile/achievements/explorer-tier4.png">
+                            <h1>Tier 4 Explorer Badge</h2>
+                            <p>2500 explorer points</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $explorerBadge5000; ?>>
+                            <img src="../assets/img/userProfile/achievements/explorer-tier5.png">
+                            <h1>Tier 5 Explorer Badge</h2>
+                            <p>5000 explorer points</p>
+                        </div>
+                    </div>
+                    <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge10; ?>>
+                            <img src="../assets/img/userProfile/achievements/scholar-tier1.png">
+                            <h1>Tier 1 Scholar Badge</h2>
+                            <p>Bookmarked 10 materials</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge50; ?>>
+                            <img src="../assets/img/userProfile/achievements/scholar-tier2.png">
+                            <h1>Tier 2 Scholar Badge</h2>
+                            <p>Bookmarked 50 materials</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge100; ?>>
+                            <img src="../assets/img/userProfile/achievements/scholar-tier3.png">
+                            <h1>Tier 3 Scholar Badge</h2>
+                            <p>Bookmarked 100 materials</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge250; ?>>
+                            <img src="../assets/img/userProfile/achievements/scholar-tier4.png">
+                            <h1>Tier 4 Scholar Badge</h2>
+                            <p>Bookmarked 250 materials</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge500; ?>>
+                            <img src="../assets/img/userProfile/achievements/scholar-tier5.png">
+                            <h1>Tier 5 Scholar Badge</h2>
+                            <p>Bookmarked 500 materials</p>
+                        </div>
+                    </div>
+                    <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $creationBadge5; ?>>
+                            <img src="../assets/img/userProfile/achievements/creator-tier1.png">
+                            <h1>Tier 1 Creator Badge</h2>
+                            <p>contributed 5 creations</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $creationBadge25; ?>>
+                            <img src="../assets/img/userProfile/achievements/creator-tier2.png">
+                            <h1>Tier 2 Creator Badge</h2>
+                            <p>contributed 25 creations</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $creationBadge50; ?>>
+                            <img src="../assets/img/userProfile/achievements/creator-tier3.png">
+                            <h1>Tier 3 Creator Badge</h2>
+                            <p>contributed 50 creations</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $creationBadge75; ?>>
+                            <img src="../assets/img/userProfile/achievements/creator-tier4.png">
+                            <h1>Tier 4 Creator Badge</h2>
+                            <p>contributed 75 creations</p>
+                        </div>
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $creationBadge100; ?>>
+                            <img src="../assets/img/userProfile/achievements/creator-tier5.png">
+                            <h1>Tier 5 Creator Badge</h2>
+                            <p>contributed 100 creations</p>
+                        </div>
+                    </div>
+                    <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
+                        <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $accountDateBadge; ?>>
+                            <img src="../assets/img/userProfile/achievements/1-year-anniv.png">
+                            <h1 style="text-align: center;">1-year anniversary badge</h2>
+                            <p></p>
                         </div>
                     </div>
                 </div>

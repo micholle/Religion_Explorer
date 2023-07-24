@@ -1,5 +1,4 @@
 <?php
-
 class libraryData {
 
     public function getBasicInfo() {
@@ -80,7 +79,6 @@ class libraryData {
     }
 
     public function getResources() {
-
         $libraryResources = [
             "photos" => [
                 "LP1" => [
@@ -162,32 +160,26 @@ class libraryData {
             ],
             "readingMats" => [
                 "LR1" => [
-                    "title" => "What is Ashura?",
+                    "title" => "Ashura",
                     "resourceImg" => "../assets/data/img/library/rm9.jpg",
                     "type" => "article",
-                    "author" => "BBC News",
-                    "date" => "2011",
+                    "author" => "National Today",
+                    "date" => "2023",
                     "religion" => "Islam",
                     "category" => ["Religious Traditions"],
                     "description" => "The day of Ashura is marked by Muslims as a whole, but for Shia Muslims it is a major religious commemoration of the martyrdom at Karbala of Hussein, a grandson of the Prophet Muhammad.",
-                    "mainPoint1" => "Significance of Ashura: The day of Ashura is an important religious commemoration for Shia Muslims, marking the martyrdom of Hussein, a grandson of the Prophet Muhammad, at Karbala. It is observed on the 10th of Muharram, the first month of the Islamic lunar calendar.",
-                    "mainPoint2" => "Observance of Ashura: Muslims, including Shia Muslims, observe Ashura with fasting, which is a voluntary act of commemoration. Additionally, it is associated with events from Islamic history.",
-                    "mainPoint3" => "Mourning and Rituals: Ashura is a solemn day for Shia Muslims, marked by mourning rituals and passion plays that re-enact the martyrdom of Hussein. Shia men and women dressed in black participate in processions, slapping their chests and chanting.",
-                    "source" => "https://www.bbc.com/news/world-middle-east-16047713"
+                    "source" => "https://nationaltoday.com/ashurah"
                 ],
                 "LR2" => [
-                    "title" => "Dharma Day",
+                    "title" => "Celebrating Dhamma Day (Asalha Puja)",
                     "resourceImg" => "",
                     "type" => "article",
-                    "author" => "Ottowa Humane Society",
-                    "date" => "n.d.",
+                    "author" => "J. Kumara",
+                    "date" => "2021",
                     "religion" => "Buddhism",
                     "category" => ["Religious Traditions"],
-                    "description" => "Dharma Day, also known as “Asalha Puja” is one of the most important holidays in Theravada Buddhism. It commemorates the Buddha's first sermon following his attainment of enlightenment.",
-                    "mainPoint1" => "",
-                    "mainPoint2" => "",
-                    "mainPoint3" => "",
-                    "source" => "https://ottawahumane.ca/dharma-day"
+                    "description" => "Dharma (Dhamma) Day, also known as “Asalha Puja” is one of the most important holidays in Theravada Buddhism. It commemorates the Buddha's first sermon following his attainment of enlightenment.",
+                    "source" => "https://www.givelify.com/blog/dhamma-day-asalha-puja/"
                 ],
                 "LR3" => [
                     "title" => "Being Christian in Western Europe",
@@ -198,10 +190,7 @@ class libraryData {
                     "religion" => "Christianity",
                     "category" => ["Social Issues"],
                     "description" => "The majority of Europe's Christians are non-practicing, but they differ from religiously unaffiliated people in their views on God, attitudes toward Muslims and immigrants, and opinions about religion's role in society.",
-                    "mainPoint1" => "",
-                    "mainPoint2" => "",
-                    "mainPoint3" => "",
-                    "source" => ""
+                    "source" => "https://www.pewresearch.org/religion/2018/05/29/being-christian-in-western-europe/"
                 ],
                 "LR4" => [
                     "title" => "What it means to be a Christian in America",
@@ -212,10 +201,7 @@ class libraryData {
                     "religion" => "Christianity",
                     "category" => ["Social Issues"],
                     "description" => "From the very beginning of European settlement in the United States, a wide range of Christian faiths appeared in America. Roman Catholics, Baptists and Methodists saw their numbers rise in the early 19th century.",
-                    "mainPoint1" => "",
-                    "mainPoint2" => "",
-                    "mainPoint3" => "",
-                    "source" => ""
+                    "source" => "https://theconversation.com/what-it-means-to-be-a-christian-in-america-today-97981"
                 ],  
                 "LR5" => [
                     "title" => "African Christianity: Its public role",
@@ -229,72 +215,43 @@ class libraryData {
                     "mainPoint1" => "",
                     "mainPoint2" => "",
                     "mainPoint3" => "",
-                    "source" => ""
+                    "source" => "https://books.google.com.ph/books/about/African_Christianity.html?id=SDS45RNq6ZkC&redir_esc=y"
                 ],    
                 "LR6" => [
                     "title" => "A History of Christianity in India: 1707 - 1858",
                     "resourceImg" => "",
                     "type" => "book",
                     "author" => "S. Neil",
-                    "date" => "1984",
+                    "date" => "2002",
                     "religion" => "Christianity",
                     "category" => ["Historical Context"],
                     "description" => "Christians form the third largest religious community in India. How has this come about? There are many studies of separate groups: but there has so far been no major history of the three large groups.",
                     "mainPoint1" => "",
                     "mainPoint2" => "",
                     "mainPoint3" => "",
-                    "source" => ""
+                    "source" => "https://www.cambridge.org/us/universitypress/subjects/religion/church-history/history-christianity-india-17071858"
                 ],
                 "LR7" => [
                     "title" => "Fast of the 17th of Tammuz",
                     "resourceImg" => "",
                     "type" => "article",
-                    "author" => "The Jerusalem Post",
-                    "date" => "2023",
+                    "author" => "The US",
+                    "date" => "n.d.",
                     "religion" => "Judaism",
                     "category" => ["Religious Traditions"],
                     "description" => "Thursday marks the fast of the 17th of the Hebrew month of Tammuz, a day commemorating several tragedies in Jewish history and the start of a mourning period known as the Three Weeks.",
-                    "mainPoint1" => "",
-                    "mainPoint2" => "",
-                    "mainPoint3" => "",
-                    "source" => "https://www.jpost.com/judaism/article-748996"
-                ],
-                "LR8" => [
-                    "title" => "The Muharram Sermons",
-                    "resourceImg" => "",
-                    "type" => "book",
-                    "author" => "Mohammed Al-Hilli",
-                    "date" => "n.d.",
-                    "religion" => "Islam",
-                    "category" => ["Theology", "Religious Traditions"],
-                    "description" => "A compilation of lectures during the sacred month of Muharram in commemoration of the eternal sacrifice and the powerful movement of Imam Hussain (a) in the Battle of Ashura in Karbala.",
-                    "mainPoint1" => "",
-                    "mainPoint2" => "",
-                    "mainPoint3" => "",
-                    "source" => "https://www.thriftbooks.com/w/the-muharram-sermons_mohammed-al-hilli/10792364/#edition=64661424&idiq=52566039"
-                ],
-                "LR9" => [
-                    "title" => "Tisha B'Av: What's Worth Mourning For?",
-                    "resourceImg" => "",
-                    "type" => "article",
-                    "author" => "Y. Sheleg",
-                    "date" => "2019",
-                    "religion" => "Judaism",
-                    "category" => ["Social Issues"],
-                    "description" => "Strengthening the norms founded on our shared national traditions can help fortify our shared national identity but any attempt to impose religious norms on a public when the majority does not identify with them will only lead to division and hate.",
-                    "mainPoint1" => "",
-                    "mainPoint2" => "",
-                    "mainPoint3" => "",
-                    "source" => "https://en.idi.org.il/articles/28380"
+                    "source" => "https://theus.org.uk/article/fast-tammuz"
                 ],
                 // "Placeholder" => [
-                //     "resourceid" => "rm",
-                //     "type" => "",
-                //     "author" => "",
-                //     "religion" => "",
-                //     "category" => [""],
-                //     "description" => "",
-                //     "source" => ""
+                    // "title" => "",
+                    // "resourceImg" => "",
+                    // "type" => "",
+                    // "author" => "",
+                    // "date" => "",
+                    // "religion" => "",
+                    // "category" => ["Religious Traditions"],
+                    // "description" => "",
+                    // "source" => ""
                 // ]
             ]
         ];

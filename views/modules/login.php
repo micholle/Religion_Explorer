@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <h3>Log in</h3>
                                     <?php if (isset($errorMessage)) : ?>
                                     <div class="row d-flex justify-content-center align-items-center">
-                                        <p class="error-message"><?php echo $errorMessage; ?></p>
+                                        <p class="error-message" style="color: #E04F5F; text-align: center;"><?php echo $errorMessage; ?></p>
                                     </div>
                                     <?php endif; ?>
                                 <form method="POST">

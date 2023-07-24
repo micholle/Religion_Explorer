@@ -73,7 +73,7 @@ function create_sidebar() {
 
                         <li>
                             <a id="sidebarNotifications" href="#">
-                                <img src="../assets/img/bell.png">
+                                <img id="notificationsIcon" src="../assets/img/bell.png">
                                 <span class="navItem">Notifications</span>
                             </a>
                         </li>
@@ -172,6 +172,23 @@ function create_sidebar() {
                                         <h5 id="reportUserStatus" class="modal-title w-100">Report Received</h5>
                                         <p id="reportUserMessage" class="text-center">The team will review your complaint. Please expect a notification in 3-5 business days.</p>
                                         <button type="button" id="reportUserNoticeButton" class="roundedButton" data-dismiss="modal">Thanks!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reportDetails" class="modal fade">
+                <div class="modal-dialog modal-xs modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <h5 id="reportedContentTitle" class="modal-title w-100"></h5>
+                                        <p id="reportedContentViolations" class="text-center"></p>
                                     </div>
                                 </div>
                             </div>

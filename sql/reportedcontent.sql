@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2023 at 07:34 PM
+-- Generation Time: Jul 23, 2023 at 05:51 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `reportedcontent` (
   `reportid` int(11) NOT NULL,
-  `contentid` varchar(12) NOT NULL,
+  `contentid` varchar(19) NOT NULL,
   `contentViolations` text NOT NULL,
   `additionalContext` text NOT NULL,
   `reportedOn` date NOT NULL,
-  `reportedBy` text NOT NULL,
+  `reportedBy` varchar(5) NOT NULL,
   `actionTaken` text DEFAULT NULL,
   `reportStatus` text NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
