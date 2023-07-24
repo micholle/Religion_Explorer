@@ -9,15 +9,15 @@ class ControllerLogin {
         if ($result === "Success") {
             if ($_SESSION['acctype'] === 'regular'){
                 // Redirect to the appropriate page based on user settings
-                if ($_SESSION['displayPage'] === '1') {
+                if ($_SESSION['displayPage'] === 1) {
                     $displayPage = "userProfile.php";
-                } elseif ($_SESSION['displayPage'] === '2') {
+                } elseif ($_SESSION['displayPage'] === 2) {
                     $displayPage = "library.php";
-                } elseif ($_SESSION['displayPage'] === '3') {
+                } elseif ($_SESSION['displayPage'] === 3) {
                     $displayPage = "discussionForum.php";
-                } elseif ($_SESSION['displayPage'] === '4') {
+                } elseif ($_SESSION['displayPage'] === 4) {
                     $displayPage = "calendar.php";
-                } elseif ($_SESSION['displayPage'] === '0') {
+                } elseif ($_SESSION['displayPage'] === 0) {
                     $displayPage = "map.php";
                 }
 
