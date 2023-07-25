@@ -57,7 +57,7 @@ $(function() {
     $.ajax({
         url: '../../ajax/getPersonalCalendarData.ajax.php',
         method: "POST",
-        data: {"accountid" : $("#accountidPlaceholder").text()},
+        data: {"accountid" : $("#accountidView").text()},
         success: function(data){
             var personalEvents = data;
             var calendarDays = document.getElementsByClassName("day_num");
@@ -77,7 +77,7 @@ $(function() {
     $.ajax({
         url: '../../ajax/getBookmarksData.ajax.php',
         method: "POST",
-        data: {"accountid" : $("#accountidPlaceholder").text()},
+        data: {"accountid" : $("#accountidView").text()},
         success: function(data){
             var bookmarksList = data;
             for (let bookmark in bookmarksList) {
@@ -206,7 +206,7 @@ $(document).ready(function() {
     getTopics();
 });
 function getTopics() {
-    const accountId = $("#accountidPlaceholder").text().trim();
+    const accountId = $("#accountidView").text().trim();
     $.ajax({
         url: "../../ajax/profileTopics.ajax.php",
         method: "GET", 
@@ -228,7 +228,7 @@ $(document).ready(function() {
     getPosts();
 });
 function getPosts() {
-    const accountId = $("#accountidPlaceholder").text().trim();
+    const accountId = $("#accountidView").text().trim();
 
     $.ajax({
         url: "../../ajax/profilePosts.ajax.php",
@@ -254,12 +254,12 @@ function getOverview() {
     $.ajax({
         url: "../../ajax/profileOverview.ajax.php",
         method: "GET", 
-        data: {"accountid" : $("#accountidPlaceholder").text()},
+        data: {"accountid" : $("#accountidView").text()},
         success: function(data) {
             $.ajax({
                 url: '../../ajax/getBookmarksData.ajax.php',
                 method: "POST",
-                data: {"accountid" : $("#accountidPlaceholder").text()},
+                data: {"accountid" : $("#accountidView").text()},
                 success: function(data){
                     var bookmarksList = data;
                     for (let bookmark in bookmarksList) {
