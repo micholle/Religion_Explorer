@@ -243,11 +243,11 @@ class ModelDiscussion {
     
         try {
             // Generate a random number
-            $topicId = mt_rand(10000000, 99999999);
+            $postId = mt_rand(10000000, 99999999);
     
             // Check if the generated topicId already exists in the database
             $stmt = $pdo->prepare("SELECT COUNT(*) FROM posts WHERE postId = :postId");
-            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
             $stmt->execute();
             $count = $stmt->fetchColumn();
     
@@ -688,7 +688,7 @@ class ModelDiscussion {
             $notifications_stmt->bindParam(":accountid", $replyOwner, PDO::PARAM_STR);
             $notifications_stmt->bindParam(":replyid", $replyId, PDO::PARAM_STR);
             $notifications_stmt->bindParam(":personInvolved", $accountId, PDO::PARAM_STR);
-            $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Posts Upvote", PDO::PARAM_STR);
+            $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Replies Upvote", PDO::PARAM_STR);
             $notifications_stmt->bindParam(":notificationDate", $notificationDate, PDO::PARAM_STR);
             $notifications_stmt->execute();
             }
