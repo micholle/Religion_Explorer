@@ -127,6 +127,7 @@ $(function() {
                 upvotesCount = notificationDetails.upvotesCount;
                 contentViolations = notificationDetails.contentViolations;
                 notificationStatus = notificationDetails.notificationStatus;
+                var displayNotifications = notificationDetails.displayNotifications;
 
                 if (notificationStatus == "Unread") {
                     $("#notificationsIcon").attr("src", "../assets/img/bell-alert.png");
@@ -157,6 +158,7 @@ $(function() {
                         '</div>'
                     );
                 } else if (notificationSource == "Discussion Forum Posts") {
+                    if (displayNotifications == 1){
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
                             '<div class="col-2 d-flex justify-content-start align-items-start">' +
@@ -168,7 +170,9 @@ $(function() {
                             '</div>' +
                         '</div>'
                     );
+                    }
                 } else if (notificationSource == "Discussion Forum Replies") {
+                    if (displayNotifications == 1){
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
                             '<div class="col-2 d-flex justify-content-start align-items-start">' +
@@ -180,6 +184,7 @@ $(function() {
                             '</div>' +
                         '</div>'
                     );
+                    }
                 } else if (notificationSource == "Discussion Forum Topics Upvote") {
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
