@@ -34,7 +34,7 @@ foreach ($posts as $post) {
     $hasUpvotedPost = $controller->ctrGetPostVoteByUser($post['postId'], $_SESSION['accountid']) === 'upvote';
     $hasDownvotedPost = $controller->ctrGetPostVoteByUser($post['postId'], $_SESSION['accountid']) === 'downvote';
     $html .= '            <img src="../assets/img/discussionForum/upvote' . ($hasUpvotedPost ? '-active' : '') . '.png" class="upvoteButton" data-type="post" data-id="' . $post['postId'] . '" '. $pointerEventsStyle .'>';
-    $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">' . $post['upvotes'] . '</p>';
+    $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote upvotes">' . $post['upvotes'] . '</p>';
     $html .= '            <img src="../assets/img/discussionForum/downvote' . ($hasDownvotedPost ? '-active' : '') . '.png" class="downvoteButton" data-type="post" data-id="' . $post['postId'] . '" '. $pointerEventsStyle .'>';
     $html .= '          </div>';
     if ($_SESSION['acctype'] === 'regular') {
@@ -89,7 +89,7 @@ foreach ($posts as $post) {
         $hasUpvotedReply = $controller->ctrGetReplyVoteByUser($reply['replyId'], $_SESSION['accountid']) === 'upvote';
         $hasDownvotedReply = $controller->ctrGetReplyVoteByUser($reply['replyId'], $_SESSION['accountid']) === 'downvote';
         $html .= '            <img src="../assets/img/discussionForum/upvote' . ($hasUpvotedReply ? '-active' : '') . '.png" class="upvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '" '. $pointerEventsStyle .'>';
-        $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote">' . $reply['upvotes'] . '</p>';
+        $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote upvotes">' . $reply['upvotes'] . '</p>';
         $html .= '            <img src="../assets/img/discussionForum/downvote' . ($hasDownvotedReply ? '-active' : '') . '.png" class="downvoteButton" data-type="reply" data-id="' . $reply['replyId'] . '" '. $pointerEventsStyle .'>';
         $html .= '          </div>';
         if ($_SESSION['acctype'] === 'regular') {

@@ -57,7 +57,7 @@ class notificationsModel {
                     $personInvolved = $notificationInfo["username"];
                     $notificationStatus = $notificationInfo["notificationStatus"];
                 } else if ($notif["notificationSource"] == "Discussion Forum Posts") {
-                    $stmt = $pdo->prepare("SELECT p.topicId, t.topicTitle, a.username, n.notificationStatus
+                    $stmt = $pdo->prepare("SELECT p.topicId, t.topicTitle, a.username, n.notificationStatus, a.avatar
                                             FROM notifications AS n
                                             LEFT JOIN posts AS p ON n.postid = p.postId
                                             LEFT JOIN topics AS t ON p.topicId = t.topicId
@@ -72,8 +72,9 @@ class notificationsModel {
                     $notificationIcon = "../assets/img/discussionForum/comments.png";
                     $personInvolved = $notificationInfo["username"];
                     $notificationStatus = $notificationInfo["notificationStatus"];
+                    $avatar = $notificationInfo["avatar"];
                 } else if ($notif["notificationSource"] == "Discussion Forum Replies") {
-                    $stmt = $pdo->prepare("SELECT p.topicId, t.topicTitle, a.username, n.notificationStatus
+                    $stmt = $pdo->prepare("SELECT p.topicId, t.topicTitle, a.username, n.notificationStatus, a.avatar
                                             FROM notifications AS n
                                             LEFT JOIN reply AS r ON n.replyid = r.replyId
                                             LEFT JOIN posts AS p ON r.postid = p.postId
@@ -89,8 +90,9 @@ class notificationsModel {
                     $notificationIcon = "../assets/img/discussionForum/comments.png";
                     $personInvolved = $notificationInfo["username"];
                     $notificationStatus = $notificationInfo["notificationStatus"];
+                    $avatar = $notificationInfo["avatar"];
                 } else if ($notif["notificationSource"] == "Discussion Forum Topics Upvote") {
-                    $stmt = $pdo->prepare("SELECT n.topicid, t.topicTitle, t.upvotes, a.username, n.notificationStatus
+                    $stmt = $pdo->prepare("SELECT n.topicid, t.topicTitle, t.upvotes, a.username, n.notificationStatus, a.avatar
                                             FROM notifications AS n
                                             LEFT JOIN topics AS t ON n.topicid = t.topicId
                                             LEFT JOIN accounts AS a ON n.personInvolved = a.accountid
@@ -105,8 +107,9 @@ class notificationsModel {
                     $personInvolved = $notificationInfo["username"];
                     $upvotesCount = $notificationInfo["upvotes"];
                     $notificationStatus = $notificationInfo["notificationStatus"];
+                    $avatar = $notificationInfo["avatar"];
                 } else if ($notif["notificationSource"] == "Discussion Forum Posts Upvote") {
-                    $stmt = $pdo->prepare("SELECT p.topicId, p.postContent, p.upvotes, a.username, n.notificationStatus
+                    $stmt = $pdo->prepare("SELECT p.topicId, p.postContent, p.upvotes, a.username, n.notificationStatus, a.avatar
                                             FROM notifications AS n
                                             LEFT JOIN posts AS p ON n.postid = p.postId
                                             LEFT JOIN accounts AS a ON n.personInvolved = a.accountid
@@ -121,8 +124,9 @@ class notificationsModel {
                     $personInvolved = $notificationInfo["username"];
                     $upvotesCount = $notificationInfo["upvotes"];
                     $notificationStatus = $notificationInfo["notificationStatus"];
+                    $avatar = $notificationInfo["avatar"];
                 } else if ($notif["notificationSource"] == "Discussion Forum Replies Upvote") {
-                    $stmt = $pdo->prepare("SELECT p.topicId, r.replyContent, r.upvotes, a.username, n.notificationStatus
+                    $stmt = $pdo->prepare("SELECT p.topicId, r.replyContent, r.upvotes, a.username, n.notificationStatus, a.avatar
                                             FROM notifications AS n
                                             LEFT JOIN reply AS r ON n.replyid = r.replyId
                                             LEFT JOIN posts AS p ON r.postId = p.postId
@@ -138,6 +142,7 @@ class notificationsModel {
                     $personInvolved = $notificationInfo["username"];
                     $upvotesCount = $notificationInfo["upvotes"];
                     $notificationStatus = $notificationInfo["notificationStatus"];
+                    $avatar = $notificationInfo["avatar"];
                 } else if ($notif["notificationSource"] == "Reported Content") {
                     $stmt = $pdo->prepare("SELECT n.reportid, r.contentid, r.contentViolations, n.notificationStatus
                                             FROM notifications AS n
@@ -179,7 +184,8 @@ class notificationsModel {
                     "upvotesCount" => $upvotesCount,
                     "contentViolations" => $contentViolations,
                     "notificationStatus" => $notificationStatus,
-                    "displayNotifications" => $displayNotifications
+                    "displayNotifications" => $displayNotifications,
+                    "avatar" => base64_encode($avatar)
                 ];
             }
         }
