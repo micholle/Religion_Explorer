@@ -50,8 +50,10 @@ $(function() {
     const registeredUsersData = {
         labels: labels,
         datasets: [{
+            axis: 'y',
             label: 'Engagement Insights',
             data: [engagementBuddhists, engagementChristians, engagementHindus, engagementIslams, engagementJews, engagementOtherReligions, engagementNonReligious],
+            fill: false,
             backgroundColor: [
                 'rgba(186, 164, 0, 0.2)',
                 'rgba(86, 9, 122, 0.2)',
@@ -78,11 +80,7 @@ $(function() {
         type: 'bar',
         data: registeredUsersData,
         options: {
-            scales: {
-                x: {
-                    beginAtZero: true
-                }
-            }
+            indexAxis: 'y'
         }
     };
     
