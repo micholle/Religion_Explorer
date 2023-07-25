@@ -90,6 +90,41 @@ $(function() {
     
     const ctx = document.getElementById('engagementInsights').getContext('2d');
     new Chart(ctx, config);
+    
+    //total uploads
+    const totalUploadsData = {
+        labels: [
+          'Images',
+          'Videos',
+          'Reading Materials'
+        ],
+        datasets: [{
+          data: [5, 5, 5],
+          backgroundColor: [
+            'rgba(186, 164, 0, 0.2)',
+            'rgba(86, 9, 122, 0.2)',
+            'rgba(168, 19, 21, 0.2)',
+        ],
+        borderColor: [
+            'rgb(186, 164, 0)',
+            'rgb(86, 9, 122)',
+            'rgb(168, 19, 21)',
+        ],
+        borderWidth: 1,
+        }]
+      };
+
+    const totalUploadsConfig = {
+        type: 'pie',
+        data: totalUploadsData,
+    };
+
+    const totalUploadsCanvas = document.createElement('canvas');
+    totalUploadsCanvas.id = 'totalCommunityUploads';
+    document.getElementById('totalCommunityUploadsContainer').appendChild(totalUploadsCanvas);
+
+    const totalUploadsCtx = document.getElementById('totalCommunityUploads').getContext('2d');
+    new Chart(totalUploadsCtx, totalUploadsConfig);
 
     $("#confirmDelete").click(function () { 
         $.ajax({

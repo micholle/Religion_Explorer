@@ -205,9 +205,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                             </div>
                                             <div class="col-9">
                                                 <div class="userProfileStatsInnerDiv">
-                                                    <div id="engagementInsightsContainer">
-                                                        <canvas id="engagementInsights"></canvas>
-                                                    </div>
+                                                    <div id="engagementInsightsContainer"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -227,23 +225,8 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                             </div>
                                         </div>
 
-                                        <div class="userProfileStatsInnerDiv d-flex justify-content-center">
-                                            <div id="totalCommunityUploadsContainer">
-                                                <canvas id="totalCommunityUploads"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="userProfileStatsOverviewBody justify-content-start">
-                                        <div class="userProfileStatsContent d-flex flex-row">
-                                            <div class="userProfileStatsContentNum">
-                                                <p>Uploads per File Type</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="userProfileStatsInnerDiv d-flex justify-content-center">
-                                            <div id="uploadsPerFileTypeContainer">
-                                                <canvas id="uploadsPerFileType"></canvas>
-                                            </div>
+                                        <div class="userProfileStatsInnerDiv">
+                                            <div id="totalCommunityUploadsContainer"></div>
                                         </div>
                                     </div>
                                 </div>
