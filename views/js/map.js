@@ -504,13 +504,21 @@ $(function() {
 
                     //generate chart
                     // Chart.register(ChartDataLabels);
-                    Chart.defaults.font.family = "Lexend Deca";
+                    const canvasElement = document.createElement('canvas');
+                    canvasElement.id = 'religionChart';
+                    $("#showReligionChart").html(canvasElement);
                     var religionChart = document.getElementById("religionChart").getContext("2d");
-    
+                    
+                    var totalPopulation = 0;
+                    var religionDataDict = {};
                     var religions = [];
                     var religionData = [];
                     var religionColors = ["#BAA400", "#56097A", "#A81315", "#018744", "#1334A8", "#B37100", "#242424"];
             
+                    for (let religion of Object.keys(religionByCountry[Object.keys(religionByCountry)[0]][currentCountry])) {
+                        religionDataDict[religion] = 0;
+                    }
+
                     for (let year in religionByCountry) {
                         var countryDetails = religionByCountry[year];
                         for (let country in countryDetails) {
@@ -520,11 +528,15 @@ $(function() {
                                 for (let religion in religionValues) {
                                     religions.push(religion);
                                     religionData.push(religionValues[religion]);
+                                    religionDataDict[religion] += religionValues[religion];
+                                    totalPopulation += religionValues[religion];
                                 }
                             }
                         }
                     }
-    
+
+                    Chart.defaults.font.family = "Lexend";
+
                     configuration = {
                         type: "bar",
                         data: {
@@ -563,13 +575,32 @@ $(function() {
                             animation: false
                         }
                     };
-    
+                    
                     if (chart) {
                         chart.destroy();
                     }
                     
                     chart = new Chart(religionChart, configuration);
+
+
+                    function calculatePercentage(count, totalPopulation) {
+                        return ((count / totalPopulation) * 100).toFixed(2);
+                    }
     
+                    var sortedReligions = Object.keys(religionDataDict).sort((a, b) => religionDataDict[b] - religionDataDict[a]);    
+
+                    var modalContent = "The chart displays the distribution of religious affiliations in <b>" + currentCountry + "</b>, presenting the number of people per religion. The most prevalent is <b>" + sortedReligions[0] + "</b>, amounting to <b>" + religionDataDict[sortedReligions[0]].toLocaleString() + "</b> people or <b>" + calculatePercentage(religionDataDict[sortedReligions[0]], totalPopulation) + "%</b> of the total population. Following that are ";
+
+                    for (let i = 1; i < sortedReligions.length; i++) {
+                        if (i === sortedReligions.length - 1) {
+                            modalContent += "and ";
+                        }
+                        modalContent += sortedReligions[i] + " at " + religionDataDict[sortedReligions[i]].toLocaleString() + " (" + calculatePercentage(religionDataDict[sortedReligions[i]], totalPopulation) + "%), ";
+                    }
+
+                    modalContent += "respectively. While interpreting the data, it's essential to consider historical and social factors that may influence these religious demographics. Additionally, it's worth noting that the accuracy of the chart relies on the data's limitations and the broader context of the country's religious landscape.";
+
+                    $("#modalContent").html(modalContent);
                     $('#modalTitle').text(currentCountry);
                     $('#countryInformationModal').modal();
                 }

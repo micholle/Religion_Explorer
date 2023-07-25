@@ -168,7 +168,6 @@ class libraryData {
                     "religion" => "Islam",
                     "category" => ["Religious Traditions"],
                     "description" => "The day of Ashura is marked by Muslims as a whole, but for Shia Muslims it is a major religious commemoration of the martyrdom at Karbala of Hussein, a grandson of the Prophet Muhammad.",
-                    // "source" => "https://nationaltoday.com/ashurah"
                     "source" => "https://nationaltoday.com/ashurah"
                 ],
                 "LR2" => [

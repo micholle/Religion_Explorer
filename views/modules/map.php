@@ -82,14 +82,8 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <div class="modal-body">
                         <!-- Chart -->
                         <div id="showReligionChart">
-                            <canvas id="religionChart" width="80%" height="30%"></canvas>
                         </div>
-                        <div id="modalContent">
-                            <p>
-                            The Philippines is a secular country, with a guaranteed separation of church and state by the Constitution and respect for all religious beliefs and rituals. That being said, the Philippines is not a very spiritually rich country. Albeit no religion is imposed, a significant majority of the population follows Christianity, followed by Islam.
-                            <br><br>The pre-Hispanic belief of Filipinos consisted of a pantheon of gods, spirits, creatures, and men that guarded the streams, fields, trees, mountains, forests, and houses. Bathala, who created earth and man, was superior to these other gods and spirits. Regular sacrifices and prayers were offered to placate these deities and spirits, some of which were benevolent, some malevolent.
-                            </p>
-                        </div>
+                        <div id="modalContent"></div>
                     </div>
                 </div>
             </div>
