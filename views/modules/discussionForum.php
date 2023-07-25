@@ -13,6 +13,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/7.0.3/pusher.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/googleapis/apis.google.com_js_api.js"></script>
 
     <script type="text/javascript" src="../js/discussionForum.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>
@@ -84,8 +85,9 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="container">
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                    <img src="../assets/img/verification-check.png" height="80px" width="80px">
-                                    <h5 class="modal-title w-100">Topic Created Successfully!</h5>
+                                    <img id="modalIcon" src="../assets/img/verification-check.png" height="80px" width="80px">
+                                    <h5 id="modalHeader" class="modal-title w-100">Topic Created Successfully!</h5>
+                                    <p id="modalContent" class="text-center"></p>
                                     <button type="button" id="closeTopicCreatedModal" class="registrationSubmitButton" data-dismiss="modal">Nice!</button>
                                 </div>
                             </div>

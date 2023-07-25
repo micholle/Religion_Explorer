@@ -114,95 +114,113 @@ $(function() {
         var description = $("#communityDescription").val();
 
         (async () => {
-            try {
-                var contentEvaluation = await checkContent(description);
-        
-                    if(title == "" || religion == null || description == "") {
-                        $("#toast").html("Please fill out all required fields.")
-                        $("#toast").css("background-color", "#E04F5F");
-                        $("#toast").addClass('show');
+            try {        
+                if(title == "" || religion == null || description == "") {
+                    $("#toast").html("Please fill out all required fields.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
+                } else {
+                    var contentEvaluationTitle = await checkContent(title);
+                    var contentEvaluationDescription = await checkContent(description);
                     
-                        setTimeout(function() {
-                            $("#toast").removeClass('show');
-                        }, 2000);
+                    var filedata = "";
+                    var filename = "";
+                    var filetype = "";
+                    var filesize = 0;
+            
+                    if ($("#communityUpload")[0].files[0] != null){
+                        filedata = $("#communityUpload")[0].files[0];
+                        filename = filedata.name;
+                        filetype = filedata.type;
+                        filesize = filedata.size;
+            
+                        $("#uploadedFilename").text(filename);
                     } else {
-                        var filedata = "";
-                        var filename = "";
-                        var filetype = "";
-                        var filesize = 0;
-                
-                        if ($("#communityUpload")[0].files[0] != null){
-                            filedata = $("#communityUpload")[0].files[0];
-                            filename = filedata.name;
-                            filetype = filedata.type;
-                            filesize = filedata.size;
-                
-                            $("#uploadedFilename").text(filename);
-                        } else {
-                            var readingMaterial = new Blob([description], { type: 'text/plain' });
-                            filesize = readingMaterial.size;
-                        }
-                
-                        var status = "Published";
-                        var date = new Date().toISOString().slice(0, 10);
-                
-                        if (filedata == "" || (filedata && (filetype.includes("image") || filetype.includes("video")))) {
-                            var dataUsed = 0.00;
-                
-                            $.ajax({
-                                url: "../../ajax/getCommunityData.ajax.php",
-                                method: "POST",
-                                success:function(data){
-                                    var communityData = data;
-                        
-                                    for (let photo in communityData["photos"]) {
-                                        var photoList = communityData["photos"][photo];
-                                        for (photoData in photoList) {
-                                            var photoDetails = photoList[photoData];
-                                            var imageSize = 0.00;
-                        
-                                            if (photoDetails.author == $("#accountUsernamePlaceholder").text()) {
-                                                imageSize = photoDetails.filesize  / (1024 * 1024);
-                                                dataUsed += imageSize;
-                                            }
-                                        }
-                                    }
-                        
-                                    for (let video in communityData["videos"]) {
-                                        var videoList = communityData["videos"][video];
-                                        for (videoData in videoList) {
-                                            var videoDetails = videoList[videoData];
-                                            var videoSize = 0.00;
-                        
-                                            if (videoDetails.author == $("#accountUsernamePlaceholder").text()) {
-                                                videoSize = videoDetails.filesize / (1024 * 1024);
-                                                dataUsed += videoSize;
-                                            }
-                                        }
-                                    }
-                                    
-                                    for (let readingMaterial in communityData["readingMaterials"]) {
-                                        var readingMaterialList = communityData["readingMaterials"][readingMaterial];
-                                        for (readingMaterialData in readingMaterialList) {
-                                            var readingMaterialDetails = readingMaterialList[readingMaterialData];
-                                            var readingMaterialSize = 0.00;
-                        
-                                            if (readingMaterialDetails.author == $("#accountUsernamePlaceholder").text()) {
-                                                readingMaterialSize = readingMaterialDetails.filesize / 1024;
-                                                dataUsed += readingMaterialDetails.filesize / (1024 * 1024);
-                                            }
-                                        }
-                                    }
-
-                                    var filesizeMB = filesize / (1024 * 1024);
+                        var readingMaterial = new Blob([description], { type: 'text/plain' });
+                        filesize = readingMaterial.size;
+                    }
+            
+                    var status = "Published";
+                    var date = new Date().toISOString().slice(0, 10);
+            
+                    if (filedata == "" || (filedata && (filetype.includes("image") || filetype.includes("video")))) {
+                        var dataUsed = 0.00;
+            
+                        $.ajax({
+                            url: "../../ajax/getCommunityData.ajax.php",
+                            method: "POST",
+                            success:function(data){
+                                var communityData = data;
                     
-                                    if ((dataUsed + filesizeMB) >= 500) {
+                                for (let photo in communityData["photos"]) {
+                                    var photoList = communityData["photos"][photo];
+                                    for (photoData in photoList) {
+                                        var photoDetails = photoList[photoData];
+                                        var imageSize = 0.00;
+                    
+                                        if (photoDetails.author == $("#accountUsernamePlaceholder").text()) {
+                                            imageSize = photoDetails.filesize  / (1024 * 1024);
+                                            dataUsed += imageSize;
+                                        }
+                                    }
+                                }
+                    
+                                for (let video in communityData["videos"]) {
+                                    var videoList = communityData["videos"][video];
+                                    for (videoData in videoList) {
+                                        var videoDetails = videoList[videoData];
+                                        var videoSize = 0.00;
+                    
+                                        if (videoDetails.author == $("#accountUsernamePlaceholder").text()) {
+                                            videoSize = videoDetails.filesize / (1024 * 1024);
+                                            dataUsed += videoSize;
+                                        }
+                                    }
+                                }
+                                
+                                for (let readingMaterial in communityData["readingMaterials"]) {
+                                    var readingMaterialList = communityData["readingMaterials"][readingMaterial];
+                                    for (readingMaterialData in readingMaterialList) {
+                                        var readingMaterialDetails = readingMaterialList[readingMaterialData];
+                                        var readingMaterialSize = 0.00;
+                    
+                                        if (readingMaterialDetails.author == $("#accountUsernamePlaceholder").text()) {
+                                            readingMaterialSize = readingMaterialDetails.filesize / 1024;
+                                            dataUsed += readingMaterialDetails.filesize / (1024 * 1024);
+                                        }
+                                    }
+                                }
+
+                                var filesizeMB = filesize / (1024 * 1024);
+                
+                                if ((dataUsed + filesizeMB) >= 500) {
+                                    $("#communityModal").removeClass("fade").modal("hide");
+                                    $("#communityModal").modal("dispose");
+                        
+                                    $("#communityNoticeIcon").attr("src", "../assets/img/verification-error.png");
+                                    $("#communityNoticeHeader").html("Upload Failed");
+                                    $("#communityNoticeContent").html("You have exceeded your maximum total upload file size of 100 MB.");
+                                    $("#communityNoticeModal").modal();
+                                    $("#communityNoticeModal").show();
+                
+                                    $("#communityUpload").val("");
+                                    $("#communityTitle").val("");
+                                    $("#communityCategory").val("Religion");
+                                    $("#communityDescription").val("");
+                                    $("#uploadedFilename").text("");
+                                    
+                                } else {
+                                    if (contentEvaluationTitle == "nsfw" || contentEvaluationDescription == "nsfw") {
+                                        $("#communityNoticeIcon").attr("src", "../assets/img/verification-error.png");
+                                        $("#communityNoticeHeader").text("Error");
+                                        $("#communityNoticeContent").text("Your content has been blocked due to a violation of our community standards. We take these standards seriously to maintain a positive and respectful environment for all users. If you believe this action was taken in error, please reach out to our support team with further details. Thank you for your understanding and cooperation in upholding our community guidelines.");
+                                        
                                         $("#communityModal").removeClass("fade").modal("hide");
                                         $("#communityModal").modal("dispose");
-                            
-                                        $("#communityNoticeIcon").attr("src", "../assets/img/verification-error.png");
-                                        $("#communityNoticeHeader").html("Upload Failed");
-                                        $("#communityNoticeContent").html("You have exceeded your maximum total upload file size of 100 MB.");
                                         $("#communityNoticeModal").modal();
                                         $("#communityNoticeModal").show();
                     
@@ -210,94 +228,82 @@ $(function() {
                                         $("#communityTitle").val("");
                                         $("#communityCategory").val("Religion");
                                         $("#communityDescription").val("");
-                                        $("#uploadedFilename").text("");
-                                        
                                     } else {
-                                        if (contentEvaluation == "nsfw") {
-                                            $("#communityNoticeIcon").attr("src", "../assets/img/verification-error.png");
-                                            $("#communityNoticeHeader").text("Error");
-                                            $("#communityNoticeContent").text("Your content has been blocked due to a violation of our community standards. We take these standards seriously to maintain a positive and respectful environment for all users. If you believe this action was taken in error, please reach out to our support team with further details. Thank you for your understanding and cooperation in upholding our community guidelines.");
-                                            
-                                            $("#communityModal").removeClass("fade").modal("hide");
-                                            $("#communityModal").modal("dispose");
-                                            $("#communityNoticeModal").modal();
-                                            $("#communityNoticeModal").show();
-                        
-                                            $("#communityUpload").val("");
-                                            $("#communityUpload").val("");
-                                            $("#communityTitle").val("");
-                                            $("#communityCategory").val("Religion");
-                                            $("#communityDescription").val("");
-                                        } else {
-                                            var creation = new FormData();
-                                            creation.append("accountid", accountid);
-                                            creation.append("title", title);
-                                            creation.append("religion", religion);
-                                            creation.append("description", description);
-                                            creation.append("filedata", filedata);
-                                            creation.append("filename", filename);
-                                            creation.append("filetype", filetype);
-                                            creation.append("filesize", filesize);
-                                            creation.append("status", status);
-                                            creation.append("date", date);
-                                    
-                                            $.ajax({
-                                                url: "../../ajax/submitCommunityCreations.ajax.php",
-                                                method: "POST",
-                                                data: creation,
-                                                dataType: "text",
-                                                processData: false,
-                                                contentType: false,
-                                                success: function() {
-                                                    $("#communityModal").removeClass("fade").modal("hide");
-                                                    $("#communityModal").modal("dispose");
-                                            
-                                                    $("#communityNoticeIcon").attr("src", "../assets/img/verification-check.png");
-                                                    $("#communityNoticeHeader").html("Upload Complete");
-                                                    $("#communityNoticeContent").html("Your content was uploaded successfully.");
-                                                    $("#communityNoticeModal").modal();
-                                                    $("#communityNoticeModal").show();
-                                                },
-                                                error: function() {
-                                                    $("#communityModal").removeClass("fade").modal("hide");
-                                                    $("#communityModal").modal("dispose");
+                                        var creation = new FormData();
+                                        creation.append("accountid", accountid);
+                                        creation.append("title", title);
+                                        creation.append("religion", religion);
+                                        creation.append("description", description);
+                                        creation.append("filedata", filedata);
+                                        creation.append("filename", filename);
+                                        creation.append("filetype", filetype);
+                                        creation.append("filesize", filesize);
+                                        creation.append("status", status);
+                                        creation.append("date", date);
+                                
+                                        $.ajax({
+                                            url: "../../ajax/submitCommunityCreations.ajax.php",
+                                            method: "POST",
+                                            data: creation,
+                                            dataType: "text",
+                                            processData: false,
+                                            contentType: false,
+                                            success: function() {
+                                                $("#communityModal").removeClass("fade").modal("hide");
+                                                $("#communityModal").modal("dispose");
                                         
-                                                    $("#communityNoticeIcon").attr("src", "../assets/img/verification-error.png");
-                                                    $("#communityNoticeHeader").html("Upload Failed");
-                                                    $("#communityNoticeContent").html("Something went wrong.");
-                                                    $("#communityNoticeModal").modal();
-                                                    $("#communityNoticeModal").show();
-                                                },
-                                                complete: function() {
-                                                    $("#communityUpload").val("");
-                                                    $("#communityUpload").val("");
-                                                    $("#communityTitle").val("");
-                                                    $("#communityCategory").val("Religion");
-                                                    $("#communityDescription").val("");
-                                                }
-                                            });
-                                        }
+                                                $("#communityNoticeIcon").attr("src", "../assets/img/verification-check.png");
+                                                $("#communityNoticeHeader").html("Upload Complete");
+                                                $("#communityNoticeContent").html("Your content was uploaded successfully.");
+                                                $("#communityNoticeModal").modal();
+                                                $("#communityNoticeModal").show();
+                                            },
+                                            error: function() {
+                                                $("#communityModal").removeClass("fade").modal("hide");
+                                                $("#communityModal").modal("dispose");
+                                    
+                                                $("#communityNoticeIcon").attr("src", "../assets/img/verification-error.png");
+                                                $("#communityNoticeHeader").html("Upload Failed");
+                                                $("#communityNoticeContent").html("Something went wrong.");
+                                                $("#communityNoticeModal").modal();
+                                                $("#communityNoticeModal").show();
+                                            },
+                                            complete: function() {
+                                                $("#communityUpload").val("");
+                                                $("#communityUpload").val("");
+                                                $("#communityTitle").val("");
+                                                $("#communityCategory").val("Religion");
+                                                $("#communityDescription").val("");
+                                            }
+                                        });
                                     }
                                 }
-                            });
-                        } else {
-                            $("#communityModal").removeClass("fade").modal("hide");
-                            $("#communityModal").modal("dispose");
-                
-                            $("#communityNoticeIcon").attr("src", "../assets/img/verification-error.png");
-                            $("#communityNoticeHeader").html("Upload Failed");
-                            $("#communityNoticeContent").html("Invalid file type.");
-                            $("#communityNoticeModal").modal();
-                            $("#communityNoticeModal").show();
-                
-                            $("#communityUpload").val("");
-                            $("#communityTitle").val("");
-                            $("#communityCategory").val("Religion");
-                            $("#communityDescription").val("");
-                        }
+                            }
+                        });
+                    } else {
+                        $("#communityModal").removeClass("fade").modal("hide");
+                        $("#communityModal").modal("dispose");
+            
+                        $("#communityNoticeIcon").attr("src", "../assets/img/verification-error.png");
+                        $("#communityNoticeHeader").html("Upload Failed");
+                        $("#communityNoticeContent").html("Invalid file type.");
+                        $("#communityNoticeModal").modal();
+                        $("#communityNoticeModal").show();
+            
+                        $("#communityUpload").val("");
+                        $("#communityTitle").val("");
+                        $("#communityCategory").val("Religion");
+                        $("#communityDescription").val("");
                     }
+                }
             } catch (error) {
-                console.error("Error:", error);
+                $("#toast").html("Something went wrong. Please try again later.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             }
         })();
     });
@@ -331,43 +337,54 @@ function viewCreationReadingMaterial(creationid) {
 }
 
 function checkContent(content) {
-    API_KEY = 'AIzaSyAMS69pJZVhNROCjcqryJNbhoQokBXPgNo';
+    const API_KEY = 'AIzaSyAMS69pJZVhNROCjcqryJNbhoQokBXPgNo';
     const DISCOVERY_URL = 'https://commentanalyzer.googleapis.com/$discovery/rest?version=v1alpha1';
-
+  
     return new Promise((resolve, reject) => {
-        function onGAPILoad() {
-            gapi.client.load(DISCOVERY_URL)
-                .then(() => {
-                    const analyzeRequest = {
-                        comment: {
-                            text: content,
-                        },
-                        requestedAttributes: {
-                            TOXICITY: {},
-                        },
-                    };
+      function onGAPILoad() {
+        gapi.client.load(DISCOVERY_URL)
+          .then(() => {
+            const analyzeRequest = {
+              comment: {
+                text: content,
+              },
+              requestedAttributes: {
+                TOXICITY: {},
+                SEVERE_TOXICITY: {},
+                IDENTITY_ATTACK: {},
+                INSULT: {},
+                PROFANITY: {},
+                THREAT: {}
+              }
+            };
+  
+            gapi.client.commentanalyzer.comments.analyze({
+              key: API_KEY,
+              resource: analyzeRequest,
+            })
+              .then(response => {
+                const toxicity_score = response.result.attributeScores.TOXICITY.summaryScore.value;
+                const severe_toxicity_score = response.result.attributeScores.SEVERE_TOXICITY.summaryScore.value;
+                const indentity_atttack_score = response.result.attributeScores.IDENTITY_ATTACK.summaryScore.value;
+                const insult_score = response.result.attributeScores.INSULT.summaryScore.value;
+                const profanity_score = response.result.attributeScores.PROFANITY.summaryScore.value;
+                const threat_score = response.result.attributeScores.THREAT.summaryScore.value;
 
-                    gapi.client.commentanalyzer.comments.analyze({
-                        key: API_KEY,
-                        resource: analyzeRequest,
-                    })
-                    .then(response => {
-                        const toxicityScore = response.result.attributeScores.TOXICITY.summaryScore.value;
-                        if (toxicityScore > 0.5) {
-                            resolve("nsfw");
-                        } else {
-                            resolve("safe");
-                        }
-                    })
-                    .catch(err => {
-                        reject(err);
-                    });
-                })
-                .catch(err => {
-                    reject(err);
-                });
-        }
-
-        gapi.load('client', onGAPILoad);
+                if (toxicity_score > 0.5 || severe_toxicity_score > 0.5 || indentity_atttack_score > 0.5 || insult_score > 0.5 || profanity_score > 0.5 || threat_score > 0.5) {
+                  resolve("nsfw");
+                } else {
+                  resolve("safe");
+                }
+              })
+              .catch(err => {
+                resolve("safe");
+              });
+          })
+          .catch(err => {
+            reject(err);
+          });
+      }
+  
+      gapi.load('client', onGAPILoad);
     });
-}
+}  

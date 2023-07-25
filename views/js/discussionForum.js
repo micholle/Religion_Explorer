@@ -36,85 +36,111 @@ $(function() {
         createDiscussion();
     });
 
-    function createDiscussion() {
+    async function createDiscussion() {
       // Retrieve the form data
-      var topicTitle = $("#topicTitle").val();
-      var topicContent = $("#topicContent").val();
-      var anonymous = $("#anonymousCheckbox").is(":checked") ? 1 : 0;
+        try {
+            var topicTitle = $("#topicTitle").val();
+            var topicContent = $("#topicContent").val();
+            var anonymous = $("#anonymousCheckbox").is(":checked") ? 1 : 0;
 
-      if (topicTitle.trim() === '') {
-        $("#toast").html("Title is empty. Please provide a title for your topic.")
-        $("#toast").css("background-color", "#E04F5F");
-        $("#toast").addClass('show');
-    
-        setTimeout(function() {
-            $("#toast").removeClass('show');
-        }, 2000);
-        return;
-    } else if (topicContent.trim() === '') {
-        $("#toast").html("Content is empty. Please provide content for your topic.")
-        $("#toast").css("background-color", "#E04F5F");
-        $("#toast").addClass('show');
-    
-        setTimeout(function() {
-            $("#toast").removeClass('show');
-        }, 2000);
-        return
+            if (topicTitle.trim() === '') {
+                $("#toast").html("Title is empty. Please provide a title for your topic.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
+                return;
+            } else if (topicContent.trim() === '') {
+                $("#toast").html("Content is empty. Please provide content for your topic.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
+                return
+            }
+            
+            // Create an object with the data
+            var discussion = {
+                topicTitle: topicTitle,
+                topicContent: topicContent,
+                anonymous: anonymous // Add the anonymous value to the object
+            };
+
+            var contentEvaluationTitle = await checkContent(topicTitle);
+            var contentEvaluationContent = await checkContent(topicContent);
+
+            if (contentEvaluationTitle == "nsfw" || contentEvaluationContent == "nsfw") {
+                $("#modalIcon").attr("src", "../assets/img/verification-error.png");
+                $("#modalHeader").text("Error");
+                $("#modalContent").text("Your content has been blocked due to a violation of our community standards. We take these standards seriously to maintain a positive and respectful environment for all users. If you believe this action was taken in error, please reach out to our support team with further details. Thank you for your understanding and cooperation in upholding our community guidelines.");
+                $("#closeTopicCreatedModal").css("display", "none");
+
+                $("#topicCreatedModal").modal();
+                $("#topicCreatedModal").show();
+
+                $("#topicTitle").val("");
+                $("#topicContent").val("");
+            } else {
+                // Make the AJAX request to create the topic
+                $.ajax({
+                    url: "../../ajax/discussionCreate.ajax.php",
+                    method: "POST",
+                    data: discussion,
+                    success: function(response) {
+                        if (response === "success") {
+                            // Topic created successfully
+                                $("#toast").html("Topic created.")
+                                $("#toast").css("background-color", "");
+                                $("#toast").addClass('show');
+                            
+                                setTimeout(function() {
+                                    $("#toast").removeClass('show');
+                                }, 2000);
+                            $("#topicTitle").val("");
+                            $("#topicContent").val("");
+                            // Refresh the topics by calling the getTopics function
+                            getTopics('user_priority');
+                            const message = {
+                                type: 'topics'
+                            };
+                            ws.send(JSON.stringify(message));
+                        } else {
+                            // Error occurred while creating the topic
+                            $("#toast").html("Error occurred while creating the topic.")
+                            $("#toast").css("background-color", "#E04F5F");
+                            $("#toast").addClass('show');
+                        
+                            setTimeout(function() {
+                                $("#toast").removeClass('show');
+                            }, 2000);
+                        }
+                    },
+                    error: function() {
+                        // AJAX request failed
+                        $("#toast").html("Error occurred while making the AJAX request.")
+                        $("#toast").css("background-color", "#E04F5F");
+                        $("#toast").addClass('show');
+                    
+                        setTimeout(function() {
+                            $("#toast").removeClass('show');
+                        }, 2000);
+                    }
+                });
+            }
+        } catch (error) {
+            $("#toast").html("Something went wrong. Please try again later.")
+            $("#toast").css("background-color", "#E04F5F");
+            $("#toast").addClass('show');
+        
+            setTimeout(function() {
+                $("#toast").removeClass('show');
+            }, 2000);
+        }
     }
-      
-      // Create an object with the data
-      var discussion = {
-          topicTitle: topicTitle,
-          topicContent: topicContent,
-          anonymous: anonymous // Add the anonymous value to the object
-      };
-  
-      // Make the AJAX request to create the topic
-      $.ajax({
-          url: "../../ajax/discussionCreate.ajax.php",
-          method: "POST",
-          data: discussion,
-          success: function(response) {
-              if (response === "success") {
-                  // Topic created successfully
-                    $("#toast").html("Topic created.")
-                    $("#toast").css("background-color", "");
-                    $("#toast").addClass('show');
-                
-                    setTimeout(function() {
-                        $("#toast").removeClass('show');
-                    }, 2000);
-                  $("#topicTitle").val("");
-                  $("#topicContent").val("");
-                  // Refresh the topics by calling the getTopics function
-                  getTopics('user_priority');
-                  const message = {
-                    type: 'topics'
-                  };
-                  ws.send(JSON.stringify(message));
-              } else {
-                  // Error occurred while creating the topic
-                  $("#toast").html("Error occurred while creating the topic.")
-                  $("#toast").css("background-color", "#E04F5F");
-                  $("#toast").addClass('show');
-              
-                  setTimeout(function() {
-                      $("#toast").removeClass('show');
-                  }, 2000);
-              }
-          },
-          error: function() {
-              // AJAX request failed
-              $("#toast").html("Error occurred while making the AJAX request.")
-              $("#toast").css("background-color", "#E04F5F");
-              $("#toast").addClass('show');
-          
-              setTimeout(function() {
-                  $("#toast").removeClass('show');
-              }, 2000);
-          }
-      });
-  }
 
     function getTopics(sortCriteria) {
       $.ajax({
@@ -122,7 +148,7 @@ $(function() {
           method: "GET",
           data: { sort: sortCriteria }, // Pass the sort criteria to the server
           success: function(data) {
-              console.log(data);
+            //   console.log(data);
               $("#topicsContainer").html(data);
               shortenUpvotes();
           },
@@ -302,4 +328,56 @@ $(function() {
           });
   
 });
-    
+
+function checkContent(content) {
+    const API_KEY = 'AIzaSyAMS69pJZVhNROCjcqryJNbhoQokBXPgNo';
+    const DISCOVERY_URL = 'https://commentanalyzer.googleapis.com/$discovery/rest?version=v1alpha1';
+  
+    return new Promise((resolve, reject) => {
+      function onGAPILoad() {
+        gapi.client.load(DISCOVERY_URL)
+          .then(() => {
+            const analyzeRequest = {
+              comment: {
+                text: content,
+              },
+              requestedAttributes: {
+                TOXICITY: {},
+                SEVERE_TOXICITY: {},
+                IDENTITY_ATTACK: {},
+                INSULT: {},
+                PROFANITY: {},
+                THREAT: {}
+              }
+            };
+  
+            gapi.client.commentanalyzer.comments.analyze({
+              key: API_KEY,
+              resource: analyzeRequest,
+            })
+              .then(response => {
+                const toxicity_score = response.result.attributeScores.TOXICITY.summaryScore.value;
+                const severe_toxicity_score = response.result.attributeScores.SEVERE_TOXICITY.summaryScore.value;
+                const indentity_atttack_score = response.result.attributeScores.IDENTITY_ATTACK.summaryScore.value;
+                const insult_score = response.result.attributeScores.INSULT.summaryScore.value;
+                const profanity_score = response.result.attributeScores.PROFANITY.summaryScore.value;
+                const threat_score = response.result.attributeScores.THREAT.summaryScore.value;
+
+                if (toxicity_score > 0.5 || severe_toxicity_score > 0.5 || indentity_atttack_score > 0.5 || insult_score > 0.5 || profanity_score > 0.5 || threat_score > 0.5) {
+                  resolve("nsfw");
+                } else {
+                  resolve("safe");
+                }
+              })
+              .catch(err => {
+                resolve("safe");
+              });
+          })
+          .catch(err => {
+            reject(err);
+          });
+      }
+  
+      gapi.load('client', onGAPILoad);
+    });
+} 
