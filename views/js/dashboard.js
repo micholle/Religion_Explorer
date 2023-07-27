@@ -27,6 +27,8 @@ $(function() {
             $("#todaysNewUsers").text(todayNewUsers);
             $("#visitors").text(visitors);
             $("#registeredUsers").text(registeredUsers);
+
+            Chart.defaults.font.family = "Lexend";
         
             //Registered Users
             var registeredBuddhists = dashboardData.registeredBuddhists;
@@ -104,7 +106,7 @@ $(function() {
             const monthlyUsersData = {
                 labels: monthlyUsersLabels,
                 datasets: [{
-                    label: 'Monthly New Users',
+                    label: 'Monthly New Users (2023)',
                     data: [januaryUsers, februaryUsers, marchUsers, aprilUsers, mayUsers, juneUsers, julyUsers, augustUsers, septemberUsers, octoberUsers, novemberUsers, decemberUsers],
                     backgroundColor: [
                         'rgba(44, 164, 100, 0.2)',
