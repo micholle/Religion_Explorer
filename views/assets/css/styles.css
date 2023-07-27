@@ -1251,6 +1251,16 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /*login signup*/
+@media only screen and (max-width: 768px) {
+    #loginSignup .loginSignupForm {
+        margin-top: -2.5vh;
+    }
+    
+    #loginSignup .loginSignupFormVariant {
+        margin-top: -2.5vh;
+    }
+}
+
 
 #loginSignup p {
     font-family: Lexend;
@@ -1259,11 +1269,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     margin-bottom: 10px;
 }
 
-#loginSignup .loginSignupContainer {
-    height: 100vh;
-}
-
-#loginSignup .loginSignupContainer .registrationNavButton {
+#loginSignup .registrationNavButton {
     background-color: transparent;
     color: #2CA464;
     border: solid #298f58 2px;
@@ -1276,7 +1282,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     transition: background-color 0.5s ease;
 }
 
-#loginSignup .loginSignupContainer .registrationNavButton:hover {
+#loginSignup .registrationNavButton:hover {
     background-color: rgb(220, 220, 220 , 0.3);
     transition: background-color 0.5s ease;
 }
@@ -1286,7 +1292,11 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 #loginSignup .loginSignupForm {
-    padding: 80px;
+    padding: 110px;
+}
+
+#loginSignup .loginSignupFormVariant {
+    padding: 40px;
 }
 
 #loginSignup .loginSignupForm h3 {
@@ -1475,6 +1485,10 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 
 #verificationCodeModal h5 {
     margin: 10px 0;
+}
+
+.userAgreementStyle {
+    width: 350px;
 }
 
 /*sidebar*/

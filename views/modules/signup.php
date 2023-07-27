@@ -19,12 +19,19 @@
 <body>
     <section id="loginSignup">
         <div class="container mw-100 mh-100">
-            <div class="row d-flex justify-content-center align-items-center loginSignupContainer">
-                <div class="col-4 mh-100 d-flex align-items-start loginSignupContainer">
-                    <a href="splash.php"><img src="../assets/img/close.png" class="margin" height="20px" width="20px"></a>
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6 d-flex justify-content-start align-items-start" >
+                            <a href="splash.php"><img src="../assets/img/close.png" class="margin" height="20px" width="20px"></a>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end align-items-end">
+                            <a href="login.php"><button class="registrationNavButton">Log in</button></a>
+                        </div>
+                    </div>
                 </div>
             
-                <div class="col-4 mh-100 loginSignupForm">
+                <div class="col-12 loginSignupFormVariant">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column">
@@ -50,15 +57,13 @@
                                     <div class="d-flex justify-content-center">
                                         <button type="submit" id="btn-signup" name="btn-signup" class="registrationSubmitButton">Sign Up</button>
                                     </div>
-                                    <p class="terms">By signing up, you agree to Religion Explorer’s <span class="signupLink" id="termsOfService">Terms of Service</span> and have acknowledged our <span class="signupLink" id="privacyPolicy">Privacy Policy</span>.</p>
+                                    <div class="userAgreementStyle d-flex justify-content-center align-items-end">
+                                        <p class="terms" style="text-align: center">By signing up, you agree to Religion Explorer’s <span class="signupLink" id="termsOfService">Terms of Service</span> and have acknowledged our <span class="signupLink" id="privacyPolicy">Privacy Policy</span>.</p>
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-4 mh-100 d-flex justify-content-end loginSignupContainer">
-                    <a href="login.php"><button class="registrationNavButton">Log in</button></a>
                 </div>
             </div>
         </div>
