@@ -14,18 +14,21 @@
 
     <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <header>
+    <header id="splashPageHeader">
         <li>
             <img src="../assets/img/logo-and-text.png">
         </li>
-        <ul clas="d-flex justify-content-center align-items-center">
+        <ul>
             <li><a href="#splash-page">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#developers">Developers</a></li>
             <li><a href="login.php"><button class="splashButton navBarButton">Log in</button></a></li>
+            <li><img src="../assets/img/menu.png" class="headerMenuIcon" id="menuIcon"></li>
         </ul>
     </header>
     
@@ -33,7 +36,7 @@
         <div class="container mw-100 mh-100">
             <div class="row" style="height: 100vh; background-image: url('../assets/img/try3.png'); background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover;">
             
-            <div class="col-5 mh-100 d-flex justify-content-center align-items-center">
+            <div class="col-12 col-lg-5 mh-100 d-flex justify-content-center align-items-center">
               <div id="splash-gif">
                   <img src="../assets/img/splash/frame1.png" alt="Frame 1">
                   <img src="../assets/img/splash/frame2.png" alt="Frame 2">
@@ -43,7 +46,7 @@
               </div>
             </div>
 
-            <div class="col-7 mh-100 d-flex justify-content-center align-items-center">
+            <div class="col-12 col-lg-7 mh-100 d-flex justify-content-center align-items-center">
                 <div class="container">
                     <div class="row d-flex justify-content-center align-items-center flex-column homeHeader">
                         <h2>Navigate the world, befriend explorers, and discover religion!</h2>
@@ -74,7 +77,6 @@
 
           </div>
         </div>
-        <hr>
       </section>
 
       <section id="features">
@@ -86,7 +88,7 @@
             </div>
 
             <div class="row content">
-              <div class="col-4 mh-100 no-gutters">
+              <div class="col-12 col-lg-4 mh-100 no-gutters">
                 <div class="row d-flex justify-content-center align-items-start">
                   <div class="col-2 d-flex justify-content-center">
                     <img src="../assets/img/feat-worldwide.png" height="50px" width="50px">
@@ -108,11 +110,11 @@
                 </div>
               </div>
     
-              <div class="col-4 mh-100 d-flex justify-content-center align-items-start">
-                <img src="../assets/img/feat-compass.png" height="275px" width="275px">
+              <div class="col-12 col-lg-4 mh-100 d-flex justify-content-center align-items-start featuresCenterImg">
+                <img src="../assets/img/feat-compass.png">
               </div>
 
-              <div class="col-4 mh-100">
+              <div class="col-12 col-lg-4 mh-100">
                 <div class="row d-flex justify-content-center align-items-start">
                   <div class="col-2 d-flex justify-content-center">
                     <img src="../assets/img/feat-chat.png" height="50px" width="50px">
@@ -135,45 +137,35 @@
               </div>
             </div>
         </div>
-        <hr>
       </section>
 
       <section id="developers">
-        <div class="container mw-100">
+        <div class="container">
 
           <div class="row contentHeader d-flex justify-content-center align-items-center">
             <h2>Developers</h2>
           </div>
 
           <div class="row content">
-            <div class="col-4 mh-100">
-              <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12 col-lg-4 mh-100">
+              <div class="row d-flex justify-content-end align-items-center flex-column">
                 <img src="../assets/img/dev1.png"> 
-              </div>
-
-              <div class="row d-flex justify-content-center align-items-center flex-column">
                 <h5>Jose Carl Angeles</h5>
                 <p>Back-end Developer</p>
-              </div>  
+              </div> 
             </div>
 
-            <div class="col-4 mh-100">
-              <div class="row d-flex justify-content-center align-items-center">
-                <img src="../assets/img/dev2.png"> 
-              </div>
-
+            <div class="col-12 col-lg-4 mh-100">
               <div class="row d-flex justify-content-center align-items-center flex-column">
+                <img src="../assets/img/dev2.png"> 
                 <h5>Andrea Ymanuelle Cervales</h5>
                 <p>Front-end Developer</p>
               </div>  
             </div>
 
-            <div class="col-4 mh-100">
-              <div class="row d-flex justify-content-center align-items-center">
-                <img src="../assets/img/dev3.png"> 
-              </div>
-
+            <div class="col-12 col-lg-4 mh-100">
               <div class="row d-flex justify-content-center align-items-center flex-column">
+                <img src="../assets/img/dev3.png"> 
                 <h5>Micholle Cortezano</h5>
                 <p>Project Manager</p>
               </div>  
