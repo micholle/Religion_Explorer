@@ -20,6 +20,10 @@ $(function() {
             $("#sidebarNotifications").removeClass("active");
         }
     });
+
+    $("sidebarCloseBtn").click(function() {
+        $(".sidebar").css("display", "none");
+    });
     
     $('#submitReportUser').click(function(event) {    
         event.preventDefault();

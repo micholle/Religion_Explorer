@@ -1428,6 +1428,23 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /*sidebar*/
+@media only screen and (max-width: 768px) {
+    body .sidebar {
+        display: none;
+        width: 100%;
+    }
+    body .sidebar.active {
+        display: none;
+    }
+    .pageContainer {
+        padding-left: 0 !important;
+    }
+}
+
+#menuToggle {
+    cursor: pointer;
+}
+
 .sidebar {
     font-family: Lexend;
     position: fixed;
@@ -1440,6 +1457,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     border-right: solid #D0D0D0 2px;
     transition: 0.5s ease;
     z-index: 5;
+    display: block;
 }
   
 .sidebar.active {
@@ -1458,6 +1476,14 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 .sidebar.active .top .logo img {
     height: 65px;
     transition: opacity 0.5s ease;
+}
+
+.sidebar .sidebarClose {
+    display: none;
+}
+
+.sidebar .sidebarClose #sidebarCloseBtn {
+    display: none;
 }
 
 .sidebar ul {
@@ -2538,9 +2564,17 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /* CSS for smaller screens (e.g., mobile) */
-@media (max-width: 992px) {
+@media only screen and (max-width: 992px) {
     .pageHeader {
         padding: 15px;
+    }
+    body .pageHeader img {
+        height: 35px;
+        width: 35px;
+        display: block;
+    }
+    body .pageHeader .pageHeaderLink {
+        display: none;
     }
 }
 
@@ -2563,8 +2597,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 .pageHeader img {
-    width: 40px;
-    height: 40px;
     display: none;
 }
 
@@ -2976,11 +3008,9 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     font-weight: 600;
 }
 
-
-
 /*discussion forum*/
 /* responsiveness */
-@media (max-width: 992px) {
+@media only screen and (max-width: 992px) {
     .forumContent {
         margin-left: 15px;
     }
