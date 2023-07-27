@@ -75,34 +75,47 @@ $(function() {
         var displayBookmark = $("#displayBookmark").is(":checked") ? 1 : 0;
         var displayReligion = $("#displayReligion").is(":checked") ? 1 : 0;
         var displayPage = $("#libraryReligionFilter").val();
-    
-        var account = new FormData();
-        account.append("religion", religion);
-        account.append("username", username);
-        account.append("displayNotification", displayNotification);
-        account.append("displayCalendar", displayCalendar);
-        account.append("displayNickname", displayNickname);
-        account.append("displayBookmark", displayBookmark);
-        account.append("displayReligion", displayReligion);
-        account.append("displayPage", displayPage);
-    
-        $.ajax({
-          url: "../../ajax/accountUpdate.ajax.php",
-          method: "POST",
-          data: account,
-          cache: false,
-          contentType: false,
-          processData: false,
-          dataType: "text",
-          success: function(answer) {
-            window.location.href = "userProfile.php";
-          },
-          error: function() {
-            alert("Oops. Something went wrong!");
-          },
-          complete: function() {
-    
+
+        checkUsername(username)
+        .then((promiseResult) => {
+          if (promiseResult === "safe") {
+            var account = new FormData();
+            account.append("religion", religion);
+            account.append("username", username);
+            account.append("displayNotification", displayNotification);
+            account.append("displayCalendar", displayCalendar);
+            account.append("displayNickname", displayNickname);
+            account.append("displayBookmark", displayBookmark);
+            account.append("displayReligion", displayReligion);
+            account.append("displayPage", displayPage);
+        
+            $.ajax({
+              url: "../../ajax/accountUpdate.ajax.php",
+              method: "POST",
+              data: account,
+              cache: false,
+              contentType: false,
+              processData: false,
+              dataType: "text",
+              success: function(answer) {
+                window.location.href = "userProfile.php";
+              },
+              error: function() {
+                alert("Oops. Something went wrong!");
+              },
+              complete: function() {
+        
+              }
+            });
+          } else {
+            $("#inputCheckHeader").text("Error");
+            $("#inputCheckContent").text("Your username is invalid due to a violation of our community standards. We take these standards seriously to maintain a positive and respectful environment for all users. If you believe this action was taken in error, please reach out to our support team with further details. Thank you for your understanding and cooperation in upholding our community guidelines.");
+            $("#inputCheckModal").modal();
+            $("#inputCheckModal").show();
           }
+        })
+        .catch((error) => {
+          console.error("Something went wrong:", error);
         });
       });
 
@@ -272,6 +285,78 @@ $(function() {
   
       return maskedEmail;
   }
-     
-
 });
+
+async function checkUsername(username) {
+  try {
+    var contentEvaluationUsername = await checkContent(username);
+    if (contentEvaluationUsername === "nsfw") {
+      return "nsfw";
+    } else {
+      return "safe";
+    }
+  } catch (error) {
+    $("#toast").html("Something went wrong. Please try again later.")
+    $("#toast").css("background-color", "#E04F5F");
+    $("#toast").addClass('show');
+
+    setTimeout(function() {
+        $("#toast").removeClass('show');
+    }, 2000);
+
+    throw error;
+  }
+}
+
+function checkContent(content) {
+  const API_KEY = 'AIzaSyAMS69pJZVhNROCjcqryJNbhoQokBXPgNo';
+  const DISCOVERY_URL = 'https://commentanalyzer.googleapis.com/$discovery/rest?version=v1alpha1';
+
+  return new Promise((resolve, reject) => {
+    function onGAPILoad() {
+      gapi.client.load(DISCOVERY_URL)
+        .then(() => {
+          const analyzeRequest = {
+            comment: {
+              text: content,
+            },
+            requestedAttributes: {
+              TOXICITY: {},
+              SEVERE_TOXICITY: {},
+              IDENTITY_ATTACK: {},
+              INSULT: {},
+              PROFANITY: {},
+              THREAT: {}
+            }
+          };
+
+          gapi.client.commentanalyzer.comments.analyze({
+            key: API_KEY,
+            resource: analyzeRequest,
+          })
+            .then(response => {
+              const toxicity_score = response.result.attributeScores.TOXICITY.summaryScore.value;
+              const severe_toxicity_score = response.result.attributeScores.SEVERE_TOXICITY.summaryScore.value;
+              const indentity_atttack_score = response.result.attributeScores.IDENTITY_ATTACK.summaryScore.value;
+              const insult_score = response.result.attributeScores.INSULT.summaryScore.value;
+              const profanity_score = response.result.attributeScores.PROFANITY.summaryScore.value;
+              const threat_score = response.result.attributeScores.THREAT.summaryScore.value;
+
+              if (toxicity_score > 0.5 || severe_toxicity_score > 0.5 || indentity_atttack_score > 0.5 || insult_score > 0.5 || profanity_score > 0.5 || threat_score > 0.5) {
+                resolve("nsfw");
+              } else {
+                resolve("safe");
+              }
+            })
+            .catch(err => {
+              resolve("safe");
+            });
+        })
+        .catch(err => {
+          reject(err);
+        });
+    }
+
+    gapi.load('client', onGAPILoad);
+  });
+} 
