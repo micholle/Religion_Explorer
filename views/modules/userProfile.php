@@ -294,27 +294,27 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge10; ?>>
                             <img src="../assets/img/userProfile/achievements/scholar-tier1.png">
                             <h1>Tier 1 Scholar Badge</h2>
-                            <p>Bookmarked 10 materials</p>
+                            <p>Marked 10 materials</p>
                         </div>
                         <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge50; ?>>
                             <img src="../assets/img/userProfile/achievements/scholar-tier2.png">
                             <h1>Tier 2 Scholar Badge</h2>
-                            <p>Bookmarked 50 materials</p>
+                            <p>Marked 50 materials</p>
                         </div>
                         <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge100; ?>>
                             <img src="../assets/img/userProfile/achievements/scholar-tier3.png">
                             <h1>Tier 3 Scholar Badge</h2>
-                            <p>Bookmarked 100 materials</p>
+                            <p>Marked 100 materials</p>
                         </div>
                         <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge250; ?>>
                             <img src="../assets/img/userProfile/achievements/scholar-tier4.png">
                             <h1>Tier 4 Scholar Badge</h2>
-                            <p>Bookmarked 250 materials</p>
+                            <p>Marked 250 materials</p>
                         </div>
                         <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $bookmarkBadge500; ?>>
                             <img src="../assets/img/userProfile/achievements/scholar-tier5.png">
                             <h1>Tier 5 Scholar Badge</h2>
-                            <p>Bookmarked 500 materials</p>
+                            <p>Marked 500 materials</p>
                         </div>
                     </div>
                     <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
