@@ -8,6 +8,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Religion Explorer: Discussion Forum</title>
     <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
@@ -29,10 +30,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     <div class="pageContainer">
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center pageHeader">
-                <div class="col-4 d-flex justify-content-start align-items-center">
+                <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start align-items-center">
                     <a href="discussionForum.php" class="pageHeaderLink"><h1>Discussion Forum</h1></a>
                 </div>
-                <div class="col-8 d-flex justify-content-start align-items-center">
+                <div class="col-12 col-lg-8 d-flex justify-content-end align-items-end">
                     <input type="search" id="forumSearch" name="forumSearch" placeholder="Search the Forum">
                 </div>
             </div>
@@ -42,21 +43,23 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
             <?php
             if ($_SESSION['acctype'] === 'regular'){
                         echo'<div class="col-12 d-flex justify-content-center align-items-center">';
-                        echo    '<div class="forumSubmitContainer">';
-                        echo        '<div class="d-flex justify-content-start align-items-center flex-column">';
+                        echo    '<div class="forumSubmitContainer flex-column flex-lg-row">';
+                        echo        '<div class="forumSubmitContainerAvatar d-flex justify-content-start align-items-center flex-column">';
                         echo            '<img src="data:image/png;base64,' . base64_encode($_SESSION['avatar']) . '" class="discussionForumAvatarPost">';
                         echo        '</div>';
                         echo        '<div class="forumSubmitContent">';
                         echo            '<form>';
                         echo                '<input type="text" id="topicTitle" class="forumSubmitContentTitle" placeholder="Start a Discussion" autocomplete="off">';
                         echo                '<textarea id="topicContent" placeholder="What do you want to talk about?"></textarea>';
-                        echo                '<div class="row forumSubmitInteractions">';
-                        echo                     '<div class="col-12 d-flex justify-content-end align-items-center flex-row">';
+                        echo                '<div class="row forumSubmitInteractions d-flex justify-content-center justify-content-lg-center align-items-center">';
+                        echo                     '<div class="col-12 d-flex justify-content-center justify-content-lg-end align-items-center flex-row forumSwitchContainer">';
                         echo                         '<p>Post anonymously</p>';
                         echo                         '<label class="switch">';
                         echo                             '<input id="anonymousCheckbox" type="checkbox">';
                         echo                             '<span class="slider round"></span>';
                         echo                         '</label>';
+                        echo                     '</div>';
+                        echo                     '<div class="col-12 d-flex justify-content-center justify-content-lg-end align-items-center">';
                         echo                         '<button type="submit" class="roundedButton">Post</button>';
                         echo                     '</div>';
                         echo                 '</div>';
@@ -67,7 +70,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
             }
             ?>
             <div class="col-12">
-                <div class="forumPostFilter d-flex justify-content-end align-items-center flex-row">
+                <div class="forumPostFilter d-flex justify-content-center justify-content-lg-end align-items-center flex-row">
                     <p>Sort by:</p>
                     <button type="button" id="top">Popularity</button>
                     <button type="button" id="new">New</button>
