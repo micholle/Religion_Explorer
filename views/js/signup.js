@@ -61,74 +61,59 @@ $(function() {
       return;
     }
 
-    (async () => {
-      try {
-        var contentEvaluationEmail = await checkContent(email);
-        var contentEvaluationUsername = await checkContent(username);
-
-        if (contentEvaluationEmail == "nsfw" || contentEvaluationUsername == "nsfw") {
-          $("#inputCheckIcon").attr("src", "../assets/img/verification-error.png");
-          $("#inputCheckHeader").text("Error");
-          $("#inputCheckContent").text("Your content has been blocked due to a violation of our community standards. We take these standards seriously to maintain a positive and respectful environment for all users. If you believe this action was taken in error, please reach out to our support team with further details. Thank you for your understanding and cooperation in upholding our community guidelines.");
-          $("#inputCheckModal").modal();
-          $("#inputCheckModal").show();
-
-          $("#email").val("");
-          $("#username").val("");
-          $("#password").val("");
-          $("#confirmPassword").val("");
-          $("#communityCategory").val("Choose your Religion");
-        } else {
-          var verify = new FormData();
-          verify.append("email", email);
-          verify.append("username", username);
-          verify.append("verificationCode", verificationCode);
-      
-          $.ajax({
-            url: "../../ajax/verifyEmail.ajax.php",
-            method: "POST",
-            data: verify,
-            dataType: "text",
-            processData: false,
-            contentType: false,
-            success: function(answer) {
-              if (answer === "email_exists") {
-                $("#toast").html("Email already exists!")
-                $("#toast").css("background-color", "#E04F5F");
-              } else if (answer === "username_exists") {
-                $("#toast").html("Username already exists!")
-                $("#toast").css("background-color", "#E04F5F");
-              } else if (answer === "ok") {
-                $("#toast").html("Verification code sent, check your email!")
-                $("#toast").css("background-color", "");
-                $('#verificationCodeModal').modal();
-                $('#verificationCodeModal').show();
-              } else {
-                $("#toast").html("Oops. Something went wrong!")
-                $("#toast").css("background-color", "#E04F5F");
-              }
-            },
-            error: function() {
-              $("#toast").html("Oops. Something went wrong!")
-              $("#toast").css("background-color", "#E04F5F");
-            }, complete: function() {
-              $("#toast").addClass('show');
-          
-              setTimeout(function() {
-                  $("#toast").removeClass('show');
-              }, 2000);
-            }
-          });
-        }
-      } catch (error) {
-        $("#toast").html("Something went wrong. Please try again later.")
-        $("#toast").css("background-color", "#E04F5F");
-        $("#toast").addClass('show');
+    checkUsername(username)
+    .then((promiseResult) => {
+      if (promiseResult === "safe") {
+        var verify = new FormData();
+        verify.append("email", email);
+        verify.append("username", username);
+        verify.append("verificationCode", verificationCode);
     
-        setTimeout(function() {
-            $("#toast").removeClass('show');
-        }, 2000);
+        $.ajax({
+          url: "../../ajax/verifyEmail.ajax.php",
+          method: "POST",
+          data: verify,
+          dataType: "text",
+          processData: false,
+          contentType: false,
+          success: function(answer) {
+            if (answer === "email_exists") {
+              $("#toast").html("Email already exists!")
+              $("#toast").css("background-color", "#E04F5F");
+            } else if (answer === "username_exists") {
+              $("#toast").html("Username already exists!")
+              $("#toast").css("background-color", "#E04F5F");
+            } else if (answer === "ok") {
+              $("#toast").html("Verification code sent, check your email!")
+              $("#toast").css("background-color", "");
+              $('#verificationCodeModal').modal();
+              $('#verificationCodeModal').show();
+            } else {
+              $("#toast").html("Please enter a valid email address.")
+              $("#toast").css("background-color", "#E04F5F");
+            }
+          },
+          error: function() {
+            $("#toast").html("Oops. Something went wrong!")
+            $("#toast").css("background-color", "#E04F5F");
+          }, complete: function() {
+            $("#toast").addClass('show');
+        
+            setTimeout(function() {
+                $("#toast").removeClass('show');
+            }, 2000);
+          }
+        });
+      } else {
+        $("#inputCheckIcon").attr("src", "../assets/img/verification-error.png");
+        $("#inputCheckHeader").text("Error");
+        $("#inputCheckContent").text("Your username is invalid due to a violation of our community standards. We take these standards seriously to maintain a positive and respectful environment for all users. If you believe this action was taken in error, please reach out to our support team with further details. Thank you for your understanding and cooperation in upholding our community guidelines.");
+        $("#inputCheckModal").modal();
+        $("#inputCheckModal").show();
       }
+    })
+    .catch((error) => {
+      console.error("Something went wrong:", error);
     });
   });
 
@@ -211,6 +196,27 @@ $(function() {
       window.location.href = "../modules/privacyPolicy.php";
   });  
 });
+
+async function checkUsername(username) {
+  try {
+    var contentEvaluationUsername = await checkContent(username);
+    if (contentEvaluationUsername === "nsfw") {
+      return "nsfw";
+    } else {
+      return "safe";
+    }
+  } catch (error) {
+    $("#toast").html("Something went wrong. Please try again later.")
+    $("#toast").css("background-color", "#E04F5F");
+    $("#toast").addClass('show');
+
+    setTimeout(function() {
+        $("#toast").removeClass('show');
+    }, 2000);
+
+    throw error;
+  }
+}
 
 function checkContent(content) {
   const API_KEY = 'AIzaSyAMS69pJZVhNROCjcqryJNbhoQokBXPgNo';

@@ -16,6 +16,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/googleapis/apis.google.com_js_api.js"></script>
 
     <script type="text/javascript" src="../js/userProfileEditProfile.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>
@@ -281,6 +282,24 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                 </div>
                             </div>
                         </form>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="inputCheckModal" class="modal fade">
+        <div class="modal-dialog modal-xs modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                <img id="inputCheckIcon" src="../assets/img/verification-error.png" height="80px" width="80px">
+                                <h5 id="inputCheckHeader" class="modal-title w-100"></h5>
+                                <p id="inputCheckContent" class="text-center"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
