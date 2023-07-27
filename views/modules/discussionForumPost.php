@@ -182,7 +182,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="modal-header text-center">
                             <div class="container d-flex justify-content-center align-items-center flex-column">
                                 <h5 class="modal-title w-100">Report Content</h5>
-                                <div id="reportContentHeader"></div>
+                                <!-- <div id="reportContentHeader"></div> -->
                                 <div id="reportContentid" hidden></div>
                             </div>
                         </div>

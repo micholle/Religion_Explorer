@@ -417,7 +417,7 @@ $userData = getUserProfileInfo($accountid);
                 <div class="modal-header text-center">
                     <div class="container d-flex justify-content-center align-items-center flex-column">
                         <h5 class="modal-title w-100">Report a User</h5>
-                        <p><?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} else {echo "not logged in";}?></p>
+                        <!-- <p><?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} else {echo "not logged in";}?></p> -->
                     </div>
                 </div>
                 <div class="modal-body">
