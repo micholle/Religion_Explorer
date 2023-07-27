@@ -13,7 +13,9 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
         <script type="text/javascript" src="../assets/js/chart.umd.js"></script>
+        <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
         <!-- <script type="text/javascript" src="../assets/js/chartjs-plugin-datalabels.min.js"></script> -->
+        <script type="text/javascript" src="../assets/plugins/jquery-svg-pan-zoom-master/compiled/jquery.svg.pan.zoom.js"></script>
 
         <script type="text/javascript" src="../js/map.js"></script>
         <script type="text/javascript" src="../js/script.js"></script>
@@ -80,14 +82,8 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <div class="modal-body">
                         <!-- Chart -->
                         <div id="showReligionChart">
-                            <canvas id="religionChart" width="80%" height="30%"></canvas>
                         </div>
-                        <div id="modalContent">
-                            <p>
-                            The Philippines is a secular country, with a guaranteed separation of church and state by the Constitution and respect for all religious beliefs and rituals. That being said, the Philippines is not a very spiritually rich country. Albeit no religion is imposed, a significant majority of the population follows Christianity, followed by Islam.
-                            <br><br>The pre-Hispanic belief of Filipinos consisted of a pantheon of gods, spirits, creatures, and men that guarded the streams, fields, trees, mountains, forests, and houses. Bathala, who created earth and man, was superior to these other gods and spirits. Regular sacrifices and prayers were offered to placate these deities and spirits, some of which were benevolent, some malevolent.
-                            </p>
-                        </div>
+                        <div id="modalContent"></div>
                     </div>
                 </div>
             </div>
@@ -137,6 +133,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                 </div>
             </div>
         </div>
+        
         <?xml version="1.0"?>
         <!--
         *************Map created by Simplemaps.com********************		
@@ -175,7 +172,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     </p>
                 </div>
                 <div class="row">
-                    <div class="col-12">
+                    <div id="svgMapContainer" class="col-12" >
                         <svg id="svgMap" baseprofile="tiny" stroke-linecap="round" stroke-linejoin="round" version="1.2" viewbox="0 0 2000 857" xmlns="http://www.w3.org/2000/svg">
                             <g id="Afghanistan">
                                 <path d="M1383 261.6l1.5 1.8-2.9 0.8-2.4 1.1-5.9 0.8-5.3 1.3-2.4 2.8 1.9 2.7 1.4 3.2-2 2.7 0.8 2.5-0.9 2.3-5.2-0.2 3.1 4.2-3.1 1.7-1.4 3.8 1.1 3.9-1.8 1.8-2.1-0.6-4 0.9-0.2 1.7-4.1 0-2.3 3.7 0.8 5.4-6.6 2.7-3.9-0.6-0.9 1.4-3.4-0.8-5.3 1-9.6-3.3 3.9-5.8-1.1-4.1-4.3-1.1-1.2-4.1-2.7-5.1 1.6-3.5-2.5-1 0.5-4.7 0.6-8 5.9 2.5 3.9-0.9 0.4-2.9 4-0.9 2.6-2-0.2-5.1 4.2-1.3 0.3-2.2 2.9 1.7 1.6 0.2 3 0 4.3 1.4 1.8 0.7 3.4-2 2.1 1.2 0.9-2.9 3.2 0.1 0.6-0.9-0.2-2.6 1.7-2.2 3.3 1.4-0.1 2 1.7 0.3 0.9 5.4 2.7 2.1 1.5-1.4 2.2-0.6 2.5-2.9 3.8 0.5 5.4 0z" id="AF" name="Afghanistan">

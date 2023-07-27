@@ -12,6 +12,7 @@
     <!-- scripts -->
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../assets/plugins/googleapis/apis.google.com_js_api.js"></script>
     <script type="text/javascript" src="../assets/js/chart.umd.js"></script>
     <script type="text/javascript" src="../js/signup.js"></script>
 </head>
@@ -76,6 +77,24 @@
                                 <h5 class="modal-title w-100">Verification Code</h5>
                                 <input type="text" id="verificationCode" name="verificationCode" placeholder="Verification Code">
                                 <button type="button" id="verify" name="verify" class="registrationSubmitButton">Verify Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="inputCheckModal" class="modal fade">
+        <div class="modal-dialog modal-xs modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                <img id="inputCheckIcon" src="../assets/img/verification-check.png" height="80px" width="80px">
+                                <h5 id="inputCheckHeader" class="modal-title w-100"></h5>
+                                <p id="inputCheckContent" class="text-center"></p>
                             </div>
                         </div>
                     </div>

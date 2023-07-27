@@ -19,6 +19,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../assets/js/chart.umd.js"></script>
 
     <script type="text/javascript" src="../js/userProfile.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>
@@ -173,7 +174,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                                         <img src="../assets/img/discussionForum/upvote-active.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>54</h1>
+                                                        <h1>154</h1>
                                                         <p>upvotes</p>
                                                     </div>
                                                 </div>
@@ -182,7 +183,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                                         <img src="../assets/img/discussionForum/downvote.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>11</h1>
+                                                        <h1>25</h1>
                                                         <p>downvotes</p>
                                                     </div>
                                                 </div>
@@ -191,20 +192,20 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                                         <img src="../assets/img/discussionForum/comments.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>7</h1>
+                                                        <h1>97</h1>
                                                         <p>comments</p>
                                                     </div>
                                                 </div>
                                                 <div class="userProfileStatsContent">
                                                     <div class="userProfileStatsContentNumVar d-flex justify-content-center align-items-center flex-column">
-                                                        <h1>72</h1>
+                                                        <h1>276</h1>
                                                         <p>total engagements</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-9">
                                                 <div class="userProfileStatsInnerDiv">
-                                                    <img src="../assets/img/placeholder.png">
+                                                    <div id="engagementInsightsContainer"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -214,7 +215,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                             <div class="col-4">
                                 <div class="userProfileStatsMain">
                                     <div class="userProfileStatsHeader">
-                                        <h1>Overview</h1>
+                                        <h1>Community Creations</h1>
                                     </div>
                                     <div class="userProfileStatsOverviewBody justify-content-start">
                                         <div class="userProfileStatsContent d-flex flex-row">
@@ -224,19 +225,8 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                             </div>
                                         </div>
 
-                                        <div class="userProfileStatsInnerDiv d-flex justify-content-center">
-                                            <img src="../assets/img/placeholder.png">
-                                        </div>
-                                    </div>
-                                    <div class="userProfileStatsOverviewBody justify-content-start">
-                                        <div class="userProfileStatsContent d-flex flex-row">
-                                            <div class="userProfileStatsContentNum">
-                                                <p>Uploads per File Type</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="userProfileStatsInnerDiv d-flex justify-content-center">
-                                            <img src="../assets/img/placeholder.png">
+                                        <div class="userProfileStatsInnerDiv">
+                                            <div id="totalCommunityUploadsContainer"></div>
                                         </div>
                                     </div>
                                 </div>

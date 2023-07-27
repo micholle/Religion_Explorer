@@ -61,39 +61,68 @@ $(function() {
       return;
     }
 
-    var verify = new FormData();
-    verify.append("email", email);
-    verify.append("username", username);
-    verify.append("verificationCode", verificationCode);
+    (async () => {
+      try {
+        var contentEvaluationEmail = await checkContent(email);
+        var contentEvaluationUsername = await checkContent(username);
 
-    $.ajax({
-      url: "../../ajax/verifyEmail.ajax.php",
-      method: "POST",
-      data: verify,
-      dataType: "text",
-      processData: false,
-      contentType: false,
-      success: function(answer) {
-        if (answer === "email_exists") {
-          $("#toast").html("Email already exists!")
-          $("#toast").css("background-color", "#E04F5F");
-        } else if (answer === "username_exists") {
-          $("#toast").html("Username already exists!")
-          $("#toast").css("background-color", "#E04F5F");
-        } else if (answer === "ok") {
-          $("#toast").html("Verification code sent, check your email!")
-          $("#toast").css("background-color", "");
-          $('#verificationCodeModal').modal();
-          $('#verificationCodeModal').show();
+        if (contentEvaluationEmail == "nsfw" || contentEvaluationUsername == "nsfw") {
+          $("#inputCheckIcon").attr("src", "../assets/img/verification-error.png");
+          $("#inputCheckHeader").text("Error");
+          $("#inputCheckContent").text("Your content has been blocked due to a violation of our community standards. We take these standards seriously to maintain a positive and respectful environment for all users. If you believe this action was taken in error, please reach out to our support team with further details. Thank you for your understanding and cooperation in upholding our community guidelines.");
+          $("#inputCheckModal").modal();
+          $("#inputCheckModal").show();
+
+          $("#email").val("");
+          $("#username").val("");
+          $("#password").val("");
+          $("#confirmPassword").val("");
+          $("#communityCategory").val("Choose your Religion");
         } else {
-          $("#toast").html("Oops. Something went wrong!")
-          $("#toast").css("background-color", "#E04F5F");
+          var verify = new FormData();
+          verify.append("email", email);
+          verify.append("username", username);
+          verify.append("verificationCode", verificationCode);
+      
+          $.ajax({
+            url: "../../ajax/verifyEmail.ajax.php",
+            method: "POST",
+            data: verify,
+            dataType: "text",
+            processData: false,
+            contentType: false,
+            success: function(answer) {
+              if (answer === "email_exists") {
+                $("#toast").html("Email already exists!")
+                $("#toast").css("background-color", "#E04F5F");
+              } else if (answer === "username_exists") {
+                $("#toast").html("Username already exists!")
+                $("#toast").css("background-color", "#E04F5F");
+              } else if (answer === "ok") {
+                $("#toast").html("Verification code sent, check your email!")
+                $("#toast").css("background-color", "");
+                $('#verificationCodeModal').modal();
+                $('#verificationCodeModal').show();
+              } else {
+                $("#toast").html("Oops. Something went wrong!")
+                $("#toast").css("background-color", "#E04F5F");
+              }
+            },
+            error: function() {
+              $("#toast").html("Oops. Something went wrong!")
+              $("#toast").css("background-color", "#E04F5F");
+            }, complete: function() {
+              $("#toast").addClass('show');
+          
+              setTimeout(function() {
+                  $("#toast").removeClass('show');
+              }, 2000);
+            }
+          });
         }
-      },
-      error: function() {
-        $("#toast").html("Oops. Something went wrong!")
+      } catch (error) {
+        $("#toast").html("Something went wrong. Please try again later.")
         $("#toast").css("background-color", "#E04F5F");
-      }, complete: function() {
         $("#toast").addClass('show');
     
         setTimeout(function() {
@@ -182,3 +211,56 @@ $(function() {
       window.location.href = "../modules/privacyPolicy.php";
   });  
 });
+
+function checkContent(content) {
+  const API_KEY = 'AIzaSyAMS69pJZVhNROCjcqryJNbhoQokBXPgNo';
+  const DISCOVERY_URL = 'https://commentanalyzer.googleapis.com/$discovery/rest?version=v1alpha1';
+
+  return new Promise((resolve, reject) => {
+    function onGAPILoad() {
+      gapi.client.load(DISCOVERY_URL)
+        .then(() => {
+          const analyzeRequest = {
+            comment: {
+              text: content,
+            },
+            requestedAttributes: {
+              TOXICITY: {},
+              SEVERE_TOXICITY: {},
+              IDENTITY_ATTACK: {},
+              INSULT: {},
+              PROFANITY: {},
+              THREAT: {}
+            }
+          };
+
+          gapi.client.commentanalyzer.comments.analyze({
+            key: API_KEY,
+            resource: analyzeRequest,
+          })
+            .then(response => {
+              const toxicity_score = response.result.attributeScores.TOXICITY.summaryScore.value;
+              const severe_toxicity_score = response.result.attributeScores.SEVERE_TOXICITY.summaryScore.value;
+              const indentity_atttack_score = response.result.attributeScores.IDENTITY_ATTACK.summaryScore.value;
+              const insult_score = response.result.attributeScores.INSULT.summaryScore.value;
+              const profanity_score = response.result.attributeScores.PROFANITY.summaryScore.value;
+              const threat_score = response.result.attributeScores.THREAT.summaryScore.value;
+
+              if (toxicity_score > 0.5 || severe_toxicity_score > 0.5 || indentity_atttack_score > 0.5 || insult_score > 0.5 || profanity_score > 0.5 || threat_score > 0.5) {
+                resolve("nsfw");
+              } else {
+                resolve("safe");
+              }
+            })
+            .catch(err => {
+              resolve("safe");
+            });
+        })
+        .catch(err => {
+          reject(err);
+        });
+    }
+
+    gapi.load('client', onGAPILoad);
+  });
+} 

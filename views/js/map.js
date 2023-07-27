@@ -20,85 +20,7 @@ $(function() {
         }
     });
 
-    var svgMap = $("#svgMap");
-    var viewBox = svgMap[0].getAttribute("viewBox");
-    var initialViewBox = viewBox.split(" ").map(parseFloat);
-    var zoomScale = 1.2;
-    var currentZoom = 0;
-    var minZoom = 0;
-    var maxZoom = 5;
-    
-    var isDragging = false;
-    var startDragX = 0;
-    var startDragY = 0;
-    var startViewBoxX = 0;
-    var startViewBoxY = 0;
-    var previousZoom = 0;
-    var prevMouseX = 0;
-    var prevMouseY = 0;
-    
-    svgMap.on("wheel", function(e) {
-        e.preventDefault();
-        var delta = e.originalEvent.deltaY;
-
-        var zoomDirection = delta > 0 ? -1 : 1;
-        currentZoom += zoomDirection;
-        currentZoom = Math.min(Math.max(currentZoom, minZoom), maxZoom);
-        var zoomFactor = Math.pow(zoomScale, currentZoom);
-    
-        var newWidth = initialViewBox[2] / zoomFactor;
-        var newHeight = initialViewBox[3] / zoomFactor;
-    
-        var mouseX = e.originalEvent.clientX - svgMap.offset().left;
-        var mouseY = e.originalEvent.clientY - svgMap.offset().top;
-    
-        var deltaMouseX = mouseX - prevMouseX;
-        var deltaMouseY = mouseY - prevMouseY;
-    
-        var currentViewBoxX = initialViewBox[0] + (deltaMouseX * initialViewBox[2]) / svgMap.width();
-        var currentViewBoxY = initialViewBox[1] + (deltaMouseY * initialViewBox[3]) / svgMap.height();
-
-        var newViewBoxX = currentViewBoxX - (newWidth - initialViewBox[2]) * (mouseX / svgMap.width());
-        var newViewBoxY = currentViewBoxY - (newHeight - initialViewBox[3]) * (mouseY / svgMap.height());
-    
-        var newViewBox = [newViewBoxX, newViewBoxY, newWidth, newHeight];
-        svgMap.attr("viewBox", newViewBox.join(" "));
-        prevMouseX = mouseX;
-        prevMouseY = mouseY;
-        previousZoom = currentZoom;
-    });
-    
-    svgMap.on("mousedown", function(e) {
-        e.preventDefault();
-        isDragging = true;
-        startDragX = e.pageX - svgMap.offset().left - initialViewBox[0] * (svgMap.width() / initialViewBox[2]);
-        startDragY = e.pageY - svgMap.offset().top - initialViewBox[1] * (svgMap.height() / initialViewBox[3]);
-        startViewBoxX = initialViewBox[0];
-        startViewBoxY = initialViewBox[1];
-    });
-    
-    
-    svgMap.on("mousemove", function(e) {
-        if (isDragging) {
-        var dragX = e.pageX - startDragX;
-        var dragY = e.pageY - startDragY;
-        var newViewBoxX = startViewBoxX - dragX;
-        var newViewBoxY = startViewBoxY - dragY;
-    
-        var newViewBox = [
-            newViewBoxX,
-            newViewBoxY,
-            initialViewBox[2] / Math.pow(zoomScale, previousZoom),
-            initialViewBox[3] / Math.pow(zoomScale, previousZoom)
-        ];
-        svgMap.attr("viewBox", newViewBox.join(" "));
-        }
-    });
-    
-    svgMap.on("mouseup mouseleave", function() {
-        isDragging = false;
-    });
-      
+    var svgPanZoom = $("svg").svgPanZoom();
 
     //initiate colors
     var religionColors = {
@@ -582,13 +504,21 @@ $(function() {
 
                     //generate chart
                     // Chart.register(ChartDataLabels);
-                    Chart.defaults.font.family = "Lexend Deca";
+                    const canvasElement = document.createElement('canvas');
+                    canvasElement.id = 'religionChart';
+                    $("#showReligionChart").html(canvasElement);
                     var religionChart = document.getElementById("religionChart").getContext("2d");
-    
+                    
+                    var totalPopulation = 0;
+                    var religionDataDict = {};
                     var religions = [];
                     var religionData = [];
                     var religionColors = ["#BAA400", "#56097A", "#A81315", "#018744", "#1334A8", "#B37100", "#242424"];
             
+                    for (let religion of Object.keys(religionByCountry[Object.keys(religionByCountry)[0]][currentCountry])) {
+                        religionDataDict[religion] = 0;
+                    }
+
                     for (let year in religionByCountry) {
                         var countryDetails = religionByCountry[year];
                         for (let country in countryDetails) {
@@ -598,11 +528,15 @@ $(function() {
                                 for (let religion in religionValues) {
                                     religions.push(religion);
                                     religionData.push(religionValues[religion]);
+                                    religionDataDict[religion] += religionValues[religion];
+                                    totalPopulation += religionValues[religion];
                                 }
                             }
                         }
                     }
-    
+
+                    Chart.defaults.font.family = "Lexend";
+
                     configuration = {
                         type: "bar",
                         data: {
@@ -641,13 +575,32 @@ $(function() {
                             animation: false
                         }
                     };
-    
+                    
                     if (chart) {
                         chart.destroy();
                     }
                     
                     chart = new Chart(religionChart, configuration);
+
+
+                    function calculatePercentage(count, totalPopulation) {
+                        return ((count / totalPopulation) * 100).toFixed(2);
+                    }
     
+                    var sortedReligions = Object.keys(religionDataDict).sort((a, b) => religionDataDict[b] - religionDataDict[a]);    
+
+                    var modalContent = "The chart displays the distribution of religious affiliations in <b>" + currentCountry + "</b>, presenting the number of people per religion. The most prevalent is <b>" + sortedReligions[0] + "</b>, amounting to <b>" + religionDataDict[sortedReligions[0]].toLocaleString() + "</b> people or <b>" + calculatePercentage(religionDataDict[sortedReligions[0]], totalPopulation) + "%</b> of the total population. Following that are ";
+
+                    for (let i = 1; i < sortedReligions.length; i++) {
+                        if (i === sortedReligions.length - 1) {
+                            modalContent += "and ";
+                        }
+                        modalContent += sortedReligions[i] + " at " + religionDataDict[sortedReligions[i]].toLocaleString() + " (" + calculatePercentage(religionDataDict[sortedReligions[i]], totalPopulation) + "%), ";
+                    }
+
+                    modalContent += "respectively. While interpreting the data, it's essential to consider historical and social factors that may influence these religious demographics. Additionally, it's worth noting that the accuracy of the chart relies on the data's limitations and the broader context of the country's religious landscape.";
+
+                    $("#modalContent").html(modalContent);
                     $('#modalTitle').text(currentCountry);
                     $('#countryInformationModal').modal();
                 }

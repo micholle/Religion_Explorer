@@ -36,6 +36,96 @@ $(function() {
     getBookmarks();
     getCreations();
 
+    //Engagement Insights
+    var engagementBuddhists = 12;
+    var engagementChristians = 35;
+    var engagementHindus = 6;
+    var engagementIslams = 22;
+    var engagementJews = 25;
+    var engagementOtherReligions = 8;
+    var engagementNonReligious = 14;
+
+    const labels = ['Buddhism', 'Christianity', 'Hinduism', 'Islam', 'Judaism', 'Other Religions', 'Non-Religious'];
+
+    const registeredUsersData = {
+        labels: labels,
+        datasets: [{
+            axis: 'y',
+            label: 'Engagement Insights',
+            data: [engagementBuddhists, engagementChristians, engagementHindus, engagementIslams, engagementJews, engagementOtherReligions, engagementNonReligious],
+            fill: false,
+            backgroundColor: [
+                'rgba(186, 164, 0, 0.2)',
+                'rgba(86, 9, 122, 0.2)',
+                'rgba(168, 19, 21, 0.2)',
+                'rgba(1, 135, 68, 0.2)',
+                'rgba(19, 52, 168, 0.2)',
+                'rgba(179, 113, 0, 0.2)',
+                'rgba(36, 36, 36, 0.2)'
+            ],
+            borderColor: [
+                'rgb(186, 164, 0)',
+                'rgb(86, 9, 122)',
+                'rgb(168, 19, 21)',
+                'rgb(1, 135, 68)',
+                'rgb(19, 52, 168)',
+                'rgb(179, 113, 0)',
+                'rgb(36, 36, 36)'
+            ],
+            borderWidth: 1
+        }]
+    };
+    
+    const config = {
+        type: 'bar',
+        data: registeredUsersData,
+        options: {
+            indexAxis: 'y'
+        }
+    };
+    
+    const canvasElement = document.createElement('canvas');
+    canvasElement.id = 'engagementInsights';
+    document.getElementById('engagementInsightsContainer').appendChild(canvasElement);
+    
+    const ctx = document.getElementById('engagementInsights').getContext('2d');
+    new Chart(ctx, config);
+    
+    //total uploads
+    const totalUploadsData = {
+        labels: [
+          'Images',
+          'Videos',
+          'Reading Materials'
+        ],
+        datasets: [{
+          data: [5, 5, 5],
+          backgroundColor: [
+            'rgba(186, 164, 0, 0.2)',
+            'rgba(86, 9, 122, 0.2)',
+            'rgba(168, 19, 21, 0.2)',
+        ],
+        borderColor: [
+            'rgb(186, 164, 0)',
+            'rgb(86, 9, 122)',
+            'rgb(168, 19, 21)',
+        ],
+        borderWidth: 1,
+        }]
+      };
+
+    const totalUploadsConfig = {
+        type: 'pie',
+        data: totalUploadsData,
+    };
+
+    const totalUploadsCanvas = document.createElement('canvas');
+    totalUploadsCanvas.id = 'totalCommunityUploads';
+    document.getElementById('totalCommunityUploadsContainer').appendChild(totalUploadsCanvas);
+
+    const totalUploadsCtx = document.getElementById('totalCommunityUploads').getContext('2d');
+    new Chart(totalUploadsCtx, totalUploadsConfig);
+
     $("#confirmDelete").click(function () { 
         $.ajax({
             url: "../../ajax/deleteReportedContent.ajax.php",
@@ -580,4 +670,31 @@ function getOverview() {
             console.log(error);
         }
     });
+
+    function shortenUpvotes() {
+        $(".upvotes").each(function() {
+            var upvotes = $(this).text().trim();
+            var upvotesShort = shortenNumber(upvotes);
+            $(this).text(upvotesShort);
+        });
+      }
+  
+      function shortenNumber(number) {
+        var SI_POSTFIXES = ["", "K", "M", "B", "T"];
+        var tier = Math.log10(Math.abs(number)) / 3 | 0;
+      
+        if (tier === 0) return number;
+      
+        var postfix = SI_POSTFIXES[tier];
+        var scale = Math.pow(10, tier * 3);
+        var scaledNumber = number / scale;
+      
+        // Remove decimal if the number is a whole number
+        if (scaledNumber % 1 === 0) {
+          scaledNumber = Math.floor(scaledNumber);
+        }
+      
+        return scaledNumber.toFixed(0) + postfix;
+      }
+  
 }

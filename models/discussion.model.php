@@ -17,7 +17,7 @@ class ModelDiscussion {
         }
     
         try {
-            $stmt = $pdo->prepare("SELECT topics.*, accounts.username, accounts.avatar,
+            $stmt = $pdo->prepare("SELECT topics.*, accounts.username, accounts.avatar, 'topic' AS itemType,
                                         (SELECT COUNT(*) FROM posts WHERE posts.topicId = topics.topicId) AS postCount,
                                         (SELECT postCount + COUNT(*) FROM reply JOIN posts ON reply.postId = posts.postId WHERE posts.topicId = topics.topicId) AS commentCount
                                    FROM topics 
@@ -48,7 +48,7 @@ class ModelDiscussion {
         $pdo = $db->connect();
     
         try {
-            $stmt = $pdo->prepare("SELECT topics.*, accounts.username, accounts.avatar,
+            $stmt = $pdo->prepare("SELECT topics.*, accounts.username, accounts.avatar, 'topic' AS itemType,
                                (SELECT COUNT(*) FROM posts WHERE posts.topicId = topics.topicId) AS postCount,
                                (SELECT postCount + COUNT(*) FROM reply JOIN posts ON reply.postId = posts.postId WHERE posts.topicId = topics.topicId) AS commentCount
                         FROM topics 
@@ -73,7 +73,7 @@ class ModelDiscussion {
         $pdo = $db->connect();
     
         try {
-            $stmt = $pdo->prepare("SELECT posts.*, topics.*, accounts.username
+            $stmt = $pdo->prepare("SELECT posts.*, topics.*, accounts.username, posts.upvotes AS postUpvotes, 'post' AS itemType
                                    FROM posts
                                    INNER JOIN topics ON posts.topicId = topics.topicId
                                    INNER JOIN accounts ON posts.accountid = accounts.accountid
@@ -93,7 +93,6 @@ class ModelDiscussion {
             $stmt = null;
         }
     }
-    
 
     public function mdlCreateDiscussion($data) {
         $db = new Connection();
@@ -243,11 +242,11 @@ class ModelDiscussion {
     
         try {
             // Generate a random number
-            $topicId = mt_rand(10000000, 99999999);
+            $postId = mt_rand(10000000, 99999999);
     
             // Check if the generated topicId already exists in the database
             $stmt = $pdo->prepare("SELECT COUNT(*) FROM posts WHERE postId = :postId");
-            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
             $stmt->execute();
             $count = $stmt->fetchColumn();
     
@@ -688,7 +687,7 @@ class ModelDiscussion {
             $notifications_stmt->bindParam(":accountid", $replyOwner, PDO::PARAM_STR);
             $notifications_stmt->bindParam(":replyid", $replyId, PDO::PARAM_STR);
             $notifications_stmt->bindParam(":personInvolved", $accountId, PDO::PARAM_STR);
-            $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Posts Upvote", PDO::PARAM_STR);
+            $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Replies Upvote", PDO::PARAM_STR);
             $notifications_stmt->bindParam(":notificationDate", $notificationDate, PDO::PARAM_STR);
             $notifications_stmt->execute();
             }

@@ -48,7 +48,7 @@ if (isset($_GET['accountid'])) {
                         <div class="forumPostContainer">
                             <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">
                                 <img src="../assets/img/discussionForum/upvote.png">
-                                <p class="upvotes">' . $post['upvotes'] . '</p>
+                                <p class="upvotes">' . $post['postUpvotes'] . '</p>
                                 <img src="../assets/img/discussionForum/downvote.png">
                             </div>
                             <div class="forumContent">

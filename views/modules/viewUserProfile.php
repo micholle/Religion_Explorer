@@ -30,7 +30,8 @@ $userData = getUserProfileInfo($accountid);
 
 <body>
     <div id="viewUserProfileSidebar"></div>
-    <div id="accountidPlaceholder" hidden><?php echo $accountid; ?></div>
+    <div id="accountidView" hidden><?php echo $accountid; ?></div>
+    <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
     <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
 
     <div class="pageContainer">
@@ -47,7 +48,9 @@ $userData = getUserProfileInfo($accountid);
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-start flex-column">
                                     <h1><?php echo $userData['username']; ?></h1>
+                                    <?php if ($userData['displayNickname'] === '1') { ?>
                                     <p class="nicknameText">aka <?php echo $userData['nickname']; ?></p>
+                                    <?php } ?>
                                 </div>
                             </div>
 
@@ -66,8 +69,10 @@ $userData = getUserProfileInfo($accountid);
                         </div>
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
+                            <?php if ($userData['displayReligion'] === '1') { ?>
                             <img src="../assets/img/editProfile/userBasicStats-feather.png">
                             <p><?php echo $userData['religion']; ?></p>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
