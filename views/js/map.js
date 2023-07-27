@@ -15,6 +15,7 @@ $(function() {
                 var tabPage = $(this).attr("href");
                 if (tabPage === currentPage) {
                     $(this).addClass("active");
+                    localStorage.setItem("sidebarStatus", "minimized");
                 }
             });
         }

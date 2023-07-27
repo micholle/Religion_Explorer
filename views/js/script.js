@@ -1,10 +1,34 @@
 $(function() {
     //sidebar
     $("#sidebarUsername").text($("#accountUsernamePlaceholder").text());
+    
+    if (localStorage.getItem("sidebarStatus")) {
+        const sidebarStatus = localStorage.getItem("sidebarStatus");
+        var currentPage = window.location.pathname.split("/").pop();
+    
+        if (sidebarStatus == "minimized") {
+            $(".sidebar").addClass("active");
+            $("#text").css("display", "none");
+            $("#minmax").attr("src", "../assets/img/maximize.png");
+            $(".pageContainer").css("padding-left", "85px");
+            $("#sidebarStatus").text("minimized");
+        } else {
+            if (currentPage === "map.php") {
+                return;
+            }
+
+            $(".sidebar").removeClass("active");
+            $("#text").css("display", "inline-block");
+            $("#minmax").attr("src", "../assets/img/minimize.png");
+            $(".pageContainer").css("padding-left", "275px");
+            $("#sidebarStatus").text("maximized");
+        }
+    }
+
     $("#minimize").click(function() {
         var currentPage = window.location.pathname.split("/").pop();
         if (currentPage === "map.php") {
-            return; // Exit the function without executing the code
+            return;
         }
 
         $(".sidebar").toggleClass("active");
@@ -12,13 +36,17 @@ $(function() {
             $("#text").css("display", "none");
             $("#minmax").attr("src", "../assets/img/maximize.png");
             $(".pageContainer").css("padding-left", "85px");
+            $("#sidebarStatus").text("minimized");
         } else {
             $("#text").css("display", "inline-block");
             $("#minmax").attr("src", "../assets/img/minimize.png");
             $(".pageContainer").css("padding-left", "275px");
             $(".notificationsPanel").removeClass("show");
             $("#sidebarNotifications").removeClass("active");
+            $("#sidebarStatus").text("maximized");
         }
+
+        localStorage.setItem("sidebarStatus", $(".sidebar").hasClass("active") ? "minimized" : "maximized");
     });
 
     $("sidebarCloseBtn").click(function() {
@@ -263,6 +291,7 @@ $(function() {
 
         // Remove the "active" class from all tab links
         $("#sidebarUsername li a").removeClass("active");
+        localStorage.setItem("sidebarStatus", "minimized");
     
         // Check if the sidebar is already minimized
         var isSidebarMinimized = $(".sidebar").hasClass("active");
