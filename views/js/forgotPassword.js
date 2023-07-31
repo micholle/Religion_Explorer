@@ -1,8 +1,8 @@
 $(function() {
     const forgotContainer = document.getElementById("forgotPasswordCont");
     const forgotNewContent = `
-    <div class="row d-flex justify-content-center align-items-center loginSignupContainer" >
-        <div class="col-3 d-flex justify-content-center align-items-center flex-column">
+    <div class="row" >
+        <div class="col-12 d-flex justify-content-center align-items-center flex-column">
             <img src="../assets/img/applogo.png" height="110px" width="110px">
             <h3 id="forgotPasswordSubmit">Thank you!</h3>
             <p>Check your email for the instructions.</p>
@@ -15,11 +15,6 @@ $(function() {
     forgotSubmitButton.addEventListener("click", (e) => {
         e.preventDefault();
         const email = $("#email").val().trim(); // Get the entered email
-    
-        if (email === "") {
-          alert("Please enter your email address.");
-          return;
-        }
 
         // Make an AJAX request to check if email exists and send email
         $.ajax({
@@ -32,6 +27,14 @@ $(function() {
             if (response === "ok") {
                 // Email exists and email sent successfully
                 forgotContainer.innerHTML = forgotNewContent;
+            } else if (email === "") {
+                $("#toast").html("Please enter your email address.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             } else if (response === "notfound") {
                 // Email not found in the database
                 $("#toast").html("Email does not exist.")

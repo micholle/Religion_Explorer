@@ -1,8 +1,8 @@
 $(function() {
     const resetContainer = document.getElementById("resetPasswordCont");
     const resetNewContent = `
-    <div class="row d-flex justify-content-center align-items-center loginSignupContainer" >
-        <div class="col-3 d-flex justify-content-center align-items-center flex-column">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center align-items-center flex-column">
             <img src="../assets/img/applogo.png" height="110px" width="110px">
             <h3 id="forgotPasswordSubmit">Change success!</h3>
             <p>Go back to the <a href="userProfile.php" class="redirectLink">Profile</a>.</p>
@@ -36,8 +36,30 @@ $(function() {
             // Handle the response from the server
             if (response === "success") {
                 resetContainer.innerHTML = resetNewContent;
+            } else if (password === "") {
+                $("#toast").html("Please enter a new password.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
+            } else if (password !== confirmPassword) {
+                $("#toast").html("Passwords are not matching.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             } else {
-                alert("Oops. Something went wrong!");
+                $("#toast").html("Something went wrong.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
             }
             },
             error: function() {

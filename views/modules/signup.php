@@ -31,8 +31,8 @@
                     </div>
                 </div>
             
-                <div class="col-12 loginSignupFormVariant">
-                    <div class="container">
+                <div class="loginSignupFormVariant d-flex align-items-center">
+                    <div class="container d-flex align-items-center justify-content-center">
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                 <img src="../assets/img/applogo.png" height="110px" width="110px">

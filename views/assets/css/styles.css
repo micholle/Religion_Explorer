@@ -1232,6 +1232,10 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     border: 2px solid #668790;
 }
 
+.navBarButton:focus {
+    outline: none;
+}
+
 .splashMainButton {
     background-color: #2ca464;
     border: 2px solid #2ca464;
@@ -1256,8 +1260,12 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     border: 2px solid #34b972;
 }
 
+.splashMainButton:focus {
+    outline: none;
+}
+
 /*login signup*/
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
     #loginSignup .loginSignupForm {
         margin-top: -2.5vh;
     }
@@ -1265,8 +1273,19 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     #loginSignup .loginSignupFormVariant {
         margin-top: -2.5vh;
     }
+} */
+
+.loginSignupForm {
+    height: 100vh;
 }
 
+.loginSignupForm p {
+    margin-top: -15px;
+}
+
+.loginSignupFormVariant {
+    height: 80vh;
+}
 
 #loginSignup p {
     font-family: Lexend;
@@ -1297,13 +1316,9 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     margin: 30px 20px;
 }
 
-#loginSignup .loginSignupForm {
-    padding: 110px;
-}
-
-#loginSignup .loginSignupFormVariant {
+/* #loginSignup .loginSignupFormVariant {
     padding: 40px;
-}
+} */
 
 #loginSignup .loginSignupForm h3 {
     margin-bottom: 5px;
@@ -1442,8 +1457,48 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     background-color: rgb(236, 236, 236, 0.3);
 }
 
+.registrationButtonVariant:focus {
+    outline: none;
+}
+
 .registrationHeader {
     background-color: #2CA464;
+}
+
+.registrationHeader .registrationNavButton {
+    background-color: transparent;
+    color: white;
+    border: solid white 2px;
+    border-radius: 15px;
+    font-family: Lexend;
+    font-size: 15px;
+    margin: 20px -5px;
+    padding: 7.5px 15px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+}
+
+.registrationHeader .registrationNavButton {
+    background-color: transparent;
+    color: white;
+    border: solid white 2px;
+    border-radius: 15px;
+    font-family: Lexend;
+    font-size: 15px;
+    margin: 20px -5px;
+    padding: 7.5px 15px;
+    text-align: center;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.registrationHeader .registrationNavButton:hover {
+    background-color: rgba(255,255,255,0.10);
+    color: white;
+}
+
+.registrationHeader .registrationNavButton:focus {
+    outline: none;
 }
 
 .registrationSubmitButton {
@@ -1457,6 +1512,17 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     margin: 5px 0px;
     width: 325px;
     transition: background-color 0.5s ease;
+    cursor: pointer;
+}
+
+.registrationSubmitButton:hover {
+    background-color: #34b972 !important;
+    color: white;
+    transition: background-color 0.5s ease;
+}
+
+.registrationSubmitButton:focus {
+    outline: none;
 }
 
 #verificationCodeModal input[type=text]{
@@ -2987,6 +3053,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease;
     z-index: 9999;
+    text-align: center;
 }
 
 .toast.show {

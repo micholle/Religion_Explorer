@@ -18,23 +18,26 @@
                 <a href="splash.php"><img src="../assets/img/logo-and-text-variant.png"></a>
             </li>
                 <ul>
-                    <li><a href="login.php"><button class="registrationButtonVariant">Login</button></a></li>
-                    <li><a href="signup.php"><button class="registrationButtonVariant">Sign up</button></a></li>
+                    <li><a href="login.php"><button class="registrationNavButton">Login</button></a></li>
+                    <li><a href="signup.php"><button class="registrationNavButton">Sign up</button></a></li>
                 </ul>
         </header>
         <section id="loginSignup">
-            <div class="container mw-100 mh-100" id="forgotPasswordCont">
-                <div class="row d-flex justify-content-center align-items-center loginSignupContainer" >
-                    <div class="col-3 d-flex justify-content-center align-items-center flex-column">
-                        <h3>Forgot Password</h3>
-                        <p>Enter your email for the verification process.</p>
-                        <form method="POST">
-                            <input type="text" id="email" name="email" placeholder="Email">
-                            <button type="submit" id="forgotPasswordSubmit" name="" class="registrationSubmitButton">Submit</button>
-                        </form>
+            <div class="loginSignupForm d-flex align-items-center">
+                <div class="container d-flex align-items-center justify-content-center" id="forgotPasswordCont">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                            <h3>Forgot Password</h3>
+                            <p>Enter your email for the verification process.</p>
+                            <form method="POST">
+                                <input type="text" id="email" name="email" placeholder="Email">
+                                <button type="submit" id="forgotPasswordSubmit" name="" class="registrationSubmitButton">Submit</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <div id="toast" class="toast"></div>
     </body>
 </html>
