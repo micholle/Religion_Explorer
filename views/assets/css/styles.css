@@ -1055,15 +1055,21 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     height: 400px;
     position: relative;
     overflow: hidden;
-  }
-  
+}
+
 #splash-gif img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0; /* Set initial opacity to 0 */
+    opacity: 0;
+    transition: opacity 1s; /* Add a smooth opacity transition */
+}
+
+#splash-gif img.active {
+    opacity: 1;
+    z-index: 1; /* Bring the active image to the top */
 }
 
 .col-lg-7 .container {

@@ -5,20 +5,17 @@ $(function() {
     });
   });
 
-  $(document).ready(function() {
-      const images = $("#splash-gif img");
-      let currentImageIndex = 0;
+  $(document).ready(function () {
+    const images = $("#splash-gif img");
+    let currentImageIndex = 0;
 
-      images.eq(currentImageIndex).css("opacity", "1");
-    
-      function fadeNextImage() {
-        images.eq(currentImageIndex).animate({ opacity: 0 }, 1000, function() {
-          currentImageIndex = (currentImageIndex + 1) % images.length;
-          images.eq(currentImageIndex).animate({ opacity: 1 }, 1000);
-        });
-      }
-    
-      setInterval(fadeNextImage, 2500);
+    function fadeNextImage() {
+        images.removeClass('active'); // Remove 'active' class from all images
+        images.eq(currentImageIndex).addClass('active'); // Add 'active' class to the current image
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+    }
+
+    setInterval(fadeNextImage, 2500);
   });
 
   $(document).ready(function() {

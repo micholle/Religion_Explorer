@@ -36,7 +36,7 @@
             
             <div class="col-12 col-lg-5 mh-100 d-flex justify-content-center align-items-center">
               <div id="splash-gif">
-                  <img src="../assets/img/splash/frame1.png" alt="Frame 1">
+                  <img src="../assets/img/splash/frame1.png" alt="Frame 1" class="active">
                   <img src="../assets/img/splash/frame2.png" alt="Frame 2">
                   <img src="../assets/img/splash/frame3.png" alt="Frame 3">
                   <img src="../assets/img/splash/frame4.png" alt="Frame 4">
