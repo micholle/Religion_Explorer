@@ -270,9 +270,9 @@ class mapData {
                 "country" => "India",
                 "timelineDate" => "200 CE",
                 "displayDate" => "3rd century CE - Present",
-                "pinVid" => "../assets/data/map/img/buddhism/videos/greatstupa.mp4",
-                "pinImg1" => "../assets/data/map/img/buddhism/location/greatstupa-1.jpg",
-                "pinImg2" => "../assets/data/map/img/buddhism/location/greatstupa-2.jpg",
+                "pinVid" => "../assets/data/map/img/hinduism/videos/greatstupa.mp4",
+                "pinImg1" => "../assets/data/map/img/hinduism/location/greatstupa-1.jpg",
+                "pinImg2" => "../assets/data/map/img/hinduism/location/greatstupa-2.jpg",
                 "source" => "https://www.britannica.com/place/Great-Stupa-Buddhist-monument-Sanchi-India"
             ],
             "HL2" => [
@@ -282,9 +282,9 @@ class mapData {
                 "country" => "India",
                 "timelineDate" => "260 CE",
                 "displayDate" => "260 CE - Present",
-                "pinVid" => "../assets/data/map/img/buddhism/videos/mahabodhi.mp4",
-                "pinImg1" => "../assets/data/map/img/buddhism/location/mahabodhi-1.jpg",
-                "pinImg2" => "../assets/data/map/img/buddhism/location/mahabodhi-2.jpg",
+                "pinVid" => "../assets/data/map/img/hinduism/videos/mahabodhi.mp4",
+                "pinImg1" => "../assets/data/map/img/hinduism/location/mahabodhi-1.jpg",
+                "pinImg2" => "../assets/data/map/img/hinduism/location/mahabodhi-2.jpg",
                 "source" => "https://www.britannica.com/topic/Mahabodhi-Temple"
             ],
             "HL3" => [
@@ -294,9 +294,9 @@ class mapData {
                 "country" => "India",
                 "timelineDate" => "1900 CE",
                 "displayDate" => "1900 CE - Present",
-                "pinVid" => "../assets/data/map/img/buddhism/videos/kashi.mp4",
-                "pinImg1" => "../assets/data/map/img/buddhism/location/kashi-1.jpg",
-                "pinImg2" => "../assets/data/map/img/buddhism/location/kashi-2.jpg",
+                "pinVid" => "../assets/data/map/img/hinduism/videos/kashi.mp4",
+                "pinImg1" => "../assets/data/map/img/hinduism/location/kashi-1.jpg",
+                "pinImg2" => "../assets/data/map/img/hinduism/location/kashi-2.jpg",
                 "source" => "https://www.britannica.com/topic/Kashi-Vishwanath-Temple"
             ],
             "HL4" => [
@@ -306,9 +306,9 @@ class mapData {
                 "country" => "India",
                 "timelineDate" => "1980 CE",
                 "displayDate" => "1986 CE - Present",
-                "pinVid" => "../assets/data/map/img/buddhism/videos/lotus.mp4",
-                "pinImg1" => "../assets/data/map/img/buddhism/location/lotus-1.jpg",
-                "pinImg2" => "../assets/data/map/img/buddhism/location/lotus-2.jpg",
+                "pinVid" => "../assets/data/map/img/hinduism/videos/lotus.mp4",
+                "pinImg1" => "../assets/data/map/img/hinduism/location/lotus-1.jpg",
+                "pinImg2" => "../assets/data/map/img/hinduism/location/lotus-2.jpg",
                 "source" => "https://www.britannica.com/topic/Lotus-Temple"
             ],
             "HP1" => [
@@ -318,9 +318,9 @@ class mapData {
                 "country" => "India",
                 "timelineDate" => "400 CE",
                 "displayDate" => "401 CE - 500 CE",
-                "pinVid" => "../assets/data/map/img/buddhism/videos/patanjali.mp4",
-                "pinImg1" => "../assets/data/map/img/buddhism/person/patanjali-1.jpg",
-                "pinImg2" => "../assets/data/map/img/buddhism/person/patanjali-2.jpg",
+                "pinVid" => "../assets/data/map/img/hinduism/videos/patanjali.mp4",
+                "pinImg1" => "../assets/data/map/img/hinduism/person/patanjali-1.jpg",
+                "pinImg2" => "../assets/data/map/img/hinduism/person/patanjali-2.jpg",
                 "source" => "https://www.britannica.com/biography/Patanjali"
             ],
             "HP2" => [
@@ -330,9 +330,9 @@ class mapData {
                 "country" => "India",
                 "timelineDate" => "1910 CE",
                 "displayDate" => "1916 CE - 1993 CE",
-                "pinVid" => "../assets/data/map/img/buddhism/videos/chinmayananda.mp4",
-                "pinImg1" => "../assets/data/map/img/buddhism/person/chinmayananda-1.jpg",
-                "pinImg2" => "../assets/data/map/img/buddhism/person/chinmayananda-2.jpg",
+                "pinVid" => "../assets/data/map/img/hinduism/videos/chinmayananda.mp4",
+                "pinImg1" => "../assets/data/map/img/hinduism/person/chinmayananda-1.jpg",
+                "pinImg2" => "../assets/data/map/img/hinduism/person/chinmayananda-2.jpg",
                 "source" => "https://www.britannica.com/biography/Chinmayananda"
             ],
             "HE1" => [
@@ -342,9 +342,9 @@ class mapData {
                 "country" => "India",
                 "timelineDate" => "300 CE",
                 "displayDate" => "4th century - 6th century",
-                "pinVid" => "../assets/data/map/img/buddhism/videos/gupta.mp4",
-                "pinImg1" => "../assets/data/map/img/buddhism/event/gupta-1.jpg",
-                "pinImg2" => "../assets/data/map/img/buddhism/event/gupta-2.jpg",
+                "pinVid" => "../assets/data/map/img/hinduism/videos/gupta.mp4",
+                "pinImg1" => "../assets/data/map/img/hinduism/event/gupta-1.jpg",
+                "pinImg2" => "../assets/data/map/img/hinduism/event/gupta-2.jpg",
                 "source" => "https://www.britannica.com/topic/Gupta-dynasty"
             ],
             "JL1" => [

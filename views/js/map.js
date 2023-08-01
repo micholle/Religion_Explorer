@@ -890,6 +890,7 @@ $(function() {
 
     $("#pinOverlayTitle").hover(function () {
             $("#pinOverlayTitle").css("color", "#2CA464");
+            $("#pinOverlayTitle").css("transition", "0.3s");
         }, function () {
             $("#pinOverlayTitle").css("color", "#FFFFFF");
 
