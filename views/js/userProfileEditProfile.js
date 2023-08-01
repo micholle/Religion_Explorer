@@ -101,7 +101,13 @@ $(function() {
                 window.location.href = "userProfile.php";
               },
               error: function() {
-                alert("Oops. Something went wrong!");
+                $("#toast").html("Something went wrong. Please try again later.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
               },
               complete: function() {
         
@@ -128,7 +134,13 @@ $(function() {
             window.location.href = "userProfileEditProfile.php";
           },
           error: function() {
-            alert("AJAX request failed");
+            $("#toast").html("AJAX request failed. Please try again later.")
+            $("#toast").css("background-color", "#E04F5F");
+            $("#toast").addClass('show');
+        
+            setTimeout(function() {
+                $("#toast").removeClass('show');
+            }, 2000);
           }
         });
       }
@@ -145,7 +157,13 @@ $(function() {
 
           updateAvatar(imagePath);
         } else {
-          alert("Please select an avatar image");
+          $("#toast").html("Please select an avatar image.")
+          $("#toast").css("background-color", "#E04F5F");
+          $("#toast").addClass('show');
+      
+          setTimeout(function() {
+              $("#toast").removeClass('show');
+          }, 2000);
         }
       });
 
@@ -154,6 +172,7 @@ $(function() {
         var fileInput = document.createElement("input");
         fileInput.type = "file";
         fileInput.style.display = "none";
+        fileInput.accept = "image/*";
       
         document.body.appendChild(fileInput);
       
@@ -161,6 +180,29 @@ $(function() {
       
         fileInput.addEventListener("change", function(event) {
           var file = event.target.files[0];
+          if (!file || !file.type.startsWith("image/")) {
+            $("#toast").html("Please select a valid file type.");
+            $("#toast").css("background-color", "#E04F5F");
+            $("#toast").addClass('show');
+    
+            setTimeout(function() {
+              $("#toast").removeClass('show');
+            }, 2000);
+
+            return;
+          }
+          if (file.size > 15 * 1024 * 1024) {
+            $("#toast").html("Please select an image not more than 15MB.");
+            $("#toast").css("background-color", "#E04F5F");
+            $("#toast").addClass('show');
+    
+            setTimeout(function() {
+              $("#toast").removeClass('show');
+            }, 2000);
+
+            return;
+          }
+      
           var formData = new FormData();
           formData.append("avatar", file);
       
@@ -170,7 +212,13 @@ $(function() {
             if (xhr.status === 200) {
               window.location.href = "userProfileEditProfile.php";
             } else {
-              alert("Error uploading the file");
+              $("#toast").html("Error uploading the file. Please try again later.");
+              $("#toast").css("background-color", "#E04F5F");
+              $("#toast").addClass('show');
+      
+              setTimeout(function() {
+                $("#toast").removeClass('show');
+              }, 2000);
             }
           };
           xhr.send(formData);
@@ -178,7 +226,7 @@ $(function() {
       
         // Remove the file input element from the body
         document.body.removeChild(fileInput);
-      });
+      });      
 
       $('#confirmDeleteAccountBtn').click(function() {
         var email = $('#deleteEmail').val();
@@ -193,7 +241,13 @@ $(function() {
             if (response === 'invalid_password' || response === 'invalid_email'){
               $('#deleteEmail').val("");
               $('#deletePassword').val("");
-              alert('Invalid credentials!');
+              $("#toast").html("Invalid Credentials.")
+              $("#toast").css("background-color", "#E04F5F");
+              $("#toast").addClass('show');
+          
+              setTimeout(function() {
+                  $("#toast").removeClass('show');
+              }, 2000);
             } else {
               var modalBody = $('#deleteAccountModal');
       
@@ -219,7 +273,13 @@ $(function() {
           },
           error: function() {
             // AJAX request failed, show an error message or take appropriate action
-            alert("AJAX request failed");
+            $("#toast").html("AJAX request failed. Please try again later.")
+            $("#toast").css("background-color", "#E04F5F");
+            $("#toast").addClass('show');
+        
+            setTimeout(function() {
+                $("#toast").removeClass('show');
+            }, 2000);
           }
         });
       });
@@ -234,13 +294,26 @@ $(function() {
         var confirmPassword = $("#confirmPassword").val().trim();
     
         if (oldPassword === '' || newPassword === '' || confirmPassword === '') {
-            alert("Please fill in all fields.");
+          $("#toast").html("Please fill in all fields.")
+          $("#toast").css("background-color", "#E04F5F");
+          $("#toast").addClass('show');
+      
+          setTimeout(function() {
+              $("#toast").removeClass('show');
+          }, 2000);
             return;
         }
     
         if (newPassword !== confirmPassword) {
-            alert("New password and confirm password do not match.");
-            return;
+          $("#toast").html("New password and confirm password do not match.")
+          $("#toast").css("background-color", "#E04F5F");
+          $("#toast").addClass('show');
+      
+          setTimeout(function() {
+              $("#toast").removeClass('show');
+          }, 2000);
+          
+          return;
         }
     
         var account = new FormData();
@@ -260,13 +333,25 @@ $(function() {
                   $("#oldPassword").val("");
                   $("#newPassword").val("");
                   $("#confirmPassword").val("");
-                  alert("Old password did not match.");
+                  $("#toast").html("Old password did not match.")
+                  $("#toast").css("background-color", "#E04F5F");
+                  $("#toast").addClass('show');
+              
+                  setTimeout(function() {
+                      $("#toast").removeClass('show');
+                  }, 2000);
                 } else {
                   successEditPassword();
                 }
             },
             error: function() {
-                alert("Oops. Something went wrong with the ajax!");
+              $("#toast").html("Something went wrong. Please try again later.")
+              $("#toast").css("background-color", "#E04F5F");
+              $("#toast").addClass('show');
+          
+              setTimeout(function() {
+                  $("#toast").removeClass('show');
+              }, 2000);
             },
             complete: function() {
     

@@ -21,7 +21,19 @@ $(function() {
         }
     });
 
-    var svgPanZoom = $("svg").svgPanZoom();
+    var svgPanZoom = $("#svgMap").svgPanZoom();
+
+    $(".mapFilterArrowDiv").click(function () { 
+        if ($(".mapFilterArrow").attr("src") == "../assets/img/arrow-up.png") {
+            $("#filterContents").slideUp();
+            $(".mapFilterArrow").attr("src", "../assets/img/arrow-down.png");
+        } else {
+            $("#filterContents").slideDown();
+            $(".mapFilterArrow").attr("src", "../assets/img/arrow-up.png");
+        }
+    });
+
+    $("#mapSlider").append('<hr id="sliderLine" class="sliderLine">');
 
     //initiate colors
     var religionColors = {
@@ -93,7 +105,7 @@ $(function() {
     //initialize map
     $("#timelineOverlayYear").text(timelineYear);
     $("#timelineOverlay").css("display", "block");
-    mapTimeline(religionFilter);
+    mapTimeline(religionFilter, timelineYear);
     mapColor(religionFilter, timelineYear);
     mapPin(religionFilter, timelineYear);
 
@@ -103,7 +115,7 @@ $(function() {
             $("#svgMap").html(mapPlain);
 
             religionFilter = $('#religionFilterOptions').val();
-            mapTimeline(religionFilter);
+            mapTimeline(religionFilter, timelineYear);
             mapColor(religionFilter, timelineYear);
             mapPin(religionFilter, timelineYear);
         }
@@ -166,20 +178,19 @@ $(function() {
         }
 
         $("#svgMap").html(mapPlain);
-    
+
         mapColor(religionFilter, timelineYear);
         mapPin(religionFilter, timelineYear);
     
         $("#timelineOverlayYear").text(timelineYear);
         $("#timelineOverlay").css("display", "block");
 
-        //do not show overlay if the same year is clicked
     }
 
-    function mapTimeline(religionFilter) {
+    function mapTimeline(religionFilter, timelineYear) {
         //set timeline based on filter
         const timelineSlider = $('#mapSlider');
-        const timelineOptions = $('#sliderOptions').empty();
+        const timelineOptions = $('#sliderOptions');
         const timelinePrev = $('<div>').attr("id", "timelinePrev").addClass("timelinePrev").text("<");
         const timelineNext = $('<div>').attr("id", "timelineNext").addClass("timelineNext").text(">");
 
@@ -230,21 +241,44 @@ $(function() {
 
             for (let i = timelineYears.length - 1; i >= 0; i--) {
                 addTimelineOption(timelineYears[i]);
-                }                      
+            }                      
         }
 
         if(religionFilter == "All Religions"){
             minYear = earliestReligionVal;
-            timelineStart = maxYear;
-            timelineEnd = maxYear - 190;
+            timelineStart = (maxYear - parseInt(timelineYear.split(' ')[0], 10));
+
+            while (timelineStart >= 200) {
+                timelineStart -= 190;
+            }
+            timelineStart += parseInt(timelineYear.split(' ')[0], 10);
+
+            if ((timelineStart - 190) < minYear) {
+                timelineEnd = minYear;
+                timelineStart = minYear + 190;
+                timelineYear = minYear + " CE";
+            } else {
+                timelineEnd = timelineStart - 190;
+            }
         } else {
             for (religion in religionStart) {
                 if (religionFilter == religion){
                     majorReligion = true;
 
                     minYear = religionStart[religion];
-                    timelineStart = maxYear;
-                    timelineEnd = maxYear - 190;
+                    timelineStart = (maxYear - parseInt(timelineYear.split(' ')[0], 10));
+                    while (timelineStart >= 200) {
+                        timelineStart -= 190;
+                    }
+                    timelineStart += parseInt(timelineYear.split(' ')[0], 10);
+
+                    if ((timelineStart - 190) < minYear) {
+                        timelineEnd = minYear;
+                        timelineStart = minYear + 190;
+                        timelineYear = minYear + " CE";
+                    } else {
+                        timelineEnd = timelineStart - 190;
+                    }
                 }
                 if (!majorReligion) {
                     timelineSlider.hide();
@@ -258,11 +292,14 @@ $(function() {
             timelineOptions.append(timelinePrev);
             timelineOptions.append(createTimeline(timelineStart, timelineEnd));
             timelineOptions.append(timelineNext);
+
+            $("input[type='radio'][value='" + timelineYear + "']").prop("checked", true);
         }
 
         createSlider();
-        $("input[type='radio'][value='" + maxYear + " CE']").prop("checked", true);
-
+        if (timelineYear == "2010 CE") {
+            $("#timelineNext").css("color","#A6A6A6") ;
+        }
 
         $(document).on('click', '#timelinePrev', function() {
             timelineStart = timelineEnd;
@@ -438,6 +475,12 @@ $(function() {
     
                 //highlight countries on hover and display content
                 const countryHover = country => {
+                    if ($(".popover:visible").length > 0) {
+                        $('g').css('opacity', 1);
+                        $('[data-toggle]').removeAttr('data-toggle');
+                        $('.popover').popover('dispose');
+                    }
+
                     var currentCountry = country.target.parentElement.id;
                     document.getElementById(currentCountry).style.opacity = 0.5; 
                     document.getElementById(currentCountry).setAttribute("data-toggle", "popover");
@@ -487,7 +530,8 @@ $(function() {
                     $('[data-toggle = "popover"]').popover({
                         title: currentCountry, 
                         content: popoverContent,
-                        placement: "top"
+                        placement: "top",
+                        template: '<div class="popover custom-popover-content" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
                     });
                     $('[data-toggle = "popover"]').popover("show");
                 }
@@ -593,13 +637,13 @@ $(function() {
                     var modalContent = "The chart displays the distribution of religious affiliations in <b>" + currentCountry + "</b>, presenting the number of people per religion. The most prevalent is <b>" + sortedReligions[0] + "</b>, amounting to <b>" + religionDataDict[sortedReligions[0]].toLocaleString() + "</b> people or <b>" + calculatePercentage(religionDataDict[sortedReligions[0]], totalPopulation) + "%</b> of the total population. Following that are ";
 
                     for (let i = 1; i < sortedReligions.length; i++) {
-                        if (i === sortedReligions.length - 1) {
+                        if (i == sortedReligions.length - 1) {
                             modalContent += "and ";
                         }
                         modalContent += sortedReligions[i] + " at " + religionDataDict[sortedReligions[i]].toLocaleString() + " (" + calculatePercentage(religionDataDict[sortedReligions[i]], totalPopulation) + "%), ";
                     }
 
-                    modalContent += "respectively. While interpreting the data, it's essential to consider historical and social factors that may influence these religious demographics. Additionally, it's worth noting that the accuracy of the chart relies on the data's limitations and the broader context of the country's religious landscape.";
+                    modalContent += "respectively.<br><br> <a href='https://www.thearda.com/'>Source: The Association of Religion Data Archives (ARDA)</a>";
 
                     $("#modalContent").html(modalContent);
                     $('#modalTitle').text(currentCountry);
@@ -643,7 +687,7 @@ $(function() {
                     var pinSource = pinDetails.source;
 
                     var pinImg = "../assets/img/map/" + pinType + "-" + (pinReligion.toLowerCase()) + ".png";
-                    $("#svgMap").html($("#svgMap").html() + '<image id="' + pinid + '"class="mapPin" onmouseover="openPinOverview(' + "'" + pinid + "', '" + pinTitle + "', '" + pinCountry + "'" + ')" onmouseout="closePinOverview(' + "'" + pinid + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDate + "', '" + pinReligion + "', '" +  pinVid + "', '" + pinImg1 + "', '" + pinImg2 + "', '" + pinSource + "'" + ')" href="' + pinImg +'" x="' + x + '" y="' + y + '" height="30" width="30"/>');
+                    $("#svgMap").html($("#svgMap").html() + '<image id="' + pinid + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinid + "', '" + pinTitle + "', '" + pinCountry + "'" + ')" onmouseout="closePinOverview(' + "'" + pinid + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDate + "', '" + pinReligion + "', '" +  pinVid + "', '" + pinImg1 + "', '" + pinImg2 + "', '" + pinSource + "'" + ')" href="' + pinImg +'" x="' + x + '" y="' + y + '" height="30" width="30"/>');
 
                     var pinid = "#" + pinid;
                     var pinTypeStatus = "";
@@ -715,26 +759,47 @@ $(function() {
 
     //help overlay
     $("#mapHelpButton").click(function(){
+        $("#svgMap").attr("viewBox", "0 0 2000 857");
         $("#helpOverlay").css("display", "block");
 
         //display tooltip
-        $("#Brazil").attr("data-toggle", "popover");
+        $(".mapKeys").attr("data-toggle", "popover");
+        $("#Mexico").attr("data-toggle", "popover");
         $("#mapFilter").attr("data-toggle", "popover");
         $("input[type='radio'][value='1970 CE']").attr("data-toggle", "popover");
+        $("#Rwanda").attr("data-toggle", "popover");
 
-        $("#Brazil").popover({
+        $(".mapKeys").popover({
+            content: "Refer to the keys for the meaning behind the colors on the map.",
+            placement: "right",
+            template: '<div class="popover custom-popover-content" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+        });
+
+        $("#Mexico").popover({
             content: "Hover on a country to view its prevailing religion, and click on it for more information.",
-            placement: "top"
+            placement: "right",
+            template: '<div class="popover custom-popover-content" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
         });
 
         $("#mapFilter").popover({
             content: "Filter the religion, geographic region, and pins on the map.",
-            placement: "left"
+            placement: "left",
+            template: '<div class="popover custom-popover-content" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
         });
 
         $("input[type='radio'][value='1970 CE']").popover({
             content: "Click on a year to change the year displayed on the map.",
-            placement: "top"
+            placement: "top",
+            template: '<div class="popover custom-popover-content" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+        });
+
+        $("#Rwanda").popover({
+            content: function() {
+                return $("#pinsPopoverContent").html();
+            },
+            html: true,
+            placement: "right",
+            template: '<div class="popover custom-popover-content" role="tooltip"><div class="popover-body"></div></div>'
         });
 
         $('[data-toggle = "popover"]').popover("show");
@@ -742,17 +807,22 @@ $(function() {
 
     $("#helpOverlay").click(function(){
         //hide tooltip
-        $("#Brazil").removeAttr("data-toggle");
+        $(".mapKeys").removeAttr("data-toggle");
+        $("#Mexico").removeAttr("data-toggle");
         $("#mapFilter").removeAttr("data-toggle");
         $("input[type='radio'][value='1970 CE']").removeAttr("data-toggle");
-
+        $("#Namibia").removeAttr("data-toggle");
+        $("#pinForHelp").remove();
         $('.popover').popover('dispose');
 
         $("#helpOverlay").css("display", "none");
     });
 
-    $("#pinOverlay").click(function () { 
-        $("#pinOverlay").addClass("invisible");
+    $("#pinOverlay").click(function (event) { 
+        if (event.target.id == "pinOverlay") {
+            $("#pinOverlayVideo")[0].pause();
+            $(this).addClass("invisible");
+        }
     });
 
     //search country
@@ -786,7 +856,8 @@ $(function() {
                                 $('[data-toggle = "popover"]').popover({
                                     title: country, 
                                     content: "Hover or click to learn more about " + country + ".",
-                                    placement: "top"
+                                    placement: "top",
+                                    template: '<div class="popover custom-popover-content" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
                                 });
                                 $('[data-toggle = "popover"]').popover("show");
 
@@ -803,6 +874,27 @@ $(function() {
             }
         });
     });
+
+    $(".pinOverlayImg").click(function (e) { 
+        e.preventDefault();
+        
+        var imageSrc = $(this).attr("src");
+        var fullscreenOverlay = $("<div>").attr("id", "fullscreenOverlay").appendTo("body");
+        $("<img>").attr("src", imageSrc).appendTo(fullscreenOverlay);
+        fullscreenOverlay.show();
+       
+        fullscreenOverlay.click(function() {
+          fullscreenOverlay.remove();
+        });
+    });
+
+    $("#pinOverlayTitle").hover(function () {
+            $("#pinOverlayTitle").css("color", "#2CA464");
+        }, function () {
+            $("#pinOverlayTitle").css("color", "#FFFFFF");
+
+        }
+    );
 });
 
 async function summarize(url) {
@@ -813,7 +905,7 @@ async function summarize(url) {
         const data = await response.text();
 
         var summarizer = new JsSummarize();
-        var summary = summarizer.summarize("Dharma Day", data);
+        var summary = summarizer.summarize("", data);
         
         return summary;
     } catch (error) {
@@ -843,6 +935,7 @@ function openPin(pinTitle, pinDate, pinReligion, pinVid, pinImg1, pinImg2, pinSo
             $("#pinOverlayDate").text(pinDate);
             $("#pinOverlayDescription").text(pinDesc);
             $("#pinOverlayReligion").text(pinReligion);
+            $("#pinOverlay").data("source", pinSource);
             
             $("#pinOverlayReligionImg").attr("src", "../assets/img/lib-" + pinReligion.toLowerCase() + ".png");
             $("#pinOverlayVideo").attr("src", pinVid);
@@ -850,6 +943,11 @@ function openPin(pinTitle, pinDate, pinReligion, pinVid, pinImg1, pinImg2, pinSo
             $("#pinOverlayImg2").attr("src", pinImg2);
         
             $("#pinOverlay").removeClass("invisible");
+
+            $("#pinOverlayTitle").click(function () { 
+                var url = $("#pinOverlay").data("source");
+                window.open(url, "_blank");
+            });
         })
         .catch(error => {
             console.error("Error fetching data from the proxy:", error);
@@ -861,7 +959,8 @@ function openPinOverview(pinid, pinTitle, pinCountry) {
 
     $('[data-toggle = "popover"]').popover({
         content: pinTitle + " (" + pinCountry + ")",
-        placement: "top"
+        placement: "top",
+        template: '<div class="popover custom-popover-content" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
     });
     $('[data-toggle = "popover"]').popover("show");
 }

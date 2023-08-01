@@ -34,45 +34,48 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 
         <!-- Filter -->
         <div id="mapFilter" class="mapFilter">
-            <input type="text" id="searchCountryInput" class="searchCountryInput" placeholder="Search Country"><br><br>
-            <p>Religion:</p>
-                <select id="religionFilterOptions">
-                    <option value="All Religions">All Religions</option>
-                    <option value="Buddhism">Buddhism</option>
-                    <option value="Christianity">Christianity</option>
-                    <option value="Hinduism">Hinduism</option>
-                    <option value="Islam">Islam</option>
-                    <option value="Judaism">Judaism</option>
-                    <option value="Other Religions">Other Religions</option>
-                    <option value="Non-Religious">Non-Religious</option>
-                </select><br><br>
-            <p>Geographic Region:</p>
-                <select id="geographicRegionFilterOptions">
-                    <option value="All Countries">All Countries</option>
-                    <option value="North America">North America</option>
-                    <option value="Central America">Central America</option>
-                    <option value="South America">South America</option>
-                    <option value="Europe">Europe</option>
-                    <option value="Middle East">Middle East</option>
-                    <option value="Africa">Africa</option>
-                    <option value="Central Asia">Central Asia</option>
-                    <option value="South Asia">South Asia</option>
-                    <option value="East and Southeast Asia">East and Southeast Asia</option>
-                    <option value="Australia and Oceania">Australia and Oceania</option>
-                </select><br><br>
-            <div class="mapPopupSettings">
-                <input type="checkbox" id="mapEvents" checked>
-                <label for="mapEvents">Important Events</label>
+            <div id="filterContents">
+                <input type="text" id="searchCountryInput" class="searchCountryInput" placeholder="Search Country"><br><br>
+                <p>Religion:</p>
+                    <select id="religionFilterOptions">
+                        <option value="All Religions">All Religions</option>
+                        <option value="Buddhism">Buddhism</option>
+                        <option value="Christianity">Christianity</option>
+                        <option value="Hinduism">Hinduism</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Judaism">Judaism</option>
+                        <option value="Other Religions">Other Religions</option>
+                        <option value="Non-Religious">Non-Religious</option>
+                    </select><br><br>
+                <p>Geographic Region:</p>
+                    <select id="geographicRegionFilterOptions">
+                        <option value="All Countries">All Countries</option>
+                        <option value="North America">North America</option>
+                        <option value="Central America">Central America</option>
+                        <option value="South America">South America</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Middle East">Middle East</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Central Asia">Central Asia</option>
+                        <option value="South Asia">South Asia</option>
+                        <option value="East and Southeast Asia">East and Southeast Asia</option>
+                        <option value="Australia and Oceania">Australia and Oceania</option>
+                    </select><br><br>
+                <div class="mapPopupSettings">
+                    <input type="checkbox" id="mapEvents" checked>
+                    <label for="mapEvents">Important Events</label>
+                </div>
+                <div class="mapPopupSettings">
+                    <input type="checkbox" id="mapPeople" checked>
+                    <label for="mapPeople">Important People</label>
+                </div>
+                <div class="mapPopupSettings">
+                    <input type="checkbox" id="mapLocations" checked>
+                    <label for="mapLocations">Important Locations</label>
+                </div><br>
+                <button id="mapHelpButton" class="mapHelpButton">Help</button> 
             </div>
-            <div class="mapPopupSettings">
-                <input type="checkbox" id="mapPeople" checked>
-                <label for="mapPeople">Important People</label>
-            </div>
-            <div class="mapPopupSettings">
-                <input type="checkbox" id="mapLocations" checked>
-                <label for="mapLocations">Important Locations</label>
-            </div><br>
-            <button id="mapHelpButton" class="mapHelpButton">Help</button> 
+            <div class="mapFilterArrowDiv"><img class="mapFilterArrow" src="../assets/img/arrow-up.png"></div>
         </div>
 
         <!-- Modal -->
@@ -86,11 +89,18 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <!-- Chart -->
                         <div id="showReligionChart">
                         </div>
-                        <div id="modalContent"></div>
+                        <div class="coutryChartDesc" id="modalContent"></div>
                     </div>
                 </div>
             </div>
         </div>
+        <div id="pinsPopoverContent" style="display: none;">
+            <p>Click on a pin to learn more about the location, person, or event.</p>
+            <img src="../assets/img/map/location-buddhism.png" width="20" height="20">
+            <img src="../assets/img/map/person-christianity.png" width="20" height="20">
+            <img src="../assets/img/map/event-hinduism.png" width="20" height="20">
+        </div>
+        <!-- Overlays -->
         <div id="timelineOverlay" class="timelineOverlay">
             <div class="timelineOverlayText">
                 <h1 id="timelineOverlayYear"></h1>
@@ -122,10 +132,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <video controls id="pinOverlayVideo" class="pinOverlayVideo"> <source src=""> </video>
                         <div class="row">
                             <div class="col-6">
-                                <img id="pinOverlayImg1" src="" class="pinOverlayImg">
+                                <img class="pinOverlayImg" id="pinOverlayImg1" src="" class="pinOverlayImg">
                             </div>
                             <div class="col-6">
-                                <img id="pinOverlayImg2" src="" class="pinOverlayImg">
+                                <img class="pinOverlayImg" id="pinOverlayImg2" src="" class="pinOverlayImg">
                             </div>
                         </div>
                     </div>
@@ -999,7 +1009,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                 <path class="France" d="M 1014.4 185 1015.5 185.5 1016.9 185.4 1019.3 187 1026.5 188.2 1024.1 192.4 1023.7 196.9 1022.4 198 1020.1 197.4 1020.3 199 1016.7 202.5 1016.7 205.4 1019.1 204.4 1020.9 207.1 1020.8 208.9 1022.3 211.3 1020.6 213.2 1022.1 218.1 1024.9 218.9 1024.4 221.6 1019.9 225.2 1009.7 223.5 1002.3 225.6 1001.7 229.4 995.8 230.2 990 227.3 988.1 228.7 978.6 225.8 976.6 223.4 979.3 219.6 980.3 207 975.2 200.4 971.5 197.2 963.9 194.8 963.5 190.2 970 188.9 978.3 190.5 976.8 183.4 981.5 186.1 992.9 181.3 994.4 176.2 998.6 174.9 999.4 177.1 1001.6 177.2 1004 179.7 1007.5 182.6 1010 182.1 1014.4 185 Z">
                                 </path>
                             </g>
-                            <g id="United States">
+                            <g id="United States of America">
                                 <path class="United States" d="M 118.8 379.3 117.7 380.4 116.5 379.5 117.1 377.7 116.7 375.3 117.2 374.6 118.4 373.6 118.3 372.3 118.7 371.7 119.1 371.8 121 372.9 121.9 373.5 122.6 374.3 123.5 376.6 123.3 376.9 120.8 378.3 118.8 379.3 Z">
                                 </path>
                                 <path class="United States" d="M 118.1 369.3 116.1 369.7 115.5 368.4 115 367.9 115 367.5 115.7 366.9 117.5 367.5 118.7 368.5 118.1 369.3 Z">
@@ -1565,94 +1575,6 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <div class="col-12">
                         <div id="mapSlider" class="mapSlider">
                             <div id="sliderOptions" class="sliderOptions">
-                                <!-- <div class="timelinePrev"><</div> -->
-                                <!-- <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1820" value="1820">
-                                    <label for="1820"><p>1820</p></label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1830" value="1830">
-                                    <label for="1830">1830</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1840" value="1840">
-                                    <label for="1840">1840</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1850" value="1850">
-                                    <label for="1850">1850</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1860" value="1860">
-                                    <label for="1860">1860</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1870" value="1870">
-                                    <label for="1870">1870</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1880" value="1880">
-                                    <label for="1880">1880</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1890" value="1890">
-                                    <label for="1890">1890</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1900" value="1900">
-                                    <label for="1900">1900</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1910" value="1910">
-                                    <label for="1910">1910</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1920" value="1920">
-                                    <label for="1920">1920</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1930" value="1930">
-                                    <label for="1930">1930</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1940" value="1940">
-                                    <label for="1940">1940</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1950" value="1950">
-                                    <label for="1950">1950</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1960" value="1960">
-                                    <label for="1960">1960</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1970" value="1970">
-                                    <label for="1970">1970</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1980" value="1980">
-                                    <label for="1980">1980</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="1990" value="1990">
-                                    <label for="1990">1990</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="2000" value="2000">
-                                    <label for="2000">2000</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="2010" value="2010">
-                                    <label for="2010">2010</label>
-                                </div>
-                                <div class="timelineOption">
-                                    <input type="radio" name="timelineValue" id="2020" value="2020" checked>
-                                    <label for="2020">2020</label>
-                                </div> -->
-                                <!-- <div class="timelineNext">></div> -->
-                            </div>
-                            <hr id="sliderLine" class="sliderLine">  
                         </div>
                     </div>
                 </div>
