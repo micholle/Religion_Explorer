@@ -1108,6 +1108,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 #about {
+    scroll-margin-top: 30px;
     padding: 60px 0;
     border-bottom: 2px solid #D0D0D0;
 }
@@ -1139,6 +1140,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 #features {
+    scroll-margin-top: 30px;
     padding: 60px 0;
     border-bottom: 2px solid #D0D0D0;
 }
@@ -1171,6 +1173,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 #developers {
+    scroll-margin-top: 30px;
     padding: 60px 0;
     border-bottom: 2px solid #D0D0D0;
 }
@@ -3142,6 +3145,15 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 .notificationsPanelBody .notificationsPanelBoldText {
     color: #2CA464;
     font-weight: 600;
+}
+
+.notificationSubIcon {
+    height: 17.5px;
+    width: 17.5px;
+    z-index: 5;
+    margin-top: 35%;
+    margin-left: -40%;
+    object-fit: contain;
 }
 
 /*discussion forum*/
