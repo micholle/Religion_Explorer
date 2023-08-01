@@ -23,6 +23,7 @@ html {
 } 
 
 * {
+    font-family: Lexend;
     margin: 0;
     box-sizing: border-box;
 }
@@ -366,6 +367,16 @@ h5 {
 
 .mapPin {
     cursor: pointer;
+    height: 60px;
+    width: 60px;
+}
+
+.mapPinStyle {
+    background-color: black !important;
+}
+
+#countryInformationModal #modalContent {
+    font-size: 14px;
 }
 
 /* overlays */
@@ -479,6 +490,13 @@ h5 {
 
 .pinOverlayVideo {
     width: 100%;
+}
+
+.pinOverlayImg {
+    width: 100%;
+    height: 150px;
+    object-fit: fill;
+    overflow: hidden;
 }
 
 /* calendar */
