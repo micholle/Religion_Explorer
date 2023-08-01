@@ -21,7 +21,19 @@ $(function() {
         }
     });
 
-    var svgPanZoom = $("svg").svgPanZoom();
+    var svgPanZoom = $("#svgMap").svgPanZoom();
+
+    $(".mapFilterArrowDiv").click(function () { 
+        if ($(".mapFilterArrow").attr("src") == "../assets/img/arrow-up.png") {
+            $("#filterContents").slideUp();
+            $(".mapFilterArrow").attr("src", "../assets/img/arrow-down.png");
+        } else {
+            $("#filterContents").slideDown();
+            $(".mapFilterArrow").attr("src", "../assets/img/arrow-up.png");
+        }
+    });
+
+    $("#mapSlider").append('<hr id="sliderLine" class="sliderLine">');
 
     //initiate colors
     var religionColors = {
@@ -93,7 +105,7 @@ $(function() {
     //initialize map
     $("#timelineOverlayYear").text(timelineYear);
     $("#timelineOverlay").css("display", "block");
-    mapTimeline(religionFilter);
+    mapTimeline(religionFilter, timelineYear);
     mapColor(religionFilter, timelineYear);
     mapPin(religionFilter, timelineYear);
 
@@ -103,7 +115,7 @@ $(function() {
             $("#svgMap").html(mapPlain);
 
             religionFilter = $('#religionFilterOptions').val();
-            mapTimeline(religionFilter);
+            mapTimeline(religionFilter, timelineYear);
             mapColor(religionFilter, timelineYear);
             mapPin(religionFilter, timelineYear);
         }
@@ -166,20 +178,19 @@ $(function() {
         }
 
         $("#svgMap").html(mapPlain);
-    
+
         mapColor(religionFilter, timelineYear);
         mapPin(religionFilter, timelineYear);
     
         $("#timelineOverlayYear").text(timelineYear);
         $("#timelineOverlay").css("display", "block");
 
-        //do not show overlay if the same year is clicked
     }
 
-    function mapTimeline(religionFilter) {
+    function mapTimeline(religionFilter, timelineYear) {
         //set timeline based on filter
         const timelineSlider = $('#mapSlider');
-        const timelineOptions = $('#sliderOptions').empty();
+        const timelineOptions = $('#sliderOptions');
         const timelinePrev = $('<div>').attr("id", "timelinePrev").addClass("timelinePrev").text("<");
         const timelineNext = $('<div>').attr("id", "timelineNext").addClass("timelineNext").text(">");
 
@@ -230,21 +241,44 @@ $(function() {
 
             for (let i = timelineYears.length - 1; i >= 0; i--) {
                 addTimelineOption(timelineYears[i]);
-                }                      
+            }                      
         }
 
         if(religionFilter == "All Religions"){
             minYear = earliestReligionVal;
-            timelineStart = maxYear;
-            timelineEnd = maxYear - 190;
+            timelineStart = (maxYear - parseInt(timelineYear.split(' ')[0], 10));
+
+            while (timelineStart >= 200) {
+                timelineStart -= 190;
+            }
+            timelineStart += parseInt(timelineYear.split(' ')[0], 10);
+
+            if ((timelineStart - 190) < minYear) {
+                timelineEnd = minYear;
+                timelineStart = minYear + 190;
+                timelineYear = minYear + " CE";
+            } else {
+                timelineEnd = timelineStart - 190;
+            }
         } else {
             for (religion in religionStart) {
                 if (religionFilter == religion){
                     majorReligion = true;
 
                     minYear = religionStart[religion];
-                    timelineStart = maxYear;
-                    timelineEnd = maxYear - 190;
+                    timelineStart = (maxYear - parseInt(timelineYear.split(' ')[0], 10));
+                    while (timelineStart >= 200) {
+                        timelineStart -= 190;
+                    }
+                    timelineStart += parseInt(timelineYear.split(' ')[0], 10);
+
+                    if ((timelineStart - 190) < minYear) {
+                        timelineEnd = minYear;
+                        timelineStart = minYear + 190;
+                        timelineYear = minYear + " CE";
+                    } else {
+                        timelineEnd = timelineStart - 190;
+                    }
                 }
                 if (!majorReligion) {
                     timelineSlider.hide();
@@ -258,11 +292,14 @@ $(function() {
             timelineOptions.append(timelinePrev);
             timelineOptions.append(createTimeline(timelineStart, timelineEnd));
             timelineOptions.append(timelineNext);
+
+            $("input[type='radio'][value='" + timelineYear + "']").prop("checked", true);
         }
 
         createSlider();
-        $("input[type='radio'][value='" + maxYear + " CE']").prop("checked", true);
-
+        if (timelineYear == "2010 CE") {
+            $("#timelineNext").css("color","#A6A6A6") ;
+        }
 
         $(document).on('click', '#timelinePrev', function() {
             timelineStart = timelineEnd;
@@ -438,9 +475,11 @@ $(function() {
     
                 //highlight countries on hover and display content
                 const countryHover = country => {
-                    $('g').css('opacity', 1);
-                    $('[data-toggle]').removeAttr('data-toggle');
-                    $('.popover').popover('dispose');
+                    if ($(".popover:visible").length > 0) {
+                        $('g').css('opacity', 1);
+                        $('[data-toggle]').removeAttr('data-toggle');
+                        $('.popover').popover('dispose');
+                    }
 
                     var currentCountry = country.target.parentElement.id;
                     document.getElementById(currentCountry).style.opacity = 0.5; 
@@ -720,6 +759,7 @@ $(function() {
 
     //help overlay
     $("#mapHelpButton").click(function(){
+        $("#svgMap").attr("viewBox", "0 0 2000 857");
         $("#helpOverlay").css("display", "block");
 
         //display tooltip
