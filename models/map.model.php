@@ -1,31 +1,26 @@
 <?php
-require_once "connection.php";
 require_once "../views/assets/data/mapData.php";
 
 class mapModel{
-
-    //Get data for map
 	static public function mdlGetMapData() {
-        $stmt = (new Connection) -> connect() -> prepare("SELECT * FROM religionbycountry ORDER BY countryID");
-		$stmt -> execute();
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $mapPopulation = (new mapData) -> getMapPopulation2010();
 
-        //dictionary for all country dictionaries
         $allCountries = [];
 
-        foreach($results as $row) {
+        foreach ($mapPopulation as $country => $population) {
             $data = [
-                "Buddhism" => intval($row["buddhism"]),
-                "Christianity" => intval($row["christianity"]),
-                "Hinduism" => intval($row["hinduism"]),
-                "Islam" => intval($row["islam"]),
-                "Judaism" => intval($row["judaism"]),
-                "Other Religions" => intval($row["otherReligions"]),
-                "Non-Religious" => intval($row["nonReligious"])
+                "Buddhism" => $population["Buddhism"],
+                "Christianity" => $population["Christianity"],
+                "Hinduism" => $population["Hinduism"],
+                "Islam" => $population["Islam"],
+                "Judaism" => $population["Judaism"],
+                "Other Religions" => $population["Other Religions"],
+                "Non-Religious" => $population["Non-Religious"]
             ];
-            $allCountries += [$row["country"] => $data];
+
+            $allCountries += [$country => $data];
             $religionPopulation = ["2010 CE" => $allCountries];
-        } 
+        }
 
         $jsonData = json_encode($religionPopulation);
         header('Content-Type: application/json');
@@ -38,15 +33,12 @@ class mapModel{
 
         foreach ($mapPins as $index => $pin) {
             $data = [
-                "pinid" => $pin["pinid"],
+                "pinTitle" => $pin["pinTitle"],
                 "pinType" => $pin["pinType"],
                 "religion" => $pin["religion"],
                 "country" => $pin["country"],
                 "timelineDate" => $pin["timelineDate"],
                 "displayDate" => $pin["displayDate"],
-                "shortDesc" => $pin["shortDesc"],
-                "description" => $pin["description"],
-                "relatedPerson" => $pin["relatedPerson"],
                 "pinVid" => $pin["pinVid"],
                 "pinImg1" => $pin["pinImg1"],
                 "pinImg2" => $pin["pinImg2"],

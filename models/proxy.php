@@ -25,8 +25,8 @@ if (isset($_GET['url'])) {
         $cleanedContent = str_replace("&rsquo;", "'", $cleanedContent);
         $cleanedContent = trim($cleanedContent);
 
-        $wordsToRemove = array("(image source)");
-        $cleanedContent = str_replace($wordsToRemove, "", $cleanedContent);
+        $wordsToRemove = array("(image source)", "https://www.britannica.com");
+        $cleanedContent = str_ireplace($wordsToRemove, "", $cleanedContent);
 
         echo $cleanedContent;
     }

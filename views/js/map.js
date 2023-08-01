@@ -631,21 +631,19 @@ $(function() {
                     var x = boundingBox.x + (boundingBox.width / 4);
                     var y = boundingBox.y + (boundingBox.height / 4);
         
-                    var pinid = pinDetails.pinid;
-                    var pinTitle = pin;
+                    var pinid = pin;
+                    var pinTitle = pinDetails.pinTitle;
                     var pinReligion = pinDetails.religion;
+                    var pinCountry = pinDetails.country;
                     var pinDate = pinDetails.displayDate;
-                    var pinShortDesc = pinDetails.shortDesc;
-                    var pinDesc = pinDetails.description;
                     var pinType = pinDetails.pinType;
-                    var pinPerson = pinDetails.relatedPerson;
-                    var pinPersonImg = "../assets/data/map/img/" + pinPerson + ".jpg";
                     var pinVid = pinDetails.pinVid;
                     var pinImg1 = pinDetails.pinImg1;
                     var pinImg2 = pinDetails.pinImg2;
+                    var pinSource = pinDetails.source;
 
                     var pinImg = "../assets/img/map/" + pinType + "-" + (pinReligion.toLowerCase()) + ".png";
-                    $("#svgMap").html($("#svgMap").html() + '<image id="' + pinid + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinid + "', '" + pinTitle + "', '" + pinShortDesc + "'" + ')" onmouseout="closePinOverview(' + "'" + pinid + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDate + "', '" + pinDesc + "', '" + pinReligion + "', '" + pinPerson + "', '" + pinPersonImg + "', '" + pinVid + "', '" + pinImg1 + "', '" + pinImg2 + "'" + ')" href="' + pinImg +'" x="' + x + '" y="' + y + '" height="30" width="30"/>');
+                    $("#svgMap").html($("#svgMap").html() + '<image id="' + pinid + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinid + "', '" + pinTitle + "', '" + pinCountry + "'" + ')" onmouseout="closePinOverview(' + "'" + pinid + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDate + "', '" + pinReligion + "', '" +  pinVid + "', '" + pinImg1 + "', '" + pinImg2 + "', '" + pinSource + "'" + ')" href="' + pinImg +'" x="' + x + '" y="' + y + '" height="30" width="30"/>');
                     
                     var pinid = "#" + pinid;
                     var pinTypeStatus = "";
@@ -807,29 +805,62 @@ $(function() {
     });
 });
 
-function openPin(pinTitle, pinDate, pinDesc, pinReligion, pinPerson, pinPersonImg, pinVid, pinImg1, pinImg2) {
-    $("#pinOverlayTitle").text(pinTitle);
-    $("#pinOverlayDate").text(pinDate);
-    $("#pinOverlayDescription").text(pinDesc);
-    $("#pinOverlayReligion").text(pinReligion);
-    $("#pinOverlayPerson").text(pinPerson);
-    
-    $("#pinOverlayReligionImg").attr("src", "../assets/img/lib-" + pinReligion.toLowerCase() + ".png");
-    $("#pinOverlayPersonImg").attr("src", pinPersonImg);
-    $("#pinOverlayVideo").attr("src", pinVid);
-    $("#pinOverlayImg1").attr("src", pinImg1);
-    $("#pinOverlayImg2").attr("src", pinImg2);
+async function summarize(url) {
+    const apiUrl = "../../models/proxy.php?url=" + url;
 
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.text();
 
-    $("#pinOverlay").removeClass("invisible");
+        var summarizer = new JsSummarize();
+        var summary = summarizer.summarize("Dharma Day", data);
+        
+        return summary;
+    } catch (error) {
+        console.error('Error fetching data from the proxy:', error);
+        return null;
+    }
 }
 
-function openPinOverview(pinid, pinTitle, pinShortDesc) {
+function openPin(pinTitle, pinDate, pinReligion, pinVid, pinImg1, pinImg2, pinSource) {
+    async function getDescription(url) {
+        var summary = await summarize(url);
+        var summaryKeys = Object.keys(summary);
+    
+        if (summaryKeys.length > 0) {
+            return summaryKeys.map((point) => summary[point]).join(' ');
+        }
+    } 
+
+    var promises = [];
+    promises.push(getDescription(pinSource));
+    
+    Promise.all(promises)
+        .then(descriptions => {
+            var pinDesc = descriptions[0];
+            
+            $("#pinOverlayTitle").text(pinTitle);
+            $("#pinOverlayDate").text(pinDate);
+            $("#pinOverlayDescription").text(pinDesc);
+            $("#pinOverlayReligion").text(pinReligion);
+            
+            $("#pinOverlayReligionImg").attr("src", "../assets/img/lib-" + pinReligion.toLowerCase() + ".png");
+            $("#pinOverlayVideo").attr("src", pinVid);
+            $("#pinOverlayImg1").attr("src", pinImg1);
+            $("#pinOverlayImg2").attr("src", pinImg2);
+        
+            $("#pinOverlay").removeClass("invisible");
+        })
+        .catch(error => {
+            console.error("Error fetching data from the proxy:", error);
+        });
+}
+
+function openPinOverview(pinid, pinTitle, pinCountry) {
     document.getElementById(pinid).setAttribute("data-toggle", "popover");
 
     $('[data-toggle = "popover"]').popover({
-        title: pinTitle, 
-        content: pinShortDesc,
+        content: pinTitle + " (" + pinCountry + ")",
         placement: "top"
     });
     $('[data-toggle = "popover"]').popover("show");

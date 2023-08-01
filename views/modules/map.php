@@ -16,6 +16,9 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
         <!-- <script type="text/javascript" src="../assets/js/chartjs-plugin-datalabels.min.js"></script> -->
         <script type="text/javascript" src="../assets/plugins/jquery-svg-pan-zoom-master/compiled/jquery.svg.pan.zoom.js"></script>
+        <script type="text/javascript" src="../assets/plugins/js-summarize-master/lib/lodash/lodash.js"></script>
+        <script type="text/javascript" src="../assets/plugins/js-summarize-master/lib/tokenizer/tokenizer.js"></script>
+        <script type="text/javascript" src="../assets/plugins/js-summarize-master/js-summarize.js"></script>
 
         <script type="text/javascript" src="../js/map.js"></script>
         <script type="text/javascript" src="../js/script.js"></script>
