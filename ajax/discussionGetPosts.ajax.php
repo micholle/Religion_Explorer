@@ -49,7 +49,7 @@ foreach ($posts as $post) {
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote editButton" value="' . $post['postId'] . '">Edit</p>';
         $html .= '          </div>';
     }
-    if ($_SESSION['acctype'] === 'regular') {
+    if ($_SESSION['acctype'] === 'regular' && $post['accountid'] != $_SESSION['accountid']) {
     $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" onclick="reportContent(\'' . $topicId . '\')">';
     $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
@@ -104,7 +104,7 @@ foreach ($posts as $post) {
             $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote editButton" value="' . $reply['replyId'] . '">Edit</p>';
             $html .= '          </div>';
         }
-        if ($_SESSION['acctype'] === 'regular') {
+        if ($_SESSION['acctype'] === 'regular' && $reply['accountid'] != $_SESSION['accountid']) {
         $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" onclick="reportContent(\'' . $topicId . '\')">';
         $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';

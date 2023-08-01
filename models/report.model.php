@@ -150,25 +150,45 @@ class reportContentModel {
             $accountid = "";
 
             if (substr($contentid, 0, 2) == "CC") {
-                $stmt = $pdo->prepare("SELECT accountid, filedata FROM communitycreations WHERE creationid = :contentid");
-                $stmt->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+                $stmt = $pdo->prepare("SELECT accountid, filedata FROM communitycreations WHERE creationid = :creationid");
+                $stmt->bindParam(":creationid", $contentid, PDO::PARAM_STR);
                 $stmt->execute();
                 $filepath = $stmt->fetch(PDO::FETCH_ASSOC);
                 $accountid = $filepath["accountid"];
-                if (file_exists($filepath["filedata"])) {unlink($filepath["filedata"]);}
+                if (file_exists($filepath["filedata"])) {
+                    unlink($filepath["filedata"]);
+                }
 
-                $stmt2 = $pdo->prepare("DELETE FROM communitycreations WHERE creationid = :contentid");
-                $stmt2->bindParam(":contentid", $contentid, PDO::PARAM_STR);
-                $stmt2->execute();
-            }        
-            
-            $bookmark_delete = $pdo->prepare("DELETE FROM bookmarks WHERE resourceid = :contentid");
-            $bookmark_delete->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+                $community_delete = $pdo->prepare("DELETE FROM communitycreations WHERE creationid = :creationid");
+                $community_delete->bindParam(":creationid", $contentid, PDO::PARAM_STR);
+                $community_delete->execute();
+                $pdo->commit();
+            } else {
+                $topics_delete = $pdo->prepare("DELETE FROM topics WHERE topicId = :topicId");
+                $topics_delete->bindParam(":topicId", $contentid, PDO::PARAM_STR);
+                $topics_delete->execute();
+                $pdo->commit();
+                
+                $posts_delete = $pdo->prepare("DELETE FROM posts WHERE postId = :postId");
+                $posts_delete->bindParam(":postId", $contentid, PDO::PARAM_STR);
+                $posts_delete->execute();
+                $pdo->commit();
+
+                $reply_delete = $pdo->prepare("DELETE FROM reply WHERE replyId = :replyId");
+                $reply_delete->bindParam(":replyId", $contentid, PDO::PARAM_STR);
+                $reply_delete->execute();
+                $pdo->commit();
+            }           
+
+            $bookmark_delete = $pdo->prepare("DELETE FROM bookmarks WHERE resourceid = :resourceid");
+            $bookmark_delete->bindParam(":resourceid", $contentid, PDO::PARAM_STR);
             $bookmark_delete->execute();
+            $pdo->commit();
 
             $delete_content = $pdo->prepare("UPDATE reportedcontent SET actionTaken = 'Delete', reportStatus = 'Completed' WHERE contentid = :contentid");
             $delete_content->bindParam(":contentid", $contentid, PDO::PARAM_STR);
             $delete_content->execute();
+            $pdo->commit();
 
             $get_reportid = $pdo->prepare("SELECT accountid FROM reportedcontent WHERE contentid = :contentid");
             $get_reportid->bindParam(":contentid", $contentid, PDO::PARAM_STR);
@@ -182,8 +202,8 @@ class reportContentModel {
             $notify_user->bindValue(":notificationSource", "Reported Content", PDO::PARAM_STR);
             $notify_user->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
             $notify_user->execute();
-    
             $pdo->commit();
+    
         } catch (Exception $e) {
             $pdo->rollBack();
             return "error";
@@ -191,7 +211,6 @@ class reportContentModel {
     
         $pdo = null;
         $stmt = null;
-        $stmt2 = null;
     }
     
     static public function mdlReportUserOfContent($contentid) {
@@ -213,8 +232,6 @@ class reportContentModel {
         }
     
         $pdo = null;
-        $stmt = null;
-        $stmt2 = null;
     } 
 
 }
