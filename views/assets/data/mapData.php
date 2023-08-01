@@ -210,7 +210,7 @@ class mapData {
             "Anguilla"=>["Buddhism"=>0,"Christianity"=>13592,"Hinduism"=>60,"Islam"=>100,"Judaism"=>23,"Non-Religious"=>551,"Other Religions"=>676],
             "United States Virgin Islands"=>["Buddhism"=>0,"Christianity"=>98660,"Hinduism"=>439,"Islam"=>110,"Judaism"=>348,"Non-Religious"=>4210,"Other Religions"=>656],
             "Barbados"=>["Buddhism"=>115,"Christianity"=>272858,"Hinduism"=>1379,"Islam"=>3105,"Judaism"=>34,"Non-Religious"=>5589,"Other Religions"=>4291],
-            "United States"=>["Buddhism"=>4300257,"Christianity"=>245457098,"Hinduism"=>1602582,"Islam"=>4564042,"Judaism"=>5578686,"Non-Religious"=>65115186,"Other Religions"=>4384796],
+            "United States of America"=>["Buddhism"=>4300257,"Christianity"=>245457098,"Hinduism"=>1602582,"Islam"=>4564042,"Judaism"=>5578686,"Non-Religious"=>65115186,"Other Religions"=>4384796],
             // "Andorra"=>["Buddhism"=>0,"Christianity"=>70191,"Hinduism"=>382,"Islam"=>1023,"Judaism"=>264,"Non-Religious"=>5285,"Other Religions"=>120],
             "Guadeloupe"=>["Buddhism"=>0,"Christianity"=>430129,"Hinduism"=>2243,"Islam"=>1660,"Judaism"=>0,"Non-Religious"=>11111,"Other Religions"=>3528],
             "Kenya"=>["Buddhism"=>1694,"Christianity"=>43554099,"Hinduism"=>268682,"Islam"=>4232760,"Judaism"=>299,"Non-Religious"=>52296,"Other Religions"=>5661470],
