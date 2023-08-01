@@ -194,9 +194,9 @@ $(function() {
                     if (displayNotifications == 1){
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                            '<div class="col-2 d-flex justify-content-start align-items-start" style="display: inline-block; position: relative;">' +
-                                '<img src="data:image/png;base64, '+ avatar +'" style="width: 40px; height: 40px; border-radius: 50%; vertical-align: middle;">' +
-                                '<img src="' + notificationIcon + '"  style="width: 20px; height: 20px; position: absolute; bottom: 15px; left: 23px;">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="data:image/png;base64, '+ avatar +'">' +
+                                '<img src="' + notificationIcon + '"  class="notificationSubIcon">' +
                             '</div>' +
                             '<div class="col-10 d-flex flex-column">' +
                                 '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span>  commented on your post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
@@ -209,9 +209,9 @@ $(function() {
                     if (displayNotifications == 1){
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                            '<div class="col-2 d-flex justify-content-start align-items-start" style="display: inline-block; position: relative;">' +
-                                '<img src="data:image/png;base64, '+ avatar +'" style="width: 40px; height: 40px; border-radius: 50%; vertical-align: middle;">' +
-                                '<img src="' + notificationIcon + '"  style="width: 20px; height: 20px; position: absolute; bottom: 15px; left: 23px;">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="data:image/png;base64, '+ avatar +'">' +
+                                '<img src="' + notificationIcon + '"  class="notificationSubIcon">' +
                             '</div>' +
                             '<div class="col-10 d-flex flex-column">' +
                                 '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span>  replied to your comment on the post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
@@ -223,9 +223,9 @@ $(function() {
                 } else if (notificationSource == "Discussion Forum Topics Upvote") {
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                            '<div class="col-2 d-flex justify-content-start align-items-start" style="display: inline-block; position: relative;">' +
-                                '<img src="data:image/png;base64, '+ avatar +'" style="width: 40px; height: 40px; border-radius: 50%; vertical-align: middle;">' +
-                                '<img src="' + notificationIcon + '"  style="width: 20px; height: 20px; position: absolute; bottom: 15px; left: 23px;">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="data:image/png;base64, '+ avatar +'">' +
+                                '<img src="' + notificationIcon + '"  class="notificationSubIcon">' +
                             '</div>' +
                             '<div class="col-10 d-flex flex-column">' +
                                 '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your post: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
@@ -236,9 +236,9 @@ $(function() {
                 } else if (notificationSource == "Discussion Forum Posts Upvote") {
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                            '<div class="col-2 d-flex justify-content-start align-items-start" style="display: inline-block; position: relative;">' +
-                                '<img src="data:image/png;base64, '+ avatar +'" style="width: 40px; height: 40px; border-radius: 50%; vertical-align: middle;">' +
-                                '<img src="' + notificationIcon + '"  style="width: 20px; height: 20px; position: absolute; bottom: 15px; left: 23px;">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="data:image/png;base64, '+ avatar +'">' +
+                                '<img src="' + notificationIcon + '"  class="notificationSubIcon">' +
                             '</div>' +
                             '<div class="col-10 d-flex flex-column">' +
                                 '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your comment: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +
@@ -249,9 +249,9 @@ $(function() {
                 } else if (notificationSource == "Discussion Forum Replies Upvote") {
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
-                            '<div class="col-2 d-flex justify-content-start align-items-start" style="display: inline-block; position: relative;">' +
-                                '<img src="data:image/png;base64, '+ avatar +'" style="width: 40px; height: 40px; border-radius: 50%; vertical-align: middle;">' +
-                                '<img src="' + notificationIcon + '"  style="width: 20px; height: 20px; position: absolute; bottom: 15px; left: 23px;">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="data:image/png;base64, '+ avatar +'">' +
+                                '<img src="' + notificationIcon + '"  class="notificationSubIcon">' +
                             '</div>' +
                             '<div class="col-10 d-flex flex-column">' +
                                 '<p class="notificationsPanelMainText"><span class="notificationsPanelBoldText">' + personInvolved + '</span> and ' + upvotesCount + ' others upvoted your reply: <span class="notificationsPanelBoldText">"' + notification + '"</span></p>' +

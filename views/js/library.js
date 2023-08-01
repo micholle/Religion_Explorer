@@ -643,7 +643,7 @@ async function summarize(url) {
         return summary;
     } catch (error) {
         console.error('Error fetching data from the proxy:', error);
-        return null; // Return null or handle the error appropriately
+        return null;
     }
 }
 
