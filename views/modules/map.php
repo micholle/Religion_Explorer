@@ -125,10 +125,6 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     <img id="pinOverlayReligionImg" src="../assets/img/map/placeholder.png">
                                     <p id="pinOverlayReligion"></p>
                                 </div>
-                                <div class="pinOverlayRelation d-flex justify-content-center align-items-center flex-column">
-                                    <img id="pinOverlayPersonImg" src="">
-                                    <p id="pinOverlayPerson"></p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -136,10 +132,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <video controls id="pinOverlayVideo" class="pinOverlayVideo"> <source src=""> </video>
                         <div class="row">
                             <div class="col-6">
-                                <img class="pinOverlayImg" id="pinOverlayImg1" src="">
+                                <img class="pinOverlayImg" id="pinOverlayImg1" src="" class="pinOverlayImg">
                             </div>
                             <div class="col-6">
-                                <img class="pinOverlayImg" id="pinOverlayImg2" src="">
+                                <img class="pinOverlayImg" id="pinOverlayImg2" src="" class="pinOverlayImg">
                             </div>
                         </div>
                     </div>

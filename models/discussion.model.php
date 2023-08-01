@@ -321,7 +321,8 @@ class ModelDiscussion {
             $stmt = $pdo->prepare("SELECT r.*, a.username, a.avatar 
                                    FROM reply AS r
                                    INNER JOIN accounts AS a ON r.accountid = a.accountid
-                                   WHERE r.postId = :postId");
+                                   WHERE r.postId = :postId
+                                   ORDER BY replyDate ASC");
             $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
             $stmt->execute();
     
