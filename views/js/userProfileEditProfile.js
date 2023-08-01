@@ -192,7 +192,7 @@ $(function() {
             return;
           }
           if (file.size > 15 * 1024 * 1024) {
-            $("#toast").html("File size exceeds the limit. Please select an image up to 15MB.");
+            $("#toast").html("Please select an image not more than 15MB.");
             $("#toast").css("background-color", "#E04F5F");
             $("#toast").addClass('show');
     
