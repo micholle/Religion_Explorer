@@ -102,8 +102,8 @@
                     <img src="../assets/img/feat-book-stack.png" height="50px" width="50px">
                   </div>
                   <div class="col-10 justify-content-center">
-                    <h5>Library of Resources</h5>
-                    <p>Includes a wide range of materials such as: articles, videos, images, books, research papers, and user-generated content.</p>
+                    <h5>Library of Resources and Community Creations</h5>
+                    <p>Offers users with an extensive array of materials for reading, learning, and content submission.</p>
                   </div>
                 </div>
               </div>
