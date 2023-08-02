@@ -261,7 +261,7 @@ $(function() {
                     );
                 } else if (notificationSource == "Reported Content") {
                     $("#notification").append(
-                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="reportedContentDetails(\'' + notification + '\', \'' + contentViolations + '\')">' +
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="reportedContentDetails(\'' + contentViolations + '\')">' +
                             '<div class="col-2 d-flex justify-content-start align-items-start">' +
                                 '<img src="' + notificationIcon + '">' +
                             '</div>' +
@@ -471,8 +471,8 @@ function notificationRedirect(uniqueid, notificationSource) {
     }
 }
 
-function reportedContentDetails(title, violations) {
-    $("#reportedContentTitle").text(title);
+function reportedContentDetails(violations) {
+    $("#reportedContentTitle").text("");
     $("#reportedContentViolations").text(violations);
     $("#reportDetails").modal();
     $("#reportDetails").show();

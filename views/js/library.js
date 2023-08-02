@@ -119,7 +119,7 @@ $(function() {
                     '</div>' +
 
                     '<div class="row">' +
-                        '<div class="col-12">'
+                        '<div class="col-12">' +
                             '<p>' + videoDetails.description + '</p>' +
                         '</div>' +
                     '</div>' +
@@ -646,6 +646,23 @@ async function summarize(url) {
         return null;
     }
 }
+
+// async function summarize(url) {
+//     try {
+//       const response = await fetch(`../../models/scrapedo.php?url=${encodeURIComponent(url)}`);
+//       if (!response.ok) {
+//         throw new Error('Network response was not ok');
+//       }
+//       const data = await response.text();
+
+//       const summarizer = new JsSummarize();
+//       const summary = summarizer.summarize("", data);
+
+//       return summary;
+//     } catch (error) {
+//       console.error(error);
+//     }
+// }
 
 async function showReadingMaterialModal(resourceid, resourceImg, title, author, date, source) {
     $("#readingMaterialTitle").text(title);

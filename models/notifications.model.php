@@ -153,16 +153,6 @@ class notificationsModel {
                     $stmt->bindValue(":actionTaken", "Delete", PDO::PARAM_STR);
                     $stmt->execute();
                     $notificationInfo = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                    if (substr($notificationInfo["contentid"], 0, 2) === "CC") {                        
-                        $get_title = $pdo->prepare("SELECT title FROM communitycreations WHERE creationid = :creationid");
-                        $get_title->bindParam(":creationid", $notificationInfo["contentid"], PDO::PARAM_STR);
-                        $get_title->execute();
-                        $notification = $get_title->fetchColumn();
-                    }
-                     else {
-                        //discussion forum
-                    }
                     
                     $notificationIcon = "../assets/img/discussionForum/report.png";
                     $contentViolations = $notificationInfo["contentViolations"];

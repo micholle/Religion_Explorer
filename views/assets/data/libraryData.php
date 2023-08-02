@@ -83,7 +83,7 @@ class libraryData {
             "photos" => [
                 "LP1" => [
                     "title" => "Ceiling Frescoes",
-                    "file" => "../assets/data/img/library/Ceiling_Frescoes.png",
+                    "file" => "../assets/data/library/LP1.png",
                     "religion" => "Christianity",
                     "category" => ["Historical Context"],
                     "description" => "This monumental fresco portrays various episodes from the life of St. Charles Borromeo and the triumph of the Catholic Church. It showcases the glory of the Baroque era and the spiritual power of the Catholic faith.",
@@ -91,38 +91,89 @@ class libraryData {
                 ],
                 "LP2" => [
                     "title" => "Gautama Buddha",
-                    "file" => "../assets/data/img/library/Gautama_Buddha.png",
+                    "file" => "../assets/data/library/LP2.png",
                     "religion" => "Buddhism",
                     "category" => ["Religious Practices"],
                     "description" => "Gautama Buddha, also known as Siddhartha Gautama, was a spiritual leader and the founder of Buddhism. His teachings and philosophy have had a profound and lasting impact on millions of people around the world.",
                     "author" => "Jose Luis Sanchez"
                 ],  
-                // "Photo 3" => [
-                //     "file" => "",
+                "LP3" => [
+                    "title" => "Hindu Gods and Deities (Lord Krishna)",
+                    "file" => "../assets/data/library/LP3.jpg",
+                    "religion" => "Hinduism",
+                    "category" => ["Theology"],
+                    "description" => "Lord Krishna is one of the most popular Gods in Hinduism. Krishna is considered the supreme deity, worshipped across many traditions of Hinduism in a variety of different perspectives. Krishna is recognized as the eighth incarnation (avatar) of Lord Vishnu, and one and the same as Lord Vishnu, one of the trimurti and as the supreme god in his own right.",
+                    "author" => ""
+                ],
+                "LP4" => [
+                    "title" => "Courtyard of the Jama Mosque, Isfahan",
+                    "file" => "../assets/data/library/LP4.avif",
+                    "religion" => "Islam",
+                    "category" => ["Religious Practices"],
+                    "description" => "Located in the historic centre of Isfahan, the Masjed-e Jāmé (Friday mosque) can be seen as a stunning illustration of the evolution of mosque architecture over twelve centuries, starting in ad 841. It is the oldest preserved edifice of its type in Iran and a prototype for later mosque designs throughout Central Asia. ",
+                    "author" => "Eugène Flandin"
+                ],
+                "LP5" => [
+                    "title" => "Mohammed and the first four Caliphs",
+                    "file" => "../assets/data/library/LP5.avif",
+                    "religion" => "Islam",
+                    "category" => ["Religious Practices"],
+                    "description" => "The Early period in Islam's socio-political history and art is estimated to be around 640 to 900 CE. This falls just after Mohammad's death, which was in the year 632 CE. After Mohammad's death, four Caliphs were appointed as his successors, known as the “Rightly Guided Caliphs” - Caliphs are rulers within what is known as the caliphate, which is a state under Islamic rule.",
+                    "author" => ""
+                ],
+                "LP6" => [
+                    "title" => "Vishnu Laying on this Serpent",
+                    "file" => "../assets/data/library/LP6.jpg",
+                    "religion" => "Hinduism",
+                    "category" => ["Theology"],
+                    "description" => "The Vishnu Anantasayana panel, Dashavatara Temple, Deogarh. 5th-6th century CE. The Gupta-period sculpture adorning the temple includes many images from Hindu mythology. This celebrated panel from the south wall of the temple has Vishnu reclining on the serpent Ananta and floating on the waters of oblivion. Above him, seated on a lotus leaf, is the Hindu creator god Brahma. Lakshmi, the wife of Vishnu, massages his feet.",
+                    "author" => ""
+                ],
+                "LP7" => [
+                    "title" => "Pietà",
+                    "file" => "../assets/data/library/LP7.webp",
+                    "religion" => "Christianity",
+                    "category" => ["Theology"],
+                    "description" => "Pietà, as a theme in Christian art, depiction of the Virgin Mary supporting the body of the dead Christ. Some representations of the Pietà include John the Apostle, Mary Magdalene, and sometimes other figures on either side of the Virgin, but the great majority show only Mary and her Son.",
+                    "author" => "Michelangelo"
+                ],
+                "LP8" => [
+                    "title" => "Standing Maitreya",
+                    "file" => "../assets/data/library/LP8.jpg",
+                    "religion" => "Buddhism",
+                    "category" => ["Theology"],
+                    "description" => "The figure of Maitreya is seen standing on a lotus pedestal. From the position of the broken right hand it appears that originally it was in abhaya mudra. The left hand, which hangs down carries a vessel. The figure is characterized by the usual features of Gandhara images such as the mark of urna on the forehead, the moustache, all the ornaments, the heavy folds of the drapery and the scalloped aureole. Noteworthy features are the absence of a pair of sandals on his feet and the absence of a stupa in his coiffure.",
+                    "author" => ""
+                ],
+                "LP9" => [
+                    "title" => "Jews cross Red Sea pursued by Pharoah",
+                    "file" => "../assets/data/library/LP9.jpg",
+                    "religion" => "Judaism",
+                    "category" => ["Theology"],
+                    "description" => "The story of Jews crossing the Red Sea while being pursued by Pharaoh is a significant event in Jewish history and is a central part of the Passover narrative, as mentioned in the Hebrew Bible. This event is known as the Splitting of the Red Sea or the Parting of the Red Sea and is considered a pivotal moment in Jewish history. It symbolizes God's intervention in delivering the Jewish people from slavery and the beginning of their journey to the Promised Land.",
+                    "author" => ""
+                ],
+                "LP10" => [
+                    "title" => "The Birds' Head Haggadah",
+                    "file" => "../assets/data/library/LP10.jpg",
+                    "religion" => "Judaism",
+                    "category" => ["Theology"],
+                    "description" => "The Birds' Head Haggadah is a unique medieval Passover Haggadah, which is a Jewish text used during the Passover Seder. It is named after its distinctive feature, which is the illustrations of the human figures with bird-like heads, rather than the conventional human heads found in other Haggadot.",
+                    "author" => ""
+                ],
+                // "" => [
+                //     "title" => "",
+                //     "file" => "../assets/data/library/LP6",
                 //     "religion" => "",
-                //     "category" => ["", ""],
+                //     "category" => [""],
                 //     "description" => "",
                 //     "author" => ""
-                // ],    
-                // "Photo 4" => [
-                //     "file" => "",
-                //     "religion" => "",
-                //     "category" => ["", ""],
-                //     "description" => "",
-                //     "author" => ""
-                // ],    
-                // "Photo 5" => [
-                //     "file" => "",
-                    // "religion" => "",
-                //     "category" => ["", ""],
-                //     "description" => "",
-                //     "author" => ""
-                // ]  
+                // ]
             ],
             "videos" => [
                 "LV1" => [
                     "title" => "Mosque",
-                    "file" => "../assets/data/vid/library/Mosque.mp4",
+                    "file" => "../assets/data/library/LV1.mp4",
                     "religion" => "Islam",
                     "category" => ["Religious Practices"],
                     "description" => "A mosque is a place of worship and community for followers of Islam. It is typically a building where Muslims gather for congregational prayers, engage in spiritual activities, seek religious guidance, and foster community bonds. ",
@@ -130,128 +181,195 @@ class libraryData {
                 ],
                 "LV2" => [
                     "title" => "Hindu Event",
-                    "file" => "../assets/data/vid/library/Hindu_Event.mp4",
+                    "file" => "../assets/data/library/LV2.mp4",
                     "religion" => "Hinduism",
                     "category" => ["Religious Practices"],
                     "description" => "Hindu events encompass a rich tapestry of religious, cultural, and traditional celebrations that hold significant importance for followers of Hinduism. These events are often marked by elaborate rituals, vibrant festivities, and communal gatherings, creating an atmosphere of joy, devotion, and spiritual connection.",
-                    "author" => "Abhilash Bahirat"
-                ],  
-                // "Video 3" => [
-                //     "file" => "",
+                    "author" => ""
+                ],
+                "LV3" => [
+                    "title" => "A Modern Jewish Family Celebrating Hanukkah",
+                    "file" => "../assets/data/library/LV3.mp4",
+                    "religion" => "Judaism",
+                    "category" => ["Religious Practices"],
+                    "description" => "A modern family celebrating Hanukkah gathers together in their home, bringing warmth and joy to the festival of lights. The family sets up a beautifully decorated Hanukkah menorah, with each member taking turns to light the candles each night.",
+                    "author" => ""
+                ],
+                "LV4" => [
+                    "title" => "Jews Praying In Front Of The Wailing Wall In Jerusalem",
+                    "file" => "../assets/data/library/LV4.mp4",
+                    "religion" => "Judaism",
+                    "category" => ["Religious Practices"],
+                    "description" => "Jews praying in front of the Wailing Wall in Jerusalem is a powerful and deeply spiritual sight. The Wailing Wall, also known as the Western Wall or the Kotel, is one of the most sacred sites in Judaism and holds significant historical and religious importance.",
+                    "author" => "Jakob Lundvall"
+                ],
+                "LV5" => [
+                    "title" => "Nativity Scene",
+                    "file" => "../assets/data/library/LV5.mp4",
+                    "religion" => "Christianity",
+                    "category" => ["Religious Traditions"],
+                    "description" => "A nativity scene, also known as a Christmas crib or creche, is a depiction of the birth of Jesus Christ as described in the Christian Bible's Gospels of Matthew and Luke. It is a traditional and popular Christmas decoration displayed in homes, churches, public places, and various settings during the Christmas season.",
+                    "author" => "Gabe"
+                ],
+                "LV6" => [
+                    "title" => "Tibetan Singing Bowl",
+                    "file" => "../assets/data/library/LV6.mp4",
+                    "religion" => "Buddhism",
+                    "category" => ["Religious Practices"],
+                    "description" => "A Tibetan Singing Bowl is a traditional musical instrument and meditative tool that originated in the Himalayan region, particularly in Tibet, Nepal, and India. These bowls are known for their unique sound, which is produced by striking or rubbing the outer rim of the bowl with a mallet.",
+                    "author" => "Antoni Shkraba"
+                ],
+                "LV7" => [
+                    "title" => "Salah",
+                    "file" => "../assets/data/library/LV7.mp4",
+                    "religion" => "Islam",
+                    "category" => ["Religious Traditions", "Religious Practices"],
+                    "description" => "Salah, also known as Salat, is the Islamic practice of ritual prayer and is one of the Five Pillars of Islam. It is an essential and mandatory act of worship for Muslims, performed five times a day at specified times. Salah is a means of establishing a direct connection with Allah (God) and is a significant way of expressing devotion and gratitude.",
+                    "author" => "Michael Burrows"
+                ],
+                "LV8" => [
+                    "title" => "House of Worship",
+                    "file" => "../assets/data/library/LV8.mp4",
+                    "religion" => "Christianity",
+                    "category" => ["Religious Practices"],
+                    "description" => "In Christianity, worship through song is a common and deeply cherished form of expressing devotion and praise to God. Singing and music have always played a central role in Christian worship, and it is an integral part of the church's liturgical and non-liturgical gatherings.",
+                    "author" => "Luis Quintero"
+                ],
+                "LV9" => [
+                    "title" => "Buddhist Altar",
+                    "file" => "../assets/data/library/LV9.mp4",
+                    "religion" => "Buddhism",
+                    "category" => ["Religious Practices"],
+                    "description" => "Kneeling in front of a Buddhist altar is a common act of reverence and devotion in Buddhist practices. The Buddhist altar, often called a shrine, is a sacred space where Buddhists place images or statues of the Buddha, Bodhisattvas, or revered teachers, as well as other symbolic items representing Buddhist principles and teachings.",
+                    "author" => ""
+                ],
+                "LV10" => [
+                    "title" => "Besakih Temple in Bali",
+                    "file" => "../assets/data/library/LV10.mp4",
+                    "religion" => "Hinduism",
+                    "category" => ["Religious Practices"],
+                    "description" => "Besakih Temple, also known as Pura Besakih, is the largest and most important Hindu temple in Bali, Indonesia. It is located on the southwestern slopes of Mount Agung, the highest volcano on the island and considered sacred by the Balinese people. The temple complex is situated in the village of Besakih, in the regency of Karangasem.",
+                    "author" => "Mikhail Nilov"
+                ],
+                // "LV#" => [
+                //     "title" => "",
+                //     "file" => "../assets/data/library/LV#.mp4",
                 //     "religion" => "",
-                //     "category" => ["", ""],
+                //     "category" => [""],
                 //     "description" => "",
                 //     "author" => ""
-                // ],    
-                // "Video 4" => [
-                //     "file" => "",
-                //     "religion" => "",
-                //     "category" => ["", ""],
-                //     "description" => "",
-                //     "author" => ""
-                // ],    
-                // "Video 5" => [
-                //     "file" => "",
-                //     "religion" => "",
-                //     "category" => ["", ""],
-                //     "description" => "",
-                //     "author" => ""
-                // ]  
+                // ]
             ],
             "readingMats" => [
                 "LR1" => [
-                    "title" => "Ashura",
-                    "resourceImg" => "../assets/data/img/library/rm9.jpg",
+                    "title" => "Muharram Festival",
+                    "resourceImg" => "../assets/data/library/LR1.jpg",
                     "type" => "article",
-                    "author" => "National Today",
-                    "date" => "2023",
+                    "author" => "Memphis Tours",
+                    "date" => "n.d.",
                     "religion" => "Islam",
                     "category" => ["Religious Traditions"],
-                    "description" => "The day of Ashura is marked by Muslims as a whole, but for Shia Muslims it is a major religious commemoration of the martyrdom at Karbala of Hussein, a grandson of the Prophet Muhammad.",
-                    "source" => "https://nationaltoday.com/ashurah"
+                    "source" => "https://www.memphistours.com/India/india-travel-guide/festivals-in-india/wiki/muharram-festival"
                 ],
                 "LR2" => [
                     "title" => "Celebrating Dhamma Day (Asalha Puja)",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR2.png",
                     "type" => "article",
                     "author" => "J. Kumara",
                     "date" => "2021",
                     "religion" => "Buddhism",
                     "category" => ["Religious Traditions"],
-                    "description" => "Dharma (Dhamma) Day, also known as “Asalha Puja” is one of the most important holidays in Theravada Buddhism. It commemorates the Buddha's first sermon following his attainment of enlightenment.",
                     "source" => "https://www.givelify.com/blog/dhamma-day-asalha-puja/"
                 ],
                 "LR3" => [
                     "title" => "Being Christian in Western Europe",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR3.webp",
                     "type" => "article",
                     "author" => "Pew Research Center",
                     "date" => "2018",
                     "religion" => "Christianity",
                     "category" => ["Social Issues"],
-                    "description" => "The majority of Europe's Christians are non-practicing, but they differ from religiously unaffiliated people in their views on God, attitudes toward Muslims and immigrants, and opinions about religion's role in society.",
                     "source" => "https://www.pewresearch.org/religion/2018/05/29/being-christian-in-western-europe/"
                 ],
                 "LR4" => [
                     "title" => "What it means to be a Christian in America",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR4.jpg",
                     "type" => "article",
                     "author" => "M. Bowman",
                     "date" => "2018",
                     "religion" => "Christianity",
                     "category" => ["Social Issues"],
-                    "description" => "From the very beginning of European settlement in the United States, a wide range of Christian faiths appeared in America. Roman Catholics, Baptists and Methodists saw their numbers rise in the early 19th century.",
                     "source" => "https://theconversation.com/what-it-means-to-be-a-christian-in-america-today-97981"
                 ],  
                 "LR5" => [
                     "title" => "African Christianity: Its public role",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR5.jpg",
                     "type" => "book",
                     "author" => "P. Gifford",
                     "date" => "1998",
                     "religion" => "Christianity",
                     "category" => ["Social Issues", "Historical Context"],
-                    "description" => "Examines African Christianity in the mid-1990s against the back ground of the continent's current social, economic, and political circumstances. Gifford sheds light on the dynamics of African churches and churchgoers.",
-                    "mainPoint1" => "",
-                    "mainPoint2" => "",
-                    "mainPoint3" => "",
                     "source" => "https://books.google.com.ph/books/about/African_Christianity.html?id=SDS45RNq6ZkC&redir_esc=y"
                 ],    
                 "LR6" => [
                     "title" => "A History of Christianity in India: 1707 - 1858",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR6.jpg",
                     "type" => "book",
                     "author" => "S. Neil",
                     "date" => "2002",
                     "religion" => "Christianity",
                     "category" => ["Historical Context"],
-                    "description" => "Christians form the third largest religious community in India. How has this come about? There are many studies of separate groups: but there has so far been no major history of the three large groups.",
-                    "mainPoint1" => "",
-                    "mainPoint2" => "",
-                    "mainPoint3" => "",
                     "source" => "https://www.cambridge.org/us/universitypress/subjects/religion/church-history/history-christianity-india-17071858"
                 ],
                 "LR7" => [
                     "title" => "Fast of the 17th of Tammuz",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR7.jpg",
                     "type" => "article",
                     "author" => "The US",
                     "date" => "n.d.",
                     "religion" => "Judaism",
                     "category" => ["Religious Traditions"],
-                    "description" => "Thursday marks the fast of the 17th of the Hebrew month of Tammuz, a day commemorating several tragedies in Jewish history and the start of a mourning period known as the Three Weeks.",
                     "source" => "https://theus.org.uk/article/fast-tammuz"
                 ],
+                "LR8" => [
+                    "title" => "What is Obon?",
+                    "resourceImg" => "../assets/data/library/LR8.jpg",
+                    "type" => "article",
+                    "author" => "East West",
+                    "date" => "n.d.",
+                    "religion" => "Buddhism",
+                    "category" => ["Religious Traditions", "Religious Practices"],
+                    "source" => "https://blog.eastwest.org/what-is-obon"
+                ],
+                "LR9" => [
+                    "title" => "Assumption of the Blessed Virgin Mary",
+                    "resourceImg" => "../assets/data/library/LR9.webp",
+                    "type" => "article",
+                    "author" => "My Catholic Life",
+                    "date" => "n.d.",
+                    "religion" => "Christianity",
+                    "category" => ["Religious Traditions"],
+                    "source" => "https://mycatholic.life/saints/saints-of-the-liturgical-year/august-15-assumption-of-the-blessed-virgin-mary/"
+                ],
+                "LR10" => [
+                    "title" => "Ganesh Chaturthi (Vinayaka Chathurthi)",
+                    "resourceImg" => "../assets/data/library/LR10.jpg",
+                    "type" => "article",
+                    "author" => "P. Punarvasu",
+                    "date" => "2023",
+                    "religion" => "Hinduism",
+                    "category" => ["Religious Practices"],
+                    "source" => "https://www.indastro.com/astrology-articles/what-significance-ganesh-chaturthi.html"
+                ],
                 // "Placeholder" => [
-                    // "title" => "",
-                    // "resourceImg" => "",
-                    // "type" => "",
-                    // "author" => "",
-                    // "date" => "",
-                    // "religion" => "",
-                    // "category" => ["Religious Traditions"],
-                    // "description" => "",
-                    // "source" => ""
+                //     "title" => "",
+                //     "resourceImg" => "",
+                //     "type" => "",
+                //     "author" => "",
+                //     "date" => "",
+                //     "religion" => "",
+                //     "category" => ["Religious Traditions"],
+                //     "source" => ""
                 // ]
             ]
         ];
