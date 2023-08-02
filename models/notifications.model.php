@@ -24,6 +24,7 @@ class notificationsModel {
                 $upvotesCount = 0;
                 $contentViolations = "";
                 $notificationStatus = "";
+                $avatar = '';
     
                 if ($notif["notificationSource"] == "Calendar") {
                     $stmt = $pdo->prepare("SELECT c.event, cc.title, a.username, n.notificationStatus
@@ -39,7 +40,6 @@ class notificationsModel {
                     $notification = $notificationInfo["event"];
                     $notificationIcon = "../assets/img/feat-calendar.png";
                     $notificationStatus = $notificationInfo["notificationStatus"];
-                    $avatar = '';
                 } else if ($notif["notificationSource"] == "Community Creations") {
                     $uniqueid = $notif["creationid"];
                     
@@ -57,7 +57,6 @@ class notificationsModel {
                     $notificationIcon = "../assets/img/diversity.png";
                     $personInvolved = $notificationInfo["username"];
                     $notificationStatus = $notificationInfo["notificationStatus"];
-                    $avatar = '';
                 } else if ($notif["notificationSource"] == "Discussion Forum Posts") {
                     $stmt = $pdo->prepare("SELECT p.topicId, t.topicTitle, a.username, n.notificationStatus, a.avatar
                                             FROM notifications AS n
@@ -168,7 +167,6 @@ class notificationsModel {
                     $notificationIcon = "../assets/img/discussionForum/report.png";
                     $contentViolations = $notificationInfo["contentViolations"];
                     $notificationStatus = $notificationInfo["notificationStatus"];
-                    $avatar = '';
                 }
 
                 $stmt = $pdo->prepare("SELECT notifications FROM accounts WHERE accountid = :accountid");
