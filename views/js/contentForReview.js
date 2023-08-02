@@ -179,7 +179,9 @@ $(function() {
     
                 setTimeout(function() {
                     $('#toast').removeClass('show');
-                    location.reload();
+
+                    var contentClass = "." + contentid;
+                    $(contentClass).hide();
                 }, 2000);
             }
         });
@@ -192,7 +194,8 @@ $(function() {
             url: "../../ajax/deleteReportedContent.ajax.php",
             method: "POST",
             data: {"contentid" : contentid},
-            success:function(){
+            success:function(data){
+                console.log(data);
                 $("#toast").html("Content deleted.");
             }, error: function() {
                 $("#toast").html("There was an error processing your request. Please try again later.")
@@ -206,7 +209,9 @@ $(function() {
     
                 setTimeout(function() {
                     $('#toast').removeClass('show');
-                    location.reload();
+                    
+                    var contentClass = "." + contentid;
+                    $(contentClass).hide();
                 }, 2000);
             }
         });
@@ -240,20 +245,9 @@ $(function() {
             contentType: false,
             success: function() {
                 $("#toast").html("User reported.");
-
-                $.ajax({
-                    url: "../../ajax/resolveReportedContent.ajax.php",
-                    method: "POST",
-                    data: {"contentid" : contentid},
-                    complete: function() {
-                        setTimeout(function() {
-                            location.reload();
-                        }, 500);
-                    }
-                });
             },
             error: function() {
-                $("#toast").html("There was an error processing your reque st. Please try again later.")
+                $("#toast").html("There was an error processing your request. Please try again later.")
                 $("#toast").css("background-color", "#E04F5F");
             },
             complete: function() {

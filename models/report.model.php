@@ -148,91 +148,100 @@ class reportContentModel {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->beginTransaction();
             $accountid = "";
+            $reportid = "";
 
             if (substr($contentid, 0, 2) == "CC") {
-                $stmt = $pdo->prepare("SELECT accountid, filedata FROM communitycreations WHERE creationid = :creationid");
-                $stmt->bindParam(":creationid", $contentid, PDO::PARAM_STR);
-                $stmt->execute();
-                $filepath = $stmt->fetch(PDO::FETCH_ASSOC);
-                $accountid = $filepath["accountid"];
-                if (file_exists($filepath["filedata"])) {
-                    unlink($filepath["filedata"]);
+                $community_select = $pdo->prepare("SELECT * FROM communitycreations");
+                $community_select->execute();
+                $creationInfo = $community_select->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($creationInfo as $info) {
+                    if($info['creationid'] == $contentid) {
+                        $accountid = $info['accountid'];
+                        if (file_exists($info['filedata'])) {
+                            unlink($info['filedata']);
+                        }
+                    }
+                }
+            } else {
+                $topics_select = $pdo->prepare("SELECT * FROM topics");
+                $topics_select->execute();
+                $topicsInfo = $topics_select->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($topicsInfo as $info) {
+                    if($info['topicId'] == $contentid) {
+                        $accountid = $info['accountid'];
+                    }
                 }
 
-                $community_delete = $pdo->prepare("DELETE FROM communitycreations WHERE creationid = :creationid");
-                $community_delete->bindParam(":creationid", $contentid, PDO::PARAM_STR);
-                $community_delete->execute();
-                $pdo->commit();
-            } else {
-                $topics_delete = $pdo->prepare("DELETE FROM topics WHERE topicId = :topicId");
-                $topics_delete->bindParam(":topicId", $contentid, PDO::PARAM_STR);
-                $topics_delete->execute();
-                $pdo->commit();
-                
-                $posts_delete = $pdo->prepare("DELETE FROM posts WHERE postId = :postId");
-                $posts_delete->bindParam(":postId", $contentid, PDO::PARAM_STR);
-                $posts_delete->execute();
-                $pdo->commit();
+                $posts_select = $pdo->prepare("SELECT * FROM posts");
+                $posts_select->execute();
+                $postsInfo = $posts_select->fetchAll(PDO::FETCH_ASSOC);
 
-                $reply_delete = $pdo->prepare("DELETE FROM reply WHERE replyId = :replyId");
-                $reply_delete->bindParam(":replyId", $contentid, PDO::PARAM_STR);
-                $reply_delete->execute();
-                $pdo->commit();
+                foreach ($postsInfo as $info) {
+                    if($info['postId'] == $contentid) {
+                        $accountid = $info['accountid'];
+                    }
+                }
+
+                $reply_select = $pdo->prepare("SELECT * FROM reply");
+                $reply_select->execute();
+                $replyInfo = $reply_select->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($replyInfo as $info) {
+                    if($info['replyId'] == $contentid) {
+                        $accountid = $info['accountid'];
+                    }
+                }
             }           
 
+            $community_delete = $pdo->prepare("DELETE FROM communitycreations WHERE creationid = :creationid");
+            $community_delete->bindParam(":creationid", $contentid, PDO::PARAM_STR);
+            $community_delete->execute();
+
+            $topics_delete = $pdo->prepare("DELETE FROM topics WHERE topicId = :topicId");
+            $topics_delete->bindParam(":topicId", $contentid, PDO::PARAM_STR);
+            $topics_delete->execute();
+            
+            $posts_delete = $pdo->prepare("DELETE FROM posts WHERE postId = :postId");
+            $posts_delete->bindParam(":postId", $contentid, PDO::PARAM_STR);
+            $posts_delete->execute();
+
+            $reply_delete = $pdo->prepare("DELETE FROM reply WHERE replyId = :replyId");
+            $reply_delete->bindParam(":replyId", $contentid, PDO::PARAM_STR);
+            $reply_delete->execute();
+            
             $bookmark_delete = $pdo->prepare("DELETE FROM bookmarks WHERE resourceid = :resourceid");
             $bookmark_delete->bindParam(":resourceid", $contentid, PDO::PARAM_STR);
             $bookmark_delete->execute();
-            $pdo->commit();
 
-            $delete_content = $pdo->prepare("UPDATE reportedcontent SET actionTaken = 'Delete', reportStatus = 'Completed' WHERE contentid = :contentid");
-            $delete_content->bindParam(":contentid", $contentid, PDO::PARAM_STR);
-            $delete_content->execute();
-            $pdo->commit();
-
-            $get_reportid = $pdo->prepare("SELECT accountid FROM reportedcontent WHERE contentid = :contentid");
+            $get_reportid = $pdo->prepare("SELECT reportid FROM reportedcontent WHERE contentid = :contentid");
             $get_reportid->bindParam(":contentid", $contentid, PDO::PARAM_STR);
             $get_reportid->execute();
-            $reportids = $get_reportid->fetch(PDO::FETCH_ASSOC);
-            $reportid = $reportids["reportid"];
+            $reportid = $get_reportid->fetchColumn();
+
+            $delete_report = $pdo->prepare("UPDATE reportedcontent SET actionTaken = 'Delete', reportStatus = 'Completed' WHERE contentid = :contentid");
+            $delete_report->bindParam(":contentid", $contentid, PDO::PARAM_STR);
+            $delete_report->execute();
+
+            $notificationDate = date('Y-m-d');
 
             $notify_user = $pdo->prepare("INSERT INTO notifications(accountid, reportid, notificationSource, notificationDate) VALUES (:accountid, :reportid, :notificationSource, :notificationDate)");
             $notify_user->bindParam(":accountid", $accountid, PDO::PARAM_STR);
-            $notify_user->bindParam(":reportid", $reportid, PDO::PARAM_STR);
+            $notify_user->bindParam(":reportid", $reportid, PDO::PARAM_INT);
             $notify_user->bindValue(":notificationSource", "Reported Content", PDO::PARAM_STR);
-            $notify_user->bindParam(":notificationDate", date('Y-m-d'), PDO::PARAM_STR);
+            $notify_user->bindParam(":notificationDate", $notificationDate, PDO::PARAM_STR);
             $notify_user->execute();
             $pdo->commit();
     
         } catch (Exception $e) {
             $pdo->rollBack();
-            return "error";
-        }
-    
-        $pdo = null;
-        $stmt = null;
-    }
-    
-    static public function mdlReportUserOfContent($contentid) {
-        $db = new Connection();
-        $pdo = $db->connect();
-    
-        try {
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $pdo->beginTransaction();
 
-            // report user then delete reported content
-            // mdlSubmitReportUser($data);
-            // mdlDeleteReportedContent($contentid);
-    
-            $pdo->commit();
-        } catch (Exception $e) {
-            $pdo->rollBack();
             return "error";
         }
     
         $pdo = null;
-    } 
+    }
 
 }
 
@@ -240,40 +249,28 @@ class reportUserModel {
     static public function mdlGetReportedUsers() {
         $db = new Connection();
         $pdo = $db->connect();
-        
+    
         $stmt = $pdo->prepare("SELECT * FROM reportedusers");
         $stmt->execute();
         $reportedUser = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $reportedUsers = [];
-        $accountid = "";
     
         foreach ($reportedUser as $user) {  
-            if ($user["reportStatus"] == "Pending") {
-                $stmt2 = $pdo->prepare("SELECT accountid, username FROM accounts");
-                $stmt2->execute();
-                $accounts = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-        
-                foreach ($accounts as $account) {
-                    if ($account["username"] == $user["username"]) {
-                        $accountid = $account["accountid"];
-                        break;
-                    }
-                }
-
-                $reportedUsers[$accountid] = [
-                    "userLink" => $user["username"],
+            if ($user["reportStatus"] == "Pending") {                 
+                $reportedUsers[] = [
+                    "userid" => $user["accountid"],
                     "violation" => $user["userViolations"],
                     "additionalContext" => $user["additionalContext"],
                     "reportedOn" => $user["reportedOn"],
                     "reportedBy" => $user["reportedBy"]
-                ];   
+                ]; 
             }
         }
     
         $jsonData = json_encode($reportedUsers);
         header('Content-Type: application/json');
         echo $jsonData;
-    }
+    }    
 
     static public function mdlSubmitReportUser($data){
         $db = new Connection();
@@ -283,9 +280,9 @@ class reportUserModel {
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->beginTransaction();
 		
-			$stmt = $pdo->prepare("INSERT INTO reportedusers(username, userViolations, additionalContext, reportedOn, reportedBy) VALUES (:username, :userViolations, :additionalContext, :reportedOn, :reportedBy)");
+			$stmt = $pdo->prepare("INSERT INTO reportedusers(accountid, userViolations, additionalContext, reportedOn, reportedBy) VALUES (:accountid, :userViolations, :additionalContext, :reportedOn, :reportedBy)");
 	
-            $stmt->bindParam(":username", $data["username"], PDO::PARAM_STR);
+            $stmt->bindParam(":accountid", $data["username"], PDO::PARAM_STR);
             $stmt->bindParam(":userViolations", $data["userViolations"], PDO::PARAM_STR);
             $stmt->bindParam(":additionalContext", $data["additionalContext"], PDO::PARAM_STR);
             $stmt->bindParam(":reportedOn", $data["reportedOn"], PDO::PARAM_STR);

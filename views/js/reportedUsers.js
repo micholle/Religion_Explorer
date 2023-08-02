@@ -105,45 +105,43 @@ $(function() {
     });
 
     function getReportedUsers(){
-    $.ajax({
-        url: "../../ajax/getReportedUsers.ajax.php",
-        method: "POST",
-        success: function (data) {
-            var reportedUsers = data;
-            
-            $(".adminReviewContainerContent").remove();
-
-            var userid = "";
-            var userLink = "";
-            var violations = "";
-            var additionalContext = "";
-            var reportedOn = "";
-            var reportedBy = "";
-    
-            for (user in reportedUsers) {
-                userDetails = reportedUsers[user];
-    
-                userid = user;
-                userLink = userDetails.userLink;
-                violations = userDetails.violation;
-                additionalContext = userDetails.additionalContext;
-                reportedOn = userDetails.reportedOn;
-                reportedBy = userDetails.reportedBy;
-
+        $.ajax({
+            url: "../../ajax/getReportedUsers.ajax.php",
+            method: "POST",
+            success: function (data) {
+                var reportedUsers = data;
+                console.log(reportedUsers);
                 
-                $("#useridColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p> <a href="' + ("viewUserProfile.php?accountid=" + userid)  + '">' + userid + '</a></p> </div>');
-                $("#userViolationColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
-                $("#userAdditionalContextColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
-                $("#userReportedOnColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
-                $("#userReportedByColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
-                $("#userActionColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-check.png" data-userid="' + userid + '" data-action="resolve">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-slash.png" data-userid="' + userid + '" data-action="suspend">' +
-                    '<img class="reportButton" src="../assets/img/admin/action-dash.png" data-userid="' + userid + '" data-action="ban">' +
-                '</div>');
+                $(".adminReviewContainerContent").remove();
+
+                var userid = "";
+                var violations = "";
+                var additionalContext = "";
+                var reportedOn = "";
+                var reportedBy = "";
+        
+                for (user in reportedUsers) {
+                    userDetails = reportedUsers[user];
+        
+                    userid = userDetails.userid;
+                    violations = userDetails.violation;
+                    additionalContext = userDetails.additionalContext;
+                    reportedOn = userDetails.reportedOn;
+                    reportedBy = userDetails.reportedBy;
+                    
+                    $("#useridColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p> <a href="' + ("viewUserProfile.php?accountid=" + userid)  + '">' + userid + '</a></p> </div>');
+                    $("#userViolationColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
+                    $("#userAdditionalContextColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
+                    $("#userReportedOnColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
+                    $("#userReportedByColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
+                    $("#userActionColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
+                        '<img class="reportButton" src="../assets/img/admin/action-check.png" data-userid="' + userid + '" data-action="resolve">' +
+                        '<img class="reportButton" src="../assets/img/admin/action-slash.png" data-userid="' + userid + '" data-action="suspend">' +
+                        '<img class="reportButton" src="../assets/img/admin/action-dash.png" data-userid="' + userid + '" data-action="ban">' +
+                    '</div>');
+                }
             }
-        }
-    });
+        });
     }
 
     $("#userSearch").keyup(function () { 
@@ -192,14 +190,15 @@ $(function() {
                 $("#toast").css("background-color", "#E04F5F");
             },
             complete: function() {
-                $("#resolveReportContentModal").removeClass("fade").modal("hide");
-                $("#resolveReportContentModal").modal("dispose");
+                $("#resolveReportUserModal").removeClass("fade").modal("hide");
+                $("#resolveReportUserModal").modal("dispose");
 
-                $('#toast').addClass('show');
+                $("#toast").addClass("show");
     
                 setTimeout(function() {
-                    $('#toast').removeClass('show');
-                    location.reload();
+                    $("#toast").removeClass("show");
+                    var userClass = "." + userID;
+                    $(userClass).hide();
                 }, 2000);
             }
         });
@@ -227,7 +226,8 @@ $(function() {
                     $('#toast').addClass('show');
                     setTimeout(function() {
                         $('#toast').removeClass('show');
-                        location.reload();
+                        var userClass = "." + userID;
+                        $(userClass).hide();
                     }, 2000);
             },
             error: function() {
@@ -253,9 +253,12 @@ $(function() {
                     $("#toast").html("User banned.");
                     $("#banUserModal").removeClass("fade").modal("hide");
                     $("#banUserModal").modal("dispose");
-                    $('#toast').addClass('show');
+                    $("#toast").addClass("show");
+
                     setTimeout(function() {
-                        $('#toast').removeClass('show');
+                        $("#toast").removeClass("show");
+                        var userClass = "." + userID;
+                        $(userClass).hide();
                     }, 2000);
             },
             error: function() {
