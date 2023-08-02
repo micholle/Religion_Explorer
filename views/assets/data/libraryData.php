@@ -83,7 +83,7 @@ class libraryData {
             "photos" => [
                 "LP1" => [
                     "title" => "Ceiling Frescoes",
-                    "file" => "../assets/data/library/Ceiling_Frescoes.png",
+                    "file" => "../assets/data/library/LP1.png",
                     "religion" => "Christianity",
                     "category" => ["Historical Context"],
                     "description" => "This monumental fresco portrays various episodes from the life of St. Charles Borromeo and the triumph of the Catholic Church. It showcases the glory of the Baroque era and the spiritual power of the Catholic faith.",
@@ -91,33 +91,84 @@ class libraryData {
                 ],
                 "LP2" => [
                     "title" => "Gautama Buddha",
-                    "file" => "../assets/data/library/Gautama_Buddha.png",
+                    "file" => "../assets/data/library/LP2.png",
                     "religion" => "Buddhism",
                     "category" => ["Religious Practices"],
                     "description" => "Gautama Buddha, also known as Siddhartha Gautama, was a spiritual leader and the founder of Buddhism. His teachings and philosophy have had a profound and lasting impact on millions of people around the world.",
                     "author" => "Jose Luis Sanchez"
                 ],  
-                // "Photo 3" => [
-                //     "file" => "",
+                "LP3" => [
+                    "title" => "Hindu Gods and Deities (Lord Krishna)",
+                    "file" => "../assets/data/library/LP3.jpg",
+                    "religion" => "Hinduism",
+                    "category" => ["Theology"],
+                    "description" => "Lord Krishna is one of the most popular Gods in Hinduism. Krishna is considered the supreme deity, worshipped across many traditions of Hinduism in a variety of different perspectives. Krishna is recognized as the eighth incarnation (avatar) of Lord Vishnu, and one and the same as Lord Vishnu, one of the trimurti and as the supreme god in his own right.",
+                    "author" => ""
+                ],
+                "LP4" => [
+                    "title" => "Courtyard of the Jama Mosque, Isfahan",
+                    "file" => "../assets/data/library/LP4.avif",
+                    "religion" => "Islam",
+                    "category" => ["Religious Practices"],
+                    "description" => "Located in the historic centre of Isfahan, the Masjed-e Jāmé (Friday mosque) can be seen as a stunning illustration of the evolution of mosque architecture over twelve centuries, starting in ad 841. It is the oldest preserved edifice of its type in Iran and a prototype for later mosque designs throughout Central Asia. ",
+                    "author" => "Eugène Flandin"
+                ],
+                "LP5" => [
+                    "title" => "Mohammed and the first four Caliphs",
+                    "file" => "../assets/data/library/LP5.avif",
+                    "religion" => "Islam",
+                    "category" => ["Religious Practices"],
+                    "description" => "The Early period in Islam's socio-political history and art is estimated to be around 640 to 900 CE. This falls just after Mohammad's death, which was in the year 632 CE. After Mohammad's death, four Caliphs were appointed as his successors, known as the “Rightly Guided Caliphs” - Caliphs are rulers within what is known as the caliphate, which is a state under Islamic rule.",
+                    "author" => ""
+                ],
+                "LP6" => [
+                    "title" => "Vishnu Laying on this Serpent",
+                    "file" => "../assets/data/library/LP6.jpg",
+                    "religion" => "Hinduism",
+                    "category" => ["Theology"],
+                    "description" => "The Vishnu Anantasayana panel, Dashavatara Temple, Deogarh. 5th-6th century CE. The Gupta-period sculpture adorning the temple includes many images from Hindu mythology. This celebrated panel from the south wall of the temple has Vishnu reclining on the serpent Ananta and floating on the waters of oblivion. Above him, seated on a lotus leaf, is the Hindu creator god Brahma. Lakshmi, the wife of Vishnu, massages his feet.",
+                    "author" => ""
+                ],
+                "LP7" => [
+                    "title" => "Pietà",
+                    "file" => "../assets/data/library/LP7.webp",
+                    "religion" => "Christianity",
+                    "category" => ["Theology"],
+                    "description" => "Pietà, as a theme in Christian art, depiction of the Virgin Mary supporting the body of the dead Christ. Some representations of the Pietà include John the Apostle, Mary Magdalene, and sometimes other figures on either side of the Virgin, but the great majority show only Mary and her Son.",
+                    "author" => "Michelangelo"
+                ],
+                "LP8" => [
+                    "title" => "Standing Maitreya",
+                    "file" => "../assets/data/library/LP8.jpg",
+                    "religion" => "Buddhism",
+                    "category" => ["Theology"],
+                    "description" => "The figure of Maitreya is seen standing on a lotus pedestal. From the position of the broken right hand it appears that originally it was in abhaya mudra. The left hand, which hangs down carries a vessel. The figure is characterized by the usual features of Gandhara images such as the mark of urna on the forehead, the moustache, all the ornaments, the heavy folds of the drapery and the scalloped aureole. Noteworthy features are the absence of a pair of sandals on his feet and the absence of a stupa in his coiffure.",
+                    "author" => ""
+                ],
+                "LP9" => [
+                    "title" => "Jews cross Red Sea pursued by Pharoah",
+                    "file" => "../assets/data/library/LP9.jpg",
+                    "religion" => "Judaism",
+                    "category" => ["Theology"],
+                    "description" => "The story of Jews crossing the Red Sea while being pursued by Pharaoh is a significant event in Jewish history and is a central part of the Passover narrative, as mentioned in the Hebrew Bible. This event is known as the Splitting of the Red Sea or the Parting of the Red Sea and is considered a pivotal moment in Jewish history. It symbolizes God's intervention in delivering the Jewish people from slavery and the beginning of their journey to the Promised Land.",
+                    "author" => ""
+                ],
+                "LP10" => [
+                    "title" => "The Birds' Head Haggadah",
+                    "file" => "../assets/data/library/LP10.jpg",
+                    "religion" => "Judaism",
+                    "category" => ["Theology"],
+                    "description" => "The Birds' Head Haggadah is a unique medieval Passover Haggadah, which is a Jewish text used during the Passover Seder. It is named after its distinctive feature, which is the illustrations of the human figures with bird-like heads, rather than the conventional human heads found in other Haggadot.",
+                    "author" => ""
+                ],
+                // "" => [
+                //     "title" => "",
+                //     "file" => "../assets/data/library/LP6",
                 //     "religion" => "",
-                //     "category" => ["", ""],
+                //     "category" => [""],
                 //     "description" => "",
                 //     "author" => ""
-                // ],    
-                // "Photo 4" => [
-                //     "file" => "",
-                //     "religion" => "",
-                //     "category" => ["", ""],
-                //     "description" => "",
-                //     "author" => ""
-                // ],    
-                // "Photo 5" => [
-                //     "file" => "",
-                    // "religion" => "",
-                //     "category" => ["", ""],
-                //     "description" => "",
-                //     "author" => ""
-                // ]  
+                // ]
             ],
             "videos" => [
                 "LV1" => [
