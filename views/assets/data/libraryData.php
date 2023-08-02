@@ -83,7 +83,7 @@ class libraryData {
             "photos" => [
                 "LP1" => [
                     "title" => "Ceiling Frescoes",
-                    "file" => "../assets/data/img/library/Ceiling_Frescoes.png",
+                    "file" => "../assets/data/library/Ceiling_Frescoes.png",
                     "religion" => "Christianity",
                     "category" => ["Historical Context"],
                     "description" => "This monumental fresco portrays various episodes from the life of St. Charles Borromeo and the triumph of the Catholic Church. It showcases the glory of the Baroque era and the spiritual power of the Catholic faith.",
@@ -91,7 +91,7 @@ class libraryData {
                 ],
                 "LP2" => [
                     "title" => "Gautama Buddha",
-                    "file" => "../assets/data/img/library/Gautama_Buddha.png",
+                    "file" => "../assets/data/library/Gautama_Buddha.png",
                     "religion" => "Buddhism",
                     "category" => ["Religious Practices"],
                     "description" => "Gautama Buddha, also known as Siddhartha Gautama, was a spiritual leader and the founder of Buddhism. His teachings and philosophy have had a profound and lasting impact on millions of people around the world.",
@@ -122,7 +122,7 @@ class libraryData {
             "videos" => [
                 "LV1" => [
                     "title" => "Mosque",
-                    "file" => "../assets/data/vid/library/Mosque.mp4",
+                    "file" => "../assets/data/library/Mosque.mp4",
                     "religion" => "Islam",
                     "category" => ["Religious Practices"],
                     "description" => "A mosque is a place of worship and community for followers of Islam. It is typically a building where Muslims gather for congregational prayers, engage in spiritual activities, seek religious guidance, and foster community bonds. ",
@@ -130,7 +130,7 @@ class libraryData {
                 ],
                 "LV2" => [
                     "title" => "Hindu Event",
-                    "file" => "../assets/data/vid/library/Hindu_Event.mp4",
+                    "file" => "../assets/data/library/Hindu_Event.mp4",
                     "religion" => "Hinduism",
                     "category" => ["Religious Practices"],
                     "description" => "Hindu events encompass a rich tapestry of religious, cultural, and traditional celebrations that hold significant importance for followers of Hinduism. These events are often marked by elaborate rituals, vibrant festivities, and communal gatherings, creating an atmosphere of joy, devotion, and spiritual connection.",
@@ -160,98 +160,114 @@ class libraryData {
             ],
             "readingMats" => [
                 "LR1" => [
-                    "title" => "Ashura",
-                    "resourceImg" => "../assets/data/img/library/rm9.jpg",
+                    "title" => "Muharram Festival",
+                    "resourceImg" => "../assets/data/library/LR1.jpg",
                     "type" => "article",
-                    "author" => "National Today",
-                    "date" => "2023",
+                    "author" => "Memphis Tours",
+                    "date" => "n.d.",
                     "religion" => "Islam",
                     "category" => ["Religious Traditions"],
-                    "description" => "The day of Ashura is marked by Muslims as a whole, but for Shia Muslims it is a major religious commemoration of the martyrdom at Karbala of Hussein, a grandson of the Prophet Muhammad.",
-                    "source" => "https://nationaltoday.com/ashurah"
+                    "source" => "https://www.memphistours.com/India/india-travel-guide/festivals-in-india/wiki/muharram-festival"
                 ],
                 "LR2" => [
                     "title" => "Celebrating Dhamma Day (Asalha Puja)",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR2.png",
                     "type" => "article",
                     "author" => "J. Kumara",
                     "date" => "2021",
                     "religion" => "Buddhism",
                     "category" => ["Religious Traditions"],
-                    "description" => "Dharma (Dhamma) Day, also known as “Asalha Puja” is one of the most important holidays in Theravada Buddhism. It commemorates the Buddha's first sermon following his attainment of enlightenment.",
                     "source" => "https://www.givelify.com/blog/dhamma-day-asalha-puja/"
                 ],
                 "LR3" => [
                     "title" => "Being Christian in Western Europe",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR3.webp",
                     "type" => "article",
                     "author" => "Pew Research Center",
                     "date" => "2018",
                     "religion" => "Christianity",
                     "category" => ["Social Issues"],
-                    "description" => "The majority of Europe's Christians are non-practicing, but they differ from religiously unaffiliated people in their views on God, attitudes toward Muslims and immigrants, and opinions about religion's role in society.",
                     "source" => "https://www.pewresearch.org/religion/2018/05/29/being-christian-in-western-europe/"
                 ],
                 "LR4" => [
                     "title" => "What it means to be a Christian in America",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR4.jpg",
                     "type" => "article",
                     "author" => "M. Bowman",
                     "date" => "2018",
                     "religion" => "Christianity",
                     "category" => ["Social Issues"],
-                    "description" => "From the very beginning of European settlement in the United States, a wide range of Christian faiths appeared in America. Roman Catholics, Baptists and Methodists saw their numbers rise in the early 19th century.",
                     "source" => "https://theconversation.com/what-it-means-to-be-a-christian-in-america-today-97981"
                 ],  
                 "LR5" => [
                     "title" => "African Christianity: Its public role",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR5.jpg",
                     "type" => "book",
                     "author" => "P. Gifford",
                     "date" => "1998",
                     "religion" => "Christianity",
                     "category" => ["Social Issues", "Historical Context"],
-                    "description" => "Examines African Christianity in the mid-1990s against the back ground of the continent's current social, economic, and political circumstances. Gifford sheds light on the dynamics of African churches and churchgoers.",
-                    "mainPoint1" => "",
-                    "mainPoint2" => "",
-                    "mainPoint3" => "",
                     "source" => "https://books.google.com.ph/books/about/African_Christianity.html?id=SDS45RNq6ZkC&redir_esc=y"
                 ],    
                 "LR6" => [
                     "title" => "A History of Christianity in India: 1707 - 1858",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR6.jpg",
                     "type" => "book",
                     "author" => "S. Neil",
                     "date" => "2002",
                     "religion" => "Christianity",
                     "category" => ["Historical Context"],
-                    "description" => "Christians form the third largest religious community in India. How has this come about? There are many studies of separate groups: but there has so far been no major history of the three large groups.",
-                    "mainPoint1" => "",
-                    "mainPoint2" => "",
-                    "mainPoint3" => "",
                     "source" => "https://www.cambridge.org/us/universitypress/subjects/religion/church-history/history-christianity-india-17071858"
                 ],
                 "LR7" => [
                     "title" => "Fast of the 17th of Tammuz",
-                    "resourceImg" => "",
+                    "resourceImg" => "../assets/data/library/LR7.jpg",
                     "type" => "article",
                     "author" => "The US",
                     "date" => "n.d.",
                     "religion" => "Judaism",
                     "category" => ["Religious Traditions"],
-                    "description" => "Thursday marks the fast of the 17th of the Hebrew month of Tammuz, a day commemorating several tragedies in Jewish history and the start of a mourning period known as the Three Weeks.",
                     "source" => "https://theus.org.uk/article/fast-tammuz"
                 ],
+                "LR8" => [
+                    "title" => "What is Obon?",
+                    "resourceImg" => "../assets/data/library/LR8.jpg",
+                    "type" => "article",
+                    "author" => "East West",
+                    "date" => "n.d.",
+                    "religion" => "Buddhism",
+                    "category" => ["Religious Traditions", "Religious Practices"],
+                    "source" => "https://blog.eastwest.org/what-is-obon"
+                ],
+                "LR9" => [
+                    "title" => "Assumption of the Blessed Virgin Mary",
+                    "resourceImg" => "../assets/data/library/LR9.webp",
+                    "type" => "article",
+                    "author" => "My Catholic Life",
+                    "date" => "n.d.",
+                    "religion" => "Christianity",
+                    "category" => ["Religious Traditions"],
+                    "source" => "https://mycatholic.life/saints/saints-of-the-liturgical-year/august-15-assumption-of-the-blessed-virgin-mary/"
+                ],
+                "LR10" => [
+                    "title" => "Ganesh Chaturthi (Vinayaka Chathurthi)",
+                    "resourceImg" => "../assets/data/library/LR10.jpg",
+                    "type" => "article",
+                    "author" => "P. Punarvasu",
+                    "date" => "2023",
+                    "religion" => "Hinduism",
+                    "category" => ["Religious Practices"],
+                    "source" => "https://www.indastro.com/astrology-articles/what-significance-ganesh-chaturthi.html"
+                ],
                 // "Placeholder" => [
-                    // "title" => "",
-                    // "resourceImg" => "",
-                    // "type" => "",
-                    // "author" => "",
-                    // "date" => "",
-                    // "religion" => "",
-                    // "category" => ["Religious Traditions"],
-                    // "description" => "",
-                    // "source" => ""
+                //     "title" => "",
+                //     "resourceImg" => "",
+                //     "type" => "",
+                //     "author" => "",
+                //     "date" => "",
+                //     "religion" => "",
+                //     "category" => ["Religious Traditions"],
+                //     "source" => ""
                 // ]
             ]
         ];
