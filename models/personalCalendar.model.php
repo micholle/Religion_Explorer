@@ -54,12 +54,14 @@ class personalCalendarModel{
             $stmt->bindParam(":date", $data["date"], PDO::PARAM_STR);
             $stmt->execute();
     
-            $stmt3 = $pdo->prepare("INSERT INTO notifications(accountid, personaleventid, notificationSource, notificationDate) VALUES (:accountid, :personaleventid, :notificationSource, :notificationDate)");
-            $stmt3->bindParam(":accountid", $data["accountid"], PDO::PARAM_STR);
-            $stmt3->bindParam(":personaleventid", $personaleventid, PDO::PARAM_STR);
-            $stmt3->bindValue(":notificationSource", "Calendar", PDO::PARAM_STR);
-            $stmt3->bindParam(":notificationDate", $data["date"], PDO::PARAM_STR);
-            $stmt3->execute();
+            if (strtotime($data["date"]) > time()) {
+                $stmt3 = $pdo->prepare("INSERT INTO notifications(accountid, personaleventid, notificationSource, notificationDate) VALUES (:accountid, :personaleventid, :notificationSource, :notificationDate)");
+                $stmt3->bindParam(":accountid", $data["accountid"], PDO::PARAM_STR);
+                $stmt3->bindParam(":personaleventid", $personaleventid, PDO::PARAM_STR);
+                $stmt3->bindValue(":notificationSource", "Calendar", PDO::PARAM_STR);
+                $stmt3->bindParam(":notificationDate", $data["date"], PDO::PARAM_STR);
+                $stmt3->execute();
+            }
     
             $pdo->commit();
             echo $data["event"];
