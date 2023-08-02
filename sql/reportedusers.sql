@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2023 at 02:22 AM
+-- Generation Time: Aug 02, 2023 at 06:16 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `reportedusers` (
   `reportid` int(11) NOT NULL,
-  `username` text NOT NULL,
+  `accountid` varchar(5) NOT NULL,
   `userViolations` text NOT NULL,
   `additionalContext` text NOT NULL,
   `reportedOn` date NOT NULL,
