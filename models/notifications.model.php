@@ -24,6 +24,7 @@ class notificationsModel {
                 $upvotesCount = 0;
                 $contentViolations = "";
                 $notificationStatus = "";
+                $avatar = '';
     
                 if ($notif["notificationSource"] == "Calendar") {
                     $stmt = $pdo->prepare("SELECT c.event, cc.title, a.username, n.notificationStatus
