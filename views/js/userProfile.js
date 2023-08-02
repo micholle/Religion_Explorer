@@ -35,97 +35,131 @@ $(function() {
     getPersonalCalendar();
     getBookmarks();
     getCreations();
+    getEngagementData();
 
-    //Engagement Insights
-    var engagementBuddhists = 12;
-    var engagementChristians = 35;
-    var engagementHindus = 6;
-    var engagementIslams = 22;
-    var engagementJews = 25;
-    var engagementOtherReligions = 8;
-    var engagementNonReligious = 14;
 
-    const labels = ['Buddhism', 'Christianity', 'Hinduism', 'Islam', 'Judaism', 'Other Religions', 'Non-Religious'];
-
-    const registeredUsersData = {
-        labels: labels,
-        datasets: [{
-            axis: 'y',
-            label: 'Engagement Insights',
-            data: [engagementBuddhists, engagementChristians, engagementHindus, engagementIslams, engagementJews, engagementOtherReligions, engagementNonReligious],
-            fill: false,
-            backgroundColor: [
-                'rgba(186, 164, 0, 0.2)',
-                'rgba(86, 9, 122, 0.2)',
-                'rgba(168, 19, 21, 0.2)',
-                'rgba(1, 135, 68, 0.2)',
-                'rgba(19, 52, 168, 0.2)',
-                'rgba(179, 113, 0, 0.2)',
-                'rgba(36, 36, 36, 0.2)'
-            ],
-            borderColor: [
-                'rgb(186, 164, 0)',
-                'rgb(86, 9, 122)',
-                'rgb(168, 19, 21)',
-                'rgb(1, 135, 68)',
-                'rgb(19, 52, 168)',
-                'rgb(179, 113, 0)',
-                'rgb(36, 36, 36)'
-            ],
-            borderWidth: 1
-        }]
-    };
+    function updateDateRangeLabel(selectedDateRange) {
+        let endDate = new Date(); // Current date
+        let startDate;
     
-    const config = {
-        type: 'bar',
-        data: registeredUsersData,
-        options: {
-            indexAxis: 'y'
+        if (selectedDateRange === 'week') {
+            startDate = new Date();
+            startDate.setDate(startDate.getDate() - 7);
+        } else if (selectedDateRange === 'month') {
+            startDate = new Date();
+            startDate.setMonth(startDate.getMonth() - 1);
+        } else if (selectedDateRange === 'year') {
+            startDate = new Date();
+            startDate.setFullYear(startDate.getFullYear() - 1);
+        } else if (selectedDateRange === 'all') {
+            startDate = null;
+            endDate = null;
         }
-    };
     
-    const canvasElement = document.createElement('canvas');
-    canvasElement.id = 'engagementInsights';
-    document.getElementById('engagementInsightsContainer').appendChild(canvasElement);
+        const startDateString = startDate ? startDate.toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+        const endDateString = endDate ? endDate.toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+        document.getElementById('dateRangeLabel').innerText = `${startDateString} - ${endDateString}`;
+    }
     
-    const ctx = document.getElementById('engagementInsights').getContext('2d');
-    new Chart(ctx, config);
+    $(document).ready(function() {
+        getEngagementData();
+        $("#engagementDate").change(function() {
+            getEngagementData();
+        });
+    });
     
-    //total uploads
-    const totalUploadsData = {
-        labels: [
-          'Images',
-          'Videos',
-          'Reading Materials'
-        ],
-        datasets: [{
-          data: [5, 5, 5],
-          backgroundColor: [
-            'rgba(186, 164, 0, 0.2)',
-            'rgba(86, 9, 122, 0.2)',
-            'rgba(168, 19, 21, 0.2)',
-        ],
-        borderColor: [
-            'rgb(186, 164, 0)',
-            'rgb(86, 9, 122)',
-            'rgb(168, 19, 21)',
-        ],
-        borderWidth: 1,
-        }]
-      };
 
-    const totalUploadsConfig = {
-        type: 'pie',
-        data: totalUploadsData,
-    };
+    function getEngagementData() {
+        var selectedDateRange = $("#engagementDate").val();
+        updateDateRangeLabel(selectedDateRange);
+        $.ajax({
+            url: "../../models/profileStats.model.php",
+            method: "POST",
+            data: {
+                username: $("#accountUsernamePlaceholder").text(),
+                engagementDate: selectedDateRange
+            },
+            success: function(data) {
+                if (data.success) {
+                    // Update the chart with the retrieved data
+                    var engagementData = data.engagementData;
+                    const labels = ['Buddhism', 'Christianity', 'Hinduism', 'Islam', 'Judaism', 'Other Religions', 'Non-Religious'];
+    
+                    const registeredUsersData = {
+                        labels: labels,
+                        datasets: [{
+                            axis: 'y',
+                            label: 'Engagement Insights',
+                            data: engagementData,
+                            fill: false,
+                            backgroundColor: [
+                                'rgba(186, 164, 0, 0.2)',
+                                'rgba(86, 9, 122, 0.2)',
+                                'rgba(168, 19, 21, 0.2)',
+                                'rgba(1, 135, 68, 0.2)',
+                                'rgba(19, 52, 168, 0.2)',
+                                'rgba(179, 113, 0, 0.2)',
+                                'rgba(36, 36, 36, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgb(186, 164, 0)',
+                                'rgb(86, 9, 122)',
+                                'rgb(168, 19, 21)',
+                                'rgb(1, 135, 68)',
+                                'rgb(19, 52, 168)',
+                                'rgb(179, 113, 0)',
+                                'rgb(36, 36, 36)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    };
+    
+                    const config = {
+                        type: 'bar',
+                        data: registeredUsersData,
+                        options: {
+                            indexAxis: 'y'
+                        }
+                    };
+    
+                    // Remove the previous canvas element if it exists
+                    const existingCanvas = document.getElementById('engagementInsights');
+                    if (existingCanvas) {
+                        existingCanvas.parentNode.removeChild(existingCanvas);
+                    }
+    
+                    // Create the new canvas element for the chart
+                    const canvasElement = document.createElement('canvas');
+                    canvasElement.id = 'engagementInsights';
+                    document.getElementById('engagementInsightsContainer').appendChild(canvasElement);
+    
+                    const ctx = document.getElementById('engagementInsights').getContext('2d');
+                    new Chart(ctx, config);
 
-    const totalUploadsCanvas = document.createElement('canvas');
-    totalUploadsCanvas.id = 'totalCommunityUploads';
-    document.getElementById('totalCommunityUploadsContainer').appendChild(totalUploadsCanvas);
 
-    const totalUploadsCtx = document.getElementById('totalCommunityUploads').getContext('2d');
-    new Chart(totalUploadsCtx, totalUploadsConfig);
+                    // Update the other statistics on the page
+                    const countUpvotes = data.totalUpvotes;
+                    const countDownvotes = data.totalDownvotes;
+                    const countComments = data.totalTopicPosts + data.totalPostReplies;
 
+                    // Total of all downvotes, upvotes, and comments
+                    const totalEngagements = countUpvotes + countDownvotes + countComments;
+
+                    // Update the HTML elements with the statistics
+                    $("#countUpvotes").text(countUpvotes);
+                    $("#countDownvotes").text(countDownvotes);
+                    $("#countComments").text(countComments);
+                    $("#totalEngagements").text(totalEngagements);
+                } else {
+                    console.error(data.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error:", error);
+            }
+        });
+    }
+    
     $("#confirmDelete").click(function () { 
         $.ajax({
             url: "../../ajax/deleteReportedContent.ajax.php",
@@ -170,6 +204,9 @@ function getCreations() {
             var communityData = data;
             var creationsMade = "";
             var dataUsed = 0.00;
+            var photoCount = 0;
+            var videoCount = 0;
+            var readingMaterialCount = 0;
 
             for (let photo in communityData["photos"]) {
                 var photoList = communityData["photos"][photo];
@@ -180,6 +217,7 @@ function getCreations() {
                     if (photoDetails.author == $("#accountUsernamePlaceholder").text()) {
                         imageSize = photoDetails.filesize  / (1024 * 1024);
                         dataUsed += imageSize;
+                        photoCount++;
 
                         creationsMade =
                         '<div id="' + photoDetails.creationid + '" class="bookmarkContainer">' +
@@ -209,7 +247,8 @@ function getCreations() {
                     if (videoDetails.author == $("#accountUsernamePlaceholder").text()) {
                         videoSize = videoDetails.filesize / (1024 * 1024);
                         dataUsed += videoSize;
-
+                        videoCount++;
+                        
                         creationsMade =
                         '<div id="' + videoDetails.creationid + '" class="bookmarkContainer">' +
                             '<div class="d-flex" onclick="viewCreationVideo(' + "'" + videoDetails.creationid + "'" + ')" style="width:100% !important">' +
@@ -238,6 +277,7 @@ function getCreations() {
                     if (readingMaterialDetails.author == $("#accountUsernamePlaceholder").text()) {
                         readingMaterialSize = readingMaterialDetails.filesize / 1024;
                         dataUsed += readingMaterialDetails.filesize / (1024 * 1024);
+                        readingMaterialCount++;
 
                         creationsMade =
                         '<div id="' + readingMaterialDetails.creationid + '" class="bookmarkContainer">' +
@@ -260,6 +300,45 @@ function getCreations() {
 
             updateFill(dataUsed);
             $("#creationsDescription").text(dataUsed.toFixed(2) + " MB of 500 MB used");
+
+            //total uploads
+            const totalUploadsData = {
+                labels: [
+                'Images',
+                'Videos',
+                'Reading Materials'
+                ],
+                datasets: [{
+                data: [photoCount, videoCount, readingMaterialCount],
+                backgroundColor: [
+                    'rgba(186, 164, 0, 0.2)',
+                    'rgba(86, 9, 122, 0.2)',
+                    'rgba(168, 19, 21, 0.2)',
+                ],
+                borderColor: [
+                    'rgb(186, 164, 0)',
+                    'rgb(86, 9, 122)',
+                    'rgb(168, 19, 21)',
+                ],
+                borderWidth: 1,
+                }]
+            };
+
+            const totalUploadsConfig = {
+                type: 'pie',
+                data: totalUploadsData,
+            };
+
+            const totalUploadsCanvas = document.createElement('canvas');
+            totalUploadsCanvas.id = 'totalCommunityUploads';
+            document.getElementById('totalCommunityUploadsContainer').appendChild(totalUploadsCanvas);
+
+            const totalUploadsCtx = document.getElementById('totalCommunityUploads').getContext('2d');
+            new Chart(totalUploadsCtx, totalUploadsConfig);
+
+            var totalUploads = photoCount + videoCount + readingMaterialCount;
+
+            $("#totalUploads").text(totalUploads);
         }
     });
 }

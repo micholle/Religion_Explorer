@@ -154,10 +154,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     <div class="userProfileStatsHeader">
                                         <div class="row justify-content-center align-items-start">
                                             <div class="col-6 d-flex justify-content-start">
-                                                <h1>July 23, 2023 - July 29, 2023</h1>
+                                                <h1 id="dateRangeLabel"></h1>
                                             </div>
                                             <div class="col-6 d-flex justify-content-end no-gutters">
-                                                <select id="" class="">
+                                                <select id="engagementDate" class="">
                                                     <option value="week">Last 7 Days</option>
                                                     <option value="month">Last Month</option>
                                                     <option value="year">Last Year</option>
@@ -174,7 +174,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                                         <img src="../assets/img/discussionForum/upvote-active.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>154</h1>
+                                                        <h1 id="countUpvotes"></h1>
                                                         <p>upvotes</p>
                                                     </div>
                                                 </div>
@@ -183,7 +183,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                                         <img src="../assets/img/discussionForum/downvote.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>25</h1>
+                                                        <h1 id="countDownvotes"></h1>
                                                         <p>downvotes</p>
                                                     </div>
                                                 </div>
@@ -192,13 +192,13 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                                         <img src="../assets/img/discussionForum/comments.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>97</h1>
+                                                        <h1 id="countComments"></h1>
                                                         <p>comments</p>
                                                     </div>
                                                 </div>
                                                 <div class="userProfileStatsContent">
                                                     <div class="userProfileStatsContentNumVar d-flex justify-content-center align-items-center flex-column">
-                                                        <h1>276</h1>
+                                                        <h1 id="totalEngagements"></h1>
                                                         <p>total engagements</p>
                                                     </div>
                                                 </div>
@@ -221,7 +221,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                         <div class="userProfileStatsContent d-flex flex-row">
                                             <div class="userProfileStatsContentNum">
                                                 <p>Total Uploads</p>
-                                                <h1>15</h1>
+                                                <h1 id='totalUploads'></h1>
                                             </div>
                                         </div>
 

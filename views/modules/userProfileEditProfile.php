@@ -48,7 +48,6 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     <div class="row">
                                         <div class="col-12 d-flex flex-row">
                                             <p class="nicknameText">aka <?php echo $_SESSION['username']; ?></p>
-                                            <button class="editNicknameButton">Edit Nickname</button>
                                         </div>
                                     </div>
                                 </div>

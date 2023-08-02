@@ -279,10 +279,17 @@ class reportUserModel {
 		try {
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->beginTransaction();
+
+            $accountStmt = $pdo->prepare("SELECT accountid FROM accounts WHERE username = :username");
+            $accountStmt->bindParam(":username", $data['username'], PDO::PARAM_STR);
+            $accountStmt->execute();
+
+            $accountid = $accountStmt->fetchColumn();
+            //get the accountid of the username using $data['username]
 		
 			$stmt = $pdo->prepare("INSERT INTO reportedusers(accountid, userViolations, additionalContext, reportedOn, reportedBy) VALUES (:accountid, :userViolations, :additionalContext, :reportedOn, :reportedBy)");
 	
-            $stmt->bindParam(":accountid", $data["username"], PDO::PARAM_STR);
+            $stmt->bindParam(":accountid", $accountid, PDO::PARAM_STR);
             $stmt->bindParam(":userViolations", $data["userViolations"], PDO::PARAM_STR);
             $stmt->bindParam(":additionalContext", $data["additionalContext"], PDO::PARAM_STR);
             $stmt->bindParam(":reportedOn", $data["reportedOn"], PDO::PARAM_STR);
@@ -348,11 +355,9 @@ class reportUserModel {
             $stmt->bindParam(":suspenduserval", $data["suspenduserval"], PDO::PARAM_INT);
             $stmt->execute();
     
-            $username = self::mdlGetUsernameByUserID($data["userid"]);
-    
             // Update the reportedusers table with actionTaken and reportStatus
-            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Suspend', reportStatus = 'Completed' WHERE username = :username");
-            $updateStmt->bindParam(":username", $username, PDO::PARAM_STR);
+            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Suspend', reportStatus = 'Completed' WHERE accountid = :accountid");
+            $updateStmt->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
             $updateStmt->execute();
     
             $pdo->commit();
@@ -391,10 +396,8 @@ class reportUserModel {
             $stmt->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
             $stmt->execute();
 
-            $username = self::mdlGetUsernameByUserID($data["userid"]);
-
-            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Ban', reportStatus = 'Completed' WHERE username = :username");
-            $updateStmt->bindParam(":username", $username, PDO::PARAM_STR);
+            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Ban', reportStatus = 'Completed' WHERE accountid = :accountid");
+            $updateStmt->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
             $updateStmt->execute();
 
             $pdo->commit();
@@ -408,25 +411,6 @@ class reportUserModel {
         $stmt = null;
     }
 
-    static public function mdlGetUsernameByUserID($userid) {
-        $db = new Connection();
-        $pdo = $db->connect();
-
-        try {
-            $stmt = $pdo->prepare("SELECT username FROM accounts WHERE accountid = :userid");
-            $stmt->bindParam(":userid", $userid, PDO::PARAM_STR);
-            $stmt->execute();
-            $username = $stmt->fetchColumn();
-
-            return $username;
-        } catch (Exception $e) {
-            return null;
-        } finally {
-            $pdo = null;
-            $stmt = null;
-        }
-    }
-
     static public function mdlResolveUser($data) {
         $db = new Connection();
         $pdo = $db->connect();
@@ -434,11 +418,9 @@ class reportUserModel {
         try {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->beginTransaction();
-
-            $username = self::mdlGetUsernameByUserID($data["userid"]);
     
-            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Resolve', reportStatus = 'Completed' WHERE username = :username");
-            $updateStmt->bindParam(":username", $username, PDO::PARAM_STR);
+            $updateStmt = $pdo->prepare("UPDATE reportedusers SET actionTaken = 'Resolve', reportStatus = 'Completed' WHERE accountid = :accountid");
+            $updateStmt->bindParam(":accountid", $data["userid"], PDO::PARAM_STR);
             $updateStmt->execute();
     
             $pdo->commit();

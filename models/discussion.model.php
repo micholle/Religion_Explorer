@@ -611,7 +611,7 @@ class ModelDiscussion {
         $notificationDate = date('Y-m-d');
     
         try {
-            $stmt = $pdo->prepare("INSERT INTO post_votes (postId, accountid, voteType) VALUES (:postId, :accountId, 'upvote')");
+            $stmt = $pdo->prepare("INSERT INTO post_votes (postId, accountid, voteType, postVoteDate) VALUES (:postId, :accountId, 'upvote', NOW())");
             $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
@@ -649,7 +649,7 @@ class ModelDiscussion {
         $pdo = $db->connect();
     
         try {
-            $stmt = $pdo->prepare("INSERT INTO post_votes (postId, accountid, voteType) VALUES (:postId, :accountId, 'downvote')");
+            $stmt = $pdo->prepare("INSERT INTO post_votes (postId, accountid, voteType, postVoteDate) VALUES (:postId, :accountId, 'downvote', NOW())");
             $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
@@ -669,7 +669,7 @@ class ModelDiscussion {
         $notificationDate = date('Y-m-d');
     
         try {
-            $stmt = $pdo->prepare("INSERT INTO reply_votes (replyId, accountid, voteType) VALUES (:replyId, :accountId, 'upvote')");
+            $stmt = $pdo->prepare("INSERT INTO reply_votes (replyId, accountid, voteType, replyVoteDate) VALUES (:replyId, :accountId, 'upvote', NOW())");
             $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
@@ -707,7 +707,7 @@ class ModelDiscussion {
         $pdo = $db->connect();
     
         try {
-            $stmt = $pdo->prepare("INSERT INTO reply_votes (replyId, accountid, voteType) VALUES (:replyId, :accountId, 'downvote')");
+            $stmt = $pdo->prepare("INSERT INTO reply_votes (replyId, accountid, voteType, replyVoteDate) VALUES (:replyId, :accountId, 'downvote', NOW())");
             $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
@@ -963,7 +963,7 @@ class ModelDiscussion {
         $notificationDate = date('Y-m-d');
 
         try {
-            $stmt = $pdo->prepare("INSERT INTO topic_votes (topicId, accountid, voteType) VALUES (:topicId, :accountId, 'upvote')");
+            $stmt = $pdo->prepare("INSERT INTO topic_votes (topicId, accountid, voteType, topicVoteDate) VALUES (:topicId, :accountId, 'upvote', NOW())");
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();
@@ -1001,7 +1001,7 @@ class ModelDiscussion {
         $pdo = $db->connect();
 
         try {
-            $stmt = $pdo->prepare("INSERT INTO topic_votes (topicId, accountid, voteType) VALUES (:topicId, :accountId, 'downvote')");
+            $stmt = $pdo->prepare("INSERT INTO topic_votes (topicId, accountid, voteType, topicVoteDate) VALUES (:topicId, :accountId, 'downvote', NOW())");
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
             $stmt->bindParam(":accountId", $accountId, PDO::PARAM_STR);
             $stmt->execute();

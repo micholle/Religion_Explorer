@@ -27,6 +27,7 @@ if (isset($_GET['accountid'])) {
 
         if ($topic) {
             $html .= '
+            <a href="discussionForumPost.php?topicId='. $topic['topicId'] . '" style="text-decoration:none">
                 <div class="forumPostContainer">
                     <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">
                         <img src="../assets/img/discussionForum/upvote.png">
@@ -62,6 +63,8 @@ if (isset($_GET['accountid'])) {
                         </div>
                     </div>
                 </div>
+                </a>
+
             ';
         }
     }

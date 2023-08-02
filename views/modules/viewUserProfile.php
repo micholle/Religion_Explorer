@@ -20,6 +20,7 @@ $userData = getUserProfileInfo($accountid);
     <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../assets/js/chart.umd.js"></script>
 
     <script type="text/javascript" src="../js/viewUserProfile.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>
@@ -33,6 +34,7 @@ $userData = getUserProfileInfo($accountid);
     <div id="accountidView" hidden><?php echo $accountid; ?></div>
     <div id="accountidPlaceholder" hidden><?php echo $_SESSION['accountid']; ?></div>
     <div id="accountUsernamePlaceholder" hidden><?php echo $_SESSION['username']; ?></div>
+    <div id="accountUsernamePlaceholderView" hidden><?php echo $userData['username']; ?></div>
 
     <div class="pageContainer">
         <div class="container mw-100 mh-100">
@@ -143,30 +145,8 @@ $userData = getUserProfileInfo($accountid);
                 </div>
 
                 <div class="userProfileContent">
-                    <div class="bookmarkContainer">
-                        <div class="bookmarkImgContainer d-flex justify-content-center align-items-center">
-                            <img src="../assets/img/userProfile/photo.png" class="userProfBookmark">
-                        </div>
-                        <div class="bookmarkContent d-flex justify-content-start align-items-center">
-                            <p>[Placeholder Title]<p>
-                        </div>
-                    </div>
-                    <div class="bookmarkContainer">
-                        <div class="bookmarkImgContainer d-flex justify-content-center align-items-center">
-                            <img src="../assets/img/userProfile/video.png" class="userProfBookmark">
-                        </div>
-                        <div class="bookmarkContent d-flex justify-content-start align-items-center">
-                            <p>[Placeholder Title]<p>
-                        </div>
-                    </div>
-                    <div class="bookmarkContainer">
-                        <div class="bookmarkImgContainer d-flex justify-content-center align-items-center">
-                            <img src="../assets/img/userProfile/readmat.png" class="userProfBookmark">
-                        </div>
-                        <div class="bookmarkContent d-flex justify-content-start align-items-center">
-                            <p>[Placeholder Title]<p>
-                        </div>
-                    </div>
+                    <p id="creationsDescription"></p>
+                    <div id="userProfileCreationsList"></div>
                 </div>
 
                 <?php if ($userData['displayBookmark'] === '1') { ?>
@@ -188,14 +168,14 @@ $userData = getUserProfileInfo($accountid);
                                     <div class="userProfileStatsHeader">
                                         <div class="row justify-content-center align-items-start">
                                             <div class="col-6 d-flex justify-content-start">
-                                                <h1>[Date Range]</h1>
+                                                <h1 id="dateRangeLabel"></h1>
                                             </div>
                                             <div class="col-6 d-flex justify-content-end no-gutters">
-                                                <select id="" class="">
+                                                <select id="engagementDate" class="">
                                                     <option value="week">Last 7 Days</option>
                                                     <option value="month">Last Month</option>
                                                     <option value="year">Last Year</option>
-                                                    <option value="year">All Time</option>
+                                                    <option value="all">All Time</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -208,8 +188,8 @@ $userData = getUserProfileInfo($accountid);
                                                         <img src="../assets/img/discussionForum/upvote-active.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>0%</h1>
-                                                        <p>upvote rate</p>
+                                                        <h1 id="countUpvotes"></h1>
+                                                        <p>upvotes</p>
                                                     </div>
                                                 </div>
                                                 <div class="userProfileStatsContent d-flex">
@@ -217,8 +197,8 @@ $userData = getUserProfileInfo($accountid);
                                                         <img src="../assets/img/discussionForum/downvote.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>0%</h1>
-                                                        <p>downvote rate</p>
+                                                        <h1 id="countDownvotes"></h1>
+                                                        <p>downvotes</p>
                                                     </div>
                                                 </div>
                                                 <div class="userProfileStatsContent d-flex">
@@ -226,26 +206,20 @@ $userData = getUserProfileInfo($accountid);
                                                         <img src="../assets/img/discussionForum/comments.png">
                                                     </div>
                                                     <div class="userProfileStatsContentNum">
-                                                        <h1>0%</h1>
-                                                        <p>comment rate</p>
+                                                        <h1 id="countComments"></h1>
+                                                        <p>comments</p>
                                                     </div>
                                                 </div>
                                                 <div class="userProfileStatsContent">
                                                     <div class="userProfileStatsContentNumVar d-flex justify-content-center align-items-center flex-column">
-                                                        <h1>0%</h1>
-                                                        <p>total engagement rate</p>
-                                                    </div>
-                                                </div>
-                                                <div class="userProfileStatsBox">
-                                                    <div class="userProfileStatsContentNumVar d-flex justify-content-center align-items-center flex-column">
-                                                        <h1>0%</h1>
-                                                        <p>Your total engagement rate [increased/decreased] by this compared to the previous [placeholder time].</p>
+                                                        <h1 id="totalEngagements"></h1>
+                                                        <p>total engagements</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-9">
                                                 <div class="userProfileStatsInnerDiv">
-                                                    <img src="../assets/img/placeholder.png">
+                                                    <div id="engagementInsightsContainer"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -255,36 +229,18 @@ $userData = getUserProfileInfo($accountid);
                             <div class="col-4">
                                 <div class="userProfileStatsMain">
                                     <div class="userProfileStatsHeader">
-                                        <h1>Overview</h1>
+                                        <h1>Community Creations</h1>
                                     </div>
                                     <div class="userProfileStatsOverviewBody justify-content-start">
                                         <div class="userProfileStatsContent d-flex flex-row">
-                                            <div class="userProfileStatsContentImg">
-                                                <img src="../assets/img/editProfile/lion.png">
-                                            </div>
                                             <div class="userProfileStatsContentNum">
-                                                <p>Profile Views</p>
-                                                <h1>[Number]<span class="userProfileStatsPercent">[Percentage]</span></h1>
+                                                <p>Total Uploads</p>
+                                                <h1 id='totalUploads'></h1>
                                             </div>
                                         </div>
 
-                                        <div class="userProfileStatsInnerDiv d-flex justify-content-center">
-                                            <img src="../assets/img/placeholder.png">
-                                        </div>
-                                    </div>
-                                    <div class="userProfileStatsOverviewBody justify-content-start">
-                                        <div class="userProfileStatsContent d-flex flex-row">
-                                            <div class="userProfileStatsContentImg">
-                                                <img src="../assets/img/editProfile/lion.png">
-                                            </div>
-                                            <div class="userProfileStatsContentNum">
-                                                <p>Video Views</p>
-                                                <h1>[Number]<span class="userProfileStatsPercent">[Percentage]</span></h1>
-                                            </div>
-                                        </div>
-
-                                        <div class="userProfileStatsInnerDiv d-flex justify-content-center">
-                                            <img src="../assets/img/placeholder.png">
+                                        <div class="userProfileStatsInnerDiv">
+                                            <div id="totalCommunityUploadsContainer"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -292,7 +248,6 @@ $userData = getUserProfileInfo($accountid);
                         </div>
                     </div>
                 </div>
-
                 <div class="userProfileContent">
                     <div class="achievementsContainer d-flex justify-content-center align-items-center flex-row">
                         <div class="achievementsBox d-flex justify-content-center align-items-center flex-column" <?Php echo $userData['postBadge10']; ?>>
@@ -422,38 +377,38 @@ $userData = getUserProfileInfo($accountid);
                 <div class="modal-header text-center">
                     <div class="container d-flex justify-content-center align-items-center flex-column">
                         <h5 class="modal-title w-100">Report a User</h5>
-                        <!-- <p><?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} else {echo "not logged in";}?></p> -->
+                        <div id="reportUserUsername" hidden><?php echo $userData['username']; ?></div>
                     </div>
                 </div>
                 <div class="modal-body">
-                    <div class="container">
-                        <form id="reportUserForm" method="post">
-                            <div class="row">
-                                <div class="col-12">
-                                    <p class="reportDescription">As accurately as you can, please tell us what happened.</p>
-                                    <input type="checkbox" id="harrassmentOrBullying" name="harrassmentOrBullying" value="Harrassment or Bullying">
-                                    <label for="harrassmentOrBullying">Harrassment or Bullying</label><br>
-                                    <input type="checkbox" id="offensiveLanguage" name="offensiveLanguage" value="Offensive Language">
-                                    <label for="offensiveLanguage">Offensive Language</label><br>
-                                    <input type="checkbox" id="spam" name="spam" value="Spam">
-                                    <label for="spam">Spam</label><br>
-                                    <input type="checkbox" id="communityGuidelinesViolation" name="communityGuidelinesViolation" value="Community Guidelines Violation">
-                                    <label for="communityGuidelinesViolation">Community Guidelines Violation</label><br>
-                                    <input type="checkbox" id="suspiciousOrFakeAccount" name="suspiciousOrFakeAccount" value="Suspicious or Fake Account">
-                                    <label for="suspiciousOrFakeAccount">Suspicious or Fake Account</label><br>
-                                    <label for="others">Others, specify:</label><br>
-                                    <input id="othersSpecify" class="inputVariant" name="othersSpecify"><br>
-                                </div>
+                            <div class="container">
+                                <form id="reportUserForm" method="post">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="reportDescription">As accurately as you can, please tell us what happened.</p>
+                                            <input type="checkbox" id="harrassmentOrBullying" name="harrassmentOrBullying" value="Harrassment or Bullying">
+                                            <label for="harrassmentOrBullying">Harrassment or Bullying</label><br>
+                                            <input type="checkbox" id="offensiveLanguage" name="offensiveLanguage" value="Offensive Language">
+                                            <label for="offensiveLanguage">Offensive Language</label><br>
+                                            <input type="checkbox" id="spam" name="spam" value="Spam">
+                                            <label for="spam">Spam</label><br>
+                                            <input type="checkbox" id="communityGuidelinesViolation" name="communityGuidelinesViolation" value="Community Guidelines Violation">
+                                            <label for="communityGuidelinesViolation">Community Guidelines Violation</label><br>
+                                            <input type="checkbox" id="suspiciousOrFakeAccount" name="suspiciousOrFakeAccount" value="Suspicious or Fake Account">
+                                            <label for="suspiciousOrFakeAccount">Suspicious or Fake Account</label><br>
+                                            <label for="userOthers">Others, specify:</label><br>
+                                            <input id="userOthers" class="inputVariant" name="userOthers"><br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                            <textarea id="reportUserAdditional" placeholder="Give additional context."></textarea><br>
+                                            <button type="button" id="submitReportUser" class="roundedButton">Send</button>
+                                        </div>
+                                    </div>
+                                </form>    
                             </div>
-                            <div class="row">
-                                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                    <textarea id="reportUserAdditional" placeholder="Give additional context."></textarea><br>
-                                    <button type="button" id="submitReportContent" class="roundedButton">Send</button>
-                                </div>
-                            </div>
-                        </form>    
-                    </div>
-                </div>
+                        </div>
             </div>
         </div>
     </div>

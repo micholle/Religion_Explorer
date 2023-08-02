@@ -43,6 +43,7 @@ if (isset($_GET['accountid'])) {
             // Check if the post has not been processed already
             if (!in_array($item['postId'], $processedPostIds)) {
                 $html .= '
+                <a href="discussionForumPost.php?topicId='. $topic['topicId'] . '" style="text-decoration:none">
                     <div class="forumPostContainer">
                         <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">
                             <img src="../assets/img/discussionForum/upvote.png">
@@ -78,6 +79,7 @@ if (isset($_GET['accountid'])) {
                             </div>
                         </div>
                     </div>
+                    </a>
                 ';
 
                 // Add the processed post ID to the array to avoid duplicating posts
@@ -87,6 +89,7 @@ if (isset($_GET['accountid'])) {
             // Check if the topic belongs to the given accountid and has not been processed already
             if ($item['accountid'] === $accountid && !in_array($item['topicId'], $processedTopicIds)) {
                 $html .= '
+                <a href="discussionForumPost.php?topicId='. $item['topicId'] . '" style="text-decoration:none">
                     <div class="forumPostContainer">
                         <div class="d-flex justify-content-start align-items-center flex-column forumInteractions">
                             <img src="../assets/img/discussionForum/upvote.png">
@@ -105,6 +108,7 @@ if (isset($_GET['accountid'])) {
                             <p>' . $item['topicContent'] . '</p>
                         </div>
                     </div>
+                    </a>
                 ';
 
                 // Add the processed topic ID to the array to avoid duplicating topics
