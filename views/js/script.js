@@ -195,7 +195,7 @@ $(function() {
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
                             '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                '<img src="data:image/png;base64, '+ avatar +'">' +
+                                '<img src="data:image/png;base64, '+ avatar +'" class="notificationIcon">' +
                                 '<img src="' + notificationIcon + '"  class="notificationSubIcon">' +
                             '</div>' +
                             '<div class="col-10 d-flex flex-column">' +
@@ -210,7 +210,7 @@ $(function() {
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
                             '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                '<img src="data:image/png;base64, '+ avatar +'">' +
+                                '<img src="data:image/png;base64, '+ avatar +'" class="notificationIcon">' +
                                 '<img src="' + notificationIcon + '"  class="notificationSubIcon">' +
                             '</div>' +
                             '<div class="col-10 d-flex flex-column">' +
@@ -224,7 +224,7 @@ $(function() {
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
                             '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                '<img src="data:image/png;base64, '+ avatar +'">' +
+                                '<img src="data:image/png;base64, '+ avatar +'" class="notificationIcon">' +
                                 '<img src="' + notificationIcon + '"  class="notificationSubIcon">' +
                             '</div>' +
                             '<div class="col-10 d-flex flex-column">' +
@@ -237,7 +237,7 @@ $(function() {
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
                             '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                '<img src="data:image/png;base64, '+ avatar +'">' +
+                                '<img src="data:image/png;base64, '+ avatar +'" class="notificationIcon">' +
                                 '<img src="' + notificationIcon + '"  class="notificationSubIcon">' +
                             '</div>' +
                             '<div class="col-10 d-flex flex-column">' +
@@ -250,7 +250,7 @@ $(function() {
                     $("#notification").append(
                         '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
                             '<div class="col-2 d-flex justify-content-start align-items-start">' +
-                                '<img src="data:image/png;base64, '+ avatar +'">' +
+                                '<img src="data:image/png;base64, '+ avatar +'" class="notificationIcon">' +
                                 '<img src="' + notificationIcon + '"  class="notificationSubIcon">' +
                             '</div>' +
                             '<div class="col-10 d-flex flex-column">' +

@@ -1967,13 +1967,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     object-fit: cover;
 }
 
-.userSidebarAvatar {
-    border-radius: 100px;
-    width: 40px !important;
-    height: 40px !important;
-    object-fit: cover;
-}
-
 .roundedButton {
     background-color: #2CA464;
     color: white;
@@ -2996,6 +2989,10 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     color: #3E3E3E;
     font-size: 20px;
     margin-right: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .libraryReadMatsTag {
@@ -3069,6 +3066,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 #readingMaterialOverview .readingMaterialHeader .readingMaterialTitle {
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 #readingMaterialOverview .readingMaterialHeader .readingMaterialExternal {
@@ -3220,6 +3218,13 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 .notificationsPanelBody .notificationsPanelBoldText {
     color: #2CA464;
     font-weight: 600;
+}
+
+.notificationIcon {
+    width: 175px;
+    height: 175px;
+    border-radius: 100px;
+    object-fit: cover;
 }
 
 .notificationSubIcon {
