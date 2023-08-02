@@ -173,7 +173,7 @@ class libraryData {
             "videos" => [
                 "LV1" => [
                     "title" => "Mosque",
-                    "file" => "../assets/data/library/Mosque.mp4",
+                    "file" => "../assets/data/library/LV1.mp4",
                     "religion" => "Islam",
                     "category" => ["Religious Practices"],
                     "description" => "A mosque is a place of worship and community for followers of Islam. It is typically a building where Muslims gather for congregational prayers, engage in spiritual activities, seek religious guidance, and foster community bonds. ",
@@ -181,33 +181,84 @@ class libraryData {
                 ],
                 "LV2" => [
                     "title" => "Hindu Event",
-                    "file" => "../assets/data/library/Hindu_Event.mp4",
+                    "file" => "../assets/data/library/LV2.mp4",
                     "religion" => "Hinduism",
                     "category" => ["Religious Practices"],
                     "description" => "Hindu events encompass a rich tapestry of religious, cultural, and traditional celebrations that hold significant importance for followers of Hinduism. These events are often marked by elaborate rituals, vibrant festivities, and communal gatherings, creating an atmosphere of joy, devotion, and spiritual connection.",
-                    "author" => "Abhilash Bahirat"
-                ],  
-                // "Video 3" => [
-                //     "file" => "",
+                    "author" => ""
+                ],
+                "LV3" => [
+                    "title" => "A Modern Jewish Family Celebrating Hanukkah",
+                    "file" => "../assets/data/library/LV3.mp4",
+                    "religion" => "Judaism",
+                    "category" => ["Religious Practices"],
+                    "description" => "A modern family celebrating Hanukkah gathers together in their home, bringing warmth and joy to the festival of lights. The family sets up a beautifully decorated Hanukkah menorah, with each member taking turns to light the candles each night.",
+                    "author" => ""
+                ],
+                "LV4" => [
+                    "title" => "Jews Praying In Front Of The Wailing Wall In Jerusalem",
+                    "file" => "../assets/data/library/LV4.mp4",
+                    "religion" => "Judaism",
+                    "category" => ["Religious Practices"],
+                    "description" => "Jews praying in front of the Wailing Wall in Jerusalem is a powerful and deeply spiritual sight. The Wailing Wall, also known as the Western Wall or the Kotel, is one of the most sacred sites in Judaism and holds significant historical and religious importance.",
+                    "author" => "Jakob Lundvall"
+                ],
+                "LV5" => [
+                    "title" => "Nativity Scene",
+                    "file" => "../assets/data/library/LV5.mp4",
+                    "religion" => "Christianity",
+                    "category" => ["Religious Traditions"],
+                    "description" => "A nativity scene, also known as a Christmas crib or creche, is a depiction of the birth of Jesus Christ as described in the Christian Bible's Gospels of Matthew and Luke. It is a traditional and popular Christmas decoration displayed in homes, churches, public places, and various settings during the Christmas season.",
+                    "author" => "Gabe"
+                ],
+                "LV6" => [
+                    "title" => "Tibetan Singing Bowl",
+                    "file" => "../assets/data/library/LV6.mp4",
+                    "religion" => "Buddhism",
+                    "category" => ["Religious Practices"],
+                    "description" => "A Tibetan Singing Bowl is a traditional musical instrument and meditative tool that originated in the Himalayan region, particularly in Tibet, Nepal, and India. These bowls are known for their unique sound, which is produced by striking or rubbing the outer rim of the bowl with a mallet.",
+                    "author" => "Antoni Shkraba"
+                ],
+                "LV7" => [
+                    "title" => "Salah",
+                    "file" => "../assets/data/library/LV7.mp4",
+                    "religion" => "Islam",
+                    "category" => ["Religious Traditions", "Religious Practices"],
+                    "description" => "Salah, also known as Salat, is the Islamic practice of ritual prayer and is one of the Five Pillars of Islam. It is an essential and mandatory act of worship for Muslims, performed five times a day at specified times. Salah is a means of establishing a direct connection with Allah (God) and is a significant way of expressing devotion and gratitude.",
+                    "author" => "Michael Burrows"
+                ],
+                "LV8" => [
+                    "title" => "House of Worship",
+                    "file" => "../assets/data/library/LV8.mp4",
+                    "religion" => "Christianity",
+                    "category" => ["Religious Practices"],
+                    "description" => "In Christianity, worship through song is a common and deeply cherished form of expressing devotion and praise to God. Singing and music have always played a central role in Christian worship, and it is an integral part of the church's liturgical and non-liturgical gatherings.",
+                    "author" => "Luis Quintero"
+                ],
+                "LV9" => [
+                    "title" => "Buddhist Altar",
+                    "file" => "../assets/data/library/LV9.mp4",
+                    "religion" => "Buddhism",
+                    "category" => ["Religious Practices"],
+                    "description" => "Kneeling in front of a Buddhist altar is a common act of reverence and devotion in Buddhist practices. The Buddhist altar, often called a shrine, is a sacred space where Buddhists place images or statues of the Buddha, Bodhisattvas, or revered teachers, as well as other symbolic items representing Buddhist principles and teachings.",
+                    "author" => ""
+                ],
+                "LV10" => [
+                    "title" => "Besakih Temple in Bali",
+                    "file" => "../assets/data/library/LV10.mp4",
+                    "religion" => "Hinduism",
+                    "category" => ["Religious Practices"],
+                    "description" => "Besakih Temple, also known as Pura Besakih, is the largest and most important Hindu temple in Bali, Indonesia. It is located on the southwestern slopes of Mount Agung, the highest volcano on the island and considered sacred by the Balinese people. The temple complex is situated in the village of Besakih, in the regency of Karangasem.",
+                    "author" => "Mikhail Nilov"
+                ],
+                // "LV#" => [
+                //     "title" => "",
+                //     "file" => "../assets/data/library/LV#.mp4",
                 //     "religion" => "",
-                //     "category" => ["", ""],
+                //     "category" => [""],
                 //     "description" => "",
                 //     "author" => ""
-                // ],    
-                // "Video 4" => [
-                //     "file" => "",
-                //     "religion" => "",
-                //     "category" => ["", ""],
-                //     "description" => "",
-                //     "author" => ""
-                // ],    
-                // "Video 5" => [
-                //     "file" => "",
-                //     "religion" => "",
-                //     "category" => ["", ""],
-                //     "description" => "",
-                //     "author" => ""
-                // ]  
+                // ]
             ],
             "readingMats" => [
                 "LR1" => [
