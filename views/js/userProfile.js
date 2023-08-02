@@ -132,6 +132,7 @@ $(function() {
             method: "POST",
             data: {"contentid" : $("#deleteContentid").text()},
             success:function(data){
+                console.log(data);
                 $("#toast").html("Content deleted.");
             }, error: function() {
                 $("#toast").html("There was an error processing your request. Please try again later.")
@@ -659,7 +660,6 @@ function getOverview() {
                     }
                 }
             }); 
-            console.log(data);
             $("#profileOverview").html(data);
             shortenUpvotes();
             
