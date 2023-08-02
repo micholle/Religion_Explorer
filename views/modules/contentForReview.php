@@ -39,7 +39,8 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="row">
                             <div class="col-12 adminFilter">
                                 <input type="search" id="contentSearch" name="" class="adminSearch" placeholder="Search">
-                                <select id="contentFilter" class="js-example-basic-multiple" multiple="multiple" data-placeholder="  Violation">
+                                <select id="contentFilter">
+                                    <option value="" selected>All Violations</option>
                                     <option value="Privacy Violation">Privacy Violation</option>
                                     <option value="Misinformation">Misinformation</option>
                                     <option value="Graphic Content">Graphic Content</option>

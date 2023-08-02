@@ -15,79 +15,34 @@ $(function() {
         }
     });
 
-    $(".js-example-basic-multiple").select2({
-        width: "100%"
-    });
 
-    $('#contentFilter').on('select2:select', function() {
-        var selectedValues = $('.js-example-basic-multiple').val();
-
-        for (value in selectedValues) {
-            var violationFilter = selectedValues[value];
+    $("#contentFilter").on("click", function() {
+        var contentFilter = $(this).val();
         
-            $.ajax({
-                url: "../../ajax/getReportedContent.ajax.php",
-                method: "POST",
-                success:function(data){
-                    var contentForReview = data;
-        
-                    for (content in contentForReview) {
-                        var contentDetails = contentForReview[content];
-                        var contentid = content;
-                        var contentClass = "." + contentid;
+        $.ajax({
+            url: "../../ajax/getReportedContent.ajax.php",
+            method: "POST",
+            success:function(data){
+                var contentForReview = data;
+    
+                for (content in contentForReview) {
+                    var contentDetails = contentForReview[content];
+                    var contentClass = "." + content;
 
-                        var violations = contentDetails.violation;
+                    var violations = contentDetails.violation;
 
-                        if(violations.length == 0){
+                    if(contentFilter == null){
+                        $(contentClass).show();
+                    } else {
+                        if (violations.includes(contentFilter)) {
                             $(contentClass).show();
                         } else {
-                            if (violations.includes(violationFilter)) {
-                                $(contentClass).show();
-                            } else {
-                                $(contentClass).hide();
-                            }
+                            $(contentClass).hide();
                         }
                     }
                 }
-            });   
-        }
-    });
-
-    $('#contentFilter').on('select2:unselect', function() {
-        var selectedValues = $('.js-example-basic-multiple').val();
-
-        if (selectedValues == "") {
-            $(".adminReviewContainerContent").show();
-        } else {
-            for (value in selectedValues) {
-                var violationFilter = selectedValues[value];
-                $.ajax({
-                    url: "../../ajax/getReportedContent.ajax.php",
-                    method: "POST",
-                    success:function(data){
-                        var contentForReview = data;
-            
-                        for (content in contentForReview) {
-                            var contentDetails = contentForReview[content];
-                            var contentid = content;
-                            var contentClass = "." + contentid;
-
-                            var violations = contentDetails.violation;
-
-                            if(violations.length == 0){
-                                $(contentClass).show();
-                            } else {
-                                if (violations.includes(violationFilter)) {
-                                    $(contentClass).show();
-                                } else {
-                                    $(contentClass).hide();
-                                }
-                            }
-                        }
-                    }
-                });   
             }
-        }
+        });   
     });
     
     $.ajax({    
@@ -118,16 +73,17 @@ $(function() {
                 contentCreator = contentDetails.contentCreator;
                 contentLink = contentDetails.contentLink;
                 
-                $("#contentidColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center text-center"> <a href="' + contentLink + contentid + '">' + contentid + '</a> </div>');
-                $("#violationColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
-                $("#additionalContextColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
-                $("#reportedOnColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
-                $("#reportedByColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
-                $("#actionColumn").append('<div class="' + contentid + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
+                $("#contentidColumn").append('<div class="' + content + ' adminReviewContainerContent justify-content-center align-items-center text-center"> <a href="' + contentLink + contentid + '">' + contentid + '</a> </div>');
+                $("#violationColumn").append('<div class="' + content + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
+                $("#additionalContextColumn").append('<div class="' + content + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
+                $("#reportedOnColumn").append('<div class="' + content + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
+                $("#reportedByColumn").append('<div class="' + content + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
+                $("#actionColumn").append('<div class="' + content + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
                     '<img class="reportButton" src="../assets/img/admin/action-check.png" onclick="resolveReport(' + "'" + contentid + "'" + ')">' +
                     '<img class="reportButton" src="../assets/img/admin/action-x.png" onclick="deleteContent(' + "'" + contentid + "'" +')">' +
                     '<img class="reportButton" src="../assets/img/admin/action-exclamation.png" onclick="reportUser(' + "'" + contentid + '\', \'' + violations + '\', \'' + additionalContext + '\', \'' + contentCreator + '\')"">' +
                 '</div>');
+
             }
         }
     });
@@ -143,12 +99,14 @@ $(function() {
     
                 for (content in contentForReview) {
                     var contentDetails = contentForReview[content];
-                    var contentid = content;
+                    var contentid = contentDetails.contentid;
                     var contentLink = contentDetails.contentLink;
+                    var additionalContext = contentDetails.additionalContext;
+                    var reportedOn = contentDetails.reportedOn;
                     var reportedBy = contentDetails.reportedBy;
-                    var contentClass = "." + contentid;
+                    var contentClass = "." + content;
 
-                    if(((contentid.toLowerCase()).includes(contentSearchVal)) || ((contentLink.toLowerCase()).includes(contentSearchVal)) || ((reportedBy.toLowerCase()).includes(contentSearchVal))) {
+                    if(((contentid.toLowerCase()).includes(contentSearchVal)) || ((contentLink.toLowerCase()).includes(contentSearchVal)) || ((additionalContext.toLowerCase()).includes(contentSearchVal)) || ((reportedOn.toLowerCase()).includes(contentSearchVal)) || ((reportedBy.toLowerCase()).includes(contentSearchVal))) {
                         $(contentClass).show();
                     } else {
                         $(contentClass).hide();

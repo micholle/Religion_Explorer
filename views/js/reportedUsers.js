@@ -28,80 +28,32 @@ $(function() {
         }
     });
 
-    $(".js-example-basic-multiple").select2({
-        width: "100%"
-    });
-
-    $('#reportedUsersFilter').on('select2:select', function() {
-        var selectedValues = $('.js-example-basic-multiple').val();
-
-        for (value in selectedValues) {
-            var violationFilter = selectedValues[value];
+    $("#reportedUsersFilter").on("click", function() {
+        var reportedUsersFilter = $(this).val();
             
-            $.ajax({
-                url: "../../ajax/getReportedUsers.ajax.php",
-                method: "POST",
-                success:function(data){
-                    var reportedUsers = data;
-        
-                    for (user in reportedUsers) {
-                        var userDetails = reportedUsers[user];
-                        var userid = user;
-                        var userClass = "." + userid;
+        $.ajax({
+            url: "../../ajax/getReportedUsers.ajax.php",
+            method: "POST",
+            success:function(data){
+                var reportedUsers = data;
+    
+                for (user in reportedUsers) {
+                    var userDetails = reportedUsers[user];
+                    var userClass = "." + user;
+                    var violations = userDetails.violation;
 
-                        var violations = userDetails.violation;
-
-                        if(violations.length == 0){
+                    if(reportedUsersFilter == null){
+                        $(userClass).show();
+                    } else {
+                        if (violations.includes(reportedUsersFilter)) {
                             $(userClass).show();
                         } else {
-                            if (violations.includes(violationFilter)) {
-                                $(userClass).show();
-                            } else {
-                                $(userClass).hide();
-                            }
+                            $(userClass).hide();
                         }
                     }
                 }
-            });   
-        }
-    });
-
-    $('#reportedUsersFilter').on('select2:unselect', function() {
-        var selectedValues = $('.js-example-basic-multiple').val();
-
-        if (selectedValues == "") {
-            $(".adminReviewContainerContent").show();
-        } else {
-            for (value in selectedValues) {
-                var violationFilter = selectedValues[value];
-                
-                $.ajax({
-                    url: "../../ajax/getReportedUsers.ajax.php",
-                    method: "POST",
-                    success:function(data){
-                        var reportedUsers = data;
-            
-                        for (user in reportedUsers) {
-                            var userDetails = reportedUsers[user];
-                            var userid = user;
-                            var userClass = "." + userid;
-    
-                            var violations = userDetails.violation;
-    
-                            if(violations.length == 0){
-                                $(userClass).show();
-                            } else {
-                                if (violations.includes(violationFilter)) {
-                                    $(userClass).show();
-                                } else {
-                                    $(userClass).hide();
-                                }
-                            }
-                        }
-                    }
-                });   
-            }   
-        }
+            }
+        });   
     });
 
     function getReportedUsers(){
@@ -122,19 +74,22 @@ $(function() {
         
                 for (user in reportedUsers) {
                     userDetails = reportedUsers[user];
+
+                    var [year, month, day] = userDetails.reportedOn.split('-');
+                    var formattedDate = `${month}-${day}-${year}`;
         
                     userid = userDetails.userid;
                     violations = userDetails.violation;
                     additionalContext = userDetails.additionalContext;
-                    reportedOn = userDetails.reportedOn;
+                    reportedOn = formattedDate;
                     reportedBy = userDetails.reportedBy;
                     
-                    $("#useridColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p> <a href="' + ("viewUserProfile.php?accountid=" + userid)  + '">' + userid + '</a></p> </div>');
-                    $("#userViolationColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
-                    $("#userAdditionalContextColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
-                    $("#userReportedOnColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
-                    $("#userReportedByColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
-                    $("#userActionColumn").append('<div class="' + userid + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
+                    $("#useridColumn").append('<div class="' + user + ' adminReviewContainerContent justify-content-center align-items-center"> <p> <a href="' + ("viewUserProfile.php?accountid=" + userid)  + '">' + userid + '</a></p> </div>');
+                    $("#userViolationColumn").append('<div class="' + user + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + violations + '</p> </div>');
+                    $("#userAdditionalContextColumn").append('<div class="' + user + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
+                    $("#userReportedOnColumn").append('<div class="' + user + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
+                    $("#userReportedByColumn").append('<div class="' + user + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
+                    $("#userActionColumn").append('<div class="' + user + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
                         '<img class="reportButton" src="../assets/img/admin/action-check.png" data-userid="' + userid + '" data-action="resolve">' +
                         '<img class="reportButton" src="../assets/img/admin/action-slash.png" data-userid="' + userid + '" data-action="suspend">' +
                         '<img class="reportButton" src="../assets/img/admin/action-dash.png" data-userid="' + userid + '" data-action="ban">' +
@@ -155,12 +110,13 @@ $(function() {
     
                 for (user in reportedUsers) {
                     var userDetails = reportedUsers[user];
-                    var userid = user;
-                    var userLink = userDetails.userLink;
+                    var userid = userDetails.userid;
+                    var userAdditionalContext = userDetails.additionalContext;
+                    var userReportedOn = userDetails.reportedOn;
                     var userReportedBy = userDetails.reportedBy;
-                    var userClass = "." + userid;
+                    var userClass = "." + user;
 
-                    if(((userid.toLowerCase()).includes(userSearchVal)) || ((userLink.toLowerCase()).includes(userSearchVal)) || ((userReportedBy.toLowerCase()).includes(userSearchVal))) {
+                    if(((userid.toLowerCase()).includes(userSearchVal)) || ((userAdditionalContext.toLowerCase()).includes(userSearchVal)) || ((userReportedOn.toLowerCase()).includes(userSearchVal)) || ((userReportedBy.toLowerCase()).includes(userSearchVal))) {
                         $(userClass).show();
                     } else {
                         $(userClass).hide();

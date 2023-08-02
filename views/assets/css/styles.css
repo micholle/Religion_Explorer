@@ -3915,14 +3915,19 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     text-align: center;
 }
 
-.adminSearch {
-    width: 250px;
+.adminSearch, .userSearch{
+    width: 75%;
     background-color: #ffffff;
     font-size: 15px;
     border-radius: 5px;
     border: solid #D0D0D0 2px;
     padding: 5px 15px;
     margin-right: 10px;
+}
+
+#contentFilter, #reportedUsersFilter {
+    width: 25%;
+    height: 100%;
 }
 
 .adminReviewContainer select:focus {

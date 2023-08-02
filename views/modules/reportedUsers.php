@@ -38,13 +38,14 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="row">
                             <div class="col-12 adminFilter">
                                 <input type="search" id="userSearch" name="" class="adminSearch" placeholder="Search">
-                                <select id="reportedUsersFilter" class="js-example-basic-multiple" multiple="multiple" data-placeholder="  Violation">
-                                    <option>Harrassment or Bullying</option>
-                                    <option>Offensive Language</option>
-                                    <option>Spam</option>
-                                    <option>Community Guidelines Violation</option>
-                                    <option>Suspicious or Fake Account</option>
-                                    <option>Content Violations</option>
+                                <select id="reportedUsersFilter">
+                                    <option value="" selected>All Violations</option>
+                                    <option value="Harrassment or Bullying">Harrassment or Bullying</option>
+                                    <option value="Offensive Language">Offensive Language</option>
+                                    <option value="Spam">Spam</option>
+                                    <option value="Community Guidelines Violation">Community Guidelines Violation</option>
+                                    <option value="Suspicious or Fake Account">Suspicious or Fake Account</option>
+                                    <option value="Content Violations">Content Violations</option>
                                 </select>
                             </div>
                         </div>
