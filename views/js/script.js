@@ -1,5 +1,6 @@
 $(function() {
     //sidebar
+
     $("#sidebarUsername").text($("#accountUsernamePlaceholder").text());
     
     if (localStorage.getItem("sidebarStatus")) {

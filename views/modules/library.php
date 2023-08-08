@@ -31,18 +31,19 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         <div class="pageContainer">
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
-                    <div class="col-4 d-flex justify-content-start align-items-center">
+                    <div class="col-2 col-lg-4 d-flex justify-content-start justify-content-lg-start align-items-center pl-0">
+                        <img src="../assets/img/menu.png" id="menuToggle">
                         <a href="library.php" class="pageHeaderLink"><h1>Library of Resources</h1></a>
                     </div>
-                    <div class="col-8 d-flex justify-content-start align-items-center">
+                    <div class="col-10 col-lg-8 d-flex justify-content-end align-items-end align-items-lg-center pr-0">
                         <input type="search" id="librarySearch" name="" placeholder="Search the Library">
                     </div>
                 </div>
 
                 <div class="row pageContent">
-                    <div class="col-7">
-                        <div class="row">
-                            <div class="col-12 libraryBasicInfoContainer">
+                    <div class="col-12 col-lg-7 col-lg-7-order">
+                        <div class="row libraryBasicInfoContainer no-gutters">
+                            <div class="col-12">
                                 <div class="row d-flex justify-content-center align-items-center">
                                     <div class="col-12 d-flex justify-content-start align-items-start">
                                         <h1>Basic Information</h1>
@@ -88,11 +89,11 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
 
                         <!--Reading Materials-->
-                        <div class="row libraryMainContainer" id="libraryReadingMaterialsWide">
+                        <div class="row libraryMainContainer no-gutters" id="libraryReadingMaterialsWide">
                             <div class="col-12">
                                 <div class="row d-flex justify-content-center align-items-center">
                                     <div class="col-12 d-flex justify-content-start align-items-start">
-                                        <h1 id="">Reading Materials</h1>
+                                        <h1>Reading Materials</h1>
                                     </div>
                                 </div>
                                 <div id="" class="row d-flex justify-content-center align-items-center flex-row">
@@ -132,7 +133,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
                     </div>
 
-                    <div class="col-5">
+                    <div class="col-12 col-lg-5 col-lg-5-order">
                         <div class="row libraryRightContainer">
                             <div class="col-12 libraryRightContBox">
                                 <p>Religion:</p>
