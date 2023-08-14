@@ -50,7 +50,48 @@ class ModelAccount{
 			$mail->setFrom('religionexplorer@religionexplorer.uno', 'Religion Explorer'); // Sender's email address and name
 			$mail->addAddress($data["email"]); // Recipient's email address
 			$mail->Subject = 'Religion Explorer Email Verification'; // Email subject
-			$mail->Body = 'Your verification code is: ' . $data["verificationCode"]; // Email body
+			$mailBody = '<!DOCTYPE html>
+						<html>
+							<head>
+								<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
+							</head>
+							<body>
+								<table cellspacing="0" cellpadding="0" border="0" width="100%">
+									<tr>
+										<td align="center">
+											<table cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px;">
+												<tr>
+													<td align="center">
+														<img src="religionexplorer.uno/views/assets/img/logo-and-text.png" style="width: 300px;">
+													</td>
+												</tr>
+												<tr style="font-family: \'Lexend Deca\', sans-serif; font-size: 15px;">
+													<td style="text-align: center; padding: 20px 20px 0px 20px;">
+														<b>Hello, Explorer!</b><br><br>
+														Welcome to Religion Explorer, a reliable religious resource for people from all walks of life!<br><br>
+														Before you can create a profile, interact with fellow explorers, and share your creations, you\'ll need to verify your account.<br><br>
+														Here is your verification code:
+													</td>
+												</tr>
+												<tr>
+													<td style="text-align: center; padding: 15px 0 20px 0; color: #2CA464; font-size: 40px; font-weight: 600; font-family: \'Lexend Deca\', sans-serif;">' . $data["verificationCode"] . '
+													</td>
+												</tr>
+												<tr>
+													<td style="font-family: \'Lexend Deca\', sans-serif; background-color: #89C68A; text-align: center; padding: 15px; font-size: 12px;">
+														Copyright © 2023 Religion Explorer. All rights reserved.
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</body>
+						</html>';
+
+
+			$mail->isHTML(true);
+			$mail->Body = $mailBody; 
 	  
 			// Send the email
 			$mail->send();
@@ -143,11 +184,49 @@ class ModelAccount{
 			  $mail->setFrom('religionexplorer@religionexplorer.uno', 'Religion Explorer'); // Sender's email address and name
 			  $mail->addAddress($email); // Recipient's email address
 			  $mail->Subject = 'Reset Password'; // Email subject
-			  $mail->Body = 'Click the link to reset your password: http://localhost/religion_explorer/views/modules/resetPassword.php'; // Email body
-	  
-			  // Send the email
-			  $mail->send();
-			  return true; // Email sent successfully
+			  $mail->Body = '<!DOCTYPE html>
+							<html>
+								<head>
+									<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
+								</head>
+								<body>
+									<table cellspacing="0" cellpadding="0" border="0" width="100%">
+										<tr>
+											<td align="center">
+												<table cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px;">
+													<tr>
+														<td align="center">
+															<img src="religionexplorer.uno/views/assets/img/logo-and-text.png" style="width: 300px;">
+														</td>
+													</tr>
+													<tr style="font-family: \'Lexend Deca\', sans-serif; font-size: 15px;">
+														<td style="text-align: center; padding: 20px 20px 0px 20px;">
+															<b>Hello, Explorer.</b><br><br>
+															We\'re sorry to hear that you\'re having trouble logging in!<br><br>
+															Your password change request has been received. Please click the link to reset your password:
+														</td>
+													</tr>
+													<tr>
+														<td style="text-align: center; padding: 15px 0 20px 0; font-size: 15px; font-family: \'Lexend Deca\', sans-serif;"><a href="http://localhost/religion_explorer/views/modules/resetPassword.php" style="text-decoration: none; color: #2CA464;">http://localhost/religion_explorer/views/modules/resetPassword.php</a>
+														</td>
+													</tr>
+													<tr>
+														<td style="font-family: \'Lexend Deca\', sans-serif; background-color: #89C68A; text-align: center; padding: 15px; font-size: 12px;">
+															Copyright © 2023 Religion Explorer. All rights reserved.
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</body>
+							</html>';
+
+				$mail->isHTML(true);
+
+				// Send the email
+				$mail->send();
+				return true; // Email sent successfully
 			} catch (Exception $e) {
 			  return false; // Error occurred while sending email
 			}
