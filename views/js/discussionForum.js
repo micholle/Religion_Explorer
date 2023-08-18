@@ -70,6 +70,8 @@ $(function() {
                 anonymous: anonymous // Add the anonymous value to the object
             };
 
+            var violationCount = 0;
+            var remainingMinutes = 0;
             var contentEvaluationTitle = await checkContent(topicTitle);
             var contentEvaluationContent = await checkContent(topicContent);
 
@@ -82,8 +84,17 @@ $(function() {
                 $("#topicCreatedModal").modal();
                 $("#topicCreatedModal").show();
 
-                $("#topicTitle").val("");
-                $("#topicContent").val("");
+                // violationCount++;
+
+                // if (violationCount >= 5) {
+                //   $("#modalIcon").attr("src", "../assets/img/verification-error.png");
+                //   $("#modalHeader").text("Error");
+                //   $("#modalContent").text("You are blocked from posting due to too many violations. Please try again in " + remainingMinutes + " minutes.");
+                //   $("#closeTopicCreatedModal").css("display", "none");
+
+                //   $("#topicCreatedModal").modal();
+                //   $("#topicCreatedModal").show();
+                // }
             } else {
                 // Make the AJAX request to create the topic
                 $.ajax({
