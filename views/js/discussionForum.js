@@ -36,121 +36,165 @@ $(function() {
         createDiscussion();
     });
 
-    async function createDiscussion() {
-      // Retrieve the form data
+    var blockDuration = 60 * 1000;
+    var violationCount = 0;
+    
+    function createDiscussion() {
         try {
-            var topicTitle = $("#topicTitle").val();
-            var topicContent = $("#topicContent").val();
-            var anonymous = $("#anonymousCheckbox").is(":checked") ? 1 : 0;
+            var storedBlockTime = localStorage.getItem("blockTime");
+            if (storedBlockTime) {
+                var currentTime = new Date().getTime();
+                var timeSinceBlock = currentTime - parseInt(storedBlockTime);
+                if (timeSinceBlock < blockDuration) {
+                    var remainingTime = blockDuration - timeSinceBlock;
+    
+                    $("#modalIcon").attr("src", "../assets/img/verification-error.png");
+                    $("#modalHeader").text("Error");
+                    $("#modalContent").text("You are blocked from posting due to too many violations. Please try again in " + Math.ceil(remainingTime / 1000) + " seconds.");
+    
+                    var countdownInterval = setInterval(function() {
+                        remainingTime -= 1000;
 
-            if (topicTitle.trim() === '') {
-                $("#toast").html("Title is empty. Please provide a title for your topic.")
-                $("#toast").css("background-color", "#E04F5F");
-                $("#toast").addClass('show');
-            
-                setTimeout(function() {
-                    $("#toast").removeClass('show');
-                }, 2000);
-                return;
-            } else if (topicContent.trim() === '') {
-                $("#toast").html("Content is empty. Please provide content for your topic.")
-                $("#toast").css("background-color", "#E04F5F");
-                $("#toast").addClass('show');
-            
-                setTimeout(function() {
-                    $("#toast").removeClass('show');
-                }, 2000);
-                return
+                        if (remainingTime <= 0) {
+                          clearInterval(countdownInterval);
+                          $("#topicCreatedModal").modal("hide");
+                          localStorage.removeItem("blockTime");
+                        } else {
+                          $("#modalContent").text("You are blocked from posting due to too many violations. Please try again in " + Math.ceil(remainingTime / 1000) + " seconds.");
+                        }
+                    }, 1000);
+
+                    $("#closeTopicCreatedModal").css("display", "none");
+    
+                    $("#topicCreatedModal").modal();
+                    $("#topicCreatedModal").show();
+                    
+                    return;
+                }
             }
-            
-            // Create an object with the data
-            var discussion = {
-                topicTitle: topicTitle,
-                topicContent: topicContent,
-                anonymous: anonymous // Add the anonymous value to the object
-            };
-
-            var violationCount = 0;
-            var remainingMinutes = 0;
-            var contentEvaluationTitle = await checkContent(topicTitle);
-            var contentEvaluationContent = await checkContent(topicContent);
-
-            if (contentEvaluationTitle == "nsfw" || contentEvaluationContent == "nsfw") {
+    
+            if (violationCount >= 5) {
+                var currentTime = new Date().getTime();
+                localStorage.setItem("blockTime", currentTime.toString());
+                violationCount = 0;
+    
                 $("#modalIcon").attr("src", "../assets/img/verification-error.png");
                 $("#modalHeader").text("Error");
-                $("#modalContent").text("Your content has been blocked due to a violation of our community standards. We take these standards seriously to maintain a positive and respectful environment for all users. If you believe this action was taken in error, please reach out to our support team with further details. Thank you for your understanding and cooperation in upholding our community guidelines.");
+                $("#modalContent").text("You are blocked from posting due to too many violations. Please try again later.");
                 $("#closeTopicCreatedModal").css("display", "none");
-
+    
                 $("#topicCreatedModal").modal();
                 $("#topicCreatedModal").show();
-
-                // violationCount++;
-
-                // if (violationCount >= 5) {
-                //   $("#modalIcon").attr("src", "../assets/img/verification-error.png");
-                //   $("#modalHeader").text("Error");
-                //   $("#modalContent").text("You are blocked from posting due to too many violations. Please try again in " + remainingMinutes + " minutes.");
-                //   $("#closeTopicCreatedModal").css("display", "none");
-
-                //   $("#topicCreatedModal").modal();
-                //   $("#topicCreatedModal").show();
-                // }
             } else {
-                // Make the AJAX request to create the topic
-                $.ajax({
-                    url: "../../ajax/discussionCreate.ajax.php",
-                    method: "POST",
-                    data: discussion,
-                    success: function(response) {
-                        if (response === "success") {
-                            // Topic created successfully
-                                $("#toast").html("Topic created.")
-                                $("#toast").css("background-color", "");
-                                $("#toast").addClass('show');
-                            
-                                setTimeout(function() {
-                                    $("#toast").removeClass('show');
-                                }, 2000);
-                            $("#topicTitle").val("");
-                            $("#topicContent").val("");
-                            // Refresh the topics by calling the getTopics function
-                            getTopics('user_priority');
-                            const message = {
-                                type: 'topics'
-                            };
-                            ws.send(JSON.stringify(message));
-                        } else {
-                            // Error occurred while creating the topic
-                            $("#toast").html("Error occurred while creating the topic.")
-                            $("#toast").css("background-color", "#E04F5F");
-                            $("#toast").addClass('show');
-                        
-                            setTimeout(function() {
-                                $("#toast").removeClass('show');
-                            }, 2000);
-                        }
-                    },
-                    error: function() {
-                        // AJAX request failed
-                        $("#toast").html("Error occurred while making the AJAX request.")
-                        $("#toast").css("background-color", "#E04F5F");
-                        $("#toast").addClass('show');
-                    
-                        setTimeout(function() {
-                            $("#toast").removeClass('show');
-                        }, 2000);
-                    }
-                });
+                attemptPost();
             }
         } catch (error) {
             $("#toast").html("Something went wrong. Please try again later.")
             $("#toast").css("background-color", "#E04F5F");
             $("#toast").addClass('show');
-        
+    
             setTimeout(function() {
                 $("#toast").removeClass('show');
             }, 2000);
         }
+    }    
+
+    async function attemptPost() {
+      var topicTitle = $("#topicTitle").val();
+      var topicContent = $("#topicContent").val();
+      var anonymous = $("#anonymousCheckbox").is(":checked") ? 1 : 0;
+
+      if (topicTitle.trim() === '') {
+          $("#toast").html("Title is empty. Please provide a title for your topic.")
+          $("#toast").css("background-color", "#E04F5F");
+          $("#toast").addClass('show');
+      
+          setTimeout(function() {
+              $("#toast").removeClass('show');
+          }, 2000);
+          return;
+      } else if (topicContent.trim() === '') {
+          $("#toast").html("Content is empty. Please provide content for your topic.")
+          $("#toast").css("background-color", "#E04F5F");
+          $("#toast").addClass('show');
+      
+          setTimeout(function() {
+              $("#toast").removeClass('show');
+          }, 2000);
+          return
+      }
+      
+      // Create an object with the data
+      var discussion = {
+          topicTitle: topicTitle,
+          topicContent: topicContent,
+          anonymous: anonymous // Add the anonymous value to the object
+      };
+
+      var contentEvaluationTitle = await checkContent(topicTitle);
+      var contentEvaluationContent = await checkContent(topicContent);
+
+      if (contentEvaluationTitle == "nsfw" || contentEvaluationContent == "nsfw") {
+          $("#modalIcon").attr("src", "../assets/img/verification-error.png");
+          $("#modalHeader").text("Error");
+          $("#modalContent").text("Your content has been blocked due to a violation of our community standards. We take these standards seriously to maintain a positive and respectful environment for all users. If you believe this action was taken in error, please reach out to our support team with further details. Thank you for your understanding and cooperation in upholding our community guidelines.");
+          $("#closeTopicCreatedModal").css("display", "none");
+
+          $("#topicCreatedModal").modal();
+          $("#topicCreatedModal").show();
+
+          violationCount++;
+          
+          if (violationCount == 5) {
+            blockTime = new Date().getTime();
+          }
+      } else {
+        // Make the AJAX request to create the topic
+        $.ajax({
+            url: "../../ajax/discussionCreate.ajax.php",
+            method: "POST",
+            data: discussion,
+            success: function(response) {
+                if (response === "success") {
+                    // Topic created successfully
+                        $("#toast").html("Topic created.")
+                        $("#toast").css("background-color", "");
+                        $("#toast").addClass('show');
+                    
+                        setTimeout(function() {
+                            $("#toast").removeClass('show');
+                        }, 2000);
+                    $("#topicTitle").val("");
+                    $("#topicContent").val("");
+                    // Refresh the topics by calling the getTopics function
+                    getTopics('user_priority');
+                    const message = {
+                        type: 'topics'
+                    };
+                    ws.send(JSON.stringify(message));
+                } else {
+                    // Error occurred while creating the topic
+                    $("#toast").html("Error occurred while creating the topic.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
+                }
+            },
+            error: function() {
+                // AJAX request failed
+                $("#toast").html("Error occurred while making the AJAX request.")
+                $("#toast").css("background-color", "#E04F5F");
+                $("#toast").addClass('show');
+            
+                setTimeout(function() {
+                    $("#toast").removeClass('show');
+                }, 2000);
+            }
+        });
+      }
     }
 
     function getTopics(sortCriteria) {
