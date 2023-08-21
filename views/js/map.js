@@ -686,7 +686,8 @@ $(function() {
                     var pinImg2 = pinDetails.pinImg2;
                     var pinSource = pinDetails.source;
 
-                    var pinImg = "../assets/img/map/" + pinType + "-" + (pinReligion.toLowerCase()) + ".png";
+                    // var pinImg = "../assets/img/map/" + pinType + "-" + (pinReligion.toLowerCase()) + ".png";
+                    var pinImg = "../assets/img/map/map-pin.png";
                     $("#svgMap").html($("#svgMap").html() + '<image id="' + pinid + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinid + "', '" + pinTitle + "', '" + pinCountry + "'" + ')" onmouseout="closePinOverview(' + "'" + pinid + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDate + "', '" + pinReligion + "', '" +  pinVid + "', '" + pinImg1 + "', '" + pinImg2 + "', '" + pinSource + "'" + ')" href="' + pinImg +'" x="' + x + '" y="' + y + '" height="30" width="30"/>');
 
                     var pinid = "#" + pinid;
