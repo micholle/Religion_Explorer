@@ -424,8 +424,8 @@ h5 {
 
 .mapPin {
     cursor: pointer;
-    height: 60px;
-    width: 60px;
+    height: 45px;
+    width: 45px;
 }
 
 .mapPinStyle {
@@ -914,16 +914,57 @@ h5 {
 
 .communitySubmissionsContentBox .communitySubmissionsContent {
     display: none;
-    animation: moving 0.5s ease;
+    animation: fade 0.75s ease;
 }
 
-@keyframes moving {
-    from{transform: translateX(50px); opacity: 0;}
-    to{transform: translateX(0px); opacity: 1;}
+@keyframes fade {
+    from{opacity: 0;}
+    to{opacity: 1;}
 }
 
 .communitySubmissionsContentBox .communitySubmissionsContent.active {
     display: block;
+}
+
+.commCreationsRightContainer {
+    padding: 20px;
+}
+
+.commCreationsRightContBox {
+    padding: 20px 20px 0px 20px !important;
+    border: solid #D0D0D0 2px;
+    border-radius: 15px;
+}
+
+.commCreationsRightContBox h3 {
+    font-size: 20px;
+    color: #3E3E3E;
+    font-family: Lexend;
+    font-weight: 600;
+}
+
+.commCreationsRightContBox h2 {
+    font-size: 12px;
+    color: #3E3E3E;
+    margin-top: -7.5px;
+    margin-right: 5px;
+    margin-bottom: 0;
+}
+
+.commCreationsRightContBox p {
+    text-align: justify;
+    margin-bottom: 0px;
+}
+
+.commCreationsRightContBox img {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.commCreationsBoxContent {
+    padding: 0 0 20px 0;
+    margin-bottom: 20px;
+    border-bottom: solid #2CA464 2px;
 }
 
 /*splash page*/
@@ -1293,6 +1334,27 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     }
 } */
 
+.input-container {
+    position: relative;
+  }
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px; /* Adjust this value to position the icon */
+    color: #2CA464;
+}
+
+.input-field {
+    padding-left: 35px !important; /* Adjust this value to create space for the icon */
+}
+
+.inputIconVariant .input-icon {
+    top: 42.5% !important;
+    transform: translateY(-42.5%) !important;
+}
+
 .loginSignupForm {
     height: 100vh;
 }
@@ -1625,10 +1687,12 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     margin-top: 25px;
     margin-bottom: 10px;
     transition: opacity 0.5s ease;
+    cursor: pointer;
 }
 
 .sidebar.active .top .logo img {
     height: 65px;
+    cursor: pointer;
     transition: opacity 0.5s ease;
 }
 
@@ -3996,6 +4060,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 
 .reportButton {
     cursor: pointer;
+    padding: 1.5px;
 }
 
 .adminActionModal .modal-xs {

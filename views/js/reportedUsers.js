@@ -89,7 +89,7 @@ $(function() {
                     $("#userAdditionalContextColumn").append('<div class="' + user + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
                     $("#userReportedOnColumn").append('<div class="' + user + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
                     $("#userReportedByColumn").append('<div class="' + user + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
-                    $("#userActionColumn").append('<div class="' + user + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
+                    $("#userActionColumn").append('<div class="' + user + ' adminReviewContainerContent justify-content-center align-items-center flex-row">' +
                         '<img class="reportButton" src="../assets/img/admin/action-check.png" data-userid="' + userid + '" data-action="resolve">' +
                         '<img class="reportButton" src="../assets/img/admin/action-slash.png" data-userid="' + userid + '" data-action="suspend">' +
                         '<img class="reportButton" src="../assets/img/admin/action-dash.png" data-userid="' + userid + '" data-action="ban">' +

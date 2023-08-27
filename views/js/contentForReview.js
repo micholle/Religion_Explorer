@@ -78,7 +78,7 @@ $(function() {
                 $("#additionalContextColumn").append('<div class="' + content + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + additionalContext + '</p> </div>');
                 $("#reportedOnColumn").append('<div class="' + content + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedOn + '</p> </div>');
                 $("#reportedByColumn").append('<div class="' + content + ' adminReviewContainerContent justify-content-center align-items-center"> <p>' + reportedBy + '</p> </div>');
-                $("#actionColumn").append('<div class="' + content + ' adminReviewContainerContent justify-content-center align-items-center flex-column">' +
+                $("#actionColumn").append('<div class="' + content + ' adminReviewContainerContent justify-content-center align-items-center flex-row">' +
                     '<img class="reportButton" src="../assets/img/admin/action-check.png" onclick="resolveReport(' + "'" + contentid + "'" + ')">' +
                     '<img class="reportButton" src="../assets/img/admin/action-x.png" onclick="deleteContent(' + "'" + contentid + "'" +')">' +
                     '<img class="reportButton" src="../assets/img/admin/action-exclamation.png" onclick="reportUser(' + "'" + contentid + '\', \'' + violations + '\', \'' + additionalContext + '\', \'' + contentCreator + '\')"">' +

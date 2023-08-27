@@ -45,15 +45,78 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <button class="communitySubmissionsTabBtn" data-tab="communitySubVideos">Videos</button>
                     <button class="communitySubmissionsTabBtn" data-tab="communitySubBlogs">Reading Materials</button>
                 </div>
-                <div class="communitySubmissionsContentBox col-12 d-flex justify-content-center align-items-center flex-column">
-                    <!--Photos-->
-                    <div class="communitySubmissionsContent" id="communitySubPhotos"></div>
+                <div class="col-12 col-lg-7">
+                    <div class="communitySubmissionsContentBox d-flex justify-content-center align-items-center flex-column">
+                        <!--Photos-->
+                        <div class="communitySubmissionsContent" id="communitySubPhotos"></div>
 
-                    <!--Videos-->
-                    <div class="communitySubmissionsContent" id="communitySubVideos"></div>
+                        <!--Videos-->
+                        <div class="communitySubmissionsContent" id="communitySubVideos"></div>
 
-                    <!--Reading Materials-->
-                    <div class="communitySubmissionsContent communitySubmissionsContentVariant" id="communitySubBlogs"></div>
+                        <!--Reading Materials-->
+                        <div class="communitySubmissionsContent communitySubmissionsContentVariant" id="communitySubBlogs"></div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5">
+                    <div class="row libraryRightContainer">
+                        <div class="col-12 libraryRightContBox">
+                            <p>Religion:</p>
+                            <select id="libraryReligionFilter">
+                                <option selected value="All Religions">All Religions</option>
+                                <option value="Buddhism">Buddhism</option>
+                                <option value="Christianity">Christianity</option>
+                                <option value="Hinduism">Hinduism</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Judaism">Judaism</option>
+                            </select>
+                            <input type="checkbox" class="libraryCategoryFilter" id="Religious Traditions" value="Religious Traditions">
+                            <label for="Religious Traditions">Religious Traditions</label><br>
+                            <input type="checkbox" class="libraryCategoryFilter" id="Historical Context" value="Historical Context">
+                            <label for="Historical Context">Historical Context</label><br>
+                            <input type="checkbox" class="libraryCategoryFilter" id="Theology" value="Theology">
+                            <label for="Theology">Theology</label><br>
+                            <input type="checkbox" class="libraryCategoryFilter" id="Religious Practices" value="Religious Practices">
+                            <label for="Religious Practices">Religious Practices</label><br>
+                            <input type="checkbox" class="libraryCategoryFilter" id="Ethics" value="Ethics">
+                            <label for="Ethics">Ethics</label><br>
+                            <input type="checkbox" class="libraryCategoryFilter" id="Social Issues" value="Social Issues">
+                            <label for="Social Issues">Social Issues</label>
+                        </div>
+
+                        <div class="row commCreationsRightContainer">
+                            <h1>Recently Bookmarked</h1>
+                            <div class="col-12 commCreationsRightContBox">
+                                <div class="commCreationsBoxContent">
+                                    <h3>Placeholder Title</h3>
+                                    <h2>Placeholder User Contributor</h2>
+                                    <img src="../assets/img/placeholder.png" style="width: 100%">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti vel molestiae a praesentium, laudantium labore repellat delectus ipsum, perspiciatis adipisci, sapiente fugit esse.</p>
+                                </div>
+                                <div class="commCreationsBoxContent">
+                                    <h3>Placeholder Title</h3>
+                                    <h2>Placeholder User Contributor</h2>
+                                    <img src="../assets/img/placeholder.png" style="width: 100%">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti vel molestiae a praesentium, laudantium labore repellat delectus ipsum, perspiciatis adipisci, sapiente fugit esse.</p>
+                                </div>
+                                <div class="commCreationsBoxContent">
+                                    <h3>Placeholder Title</h3>
+                                    <h2>Placeholder User Contributor</h2>
+                                    <img src="../assets/img/placeholder.png" style="width: 100%">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti vel molestiae a praesentium, laudantium labore repellat delectus ipsum, perspiciatis adipisci, sapiente fugit esse.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-12 commCreationsRecoContainer">
+                            <h3>Recently Bookmarked</h3>
+                            <div class="commCreationsRecoBox">
+                                <h3>Placeholder Title</h3>
+                                <h2>Placeholder User Contributor</h2>
+                                <img src="../assets/img/placeholder.png" style="width: 100%">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti vel molestiae a praesentium, laudantium labore repellat delectus ipsum, perspiciatis adipisci, sapiente fugit esse.</p>
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
             </div>
         </div>

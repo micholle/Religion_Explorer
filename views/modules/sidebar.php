@@ -16,7 +16,7 @@ function create_sidebar() {
             <div class="sidebarContainer" style="display: flex">
                 <div class="sidebar">
                     <div class="top">
-                        <div class="logo d-flex justify-content-center align-items-center">
+                        <div class="logo d-flex justify-content-center align-items-center" id="minimize">
                             <img src="../assets/img/applogo.png" id="logo">
                             <img src="../assets/img/text.png" id="text">
                         </div>
@@ -77,32 +77,17 @@ function create_sidebar() {
                                 <span class="navItem">Notifications</span>
                             </a>
                         </li>
-
-                        <li class="dropdown">
-                            <a href="#">
-                                <img src="../assets/img/more.png">
-                                <span class="navItem">More</span>
+                        <li>
+                            <a id="sidebarReport" href="#">
+                                <img src="../assets/img/report.png">
+                                <span class="navItem">Report a User</span>
                             </a>
-                            <ul class="dropdownMenu">
-                                <li>
-                                    <a id="minimize" href="#">
-                                        <img src="../assets/img/minimize.png" id="minmax">
-                                        <span class="navItem">Minimize Sidebar</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a id="sidebarReport" href="#">
-                                        <img src="../assets/img/report.png">
-                                        <span class="navItem">Report a User</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../../models/logout.model.php">
-                                        <img src="../assets/img/logout.png">
-                                        <span class="navItem">Logout</span>
-                                    </a>
-                                </li>
-                            </ul>
+                        </li>
+                        <li>
+                            <a href="../../models/logout.model.php">
+                                <img src="../assets/img/logout.png">
+                                <span class="navItem">Logout</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -256,27 +241,12 @@ function create_sidebar() {
                                 <span class="navItem">Calendar</span>
                             </a>
                         </li>
-
-                        <li class="dropdown">
-                            <a href="#">
-                                <img src="../assets/img/more.png">
-                                <span class="navItem">More</span>
+                        
+                        <li>
+                            <a href="../../models/logout.model.php">
+                                <img src="../assets/img/logout.png">
+                                <span class="navItem">Exit</span>
                             </a>
-                            <ul class="dropdownMenu">
-                                <li>
-                                    <a id="minimize" href="#">
-                                        <img src="../assets/img/minimize.png" id="minmax">
-                                        <span class="navItem">Minimize Sidebar</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="../../models/logout.model.php">
-                                        <img src="../assets/img/logout.png">
-                                        <span class="navItem">Exit</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
                 </div>

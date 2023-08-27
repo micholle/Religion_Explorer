@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -49,8 +50,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     </div>
                                     <?php endif; ?>
                                 <form method="POST">
-                                    <input type="text" id="username" name="username" placeholder="Email or username">
-                                    <input type="password" id="password" name="password" placeholder="Password">
+                                    <div class="input-container">
+                                        <span class="input-icon">
+                                            <i class="fa fa-user fa-fw"></i>
+                                        </span>
+                                        <input type="text" id="username" name="username" class="input-field" placeholder="Email or username">
+                                    </div>
+                                    <div class="input-container">
+                                        <span class="input-icon">
+                                            <i class="fa fa-lock fa-fw"></i>
+                                        </span>
+                                        <input type="password" id="password" name="password" class="input-field" placeholder="Password">
+                                    </div>
                                     <p class="forgotLink"><a href="forgotPassword.php">Forgot your password?</a></p>
                                     <button type="submit" id="btn-login" name="btn-login" class="registrationSubmitButton">Login</button>
                                 </form>

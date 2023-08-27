@@ -7,6 +7,7 @@
     <title>Religion Explorer: Sign Up</title>
     <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
     
     <!-- scripts -->
@@ -38,21 +39,46 @@
                                 <img src="../assets/img/applogo.png" height="110px" width="110px">
                                 <h3>Sign Up</h3>
                                 <form method="POST">
-                                    <div class="d-flex justify-content-center align-items-center flex-column">
-                                        <input type="text" id="email" name="email" placeholder="Email" autocomplete="off">
-                                        <input type="text" id="username" name="username" placeholder="Username" autocomplete="off">
-                                        <input type="password" id="password" name="password" placeholder="Password">
-                                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
-                                        <select id="religion" name="religion">
-                                            <option value="" disabled selected hidden>Choose your religion</option>
-                                            <option value="Buddhism">Buddhism</option>
-                                            <option value="Christianity">Christianity</option>
-                                            <option value="Hinduism">Hinduism</option>
-                                            <option value="Islam">Islam</option>
-                                            <option value="Judaism">Judaism</option>
-                                            <option value="Non-religious">Non-religious</option>
-                                            <option value="Other">Other</option>
-                                        </select>
+                                    <div class="d-flex justify-content-center align-items-center flex-column inputIconVariant">
+                                        <div class="input-container">
+                                            <span class="input-icon">
+                                                <i class="fa fa-inbox fa-fw"></i>
+                                            </span>
+                                            <input type="text" id="email" name="email" class="input-field" placeholder="Email" autocomplete="off">
+                                        </div>
+                                        <div class="input-container">
+                                            <span class="input-icon">
+                                                <i class="fa fa-user fa-fw"></i>
+                                            </span>
+                                            <input type="text" id="username" name="username" class="input-field" placeholder="Username" autocomplete="off">
+                                        </div>
+                                        <div class="input-container">
+                                            <span class="input-icon">
+                                                <i class="fa fa-lock fa-fw"></i>
+                                            </span>
+                                            <input type="password" id="password" name="password" class="input-field" placeholder="Password">
+                                        </div>
+                                        <div class="input-container">
+                                            <span class="input-icon">
+                                                <i class="fa fa-lock fa-fw"></i>
+                                            </span>
+                                            <input type="password" id="confirmPassword" name="confirmPassword" class="input-field" placeholder="Confirm Password">
+                                        </div>
+                                        <div class="input-container">
+                                            <span class="input-icon">
+                                                <i class="fa fa-heart fa-fw"></i>
+                                            </span>
+                                            <select id="religion" name="religion" class="input-field">
+                                                <option value="" disabled selected hidden>Choose your religion</option>
+                                                <option value="Buddhism">Buddhism</option>
+                                                <option value="Christianity">Christianity</option>
+                                                <option value="Hinduism">Hinduism</option>
+                                                <option value="Islam">Islam</option>
+                                                <option value="Judaism">Judaism</option>
+                                                <option value="Non-religious">Non-religious</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <button type="submit" id="btn-signup" name="btn-signup" class="registrationSubmitButton">Sign Up</button>

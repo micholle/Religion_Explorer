@@ -10,7 +10,6 @@ $(function() {
         if (sidebarStatus == "minimized") {
             $(".sidebar").addClass("active");
             $("#text").css("display", "none");
-            $("#minmax").attr("src", "../assets/img/maximize.png");
             $(".pageContainer").css("padding-left", "85px");
             $("#sidebarStatus").text("minimized");
         } else {
@@ -20,7 +19,6 @@ $(function() {
 
             $(".sidebar").removeClass("active");
             $("#text").css("display", "inline-block");
-            $("#minmax").attr("src", "../assets/img/minimize.png");
             $(".pageContainer").css("padding-left", "275px");
             $("#sidebarStatus").text("maximized");
         }
@@ -35,12 +33,10 @@ $(function() {
         $(".sidebar").toggleClass("active");
         if ($(".sidebar").hasClass("active")) {
             $("#text").css("display", "none");
-            $("#minmax").attr("src", "../assets/img/maximize.png");
             $(".pageContainer").css("padding-left", "85px");
             $("#sidebarStatus").text("minimized");
         } else {
             $("#text").css("display", "inline-block");
-            $("#minmax").attr("src", "../assets/img/minimize.png");
             $(".pageContainer").css("padding-left", "275px");
             $(".notificationsPanel").removeClass("show");
             $("#sidebarNotifications").removeClass("active");
@@ -316,11 +312,9 @@ $(function() {
     
             if ($(".sidebar").hasClass("active")) {
                 $("#text").css("display", "none");
-                $("#minmax").attr("src", "../assets/img/maximize.png");
                 $(".pageContainer").css("padding-left", "85px");
             } else {
                 $("#text").css("display", "inline-block");
-                $("#minmax").attr("src", "../assets/img/minimize.png");
                 $(".pageContainer").css("padding-left", "275px");
             }
         }
