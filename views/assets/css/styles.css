@@ -2845,6 +2845,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 
 .libraryBasicInfoContainer {
     padding: 15px 0;
+    border-bottom: solid #D0D0D0 2px;
 }
 
 .libraryBasicInfoContainer p {
@@ -2926,7 +2927,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 .libraryMainContainer {
-    border-top: solid #D0D0D0 2px;
     padding: 15px 0 !important;
 }
 
@@ -3111,8 +3111,37 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     border-radius: 15px;
     object-fit: cover;
     cursor: pointer;
+    margin: 0 10px 10px 0;
 }
 
+.libraryScrollContainer {
+    margin: 0 20px;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.libraryScrollContainer::-webkit-scrollbar {
+    height: 15px;
+}
+
+.libraryScrollContainer::-webkit-scrollbar-thumb {
+    background-color: #C1C1C1;
+    border-radius: 20px;
+}
+
+.libraryScrollContainer::-webkit-scrollbar-thumb:hover {
+    background-color: #787878;
+}
+
+.libraryScrollContainer::-webkit-scrollbar-track {
+    background-color: #F1F1F1;
+    border-radius: 20px;
+}
+
+.libraryScrollContainer .roundedButton {
+    padding: 0px 20px;
+    border-radius: 100px;
+}
 .librarySeeMore {
     cursor: pointer;
 }
@@ -3183,9 +3212,31 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /* user agreement */
+.userAgreementNav .registrationNavButton {
+    background-color: transparent;
+    color: #2CA464;
+    border: solid #298f58 2px;
+    border-radius: 15px;
+    font-family: Lexend;
+    font-size: 15px;
+    margin: 20px 10px;
+    padding: 7.5px 15px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+}
+
+.userAgreementNav .registrationNavButton:hover {
+    background-color: rgb(220, 220, 220 , 0.3);
+    transition: background-color 0.5s ease;
+}
+
+.userAgreementNav .registrationNavButton:focus {
+    outline: none;
+}
 
 .userAgreementDiv {
-    padding: 50px 200px 50px 200px;
+    padding: 10px 200px 50px 200px;
     font-family: Lexend;
 }
 

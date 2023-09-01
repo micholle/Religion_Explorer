@@ -162,13 +162,16 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <!--Photos Small-->
                         <div class="row libraryRightContainer" id="libraryPhotosSmall">
                             <h1>Photos</h1>
-                            <div class="col-12 d-flex justify-content-center align-items-center flex-column libraryRightContBox">
+                            <div class="col-12 libraryRightContBox">
                                 <div class="row d-flex flex-row">
-                                    <div id="libraryPhotosPreview" class="col-12 d-flex justify-content-center align-items-center"></div>
-                                </div>
-                                <div class="row d-flex flex-row">
-                                    <div class="col-12 d-flex justify-content-center align-items-center">
-                                        <button class="roundedButton librarySeeMore" id="libraryPhotosSeeMore">See More</button>
+                                    <div class="libraryScrollContainer">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <!-- <div id="libraryPhotosPreview" class="col-12 d-flex justify-content-center align-items-center"></div> -->
+                                        <button class="roundedButton librarySeeMore" id="libraryPhotosSeeMore">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -177,13 +180,16 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <!--Videos Small-->
                         <div class="row libraryRightContainer" id="libraryVideosSmall">
                             <h1>Videos</h1>
-                            <div class="col-12 d-flex justify-content-center align-items-center flex-column libraryRightContBox">
+                            <div class="col-12 libraryRightContBox">
                                 <div class="row d-flex flex-row">
-                                    <div id="libraryVideosPreview" class="col-12 d-flex justify-content-center align-items-center"></div>
-                                </div>
-                                <div class="row d-flex flex-row">
-                                    <div class="col-12 d-flex justify-content-center align-items-center">
-                                        <button class="roundedButton librarySeeMore" id="libraryVideosSeeMore">See More</button>
+                                    <div class="libraryScrollContainer">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <!-- <div id="libraryVideosPreview" class="col-12 d-flex justify-content-center align-items-center"></div> -->
+                                        <button class="roundedButton librarySeeMore" id="libraryVideosSeeMore">+</button>
                                     </div>
                                 </div>
                             </div>
