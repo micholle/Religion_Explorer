@@ -358,18 +358,6 @@ $(function() {
             }
         });
     });    
-
-    function maskEmail(email) {
-      var [username, domain] = email.split("@");
-      var maskedUsername = username.substring(0, 2);
-
-      for (var i = 2; i < username.length; i++) {
-          maskedUsername += "*";
-      }
-        var maskedEmail = maskedUsername + "@" + domain;
-  
-      return maskedEmail;
-  }
 });
 
 async function checkUsername(username) {

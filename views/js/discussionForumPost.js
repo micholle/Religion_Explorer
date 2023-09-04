@@ -610,28 +610,56 @@ $(function() {
 
     // ...
 
-    function updateContent(type, id, content) {
-        $.ajax({
-            url: "../../ajax/discussionUpdate.ajax.php",
-            method: "POST",
-            data: { type: type, id: id, content: content },
-            success: function(response) {
-                if (response === "success") {
-                    // Content updated successfully
-                    getPosts("user_priority", $("#topicId").val());
-                    $("#toast").html("Comment edited successfully.")
-                    $("#toast").addClass('show');
-                
-                    setTimeout(function() {
-                        $("#toast").removeClass('show');
-                    }, 2000);
-                    const message = {
-                        type: 'discussion'
-                    };
-                    ws.send(JSON.stringify(message));
-                } else {
-                    // Error occurred while updating the content
-                    $("#toast").html("Error occurred while updating the content.")
+    async function updateContent(type, id, content) {
+        const updateContent = {
+            type: type,
+            id: id,
+            content: content
+        };
+        var contentEvaluationContent = await checkContent(content);
+
+        if (contentEvaluationContent == "nsfw") {
+            $("#reportContentIcon").attr("src", "../assets/img/verification-error.png");
+            $("#reportContentStatus").text("Error");
+            $("#reportContentMessage").text("Your content has been blocked due to a violation of our community standards. We take these standards seriously to maintain a positive and respectful environment for all users. If you believe this action was taken in error, please reach out to our support team with further details. Thank you for your understanding and cooperation in upholding our community guidelines.");
+            $("#reportContentNoticeButton").css("display", "none");
+
+            $("#reportContentNotice").modal();
+            $("#reportContentNotice").show();
+            getPosts("user_priority", $("#topicId").val());
+        } else {
+            $.ajax({
+                url: "../../ajax/discussionUpdate.ajax.php",
+                method: "POST",
+                data: updateContent,
+                success: function(response) {
+                    if (response === "success") {
+                        // Content updated successfully
+                        getPosts("user_priority", $("#topicId").val());
+                        $("#toast").html("Comment edited successfully.")
+                        $("#toast").addClass('show');
+                    
+                        setTimeout(function() {
+                            $("#toast").removeClass('show');
+                        }, 2000);
+                        const message = {
+                            type: 'discussion'
+                        };
+                        ws.send(JSON.stringify(message));
+                    } else {
+                        // Error occurred while updating the content
+                        $("#toast").html("Error occurred while updating the content.")
+                        $("#toast").css("background-color", "#E04F5F");
+                        $("#toast").addClass('show');
+                    
+                        setTimeout(function() {
+                            $("#toast").removeClass('show');
+                        }, 2000);
+                    }
+                },
+                error: function() {
+                    // AJAX request failed
+                    $("#toast").html("Error occurred while making the AJAX request.")
                     $("#toast").css("background-color", "#E04F5F");
                     $("#toast").addClass('show');
                 
@@ -639,18 +667,8 @@ $(function() {
                         $("#toast").removeClass('show');
                     }, 2000);
                 }
-            },
-            error: function() {
-                // AJAX request failed
-                $("#toast").html("Error occurred while making the AJAX request.")
-                $("#toast").css("background-color", "#E04F5F");
-                $("#toast").addClass('show');
-            
-                setTimeout(function() {
-                    $("#toast").removeClass('show');
-                }, 2000);
-            }
-        });
+            });
+        }
     }
 
 
@@ -834,7 +852,26 @@ $(function() {
                 // Redirect to viewUserProfile.php with the accountId
                 window.location.href = 'viewUserProfile.php?accountid=' + accountId;
             });
+            $(document).off('click', '.discussionForumUsernameComment').on('click', '.discussionForumUsernameComment', function() {
+                const accountId = $(this).data('accountid');
+                // Redirect to viewUserProfile.php with the accountId
+                window.location.href = 'viewUserProfile.php?accountid=' + accountId;
+            });
         }   
+        function convertToLocalTime() {
+            const postDateElements = document.querySelectorAll(".postDate");
+    
+            postDateElements.forEach(function(element) {
+                const postDate = new Date(element.getAttribute("data-postdate"));
+                const userTimezoneOffset = new Date().getTimezoneOffset() * 60000;
+                const localTime = new Date(postDate - userTimezoneOffset).toLocaleString();
+    
+                element.textContent = localTime;
+            });
+        }
+    
+        // Call the function to convert date and time on page load
+        window.addEventListener("load", convertToLocalTime);
 });
 
 function reportContent(contentid) {
