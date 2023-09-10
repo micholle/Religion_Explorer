@@ -189,8 +189,8 @@ $(function() {
 
             return;
           }
-          if (file.size > 15 * 1024 * 1024) {
-            $("#toast").html("Please select an image not more than 15MB.");
+          if (file.size > 1 * 1024 * 1024) {
+            $("#toast").html("Please select an image not more than 1MB.");
             $("#toast").css("background-color", "#E04F5F");
             $("#toast").addClass('show');
     
