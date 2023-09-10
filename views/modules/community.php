@@ -112,6 +112,14 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                 </div>
                                 <div class="row communityUploadDetails">
                                     <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                                        <div class="communityAddFilters">
+                                            <div id="Religious_Traditions" class="communityFilterCategory">Religious Traditions</div>
+                                            <div id="Historical_Context" class="communityFilterCategory">Historical Context</div>
+                                            <div id="Theology" class="communityFilterCategory">Theology</div>
+                                            <div id="Religious_Practices" class="communityFilterCategory">Religious Practices</div>
+                                            <div id="Ethics" class="communityFilterCategory">Ethics</div>
+                                            <div id="Social_Issues" class="communityFilterCategory">Social Issues</div>
+                                        </div>
                                         <textarea id="communityDescription" name="communityDescription" placeholder="Description"></textarea>
                                         <button type="button" id="communityPublish" class="roundedButton">Publish</button>
                                     </div>

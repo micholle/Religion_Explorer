@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2023 at 05:50 PM
+-- Generation Time: Sep 11, 2023 at 12:51 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -36,6 +36,7 @@ CREATE TABLE `notifications` (
   `postid` int(8) DEFAULT NULL,
   `replyid` int(8) DEFAULT NULL,
   `reportid` int(11) DEFAULT NULL,
+  `achievementid` int(11) DEFAULT NULL,
   `personInvolved` varchar(5) DEFAULT NULL,
   `notificationSource` text NOT NULL,
   `notificationDate` date NOT NULL,
@@ -66,7 +67,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notificationid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `notificationid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
