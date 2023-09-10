@@ -3,6 +3,14 @@ $(function() {
     var maskedEmail = maskEmail(fullEmail);
     $("#email").val(maskedEmail);
 
+  $("#avatarSizeTest").click(function(){
+    $("#avatarSizeIcon").attr("src", "../assets/img/editProfile/alert.png");
+    $("#avatarSizeHeader").text("Avatar File Size Error");
+    $("#avatarSizeContent").text("The file size of your chosen avatar has exceeded the limit. Please select an image with a smaller file size.");
+    $('#avatarSizeModal').modal();
+    $('#avatarSizeModal').show();
+  });
+
   $.ajax({
     url: "../../ajax/showSidebar.ajax.php",
     method: "POST",
@@ -21,10 +29,17 @@ $(function() {
                 });
             }
         });
-    }
-});
+      }
+  });
 
-
+    //AVATAR FILE SIZE WARNING MODAL
+    $("#").click(function(){
+      $("#avatarSizeIcon").attr("src", "../assets/img/editProfile/alert.png");
+      $("#avatarSizeHeader").text("Avatar File Size Error");
+      $("#avatarSizeContent").text("The file size of your chosen avatar has exceeded the limit. Please select an image with a file size that is not greater than 1000 kilobytes.");
+      $('#avatarSizeModal').modal();
+      $('#avatarSizeModal').show();
+    });
 
     $("#editAvatar").click(function(){
         $('#editAvatarModal').modal();
