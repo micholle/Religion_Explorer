@@ -11,6 +11,7 @@ class communityAjax {
   public $filename;
   public $filetype;
   public $filesize;
+  public $filters;
   public $status;
   public $date;
 
@@ -24,6 +25,7 @@ class communityAjax {
     $filename = $this->filename;
     $filetype = $this->filetype;
     $filesize = $this->filesize;
+    $filters = $this->filters;
     $status = $this->status;
     $date = $this->date;
 
@@ -37,6 +39,7 @@ class communityAjax {
       "filename" => $filename,
       "filetype" => $filetype,
       "filesize" => $filesize,
+      "filters" => $filters,
       "status" => $status,
       "date" => $date
     );
@@ -62,6 +65,7 @@ $submitCreation->filedata = $filepath;
 $submitCreation->filename = $_POST["filename"];
 $submitCreation->filetype = $_POST["filetype"];
 $submitCreation->filesize = $_POST["filesize"];
+$submitCreation->filters = $_POST["filters"];
 $submitCreation->status = $_POST["status"];
 $submitCreation->date = $_POST["date"];
 

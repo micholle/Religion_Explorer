@@ -76,6 +76,80 @@ $(function() {
         }
     });
 
+    var filtersArray = [];
+
+    $("#Religious_Traditions").click(function(){
+        if ($("#Religious_Traditions").css("background-color") == "rgb(236, 236, 236)") {
+            $("#Religious_Traditions").css("background-color", "#BFE3D0");
+            $("#Religious_Traditions").css("border", "solid #2CA464 2px");
+            filtersArray.push("Religious Traditions");
+        } else {
+            $("#Religious_Traditions").css("background-color", "#ECECEC");
+            $("#Religious_Traditions").css("border", "solid #D6D6D6 2px");
+            filtersArray.splice(filtersArray.indexOf("Religious Traditions"), 1);
+        }
+    });
+
+    $("#Historical_Context").click(function(){
+        if ($("#Historical_Context").css("background-color") == "rgb(236, 236, 236)") {
+            $("#Historical_Context").css("background-color", "#BFE3D0");
+            $("#Historical_Context").css("border", "solid #2CA464 2px");
+            filtersArray.push("Historical Context");
+        } else {
+            $("#Historical_Context").css("background-color", "#ECECEC");
+            $("#Historical_Context").css("border", "solid #D6D6D6 2px");
+            filtersArray.splice(filtersArray.indexOf("Historical Context"), 1);
+        }
+    });
+    
+    $("#Theology").click(function(){
+        if ($("#Theology").css("background-color") == "rgb(236, 236, 236)") {
+            $("#Theology").css("background-color", "#BFE3D0");
+            $("#Theology").css("border", "solid #2CA464 2px");
+            filtersArray.push("Theology");
+        } else {
+            $("#Theology").css("background-color", "#ECECEC");
+            $("#Theology").css("border", "solid #D6D6D6 2px");
+            filtersArray.splice(filtersArray.indexOf("Theology"), 1);
+        }
+    });
+
+    $("#Religious_Practices").click(function(){
+        if ($("#Religious_Practices").css("background-color") == "rgb(236, 236, 236)") {
+            $("#Religious_Practices").css("background-color", "#BFE3D0");
+            $("#Religious_Practices").css("border", "solid #2CA464 2px");
+            filtersArray.push("Religious Practices");
+        } else {
+            $("#Religious_Practices").css("background-color", "#ECECEC");
+            $("#Religious_Practices").css("border", "solid #D6D6D6 2px");
+            filtersArray.splice(filtersArray.indexOf("Religious Practices"), 1);
+        }
+    });
+
+    $("#Ethics").click(function(){
+        if ($("#Ethics").css("background-color") == "rgb(236, 236, 236)") {
+            $("#Ethics").css("background-color", "#BFE3D0");
+            $("#Ethics").css("border", "solid #2CA464 2px");
+            filtersArray.push("Ethics");
+        } else {
+            $("#Ethics").css("background-color", "#ECECEC");
+            $("#Ethics").css("border", "solid #D6D6D6 2px");
+            filtersArray.splice(filtersArray.indexOf("Ethics"), 1);
+        }
+    });
+
+    $("#Social_Issues").click(function(){
+        if ($("#Social_Issues").css("background-color") == "rgb(236, 236, 236)") {
+            $("#Social_Issues").css("background-color", "#BFE3D0");
+            $("#Social_Issues").css("border", "solid #2CA464 2px");
+            filtersArray.push("Social Issues");
+        } else {
+            $("#Social_Issues").css("background-color", "#ECECEC");
+            $("#Social_Issues").css("border", "solid #D6D6D6 2px");
+            filtersArray.splice(filtersArray.indexOf("Social Issues"), 1);
+        }
+    });
+
     $("#communityCreate").click(function(){
         $('#communityModal').modal();
         $('#communityModal').show();
@@ -112,6 +186,7 @@ $(function() {
         var title = $("#communityTitle").val();
         var religion = $("#communityCategory").val();
         var description = $("#communityDescription").val();
+        var filters = filtersArray.join(", ");
 
         (async () => {
             try {        
@@ -207,11 +282,11 @@ $(function() {
                                     $("#communityNoticeModal").modal();
                                     $("#communityNoticeModal").show();
                 
-                                    $("#communityUpload").val("");
-                                    $("#communityTitle").val("");
-                                    $("#communityCategory").val("Religion");
-                                    $("#communityDescription").val("");
-                                    $("#uploadedFilename").text("");
+                                    // $("#communityUpload").val("");
+                                    // $("#communityTitle").val("");
+                                    // $("#communityCategory").val("Religion");
+                                    // $("#communityDescription").val("");
+                                    // $("#uploadedFilename").text("");
                                     
                                 } else {
                                     if (contentEvaluationTitle == "nsfw" || contentEvaluationDescription == "nsfw") {
@@ -224,10 +299,10 @@ $(function() {
                                         $("#communityNoticeModal").modal();
                                         $("#communityNoticeModal").show();
                     
-                                        $("#communityUpload").val("");
-                                        $("#communityTitle").val("");
-                                        $("#communityCategory").val("Religion");
-                                        $("#communityDescription").val("");
+                                        // $("#communityUpload").val("");
+                                        // $("#communityTitle").val("");
+                                        // $("#communityCategory").val("Religion");
+                                        // $("#communityDescription").val("");
                                     } else {
                                         var creation = new FormData();
                                         creation.append("accountid", accountid);
@@ -238,6 +313,7 @@ $(function() {
                                         creation.append("filename", filename);
                                         creation.append("filetype", filetype);
                                         creation.append("filesize", filesize);
+                                        creation.append("filters", filters);
                                         creation.append("status", status);
                                         creation.append("date", date);
                                 
@@ -274,6 +350,8 @@ $(function() {
                                                 $("#communityTitle").val("");
                                                 $("#communityCategory").val("Religion");
                                                 $("#communityDescription").val("");
+                                                $(".communityFilterCategory").css("background-color", "#ECECEC");
+                                                $(".communityFilterCategory").css("border", "solid #D6D6D6 2px");
                                             }
                                         });
                                     }

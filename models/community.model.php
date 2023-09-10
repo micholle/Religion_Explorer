@@ -85,7 +85,7 @@ class communityModel{
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->beginTransaction();
 		
-			$stmt = $pdo->prepare("INSERT INTO communitycreations(creationid, accountid, title, religion, description, filename, filetype, filesize, filedata, status, date) VALUES (:creationid, :accountid, :title, :religion, :description, :filename, :filetype, :filesize, :filedata, :status, :date)");
+			$stmt = $pdo->prepare("INSERT INTO communitycreations(creationid, accountid, title, religion, description, filename, filetype, filesize, filedata, filters, status, date) VALUES (:creationid, :accountid, :title, :religion, :description, :filename, :filetype, :filesize, :filedata, :filters, :status, :date)");
 	
             $stmt->bindParam(":creationid", $data["creationid"], PDO::PARAM_STR);
             $stmt->bindParam(":accountid", $data["accountid"], PDO::PARAM_STR);
@@ -96,6 +96,7 @@ class communityModel{
             $stmt->bindParam(":filetype", $data["filetype"], PDO::PARAM_STR);
             $stmt->bindParam(":filesize", $data["filesize"], PDO::PARAM_INT);
             $stmt->bindParam(":filedata", $data["filedata"], PDO::PARAM_STR);
+            $stmt->bindParam(":filters", $data["filters"], PDO::PARAM_STR);
             $stmt->bindParam(":status", $data["status"], PDO::PARAM_STR);
             $stmt->bindParam(":date", $data["date"], PDO::PARAM_STR);
             
