@@ -1675,7 +1675,14 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     z-index: 5;
     display: block;
 }
-  
+
+.sidebar .userSidebarAvatar {
+    object-fit: cover;
+    width: 65px;
+    height: 65px;
+    border-radius: 100px;
+}
+
 .sidebar.active {
     width: 85px;
     padding: 0px;
