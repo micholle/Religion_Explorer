@@ -304,24 +304,6 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="avatarSizeModal">
-        <div id class="modal-dialog modal-xs modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <img id="avatarSizeIcon" src="" height="80px" width="80px">
-                                <h5 id="avatarSizeHeader" class="modal-title w-100"></h5>
-                                <p  id="avatarSizeContent" class="text-center"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     
 </body>
 </html>
