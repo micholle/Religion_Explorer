@@ -1,7 +1,5 @@
 $(function() {
-    var fullEmail = $("#email").attr("placeholder");
-    var maskedEmail = maskEmail(fullEmail);
-    $("#email").val(maskedEmail);
+
 
   $.ajax({
     url: "../../ajax/showSidebar.ajax.php",
