@@ -1,7 +1,5 @@
 $(function() {
-    var fullEmail = $("#email").attr("placeholder");
-    var maskedEmail = maskEmail(fullEmail);
-    $("#email").val(maskedEmail);
+
 
   $("#avatarSizeTest").click(function(){
     $("#avatarSizeIcon").attr("src", "../assets/img/editProfile/alert.png");

@@ -24,14 +24,12 @@ class notificationsModel {
                 $upvotesCount = 0;
                 $contentViolations = "";
                 $notificationStatus = "";
-                $avatar = '';
+                $avatar = "";
     
                 if ($notif["notificationSource"] == "Calendar") {
-                    $stmt = $pdo->prepare("SELECT c.event, cc.title, a.username, n.notificationStatus
+                    $stmt = $pdo->prepare("SELECT c.event, n.notificationStatus
                                           FROM notifications AS n
                                           JOIN personalcalendar AS c ON n.personaleventid = c.personaleventid
-                                          LEFT JOIN communitycreations AS cc ON n.creationid = cc.creationid
-                                          LEFT JOIN accounts AS a ON n.personInvolved = a.accountid
                                           WHERE n.notificationid = :notificationid");
                     $stmt->bindParam(":notificationid", $notif["notificationid"], PDO::PARAM_STR);
                     $stmt->execute();
@@ -156,6 +154,33 @@ class notificationsModel {
                     
                     $notificationIcon = "../assets/img/discussionForum/report.png";
                     $contentViolations = $notificationInfo["contentViolations"];
+                    $notificationStatus = $notificationInfo["notificationStatus"];
+                } else if ($notif["notificationSource"] == "Achievements") {
+                    $stmt = $pdo->prepare("SELECT n.achievementid, a.achievement, n.notificationStatus
+                    FROM notifications AS n
+                    JOIN achievements AS a ON n.achievementid = a.achievementid
+                    WHERE n.notificationid = :notificationid");
+                    $stmt->bindParam(":notificationid", $notif["notificationid"], PDO::PARAM_STR);
+                    $stmt->execute();
+                    $notificationInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $notification = $notificationInfo["achievement"];
+                    $notificationIcon = "";
+
+                    if (preg_match("/Posts (10|50|100|250|500)/", $notification)) {
+                        $notificationIcon = "../assets/img/userProfile/achievements/forum-\\1.png";
+                    } else if (preg_match("/Explorer/", $notification)) {
+                        $tierNumber = $notification[5];
+                        $notificationIcon = "../assets/img/userProfile/achievements/explorer-tier" . $tierNumber . ".png";
+                    } else if (preg_match("/Scholar/", $notification)) {
+                        $tierNumber = $notification[5];
+                        $notificationIcon = "../assets/img/userProfile/achievements/scholar-tier" . $tierNumber . ".png";
+                    } else if (preg_match("/Creator/", $notification)) {
+                        $tierNumber = $notification[5];
+                        $notificationIcon = "../assets/img/userProfile/achievements/creator-tier" . $tierNumber . ".png";
+                    } else if (preg_match("/Anniversary/", $notification)) {
+                        $notificationIcon = "../assets/img/userProfile/achievements/1-year-anniv.png";
+                    }
+
                     $notificationStatus = $notificationInfo["notificationStatus"];
                 }
 

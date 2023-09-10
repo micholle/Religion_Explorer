@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2023 at 08:18 AM
+-- Generation Time: Sep 04, 2023 at 08:49 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -31,8 +31,17 @@ CREATE TABLE `reply_votes` (
   `voteId` int(10) NOT NULL,
   `replyId` int(8) NOT NULL,
   `accountid` varchar(5) NOT NULL,
-  `voteType` varchar(10) NOT NULL
+  `voteType` varchar(10) NOT NULL,
+  `replyVoteDate` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reply_votes`
+--
+
+INSERT INTO `reply_votes` (`voteId`, `replyId`, `accountid`, `voteType`, `replyVoteDate`) VALUES
+(171, 80492084, 'R0002', 'upvote', '2023-09-04 14:22:53'),
+(172, 35860036, 'R0002', 'upvote', '2023-09-04 14:22:55');
 
 --
 -- Indexes for dumped tables
@@ -42,7 +51,8 @@ CREATE TABLE `reply_votes` (
 -- Indexes for table `reply_votes`
 --
 ALTER TABLE `reply_votes`
-  ADD PRIMARY KEY (`voteId`);
+  ADD PRIMARY KEY (`voteId`),
+  ADD KEY `fk_reply_votes_replyId` (`replyId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -52,17 +62,7 @@ ALTER TABLE `reply_votes`
 -- AUTO_INCREMENT for table `reply_votes`
 --
 ALTER TABLE `reply_votes`
-  MODIFY `voteId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `reply_votes`
---
-ALTER TABLE `reply_votes`
-  ADD CONSTRAINT `fk_reply_votes_replyId` FOREIGN KEY (`replyId`) REFERENCES `reply` (`replyId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  MODIFY `voteId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

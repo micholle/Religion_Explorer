@@ -268,6 +268,18 @@ $(function() {
                             '</div>' +
                         '</div>'
                     );
+                } else if (notificationSource == "Achievements") {
+                    $("#notification").append(
+                        '<div class="row notificationsPanelBody d-flex justify-content-start align-items-top" onclick="notificationRedirect(\'' + uniqueid + '\', \'' + notificationSource + '\')">' +
+                            '<div class="col-2 d-flex justify-content-start align-items-start">' +
+                                '<img src="' + notificationIcon + '">' +
+                            '</div>' +
+                            '<div class="col-10 d-flex flex-column">' +
+                                '<p class="notificationsPanelMainText">Congratulations! You earned the ' + notification + '</p>' +
+                                '<p class="notificationsPanelSubtext">' + notificationDate + '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
                 }
             } 
         }
@@ -463,6 +475,8 @@ function notificationRedirect(uniqueid, notificationSource) {
         });
     } else if (notificationSource.includes("Discussion Forum")) {
         window.location.replace("discussionForumPost.php?topicId=" + uniqueid);
+    } else if (notificationSource == "Achievements") {
+        window.location.replace("userprofile.php"); 
     }
 }
 
