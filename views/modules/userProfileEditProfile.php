@@ -199,7 +199,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header border-0 text-center">
-                    <h5 class="modal-title w-100">Choose an Avatar</h5>
+                    <h5 class="modal-title w-100" id="avatarModalTitle">Choose an Avatar</h5>
                 </div>
                 <div class="modal-body">
                     <div class="container" id="originalContainer">
@@ -230,11 +230,11 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
                     </div>
                     <div class="container" id="cropperContainer" style="display: none;">
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-12">
                                 <button class="btn btn-secondary" id="backToSelection">Back</button>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-12">
                                 <div id="cropper" style="height: 300px;"></div>

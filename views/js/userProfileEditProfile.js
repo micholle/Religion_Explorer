@@ -182,11 +182,25 @@ $(function() {
             showErrorMessage("Please select an image not more than 1MB.");
             return;
           }
-      
+          
+          // Get references to the containers and the title element
+          const cropperContainer = document.getElementById("cropperContainer");
+          const originalContainer = document.getElementById("originalContainer");
+          const modalTitle = document.getElementById("avatarModalTitle");
+
+          // Function to update the title based on which container is showing
+          function updateModalTitle() {
+            if (cropperContainer.style.display === "block") {
+              modalTitle.textContent = "Crop your Avatar";
+            } else if (originalContainer.style.display === "block") {
+              modalTitle.textContent = "Choose an Avatar"
+            }
+          }
           // Hide the original avatar selection, show the cropping container
           document.getElementById("cropperContainer").style.display = "block";
           document.getElementById("originalContainer").style.display = "none";
-      
+          updateModalTitle()
+
           // Initialize Cropper with the selected image
           var image = document.createElement("img");
           image.src = URL.createObjectURL(file);
@@ -259,6 +273,7 @@ $(function() {
               // Hide the cropping container, show the original avatar selection
               document.getElementById("cropperContainer").style.display = "none";
               document.getElementById("originalContainer").style.display = "block";
+              updateModalTitle()
             }, "image/png");
           });
         });

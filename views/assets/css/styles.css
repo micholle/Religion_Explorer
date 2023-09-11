@@ -1706,13 +1706,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     display: block;
 }
 
-.sidebar .userSidebarAvatar {
-    object-fit: cover;
-    width: 65px;
-    height: 65px;
-    border-radius: 100px;
-}
-
 .sidebar.active {
     width: 85px;
     padding: 0px;
@@ -2432,6 +2425,10 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /*edit profile*/
+
+#cropAvatarBtn {
+    margin-top: 20px;
+}
 
 .editNicknameButton {
     background-color: #B3BEC4;
@@ -3454,6 +3451,12 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     width: 35px;
     height: 35px;
     object-fit: cover;
+}
+
+.discussionForumUsernameComment:hover {
+    color: #2CA464;
+    transition: 0.5s ease;
+    cursor: pointer;
 }
 
 .forumSubmitContainer {
