@@ -23,6 +23,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 
     <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="../assets/css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
 </head>
 
 <body>
@@ -198,7 +202,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <h5 class="modal-title w-100">Choose an Avatar</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="container">
+                    <div class="container" id="originalContainer">
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center flex-row">
                                 <img src="../assets/img/editProfile/lion.png" class="defaultAvatar" value="../views/assets/img/editProfile/lion.png">
@@ -222,6 +226,23 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column">
                                 <button class="roundedButtonVariant" id="uploadButton">Upload File</button>
                                 <button class="roundedButton" id="updateAvatarBtn">Update Avatar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container" id="cropperContainer" style="display: none;">
+                        <div class="row">
+                            <div class="col-12">
+                                <button class="btn btn-secondary" id="backToSelection">Back</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="cropper" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center align-items-center flex-row">
+                                <button class="roundedButton" id="cropAvatarBtn">Crop and Save</button>
                             </div>
                         </div>
                     </div>

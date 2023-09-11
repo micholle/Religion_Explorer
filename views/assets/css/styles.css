@@ -10,6 +10,16 @@
 }
 
 /*global*/
+
+#cropper {
+    overflow: hidden;
+  }
+  
+  .cropper-view-box,
+  .cropper-face {
+    border-radius: 50%; /* This makes the cropping area circular */
+  }
+  
 .highlight {
     border: 2px solid #2CA464;
     border-radius: 10px;

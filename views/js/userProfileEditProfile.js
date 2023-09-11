@@ -166,7 +166,7 @@ $(function() {
       });
 
 
-      document.getElementById("uploadButton").addEventListener("click", function() {
+      document.getElementById("uploadButton").addEventListener("click", function () {
         var fileInput = document.createElement("input");
         fileInput.type = "file";
         fileInput.style.display = "none";
@@ -176,55 +176,112 @@ $(function() {
       
         fileInput.click();
       
-        fileInput.addEventListener("change", function(event) {
+        fileInput.addEventListener("change", function (event) {
           var file = event.target.files[0];
           if (!file || !file.type.startsWith("image/")) {
-            $("#toast").html("Please select a valid file type.");
-            $("#toast").css("background-color", "#E04F5F");
-            $("#toast").addClass('show');
-    
-            setTimeout(function() {
-              $("#toast").removeClass('show');
-            }, 2000);
-
+            showErrorMessage("Please select a valid image file.");
             return;
           }
           if (file.size > 1 * 1024 * 1024) {
-            $("#toast").html("Please select an image not more than 1MB.");
-            $("#toast").css("background-color", "#E04F5F");
-            $("#toast").addClass('show');
-    
-            setTimeout(function() {
-              $("#toast").removeClass('show');
-            }, 2000);
-
+            showErrorMessage("Please select an image not more than 1MB.");
             return;
           }
       
-          var formData = new FormData();
-          formData.append("avatar", file);
+          // Hide the original avatar selection, show the cropping container
+          document.getElementById("cropperContainer").style.display = "block";
+          document.getElementById("originalContainer").style.display = "none";
       
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", "../../ajax/uploadAvatar.ajax.php", true);
-          xhr.onload = function() {
-            if (xhr.status === 200) {
-              window.location.href = "userProfileEditProfile.php";
-            } else {
-              $("#toast").html("Error uploading the file. Please try again later.");
-              $("#toast").css("background-color", "#E04F5F");
-              $("#toast").addClass('show');
+          // Initialize Cropper with the selected image
+          var image = document.createElement("img");
+          image.src = URL.createObjectURL(file);
+          var cropper = new Cropper(image, {
+            aspectRatio: 1, // You can adjust this as needed
+            viewMode: 2,
+          });
       
-              setTimeout(function() {
-                $("#toast").removeClass('show');
-              }, 2000);
+          // Append the Cropper's image to the #cropper div
+          document.getElementById("cropper").appendChild(image);
+      
+          // Crop and save button functionality
+          document.getElementById("cropAvatarBtn").addEventListener("click", function () {
+            // Get the cropped data
+            var croppedCanvas = cropper.getCroppedCanvas();
+            if (!croppedCanvas) {
+              showErrorMessage("Unable to crop the image.");
+              return;
             }
-          };
-          xhr.send(formData);
+      
+            // Create a circular mask on a new canvas
+            var circularCanvas = document.createElement("canvas");
+            var circularContext = circularCanvas.getContext("2d");
+      
+            // Set canvas size to match the cropped image size
+            circularCanvas.width = croppedCanvas.width;
+            circularCanvas.height = croppedCanvas.height;
+      
+            // Calculate the center point of the circle
+            var centerX = circularCanvas.width / 2;
+            var centerY = circularCanvas.height / 2;
+      
+            // Calculate the radius of the circle (half of the canvas width)
+            var radius = circularCanvas.width / 2;
+      
+            // Create a circular mask
+            circularContext.beginPath();
+            circularContext.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            circularContext.closePath();
+            circularContext.clip();
+      
+            // Draw the cropped image onto the circular canvas
+            circularContext.drawImage(croppedCanvas, 0, 0);
+      
+            // Convert the circular canvas to a Blob
+            circularCanvas.toBlob(function (blob) {
+              var formData = new FormData();
+              formData.append("avatar", blob, "avatar.png");
+      
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", "../../ajax/uploadAvatar.ajax.php", true);
+              xhr.onload = function () {
+                if (xhr.status === 200) {
+                  window.location.href = "userProfileEditProfile.php";
+                } else {
+                  showErrorMessage("Error uploading the file. Please try again later.");
+                }
+              };
+              xhr.send(formData);
+      
+              // Destroy the Cropper instance
+              cropper.destroy();
+      
+              // Remove the image element from the #cropper container
+              var cropperContainer = document.getElementById("cropper");
+              while (cropperContainer.firstChild) {
+                cropperContainer.removeChild(cropperContainer.firstChild);
+              }
+      
+              // Hide the cropping container, show the original avatar selection
+              document.getElementById("cropperContainer").style.display = "none";
+              document.getElementById("originalContainer").style.display = "block";
+            }, "image/png");
+          });
         });
       
-        // Remove the file input element from the body
+        // Remove the file input element from the body after use
         document.body.removeChild(fileInput);
-      });      
+      
+        function showErrorMessage(message) {
+          $("#toast").html(message);
+          $("#toast").css("background-color", "#E04F5F");
+          $("#toast").addClass("show");
+      
+          setTimeout(function () {
+            $("#toast").removeClass("show");
+          }, 2000);
+        }
+      });
+      
+      
 
       $('#confirmDeleteAccountBtn').click(function() {
         var email = $('#deleteEmail').val();
