@@ -796,6 +796,26 @@ h5 {
     margin-top: 10px;
 }
 
+.communityAddFilters {
+    white-space: nowrap;
+    display: flex;
+}
+
+/* .communityAddFilters input[type="checkbox"], .communityAddFilters label {
+    margin-right: 10px;
+} */
+
+.communityFilterCategory {
+    padding: 5px 10px 5px 10px;
+    margin-top: 10px;
+    margin-right: 5px;
+    border: solid #D6D6D6 2px;
+    border-radius: 15px;
+    background-color: #ECECEC;
+    font-size: 12px;
+    cursor: pointer;
+}
+
 .communityPhotos {
     display: flex;
 }
@@ -1685,7 +1705,14 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     z-index: 5;
     display: block;
 }
-  
+
+.sidebar .userSidebarAvatar {
+    object-fit: cover;
+    width: 65px;
+    height: 65px;
+    border-radius: 100px;
+}
+
 .sidebar.active {
     width: 85px;
     padding: 0px;
