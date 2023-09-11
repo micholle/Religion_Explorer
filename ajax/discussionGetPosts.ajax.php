@@ -14,9 +14,14 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
 $topicId = isset($_GET['topicId']) ? $_GET['topicId'] : '';
 $controller = new ControllerDiscussion();
 $posts = $controller->ctrGetAllPosts($sort, $topicId);
+$userTimezoneOffsetMinutes = $_GET['userTimezoneOffsetMinutes'];
 
 $html = '';
 foreach ($posts as $post) {
+    $postDateTimestamp = strtotime($post['postDate']);
+    $localizedPostDateTimestamp = $postDateTimestamp + (-($userTimezoneOffsetMinutes) * 60);
+    $localizedPostDate = date('F d, Y', $localizedPostDateTimestamp);
+    $localizedPostTime = date('H:i', $localizedPostDateTimestamp);
     if ($post['downvotes'] < 50){
     $html .= '<div class="forumPostViewComments d-flex flex-column" data-post-id="' . $post['postId'] . '">';
     $html .= '  <div class="d-flex justify-content-start align-items-start flex-row">';
@@ -24,7 +29,7 @@ foreach ($posts as $post) {
     $html .= '    <div class="forumPostViewContent">';
     $html .= '      <div class="row">';
     $html .= '        <div class="col-12 d-flex flex-row">';
-    $html .= '          <h2 class="discussionForumUsernameComment" data-accountid="' . $post['accountid'] . '">' . $post['username'] . '</h2><h2>•</h2><h2 class="postDate" data-postdate="' . $post['postDate'] . '">' . date('F d, Y', strtotime($post['postDate'])) . ' • ' . date('H:i', strtotime($post['postDate'])) . '</h2>';
+    $html .= '          <h2 class="discussionForumUsernameComment" data-accountid="' . $post['accountid'] . '">' . $post['username'] . '</h2><h2>•</h2><h2 class="postDate" data-postdate="' . $post['postDate'] . '">' . $localizedPostDate . ' • ' . $localizedPostTime . '</h2>';
     $html .= '        </div>';
     $html .= '      </div>';
     $html .= '      <div class="forumPostViewContentBox">';

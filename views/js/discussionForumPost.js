@@ -331,12 +331,14 @@ $(function() {
             });
         }
     }
-
+    
+    
     function getPosts(sortCriteria, topicId) {
+        var userTimezoneOffsetMinutes = new Date().getTimezoneOffset();
         $.ajax({
             url: "../../ajax/discussionGetPosts.ajax.php",
             method: "GET",
-            data: { sort: sortCriteria, topicId: topicId },
+            data: { sort: sortCriteria, topicId: topicId, userTimezoneOffsetMinutes: userTimezoneOffsetMinutes  },
             success: function(data) {
                 $("#postContainer").html(data);
                 // Call the initializeReplyButtons function after loading the AJAX response
