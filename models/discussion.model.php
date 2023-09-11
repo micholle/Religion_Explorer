@@ -194,7 +194,6 @@ class ModelDiscussion {
     public function mdlCreatePost($data) {
         $db = new Connection();
         $pdo = $db->connect();
-        $notificationDate = date('Y-m-d');
     
         try {
             // Generate a unique topicId
@@ -218,12 +217,11 @@ class ModelDiscussion {
             
             if ($topicOwner != $data['accountid']){
             //add to notifications
-                $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, postid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :postid, :personInvolved, :notificationSource, :notificationDate)");
+                $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, postid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :postid, :personInvolved, :notificationSource, NOW())");
                 $notifications_stmt->bindParam(":accountid", $topicOwner, PDO::PARAM_STR);
                 $notifications_stmt->bindParam(":postid", $postId, PDO::PARAM_STR);
                 $notifications_stmt->bindParam(":personInvolved", $data["accountid"], PDO::PARAM_STR);
                 $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Posts", PDO::PARAM_STR);
-                $notifications_stmt->bindParam(":notificationDate", $notificationDate, PDO::PARAM_STR);
                 $notifications_stmt->execute();
             }
     
@@ -271,7 +269,6 @@ class ModelDiscussion {
     public function mdlCreateReply($data) {
         $db = new Connection();
         $pdo = $db->connect();
-        $notificationDate = date('Y-m-d');
     
         try {
             // Generate a unique replyId
@@ -295,12 +292,11 @@ class ModelDiscussion {
             
             if ($postOwner != $data['accountid']){
             //add to notifications
-                $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, replyid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :replyid, :personInvolved, :notificationSource, :notificationDate)");
+                $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, replyid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :replyid, :personInvolved, :notificationSource, NOW())");
                 $notifications_stmt->bindParam(":accountid", $postOwner, PDO::PARAM_STR);
                 $notifications_stmt->bindParam(":replyid", $replyId, PDO::PARAM_STR);
                 $notifications_stmt->bindParam(":personInvolved", $data["accountid"], PDO::PARAM_STR);
                 $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Replies", PDO::PARAM_STR);
-                $notifications_stmt->bindParam(":notificationDate", $notificationDate, PDO::PARAM_STR);
                 $notifications_stmt->execute();
             }
     
@@ -608,7 +604,6 @@ class ModelDiscussion {
     public function mdlAddPostUpvote($postId, $accountId) {
         $db = new Connection();
         $pdo = $db->connect();
-        $notificationDate = date('Y-m-d');
     
         try {
             $stmt = $pdo->prepare("INSERT INTO post_votes (postId, accountid, voteType, postVoteDate) VALUES (:postId, :accountId, 'upvote', NOW())");
@@ -626,12 +621,11 @@ class ModelDiscussion {
             
             if ($postOwner != $accountId){
             //add to notifications
-            $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, postid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :postid, :personInvolved, :notificationSource, :notificationDate)");
+            $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, postid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :postid, :personInvolved, :notificationSource, NOW())");
             $notifications_stmt->bindParam(":accountid", $postOwner, PDO::PARAM_STR);
             $notifications_stmt->bindParam(":postid", $postId, PDO::PARAM_STR);
             $notifications_stmt->bindParam(":personInvolved", $accountId, PDO::PARAM_STR);
             $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Posts Upvote", PDO::PARAM_STR);
-            $notifications_stmt->bindParam(":notificationDate", $notificationDate, PDO::PARAM_STR);
             $notifications_stmt->execute();
             }
     
@@ -666,7 +660,6 @@ class ModelDiscussion {
     public function mdlAddReplyUpvote($replyId, $accountId) {
         $db = new Connection();
         $pdo = $db->connect();
-        $notificationDate = date('Y-m-d');
     
         try {
             $stmt = $pdo->prepare("INSERT INTO reply_votes (replyId, accountid, voteType, replyVoteDate) VALUES (:replyId, :accountId, 'upvote', NOW())");
@@ -684,12 +677,11 @@ class ModelDiscussion {
             
             if ($replyOwner != $accountId){
             //add to notifications
-            $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, replyid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :replyid, :personInvolved, :notificationSource, :notificationDate)");
+            $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, replyid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :replyid, :personInvolved, :notificationSource, NOW())");
             $notifications_stmt->bindParam(":accountid", $replyOwner, PDO::PARAM_STR);
             $notifications_stmt->bindParam(":replyid", $replyId, PDO::PARAM_STR);
             $notifications_stmt->bindParam(":personInvolved", $accountId, PDO::PARAM_STR);
             $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Replies Upvote", PDO::PARAM_STR);
-            $notifications_stmt->bindParam(":notificationDate", $notificationDate, PDO::PARAM_STR);
             $notifications_stmt->execute();
             }
     
@@ -960,7 +952,6 @@ class ModelDiscussion {
     public function mdlAddTopicUpvote($topicId, $accountId) {
         $db = new Connection();
         $pdo = $db->connect();
-        $notificationDate = date('Y-m-d');
 
         try {
             $stmt = $pdo->prepare("INSERT INTO topic_votes (topicId, accountid, voteType, topicVoteDate) VALUES (:topicId, :accountId, 'upvote', NOW())");
@@ -978,12 +969,11 @@ class ModelDiscussion {
             
             if ($topicOwner != $accountId){
             //add to notifications
-            $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, topicid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :topicid, :personInvolved, :notificationSource, :notificationDate)");
+            $notifications_stmt = $pdo->prepare("INSERT INTO notifications(accountid, topicid, personInvolved, notificationSource, notificationDate) VALUES (:accountid, :topicid, :personInvolved, :notificationSource, NOW())");
             $notifications_stmt->bindParam(":accountid", $topicOwner, PDO::PARAM_STR);
             $notifications_stmt->bindParam(":topicid", $topicId, PDO::PARAM_STR);
             $notifications_stmt->bindParam(":personInvolved", $accountId, PDO::PARAM_STR);
             $notifications_stmt->bindValue(":notificationSource", "Discussion Forum Topics Upvote", PDO::PARAM_STR);
-            $notifications_stmt->bindParam(":notificationDate", $notificationDate, PDO::PARAM_STR);
             $notifications_stmt->execute();
             }
 

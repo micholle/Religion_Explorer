@@ -133,31 +133,42 @@ $(function() {
         success: function (data) {
             var notificationData = data;  
 
-            var uniqueid = "";
-            var notification = "";
-            var notificationIcon = "";
-            var notificationDate = "";
-            var personInvolved = "";
-            var notificationSource = "";
-            var upvotesCount = 0;
-            var contentViolations = "";
-            var notificationStatus = "";
-            $("#notification").html("");
+            var notificationsArray = [];
 
             for (notif in notificationData) {
                 notificationDetails = notificationData[notif];
 
-                uniqueid = notificationDetails.uniqueid;
-                notification = notificationDetails.notification;
-                notificationIcon = notificationDetails.notificationIcon;
-                notificationDate = notificationDetails.notificationDate;
-                personInvolved = notificationDetails.personInvolved;
-                notificationSource = notificationDetails.notificationSource;
-                upvotesCount = notificationDetails.upvotesCount;
-                contentViolations = notificationDetails.contentViolations;
-                notificationStatus = notificationDetails.notificationStatus;
-                var displayNotifications = notificationDetails.displayNotifications;
-                var avatar = notificationDetails.avatar;
+                // Parse the date string into a Date object for sorting
+                var notificationDate = new Date(notificationDetails.notificationDate);
+
+                // Add the notification object to the array
+                notificationsArray.push({
+                    notificationDetails: notificationDetails,
+                    notificationDate: notificationDate
+                });
+            }
+
+            // Sort the array by notificationDate in descending order (most recent first)
+            notificationsArray.sort(function (a, b) {
+                return b.notificationDate - a.notificationDate;
+            });
+
+            $("#notification").html("");
+
+            for (var i = 0; i < notificationsArray.length; i++) {
+                var notificationItem = notificationsArray[i].notificationDetails;
+
+                var uniqueid = notificationItem.uniqueid;
+                var notification = notificationItem.notification;
+                var notificationIcon = notificationItem.notificationIcon;
+                var notificationDate = notificationItem.notificationDate;
+                var personInvolved = notificationItem.personInvolved;
+                var notificationSource = notificationItem.notificationSource;
+                var upvotesCount = notificationItem.upvotesCount;
+                var contentViolations = notificationItem.contentViolations;
+                var notificationStatus = notificationItem.notificationStatus;
+                var displayNotifications = notificationItem.displayNotifications;
+                var avatar = notificationItem.avatar;
 
                 if (notificationStatus == "Unread") {
                     $("#notificationsIcon").attr("src", "../assets/img/bell-alert.png");

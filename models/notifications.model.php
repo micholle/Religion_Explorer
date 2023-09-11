@@ -12,8 +12,9 @@ class notificationsModel {
         $notifications_stmt->execute();
         $userNotifications = $notifications_stmt->fetchAll(PDO::FETCH_ASSOC);
         $notificationsList = [];
-    
-        $today = date("Y-m-d");
+        
+        date_default_timezone_set('Asia/Singapore');
+        $today = date("Y-m-d H:i:s");
 
         foreach ($userNotifications as $notif) {
             if ($notif["notificationDate"] <= $today) {
@@ -189,7 +190,7 @@ class notificationsModel {
                 $stmt->execute();
                 $displayNotifications = $stmt->fetch(PDO::FETCH_ASSOC)['notifications'];
                 
-                $notificationDate = date('m-d-Y', strtotime($notif["notificationDate"]));
+                $notificationDate = date('m-d-Y H:i', strtotime($notif["notificationDate"]));
                 $notificationsList[$notif["notificationid"]] = [
                     "uniqueid" => $uniqueid,
                     "notification" => $notification,
