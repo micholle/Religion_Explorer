@@ -61,7 +61,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <div class="row libraryRightContainer">
                         <div class="col-12 libraryRightContBox">
                             <p>Religion:</p>
-                            <select id="libraryReligionFilter">
+                            <select id="communityReligionFilter">
                                 <option selected value="All Religions">All Religions</option>
                                 <option value="Buddhism">Buddhism</option>
                                 <option value="Christianity">Christianity</option>
@@ -69,17 +69,17 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                 <option value="Islam">Islam</option>
                                 <option value="Judaism">Judaism</option>
                             </select>
-                            <input type="checkbox" class="libraryCategoryFilter" id="Religious Traditions" value="Religious Traditions">
+                            <input type="checkbox" class="communityCategoryFilter" id="Religious Traditions" value="Religious Traditions">
                             <label for="Religious Traditions">Religious Traditions</label><br>
-                            <input type="checkbox" class="libraryCategoryFilter" id="Historical Context" value="Historical Context">
+                            <input type="checkbox" class="communityCategoryFilter" id="Historical Context" value="Historical Context">
                             <label for="Historical Context">Historical Context</label><br>
-                            <input type="checkbox" class="libraryCategoryFilter" id="Theology" value="Theology">
+                            <input type="checkbox" class="communityCategoryFilter" id="Theology" value="Theology">
                             <label for="Theology">Theology</label><br>
-                            <input type="checkbox" class="libraryCategoryFilter" id="Religious Practices" value="Religious Practices">
+                            <input type="checkbox" class="communityCategoryFilter" id="Religious Practices" value="Religious Practices">
                             <label for="Religious Practices">Religious Practices</label><br>
-                            <input type="checkbox" class="libraryCategoryFilter" id="Ethics" value="Ethics">
+                            <input type="checkbox" class="communityCategoryFilter" id="Ethics" value="Ethics">
                             <label for="Ethics">Ethics</label><br>
-                            <input type="checkbox" class="libraryCategoryFilter" id="Social Issues" value="Social Issues">
+                            <input type="checkbox" class="communityCategoryFilter" id="Social Issues" value="Social Issues">
                             <label for="Social Issues">Social Issues</label>
                         </div>
 

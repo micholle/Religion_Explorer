@@ -450,12 +450,154 @@ $(function() {
         }
     }
       
-      // Check the URL for the "openTab" parameter and activate the corresponding tab
+    // Check the URL for the "openTab" parameter and activate the corresponding tab
     const urlParams = new URLSearchParams(window.location.search);
     const openTabParam = urlParams.get("openTab");
     if (openTabParam) {
         activateTab(openTabParam);
-    }      
+    }
+    
+    function handleFilterChange() { 
+        var communityReligion = $("#communityReligionFilter").val();
+        var communityFilters = $(".communityCategoryFilter:checked").map(function() {
+          return $(this).val();
+        }).get();
+
+        $.ajax({
+            url: "../../ajax/getCommunityData.ajax.php",
+            method: "POST",
+            success:function(data){
+                var communityData = data;
+                const currentURL = window.location.href;
+
+                if (currentURL.includes("photos")) {
+                    for (let photo in communityData["photos"]) {
+                        var photoDetails = communityData["photos"][photo];
+                        var resourceid = "#" + photo;
+
+                        if ($(".communityCategoryFilter:checked").length == 0) {
+                            if (communityReligion == "All Religions") {
+                                $(resourceid).css("display", "block");
+                            } else {
+                                if (communityReligion == photoDetails.religion) {
+                                    $(resourceid).css("display", "block");
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        } else {
+                            if (communityReligion == "All Religions") {
+                                $.each(photoDetails.category, function(index, category) {
+                                    if (communityFilters.includes(category)) {
+                                        $(resourceid).css("display", "block");
+                                    } else {
+                                        $(resourceid).css("display", "none");
+                                    }
+                                });
+                            } else {
+                                if (communityReligion == photoDetails.religion) {
+                                    $.each(photoDetails.category, function(index, category) {
+                                        if (communityFilters.includes(category)) {
+                                            $(resourceid).css("display", "block");
+                                        } else {
+                                            $(resourceid).css("display", "none");
+                                        }
+                                    });
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                if (currentURL.includes("videos")) {
+                    for (let video in communityData["videos"]) {
+                        var videoDetails = communityData["videos"][video];
+                        var resourceid = "#" + video;
+
+                        if ($(".communityCategoryFilter:checked").length == 0) {
+                            if (communityReligion == "All Religions") {
+                                $(resourceid).css("display", "block");
+                            } else {
+                                if (communityReligion == videoDetails.religion) {
+                                    $(resourceid).css("display", "block");
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        } else {
+                            if (communityReligion == "All Religions") {
+                                $.each(videoDetails.category, function(index, category) {
+                                    if (communityFilters.includes(category)) {
+                                        $(resourceid).css("display", "block");
+                                    } else {
+                                        $(resourceid).css("display", "none");
+                                    }
+                                });
+                            } else {
+                                if (communityReligion == videoDetails.religion) {
+                                    $.each(videoDetails.category, function(index, category) {
+                                        if (communityFilters.includes(category)) {
+                                            $(resourceid).css("display", "block");
+                                        } else {
+                                            $(resourceid).css("display", "none");
+                                        }
+                                    });
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                if (currentURL.includes("reading-materials")) {
+                    for (let readingMat in communityData["readingMats"]) {
+                        var readingMatDetails = communityData["readingMats"][readingMat];
+                        var resourceid = "#" + readingMat;
+                        
+                        if ($(".communityCategoryFilter:checked").length == 0) {
+                            if (communityReligion == "All Religions") {
+                                $(resourceid).css("display", "block");
+                            } else {
+                                if (communityReligion == readingMatDetails.religion) {
+                                    $(resourceid).css("display", "block");
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        } else {
+                            if (communityReligion == "All Religions") {
+                                $.each(readingMatDetails.category, function(index, category) {
+                                    if (communityFilters.includes(category)) {
+                                        $(resourceid).css("display", "block");
+                                    } else {
+                                        $(resourceid).css("display", "none");
+                                    }
+                                });
+                            } else {
+                                if (communityReligion == readingMatDetails.religion) {
+                                    $.each(readingMatDetails.category, function(index, category) {
+                                        if (communityFilters.includes(category)) {
+                                            $(resourceid).css("display", "block");
+                                        } else {
+                                            $(resourceid).css("display", "none");
+                                        }
+                                    });
+                                } else {
+                                    $(resourceid).css("display", "none");
+                                }
+                            }
+                        }
+                    }  
+                }
+
+            }
+        });
+    }
+
+    $("#communityReligionFilter, .communityCategoryFilter").on("change", handleFilterChange);
 });
 
 function downloadContent(file, filename) {

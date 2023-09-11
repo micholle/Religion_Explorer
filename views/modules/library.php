@@ -164,14 +164,14 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                             <h1>Photos</h1>
                             <div class="col-12 libraryRightContBox">
                                 <div class="row d-flex flex-row">
-                                    <div class="libraryScrollContainer">
+                                    <div id="libraryPhotosPreview" class="libraryScrollContainer">
+                                        <!-- <img src="../assets/img/placeholder.png" class="libraryPreview">
                                         <img src="../assets/img/placeholder.png" class="libraryPreview">
                                         <img src="../assets/img/placeholder.png" class="libraryPreview">
                                         <img src="../assets/img/placeholder.png" class="libraryPreview">
-                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
-                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview"> -->
                                         <!-- <div id="libraryPhotosPreview" class="col-12 d-flex justify-content-center align-items-center"></div> -->
-                                        <button class="roundedButton librarySeeMore" id="libraryPhotosSeeMore">+</button>
+                                        <!-- <button class="roundedButton librarySeeMore" id="libraryPhotosSeeMore">+</button> -->
                                     </div>
                                 </div>
                             </div>
@@ -182,14 +182,14 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                             <h1>Videos</h1>
                             <div class="col-12 libraryRightContBox">
                                 <div class="row d-flex flex-row">
-                                    <div class="libraryScrollContainer">
+                                    <div id="libraryVideosPreview" class="libraryScrollContainer">
+                                        <!-- <img src="../assets/img/placeholder.png" class="libraryPreview">
                                         <img src="../assets/img/placeholder.png" class="libraryPreview">
                                         <img src="../assets/img/placeholder.png" class="libraryPreview">
                                         <img src="../assets/img/placeholder.png" class="libraryPreview">
-                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
-                                        <img src="../assets/img/placeholder.png" class="libraryPreview">
+                                        <img src="../assets/img/placeholder.png" class="libraryPreview"> -->
                                         <!-- <div id="libraryVideosPreview" class="col-12 d-flex justify-content-center align-items-center"></div> -->
-                                        <button class="roundedButton librarySeeMore" id="libraryVideosSeeMore">+</button>
+                                        <!-- <button class="roundedButton librarySeeMore" id="libraryVideosSeeMore">+</button> -->
                                     </div>
                                 </div>
                             </div>

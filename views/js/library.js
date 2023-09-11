@@ -79,8 +79,11 @@ $(function() {
                 $("#libraryPhotosContainer").append($libraryPhotosMats);
 
                 // Small
-                if (photoPreviewCounter <= 1) {
+                if (photoPreviewCounter <= 5) {
                     $("#libraryPhotosPreview").append("<img id='" + photo + "' src=" + photoDetails.file +" class='libraryPreview' data-identifier='libraryPreview'> &nbsp;");
+                    photoPreviewCounter++;
+                } else if (photoPreviewCounter == 6) {
+                    $("#libraryPhotosPreview").append('<button class="roundedButton librarySeeMore" onclick="viewPhotos()">+</button>');
                     photoPreviewCounter++;
                 }
             }
@@ -129,8 +132,11 @@ $(function() {
 
                 // Small
                 
-                if (videoPreviewCounter <= 1) {
+                if (videoPreviewCounter <= 5) {
                     $("#libraryVideosPreview").append("<video id='" + video + "' class='libraryPreview' data-identifier='libraryPreview' controls> <source src=" + videoDetails.file +"> </video> &nbsp;");
+                    videoPreviewCounter++;
+                } else if (videoPreviewCounter == 6) {
+                    $("#libraryVideosPreview").append('<button class="roundedButton librarySeeMore" onclick="viewVideos()">+</button>');
                     videoPreviewCounter++;
                 }
 
@@ -536,14 +542,6 @@ $(function() {
     }
 
     $("#libraryReligionFilter, .libraryCategoryFilter").on("change", handleFilterChange);
-
-    $("#libraryPhotosSeeMore").click(function () { 
-        viewPhotos();
-    });
-
-    $("#libraryVideosSeeMore").click(function () { 
-        viewVideos();
-    });
 
     $("#libraryReadingMaterialsSeeMore").click(function () { 
         viewReadingMaterials();
