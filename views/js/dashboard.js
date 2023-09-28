@@ -4,6 +4,7 @@ $(function() {
         method: "POST",
         success:function(data){
             $("#dashboardSidebar").html(data);
+            var currentPage = window.location.pathname.split("/").pop();
 
             $("#dashboardSidebar li a").each(function() {
                 var tabPage = $(this).attr("href");

@@ -18,6 +18,7 @@ $(function() {
         method: "POST",
         success:function(data){
             $("#reportedUsersSidebar").html(data);
+            var currentPage = window.location.pathname.split("/").pop();
 
             $("#reportedUsersSidebar li a").each(function() {
                 var tabPage = $(this).attr("href");

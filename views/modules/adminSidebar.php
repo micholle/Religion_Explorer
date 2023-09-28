@@ -14,7 +14,7 @@ function create_sidebar() {
 
         <div class="sidebar">
             <div class="top">
-                <div class="logo d-flex justify-content-center align-items-center">
+                <div class="logo d-flex justify-content-center align-items-center" id="minimize">
                     <img src="../assets/img/applogo.png" id="logo">
                     <img src="../assets/img/text.png" id="text">
                 </div>
@@ -38,13 +38,6 @@ function create_sidebar() {
                     <a id="" href="reportedUsers.php">
                         <img src="../assets/img/admin/reported-users.png">
                         <span class="navItem">Reported Users</span>
-                    </a>
-                </li>
-                
-                <li>
-                    <a id="minimize" href="#">
-                        <img src="../assets/img/minimize.png" id="minmax">
-                        <span class="navItem">Minimize Sidebar</span>
                     </a>
                 </li>
 
