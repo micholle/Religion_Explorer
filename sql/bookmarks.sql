@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2023 at 10:40 AM
+-- Generation Time: Oct 05, 2023 at 08:53 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -31,7 +31,8 @@ CREATE TABLE `bookmarks` (
   `bookmarkid` int(11) NOT NULL,
   `accountid` varchar(5) NOT NULL,
   `resourceid` text NOT NULL,
-  `resourceTitle` text NOT NULL
+  `resourceTitle` text NOT NULL,
+  `datetime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
