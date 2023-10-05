@@ -85,37 +85,8 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 
                         <div class="row commCreationsRightContainer">
                             <h1>Recently Bookmarked</h1>
-                            <div class="col-12 commCreationsRightContBox">
-                                <div class="commCreationsBoxContent">
-                                    <h3>Placeholder Title</h3>
-                                    <h2>Placeholder User Contributor</h2>
-                                    <img src="../assets/img/placeholder.png" style="width: 100%">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti vel molestiae a praesentium, laudantium labore repellat delectus ipsum, perspiciatis adipisci, sapiente fugit esse.</p>
-                                </div>
-                                <div class="commCreationsBoxContent">
-                                    <h3>Placeholder Title</h3>
-                                    <h2>Placeholder User Contributor</h2>
-                                    <img src="../assets/img/placeholder.png" style="width: 100%">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti vel molestiae a praesentium, laudantium labore repellat delectus ipsum, perspiciatis adipisci, sapiente fugit esse.</p>
-                                </div>
-                                <div class="commCreationsBoxContent">
-                                    <h3>Placeholder Title</h3>
-                                    <h2>Placeholder User Contributor</h2>
-                                    <img src="../assets/img/placeholder.png" style="width: 100%">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti vel molestiae a praesentium, laudantium labore repellat delectus ipsum, perspiciatis adipisci, sapiente fugit esse.</p>
-                                </div>
-                            </div>
+                            <div id="recentlyBookmarked" class="col-12 commCreationsRightContBox"></div>
                         </div>
-
-                        <!-- <div class="col-12 commCreationsRecoContainer">
-                            <h3>Recently Bookmarked</h3>
-                            <div class="commCreationsRecoBox">
-                                <h3>Placeholder Title</h3>
-                                <h2>Placeholder User Contributor</h2>
-                                <img src="../assets/img/placeholder.png" style="width: 100%">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti vel molestiae a praesentium, laudantium labore repellat delectus ipsum, perspiciatis adipisci, sapiente fugit esse.</p>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>

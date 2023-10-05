@@ -30,15 +30,17 @@ class bookmarkModel{
 	static public function mdlAddToBookmarks($accountid, $resourceid, $resourceTitle){
         $db = new Connection();
         $pdo = $db->connect();
+        $currentDateTime = date('Y-m-d H:i:s');
 
 		try {
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->beginTransaction();
 		
-			$stmt = $pdo->prepare("INSERT INTO bookmarks(accountid, resourceid, resourceTitle) VALUES (:accountid, :resourceid, :resourceTitle)");
+			$stmt = $pdo->prepare("INSERT INTO bookmarks(accountid, resourceid, resourceTitle, datetime) VALUES (:accountid, :resourceid, :resourceTitle, :datetime)");
 			$stmt->bindParam(":accountid", $accountid, PDO::PARAM_STR);
 			$stmt->bindParam(":resourceid", $resourceid, PDO::PARAM_STR);
 			$stmt->bindParam(":resourceTitle", $resourceTitle, PDO::PARAM_STR);
+			$stmt->bindParam(":datetime", $currentDateTime, PDO::PARAM_STR);
 			$stmt->execute();
 
             if (substr($resourceid, 0, 2) == "CC") {

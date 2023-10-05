@@ -598,6 +598,167 @@ $(function() {
     }
 
     $("#communityReligionFilter, .communityCategoryFilter").on("change", handleFilterChange);
+
+    $.ajax({
+        url: "../../ajax/getBookmarksData.ajax.php",
+        method: "POST",
+        data: {"accountid" : $("#accountidPlaceholder").text()},
+        success: function(data){
+            data.sort(function(a, b) {
+                return new Date(b.datetime) - new Date(a.datetime);
+            });
+
+            var bookmarkTitle = "";
+            var bookmarkPreview = "";
+            var bookmarkDescription = "";
+            var bookmarksCounter = 0;
+    
+            for (let bookmark of data) {
+    
+                if (bookmarksCounter < 3) {
+                    if ((bookmark.resourceid).startsWith("CC")) {
+                        $.ajax({
+                            url: "../../ajax/getCommunityData.ajax.php",
+                            method: "POST",
+                            success:function(data){
+                                var communityData = data;
+
+                                for (let photo in communityData["photos"]) {
+                                    var photoList = communityData["photos"][photo];
+                                    for (photoData in photoList) {
+                                        var photoDetails = photoList[photoData];
+
+                                        if(photoDetails.creationid == bookmark.resourceid) {
+                                            bookmarkTitle = photoDetails.title;
+                                            bookmarkPreview = '<img src="' + "../" + photoDetails.filedata + '">';
+                                            bookmarkDescription = photoDetails.description;
+
+                                            $("#recentlyBookmarked").append(
+                                                '<div class="commCreationsBoxContent">' +
+                                                    '<h3>' + bookmarkTitle + '</h3>' +
+                                                    bookmarkPreview +
+                                                    '<p>' + bookmarkDescription + '</p>' +
+                                                '</div>'
+                                            );
+                                        }
+                                    }
+                                }
+                    
+                                for (let video in communityData["videos"]) {
+                                    var videoList = communityData["videos"][video];
+                                    for (videoData in videoList) {
+                                        var videoDetails = videoList[videoData];
+                    
+                                        if(videoDetails.creationid == bookmark.resourceid) {
+                                            bookmarkTitle = videoDetails.title;
+                                            bookmarkPreview = '<video controls> <source src=' + "../" + videoDetails.filedata + '> </video>';
+                                            bookmarkDescription = videoDetails.description;
+
+                                            $("#recentlyBookmarked").append(
+                                                '<div class="commCreationsBoxContent">' +
+                                                    '<h3>' + bookmarkTitle + '</h3>' +
+                                                    bookmarkPreview +
+                                                    '<p>' + bookmarkDescription + '</p>' +
+                                                '</div>'
+                                            );
+                                        }
+
+                                    }
+                                }
+                                
+                                for (let readingMaterial in communityData["readingMaterials"]) {
+                                    var readingMaterialsList = communityData["readingMaterials"][readingMaterial];
+                                
+                                    for (let readingMaterialData in readingMaterialsList) {
+                                        var readingMaterialDetails = readingMaterialsList[readingMaterialData];
+
+                                        if(readingMaterialDetails.creationid == bookmark.resourceid) {
+                                            bookmarkTitle = readingMaterialDetails.title;
+                                            bookmarkDescription = readingMaterialDetails.description;
+
+                                            $("#recentlyBookmarked").append(
+                                                '<div class="commCreationsBoxContent">' +
+                                                    '<h3>' + bookmarkTitle + '</h3>' +
+                                                    '<p>' + bookmarkDescription + '</p>' +
+                                                '</div>'
+                                            );
+                                        }
+                    
+                                    }
+                                }            
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            url: "../../ajax/getLibraryResources.ajax.php",
+                            method: "POST",
+                            success:function(data){
+                                var libraryData = data;
+                    
+                                for (let photo in libraryData["photos"]) {
+                                    if (photo == bookmark.resourceid) {
+                                        var photoDetails = libraryData["photos"][photo];
+                                        bookmarkTitle = photoDetails.title;
+                                        bookmarkPreview = '<img src="' + photoDetails.file + '">';
+                                        bookmarkDescription = photoDetails.description;
+
+                                        $("#recentlyBookmarked").append(
+                                            '<div class="commCreationsBoxContent">' +
+                                                '<h3>' + bookmarkTitle + '</h3>' +
+                                                bookmarkPreview +
+                                                '<p>' + bookmarkDescription + '</p>' +
+                                            '</div>'
+                                        );
+                                    }
+                                }
+                                
+                                for (let video in libraryData["videos"]) {
+                                    if (video == bookmark.resourceid) {
+                                        var videoDetails = libraryData["videos"][video];
+                                        bookmarkTitle = videoDetails.title;
+                                        bookmarkPreview = '<video controls> <source src=' + videoDetails.file + '> </video>';
+                                        bookmarkDescription = videoDetails.description;
+                                    
+                                        $("#recentlyBookmarked").append(
+                                            '<div class="commCreationsBoxContent">' +
+                                                '<h3>' + bookmarkTitle + '</h3>' +
+                                                bookmarkPreview +
+                                                '<p>' + bookmarkDescription + '</p>' +
+                                            '</div>'
+                                        );
+                                    }
+                                }                                
+                            
+                                for (let readingMat in libraryData["readingMats"]) {
+                                    if (readingMat == bookmark.resourceid) {
+                                        var readingMatDetails = libraryData["readingMats"][readingMat];
+                                
+                                        bookmarkTitle = readingMatDetails.title;
+                                        bookmarkPreview = '<img src="' + readingMatDetails.resourceImg + '">';
+                                        bookmarkDescription = readingMatDetails.source;
+
+                                        $("#recentlyBookmarked").append(
+                                            '<div class="commCreationsBoxContent">' +
+                                                '<h3>' + bookmarkTitle + '</h3>' +
+                                                bookmarkPreview +
+                                                '<p>' + bookmarkDescription + '</p>' +
+                                            '</div>'
+                                        );
+                                    }
+                                }
+                                
+                            }
+                        });
+
+                    }
+
+                    bookmarksCounter++;
+                }
+            }
+        }
+    });
+          
+
 });
 
 function downloadContent(file, filename) {
