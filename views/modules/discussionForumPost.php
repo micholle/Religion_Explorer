@@ -34,17 +34,18 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         <div class="pageContainer">
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
-                    <div class="col-4 d-flex justify-content-start align-items-center">
+                    <div class="col-2 col-lg-4 d-flex justify-content-start justify-content-lg-start align-items-center pl-0">
+                        <img src="../assets/img/menu.png" id="menuToggle">
                         <a href="discussionForum.php" class="pageHeaderLink"><h1>Discussion Forum</h1></a>
-                    </div>  
-                    <div class="col-8 d-flex justify-content-start align-items-center">
+                    </div>
+                    <div class="col-10 col-lg-8 d-flex justify-content-end align-items-end align-items-lg-center pr-0">
                         <input type="search" id="forumSearch" name="forumSearch" placeholder="Search the Forum">
                     </div>
                 </div>
             </div>
 
             <div class="row pageContent forumPostViewContainer">
-                <div class="col-9 d-flex justify-content-center align-items-start">
+                <div class="col-12 col-lg-9 d-flex justify-content-center align-items-start">
                     <div class="forumPostViewBox">
                         <div class="forumPostViewMain" id="TopTopic">
                             <input type="hidden" id="topicId" value="<?php echo $topicId; ?>">
@@ -90,38 +91,55 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                         }
                                         ?>
                                     </div>
+
                                     <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="comments">
                                         <img src="../assets/img/discussionForum/comments.png" class="commentIcon">
                                         <p class="forumPostViewMainCount forumPostViewMainComment"><?php echo $commentCount; ?></p>
                                     </div>
-                                    <?php 
-                                    if ($accountid === $_SESSION['accountid']) {
-                                        echo '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
-                                        echo    '<img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
-                                        echo    '<p class="forumPostViewMainCount forumPostViewMainVote" value="'.$topicId.'" class="editButton" id="editButton">Edit</p>';
-                                        echo '</div>';
-                                    }
-                                    if ($_SESSION['acctype'] === 'regular') {
-                                        echo '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" onclick="reportContent(\'' . $topicId . '\')">';
-                                        echo '<img src="../assets/img/discussionForum/report.png" class="commentIcon">';
-                                        echo '<p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
-                                        echo '</div>';
-                                    }
-                                    if ($accountid === $_SESSION['accountid']) {
-                                        echo '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="forumDeletePost">';
-                                        echo     '<img src="../assets/img/discussionForum/delete.png" class="commentIcon">';
-                                        echo     '<p class="forumPostViewMainCount forumPostViewMainDelete" value="'.$topicId.'">Delete</p>';
-                                        echo '</div>';
-                                    }
-                                    ?>
+                                    
+                                    <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="dropdownMenu">
+                                        <img src="../assets/img/discussionForum/menu.png" class="commentIcon">
+                                    </div>
+
+                                    <div id="dropdownContainer">
+                                        <div id="dropdownContent" class="dropdown-content">
+                                            <div class="dropdown-buttons-container">
+                                                <?php 
+                                                if ($accountid === $_SESSION['accountid']) {
+                                                    echo '<div class="forumPostViewMainInt d-flex justify-content-left align-items-center flex-row">';
+                                                    echo    '<img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
+                                                    echo    '<p class="forumPostViewMainCount forumPostViewMainVote" value="'.$topicId.'" class="editButton" id="editButton">Edit</p>';
+                                                    echo '</div>';
+                                                }
+                                                if ($_SESSION['acctype'] === 'regular') {
+                                                    echo '<div class="forumPostViewMainInt d-flex justify-content-left align-items-center flex-row" onclick="reportContent(\'' . $topicId . '\')">';
+                                                    echo '<img src="../assets/img/discussionForum/report.png" class="commentIcon">';
+                                                    echo '<p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
+                                                    echo '</div>';
+                                                }
+                                                if ($accountid === $_SESSION['accountid']) {
+                                                    echo '<div class="forumPostViewMainInt d-flex justify-content-left align-items-center flex-row" id="forumDeletePost">';
+                                                    echo     '<img src="../assets/img/discussionForum/delete.png" class="commentIcon">';
+                                                    echo     '<p class="forumPostViewMainCount forumPostViewMainDelete" value="'.$topicId.'">Delete</p>';
+                                                    echo '</div>';
+                                                }
+                                                ?>
+                                                <div class="forumPostViewMainInt d-flex justify-content-left align-items-center flex-row" id="forumViewHistory">
+                                                    <img src="../assets/img/discussionForum/time.png" class="commentIcon">
+                                                    <p class="forumPostViewMainCount forumPostViewMainHistory" value="'.$topicId.'" class="historyButton">History</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="forumPostFilter d-flex justify-content-end align-items-center flex-row">
-                            <p >Sort comments by:</p>
-                            <button type="button" id="top">Popularity</button>
-                            <button type="button" id="new">New</button>
+                        <div class="col-12">
+                            <div class="forumPostFilter d-flex justify-content-center justify-content-lg-end align-items-center flex-row">
+                                <p >Sort comments by:</p>
+                                <button type="button" id="top">Popularity</button>
+                                <button type="button" id="new">New</button>
+                            </div>
                         </div>
                         <?php
                         if ($_SESSION['acctype'] === 'regular'){
@@ -145,7 +163,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     </div>
                 </div>
 
-                <div class="col-3">
+                <div class="col-12 col-lg-3">
                     <div class="forumPostRecoContainer" id="forumPostRecoContainer">
                     
                     </div>
@@ -167,6 +185,42 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                             <div class="col-12 d-flex flex-row">
                                                 <button type="button" class="roundedButtonVariant" data-dismiss="modal">Cancel</button>
                                                 <button type="button" class="roundedButton" id="confirmDelete">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="viewHistoryModal">
+                <div class="modal-dialog modal-xs modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <div class="container d-flex justify-content-center align-items-center flex-column">
+                                <h5 class="modal-title w-100">Edit History</h5>
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="forumPostViewComments forumPostViewHistory">
+                                            <div class="d-flex justify-content-start align-items-center flex-column">
+                                                <img src="../assets/img/editProfile/lion.png" class="discussionForumAvatarComment">
+                                            </div>
+                                            <div class="forumPostViewContent">
+                                                <div class="row">
+                                                    <div class="col-12 d-flex flex-row discussionForumHistoryHeader">
+                                                        <h2 class="discussionForumUsernameComment">[Placeholder User]</h2><h2 class="discussionForumUsernameCommentSpace">•</h2><h2>[Placeholder Time]</h2>
+                                                    </div>
+                                                </div>
+                                                <div class="forumPostViewContentBox">
+                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque tenetur exercitationem adipisci. Quos saepe debitis quasi in distinctio sit nostrum similique quas, voluptatum obcaecati a id. Est quam illum nobis.<p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -3437,6 +3437,9 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     .forumSubmitContainer textarea {
         text-align: center;
     }
+    .forumPostRecoContainer {
+        margin-top: 40px;
+    }
 }
 
 .discussionForumAvatarPost {
@@ -3669,6 +3672,57 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /*discussion forum post view*/
+.forumPostViewHistory {
+    padding-bottom: 5px;
+}
+
+.discussionForumHistoryHeader h2 {
+    font-size: 12px;
+}
+
+.discussionForumUsernameCommentSpace {
+    padding: 0 5px;
+}
+
+#dropdownContainer,#dropdownContainerComment {
+    position: relative;
+}
+
+#dropdownContent,#dropdownContentComment {
+    display: none; 
+    position: absolute; 
+    z-index: 1;
+}
+
+.dropdown-buttons-container {
+    width: 90px;
+    border-radius: 20px;
+    background-color: #F4F4F4;
+}
+
+.dropdown-buttons-container .forumPostViewMainInt {
+    width: 100%;
+    border-radius: 15px;
+    text-align: left;
+}
+
+.dropdown-buttons-container .forumPostViewMainInt:hover {
+    background-color: #F4F4F4;
+}
+
+.dropdown-buttons-container-var {
+    width: 80px;
+    padding-left: 10px;
+    border-radius: 20px;
+    background-color: #F4F4F4;
+}
+
+#dropdownContentComment {
+    position: absolute;
+    left: 165px;
+    display: none;
+}
+
 .forumPostViewContainer {
     margin-top: 20px;
     font-size: 15px;
@@ -3758,6 +3812,10 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     color: black;
 }
 
+.forumPostViewMainHistory {
+    color: #8917C4;
+}
+
 .forumPostFilter {
     margin-top: 10px;
     font-weight: 600;
@@ -3843,6 +3901,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 .forumPostViewContentBox p {
     margin: 0;
     padding: 0;
+    font-size: 15px;
 }
 
 .forumPostViewContentBox .forumPostViewMainInt {
@@ -3918,7 +3977,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 .threadReply .threadReplyLine {
-    margin-left: 47px;
+    margin-left: 47.5px;
     padding-left: 10px;
     border-left: solid #D0D0D0 2px;
 }

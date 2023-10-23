@@ -48,25 +48,32 @@ foreach ($posts as $post) {
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainComment" onclick="initializeReplyButtons(' . $post['postId'] . ')" value="' . $post['postId'] . '">Reply</p>';
     $html .= '          </div>';
     }
+    $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="dropdownMenuComment">';
+    $html .= '    <img src="../assets/img/discussionForum/menu.png" class="commentIcon">';
+    $html .= '</div>';
+    $html .= '<div id="dropdownContentComment" class="dropdown-content" style="display: none;">';
+    $html .= '    <div class="dropdown-buttons-container-var">';
     if ($post['accountid'] === $_SESSION['accountid']) {
-        $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
-        $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
-        $html .= '            <p class="forumPostViewMainCount forumPostViewMainVote editButton" value="' . $post['postId'] . '">Edit</p>';
-        $html .= '          </div>';
+    $html .= '    <div class="forumPostViewMainInt d-flex justify-content-left align-items-center flex-row">';
+    $html .= '        <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
+    $html .= '        <p class="forumPostViewMainCount forumPostViewMainVote editButton" data-post-id="' . $post['postId'] . '">Edit</p>';
+    $html .= '    </div>';
     }
     if ($_SESSION['acctype'] === 'regular' && $post['accountid'] != $_SESSION['accountid']) {
-    $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" onclick="reportContent(\'' . $topicId . '\')">';
-    $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
-    $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
-    $html .= '          </div>';
+    $html .= '    <div class="forumPostViewMainInt d-flex justify-content-left align-items-center flex-row" onclick="reportContent(\'' . $topicId . '\')">';
+    $html .= '        <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
+    $html .= '        <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
+    $html .= '    </div>';
     }
     // Add the delete button only if the account ID matches the session account ID
     if ($post['accountid'] === $_SESSION['accountid']) {
-        $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" data-post-id="' . $post['postId'] . '">';
-        $html .= '    <img src="../assets/img/discussionForum/delete.png" class="commentIcon">';
-        $html .= '<p class="forumPostViewMainCount forumPostViewMainDeletePost" value="' . $post['postId'] . '">Delete</p>';
-        $html .= '</div>';
+    $html .= '    <div class="forumPostViewMainInt d-flex justify-content-left align-items-center flex-row" data-post-id="' . $post['postId'] . '">';
+    $html .= '        <img src="../assets/img/discussionForum/delete.png" class="commentIcon">';
+    $html .= '        <p class="forumPostViewMainCount forumPostViewMainDeletePost" data-post-id="' . $post['postId'] . '">Delete</p>';
+    $html .= '    </div>';
     }
+    $html .= '    </div>';
+    $html .= '</div>';
     $html .= '        </div>';
     $html .= '      </div>';
     $html .= '    </div>';
@@ -103,6 +110,11 @@ foreach ($posts as $post) {
         $html .= '            <p class="forumPostViewMainCount forumPostViewMainComment" onclick="initializeReplyButtons(' . $post['postId'] . ')" value="' . $post['postId'] . '">Reply</p>';
         $html .= '          </div>';
         }
+        $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" id="dropdownMenuComment">';
+        $html .= '    <img src="../assets/img/discussionForum/menu.png" class="commentIcon">';
+        $html .= '</div>';
+        $html .= '<div id="dropdownContentComment" class="dropdown-content" style="display: none;">';
+        $html .= '    <div class="dropdown-buttons-container-var">';
         if ($reply['accountid'] === $_SESSION['accountid']) {
             $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row">';
             $html .= '            <img src="../assets/img/discussionForum/edit.png" class="commentIcon">';
@@ -110,18 +122,20 @@ foreach ($posts as $post) {
             $html .= '          </div>';
         }
         if ($_SESSION['acctype'] === 'regular' && $reply['accountid'] != $_SESSION['accountid']) {
-        $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" onclick="reportContent(\'' . $topicId . '\')">';
-        $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
-        $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
-        $html .= '          </div>';
+            $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" onclick="reportContent(\'' . $topicId . '\')">';
+            $html .= '            <img src="../assets/img/discussionForum/report.png" class="commentIcon">';
+            $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
+            $html .= '          </div>';
         }
         // Add the delete button only if the account ID matches the session account ID
         if ($reply['accountid'] === $_SESSION['accountid']) {
-            $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" data-reply-id="' . $reply['replyId'] . '">';
-            $html .= '    <img src="../assets/img/discussionForum/delete.png" class="commentIcon">';
-            $html .= '<p class="forumPostViewMainCount forumPostViewMainDeleteReply" value="' . $reply['replyId'] . '">Delete</p>';
-            $html .= '</div>';
+            $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" data-reply-id="' . $reply['replyId'] . '">';
+            $html .= '              <img src="../assets/img/discussionForum/delete.png" class="commentIcon">';
+            $html .= '              <p class="forumPostViewMainCount forumPostViewMainDeleteReply" value="' . $reply['replyId'] . '">Delete</p>';
+            $html .= '          </div>';
         }
+        $html .= '              </div>';
+        $html .= '          </div>';
         $html .= '        </div>';
         $html .= '      </div>';
         $html .= '    </div>';

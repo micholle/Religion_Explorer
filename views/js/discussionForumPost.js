@@ -1,4 +1,51 @@
 $(function() {
+    $(document).ready(function() {
+        $('#dropdownMenu').on('click', function(event) {
+            event.stopPropagation();
+            $('#dropdownContent').toggle();
+        });
+
+        $(window).on('click', function(event) {
+            if (!event.target.matches('#dropdownMenu')) {
+                $('#dropdownContent').hide();
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        var openDropdown = null;
+    
+        $(document).on('click', '.forumPostViewMainInt', function(event) {
+            event.stopPropagation();
+            var dropdownContent = $(this).closest('.forumPostViewComments').find('.dropdown-content');
+    
+            // Check if the clicked element is not the "Reply" button
+            if (!$(event.target).hasClass('forumPostViewMainComment')) {
+                if (openDropdown && openDropdown[0] !== dropdownContent[0]) {
+                    openDropdown.hide();
+                }
+                dropdownContent.toggle();
+                openDropdown = dropdownContent;
+            }
+        });
+    
+        // Handle clicks outside of the dropdowns
+        $(document).on('click', function(event) {
+            if (openDropdown && !$(event.target).is('.forumPostViewMainInt')) {
+                openDropdown.hide();
+                openDropdown = null;
+            }
+        });
+    });
+    
+    
+    
+    
+    //view edit history
+    $(document).on('click', '#forumViewHistory', function() {
+        $('#viewHistoryModal').modal('show');
+    });
+
     const pusher = new Pusher('a314fc475591f42fbafc', {
         cluster: 'ap1',
         // Add any other options you might need
@@ -103,7 +150,7 @@ $(function() {
             }, 2000);
         }
     });
-
+    
     function initializeReplyButtons() {
         const replyButtons = document.querySelectorAll('.forumPostViewMainComment');
       
