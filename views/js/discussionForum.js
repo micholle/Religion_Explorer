@@ -171,7 +171,6 @@ $(function() {
                     const message = {
                         type: 'topics'
                     };
-                    ws.send(JSON.stringify(message));
                 } else {
                     // Error occurred while creating the topic
                     $("#toast").html("Error occurred while creating the topic.")
@@ -296,7 +295,6 @@ $(function() {
               const message = {
                 type: 'topics'
             };
-            ws.send(JSON.stringify(message));
   
               // Disable the clicked button to prevent multiple votes
               targetElement.prop('disabled', true);
@@ -357,23 +355,6 @@ $(function() {
       }
     });
   }
-
- //websocket
-//  const ws = new WebSocket('ws://localhost:8080');
-        
-//  ws.onmessage = function (event) {
-//      const data = JSON.parse(event.data);
- 
-//      // Handle the received WebSocket message and update the UI
-//      switch (data.type) {
-//          case 'topics':
-//              // Handle new post
-//              getTopics();
-//              break;
-//          default:
-//              break;
-//      }
-//  };
 
  const channel = pusher.subscribe('religionExplorer');
 

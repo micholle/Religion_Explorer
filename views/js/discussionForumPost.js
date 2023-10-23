@@ -45,7 +45,7 @@ $(function() {
     $(document).on('click', '#forumViewHistory', function() {
         $('#viewHistoryModal').modal('show');
     });
-
+    
     const pusher = new Pusher('a314fc475591f42fbafc', {
         cluster: 'ap1',
         // Add any other options you might need
@@ -150,7 +150,7 @@ $(function() {
             }, 2000);
         }
     });
-    
+
     function initializeReplyButtons() {
         const replyButtons = document.querySelectorAll('.forumPostViewMainComment');
       
