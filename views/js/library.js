@@ -60,11 +60,11 @@ $(function() {
                     '</div>' +
 
                     '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
-                        '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
+                        '<div class="col-6 col-lg-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                             '<img class="libraryActions" src="../assets/img/download.png" onclick="downloadPhoto(\'' + photoDetails.file + '\')">' +
                             '<img class="libraryActions" src="../assets/img/broken-link.png" onclick="copyResourceLink(\'' + photo + '\')">' +
                         '</div>' +
-                        '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
+                        '<div class="col-6 col-lg-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                         (acctype === 'regular' ? '<img id="' + photo + "Bookmark" +'" class="libraryActions" src="../assets/img/bookmark-white.png" onclick="bookmarkResource(this, \'' + photo + '\', \'' + photoDetails.title + '\')">' : '') +
                         '</div>' +
                     '</div>' +
@@ -112,11 +112,11 @@ $(function() {
                     '</div>' +
 
                     '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
-                        '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
+                        '<div class="col-6 col-lg-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                             '<img class="libraryActions" src="../assets/img/download.png" onclick="downloadVideo(\'' + videoDetails.file + '\')">' +
                             '<img class="libraryActions" src="../assets/img/broken-link.png" onclick="copyResourceLink(\'' + video + '\')">' +
                         '</div>' +
-                        '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
+                        '<div class="col-6 col-lg-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                         (acctype === 'regular' ? '<img id="' + video + "Bookmark" +'"  class="libraryActions" src="../assets/img/bookmark-white.png" onclick="bookmarkResource(this, \'' + video + '\', \'' + videoDetails.title + '\')">' : '') +
                         '</div>' +
                     '</div>' +
@@ -133,10 +133,10 @@ $(function() {
                 // Small
                 
                 if (videoPreviewCounter <= 5) {
-                    $("#libraryVideosPreview").append("<video id='" + video + "' class='libraryPreview' data-identifier='libraryPreview' controls> <source src=" + videoDetails.file +"> </video> &nbsp;");
+                    $("#libraryVideosPreview").append("<video id='" + video + "' class='libraryPreview' data-identifier='libraryPreview' controls> <source src=" + videoDetails.file +"></video> &nbsp;");
                     videoPreviewCounter++;
                 } else if (videoPreviewCounter == 6) {
-                    $("#libraryVideosPreview").append('<button class="roundedButton librarySeeMore" onclick="viewVideos()">+</button>');
+                    $("#libraryVideosPreview").append('<button class="roundedButton librarySeeMoreVariant" onclick="viewVideos()">+</button>');
                     videoPreviewCounter++;
                 }
 

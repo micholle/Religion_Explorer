@@ -2820,6 +2820,9 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     body .pageHeader .pageHeaderLink {
         display: none;
     }
+    body .libraryBasicInfoModalBorder {
+        width: 60px !important;
+    }
 }
 
 .pageHeader h1:hover {
@@ -2910,7 +2913,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     font-weight: 600;
 }
 
-#libraryBasicInfoModal .col-2 img {
+#libraryBasicInfoModal .libraryBasicInfoModalBorder {
     width: 80px;
 }
 
@@ -2978,17 +2981,15 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     body .col-lg-7-order {
         order: 2;
         padding: 0;
-        background-color: plum;
         height: auto;
     }
     .col-lg-5-order {
         order: 1;
         height: auto;
-        background-color: lime;
     }
     body .libraryRightContainer {
         padding: 20px 0;
-    } 
+    }
 }
 
 .libraryMediaContainer {
@@ -3051,10 +3052,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 
 .libraryRightContainer .libraryReadMatsBox p {
     font-weight: 400 !important;
-}
-
-.libraryRightContainer .roundedButton {
-    margin-top: 20px;
 }
 
 .libraryRightContBox {
@@ -3137,6 +3134,8 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     padding: 4px 10px;
     font-size: 12px;
     height: 25px;
+    text-align: center;
+    overflow: hidden !important;    /* Clips overflowing text */
 }
 
 .libraryPreview {
@@ -3152,6 +3151,8 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     margin: 0 20px;
     overflow: auto;
     white-space: nowrap;
+    height: 145px;
+    overflow-y: hidden;
 }
 
 .libraryScrollContainer::-webkit-scrollbar {
@@ -3176,8 +3177,16 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     padding: 0px 20px;
     border-radius: 100px;
 }
+
 .librarySeeMore {
     cursor: pointer;
+    position: relative;
+}
+
+.librarySeeMoreVariant {
+    cursor: pointer;
+    top: -60.5px !important;
+    position: relative;
 }
 
 .libraryActions {
