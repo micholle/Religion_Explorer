@@ -403,17 +403,17 @@ function updateFill(used) {
 }
 
 function viewCreationImage(creationid) {
-    var imageLink = "http://localhost/religion_explorer/views/modules/communitySubmissions.php?openTab=communitySubPhotos" + "&view=" +  encodeURIComponent(creationid);
+    var imageLink = "communitySubmissions.php?openTab=communitySubPhotos" + "&view=" +  encodeURIComponent(creationid);
     window.location.href = imageLink;
 }
 
 function viewCreationVideo(creationid) {
-    var videoLink = "http://localhost/religion_explorer/views/modules/communitySubmissions.php?openTab=communitySubVideos" + "&view=" +  encodeURIComponent(creationid);
+    var videoLink = "communitySubmissions.php?openTab=communitySubVideos" + "&view=" +  encodeURIComponent(creationid);
     window.location.href = videoLink;
 }
 
 function viewCreationReadingMaterial(creationid) {
-    var readingMaterialLink = "http://localhost/religion_explorer/views/modules/communitySubmissions.php?openTab=communitySubBlogs" + "&view=" +  encodeURIComponent(creationid);
+    var readingMaterialLink = "communitySubmissions.php?openTab=communitySubBlogs" + "&view=" +  encodeURIComponent(creationid);
     window.location.href = readingMaterialLink;
 }
 
