@@ -36,18 +36,18 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 
     <div class="pageContainer">
         <div class="container mw-100 mh-100">
-            <div class="row d-flex justify-content-center align-items-center basicInfoContainer">
-                <div class="col-3 d-flex justify-content-end align-items-end">
+            <div class="row d-flex justify-content-center align-items-center basicInfoContainer basicInfoContainerVariant">
+                <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center justify-content-lg-end align-items-lg-end">
                     <img src="data:image/png;base64,<?php echo base64_encode($_SESSION['avatar']); ?>" class="userProfileAvatar">
                     <img src="../assets/img/editProfile/edit.png" id="editAvatar" class="editAvatarButton">
                 </div>
 
-                <div class="col-4 userBasicStatsContainer">
+                <div class="col-12 col-lg-4 userBasicStatsContainer">
                     <div class="row">
                         <div class="col-12 mh-100 userBasicInfo">
 
                             <div class="row d-flex justify-content-center align-items-center">
-                                <div class="col-12 mh-100 d-flex justify-content-start flex-column">
+                                <div class="col-12 mh-100 d-flex justify-content-center align-items-center justify-content-lg-start align-items-lg-start flex-column">
                                     <h1><?php echo $_SESSION['username']; ?></h1>
                                     <div class="row">
                                         <div class="col-12 d-flex flex-row">
@@ -60,25 +60,25 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
                     </div>
 
-                    <div class="userBasicStatsOverview userBasicStats row d-flex justify-content-start align-items-center flex-column">
-                        <div class="col-12 d-flex justify-content-start align-items-center flex-row">
+                    <div class="userBasicStatsOverview userBasicStats row d-flex justify-content-start align-items-center justify-content-lg-start flex-column">
+                    <div class="col-12 d-flex justify-content-center align-items-center justify-content-lg-start flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-clock.png">
                             <p>Joined <?php echo date('F d, Y', strtotime($_SESSION['accountDate'])); ?></p>
                         </div>
 
-                        <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
+                        <div class="userBasicStatsOverview col-12 d-flex justify-content-center align-items-center justify-content-lg-start flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-star.png">
                             <p><?php echo $explorerPoints; ?> Explorer Points</p>
                         </div>
 
-                        <div class="userBasicStatsOverview col-12 d-flex justify-content-start align-items-center flex-row">
+                        <div class="userBasicStatsOverview col-12 d-flex justify-content-center align-items-center justify-content-lg-start flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-feather.png">
                             <p><?php echo $_SESSION['religion']; ?></p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-3 d-flex flex-column justify-content-start align-items-center buttonProfile flex-column">
+                <div class="col-12 col-lg-3 d-flex flex-column justify-content-center align-items-center justify-content-lg-start buttonProfile buttonProfileVariant">
                     <a href="userProfile.php"><button class="roundedButton userBasicStatsSave" id="saveEdit">Save Changes</button></a>
                     <a href="userProfile.php"><button class="roundedButtonVariant userBasicStatsCancel">Cancel</button></a>
                 </div>

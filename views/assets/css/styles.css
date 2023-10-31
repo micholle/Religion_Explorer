@@ -1353,17 +1353,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     outline: none;
 }
 
-/*login signup*/
-/* @media only screen and (max-width: 768px) {
-    #loginSignup .loginSignupForm {
-        margin-top: -2.5vh;
-    }
-    
-    #loginSignup .loginSignupFormVariant {
-        margin-top: -2.5vh;
-    }
-} */
-
 .input-container {
     position: relative;
   }
@@ -1674,19 +1663,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /*sidebar*/
-@media only screen and (max-width: 768px) {
-    body .sidebar {
-        display: none;
-        width: 100%;
-    }
-    body .sidebar.active {
-        display: none;
-    }
-    .pageContainer {
-        padding-left: 0 !important;
-    }
-}
-
 #menuToggle {
     cursor: pointer;
 }
@@ -1950,6 +1926,29 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /*user profile*/
+@media only screen and (max-width: 992px) {
+    body .pageContainer .basicInfoContainer {
+        height: 440px;
+    }
+    body .pageContainer .basicInfoContainer .userProfileAvatar {
+        margin: 15px 0 0 0;
+    }
+    body .pageContainer .basicInfoContainer .buttonProfile {
+        /* background-color: #2196F3; */
+        height: 50px;
+        margin: -5px 0 30px 0;
+        padding: 3px 0;
+    }
+    body .pageContainer .basicInfoContainer .userBasicStatsContainer {
+        margin: 0;
+        padding: 0;
+    }
+    body .pageContainer .basicInfoContainer .userBasicStats {
+        margin: -10px 0 0 0; 
+        padding: 0;
+    }
+}
+
 .basicInfoContainer {
     height: 275px;
     color: #3E3E3E;
@@ -2812,14 +2811,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     .pageHeader {
         padding: 15px;
     }
-    body .pageHeader img {
-        height: 35px;
-        width: 35px;
-        display: block;
-    }
-    body .pageHeader .pageHeaderLink {
-        display: none;
-    }
     body .libraryBasicInfoModalBorder {
         width: 60px !important;
     }
@@ -2840,7 +2831,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     border: solid #D0D0D0 2px;
     padding: 5px 15px;
     width: 100%;
-    display: block;
 }
 
 .pageHeader img {
