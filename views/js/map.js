@@ -100,7 +100,7 @@ $(function() {
 
     //initialize default filter and timeline
     var religionFilter = "All Religions";
-    var timelineYear = "2010 CE";
+    var timelineYear = "2000 CE";
 
     //initialize map
     $("#timelineOverlayYear").text(timelineYear);
@@ -108,6 +108,7 @@ $(function() {
     mapTimeline(religionFilter, timelineYear);
     mapColor(religionFilter, timelineYear);
     mapPin(religionFilter, timelineYear);
+    enableYears(religionFilter);
 
     //change map data based on filter
     $('#religionFilterOptions').click(function(){
@@ -115,9 +116,26 @@ $(function() {
             $("#svgMap").html(mapPlain);
 
             religionFilter = $('#religionFilterOptions').val();
+
+            if (!religionFilter || religionFilter == "All Religions") {
+                timelineYear = "2000 CE";
+            } else if (religionFilter == "Buddhism") {
+                timelineYear = "1940 CE";
+            } else if (religionFilter == "Christianity") {
+                timelineYear = "1990 CE";
+            } else if (religionFilter == "Hinduism") {
+                timelineYear = "1980 CE";
+            } else if (religionFilter == "Islam") {
+                timelineYear = "2000 CE";
+            } else if (religionFilter == "Judaism") {
+                timelineYear = "1990 CE";
+            }
+            
             mapTimeline(religionFilter, timelineYear);
             mapColor(religionFilter, timelineYear);
             mapPin(religionFilter, timelineYear);
+            enableYears(religionFilter);
+            
         }
     });
 
@@ -165,6 +183,41 @@ $(function() {
         $("#timelineOverlay").css("display", "none");
     });
 
+    //disable timeline years with no pins
+    function enableYears(religionFilter) {
+        var yearsWithPin = [];
+    
+        $.ajax({
+            url: "../../ajax/getMapPinsData.ajax.php",
+            method: "POST",
+            success: function (data) {
+                var allPins = data;
+    
+                for (var pin in allPins) {
+                    var pinDetails = allPins[pin];
+                    var pinYear = pinDetails.timelineDate;
+                    var pinReligion = pinDetails.religion;
+    
+                    yearsWithPin.push({ year: pinYear, religion: pinReligion });
+                }
+    
+                for (var year = 0; year < yearsWithPin.length; year++) {
+                    var yearData = yearsWithPin[year];
+                    var yearToEnable = yearData.year;
+    
+                    var enableYears = document.getElementById(yearToEnable);
+    
+                    if (enableYears) {
+                        if (!religionFilter || religionFilter == "All Religions" || religionFilter == yearData.religion) {
+                            enableYears.disabled = false;
+                            enableYears.style.cursor = "pointer";
+                        }
+                    }
+                }
+            }
+        });
+    }
+        
     //change map data based on timeline
     function changeTimeline() {
         var timelineYears = document.getElementsByName("timelineValue");
@@ -208,7 +261,8 @@ $(function() {
                 type: 'radio',
                 name: 'timelineValue',
                 id: year,
-                value: year
+                value: year,
+                disabled: true
             }).on('click', changeTimeline);
 
             const optionLabel = $('<label>').attr('for', year).text(year);
@@ -319,7 +373,8 @@ $(function() {
             }
 
             createSlider();
-            });
+            enableYears(religionFilter);
+        });
 
         $(document).on('click', '#timelineNext', function() {
             timelineEnd = timelineStart;
@@ -339,6 +394,7 @@ $(function() {
             }
         
             createSlider();
+            enableYears(religionFilter);
         });
     }
 
@@ -969,5 +1025,33 @@ function openPinOverview(pinid, pinTitle, pinCountry) {
 
 function closePinOverview(pinTitle) {
     document.getElementById(pinTitle).removeAttribute("data-toggle", "popover");
+    $('.popover').popover('dispose');
+}
+
+function openPinOptions(pinid, multipleDisplay) {
+    var displayOptions = multipleDisplay.split(',').map(function(item) {
+        return item.trim();
+    });
+
+    document.getElementById(pinid).setAttribute("data-toggle", "popover");
+
+    var popoverContent = '<div class="btn-group">';
+    
+    displayOptions.forEach(function(option) {
+        popoverContent += '<button type="button" class="btn btn-secondary">' + option + '</button>';
+    });
+
+    popoverContent += '</div>';
+
+    $('[data-toggle = "popover"]').popover({
+        content: popoverContent,
+        placement: "top",
+        template: '<div class="popover custom-popover-content" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+    });
+    $('[data-toggle = "popover"]').popover("show");
+}
+
+function closePinOptions(pinid) {
+    document.getElementById(pinid).removeAttribute("data-toggle", "popover");
     $('.popover').popover('dispose');
 }

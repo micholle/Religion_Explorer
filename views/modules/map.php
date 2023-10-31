@@ -96,9 +96,9 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         </div>
         <div id="pinsPopoverContent" style="display: none;">
             <p>Click on a pin to learn more about the location, person, or event.</p>
-            <img src="../assets/img/map/location-buddhism.png" width="20" height="20">
+            <!-- <img src="../assets/img/map/location-buddhism.png" width="20" height="20">
             <img src="../assets/img/map/person-christianity.png" width="20" height="20">
-            <img src="../assets/img/map/event-hinduism.png" width="20" height="20">
+            <img src="../assets/img/map/event-hinduism.png" width="20" height="20"> -->
         </div>
         <!-- Overlays -->
         <div id="timelineOverlay" class="timelineOverlay">
