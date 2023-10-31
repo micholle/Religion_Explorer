@@ -3,26 +3,39 @@ $(function() {
 
     $("#sidebarUsername").text($("#accountUsernamePlaceholder").text());
     
-    if (localStorage.getItem("sidebarStatus")) {
-        const sidebarStatus = localStorage.getItem("sidebarStatus");
-        var currentPage = window.location.pathname.split("/").pop();
-    
-        if (sidebarStatus == "minimized") {
-            $(".sidebar").addClass("active");
-            $("#text").css("display", "none");
-            $(".pageContainer").css("padding-left", "85px");
-            $("#sidebarStatus").text("minimized");
-        } else {
-            if (currentPage === "map.php") {
-                return;
+    $(document).ready(function() {
+        if (localStorage.getItem("sidebarStatus")) {
+            const sidebarStatus = localStorage.getItem("sidebarStatus");
+            const windowWidth = $(window).width();
+            const isMobile = windowWidth < 992;
+            var currentPage = window.location.pathname.split("/").pop();
+            
+            if (isMobile) {
+                // Sidebar should be minimized on mobile screens
+                $(".sidebar").addClass("active");
+                $("#text").css("display", "none");
+                $(".pageContainer").css("padding-left", "85px");
+                $("#sidebarStatus").text("minimized");
+            } else {
+                if (sidebarStatus == "minimized") {
+                    $(".sidebar").addClass("active");
+                    $("#text").css("display", "none");
+                    $(".pageContainer").css("padding-left", "85px");
+                    $("#sidebarStatus").text("minimized");
+                } else {
+                    if (currentPage === "map.php") {
+                        return;
+                    }
+        
+                    $(".sidebar").removeClass("active");
+                    $("#text").css("display", "inline-block");
+                    $(".pageContainer").css("padding-left", "275px");
+                    $("#sidebarStatus").text("maximized");
+                }
             }
-
-            $(".sidebar").removeClass("active");
-            $("#text").css("display", "inline-block");
-            $(".pageContainer").css("padding-left", "275px");
-            $("#sidebarStatus").text("maximized");
         }
-    }
+    });
+    
 
     $("#minimize").click(function() {
         var currentPage = window.location.pathname.split("/").pop();

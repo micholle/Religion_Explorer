@@ -13,7 +13,7 @@ function create_sidebar() {
             <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
             <link type="text/css" rel="stylesheet" href="../assets/plugins/bootstrap-4.0.0/css/bootstrap.min.css">
 
-            <div class="sidebarContainer" style="display: flex">
+            <div class="sidebarContainer" style="display: flex;">
                 <div class="sidebar">
                     <div class="top">
                         <div class="logo d-flex justify-content-center align-items-center" id="minimize">

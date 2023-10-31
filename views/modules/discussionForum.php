@@ -30,11 +30,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     <div class="pageContainer">
         <div class="container mw-100 mh-100">
             <div class="row d-flex justify-content-center align-items-center pageHeader pl-0 pr-0">
-                <div class="col-2 col-lg-4 d-flex justify-content-start justify-content-lg-start align-items-center pl-0">
-                    <img src="../assets/img/menu.png" id="menuToggle">
+                <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start justify-content-lg-start align-items-center pl-0">
                     <a href="discussionForum.php" class="pageHeaderLink"><h1>Discussion Forum</h1></a>
                 </div>
-                <div class="col-10 col-lg-8 d-flex justify-content-end align-items-end align-items-lg-center pr-0">
+                <div class="col-12 col-lg-8 d-flex pr-0 pl-0">
                     <input type="search" id="forumSearch" name="forumSearch" placeholder="Search the Forum">
                 </div>
             </div>

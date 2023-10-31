@@ -29,10 +29,11 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         <div class="pageContainer">
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
-                    <div class="col-4 d-flex justify-content-start align-items-center">
+                    <div class="col-12 col-lg-4 d-flex justify-content-start justify-content-lg-start align-items-center pl-0">
+                        <img src="../assets/img/menu.png" id="menuToggle">
                         <a href="community.php" class="pageHeaderLink"><h1>Community Creations</h1></a>
                     </div>
-                    <div class="col-8 d-flex justify-content-start align-items-center">
+                    <div class="col-12 col-lg-8 d-flex justify-content-end align-items-end align-items-lg-center pr-0">
                     </div>
                 </div>
 
