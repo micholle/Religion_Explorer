@@ -995,6 +995,7 @@ h5 {
     padding: 0 0 20px 0;
     margin-bottom: 20px;
     border-bottom: solid #2CA464 2px;
+    cursor: pointer;
 }
 
 /*splash page*/

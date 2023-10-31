@@ -6,7 +6,7 @@ class communityModel{
 		$db = new Connection();
         $pdo = $db->connect();
         
-        $stmt = $pdo->prepare("SELECT cc.creationid, a.username, cc.title, cc.religion, cc.description, cc.filename, cc.filetype, cc.filesize, cc.filedata, cc.status, cc.date 
+        $stmt = $pdo->prepare("SELECT cc.creationid, a.username, cc.title, cc.religion, cc.description, cc.filename, cc.filetype, cc.filesize, cc.filedata, cc.filters, cc.status, cc.date 
                                 FROM communitycreations cc
                                 INNER JOIN accounts a ON cc.accountid = a.accountid");
         $stmt->execute();
@@ -28,6 +28,7 @@ class communityModel{
                         "filetype" => $creation["filetype"],
                         "filesize" => $creation["filesize"],
                         "religion" => $creation["religion"],
+                        "filters" => $creation["filters"],
                         "description" => nl2br(htmlspecialchars_decode($creation["description"])),
                         "date" => $creation["date"]
                     ]
@@ -45,6 +46,7 @@ class communityModel{
                         "filetype" => $creation["filetype"],
                         "filesize" => $creation["filesize"],
                         "religion" => $creation["religion"],
+                        "filters" => $creation["filters"],
                         "description" => nl2br(htmlspecialchars_decode($creation["description"])),
                         "date" => $creation["date"]
                     ]
@@ -59,6 +61,7 @@ class communityModel{
                         "filesize" => $creation["filesize"],
                         "filetype" => "",
                         "religion" => $creation["religion"],
+                        "filters" => $creation["filters"],
                         "description" => nl2br(htmlspecialchars_decode($creation["description"])),
                         "date" => $creation["date"]
                     ]

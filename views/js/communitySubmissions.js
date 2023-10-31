@@ -418,20 +418,32 @@ $(function() {
     const tabs = document.querySelectorAll('.communitySubmissionsTabBtn')
     const all_content = document.querySelectorAll('.communitySubmissionsContent')
 
-    tabs.forEach((tab, index)=>{
-        tab.addEventListener('click', (e)=>{
-            tabs.forEach(tab=>{tab.classList.remove('active')})
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', (e) => {
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
             tab.classList.add('active');
-
-            all_content.forEach(content=>{content.classList.remove('active')});
+    
+            all_content.forEach(content => {
+                content.classList.remove('active');
+            });
             all_content[index].classList.add('active');
-
+    
             const dataTab = tab.getAttribute('data-tab');
-            const currentURL = new URL(window.location.href);
+            var currentURL = new URL(window.location.href);
+    
+            if (currentURL.searchParams.has('view')) {
+                currentURL.searchParams.delete('view');
+            }
+    
             currentURL.searchParams.set('openTab', dataTab);
             window.history.pushState({}, '', currentURL.toString());
-        })
-    })
+    
+            handleFilterChange();
+        });
+    });
+    
 
     function activateTab(tabId) {
         const tabs = document.querySelectorAll(".communitySubmissionsTabBtn");
@@ -463,6 +475,7 @@ $(function() {
           return $(this).val();
         }).get();
 
+
         $.ajax({
             url: "../../ajax/getCommunityData.ajax.php",
             method: "POST",
@@ -470,123 +483,138 @@ $(function() {
                 var communityData = data;
                 const currentURL = window.location.href;
 
-                if (currentURL.includes("photos")) {
+                if (currentURL.includes("communitySubPhotos")) {
                     for (let photo in communityData["photos"]) {
-                        var photoDetails = communityData["photos"][photo];
-                        var resourceid = "#" + photo;
+                        var allPhotos = communityData["photos"][photo];
 
-                        if ($(".communityCategoryFilter:checked").length == 0) {
-                            if (communityReligion == "All Religions") {
-                                $(resourceid).css("display", "block");
-                            } else {
-                                if (communityReligion == photoDetails.religion) {
+                        for (let img in allPhotos) {
+                            var resourceid = "#" + img;
+                            var photoDetails = allPhotos[img];
+                            var filtersArray = (photoDetails.filters).split(", ");
+
+                            if ($(".communityCategoryFilter:checked").length == 0) {
+                                if (communityReligion == "All Religions") {
                                     $(resourceid).css("display", "block");
                                 } else {
-                                    $(resourceid).css("display", "none");
-                                }
-                            }
-                        } else {
-                            if (communityReligion == "All Religions") {
-                                $.each(photoDetails.category, function(index, category) {
-                                    if (communityFilters.includes(category)) {
+                                    if (communityReligion == photoDetails.religion) {
                                         $(resourceid).css("display", "block");
                                     } else {
                                         $(resourceid).css("display", "none");
                                     }
-                                });
+                                }
                             } else {
-                                if (communityReligion == photoDetails.religion) {
-                                    $.each(photoDetails.category, function(index, category) {
-                                        if (communityFilters.includes(category)) {
+                                if (communityReligion == "All Religions") {
+                                    $.each(filtersArray, function(index, filters) {
+                                        if (communityFilters.includes(filters)) {
                                             $(resourceid).css("display", "block");
                                         } else {
                                             $(resourceid).css("display", "none");
                                         }
                                     });
                                 } else {
-                                    $(resourceid).css("display", "none");
+                                    if (communityReligion == photoDetails.religion) {
+                                        $.each(filtersArray, function(index, filters) {
+                                            if (communityFilters.includes(filters)) {
+                                                $(resourceid).css("display", "block");
+                                            } else {
+                                                $(resourceid).css("display", "none");
+                                            }
+                                        });
+                                    } else {
+                                        $(resourceid).css("display", "none");
+                                    }
                                 }
                             }
                         }
                     }
                 }
     
-                if (currentURL.includes("videos")) {
+                if (currentURL.includes("communitySubVideos")) {
                     for (let video in communityData["videos"]) {
-                        var videoDetails = communityData["videos"][video];
-                        var resourceid = "#" + video;
+                        var allVideos = communityData["videos"][video];
 
-                        if ($(".communityCategoryFilter:checked").length == 0) {
-                            if (communityReligion == "All Religions") {
-                                $(resourceid).css("display", "block");
-                            } else {
-                                if (communityReligion == videoDetails.religion) {
+                        for (let vid in allVideos) {
+                            var resourceid = "#" + vid;
+                            var videoDetails = allVideos[vid];
+                            var filtersArray = (videoDetails.filters).split(", ");
+
+                            if ($(".communityCategoryFilter:checked").length == 0) {
+                                if (communityReligion == "All Religions") {
                                     $(resourceid).css("display", "block");
                                 } else {
-                                    $(resourceid).css("display", "none");
-                                }
-                            }
-                        } else {
-                            if (communityReligion == "All Religions") {
-                                $.each(videoDetails.category, function(index, category) {
-                                    if (communityFilters.includes(category)) {
+                                    if (communityReligion == videoDetails.religion) {
                                         $(resourceid).css("display", "block");
                                     } else {
                                         $(resourceid).css("display", "none");
                                     }
-                                });
+                                }
                             } else {
-                                if (communityReligion == videoDetails.religion) {
-                                    $.each(videoDetails.category, function(index, category) {
-                                        if (communityFilters.includes(category)) {
+                                if (communityReligion == "All Religions") {
+                                    $.each(filtersArray, function(index, filters) {
+                                        if (communityFilters.includes(filters)) {
                                             $(resourceid).css("display", "block");
                                         } else {
                                             $(resourceid).css("display", "none");
                                         }
                                     });
                                 } else {
-                                    $(resourceid).css("display", "none");
+                                    if (communityReligion == videoDetails.religion) {
+                                        $.each(filtersArray, function(index, filters) {
+                                            if (communityFilters.includes(filters)) {
+                                                $(resourceid).css("display", "block");
+                                            } else {
+                                                $(resourceid).css("display", "none");
+                                            }
+                                        });
+                                    } else {
+                                        $(resourceid).css("display", "none");
+                                    }
                                 }
                             }
                         }
                     }
                 }
                 
-                if (currentURL.includes("reading-materials")) {
-                    for (let readingMat in communityData["readingMats"]) {
-                        var readingMatDetails = communityData["readingMats"][readingMat];
-                        var resourceid = "#" + readingMat;
+                if (currentURL.includes("communitySubBlogs")) {
+                    for (let readingMat in communityData["readingMaterials"]) {
+                        var allReadingMat = communityData["readingMaterials"][readingMat];
+
+                        for (let blog in allReadingMat) {
+                            var resourceid = "#" + blog;
+                            var readingMatDetails = allReadingMat[blog];
+                            var filtersArray = (readingMatDetails.filters).split(", ");
                         
-                        if ($(".communityCategoryFilter:checked").length == 0) {
-                            if (communityReligion == "All Religions") {
-                                $(resourceid).css("display", "block");
-                            } else {
-                                if (communityReligion == readingMatDetails.religion) {
+                            if ($(".communityCategoryFilter:checked").length == 0) {
+                                if (communityReligion == "All Religions") {
                                     $(resourceid).css("display", "block");
                                 } else {
-                                    $(resourceid).css("display", "none");
-                                }
-                            }
-                        } else {
-                            if (communityReligion == "All Religions") {
-                                $.each(readingMatDetails.category, function(index, category) {
-                                    if (communityFilters.includes(category)) {
+                                    if (communityReligion == readingMatDetails.religion) {
                                         $(resourceid).css("display", "block");
                                     } else {
                                         $(resourceid).css("display", "none");
                                     }
-                                });
+                                }
                             } else {
-                                if (communityReligion == readingMatDetails.religion) {
-                                    $.each(readingMatDetails.category, function(index, category) {
-                                        if (communityFilters.includes(category)) {
+                                if (communityReligion == "All Religions") {
+                                    $.each(filtersArray, function(index, filters) {
+                                        if (communityFilters.includes(filters)) {
                                             $(resourceid).css("display", "block");
                                         } else {
                                             $(resourceid).css("display", "none");
                                         }
                                     });
                                 } else {
-                                    $(resourceid).css("display", "none");
+                                    if (communityReligion == readingMatDetails.religion) {
+                                        $.each(filtersArray, function(index, filters) {
+                                            if (communityFilters.includes(filters)) {
+                                                $(resourceid).css("display", "block");
+                                            } else {
+                                                $(resourceid).css("display", "none");
+                                            }
+                                        });
+                                    } else {
+                                        $(resourceid).css("display", "none");
+                                    }
                                 }
                             }
                         }
@@ -615,95 +643,29 @@ $(function() {
     
             for (let bookmark of data) {
     
-                if (bookmarksCounter < 3) {
-                    if ((bookmark.resourceid).startsWith("CC")) {
-                        $.ajax({
-                            url: "../../ajax/getCommunityData.ajax.php",
-                            method: "POST",
-                            success:function(data){
-                                var communityData = data;
+                if (bookmarksCounter >= 3) {
+                    break;
+                }
 
-                                for (let photo in communityData["photos"]) {
-                                    var photoList = communityData["photos"][photo];
-                                    for (photoData in photoList) {
-                                        var photoDetails = photoList[photoData];
+                if ((bookmark.resourceid).startsWith("CC")) {
+                    $.ajax({
+                        url: "../../ajax/getCommunityData.ajax.php",
+                        method: "POST",
+                        success:function(data){
+                            var communityData = data;
 
-                                        if(photoDetails.creationid == bookmark.resourceid) {
-                                            bookmarkTitle = photoDetails.title;
-                                            bookmarkPreview = '<img src="' + "../" + photoDetails.filedata + '">';
-                                            bookmarkDescription = photoDetails.description;
+                            for (let photo in communityData["photos"]) {
+                                var photoList = communityData["photos"][photo];
+                                for (photoData in photoList) {
+                                    var photoDetails = photoList[photoData];
 
-                                            $("#recentlyBookmarked").append(
-                                                '<div class="commCreationsBoxContent">' +
-                                                    '<h3>' + bookmarkTitle + '</h3>' +
-                                                    bookmarkPreview +
-                                                    '<p>' + bookmarkDescription + '</p>' +
-                                                '</div>'
-                                            );
-                                        }
-                                    }
-                                }
-                    
-                                for (let video in communityData["videos"]) {
-                                    var videoList = communityData["videos"][video];
-                                    for (videoData in videoList) {
-                                        var videoDetails = videoList[videoData];
-                    
-                                        if(videoDetails.creationid == bookmark.resourceid) {
-                                            bookmarkTitle = videoDetails.title;
-                                            bookmarkPreview = '<video controls> <source src=' + "../" + videoDetails.filedata + '> </video>';
-                                            bookmarkDescription = videoDetails.description;
-
-                                            $("#recentlyBookmarked").append(
-                                                '<div class="commCreationsBoxContent">' +
-                                                    '<h3>' + bookmarkTitle + '</h3>' +
-                                                    bookmarkPreview +
-                                                    '<p>' + bookmarkDescription + '</p>' +
-                                                '</div>'
-                                            );
-                                        }
-
-                                    }
-                                }
-                                
-                                for (let readingMaterial in communityData["readingMaterials"]) {
-                                    var readingMaterialsList = communityData["readingMaterials"][readingMaterial];
-                                
-                                    for (let readingMaterialData in readingMaterialsList) {
-                                        var readingMaterialDetails = readingMaterialsList[readingMaterialData];
-
-                                        if(readingMaterialDetails.creationid == bookmark.resourceid) {
-                                            bookmarkTitle = readingMaterialDetails.title;
-                                            bookmarkDescription = readingMaterialDetails.description;
-
-                                            $("#recentlyBookmarked").append(
-                                                '<div class="commCreationsBoxContent">' +
-                                                    '<h3>' + bookmarkTitle + '</h3>' +
-                                                    '<p>' + bookmarkDescription + '</p>' +
-                                                '</div>'
-                                            );
-                                        }
-                    
-                                    }
-                                }            
-                            }
-                        });
-                    } else {
-                        $.ajax({
-                            url: "../../ajax/getLibraryResources.ajax.php",
-                            method: "POST",
-                            success:function(data){
-                                var libraryData = data;
-                    
-                                for (let photo in libraryData["photos"]) {
-                                    if (photo == bookmark.resourceid) {
-                                        var photoDetails = libraryData["photos"][photo];
+                                    if(photoDetails.creationid == bookmark.resourceid) {
                                         bookmarkTitle = photoDetails.title;
-                                        bookmarkPreview = '<img src="' + photoDetails.file + '">';
+                                        bookmarkPreview = '<img src="' + "../" + photoDetails.filedata + '">';
                                         bookmarkDescription = photoDetails.description;
 
                                         $("#recentlyBookmarked").append(
-                                            '<div class="commCreationsBoxContent">' +
+                                            '<div class="commCreationsBoxContent" id="' + bookmark.resourceid + '" onclick="redirectBookmark(this, \'' + "ccPhoto" + '\')">' +
                                                 '<h3>' + bookmarkTitle + '</h3>' +
                                                 bookmarkPreview +
                                                 '<p>' + bookmarkDescription + '</p>' +
@@ -711,55 +673,141 @@ $(function() {
                                         );
                                     }
                                 }
-                                
-                                for (let video in libraryData["videos"]) {
-                                    if (video == bookmark.resourceid) {
-                                        var videoDetails = libraryData["videos"][video];
-                                        bookmarkTitle = videoDetails.title;
-                                        bookmarkPreview = '<video controls> <source src=' + videoDetails.file + '> </video>';
-                                        bookmarkDescription = videoDetails.description;
-                                    
-                                        $("#recentlyBookmarked").append(
-                                            '<div class="commCreationsBoxContent">' +
-                                                '<h3>' + bookmarkTitle + '</h3>' +
-                                                bookmarkPreview +
-                                                '<p>' + bookmarkDescription + '</p>' +
-                                            '</div>'
-                                        );
-                                    }
-                                }                                
-                            
-                                for (let readingMat in libraryData["readingMats"]) {
-                                    if (readingMat == bookmark.resourceid) {
-                                        var readingMatDetails = libraryData["readingMats"][readingMat];
-                                
-                                        bookmarkTitle = readingMatDetails.title;
-                                        bookmarkPreview = '<img src="' + readingMatDetails.resourceImg + '">';
-                                        bookmarkDescription = readingMatDetails.source;
-
-                                        $("#recentlyBookmarked").append(
-                                            '<div class="commCreationsBoxContent">' +
-                                                '<h3>' + bookmarkTitle + '</h3>' +
-                                                bookmarkPreview +
-                                                '<p>' + bookmarkDescription + '</p>' +
-                                            '</div>'
-                                        );
-                                    }
-                                }
-                                
                             }
-                        });
+                
+                            for (let video in communityData["videos"]) {
+                                var videoList = communityData["videos"][video];
+                                for (videoData in videoList) {
+                                    var videoDetails = videoList[videoData];
+                
+                                    if(videoDetails.creationid == bookmark.resourceid) {
+                                        bookmarkTitle = videoDetails.title;
+                                        bookmarkPreview = '<video controls> <source src=' + "../" + videoDetails.filedata + '> </video>';
+                                        bookmarkDescription = videoDetails.description;
 
-                    }
+                                        $("#recentlyBookmarked").append(
+                                            '<div class="commCreationsBoxContent" id="' + bookmark.resourceid + '" onclick="redirectBookmark(this, \'' + "ccVideo" + '\')">' +
+                                                '<h3>' + bookmarkTitle + '</h3>' +
+                                                bookmarkPreview +
+                                                '<p>' + bookmarkDescription + '</p>' +
+                                            '</div>'
+                                        );
+                                    }
 
-                    bookmarksCounter++;
+                                }
+                            }
+                            
+                            for (let readingMaterial in communityData["readingMaterials"]) {
+                                var readingMaterialsList = communityData["readingMaterials"][readingMaterial];
+                            
+                                for (let readingMaterialData in readingMaterialsList) {
+                                    var readingMaterialDetails = readingMaterialsList[readingMaterialData];
+
+                                    if(readingMaterialDetails.creationid == bookmark.resourceid) {
+                                        bookmarkTitle = readingMaterialDetails.title;
+                                        bookmarkDescription = readingMaterialDetails.description;
+
+                                        $("#recentlyBookmarked").append(
+                                            '<div class="commCreationsBoxContent" id="' + bookmark.resourceid + '" onclick="redirectBookmark(this, \'' + "ccReadingMaterial" + '\')">' +
+                                                '<h3>' + bookmarkTitle + '</h3>' +
+                                                '<p>' + bookmarkDescription + '</p>' +
+                                            '</div>'
+                                        );
+                                    }
+                
+                                }
+                            }            
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        url: "../../ajax/getLibraryResources.ajax.php",
+                        method: "POST",
+                        success:function(data){
+                            var libraryData = data;
+                
+                            for (let photo in libraryData["photos"]) {
+                                if (photo == bookmark.resourceid) {
+                                    var photoDetails = libraryData["photos"][photo];
+                                    bookmarkTitle = photoDetails.title;
+                                    bookmarkPreview = '<img src="' + photoDetails.file + '">';
+                                    bookmarkDescription = photoDetails.description;
+
+                                    $("#recentlyBookmarked").append(
+                                        '<div class="commCreationsBoxContent" id="' + bookmark.resourceid + '" onclick="redirectBookmark(this, \'' + "libPhoto" + '\')">' +
+                                            '<h3>' + bookmarkTitle + '</h3>' +
+                                            bookmarkPreview +
+                                            '<p>' + bookmarkDescription + '</p>' +
+                                        '</div>'
+                                    );
+                                }
+                            }
+                            
+                            for (let video in libraryData["videos"]) {
+                                if (video == bookmark.resourceid) {
+                                    var videoDetails = libraryData["videos"][video];
+                                    bookmarkTitle = videoDetails.title;
+                                    bookmarkPreview = '<video controls> <source src=' + videoDetails.file + '> </video>';
+                                    bookmarkDescription = videoDetails.description;
+                                
+                                    $("#recentlyBookmarked").append(
+                                        '<div class="commCreationsBoxContent" id="' + bookmark.resourceid + '" onclick="redirectBookmark(this, \'' + "libVideo" + '\')">' +
+                                            '<h3>' + bookmarkTitle + '</h3>' +
+                                            bookmarkPreview +
+                                            '<p>' + bookmarkDescription + '</p>' +
+                                        '</div>'
+                                    );
+                                }
+                            }                                
+                        
+                            for (let readingMat in libraryData["readingMats"]) {
+                                if (readingMat == bookmark.resourceid) {
+                                    var readingMatDetails = libraryData["readingMats"][readingMat];
+                            
+                                    bookmarkTitle = readingMatDetails.title;
+                                    bookmarkPreview = '<img src="' + readingMatDetails.resourceImg + '">';
+                                    bookmarkDescription = readingMatDetails.source;
+
+                                    $("#recentlyBookmarked").append(
+                                        '<div class="commCreationsBoxContent" id="' + bookmark.resourceid + '" onclick="redirectBookmark(this, \'' + "libReadingMaterial" + '\')">' +
+                                            '<h3>' + bookmarkTitle + '</h3>' +
+                                            bookmarkPreview +
+                                            '<p>' + bookmarkDescription + '</p>' +
+                                        '</div>'
+                                    );
+                                }
+                            }
+                            
+                        }
+                    });
+
                 }
+
+                bookmarksCounter++;
+
             }
         }
     });
-          
-
+    
 });
+
+function redirectBookmark(bookmark, bookmarkType){
+    console.log(bookmarkType);
+    if (bookmarkType == "ccPhoto") {
+        window.location.href = "communitySubmissions.php?openTab=communitySubPhotos&view=" +  encodeURIComponent(bookmark.id);
+    } else if (bookmarkType == "ccVideo") {
+        window.location.href = "communitySubmissions.php?openTab=communitySubVideos&view=" +  encodeURIComponent(bookmark.id);
+    } else if (bookmarkType == "ccReadingMaterial") {
+        window.location.href = "communitySubmissions.php?openTab=communitySubBlogs&view=" +  encodeURIComponent(bookmark.id);
+    } else if (bookmarkType == "libPhoto") {
+        window.location.href = "library.php?open=photos&view=" +  encodeURIComponent(bookmark.id);
+    } else if (bookmarkType == "libVideo") {
+        window.location.href = "library.php?open=videos&view=" +  encodeURIComponent(bookmark.id);
+    } else {
+        window.location.href = "library.php?open=reading-materials&view=" +  encodeURIComponent(bookmark.id);
+    } 
+
+}
 
 function downloadContent(file, filename) {
     fetch(file)
