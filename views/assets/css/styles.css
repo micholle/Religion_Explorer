@@ -148,7 +148,6 @@ h5 {
 
 .sliderOptions input[type=radio]{
     accent-color: #000000;
-    cursor: pointer;
     transform: scale(1.3);
 }
 
