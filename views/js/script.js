@@ -4,20 +4,22 @@ $(function() {
     $("#sidebarUsername").text($("#accountUsernamePlaceholder").text());
     
     $(document).ready(function() {
-        if (localStorage.getItem("sidebarStatus")) {
-            const sidebarStatus = localStorage.getItem("sidebarStatus");
+        // Function to update the sidebar based on screen width
+        function updateSidebar() {
             const windowWidth = $(window).width();
-            const isMobile = windowWidth < 992;
+            const isMobile = windowWidth <= 992;
             var currentPage = window.location.pathname.split("/").pop();
-            
-            if (isMobile) {
-                // Sidebar should be minimized on mobile screens
-                $(".sidebar").addClass("active");
-                $("#text").css("display", "none");
-                $(".pageContainer").css("padding-left", "85px");
-                $("#sidebarStatus").text("minimized");
-            } else {
-                if (sidebarStatus == "minimized") {
+    
+            if (localStorage.getItem("sidebarStatus")) {
+                const sidebarStatus = localStorage.getItem("sidebarStatus");
+    
+                if (isMobile) {
+                    // Lock the sidebar in "active" state on small screens
+                    $(".sidebar").addClass("active locked");
+                    $("#text").css("display", "none");
+                    $(".pageContainer").css("padding-left", "85px");
+                    $("#sidebarStatus").text("minimized");
+                } else if (sidebarStatus == "minimized" && currentPage !== "map.php") {
                     $(".sidebar").addClass("active");
                     $("#text").css("display", "none");
                     $(".pageContainer").css("padding-left", "85px");
@@ -26,38 +28,54 @@ $(function() {
                     if (currentPage === "map.php") {
                         return;
                     }
-        
-                    $(".sidebar").removeClass("active");
+    
+                    $(".sidebar").removeClass("active locked");
                     $("#text").css("display", "inline-block");
                     $(".pageContainer").css("padding-left", "275px");
                     $("#sidebarStatus").text("maximized");
                 }
             }
         }
-    });
     
+        // Initial update
+        updateSidebar();
+    
+        // Update the sidebar on window resize
+        $(window).on('resize', function() {
+            updateSidebar();
+        });
+    });    
 
     $("#minimize").click(function() {
         var currentPage = window.location.pathname.split("/").pop();
+        const windowWidth = $(window).width();
+    
         if (currentPage === "map.php") {
             return;
         }
-
-        $(".sidebar").toggleClass("active");
-        if ($(".sidebar").hasClass("active")) {
-            $("#text").css("display", "none");
-            $(".pageContainer").css("padding-left", "85px");
-            $("#sidebarStatus").text("minimized");
-        } else {
-            $("#text").css("display", "inline-block");
-            $(".pageContainer").css("padding-left", "275px");
-            $(".notificationsPanel").removeClass("show");
-            $("#sidebarNotifications").removeClass("active");
-            $("#sidebarStatus").text("maximized");
+    
+        if (windowWidth <= 992) {
+            return; // Prevent toggling when the screen is small
         }
-
+    
+        // Toggle the "active" class for larger screens only
+        if (windowWidth > 992) {
+            $(".sidebar").toggleClass("active");
+            if ($(".sidebar").hasClass("active")) {
+                $("#text").css("display", "none");
+                $(".pageContainer").css("padding-left", "85px");
+                $("#sidebarStatus").text("minimized");
+            } else {
+                $("#text").css("display", "inline-block");
+                $(".pageContainer").css("padding-left", "275px");
+                $(".notificationsPanel").removeClass("show");
+                $("#sidebarNotifications").removeClass("active");
+                $("#sidebarStatus").text("maximized");
+            }
+        }
+    
         localStorage.setItem("sidebarStatus", $(".sidebar").hasClass("active") ? "minimized" : "maximized");
-    });
+    });    
 
     $("sidebarCloseBtn").click(function() {
         $(".sidebar").css("display", "none");

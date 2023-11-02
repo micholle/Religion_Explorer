@@ -86,33 +86,33 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
             </div>
 
             <div class="row no-gutters justify-content-center editProfileContainer">
-                <div class="col-7">
-                    <div class="row no-gutters justify-content-start">
+                <div class="col-12 col-lg-7 justify-content-center justify-content-lg-start">
+                    <div class="row no-gutters d-flex justify-content-center justify-content-lg-start">
                         <h3>Personal Information</h3>
                     </div>
-                    <div class="row">
-                        <div class="col-12 personalInfoContainer">
-                            <div class="row">
+                    <div class="row no-gutters d-flex justify-content-center justify-content-lg-start">
+                        <div class="col-12">
+                            <div class="row no-gutters d-flex justify-content-center">
                                 <div class="col-3 d-flex justify-content-center align-items-center">
                                     <p>Username</p>
                                 </div>
-                                <div class="col-9 d-flex justify-content-start align-items-center">
+                                <div class="col-9 d-flex justify-content-end justify-content-lg-start align-items-center">
                                     <input type="text" id="username" name="" placeholder="Placeholder">
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row no-gutters d-flex justify-content-center">
                                 <div class="col-3 d-flex justify-content-center align-items-center">
                                     <p>Email</p>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-9 d-flex justify-content-end justify-content-lg-start align-items-center">
                                     <input type="text" id="email" name="" placeholder="<?php echo $_SESSION['email']; ?>" readonly>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row no-gutters d-flex justify-content-center">
                                 <div class="col-3 d-flex justify-content-center align-items-center">
                                     <p>Password</p>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-9 d-flex justify-content-end justify-content-lg-start align-items-center">
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-start align-items-start flex-column">
                                             <button class="editPasswordButton" id="editPasswordButton">Edit Password</button>
@@ -120,11 +120,11 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row no-gutters d-flex justify-content-center">
                                 <div class="col-3 d-flex justify-content-center align-items-center">
                                     <p>Religious Affiliation</p>
                                 </div>
-                                <div class="col-9 d-flex justify-content-start align-items-center">
+                                <div class="col-9 d-flex justify-content-end justify-content-lg-start align-items-center">
                                     <select id="religion" name="religion">
                                         <option value="<?php echo $_SESSION['religion']; ?>" disabled selected hidden>Choose your religion</option>
                                         <option value="Buddhism">Buddhism</option>
@@ -141,10 +141,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     </div>
                 </div>
 
-                <div class="col-5">
+                <div class="col-12 col-lg-5 justify-content-center justify-content-lg-start">
                     <div class="row settingsBlock">
                         <div class="col-12">
-                            <div class="row no-gutters justify-content-start">
+                            <div class="row no-gutters justify-content-center justify-content-lg-start">
                                 <h3>Account Settings</h3>
                             </div>
                             <div class="row no-gutters settingsContainer">
