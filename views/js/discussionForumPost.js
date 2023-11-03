@@ -248,6 +248,26 @@ $(function() {
                         };
                         ws.send(JSON.stringify(message));
                         getPosts("user_priority", $("#topicId").val());
+
+                        //add explorer points: discussion forum reply              
+                        var accountid = $("#accountidPlaceholder").text();
+                        var currentDateTime = new Date();
+                        var unixTimestamp = currentDateTime.getTime() / 1000;
+                        
+                        var explorerPoint = new FormData();
+                        explorerPoint.append("accountid", accountid);
+                        explorerPoint.append("pointsource", accountid + "_forum_reply_" + unixTimestamp);
+                        explorerPoint.append("points", 2);
+
+                        $.ajax({
+                            url: '../../ajax/addExplorerPoints.ajax.php',
+                            method: "POST",
+                            data: explorerPoint,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            dataType: "text"
+                        });
                     } else {
                         $("#toast").html("Error occurred while creating the reply.")
                         $("#toast").css("background-color", "#E04F5F");
@@ -354,6 +374,26 @@ $(function() {
                         };
                         ws.send(JSON.stringify(message));
                         getPosts("user_priority", $("#topicId").val());
+
+                        //add explorer points: discussion forum comment              
+                        var accountid = $("#accountidPlaceholder").text();
+                        var currentDateTime = new Date();
+                        var unixTimestamp = currentDateTime.getTime() / 1000;
+                        
+                        var explorerPoint = new FormData();
+                        explorerPoint.append("accountid", accountid);
+                        explorerPoint.append("pointsource", accountid + "_forum_post_" + unixTimestamp);
+                        explorerPoint.append("points", 2);
+
+                        $.ajax({
+                            url: '../../ajax/addExplorerPoints.ajax.php',
+                            method: "POST",
+                            data: explorerPoint,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            dataType: "text"
+                        });
                     } else {
                         // Error occurred while creating the topic
                         $("#toast").html("Error occurred while creating the post.")
@@ -781,6 +821,24 @@ $(function() {
             data: { type, id, voteAction },
             success: function(response) {
                 callback(response);
+
+                //add explorer points: discussion forum vote              
+                var accountid = $("#accountidPlaceholder").text();
+                
+                var explorerPoint = new FormData();
+                explorerPoint.append("accountid", accountid);
+                explorerPoint.append("pointsource", accountid + "_forum_vote_" + id);
+                explorerPoint.append("points", 2);
+
+                $.ajax({
+                    url: '../../ajax/addExplorerPoints.ajax.php',
+                    method: "POST",
+                    data: explorerPoint,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: "text"
+                });
             },
             error: function() {
                 // AJAX request failed

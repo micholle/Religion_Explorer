@@ -324,7 +324,9 @@ $(function() {
                                             dataType: "text",
                                             processData: false,
                                             contentType: false,
-                                            success: function() {
+                                            success: function(data) {
+                                                console.log(data);
+
                                                 $("#communityModal").removeClass("fade").modal("hide");
                                                 $("#communityModal").modal("dispose");
                                         
@@ -333,6 +335,24 @@ $(function() {
                                                 $("#communityNoticeContent").html("Your content was uploaded successfully.");
                                                 $("#communityNoticeModal").modal();
                                                 $("#communityNoticeModal").show();
+
+                                                //add explorer points: community creations upload                
+                                                var accountid = $("#accountidPlaceholder").text();
+
+                                                var explorerPoint = new FormData();
+                                                explorerPoint.append("accountid", accountid);
+                                                explorerPoint.append("pointsource", accountid + "_cc_upload_" + data.substr(-15));
+                                                explorerPoint.append("points", 3);
+
+                                                $.ajax({
+                                                    url: '../../ajax/addExplorerPoints.ajax.php',
+                                                    method: "POST",
+                                                    data: explorerPoint,
+                                                    cache: false,
+                                                    contentType: false,
+                                                    processData: false,
+                                                    dataType: "text"
+                                                });
                                             },
                                             error: function() {
                                                 $("#communityModal").removeClass("fade").modal("hide");
