@@ -103,7 +103,7 @@ $(function() {
                     },
                     title: {
                         display: true,
-                        text: 'Yearly Active Users'
+                        text: 'Monthly Active Users'
                     }
                     }
                 },
@@ -263,50 +263,55 @@ $(function() {
             new Chart(usersActivityReligionCanvasCtx, usersActivityReligionConfig);
 
             //Users activity
-            var registeredBuddhists = dashboardData.registeredBuddhists;
-            var registeredChristians = dashboardData.registeredChristians;
-            var registeredHindus = dashboardData.registeredHindus;
-            var registeredIslams = dashboardData.registeredIslams;
-            var registeredJews = dashboardData.registeredJews;
-            var registeredOtherReligions = dashboardData.registeredOtherReligions;
-            var registeredNonReligious = dashboardData.registeredNonReligious;
+            var januaryUsers2022 = dashboardData.januaryUsers2022;
+            var februaryUsers2022 = dashboardData.februaryUsers2022;
+            var marchUsers2022 = dashboardData.marchUsers2022;
+            var aprilUsers2022 = dashboardData.aprilUsers2022;
+            var mayUsers2022 = dashboardData.mayUsers2022;
+            var juneUsers2022 = dashboardData.juneUsers2022;
+            var julyUsers2022 = dashboardData.julyUsers2022;
+            var augustUsers2022 = dashboardData.augustUsers2022;
+            var septemberUsers2022 = dashboardData.septemberUsers2022;
+            var octoberUsers2022 = dashboardData.octoberUsers2022;
+            var novemberUsers2022 = dashboardData.novemberUsers2022;
+            var decemberUsers2022 = dashboardData.decemberUsers2022;
         
-            const usersActivityLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+            const usersActivityLabels = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
         
             const usersActivityData = {
                 labels: usersActivityLabels,
                 datasets: [
                     {
                         label: 'Map',
-                        data: [registeredBuddhists, registeredChristians, registeredHindus, registeredIslams, registeredJews, registeredOtherReligions, registeredNonReligious],
+                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
                         backgroundColor: ['rgba(186, 164, 0, 0.2)'],
                         borderColor: ['rgb(186, 164, 0)'],
                         borderWidth: 1
                     },
                     {
                         label: 'Library',
-                        data: [registeredBuddhists, registeredChristians, registeredHindus, registeredIslams, registeredJews, registeredOtherReligions, registeredNonReligious],
+                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
                         backgroundColor: ['rgba(86, 9, 122, 0.2)'],
                         borderColor: ['rgb(86, 9, 122)'],
                         borderWidth: 1
                     },
                     {
                         label: 'CommunityCreations',
-                        data: [registeredBuddhists, registeredChristians, registeredHindus, registeredIslams, registeredJews, registeredOtherReligions, registeredNonReligious],
+                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
                         backgroundColor: ['rgba(168, 19, 21, 0.2)'],
                         borderColor: ['rgb(168, 19, 21)'],
                         borderWidth: 1
                     },
                     {
                         label: 'Discussion Forum',
-                        data: [registeredBuddhists, registeredChristians, registeredHindus, registeredIslams, registeredJews, registeredOtherReligions, registeredNonReligious],
+                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
                         backgroundColor: ['rgba(1, 135, 68, 0.2)'],
                         borderColor: ['rgb(1, 135, 68)'],
                         borderWidth: 1
                     },
                     {
                         label: 'Calendar',
-                        data: [registeredBuddhists, registeredChristians, registeredHindus, registeredIslams, registeredJews, registeredOtherReligions, registeredNonReligious],
+                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
                         backgroundColor: ['rgba(19, 52, 168, 0.2)'],
                         borderColor: ['rgb(19, 52, 168)'],
                         borderWidth: 1
@@ -317,11 +322,11 @@ $(function() {
                 type: 'bar',
                 data: usersActivityData,
                 options: {
-                  indexAxis: 'y',
+                //   indexAxis: 'y',
                   plugins: {
                     title: {
                       display: true,
-                      text: 'User Activity'
+                      text: 'Monthly User Activity'
                     },
                   },
                   responsive: true,

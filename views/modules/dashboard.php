@@ -129,6 +129,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                 <div class="col-6 d-flex justify-content-center align-items-center">
                     <div class="adminMainStatsBox">
                         <div id="usersActivityContainer"></div>
+                        <div style="border-bottom: solid #D0D0D0 2px; margin-top:10px"></div>
                         <div id="usersActivityReligionContainer"></div>
                     </div>
                 </div>
