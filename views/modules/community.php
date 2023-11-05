@@ -29,11 +29,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         <div class="pageContainer">
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
-                    <div class="col-12 col-lg-4 d-flex justify-content-start justify-content-lg-start align-items-center pl-0">
-                        <img src="../assets/img/menu.png" id="menuToggle">
+                    <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start align-items-center pl-0 pr-0">
                         <a href="community.php" class="pageHeaderLink"><h1>Community Creations</h1></a>
                     </div>
-                    <div class="col-12 col-lg-8 d-flex justify-content-end align-items-end align-items-lg-center pr-0">
+                    <div class="col-12 col-lg-8 d-flex pr-0 pl-0">
                     </div>
                 </div>
 
@@ -97,10 +96,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     <div id="uploadedFilename">&nbsp;</div>
                                 </div>
                                 <div class="row communityUploadDetails">
-                                    <div class="col-8 d-flex justify-content-center align-items-center">
+                                    <div class="col-12 col-lg-8 d-flex justify-content-center align-items-center">
                                         <input id="communityTitle" name="communityTitle" placeholder="Title" required>
                                     </div>
-                                    <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center communityUploadSelect">
                                         <select id="communityCategory">
                                             <option selected hidden disabled>Religion</option>
                                             <option value="Buddhism">Buddhism</option>

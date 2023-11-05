@@ -35,8 +35,8 @@ $(function() {
 
                     var photoDisplay =
                     '<div id="' + photoDetails.creationid + '" class="flex-column libraryMediaContainer libraryWideContainer">' +
-                        '<div class="row d-flex justify-content-center align-items-center">' +
-                            '<div class="col-12 libraryMediaHeader">' +
+                        '<div class="row d-flex justify-content-center align-items-center pl-0 pr-0">' +
+                            '<div class="col-12">' +
                                 '<div class="row">' +
                                     '<div class="col-12">' +
                                         '<div class="row">' +
@@ -45,8 +45,8 @@ $(function() {
                                             '</div>' +
                                         '</div>' +
                                         '<div class="row">' +
-                                            '<div class="col-12 d-flex flex-row">' +
-                                                '<p>' + photoDetails.author + '</p><p>•<p>' + formattedDate + '</p>' +
+                                            '<div class="col-12 flex-row d-flex justify-content-center justify-content-lg-start align-items-start" style="margin-top: -10px;">' +
+                                                '<p>' + photoDetails.author + '</p><p>&nbsp•&nbsp</p><p>' + formattedDate + '</p>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
@@ -61,12 +61,12 @@ $(function() {
                         '</div>' +
 
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
-                            '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
+                            '<div class="col-6 col-lg-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 '<img onclick="downloadContent(' + "'" + photoDetails.filedata + '\', \'' + photoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
                                 (acctype === 'regular' ? '<img onclick="reportContent(' + "'" + photoDetails.title + '\', \'' + photoDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png">': '') +
                                 '<img onclick="copyContentLink(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
-                            '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
+                            '<div class="col-6 col-lg-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 (acctype === 'regular' ? '<img id="' + photoDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + photoDetails.creationid + '\', \'' + photoDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' : '') +
                             '</div>' +
                         '</div>' +
@@ -92,8 +92,8 @@ $(function() {
 
                     var videoDisplay = 
                     '<div id="' + videoDetails.creationid + '" class="flex-column libraryMediaContainer libraryWideContainer">' +
-                        '<div class="row d-flex justify-content-center align-items-center">' +
-                            '<div class="col-12 libraryMediaHeader">' +
+                        '<div class="row d-flex justify-content-center align-items-center pl-0 pr-0">' +
+                            '<div class="col-12">' +
                                 '<div class="row">' +
                                     '<div class="col-12">' +
                                         '<div class="row">' +
@@ -102,8 +102,8 @@ $(function() {
                                             '</div>' +
                                         '</div>' +
                                         '<div class="row">' +
-                                            '<div class="col-12 d-flex flex-row">' +
-                                                '<p>' + videoDetails.author + '</p><p>•<p>' + formattedDate + '</p>' +
+                                            '<div class="col-12 flex-row d-flex justify-content-center justify-content-lg-start align-items-start" style="margin-top: -10px;">' +
+                                                '<p>' + videoDetails.author + '</p><p>&nbsp•&nbsp</p><p>' + formattedDate + '</p>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
@@ -118,12 +118,12 @@ $(function() {
                         '</div>' +
 
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
-                            '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
+                            '<div class="col-6 col-lg-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 '<img onclick="downloadContent(' + "'" + videoDetails.filedata + '\', \'' + videoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
                                 (acctype === 'regular' ? '<img onclick="reportContent(' + "'" + videoDetails.title + '\', \'' + videoDetails.creationid + '\')" class="libraryActions" class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">': '') +
                                 '<img onclick="copyContentLink(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
-                            '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
+                            '<div class="col-6 col-lg-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 (acctype === 'regular' ? '<img id="' + videoDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + videoDetails.creationid + '\', \'' + videoDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' : '') +
                             '</div>' +
                         '</div>' +
@@ -155,14 +155,18 @@ $(function() {
                                 '<div class="row">' +
                                     '<div class="col-12">' +
                                         '<div class="row">' +
-                                            '<div class="col-12 d-flex">' +
+                                            '<div class="col-12 d-flex justify-content-center justify-content-lg-start align-items-start">' +
                                                 '<h1>' + readingMaterialDetails.title + '</h1>' +
-                                                '<div class="libraryReadMatsTag" style="margin-left: 5px">' + readingMaterialDetails.religion + '</div>' +
                                             '</div>' +
                                         '</div>' +
                                         '<div class="row">' +
-                                            '<div class="col-12 d-flex flex-row">' +
-                                                '<p>' + readingMaterialDetails.author + '</p><p>•<p>' + formattedDate + '</p>' +
+                                            '<div class="col-12 flex-row d-flex justify-content-center justify-content-lg-start align-items-start">' +
+                                                '<p>' + readingMaterialDetails.author + '</p><p>&nbsp•&nbsp</p><p>' + formattedDate + '</p>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<div class="row">' +
+                                            '<div class="col-12 d-flex flex-row justify-content-center justify-content-lg-start align-items-start">' +
+                                                '<div class="libraryReadMatsTag">' + readingMaterialDetails.religion + '</div>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
@@ -171,12 +175,12 @@ $(function() {
                         '</div>' +
 
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
-                            '<div class="col-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
+                            '<div class="col-6 col-lg-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 // '<img class="libraryActions" src="../assets/img/download.png">' +
                                 (acctype === 'regular' ? '<img onclick="reportContent(' + "'" + readingMaterialDetails.title + '\', \'' + readingMaterialDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' : '')+
                                 '<img onclick="copyContentLink(' + "'" + readingMaterialDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
-                            '<div class="col-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
+                            '<div class="col-6 col-lg-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
                                 (acctype === 'regular' ? '<img id="' + readingMaterialDetails.creationid + "Bookmark" + '" onclick="bookmarkContent(this, \'' + readingMaterialDetails.creationid + '\', \'' + readingMaterialDetails.title + '\')" class="libraryActions" src="../assets/img/bookmark-white.png">' :'') +
                             '</div>' +
                         '</div>' +

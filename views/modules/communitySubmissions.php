@@ -29,11 +29,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         <div class="pageContainer">
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
-                    <img src="../assets/img/menu.png" id="menuToggle" style="position: absolute; top: 15px; left: 0px;">
-                    <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start align-items-center pl-0">
+                    <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start align-items-center pl-0 pr-0">
                         <a href="community.php" class="pageHeaderLink"><h1>Community Creations</h1></a>
                     </div>
-                    <div class="col-12 col-lg-8 d-flex justify-content-center justify-content-lg-end align-items-end pr-0">
+                    <div class="col-12 col-lg-8 d-flex pr-0 pl-0">
                         <input type="search" id="communitySearch" name="communitySearch" placeholder="Search the Community">
                     </div>
                     <div id="viewContent" hidden></div>
@@ -46,7 +45,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <button class="communitySubmissionsTabBtn" data-tab="communitySubVideos">Videos</button>
                     <button class="communitySubmissionsTabBtn" data-tab="communitySubBlogs">Reading Materials</button>
                 </div>
-                <div class="col-12 col-lg-7">
+                <div class="col-12 col-lg-7 col-lg-7-order pr-0 pl-0">
                     <div class="communitySubmissionsContentBox d-flex justify-content-center align-items-center flex-column">
                         <!--Photos-->
                         <div class="communitySubmissionsContent" id="communitySubPhotos"></div>
@@ -58,7 +57,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="communitySubmissionsContent communitySubmissionsContentVariant" id="communitySubBlogs"></div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-5">
+                <div class="col-12 col-lg-5 col-lg-5-order">
                     <div class="row libraryRightContainer">
                         <div class="col-12 libraryRightContBox">
                             <p>Religion:</p>
@@ -84,7 +83,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                             <label for="Social Issues">Social Issues</label>
                         </div>
 
-                        <div class="row commCreationsRightContainer">
+                        <div class="col-12 commCreationsRightContainer pl-0 pr-0">
                             <h1>Recently Bookmarked</h1>
                             <div id="recentlyBookmarked" class="col-12 commCreationsRightContBox"></div>
                         </div>

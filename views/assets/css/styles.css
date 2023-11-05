@@ -11,6 +11,16 @@
 
 /*global*/
 
+@media only screen and (max-width: 768px) {
+    body .pageHeader .pageHeaderLink {
+        text-align: center;
+    }
+    body .pageHeader h1 {
+        font-size: 1.4em;
+        text-align: center;
+    }
+}
+
 #cropper {
     overflow: hidden;
   }
@@ -568,21 +578,28 @@ h5 {
 /* calendar */
 .calendarContainer {
     padding: 25px;
+    background-color: pink;
 }
 .calendar {
+    width: 100%;
     display: flex;
     flex-flow: column;
     font-family: "Lexend";
+    overflow: auto;
 }
 .calendar .header .month-year {
     font-size: 20px;
     font-weight: bold;
     color: #000000;
     padding: 0 10px 10px 10px;
+    overflow: auto;
+    background-color: lightgreen;
 }
 .calendar .days {
     display: flex;
     flex-flow: wrap;
+    overflow: auto;
+    background-color: palevioletred;
 }
 .calendar .days .day_name {
     width: calc(100% / 7);
@@ -724,6 +741,32 @@ h5 {
 }
 
 /* community creations */
+@media only screen and (max-width: 992px) {
+    body .communityUploadSelect {
+        padding-top: 10px;
+    }
+    body .communityFilterCategory {
+        margin-bottom: 10px;
+    }
+    body .libraryMediaContainer h1 {
+        text-align: center;
+    }
+    body .libraryMediaContainer p {
+        text-align: justify;
+        text-align-last: center;
+    }
+    body .commCreationsRightContainer {
+        margin-bottom: -20px;
+    }
+    body .commCreationsRightContainer h3 {
+        text-align: center;
+    }
+    body .commCreationsRightContainer p {
+        text-align: justify;
+        text-align-last: center;
+    }
+}
+
 .communityUploadArea {
     border-style: dashed;
     border-radius: 15px;
@@ -795,14 +838,34 @@ h5 {
     margin-top: 10px;
 }
 
+.communityUploadSelect {
+    padding-top: 0px;
+}
+
 .communityAddFilters {
     white-space: nowrap;
     display: flex;
+    overflow-x: auto;
+    width: 100%;
 }
 
-/* .communityAddFilters input[type="checkbox"], .communityAddFilters label {
-    margin-right: 10px;
-} */
+.communityAddFilters::-webkit-scrollbar {
+    height: 15px;
+}
+
+.communityAddFilters::-webkit-scrollbar-thumb {
+    background-color: #C1C1C1;
+    border-radius: 20px;
+}
+
+.communityAddFilters::-webkit-scrollbar-thumb:hover {
+    background-color: #787878;
+}
+
+.communityAddFilters::-webkit-scrollbar-track {
+    background-color: #F1F1F1;
+    border-radius: 20px;
+}
 
 .communityFilterCategory {
     padding: 5px 10px 5px 10px;
@@ -842,16 +905,20 @@ h5 {
 .communitySubVideo {
     width: 100%;
     border-radius: 10px;
+    margin-top: 10px;
 }
 
 .communityReadingMaterialsWidth {
-    width: 1115px;
+    width: 100%;
 }
 
 .createSubmissionsBox {
     border-bottom: solid #D0D0D0 2px;
 }
 
+.createSubmissionsBox h1 {
+    text-align: center;
+}
 
 .createSubmissionsBox .roundedButton {
     margin: 15px 15px 20px;
@@ -869,6 +936,7 @@ h5 {
     width: 100%;
     margin: 0;
     box-sizing: border-box; /* Add this line to include padding in width calculation */
+    overflow: hidden;
 }
 
 .submissionsWidth {
@@ -988,6 +1056,7 @@ h5 {
 .commCreationsRightContBox img {
     width: 100%;
     margin: 5px 0;
+    border-radius: 10px;
 }
 
 .commCreationsBoxContent {
@@ -2896,6 +2965,9 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     body .libraryBasicInfoModalBorder {
         width: 60px !important;
     }
+    body .submissionsWidth h1 {
+        text-align: center;
+    }
 }
 
 .pageHeader h1:hover {
@@ -3020,35 +3092,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /*main library content*/
-.col-lg-7-order::-webkit-scrollbar,
-.col-lg-5-order::-webkit-scrollbar {
-    width: 0.5em;
-}
-
-.col-lg-7-order::-webkit-scrollbar-thumb,
-.col-lg-5-order::-webkit-scrollbar-thumb {
-    background-color: transparent;
-}
-
-.col-lg-7-order::-webkit-scrollbar-track,
-.col-lg-5-order::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-
-.libraryMainContainer {
-    padding: 15px 0 !important;
-}
-
-.col-lg-5-order {
-    height: 85vh;
-    overflow-y: auto;
-}
-
-.col-lg-7-order {
-    height: 85vh;
-    overflow-y: auto;
-}
-
 @media only screen and (max-width: 992px) {
     body .col-lg-7-order {
         order: 2;
@@ -3062,7 +3105,52 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     body .libraryRightContainer {
         padding: 20px 0;
     }
+    body .libraryRightContainer h1 {
+        text-align: center;
+    }
+    body .libraryMainContainer h1 {
+        text-align: center;
+    }
+    body .libraryMainContainer p {
+        text-align: justify;
+        text-align-last: center;
+    }
 }
+
+@media only screen and (max-width: 768px) {
+    .libraryBasicInfoBox {
+        width: 100%;
+    }
+}
+
+/* .col-lg-7-order::-webkit-scrollbar,
+.col-lg-5-order::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.col-lg-7-order::-webkit-scrollbar-thumb,
+.col-lg-5-order::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.col-lg-7-order::-webkit-scrollbar-track,
+.col-lg-5-order::-webkit-scrollbar-track {
+    background-color: transparent;
+} */
+
+.libraryMainContainer {
+    padding: 15px 0 !important;
+}
+
+/* .col-lg-5-order {
+    height: 85vh;
+    overflow-y: auto;
+}
+
+.col-lg-7-order {
+    height: 85vh;
+    overflow-y: auto;
+} */
 
 .libraryMediaContainer {
     display: flex;
@@ -3753,10 +3841,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /*discussion forum post view*/
-.editable {
-    border: solid #2CA464 2px;
-}
-
 .forumPostViewHistory {
     padding-bottom: 5px;
 }

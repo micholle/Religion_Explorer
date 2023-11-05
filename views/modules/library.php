@@ -31,55 +31,54 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
         <div class="pageContainer">
             <div class="container mw-100 mh-100">
                 <div class="row d-flex justify-content-center align-items-center pageHeader">
-                    <div class="col-2 col-lg-4 d-flex justify-content-start justify-content-lg-start align-items-center pl-0">
-                        <img src="../assets/img/menu.png" id="menuToggle">
+                    <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start align-items-center pl-0 pr-0">
                         <a href="library.php" class="pageHeaderLink"><h1>Library of Resources</h1></a>
                     </div>
-                    <div class="col-10 col-lg-8 d-flex justify-content-end align-items-end align-items-lg-center pr-0">
+                    <div class="col-12 col-lg-8 d-flex pr-0 pl-0">
                         <input type="search" id="librarySearch" name="" placeholder="Search the Library">
                     </div>
                 </div>
 
                 <div class="row pageContent">
-                    <div class="col-12 col-lg-7 col-lg-7-order">
+                    <div class="col-12 col-lg-7 col-lg-7-order pr-0 pl-0">
                         <div class="row libraryBasicInfoContainer no-gutters">
                             <div class="col-12">
                                 <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-12 d-flex justify-content-start align-items-start">
+                                    <div class="col-12 d-flex justify-content-center justify-content-lg-start align-items-start">
                                         <h1>Basic Information</h1>
                                     </div>
                                 </div>
                                 <div class="row d-flex justify-content-center align-items-center flex-row">
-                                    <div class="col-4 col-sm-2 col-lg-2 d-flex justify-content-center align-items-center flex-column">
-                                        <div class="libraryBasicInfoBox" id="Buddhism">
+                                    <div class="col-12 col-md-4 col-lg-2 d-flex justify-content-center align-items-center flex-column">
+                                        <div class="libraryBasicInfoBox d-flex justify-content-center align-items-center" id="Buddhism">
                                             <img src="../assets/img/lib-buddhism.png">
                                         </div>
                                         <p>Buddhism</p>
                                     </div>
                                     
-                                    <div class="col-4 col-sm-2 col-lg-2 d-flex justify-content-center align-items-center flex-column">
-                                        <div class="libraryBasicInfoBox" id="Christianity">
+                                    <div class="col-12 col-md-4 col-lg-2 d-flex justify-content-center align-items-center flex-column">
+                                        <div class="libraryBasicInfoBox d-flex justify-content-center align-items-center" id="Christianity">
                                             <img src="../assets/img/lib-christianity.png">
                                         </div>
                                         <p>Christianity</p>
                                     </div>
 
-                                    <div class="col-4 col-sm-2 col-lg-2 d-flex justify-content-center align-items-center flex-column">
-                                        <div class="libraryBasicInfoBox" id="Hinduism">
+                                    <div class="col-12 col-md-4 col-lg-2 d-flex justify-content-center align-items-center flex-column">
+                                        <div class="libraryBasicInfoBox d-flex justify-content-center align-items-center" id="Hinduism">
                                             <img src="../assets/img/lib-hinduism.png">
                                         </div>
                                         <p>Hinduism</p>
                                     </div>
 
-                                    <div class="col-4 col-sm-2 col-lg-2 d-flex justify-content-center align-items-center flex-column">
-                                        <div class="libraryBasicInfoBox" id="Islam">
+                                    <div class="col-12 col-md-4 col-lg-2 d-flex justify-content-center align-items-center flex-column">
+                                        <div class="libraryBasicInfoBox d-flex justify-content-center align-items-center" id="Islam">
                                             <img src="../assets/img/lib-islam.png">
                                         </div>
                                         <p>Islam</p>
                                     </div>
 
-                                    <div class="col-4 col-sm-2 col-lg-2 d-flex justify-content-center align-items-center flex-column">
-                                        <div class="libraryBasicInfoBox" id="Judaism">
+                                    <div class="col-12 col-md-4 col-lg-2 d-flex justify-content-center align-items-center flex-column">
+                                        <div class="libraryBasicInfoBox d-flex justify-content-center align-items-center" id="Judaism">
                                             <img src="../assets/img/lib-judaism.png">
                                         </div>
                                         <p>Judaism</p>
@@ -92,7 +91,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="row libraryMainContainer no-gutters" id="libraryReadingMaterialsWide">
                             <div class="col-12">
                                 <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-12 d-flex justify-content-start align-items-start">
+                                <div class="col-12 d-flex justify-content-center justify-content-lg-start align-items-start">
                                         <h1>Reading Materials</h1>
                                     </div>
                                 </div>
@@ -108,7 +107,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="row libraryMainContainer" id="libraryPhotosWide" hidden>
                             <div class="col-12">
                                 <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-12 d-flex justify-content-start align-items-start">
+                                    <div class="col-12 d-flex justify-content-center justify-content-lg-start align-items-start">
                                         <h1 id="">Photos</h1>
                                     </div>
                                 </div>
@@ -122,7 +121,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="row libraryMainContainer" id="libraryVideosWide" hidden>
                             <div class="col-12">
                                 <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-12 d-flex justify-content-start align-items-start">
+                                <div class="col-12 d-flex justify-content-center justify-content-lg-start align-items-start">
                                         <h1 id="">Videos</h1>
                                     </div>
                                 </div>
@@ -160,7 +159,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                             </div>
                         </div>
                         <!--Photos Small-->
-                        <div class="row libraryRightContainer" id="libraryPhotosSmall">
+                        <div class="row libraryRightContainer d-flex justify-content-center justify-content-lg-start align-items-center" id="libraryPhotosSmall">
                             <h1>Photos</h1>
                             <div class="col-12 libraryRightContBox">
                                 <div class="row d-flex flex-row justify-content-center align-items-center">
@@ -171,7 +170,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
 
                         <!--Videos Small-->
-                        <div class="row libraryRightContainer" id="libraryVideosSmall">
+                        <div class="row libraryRightContainer d-flex justify-content-center justify-content-lg-start align-items-center" id="libraryVideosSmall">
                             <h1>Videos</h1>
                             <div class="col-12 libraryRightContBox">
                                 <div class="row d-flex flex-row justify-content-center align-items-center">
@@ -182,7 +181,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
 
                         <!--Reading Materials Small-->
-                        <div class="row libraryRightContainer" id="libraryReadingMaterialsSmall" hidden>
+                        <div class="row libraryRightContainer d-flex justify-content-center justify-content-lg-start align-items-center" id="libraryReadingMaterialsSmall" hidden>
                             <h1>Reading Materials</h1>
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column libraryRightContBox">
                                 <div class="row d-flex justify-content-center align-items-center flex-row">
