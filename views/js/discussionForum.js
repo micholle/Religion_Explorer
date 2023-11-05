@@ -171,6 +171,26 @@ $(function() {
                     const message = {
                         type: 'topics'
                     };
+
+                    //add explorer points: discussion forum create topic               
+                    var accountid = $("#accountidPlaceholder").text();
+                    var currentDateTime = new Date();
+                    var unixTimestamp = currentDateTime.getTime() / 1000;
+                    
+                    var explorerPoint = new FormData();
+                    explorerPoint.append("accountid", accountid);
+                    explorerPoint.append("pointsource", accountid + "_forum_topic_" + unixTimestamp);
+                    explorerPoint.append("points", 3);
+
+                    $.ajax({
+                        url: '../../ajax/addExplorerPoints.ajax.php',
+                        method: "POST",
+                        data: explorerPoint,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        dataType: "text"
+                    });
                 } else {
                     // Error occurred while creating the topic
                     $("#toast").html("Error occurred while creating the topic.")

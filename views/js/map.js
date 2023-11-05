@@ -397,7 +397,7 @@ $(function() {
             enableYears(religionFilter);
         });
     }
-
+    
     function mapColor(religionFilter, timelineYear) {
         $.ajax({
             url: '../../ajax/getMapData.ajax.php',
@@ -704,6 +704,25 @@ $(function() {
                     $("#modalContent").html(modalContent);
                     $('#modalTitle').text(currentCountry);
                     $('#countryInformationModal').modal();
+
+                    //add explorer point: country_opened                    
+                    var accountid = $("#accountidPlaceholder").text();
+
+                    var explorerPoint = new FormData();
+                    explorerPoint.append("accountid", accountid);
+                    explorerPoint.append("pointsource", accountid + "_country_opened_" + currentCountry);
+                    explorerPoint.append("points", 1);
+                
+                    $.ajax({
+                        url: '../../ajax/addExplorerPoints.ajax.php',
+                        method: "POST",
+                        data: explorerPoint,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        dataType: "text"
+                    });
+
                 }
             
                 for (let country of allCountries) {
@@ -744,7 +763,7 @@ $(function() {
 
                     // var pinImg = "../assets/img/map/" + pinType + "-" + (pinReligion.toLowerCase()) + ".png";
                     var pinImg = "../assets/img/map/map-pin.png";
-                    $("#svgMap").html($("#svgMap").html() + '<image id="' + pinid + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinid + "', '" + pinTitle + "', '" + pinCountry + "'" + ')" onmouseout="closePinOverview(' + "'" + pinid + "'" + ')" onclick="openPin(' + "'" + pinTitle + "', '" + pinDate + "', '" + pinReligion + "', '" +  pinVid + "', '" + pinImg1 + "', '" + pinImg2 + "', '" + pinSource + "'" + ')" href="' + pinImg +'" x="' + x + '" y="' + y + '" height="30" width="30"/>');
+                    $("#svgMap").html($("#svgMap").html() + '<image id="' + pinid + '" class="mapPin" onmouseover="openPinOverview(' + "'" + pinid + "', '" + pinTitle + "', '" + pinCountry + "'" + ')" onmouseout="closePinOverview(' + "'" + pinid + "'" + ')" onclick="openPin(' + "'" + pinid + "', '" + pinTitle + "', '" + pinDate + "', '" + pinReligion + "', '" +  pinVid + "', '" + pinImg1 + "', '" + pinImg2 + "', '" + pinSource + "'" + ')" href="' + pinImg +'" x="' + x + '" y="' + y + '" height="30" width="30"/>');
 
                     var pinid = "#" + pinid;
                     var pinTypeStatus = "";
@@ -972,7 +991,7 @@ async function summarize(url) {
     }
 }
 
-function openPin(pinTitle, pinDate, pinReligion, pinVid, pinImg1, pinImg2, pinSource) {
+function openPin(pinid, pinTitle, pinDate, pinReligion, pinVid, pinImg1, pinImg2, pinSource) {
     async function getDescription(url) {
         var summary = await summarize(url);
         var summaryKeys = Object.keys(summary);
@@ -1010,6 +1029,24 @@ function openPin(pinTitle, pinDate, pinReligion, pinVid, pinImg1, pinImg2, pinSo
         .catch(error => {
             console.error("Error fetching data from the proxy:", error);
         });
+
+    //add explorer point: pin_opened                    
+    var accountid = $("#accountidPlaceholder").text();
+
+    var explorerPoint = new FormData();
+    explorerPoint.append("accountid", accountid);
+    explorerPoint.append("pointsource", accountid + "_pin_opened_" + pinid);
+    explorerPoint.append("points", 1);
+
+    $.ajax({
+        url: '../../ajax/addExplorerPoints.ajax.php',
+        method: "POST",
+        data: explorerPoint,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "text"
+    });
 }
 
 function openPinOverview(pinid, pinTitle, pinCountry) {

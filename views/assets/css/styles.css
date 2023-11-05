@@ -4176,6 +4176,10 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     font-family: "Lexend";
 }
 
+.adminDashboardDate {
+    margin-left: 10px !important;
+}
+
 .adminBasicStats {
     margin: 10px 20px;
 }
@@ -4204,7 +4208,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 
-.adminBasicStatsContainer .col-4 .adminBasicStatsBox {
+.adminBasicStatsContainer .col-3 .adminBasicStatsBox {
     width: 100%;
     border-radius: 15px;
     border: solid black 3px;
@@ -4266,11 +4270,11 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
    background-color: #3B97D3 !important;
 }
 
-.adminBasicStatsContainer .col-4 .adminBasicStatsBox .adminBasicStatsBoxContent {
+.adminBasicStatsContainer .col-3 .adminBasicStatsBox .adminBasicStatsBoxContent {
     margin: 20px 0 20px 20px;
 }
 
-.adminBasicStatsContainer .col-4 .adminBasicStatsBox .adminBasicStatsBoxFooter {
+.adminBasicStatsContainer .col-3 .adminBasicStatsBox .adminBasicStatsBoxFooter {
     display: block;
     bottom: 0;
     height: 10px;

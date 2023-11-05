@@ -105,7 +105,8 @@ class communityModel{
             
 			$stmt->execute();
 			$pdo->commit();
-            
+            echo $data["creationid"];
+
 			return "success";
 		} catch (Exception $e) {
             echo $e->getMessage();

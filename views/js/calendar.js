@@ -206,6 +206,24 @@ function addToPersonalCalendar(event, religion, date) {
             setTimeout(function() {
                 $('#toast').removeClass('show');
             }, 2000);
+
+            //add explorer points: calendar add event                
+            var accountid = $("#accountidPlaceholder").text();
+
+            var explorerPoint = new FormData();
+            explorerPoint.append("accountid", accountid);
+            explorerPoint.append("pointsource", accountid + "_calendar_add_" + data);
+            explorerPoint.append("points", 2);
+
+            $.ajax({
+                url: '../../ajax/addExplorerPoints.ajax.php',
+                method: "POST",
+                data: explorerPoint,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "text"
+            });
         }
     });
 }

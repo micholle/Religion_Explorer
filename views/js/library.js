@@ -707,6 +707,24 @@ async function showReadingMaterialModal(resourceid, resourceImg, title, author, 
 
     $('#readingMaterialOverview').modal();
     $('#readingMaterialOverview').show();
+
+    //add explorer point: library reading material opened                    
+    var accountid = $("#accountidPlaceholder").text();
+
+    var explorerPoint = new FormData();
+    explorerPoint.append("accountid", accountid);
+    explorerPoint.append("pointsource", accountid + "_lib_opened_" + resourceid);
+    explorerPoint.append("points", 1);
+
+    $.ajax({
+        url: '../../ajax/addExplorerPoints.ajax.php',
+        method: "POST",
+        data: explorerPoint,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "text"
+    });
 }
 
 function downloadPhoto(file) {
@@ -799,6 +817,7 @@ function bookmarkResource(thisIcon, resourceid, resourceTitle) {
                             }, 2000);
                         }
                     });
+
                 }
             }
 
@@ -815,6 +834,24 @@ function bookmarkResource(thisIcon, resourceid, resourceTitle) {
                         setTimeout(function() {
                             $('#toast').removeClass('show');
                         }, 2000);
+
+                        //add explorer point: library reading material bookmarked                    
+                        var accountid = $("#accountidPlaceholder").text();
+
+                        var explorerPoint = new FormData();
+                        explorerPoint.append("accountid", accountid);
+                        explorerPoint.append("pointsource", accountid + "_lib_bookmarked_" + resourceid);
+                        explorerPoint.append("points", 2);
+
+                        $.ajax({
+                            url: '../../ajax/addExplorerPoints.ajax.php',
+                            method: "POST",
+                            data: explorerPoint,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            dataType: "text"
+                        });
                     },
                     error: function() {
                         $(thisIcon).attr("src", "../assets/img/bookmark-white.png");
