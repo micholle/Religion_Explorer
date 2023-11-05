@@ -159,7 +159,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                             </div>
                         </div>
                         <!--Photos Small-->
-                        <div class="row libraryRightContainer d-flex justify-content-center justify-content-lg-start align-items-center" id="libraryPhotosSmall">
+                        <div class="row libraryRightContainer" id="libraryPhotosSmall">
                             <h1>Photos</h1>
                             <div class="col-12 libraryRightContBox">
                                 <div class="row d-flex flex-row justify-content-center align-items-center">
@@ -170,7 +170,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
 
                         <!--Videos Small-->
-                        <div class="row libraryRightContainer d-flex justify-content-center justify-content-lg-start align-items-center" id="libraryVideosSmall">
+                        <div class="row libraryRightContainer" id="libraryVideosSmall">
                             <h1>Videos</h1>
                             <div class="col-12 libraryRightContBox">
                                 <div class="row d-flex flex-row justify-content-center align-items-center">
@@ -181,7 +181,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
 
                         <!--Reading Materials Small-->
-                        <div class="row libraryRightContainer d-flex justify-content-center justify-content-lg-start align-items-center" id="libraryReadingMaterialsSmall" hidden>
+                        <div class="row libraryRightContainer" id="libraryReadingMaterialsSmall" hidden>
                             <h1>Reading Materials</h1>
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column libraryRightContBox">
                                 <div class="row d-flex justify-content-center align-items-center flex-row">

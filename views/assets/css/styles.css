@@ -3115,6 +3115,11 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
         text-align: justify;
         text-align-last: center;
     }
+    body .libraryRightContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 @media only screen and (max-width: 768px) {
