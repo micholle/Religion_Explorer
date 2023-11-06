@@ -31,7 +31,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <h1>Admin Dashboard</h1>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <select id="adminDashboardDate" class="adminDashboardDate">
+                    <select id="adminDashboardMonth" class="adminDashboardDate">
                         <option selected value="allMonths">January to December</option>
                         <option value="January">January</option>
                         <option value="February">February</option>
@@ -46,14 +46,14 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <option value="November">November</option>
                         <option value="December">December</option>
                     </select>
-                    <select id="adminDashboardDate" class="adminDashboardDate" disabled>
+                    <select id="adminDashboardWeek" class="adminDashboardDate" disabled>
                         <option value="allWeeks">Week 1 - 4</option>
                         <option value="Week 1">Week 1</option>
                         <option value="Week 2">Week 2</option>
                         <option value="Week 3">Week 3</option>
                         <option value="Week 4">Week 4</option>
                     </select>
-                    <select id="adminDashboardDate" class="adminDashboardDate">
+                    <select id="adminDashboardYear" class="adminDashboardDate">
                         <option value="2021">2021</option>
                         <option value="2022">2022</option>
                         <option selected value="2023">2023</option>
@@ -67,7 +67,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/user.png">
                             <h3>New Users</h3>
-                            <h1 id="todaysNewUsers"></h1>
+                            <h1 id="newUsers"></h1>
                         </div>
                         <div class="adminBasicStatsBoxFooter">
                         </div>

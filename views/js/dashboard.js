@@ -15,18 +15,43 @@ $(function() {
         }
     });
 
+    $("#adminDashboardMonth").on("change", function() {
+        var selectedMonth = $(this).val();
+        if (selectedMonth == "allMonths") {
+            $("#adminDashboardWeek").val("allWeeks");
+            $("#adminDashboardWeek").prop("disabled", true);
+        } else {
+            $("#adminDashboardWeek").prop("disabled", false);
+
+        }
+    });
+
+    var adminDashboardMonth = $("#adminDashboardMonth").val();
+    var adminDashboardWeek= $("#adminDashboardWeek").val();
+    var adminDashboardYear = $("#adminDashboardYear").val();
+
+    var dashboardDate = new FormData();
+    dashboardDate.append("adminDashboardMonth", adminDashboardMonth);
+    dashboardDate.append("adminDashboardWeek", adminDashboardWeek);
+    dashboardDate.append("adminDashboardYear", adminDashboardYear);
+
     $.ajax({
         url: "../../ajax/getDashboardData.ajax.php",
         method: "POST",
+        data: dashboardDate,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
         success: function (data) {
             var dashboardData = data;
     
-            var todayNewUsers = dashboardData.todayNewUsers;
+            var newUsers = dashboardData.newUsers;
             var online = dashboardData.online;
             var visitors = dashboardData.visitors;
             var registeredUsers = dashboardData.registeredUsers;
         
-            $("#todaysNewUsers").text(todayNewUsers);
+            $("#newUsers").text(newUsers);
             $("#online").text(online);
             $("#visitors").text(visitors);
             $("#registeredUsers").text(registeredUsers);
@@ -44,48 +69,47 @@ $(function() {
             Chart.defaults.font.family = "Lexend";
 
             // Monthly New Users (2022)
-            var januaryUsers2022 = dashboardData.januaryUsers2022;
-            var februaryUsers2022 = dashboardData.februaryUsers2022;
-            var marchUsers2022 = dashboardData.marchUsers2022;
-            var aprilUsers2022 = dashboardData.aprilUsers2022;
-            var mayUsers2022 = dashboardData.mayUsers2022;
-            var juneUsers2022 = dashboardData.juneUsers2022;
-            var julyUsers2022 = dashboardData.julyUsers2022;
-            var augustUsers2022 = dashboardData.augustUsers2022;
-            var septemberUsers2022 = dashboardData.septemberUsers2022;
-            var octoberUsers2022 = dashboardData.octoberUsers2022;
-            var novemberUsers2022 = dashboardData.novemberUsers2022;
-            var decemberUsers2022 = dashboardData.decemberUsers2022;
-
+            var januaryUsersPrevious = dashboardData.januaryUsersPrevious;
+            var februaryUsersPrevious = dashboardData.februaryUsersPrevious;
+            var marchUsersPrevious = dashboardData.marchUsersPrevious;
+            var aprilUsersPrevious = dashboardData.aprilUsersPrevious;
+            var mayUsersPrevious = dashboardData.mayUsersPrevious;
+            var juneUsersPrevious = dashboardData.juneUsersPrevious;
+            var julyUsersPrevious = dashboardData.julyUsersPrevious;
+            var augustUsersPrevious = dashboardData.augustUsersPrevious;
+            var septemberUsersPrevious = dashboardData.septemberUsersPrevious;
+            var octoberUsersPrevious = dashboardData.octoberUsersPrevious;
+            var novemberUsersPrevious = dashboardData.novemberUsersPrevious;
+            var decemberUsersPrevious = dashboardData.decemberUsersPrevious;
 
             //Monthly New Users (2023)
-            var januaryUsers2023 = dashboardData.januaryUsers2023;
-            var februaryUsers2023 = dashboardData.februaryUsers2023;
-            var marchUsers2023 = dashboardData.marchUsers2023;
-            var aprilUsers2023 = dashboardData.aprilUsers2023;
-            var mayUsers2023 = dashboardData.mayUsers2023;
-            var juneUsers2023 = dashboardData.juneUsers2023;
-            var julyUsers2023 = dashboardData.julyUsers2023;
-            var augustUsers2023 = dashboardData.augustUsers2023;
-            var septemberUsers2023 = dashboardData.septemberUsers2023;
-            var octoberUsers2023 = dashboardData.octoberUsers2023;
-            var novemberUsers2023 = dashboardData.novemberUsers2023;
-            var decemberUsers2023 = dashboardData.decemberUsers2023;
-        
+            var januaryUsersCurrent = dashboardData.januaryUsersCurrent;
+            var februaryUsersCurrent = dashboardData.februaryUsersCurrent;
+            var marchUsersCurrent = dashboardData.marchUsersCurrent;
+            var aprilUsersCurrent = dashboardData.aprilUsersCurrent;
+            var mayUsersCurrent = dashboardData.mayUsersCurrent;
+            var juneUsersCurrent = dashboardData.juneUsersCurrent;
+            var julyUsersCurrent = dashboardData.julyUsersCurrent;
+            var augustUsersCurrent = dashboardData.augustUsersCurrent;
+            var septemberUsersCurrent = dashboardData.septemberUsersCurrent;
+            var octoberUsersCurrent = dashboardData.octoberUsersCurrent;
+            var novemberUsersCurrent = dashboardData.novemberUsersCurrent;
+            var decemberUsersCurrent = dashboardData.decemberUsersCurrent;
+
             const monthlyUsersLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             
             const monthlyUsersData = {
                 labels: monthlyUsersLabels,
                 datasets: [
                     {
-                        label: 'Monthly Active Users (2022)',
-                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
+                        label: 'Monthly Active Users (' + (adminDashboardYear - 1) + ')',
+                        data: [januaryUsersPrevious, februaryUsersPrevious, marchUsersPrevious, aprilUsersPrevious, mayUsersPrevious, juneUsersPrevious, julyUsersPrevious, augustUsersPrevious, septemberUsersPrevious, octoberUsersPrevious, novemberUsersPrevious, decemberUsersPrevious],
                         borderColor: "#3B97D3",
                         backgroundColor: "#3B97D3"
                     },
                     {
-                        label: 'Monthly Active Users (2023)',
-                        data: [januaryUsers2023, februaryUsers2023, marchUsers2023, aprilUsers2023, mayUsers2023, juneUsers2023, julyUsers2023, augustUsers2023, septemberUsers2023, octoberUsers2023, novemberUsers2023, decemberUsers2023],
+                        label: 'Monthly Active Users (' + adminDashboardYear + ')',
+                        data: [januaryUsersCurrent, februaryUsersCurrent, marchUsersCurrent, aprilUsersCurrent, mayUsersCurrent, juneUsersCurrent, julyUsersCurrent, augustUsersCurrent, septemberUsersCurrent, octoberUsersCurrent, novemberUsersCurrent, decemberUsersCurrent],
                         borderColor: "#e56353",
                         backgroundColor: "#e56353"
                     }
@@ -349,18 +373,18 @@ $(function() {
             new Chart(usersActivityCanvasCtx, usersActivityConfig);
 
             // Reported Content
-            var januaryUsers2022 = dashboardData.januaryUsers2022;
-            var februaryUsers2022 = dashboardData.februaryUsers2022;
-            var marchUsers2022 = dashboardData.marchUsers2022;
-            var aprilUsers2022 = dashboardData.aprilUsers2022;
-            var mayUsers2022 = dashboardData.mayUsers2022;
-            var juneUsers2022 = dashboardData.juneUsers2022;
-            var julyUsers2022 = dashboardData.julyUsers2022;
-            var augustUsers2022 = dashboardData.augustUsers2022;
-            var septemberUsers2022 = dashboardData.septemberUsers2022;
-            var octoberUsers2022 = dashboardData.octoberUsers2022;
-            var novemberUsers2022 = dashboardData.novemberUsers2022;
-            var decemberUsers2022 = dashboardData.decemberUsers2022;
+            var januaryReportedContent = dashboardData.januaryReportedContent;
+            var februaryReportedContent = dashboardData.februaryReportedContent;
+            var marchReportedContent = dashboardData.marchReportedContent;
+            var aprilReportedContent = dashboardData.aprilReportedContent;
+            var mayReportedContent = dashboardData.mayReportedContent;
+            var juneReportedContent = dashboardData.juneReportedContent;
+            var julyReportedContent = dashboardData.julyReportedContent;
+            var augustReportedContent = dashboardData.augustReportedContent;
+            var septemberReportedContent = dashboardData.septemberReportedContent;
+            var octoberReportedContent = dashboardData.octoberReportedContent;
+            var novemberReportedContent = dashboardData.novemberReportedContent;
+            var decemberReportedContent = dashboardData.decemberReportedContent;            
         
             const reportedContentLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             
@@ -368,8 +392,8 @@ $(function() {
                 labels: reportedContentLabels,
                 datasets: [
                     {
-                        label: 'Reported Content',
-                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
+                        label: 'Reported Content Count',
+                        data: [januaryReportedContent, februaryReportedContent, marchReportedContent, aprilReportedContent, mayReportedContent, juneReportedContent, julyReportedContent, augustReportedContent, septemberReportedContent, octoberReportedContent, novemberReportedContent, decemberReportedContent],
                         borderColor: "#2CA464",
                         backgroundColor: "#2CA464"
                     }
@@ -387,7 +411,7 @@ $(function() {
                     },
                     title: {
                         display: true,
-                        text: "January to December 2023"
+                        text: "Reported Content " + adminDashboardYear
                     }
                     }
                 },
@@ -403,18 +427,19 @@ $(function() {
             new Chart(reportedContentCtx, reportedContentConfig);
 
             // Reported Users
-            var januaryUsers2022 = dashboardData.januaryUsers2022;
-            var februaryUsers2022 = dashboardData.februaryUsers2022;
-            var marchUsers2022 = dashboardData.marchUsers2022;
-            var aprilUsers2022 = dashboardData.aprilUsers2022;
-            var mayUsers2022 = dashboardData.mayUsers2022;
-            var juneUsers2022 = dashboardData.juneUsers2022;
-            var julyUsers2022 = dashboardData.julyUsers2022;
-            var augustUsers2022 = dashboardData.augustUsers2022;
-            var septemberUsers2022 = dashboardData.septemberUsers2022;
-            var octoberUsers2022 = dashboardData.octoberUsers2022;
-            var novemberUsers2022 = dashboardData.novemberUsers2022;
-            var decemberUsers2022 = dashboardData.decemberUsers2022;
+            var januaryReportedUsers = dashboardData.januaryReportedUsers;
+            var februaryReportedUsers = dashboardData.februaryReportedUsers;
+            var marchReportedUsers = dashboardData.marchReportedUsers;
+            var aprilReportedUsers = dashboardData.aprilReportedUsers;
+            var mayReportedUsers = dashboardData.mayReportedUsers;
+            var juneReportedUsers = dashboardData.juneReportedUsers;
+            var julyReportedUsers = dashboardData.julyReportedUsers;
+            var augustReportedUsers = dashboardData.augustReportedUsers;
+            var septemberReportedUsers = dashboardData.septemberReportedUsers;
+            var octoberReportedUsers = dashboardData.octoberReportedUsers;
+            var novemberReportedUsers = dashboardData.novemberReportedUsers;
+            var decemberReportedUsers = dashboardData.decemberReportedUsers;
+
         
             const reportedUsersLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             
@@ -422,8 +447,8 @@ $(function() {
                 labels: reportedUsersLabels,
                 datasets: [
                     {
-                        label: 'Reported Users',
-                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
+                        label: 'Reported Users Count',
+                        data: [januaryReportedUsers, februaryReportedUsers, marchReportedUsers, aprilReportedUsers, mayReportedUsers, juneReportedUsers, julyReportedUsers, augustReportedUsers, septemberReportedUsers, octoberReportedUsers, novemberReportedUsers, decemberReportedUsers],
                         borderColor: "#d5af4d",
                         backgroundColor: "#d5af4d"
                     }
@@ -441,7 +466,7 @@ $(function() {
                     },
                     title: {
                         display: true,
-                        text: "January to December 2023"
+                        text: "Reported Users " + adminDashboardYear
                     }
                     }
                 },
