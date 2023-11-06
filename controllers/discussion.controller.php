@@ -260,5 +260,11 @@ private function ctrUpdateVoteCountForPost($postId, $voteAction, $accountId, $mo
         return $topics;
       }
       
+    //history
+    public function ctrGetAllTopicHistory($topicId) {
+      $result = (new ModelDiscussion)->mdlGetAllTopicHistory($topicId);
+      return $result;
+    }
+  
       
 }

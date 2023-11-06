@@ -509,33 +509,69 @@ class ModelDiscussion {
         $pdo = $db->connect();
     
         try {
+            $pdo->beginTransaction();
+    
+            // Retrieve the current content
+            $currentContent = $this->getCurrentTopicContent($pdo, $topicId);
+    
+            // Check if the content has changed
+            if ($currentContent !== $updatedContent) {
+                // Content has changed, so save it to topic_history
+                $stmt = $pdo->prepare("INSERT INTO topic_history (topicId, topicContent, topicDate) VALUES (:topicId, :topicContent, NOW())");
+                $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+                $stmt->bindParam(":topicContent", $currentContent, PDO::PARAM_STR);
+                $stmt->execute();
+            }
+    
+            // Update the topic in the topics table
             $stmt = $pdo->prepare("UPDATE topics SET topicTitle = :updatedTitle, topicContent = :updatedContent WHERE topicId = :topicId");
             $stmt->bindParam(":updatedTitle", $updatedTitle, PDO::PARAM_STR);
             $stmt->bindParam(":updatedContent", $updatedContent, PDO::PARAM_STR);
             $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
             $stmt->execute();
     
+            $pdo->commit();
+    
             return true; // Topic updated successfully
         } catch (Exception $e) {
+            $pdo->rollBack();
             return false; // Error occurred while updating the topic
         } finally {
             $pdo = null;
             $stmt = null;
         }
     }
-
+    
     public function mdlUpdatePost($postId, $updatedContent) {
         $db = new Connection();
         $pdo = $db->connect();
     
         try {
+            $pdo->beginTransaction();
+    
+            // Retrieve the current post content
+            $currentContent = $this->getCurrentPostContent($pdo, $postId);
+    
+            // Check if the content has changed
+            if ($currentContent !== $updatedContent) {
+                // Content has changed, so save it to post_history
+                $stmt = $pdo->prepare("INSERT INTO post_history (postId, postContent, postDate) VALUES (:postId, :postContent, NOW())");
+                $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+                $stmt->bindParam(":postContent", $currentContent, PDO::PARAM_STR);
+                $stmt->execute();
+            }
+    
+            // Update the post content in the posts table
             $stmt = $pdo->prepare("UPDATE posts SET postContent = :updatedContent WHERE postId = :postId");
             $stmt->bindParam(":updatedContent", $updatedContent, PDO::PARAM_STR);
             $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
             $stmt->execute();
     
+            $pdo->commit();
+    
             return true; // Post updated successfully
         } catch (Exception $e) {
+            $pdo->rollBack();
             return false; // Error occurred while updating the post
         } finally {
             $pdo = null;
@@ -548,19 +584,77 @@ class ModelDiscussion {
         $pdo = $db->connect();
     
         try {
+            $pdo->beginTransaction();
+    
+            // Retrieve the current reply content
+            $currentContent = $this->getCurrentReplyContent($pdo, $replyId);
+    
+            // Check if the content has changed
+            if ($currentContent !== $updatedContent) {
+                // Content has changed, so save it to reply_history
+                $stmt = $pdo->prepare("INSERT INTO reply_history (replyId, replyContent, replyDate) VALUES (:replyId, :replyContent, NOW())");
+                $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+                $stmt->bindParam(":replyContent", $currentContent, PDO::PARAM_STR);
+                $stmt->execute();
+            }
+    
+            // Update the reply content in the reply table
             $stmt = $pdo->prepare("UPDATE reply SET replyContent = :updatedContent WHERE replyId = :replyId");
             $stmt->bindParam(":updatedContent", $updatedContent, PDO::PARAM_STR);
             $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
             $stmt->execute();
     
+            $pdo->commit();
+    
             return true; // Reply updated successfully
         } catch (Exception $e) {
+            $pdo->rollBack();
             return false; // Error occurred while updating the reply
         } finally {
             $pdo = null;
             $stmt = null;
         }
     }
+
+    private function getCurrentTopicContent($pdo, $topicId) {
+        $stmt = $pdo->prepare("SELECT topicContent FROM topics WHERE topicId = :topicId");
+        $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result) {
+            return $result['topicContent'];
+        }
+    
+        return "";
+    }
+    
+    private function getCurrentPostContent($pdo, $postId) {
+        $stmt = $pdo->prepare("SELECT postContent FROM posts WHERE postId = :postId");
+        $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result) {
+            return $result['postContent'];
+        }
+    
+        return "";
+    }
+    
+    private function getCurrentReplyContent($pdo, $replyId) {
+        $stmt = $pdo->prepare("SELECT replyContent FROM reply WHERE replyId = :replyId");
+        $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result) {
+            return $result['replyContent'];
+        }
+    
+        return "";
+    }
+    
 
     //vote
     public function mdlGetPostVoteByUser($postId, $accountId) {
@@ -1221,7 +1315,35 @@ class ModelDiscussion {
             $stmt = null;
         }
     }
-      
-      
+    
+    // getting history
+    public function mdlGetAllTopicHistory($topicId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $stmt = $pdo->prepare("SELECT th.topicContent, th.topicDate, a.username, a.avatar 
+                FROM topic_history th
+                JOIN topics t ON th.topicId = t.topicId
+                JOIN accounts a ON t.accountId = a.accountid
+                WHERE t.topicId = :topicId
+                ORDER BY th.topicDate DESC");
+            $stmt->bindParam(":topicId", $topicId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
+        } catch (Exception $e) {
+            return null; // Error occurred while retrieving topic history
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    
     
 }
+
+
+

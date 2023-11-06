@@ -204,26 +204,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
 
                         <div class="modal-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="forumPostViewComments forumPostViewHistory">
-                                            <div class="d-flex justify-content-start align-items-center flex-column">
-                                                <img src="../assets/img/editProfile/lion.png" class="discussionForumAvatarComment">
-                                            </div>
-                                            <div class="forumPostViewContent">
-                                                <div class="row">
-                                                    <div class="col-12 d-flex flex-row discussionForumHistoryHeader">
-                                                        <h2 class="discussionForumUsernameComment">[Placeholder User]</h2><h2 class="discussionForumUsernameCommentSpace">•</h2><h2>[Placeholder Time]</h2>
-                                                    </div>
-                                                </div>
-                                                <div class="forumPostViewContentBox">
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque tenetur exercitationem adipisci. Quos saepe debitis quasi in distinctio sit nostrum similique quas, voluptatum obcaecati a id. Est quam illum nobis.<p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="container forumHistoryContainer">
                             </div>
                         </div>
                     </div>
