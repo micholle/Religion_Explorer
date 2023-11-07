@@ -77,12 +77,7 @@ function create_sidebar() {
                                 <span class="navItem">Notifications</span>
                             </a>
                         </li>
-                        <li>
-                            <a id="sidebarReport" href="#">
-                                <img src="../assets/img/report.png">
-                                <span class="navItem">Report a User</span>
-                            </a>
-                        </li>
+
                         <li>
                             <a href="../../models/logout.model.php">
                                 <img src="../assets/img/logout.png">
@@ -103,48 +98,6 @@ function create_sidebar() {
             </div>
             
             <div id="toast" class="toast"></div>
-
-            <div class="modal fade" id="reportUserModal">
-                <div class="modal-dialog modal-xs modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header text-center">
-                            <div class="container d-flex justify-content-center align-items-center flex-column">
-                                <h5 class="modal-title w-100">Report a User</h5>
-                                <input class="inputVariant" id="reportUserUsername" placeholder="Enter username"><br>
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <form id="reportUserForm" method="post">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <p class="reportDescription">As accurately as you can, please tell us what happened.</p>
-                                            <input type="checkbox" id="harrassmentOrBullying" name="harrassmentOrBullying" value="Harrassment or Bullying">
-                                            <label for="harrassmentOrBullying">Harrassment or Bullying</label><br>
-                                            <input type="checkbox" id="offensiveLanguage" name="offensiveLanguage" value="Offensive Language">
-                                            <label for="offensiveLanguage">Offensive Language</label><br>
-                                            <input type="checkbox" id="spam" name="spam" value="Spam">
-                                            <label for="spam">Spam</label><br>
-                                            <input type="checkbox" id="communityGuidelinesViolation" name="communityGuidelinesViolation" value="Community Guidelines Violation">
-                                            <label for="communityGuidelinesViolation">Community Guidelines Violation</label><br>
-                                            <input type="checkbox" id="suspiciousOrFakeAccount" name="suspiciousOrFakeAccount" value="Suspicious or Fake Account">
-                                            <label for="suspiciousOrFakeAccount">Suspicious or Fake Account</label><br>
-                                            <label for="userOthers">Others, specify:</label><br>
-                                            <input id="userOthers" class="inputVariant" name="userOthers"><br>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                            <textarea id="reportUserAdditional" placeholder="Give additional context."></textarea><br>
-                                            <button type="button" id="submitReportUser" class="roundedButton">Send</button>
-                                        </div>
-                                    </div>
-                                </form>    
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div id="reportUserNotice" class="modal fade">
                 <div class="modal-dialog modal-xs modal-dialog-centered">

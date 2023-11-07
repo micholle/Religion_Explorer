@@ -43,14 +43,11 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                 <div class="col-12 col-lg-4 userBasicStatsContainer">
                     <div class="row">
                         <div class="col-12 mh-100 userBasicInfo">
-
-                        <div class="row d-flex justify-content-center align-items-center">
+                            <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-center align-items-center justify-content-lg-start align-items-lg-start flex-column">
                                     <h1><?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} else {echo "not logged in";}?></h1>
-                                    <p class="nicknameText">aka <?php echo $_SESSION['username']; ?></p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -63,6 +60,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-center align-items-center justify-content-lg-start flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-star.png">
                             <p><?php echo $explorerPoints;?> Explorer Points</p>
+                            <img src="../assets/img/userProfile/question.png" class="userProfilePointsMarker">
                         </div>
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-center align-items-center justify-content-lg-start flex-row">
@@ -130,7 +128,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                 <div class="userProfileStatsMain">
                                     <div class="userProfileStatsHeader">
                                         <div class="row justify-content-center align-items-start">
-                                            <div class="col=12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
+                                            <div class="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
                                                 <h1 id="dateRangeLabel"></h1>
                                             </div>
                                             <div class="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-end no-gutters">

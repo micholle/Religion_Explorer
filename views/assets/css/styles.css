@@ -2002,9 +2002,8 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
         margin: 15px 0 0 0;
     }
     body .pageContainer .basicInfoContainer .buttonProfile {
-        /* background-color: #2196F3; */
         height: 50px;
-        margin: -5px 0 20px 0;
+        margin: -50px 0 20px 0;
         padding: 3px 0;
     }
     body .pageContainer .basicInfoContainer .userBasicStatsContainer {
@@ -2014,6 +2013,10 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     body .pageContainer .basicInfoContainer .userBasicStats {
         margin: -10px 0 0 0; 
         padding: 0;
+    }
+    body .userBasicInfo {
+        margin-bottom: 15px;
+        margin-top: -10px;
     }
     /*user tabs*/
     body .userProfileContent .achievementsBox {
@@ -2099,6 +2102,10 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     width: 20px;
 }
 
+.userBasicInfo {
+    margin-bottom: 5px;
+}
+
 .userBasicStatsSave {
     width: 170px;
 }
@@ -2122,6 +2129,9 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     height: 175px;
     border-radius: 100px;
     object-fit: cover;
+}
+.userProfilePointsMarker {
+    margin-left: 5px;
 }
 
 .roundedButton {
@@ -2565,14 +2575,24 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 
 /*edit profile*/
 @media only screen and (max-width: 992px) {
-    body .editProfileContainer input[type=text],input[type=password] {
+    body .editProfileContainer input[type=text] {
         width: 95%;
+        margin-left: 10px;
+    }
+    body .editProfileContainer input[type=password] {
+        width: 95% !important;
+        margin-left: 10px;
     }
     body .editProfileContainer select {
         width: 95%;
     }
     body .settingsBlock {
         margin-top: 20px;
+    }
+    body .editProfilePasswordDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -2718,11 +2738,18 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     margin-top: 0 !important;
 }
 
+.settingsContainer .roundedButton {
+    margin-top: -20px;
+    margin-bottom: 25px;
+    width: 175px;
+}
 .settingsContainer .roundedButtonVariantTwo {
-    margin: -5px 0 20px 0;
+    margin-top: -20px;
+    margin-bottom: 25px;
+    width: 175px;
 }
 
-.editPasswordButton {
+/* .editPasswordButton {
     background-color: #B3BEC4;
     color: white;
     border-style: none;
@@ -2739,7 +2766,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 
 .editPasswordButton:focus {
     outline: none;
-} 
+}  */
 
 #editPasswordModal input[type=password] {
     margin-top: 0px;

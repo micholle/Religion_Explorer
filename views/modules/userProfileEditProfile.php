@@ -45,18 +45,11 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                 <div class="col-12 col-lg-4 userBasicStatsContainer">
                     <div class="row">
                         <div class="col-12 mh-100 userBasicInfo">
-
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-center align-items-center justify-content-lg-start align-items-lg-start flex-column">
                                     <h1><?php echo $_SESSION['username']; ?></h1>
-                                    <div class="row">
-                                        <div class="col-12 d-flex flex-row">
-                                            <p class="nicknameText" id="avatarSizeTest">aka <?php echo $_SESSION['username']; ?></p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
 
@@ -112,13 +105,20 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                 <div class="col-3 d-flex justify-content-center align-items-center">
                                     <p>Password</p>
                                 </div>
-                                <div class="col-9 d-flex justify-content-end justify-content-lg-start align-items-center">
-                                    <div class="row">
-                                        <div class="col-12 d-flex justify-content-start align-items-start flex-column">
+                                <div class="col-9 d-flex justify-content-center justify-content-lg-start align-items-center">
+                                    <input type="password" id="" name="" placeholder="********" readonly>
+                                    <!-- <button class="editPasswordButton" id="editPasswordButton">Edit Password</button> -->
+                                </div>
+                                <!-- <div class="col-9">
+                                    <div class="row no-gutters d-flex justify-content-center">
+                                        <div class="col-12">
+                                            <input type="text" id="" name="" placeholder="*******" style=""readonly>
+                                        </div>
+                                        <div class="col-12 ">
                                             <button class="editPasswordButton" id="editPasswordButton">Edit Password</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row no-gutters d-flex justify-content-center">
                                 <div class="col-3 d-flex justify-content-center align-items-center">
@@ -182,8 +182,15 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     </select>
                                 </div>
 
-                                <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                    <button class="roundedButtonVariantTwo" id="deleteAccountButton">Delete Account</button>
+                                <div class="col-12 d-flex justify-content-center align-items-center no-gutters">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-6 d-flex justify-content-center align-items-start p-0">
+                                            <button class="roundedButton" id="editPasswordButton">Edit Password</button>
+                                        </div>
+                                        <div class="col-12 col-lg-6 d-flex justify-content-center align-items-start p-0">
+                                            <button class="roundedButtonVariantTwo" id="deleteAccountButton">Delete Account</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
