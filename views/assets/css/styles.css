@@ -337,11 +337,13 @@ h5 {
 
 /* map */
 .mapContainer {
-    width: 100%; 
+    width: 1535px; 
     height: 100%;
     margin: 0 !important; 
     padding: 0 !important;
 }
+
+
 
 .mapFilter {
     z-index: 1;
@@ -576,16 +578,31 @@ h5 {
 }
 
 /* calendar */
+.calendarMainContainer {
+    overflow: auto;
+}
+.calendarMainContainer::-webkit-scrollbar {
+    height: 15px !important;
+}
+.calendarMainContainer::-webkit-scrollbar-thumb {
+    background-color: #C1C1C1 !important;
+    border-radius: 20px !important;
+}
+.calendarMainContainer::-webkit-scrollbar-thumb:hover {
+    background-color: #787878 !important;
+}
+.calendarMainContainer::-webkit-scrollbar-track {
+    background-color: #F1F1F1 !important;
+    border-radius: 20px !important;
+}
 .calendarContainer {
-    padding: 25px;
-    background-color: pink;
+    padding: 35px 7.5px;
 }
 .calendar {
-    width: 100%;
+    width: 1375px;
     display: flex;
     flex-flow: column;
     font-family: "Lexend";
-    overflow: auto;
 }
 .calendar .header .month-year {
     font-size: 20px;
@@ -593,16 +610,14 @@ h5 {
     color: #000000;
     padding: 0 10px 10px 10px;
     overflow: auto;
-    background-color: lightgreen;
 }
 .calendar .days {
     display: flex;
     flex-flow: wrap;
     overflow: auto;
-    background-color: palevioletred;
 }
 .calendar .days .day_name {
-    width: calc(100% / 7);
+    width: calc(1375px / 7);
     display: flex;
     justify-content: center;
     border-right: 1px solid #FFFFFF;
@@ -692,6 +707,7 @@ h5 {
     font-size: 25px;
     cursor: pointer;
 }
+
 .calendar .days .day_num .calendarEvent.Buddhism {
     background-color: #BAA400;
 }
@@ -739,7 +755,6 @@ h5 {
     width: 100%;
     cursor: pointer;
 }
-
 /* community creations */
 @media only screen and (max-width: 992px) {
     body .communityUploadSelect {
@@ -1239,6 +1254,10 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     color: white;
     margin-bottom: 30px;
     padding: 20px;
+}
+
+.col-lg-7 .container .homeHeader h2 {
+    font-size: 40px;
 }
 
 .col-lg-7 .container .homeHeader p {
@@ -3154,21 +3173,6 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
         width: 100%;
     }
 }
-
-/* .col-lg-7-order::-webkit-scrollbar,
-.col-lg-5-order::-webkit-scrollbar {
-    width: 0.5em;
-}
-
-.col-lg-7-order::-webkit-scrollbar-thumb,
-.col-lg-5-order::-webkit-scrollbar-thumb {
-    background-color: transparent;
-}
-
-.col-lg-7-order::-webkit-scrollbar-track,
-.col-lg-5-order::-webkit-scrollbar-track {
-    background-color: transparent;
-} */
 
 .libraryMainContainer {
     padding: 15px 0 !important;

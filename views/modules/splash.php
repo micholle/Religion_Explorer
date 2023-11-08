@@ -47,7 +47,7 @@
             <div class="col-12 col-lg-7 mh-100 d-flex justify-content-center align-items-center">
                 <div class="container">
                     <div class="row d-flex justify-content-center align-items-center flex-column homeHeader">
-                        <h2>Navigate the world, befriend explorers, and discover religion!</h2>
+                        <h2>Navigate the world and discover religion!</h2>
                         <a href="signup.php"><button class="splashButton splashMainButton">Sign Up</button></a>
                         <a href="../../models/guest.model.php"><p>View Religion Explorer as Guest</p></a>
                     </div>
