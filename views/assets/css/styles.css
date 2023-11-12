@@ -119,10 +119,46 @@ h5 {
 }
 
 /* map slider */
+@media only screen and (max-width: 1200px) {
+    body .mapSliderDiv {
+        width: 87.5%;
+        margin-left: 85px;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    body .mapSlider {
+        width: 1535px;
+        margin-left: -85px;
+        padding-right: 85px;
+    }
+}
+
+.mapSliderDiv {
+    bottom: 0; 
+    position: fixed; 
+    height: 90px; 
+    width: 87.5%;
+}
+
+.mapSliderDiv::-webkit-scrollbar {
+    height: 15px !important;
+}
+.mapSliderDiv::-webkit-scrollbar-thumb {
+    background-color: #C1C1C1 !important;
+    border-radius: 20px !important;
+}
+.mapSliderDiv::-webkit-scrollbar-thumb:hover {
+    background-color: #787878 !important;
+}
+.mapSliderDiv::-webkit-scrollbar-track {
+    background-color: #F1F1F1 !important;
+    border-radius: 20px !important;
+}
 
 .mapSlider {
     position: absolute;
     width: 90%;
+    width: 100%;
     margin: 0 20px;
     top: 10px;
     left: 100px;
@@ -336,14 +372,19 @@ h5 {
 }
 
 /* map */
+
+@media only screen and (max-width: 1200px) {
+    body .mapContainer {
+        width: 1535px;
+    }
+}
+
 .mapContainer {
-    width: 1535px; 
+    width: 100%; 
     height: 100%;
     margin: 0 !important; 
     padding: 0 !important;
 }
-
-
 
 .mapFilter {
     z-index: 1;
@@ -578,6 +619,15 @@ h5 {
 }
 
 /* calendar */
+@media only screen and (max-width: 1200px) {
+    body .calendar {
+        width: 1375px;
+    }
+    body .calendar .days .day_name {
+        width: calc(1375px / 7);
+    }
+}
+
 .calendarMainContainer {
     overflow: auto;
 }
@@ -599,7 +649,7 @@ h5 {
     padding: 35px 7.5px;
 }
 .calendar {
-    width: 1375px;
+    width: 100%;
     display: flex;
     flex-flow: column;
     font-family: "Lexend";
@@ -617,7 +667,7 @@ h5 {
     overflow: auto;
 }
 .calendar .days .day_name {
-    width: calc(1375px / 7);
+    width: calc(100% / 7);
     display: flex;
     justify-content: center;
     border-right: 1px solid #FFFFFF;
@@ -1066,6 +1116,8 @@ h5 {
 .commCreationsRightContBox p {
     text-align: justify;
     margin-bottom: 0px;
+    width: 100%;
+    word-break: break-all;
 }
 
 .commCreationsRightContBox img {
@@ -1082,22 +1134,31 @@ h5 {
 
 /*splash page*/
 @media only screen and (max-width: 992px) {
+    body #splashPageHeader {
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        margin-left: 0;
+        padding-left: 0;
+    }
+    body #splashPageHeader img {
+        margin-top: 20px;
+        margin-bottom: -10px;
+    }
+    body header ul li a {
+        margin-left: 15px;
+        font-size: 14.5px;
+    }
     body header {
         padding: 0 25px;
     }
-    body header ul li a {
-        display: none;
-    }
-    body header .headerMenuIcon {
-        width: 35px;
-        height: 35px;
-        display: block !important;
-        color: white;
-        float: right;
-        cursor: pointer;
-    }
+
     body header.sticky{
         padding: 0px 25px;
+        height: 150px;
+    }
+    body #splashPageHeader .navBarButton {
+        font-size: 14.5px;
     }
 }
 
@@ -1159,7 +1220,7 @@ header ul li {
 
 header ul li a {
     position: relative;
-    margin-left: 23.5px;
+    margin-left: 35px;
     text-decoration: none;
     color: white;
     letter-spacing: 2px;
@@ -1197,11 +1258,17 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     width: 100%;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
     body #splash-gif {
-        margin-top: 50px;
-        margin-bottom: -50px;
+        margin-top: 105px;
+        margin-bottom: -100px;
+        width: 300px;
+        height: 300px;
     }
+    body .col-lg-7 .container .homeHeader h2 {
+        font-size: 32px;
+    }
+    
     body #about {
         padding: 60px 45px;
     }
@@ -3877,6 +3944,27 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 /*discussion forum post view*/
+.forumHistoryContainer {
+    height: 65vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.forumHistoryContainer::-webkit-scrollbar {
+    height: 15px !important;
+}
+.forumHistoryContainer::-webkit-scrollbar-thumb {
+    background-color: #C1C1C1 !important;
+    border-radius: 20px !important;
+}
+.forumHistoryContainer::-webkit-scrollbar-thumb:hover {
+    background-color: #787878 !important;
+}
+.forumHistoryContainer::-webkit-scrollbar-track {
+    background-color: #F1F1F1 !important;
+    border-radius: 20px !important;
+}
+
 .forumPostViewHistory {
     padding-bottom: 5px;
 }

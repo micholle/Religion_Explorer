@@ -79,11 +79,11 @@ $(function() {
                     $("#reportUserNoticeButton").css("background-color", "#E04F5F");
                 },
                 complete: function() {
-                    $("#reportUserNotice").modal();
-                    $("#reportUserNotice").show();
+                    $("#reportContentNotice").modal();
+                    $("#reportContentNotice").show();
 
-                    $("#reportUserModal").removeClass("fade").modal("hide");
-                    $("#reportUserModal").modal("dispose");
+                    $("#reportViewUserModal").removeClass("fade").modal("hide");
+                    $("#reportViewUserModal").modal("dispose");
 
                     $("#reportUserUsername").val("");
                     $("#reportUserForm")[0].reset();
