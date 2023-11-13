@@ -1341,7 +1341,7 @@ class ModelDiscussion {
         }
     }
 
-    public function mdlGetAllTopicHistory($postId) {
+    public function mdlGetAllPostHistory($postId) {
         $db = new Connection();
         $pdo = $db->connect();
 
@@ -1365,7 +1365,7 @@ class ModelDiscussion {
         }
     }
 
-    public function mdlGetAllTopicHistory($replyId) {
+    public function mdlGetAllReplyHistory($replyId) {
         $db = new Connection();
         $pdo = $db->connect();
 
