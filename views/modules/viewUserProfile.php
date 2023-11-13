@@ -80,7 +80,7 @@ $userData = getUserProfileInfo($accountid);
                 </div>
 
                 <div class="col-12 col-lg-3 d-flex flex-column justify-content-start align-items-center justify-content-lg-start buttonProfile">
-                    <button button id="viewUserReport" class="roundedButtonVariantTwo userBasicStatsSave">Report User</button></a>
+                    <?php if ($userData['username'] !== $_SESSION['username']){ echo '<button button id="viewUserReport" class="roundedButtonVariantTwo userBasicStatsSave">Report User</button></a>';} ?>
                 </div>
             </div>
 
@@ -95,7 +95,7 @@ $userData = getUserProfileInfo($accountid);
                 <?php if ($userData['displayCalendar'] === '1') { ?>
                     <button class="userProfileTabBtn">Personal Calendar</button>
                 <?php } ?>
-                <button class="userProfileTabBtn">Statistics</button>
+                <!-- <button class="userProfileTabBtn">Statistics</button> -->
                 <button class="userProfileTabBtn">Achievements</button>
             </div>
             <div class="userProfileContentBox">
@@ -160,7 +160,7 @@ $userData = getUserProfileInfo($accountid);
                 <div class="userProfileContent" id="userProfileCalendar"></div>
                 <?php } ?>
 
-                <div class="userProfileContent">
+                <!-- <div class="userProfileContent">
                     <div class="container mw-100 mh-100">
                         <div class="row userProfileStatsContainer">
                             <div class="col-12 col-lg-8">
@@ -247,7 +247,7 @@ $userData = getUserProfileInfo($accountid);
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="userProfileContent">
                     <div class="container">
                         <div class="row">
@@ -501,10 +501,10 @@ $userData = getUserProfileInfo($accountid);
                     <div class="container">
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                <img id="reportContentIcon" src="" height="80px" width="80px">
-                                <h5 id="reportContentStatus" class="modal-title w-100"></h5>
-                                <p  id="reportContentMessage" class="text-center"></p>
-                                <button type="button" id="reportContentNoticeButton" class="roundedButton" data-dismiss="modal">Thanks!</button></a>
+                                <img id="reportUserIcon" src="" height="80px" width="80px">
+                                <h5 id="reportUserStatus" class="modal-title w-100"></h5>
+                                <p  id="reportUserMessage" class="text-center"></p>
+                                <button type="button" id="reportUserNoticeButton" class="roundedButton" data-dismiss="modal">Thanks!</button></a>
                             </div>
                         </div>
                     </div>
