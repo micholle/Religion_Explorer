@@ -8,7 +8,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Religion Explorer: Discussion Forum</title>
+    <title>Religion Explorer: Reported Users</title>
     <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
@@ -32,7 +32,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row adminContainer">
                 <div class="col-12 d-flex justify-content-center align-items-center">
                     <div class="adminReviewContainer">
                         <div class="row">

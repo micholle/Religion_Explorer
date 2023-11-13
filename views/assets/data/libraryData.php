@@ -289,7 +289,7 @@ class libraryData {
                     "date" => "2018",
                     "religion" => "Christianity",
                     "category" => ["Social Issues"],
-                    "source" => "https://www.pewresearch.org/religion/2018/05/29/being-christian-in-western-europe/"
+                    "source" => "https://blogs.lse.ac.uk/religionglobalsociety/2018/06/pew-research-center-being-christian-in-western-europe/"
                 ],
                 "LR4" => [
                     "title" => "What it means to be a Christian in America",
@@ -352,15 +352,136 @@ class libraryData {
                     "source" => "https://mycatholic.life/saints/saints-of-the-liturgical-year/august-15-assumption-of-the-blessed-virgin-mary/"
                 ],
                 "LR10" => [
-                    "title" => "Ganesh Chaturthi (Vinayaka Chathurthi)",
+                    "title" => "All About Ganesh Chaturthi",
                     "resourceImg" => "../assets/data/library/LR10.jpg",
                     "type" => "article",
                     "author" => "P. Punarvasu",
                     "date" => "2023",
                     "religion" => "Hinduism",
                     "category" => ["Religious Practices"],
-                    "source" => "https://www.indastro.com/astrology-articles/what-significance-ganesh-chaturthi.html"
+                    "source" => "https://www.hinduamerican.org/all-about-ganesh-chaturthi"
                 ],
+                "LR11" => [
+                    "title" => "The Book in the Jewish World, 1700-1900",
+                    "resourceImg" => "../assets/data/library/LR11.jpg",
+                    "type" => "book",
+                    "author" => "Z. Gries",
+                    "date" => "2007",
+                    "religion" => "Judaism",
+                    "category" => ["Historical Context"],
+                    "source" => "https://books.google.com.ph/books/about/The_Book_in_the_Jewish_World.html?id=b4QsAAAAYAAJ&redir_esc=y"
+                ],
+                "LR12" => [
+                    "title" => "The Foundations of Buddhism",
+                    "resourceImg" => "../assets/data/library/LR12.jpg",
+                    "type" => "book",
+                    "author" => "R. Gethin",
+                    "date" => "1998",
+                    "religion" => "Buddhism",
+                    "category" => ["Historical Context"],
+                    "source" => "https://www.goodreads.com/en/book/show/149243"
+                ],
+                "LR13" => [
+                    "title" => "An Introduction to Buddhism: Teachings, History and Practices",
+                    "resourceImg" => "../assets/data/library/LR13.jpg",
+                    "type" => "book",
+                    "author" => "P. Harvey",
+                    "date" => "2013",
+                    "religion" => "Buddhism",
+                    "category" => ["Religious Traditions", "Religious Practices"],
+                    "source" => "https://books.google.com.ph/books/about/An_Introduction_to_Buddhism.html?id=u0sg9LV_rEgC&redir_esc=y"
+                ],
+                "LR14" => [
+                    "title" => "Buddhism and the Definition of Religion: One More Time",
+                    "resourceImg" => "../assets/data/library/LR14.jpeg",
+                    "type" => "journal",
+                    "author" => "W. Herbrechtsmeier",
+                    "date" => "2013",
+                    "religion" => "Buddhism",
+                    "category" => ["Social Issues"],
+                    "source" => "https://buddhism.lib.ntu.edu.tw/FULLTEXT/JR-ADM/herbre.htm"
+                ],
+                "LR15" => [
+                    "title" => "What is the significance of All Saints Day?",
+                    "resourceImg" => "../assets/data/library/LR15.png",
+                    "type" => "article",
+                    "author" => "The Basilica",
+                    "date" => "2021",
+                    "religion" => "Christianity",
+                    "category" => ["Religious Traditions"],
+                    "source" => "https://www.nationalshrine.org/blog/what-is-the-significance-of-all-saints-day/"
+                ],
+                "LR16" => [
+                    "title" => "Bhai Duj",
+                    "resourceImg" => "../assets/data/library/LR16.png",
+                    "type" => "article",
+                    "author" => "n.a.",
+                    "date" => "n.d.",
+                    "religion" => "Hinduism",
+                    "category" => ["Religious Traditions", "Religious Practices"],
+                    "source" => "https://pujayagna.com/blogs/hindu-festivals/bhai-dooj-festival"
+                ],
+                "LR17" => [
+                    "title" => "Hanukkah 101",
+                    "resourceImg" => "../assets/data/library/LR17.jpg",
+                    "type" => "article",
+                    "author" => "My Jewish Learning",
+                    "date" => "n.d.",
+                    "religion" => "Judaism",
+                    "category" => ["Religious Traditions", "Religious Practices"],
+                    "source" => "https://www.myjewishlearning.com/article/hanukkah-101/"
+                ],
+                "LR18" => [
+                    "title" => "Animals in Islamic Tradition and Muslim Cultures",
+                    "resourceImg" => "../assets/data/library/LR18.jpg",
+                    "type" => "book",
+                    "author" => "R. Foltz",
+                    "date" => "2006",
+                    "religion" => "Islam",
+                    "category" => ["Religious Traditions"],
+                    "source" => "https://www.simonandschuster.com/books/Animals-in-Islamic-Tradition-and-Muslim-Cultures/Richard-Foltz/9781851683987"
+                ],
+                "LR19" => [
+                    "title" => "Islamophobia and the Politics of Empire",
+                    "resourceImg" => "../assets/data/library/LR19.jpg",
+                    "type" => "book",
+                    "author" => "D. Kumar",
+                    "date" => "2012",
+                    "religion" => "Islam",
+                    "category" => ["Social Issues"],
+                    "source" => "https://books.google.com.ph/books/about/Islamophobia_and_the_Politics_of_Empire.html?id=j7BMcQ4tLZAC&redir_esc=y"
+                ],
+                "LR20" => [
+                    "title" => "Hinduism and Globalization",
+                    "resourceImg" => "../assets/data/library/LR20.jpg",
+                    "type" => "journal",
+                    "author" => "R. Singh & M. Aktor",
+                    "date" => "2015",
+                    "religion" => "Hinduism",
+                    "category" => ["Social Issues"],
+                    "source" => "https://link.springer.com/chapter/10.1007/978-94-017-9376-6_100"
+                ],
+                "LR21" => [
+                    "title" => "Introduction to Islamic Theology and Law",
+                    "resourceImg" => "../assets/data/library/LR21.jpg",
+                    "type" => "book",
+                    "author" => "I. Goldziher",
+                    "date" => "1981",
+                    "religion" => "Islam",
+                    "category" => ["Theology"],
+                    "source" => "https://bahai-library.com/goldziher_islamic_theology_law"
+                ],
+                "LR22" => [
+                    "title" => "Hinduism and Environmental Ethics: Law, Literature, and Philosophy",
+                    "resourceImg" => "../assets/data/library/LR22.jpg",
+                    "type" => "book",
+                    "author" => "C. Framarin",
+                    "date" => "2014",
+                    "religion" => "Hinduism",
+                    "category" => ["Ethics"],
+                    "source" => "https://books.google.com.ph/books?id=oLPpAgAAQBAJ&printsec=frontcover&redir_esc=y#v=onepage&q&f=false"
+                ],
+                
                 // "Placeholder" => [
                 //     "title" => "",
                 //     "resourceImg" => "",

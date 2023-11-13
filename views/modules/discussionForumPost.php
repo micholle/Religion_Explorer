@@ -199,7 +199,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <div class="modal-content">
                         <div class="modal-header text-center">
                             <div class="container d-flex justify-content-center align-items-center flex-column">
-                                <h5 class="modal-title w-100">Edit History</h5>
+                                <h5 class="modal-title w-100">Post Edit History</h5>
                             </div>
                         </div>
 
@@ -210,6 +210,41 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="viewCommentHistoryModal">
+                <div class="modal-dialog modal-xs modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <div class="container d-flex justify-content-center align-items-center flex-column">
+                                <h5 class="modal-title w-100">Comment Edit History</h5>
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="container forumHistoryContainer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="viewReplyHistoryModal">
+                <div class="modal-dialog modal-xs modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <div class="container d-flex justify-content-center align-items-center flex-column">
+                                <h5 class="modal-title w-100">Reply Edit History</h5>
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="container forumHistoryContainer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="modal fade" id="reportContentModal">
                 <div class="modal-dialog modal-xs modal-dialog-centered">

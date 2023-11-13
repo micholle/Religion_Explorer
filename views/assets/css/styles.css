@@ -3081,6 +3081,9 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     body .submissionsWidth h1 {
         text-align: center;
     }
+    body .adminHeader {
+        margin-bottom: 100px;
+    }
 }
 
 .pageHeader h1:hover {
@@ -4005,7 +4008,7 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 
 .dropdown-buttons-container-var {
     width: 80px;
-    padding-left: 10px;
+    padding-left: 20px;
     border-radius: 20px;
     background-color: #F4F4F4;
 }
@@ -4300,6 +4303,13 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     font-family: "Lexend";
 }
 
+/*admin*/
+@media only screen and (max-width: 768px) {
+    body .adminBasicStatsBox {
+        padding-top: 100px;
+    }
+}
+
 .adminDashboardDate {
     margin-left: 10px !important;
 }
@@ -4332,10 +4342,11 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
 }
 
 
-.adminBasicStatsContainer .col-3 .adminBasicStatsBox {
+.adminBasicStatsContainer .col-lg-3 .adminBasicStatsBox {
     width: 100%;
     border-radius: 15px;
     border: solid black 3px;
+    padding: 20px;
 }
 
 .adminBasicStatsBoxUser {
@@ -4413,11 +4424,28 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     border-radius: 15px;
     border: solid #D0D0D0 2px;
     width: 100%;
-    height: 600px;
+    height: 85%;
     padding: 20px;
 }
 
 /*content for review / reported users*/
+@media only screen and (max-width: 1200px) {
+    body .adminReviewContainer {
+        width: 1535px;
+        overflow-x: scroll;
+    }
+    /* body .adminReviewContainer .col-2 {
+        width: (1535px/6);
+    } */
+    body .adminContainer {
+        width: 1200px;
+    }
+}
+
+.adminContainer {
+    width: 100%;
+}
+
 .adminReviewContainer {
     border-radius: 5px;
     border: solid #D0D0D0 2px;
@@ -4482,6 +4510,62 @@ header.sticky .logo:hover, header.sticky ul li a:hover, header.sticky ul li butt
     outline: none;
     transition: 0.5s;
 }
+
+.adminDashboardFilter select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: solid #D6D6D6 2px;
+    border-radius: 5px;
+    font-family: Lexend;
+    padding: 5px 15px;
+    width: 100%;
+    margin-bottom: 5px;
+    color: #3E3E3E;
+    font-size: 15px;
+    background-image: url("../img/dropdown.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+}
+/* 
+
+.adminDashboardFilterVar2 select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: solid #D6D6D6 2px;
+    border-radius: 5px;
+    font-family: Lexend;
+    padding: 5px 15px;
+    width: 150px;
+    margin-bottom: 5px;
+    color: #3E3E3E;
+    font-size: 15px;
+    background-image: url("../img/dropdown.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+}
+
+
+.adminDashboardFilterVar3 select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: solid #D6D6D6 2px;
+    border-radius: 5px;
+    font-family: Lexend;
+    padding: 5px 15px;
+    width: 100px;
+    margin-bottom: 5px;
+    color: #3E3E3E;
+    font-size: 15px;
+    background-image: url("../img/dropdown.png");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+} */
 
 .adminReviewContainer select {
     appearance: none;

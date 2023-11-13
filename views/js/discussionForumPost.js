@@ -63,6 +63,13 @@ $(function() {
         });
     });
     
+    $(document).on('click', '#forumCommentViewHistory', function() {
+        $('#viewCommentHistoryModal').modal('show');
+    });
+
+    $(document).on('click', '#forumReplyViewHistory', function() {
+        $('#viewReplyHistoryModal').modal('show');
+    });
 
     $(document).ready(function() {
         $('#dropdownMenu').on('click', function(event) {

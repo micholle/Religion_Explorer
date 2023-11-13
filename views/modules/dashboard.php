@@ -9,7 +9,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Religion Explorer: Discussion Forum</title>
+    <title>Religion Explorer: Admin Dashboard</title>
     <link rel="icon" type="image/x-icon" href="../assets/img/applogo.png">
     <script type="text/javascript" src="../assets/js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="../assets/plugins/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
@@ -26,43 +26,51 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
 
     <div class="pageContainer">
         <div class="container mw-100 mh-100">
-            <div class="row pageHeader adminHeader">
-                <div class="col-8 d-flex justify-content-start align-items-center">
-                    <h1>Admin Dashboard</h1>
+            <div class="row d-flex justify-content-center align-items-center pageHeader adminHeader">
+                <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start align-items-center pl-0 pr-0">
+                    <a href="dashboard.php" class="pageHeaderLink"><h1>Admin Dashboard</h1></a>
                 </div>
-                <div class="col-4 d-flex justify-content-end align-items-center">
-                    <select id="adminDashboardMonth" class="adminDashboardDate">
-                        <option selected value="allMonths">January to December</option>
-                        <option value="January">January</option>
-                        <option value="February">February</option>
-                        <option value="March">March</option>
-                        <option value="April">April</option>
-                        <option value="May">May</option>
-                        <option value="June">June</option>
-                        <option value="July">July</option>
-                        <option value="August">August</option>
-                        <option value="September">September</option>
-                        <option value="October">October</option>
-                        <option value="November">November</option>
-                        <option value="December">December</option>
-                    </select>
-                    <select id="adminDashboardWeek" class="adminDashboardDate" disabled>
-                        <option value="allWeeks">Week 1 - 4</option>
-                        <option value="Week 1">Week 1</option>
-                        <option value="Week 2">Week 2</option>
-                        <option value="Week 3">Week 3</option>
-                        <option value="Week 4">Week 4</option>
-                    </select>
-                    <select id="adminDashboardYear" class="adminDashboardDate">
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option>
-                        <option selected value="2023">2023</option>
-                    </select>
+                <div class="col-12 col-lg-8 d-flex pr-0 pl-0">
+                    <div class="row" style="width: 100%;">
+                        <div class="col-12 col-lg-6 adminDashboardFilter">
+                            <select id="adminDashboardMonth" class="adminDashboardDate">
+                                <option selected value="allMonths">January to December</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-lg-4 adminDashboardFilter">
+                            <select id="adminDashboardWeek" class="adminDashboardDate" disabled>
+                                <option value="allWeeks">Week 1 - 4</option>
+                                <option value="Week 1">Week 1</option>
+                                <option value="Week 2">Week 2</option>
+                                <option value="Week 3">Week 3</option>
+                                <option value="Week 4">Week 4</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-lg-2 adminDashboardFilter">
+                            <select id="adminDashboardYear" class="adminDashboardDate">
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option selected value="2023">2023</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="row adminBasicStatsContainer">
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center">
                     <div class="adminBasicStatsBox adminBasicStatsBoxUser">
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/user.png">
@@ -73,7 +81,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center">
                     <div class="adminBasicStatsBox adminBasicStatsBoxOnline">
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/online.png">
@@ -84,7 +92,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center">
                     <div class="adminBasicStatsBox adminBasicStatsBoxVisitor">
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/eyes.png">
@@ -95,7 +103,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center">
                     <div class="adminBasicStatsBox adminBasicStatsBoxRegister">
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/register.png">
@@ -108,7 +116,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                 </div>
             </div>
 
-            <div class="row adminMainStatsContainer">
+            <div class="row adminMainStatsContainer" style="margin-top: -50px; margin-bottom: -100px;">
                 <div class="col-12 d-flex justify-content-center align-items-center">
                     <div class="adminMainStatsBox">
                         <div id="monthlyNewUsersContainer">
@@ -118,7 +126,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                 </div>
             </div>
 
-            <div class="row adminMainStatsContainer">
+            <div class="row adminMainStatsContainer" style="margin-bottom: -45px;">
                 <div class="col-6 d-flex justify-content-center align-items-center">
                     <div class="adminMainStatsBox">
                         <div id="registeredUsersReligionContainer">
@@ -136,7 +144,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
             </div>
 
             <div class="row adminBasicStatsContainer" style="border-top:solid #D0D0D0 2px; border-bottom:none; padding-top:30px; margin-top:30px; margin-bottom:-20px">
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center">
                     <div class="adminBasicStatsBox adminBasicStatsBoxUser">
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/bookmark.png">
@@ -147,7 +155,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center">
                     <div class="adminBasicStatsBox adminBasicStatsBoxOnline">
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/upload.png">
@@ -158,7 +166,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center">
                     <div class="adminBasicStatsBox adminBasicStatsBoxVisitor">
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/post.png">
@@ -169,7 +177,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center">
                     <div class="adminBasicStatsBox adminBasicStatsBoxRegister">
                         <div class="adminBasicStatsBoxContent d-flex flex-column">
                             <img src="../assets/img/admin/event.png">
@@ -181,19 +189,20 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     </div>
                 </div>
             </div>
+            
 
             <div class="row adminMainStatsContainer">
                 <div class="col-12 d-flex justify-content-center align-items-center">
-                    <div class="adminMainStatsBox">
-                        <div id="reportedContentContainer"></div>
+                    <div class="adminMainStatsBox d-flex justify-content-center align-items-center  " style="height: 100%;"> 
+                        <div class="d-flex justify-content-center align-items-center" id="reportedContentContainer" style="width: 100%;"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="row adminMainStatsContainer">
+            <div class="row adminMainStatsContainer" style="margin-bottom: 30px;">
                 <div class="col-12 d-flex justify-content-center align-items-center">
-                    <div class="adminMainStatsBox">
-                        <div id="reportedUsersContainer"></div>
+                    <div class="adminMainStatsBox d-flex justify-content-center align-items-center" style="height: 100%;">
+                        <div class="d-flex justify-content-center align-items-center" id="reportedUsersContainer" style="width: 100%;"></div>
                     </div>
                 </div>
             </div>

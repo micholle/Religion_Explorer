@@ -65,6 +65,10 @@ foreach ($posts as $post) {
     $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
     $html .= '          </div>';
     }
+    $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center" id="forumCommentViewHistory">';
+    $html .= '<img src="../assets/img/discussionForum/time.png" class="commentIcon">';
+    $html .= '<p class="forumPostViewMainCount forumPostViewMainHistory" value="'.$topicId.'" class="historyButton">History</p>';
+    $html .= '</div>';
     // Add the delete button only if the account ID matches the session account ID
     if ($post['accountid'] === $_SESSION['accountid']) {
         $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" data-post-id="' . $post['postId'] . '">';
@@ -127,11 +131,15 @@ foreach ($posts as $post) {
             $html .= '            <p class="forumPostViewMainCount forumPostViewMainReport">Report</p>';
             $html .= '          </div>';
         }
+        $html .= '<div class="forumPostViewMainInt d-flex justify-content-center align-items-center" id="forumReplyViewHistory">';
+        $html .= '<img src="../assets/img/discussionForum/time.png" class="commentIcon">';
+        $html .= '<p class="forumPostViewMainCount forumPostViewMainHistory" value="'.$topicId.'" class="historyButton">History</p>';
+        $html .= '</div>';
         // Add the delete button only if the account ID matches the session account ID
         if ($reply['accountid'] === $_SESSION['accountid']) {
             $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" data-reply-id="' . $reply['replyId'] . '">';
             $html .= '              <img src="../assets/img/discussionForum/delete.png" class="commentIcon">';
-            $html .= '              <p class="forumPostViewMainCount forumPostViewMainDeleteReply" value="' . $reply['replyId'] . '">Delete</p>';
+            $html .= '              <p class="forumPostViewMainCount forumPostViewMainDeleteReply" value="' . $reply['replyId'] . '">Deleteeee</p>';
             $html .= '          </div>';
         }
         $html .= '              </div>';

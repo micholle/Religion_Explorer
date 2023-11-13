@@ -28,12 +28,12 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     <div class="pageContainer">
         <div class="container mw-100 mh-100">
             <div class="row pageHeader adminHeader">
-                <div class="col-12 d-flex justify-content-start align-items-center">
+                <div class="col-12 d-flex justify-content-center justify-content-lg-start align-items-center">
                     <h1>Content for Review</h1>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row adminContainer">
                 <div class="col-12 d-flex justify-content-center align-items-center">
                     <div class="adminReviewContainer">
                         <div class="row">

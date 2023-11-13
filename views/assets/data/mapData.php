@@ -1186,6 +1186,30 @@ class mapData {
                 "pinImg1" => "../assets/data/map/img/christianity/event/goodfriday-1.jpg",
                 "pinImg2" => "../assets/data/map/img/christianity/event/goodfriday-2.jpg",
                 "source" => "https://www.britannica.com/topic/Good-Friday-Agreement"
+            ],
+            "CE8" => [
+                "pinTitle" => "Mormon Trail",
+                "pinType" => "event",
+                "religion" => "Christianity",
+                "country" => "United States of America",
+                "timelineDate" => "1840 CE",
+                "displayDate" => "1846",
+                "pinVid" => "../assets/data/map/vid/mormon.mp4",
+                "pinImg1" => "../assets/data/map/img/christianity/event/mormon-1.jpeg",
+                "pinImg2" => "../assets/data/map/img/christianity/event/mormon-2.png",
+                "source" => "https://www.britannica.com/topic/Mormon-Trail"
+            ],
+            "CE9" => [
+                "pinTitle" => "Founding of the American Bible Society",
+                "pinType" => "event",
+                "religion" => "Christianity",
+                "country" => "United States of America",
+                "timelineDate" => "1810 CE",
+                "displayDate" => "1816",
+                "pinVid" => "../assets/data/map/vid/abs.mp4",
+                "pinImg1" => "../assets/data/map/img/christianity/event/abs-1.png",
+                "pinImg2" => "../assets/data/map/img/christianity/event/abs-2.png",
+                "source" => "https://www.britannica.com/topic/American-Bible-Society"
             ]
         ];
         
