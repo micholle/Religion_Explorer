@@ -51,15 +51,37 @@ class ModelLogin {
             if ($user && password_verify($password, $user['password'])) {
                 // Credentials are valid, and the user is not suspended or banned
                 session_start();
-                $_SESSION['accountid'] = $user['accountid'];
-                $_SESSION['username'] = $user['username'];
-                $_SESSION['email'] = $user['email'];
-                $_SESSION['religion'] = $user['religion'];
-                $_SESSION['accountDate'] = $user['accountDate'];
-                $_SESSION['acctype'] = $user['acctype'];
-                $_SESSION['avatar'] = $user['avatar'];
-                $_SESSION['displayPage'] = $user['displayPage'];
-                return "Success";
+
+                try {
+                    if($user['acctype'] == "regular"){
+                        $status = "registered";
+                        $datetime = date("Y-m-d H:i:s");
+                        
+                        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $pdo->beginTransaction();
+    
+                        $accesslogstmt = $pdo->prepare("INSERT INTO accesslog(status, accesslogid, datetime) VALUES (:status, :accesslogid, :datetime)");
+                        $accesslogstmt->bindParam(":status", $status, PDO::PARAM_STR);
+                        $accesslogstmt->bindParam(":accesslogid", $user['accountid'], PDO::PARAM_STR);
+                        $accesslogstmt->bindParam(":datetime", $datetime, PDO::PARAM_STR);
+    
+                        $accesslogstmt->execute();
+                        $pdo->commit();
+                    }
+
+                    $_SESSION['accountid'] = $user['accountid'];
+                    $_SESSION['username'] = $user['username'];
+                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['religion'] = $user['religion'];
+                    $_SESSION['accountDate'] = $user['accountDate'];
+                    $_SESSION['acctype'] = $user['acctype'];
+                    $_SESSION['avatar'] = $user['avatar'];
+                    $_SESSION['displayPage'] = $user['displayPage'];
+
+                    return "Success";
+                } catch (PDOException $e) {
+                    return "Error: " . $e->getMessage();
+                }
             } else {
                 // Invalid credentials
                 return "Invalid credentials";

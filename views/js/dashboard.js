@@ -205,14 +205,50 @@ $(function() {
             const usersReligionCtx = document.getElementById('registeredUsersReligion').getContext('2d');
             new Chart(usersReligionCtx, usersReligionConfig);
 
-            //Users activity
-            var registeredBuddhists = dashboardData.registeredBuddhists;
-            var registeredChristians = dashboardData.registeredChristians;
-            var registeredHindus = dashboardData.registeredHindus;
-            var registeredIslams = dashboardData.registeredIslams;
-            var registeredJews = dashboardData.registeredJews;
-            var registeredOtherReligions = dashboardData.registeredOtherReligions;
-            var registeredNonReligious = dashboardData.registeredNonReligious;
+            // Map
+            var buddhismUserActivityMap = dashboardData.buddhismUserActivityMap;
+            var christianityUserActivityMap = dashboardData.christianityUserActivityMap;
+            var hinduismUserActivityMap = dashboardData.hinduismUserActivityMap;
+            var islamUserActivityMap = dashboardData.islamUserActivityMap;
+            var judaismUserActivityMap = dashboardData.judaismUserActivityMap;
+            var otherReligionsUserActivityMap = dashboardData.otherReligionsUserActivityMap;
+            var nonReligiousUserActivityMap = dashboardData.nonReligiousUserActivityMap;
+
+            // Library
+            var buddhismUserActivityLibrary = dashboardData.buddhismUserActivityLibrary;
+            var christianityUserActivityLibrary = dashboardData.christianityUserActivityLibrary;
+            var hinduismUserActivityLibrary = dashboardData.hinduismUserActivityLibrary;
+            var islamUserActivityLibrary = dashboardData.islamUserActivityLibrary;
+            var judaismUserActivityLibrary = dashboardData.judaismUserActivityLibrary;
+            var otherReligionsUserActivityLibrary = dashboardData.otherReligionsUserActivityLibrary;
+            var nonReligiousUserActivityLibrary = dashboardData.nonReligiousUserActivityLibrary;
+
+            // Community
+            var buddhismUserActivityCommunity = dashboardData.buddhismUserActivityCommunity;
+            var christianityUserActivityCommunity = dashboardData.christianityUserActivityCommunity;
+            var hinduismUserActivityCommunity = dashboardData.hinduismUserActivityCommunity;
+            var islamUserActivityCommunity = dashboardData.islamUserActivityCommunity;
+            var judaismUserActivityCommunity = dashboardData.judaismUserActivityCommunity;
+            var otherReligionsUserActivityCommunity = dashboardData.otherReligionsUserActivityCommunity;
+            var nonReligiousUserActivityCommunity = dashboardData.nonReligiousUserActivityCommunity;
+
+            // Forum
+            var buddhismUserActivityForum = dashboardData.buddhismUserActivityForum;
+            var christianityUserActivityForum = dashboardData.christianityUserActivityForum;
+            var hinduismUserActivityForum = dashboardData.hinduismUserActivityForum;
+            var islamUserActivityForum = dashboardData.islamUserActivityForum;
+            var judaismUserActivityForum = dashboardData.judaismUserActivityForum;
+            var otherReligionsUserActivityForum = dashboardData.otherReligionsUserActivityForum;
+            var nonReligiousUserActivityForum = dashboardData.nonReligiousUserActivityForum;
+
+            // Calendar
+            var buddhismUserActivityCalendar = dashboardData.buddhismUserActivityCalendar;
+            var christianityUserActivityCalendar = dashboardData.christianityUserActivityCalendar;
+            var hinduismUserActivityCalendar = dashboardData.hinduismUserActivityCalendar;
+            var islamUserActivityCalendar = dashboardData.islamUserActivityCalendar;
+            var judaismUserActivityCalendar = dashboardData.judaismUserActivityCalendar;
+            var otherReligionsUserActivityCalendar = dashboardData.otherReligionsUserActivityCalendar;
+            var nonReligiousUserActivityCalendar = dashboardData.nonReligiousUserActivityCalendar;
         
             const usersActivityReligionLabels = ['Buddhism', 'Christianity', 'Hinduism', 'Islam', 'Judaism', 'Other Religions', 'Non-Religious'];
         
@@ -221,35 +257,35 @@ $(function() {
                 datasets: [
                     {
                         label: 'Map',
-                        data: [registeredBuddhists, registeredChristians, registeredHindus, registeredIslams, registeredJews, registeredOtherReligions, registeredNonReligious],
+                        data: [buddhismUserActivityMap, christianityUserActivityMap, hinduismUserActivityMap, islamUserActivityMap, judaismUserActivityMap, otherReligionsUserActivityMap, nonReligiousUserActivityMap],
                         backgroundColor: ['rgba(186, 164, 0, 0.2)'],
                         borderColor: ['rgb(186, 164, 0)'],
                         borderWidth: 1
                     },
                     {
                         label: 'Library',
-                        data: [registeredBuddhists, registeredChristians, registeredHindus, registeredIslams, registeredJews, registeredOtherReligions, registeredNonReligious],
+                        data: [buddhismUserActivityLibrary, christianityUserActivityLibrary, hinduismUserActivityLibrary, islamUserActivityLibrary, judaismUserActivityLibrary, otherReligionsUserActivityLibrary, nonReligiousUserActivityLibrary],
                         backgroundColor: ['rgba(86, 9, 122, 0.2)'],
                         borderColor: ['rgb(86, 9, 122)'],
                         borderWidth: 1
                     },
                     {
                         label: 'CommunityCreations',
-                        data: [registeredBuddhists, registeredChristians, registeredHindus, registeredIslams, registeredJews, registeredOtherReligions, registeredNonReligious],
+                        data: [buddhismUserActivityCommunity, christianityUserActivityCommunity, hinduismUserActivityCommunity, islamUserActivityCommunity, judaismUserActivityCommunity, otherReligionsUserActivityCommunity, nonReligiousUserActivityCommunity],
                         backgroundColor: ['rgba(168, 19, 21, 0.2)'],
                         borderColor: ['rgb(168, 19, 21)'],
                         borderWidth: 1
                     },
                     {
                         label: 'Discussion Forum',
-                        data: [registeredBuddhists, registeredChristians, registeredHindus, registeredIslams, registeredJews, registeredOtherReligions, registeredNonReligious],
+                        data: [buddhismUserActivityForum, christianityUserActivityForum, hinduismUserActivityForum, islamUserActivityForum, judaismUserActivityForum, otherReligionsUserActivityForum, nonReligiousUserActivityForum],
                         backgroundColor: ['rgba(1, 135, 68, 0.2)'],
                         borderColor: ['rgb(1, 135, 68)'],
                         borderWidth: 1
                     },
                     {
                         label: 'Calendar',
-                        data: [registeredBuddhists, registeredChristians, registeredHindus, registeredIslams, registeredJews, registeredOtherReligions, registeredNonReligious],
+                        data: [buddhismUserActivityCalendar, christianityUserActivityCalendar, hinduismUserActivityCalendar, islamUserActivityCalendar, judaismUserActivityCalendar, otherReligionsUserActivityCalendar, nonReligiousUserActivityCalendar],
                         backgroundColor: ['rgba(19, 52, 168, 0.2)'],
                         borderColor: ['rgb(19, 52, 168)'],
                         borderWidth: 1
@@ -286,19 +322,75 @@ $(function() {
             const usersActivityReligionCanvasCtx = document.getElementById('usersActivityReligion').getContext('2d');
             new Chart(usersActivityReligionCanvasCtx, usersActivityReligionConfig);
 
-            //Users activity
-            var januaryUsers2022 = dashboardData.januaryUsers2022;
-            var februaryUsers2022 = dashboardData.februaryUsers2022;
-            var marchUsers2022 = dashboardData.marchUsers2022;
-            var aprilUsers2022 = dashboardData.aprilUsers2022;
-            var mayUsers2022 = dashboardData.mayUsers2022;
-            var juneUsers2022 = dashboardData.juneUsers2022;
-            var julyUsers2022 = dashboardData.julyUsers2022;
-            var augustUsers2022 = dashboardData.augustUsers2022;
-            var septemberUsers2022 = dashboardData.septemberUsers2022;
-            var octoberUsers2022 = dashboardData.octoberUsers2022;
-            var novemberUsers2022 = dashboardData.novemberUsers2022;
-            var decemberUsers2022 = dashboardData.decemberUsers2022;
+            //user activity map
+            var januaryUserActivityMap = dashboardData.januaryUserActivityMap;
+            var februaryUserActivityMap = dashboardData.februaryUserActivityMap;
+            var marchUserActivityMap = dashboardData.marchUserActivityMap;
+            var aprilUserActivityMap = dashboardData.aprilUserActivityMap;
+            var mayUserActivityMap = dashboardData.mayUserActivityMap;
+            var juneUserActivityMap = dashboardData.juneUserActivityMap;
+            var julyUserActivityMap = dashboardData.julyUserActivityMap;
+            var augustUserActivityMap = dashboardData.augustUserActivityMap;
+            var septemberUserActivityMap = dashboardData.septemberUserActivityMap;
+            var octoberUserActivityMap = dashboardData.octoberUserActivityMap;
+            var novemberUserActivityMap = dashboardData.novemberUserActivityMap;
+            var decemberUserActivityMap = dashboardData.decemberUserActivityMap;
+
+            // user activity library
+            var januaryUserActivityLibrary = dashboardData.januaryUserActivityLibrary;
+            var februaryUserActivityLibrary = dashboardData.februaryUserActivityLibrary;
+            var marchUserActivityLibrary = dashboardData.marchUserActivityLibrary;
+            var aprilUserActivityLibrary = dashboardData.aprilUserActivityLibrary;
+            var mayUserActivityLibrary = dashboardData.mayUserActivityLibrary;
+            var juneUserActivityLibrary = dashboardData.juneUserActivityLibrary;
+            var julyUserActivityLibrary = dashboardData.julyUserActivityLibrary;
+            var augustUserActivityLibrary = dashboardData.augustUserActivityLibrary;
+            var septemberUserActivityLibrary = dashboardData.septemberUserActivityLibrary;
+            var octoberUserActivityLibrary = dashboardData.octoberUserActivityLibrary;
+            var novemberUserActivityLibrary = dashboardData.novemberUserActivityLibrary;
+            var decemberUserActivityLibrary = dashboardData.decemberUserActivityLibrary;
+
+            // user acitivity community
+            var januaryUserActivityCommunity = dashboardData.januaryUserActivityCommunity;
+            var februaryUserActivityCommunity = dashboardData.februaryUserActivityCommunity;
+            var marchUserActivityCommunity = dashboardData.marchUserActivityCommunity;
+            var aprilUserActivityCommunity = dashboardData.aprilUserActivityCommunity;
+            var mayUserActivityCommunity = dashboardData.mayUserActivityCommunity;
+            var juneUserActivityCommunity = dashboardData.juneUserActivityCommunity;
+            var julyUserActivityCommunity = dashboardData.julyUserActivityCommunity;
+            var augustUserActivityCommunity = dashboardData.augustUserActivityCommunity;
+            var septemberUserActivityCommunity = dashboardData.septemberUserActivityCommunity;
+            var octoberUserActivityCommunity = dashboardData.octoberUserActivityCommunity;
+            var novemberUserActivityCommunity = dashboardData.novemberUserActivityCommunity;
+            var decemberUserActivityCommunity = dashboardData.decemberUserActivityCommunity;
+
+            // user activity forum
+            var januaryUserActivityForum = dashboardData.januaryUserActivityForum;
+            var februaryUserActivityForum = dashboardData.februaryUserActivityForum;
+            var marchUserActivityForum = dashboardData.marchUserActivityForum;
+            var aprilUserActivityForum = dashboardData.aprilUserActivityForum;
+            var mayUserActivityForum = dashboardData.mayUserActivityForum;
+            var juneUserActivityForum = dashboardData.juneUserActivityForum;
+            var julyUserActivityForum = dashboardData.julyUserActivityForum;
+            var augustUserActivityForum = dashboardData.augustUserActivityForum;
+            var septemberUserActivityForum = dashboardData.septemberUserActivityForum;
+            var octoberUserActivityForum = dashboardData.octoberUserActivityForum;
+            var novemberUserActivityForum = dashboardData.novemberUserActivityForum;
+            var decemberUserActivityForum = dashboardData.decemberUserActivityForum;
+
+            // user activity calendar
+            var januaryUserActivityCalendar = dashboardData.januaryUserActivityCalendar;
+            var februaryUserActivityCalendar = dashboardData.februaryUserActivityCalendar;
+            var marchUserActivityCalendar = dashboardData.marchUserActivityCalendar;
+            var aprilUserActivityCalendar = dashboardData.aprilUserActivityCalendar;
+            var mayUserActivityCalendar = dashboardData.mayUserActivityCalendar;
+            var juneUserActivityCalendar = dashboardData.juneUserActivityCalendar;
+            var julyUserActivityCalendar = dashboardData.julyUserActivityCalendar;
+            var augustUserActivityCalendar = dashboardData.augustUserActivityCalendar;
+            var septemberUserActivityCalendar = dashboardData.septemberUserActivityCalendar;
+            var octoberUserActivityCalendar = dashboardData.octoberUserActivityCalendar;
+            var novemberUserActivityCalendar = dashboardData.novemberUserActivityCalendar;
+            var decemberUserActivityCalendar = dashboardData.decemberUserActivityCalendar;
         
             const usersActivityLabels = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
         
@@ -307,35 +399,35 @@ $(function() {
                 datasets: [
                     {
                         label: 'Map',
-                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
+                        data: [januaryUserActivityMap, februaryUserActivityMap, marchUserActivityMap, aprilUserActivityMap, mayUserActivityMap, juneUserActivityMap, julyUserActivityMap, augustUserActivityMap, septemberUserActivityMap, octoberUserActivityMap, novemberUserActivityMap, decemberUserActivityMap],
                         backgroundColor: ['rgba(186, 164, 0, 0.2)'],
                         borderColor: ['rgb(186, 164, 0)'],
                         borderWidth: 1
                     },
                     {
                         label: 'Library',
-                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
+                        data: [januaryUserActivityLibrary, februaryUserActivityLibrary, marchUserActivityLibrary, aprilUserActivityLibrary, mayUserActivityLibrary, juneUserActivityLibrary, julyUserActivityLibrary, augustUserActivityLibrary, septemberUserActivityLibrary, octoberUserActivityLibrary, novemberUserActivityLibrary, decemberUserActivityLibrary],                        
                         backgroundColor: ['rgba(86, 9, 122, 0.2)'],
                         borderColor: ['rgb(86, 9, 122)'],
                         borderWidth: 1
                     },
                     {
                         label: 'CommunityCreations',
-                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
+                        data: [januaryUserActivityCommunity, februaryUserActivityCommunity, marchUserActivityCommunity, aprilUserActivityCommunity, mayUserActivityCommunity, juneUserActivityCommunity, julyUserActivityCommunity, augustUserActivityCommunity, septemberUserActivityCommunity, octoberUserActivityCommunity, novemberUserActivityCommunity, decemberUserActivityCommunity],
                         backgroundColor: ['rgba(168, 19, 21, 0.2)'],
                         borderColor: ['rgb(168, 19, 21)'],
                         borderWidth: 1
                     },
                     {
                         label: 'Discussion Forum',
-                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
+                        data: [januaryUserActivityForum, februaryUserActivityForum, marchUserActivityForum, aprilUserActivityForum, mayUserActivityForum, juneUserActivityForum, julyUserActivityForum, augustUserActivityForum, septemberUserActivityForum, octoberUserActivityForum, novemberUserActivityForum, decemberUserActivityForum],
                         backgroundColor: ['rgba(1, 135, 68, 0.2)'],
                         borderColor: ['rgb(1, 135, 68)'],
                         borderWidth: 1
                     },
                     {
                         label: 'Calendar',
-                        data: [januaryUsers2022, februaryUsers2022, marchUsers2022, aprilUsers2022, mayUsers2022, juneUsers2022, julyUsers2022, augustUsers2022, septemberUsers2022, octoberUsers2022, novemberUsers2022, decemberUsers2022],
+                        data: [januaryUserActivityCalendar, februaryUserActivityCalendar, marchUserActivityCalendar, aprilUserActivityCalendar, mayUserActivityCalendar, juneUserActivityCalendar, julyUserActivityCalendar, augustUserActivityCalendar, septemberUserActivityCalendar, octoberUserActivityCalendar, novemberUserActivityCalendar, decemberUserActivityCalendar],
                         backgroundColor: ['rgba(19, 52, 168, 0.2)'],
                         borderColor: ['rgb(19, 52, 168)'],
                         borderWidth: 1

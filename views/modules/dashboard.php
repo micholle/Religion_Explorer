@@ -31,7 +31,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <a href="dashboard.php" class="pageHeaderLink"><h1>Admin Dashboard</h1></a>
                 </div>
                 <div class="col-12 col-lg-8 d-flex pr-0 pl-0">
-                    <div class="row" style="width: 100%;">
+                    <div class="row" style="width: 100%;" hidden>
                         <div class="col-12 col-lg-6 adminDashboardFilter">
                             <select id="adminDashboardMonth" class="adminDashboardDate">
                                 <option selected value="allMonths">January to December</option>

@@ -11,9 +11,21 @@ class dashboardModel {
         $adminDashboardMonth = $data["adminDashboardMonth"];
         $adminDashboardWeek = $data["adminDashboardWeek"];
         
+        $accessLogActiveStmt = $pdo->prepare("SELECT * FROM accesslog WHERE status='registered'");
+        $accessLogActiveStmt->execute();
+        $accessLogActiveResults = $accessLogActiveStmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $accessLogGuestStmt = $pdo->prepare("SELECT * FROM accesslog WHERE status='guest'");
+        $accessLogGuestStmt->execute();
+        $accessLogGuestResults = $accessLogGuestStmt->fetchAll(PDO::FETCH_ASSOC);
+
         $accountsStmt = $pdo->prepare("SELECT * FROM accounts");
         $accountsStmt->execute();
         $accountsResults = $accountsStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $userActivityStmt = $pdo->prepare("SELECT * FROM explorerpoints");
+        $userActivityStmt->execute();
+        $userActivityResults = $userActivityStmt->fetchAll(PDO::FETCH_ASSOC);
 
         $bookmarksStmt = $pdo->prepare("SELECT * FROM bookmarks");
         $bookmarksStmt->execute();
@@ -84,6 +96,116 @@ class dashboardModel {
             $novemberUsersCurrent = 0;
             $decemberUsersCurrent = 0;
 
+            $januaryUserActivityMap = 0;
+            $februaryUserActivityMap = 0;
+            $marchUserActivityMap = 0;
+            $aprilUserActivityMap = 0;
+            $mayUserActivityMap = 0;
+            $juneUserActivityMap = 0;
+            $julyUserActivityMap = 0;
+            $augustUserActivityMap = 0;
+            $septemberUserActivityMap = 0;
+            $octoberUserActivityMap = 0;
+            $novemberUserActivityMap = 0;
+            $decemberUserActivityMap = 0;
+
+            $januaryUserActivityLibrary = 0;
+            $februaryUserActivityLibrary = 0;
+            $marchUserActivityLibrary = 0;
+            $aprilUserActivityLibrary = 0;
+            $mayUserActivityLibrary = 0;
+            $juneUserActivityLibrary = 0;
+            $julyUserActivityLibrary = 0;
+            $augustUserActivityLibrary = 0;
+            $septemberUserActivityLibrary = 0;
+            $octoberUserActivityLibrary = 0;
+            $novemberUserActivityLibrary = 0;
+            $decemberUserActivityLibrary = 0;
+
+            $januaryUserActivityCommunity = 0;
+            $februaryUserActivityCommunity = 0;
+            $marchUserActivityCommunity = 0;
+            $aprilUserActivityCommunity = 0;
+            $mayUserActivityCommunity = 0;
+            $juneUserActivityCommunity = 0;
+            $julyUserActivityCommunity = 0;
+            $augustUserActivityCommunity = 0;
+            $septemberUserActivityCommunity = 0;
+            $octoberUserActivityCommunity = 0;
+            $novemberUserActivityCommunity = 0;
+            $decemberUserActivityCommunity = 0;
+
+            $januaryUserActivityForum = 0;
+            $februaryUserActivityForum = 0;
+            $marchUserActivityForum = 0;
+            $aprilUserActivityForum = 0;
+            $mayUserActivityForum = 0;
+            $juneUserActivityForum = 0;
+            $julyUserActivityForum = 0;
+            $augustUserActivityForum = 0;
+            $septemberUserActivityForum = 0;
+            $octoberUserActivityForum = 0;
+            $novemberUserActivityForum = 0;
+            $decemberUserActivityForum = 0;
+
+            $januaryUserActivityCalendar = 0;
+            $februaryUserActivityCalendar = 0;
+            $marchUserActivityCalendar = 0;
+            $aprilUserActivityCalendar = 0;
+            $mayUserActivityCalendar = 0;
+            $juneUserActivityCalendar = 0;
+            $julyUserActivityCalendar = 0;
+            $augustUserActivityCalendar = 0;
+            $septemberUserActivityCalendar = 0;
+            $octoberUserActivityCalendar = 0;
+            $novemberUserActivityCalendar = 0;
+            $decemberUserActivityCalendar = 0;
+
+            // User Activity Map
+            $buddhismUserActivityMap = 0;
+            $christianityUserActivityMap = 0;
+            $hinduismUserActivityMap = 0;
+            $islamUserActivityMap = 0;
+            $judaismUserActivityMap = 0;
+            $otherReligionsUserActivityMap = 0;
+            $nonReligiousUserActivityMap = 0;
+
+            // User Activity Library
+            $buddhismUserActivityLibrary = 0;
+            $christianityUserActivityLibrary = 0;
+            $hinduismUserActivityLibrary = 0;
+            $islamUserActivityLibrary = 0;
+            $judaismUserActivityLibrary = 0;
+            $otherReligionsUserActivityLibrary = 0;
+            $nonReligiousUserActivityLibrary = 0;
+
+            // User Activity Community
+            $buddhismUserActivityCommunity = 0;
+            $christianityUserActivityCommunity = 0;
+            $hinduismUserActivityCommunity = 0;
+            $islamUserActivityCommunity = 0;
+            $judaismUserActivityCommunity = 0;
+            $otherReligionsUserActivityCommunity = 0;
+            $nonReligiousUserActivityCommunity = 0;
+
+            // User Activity Forum
+            $buddhismUserActivityForum = 0;
+            $christianityUserActivityForum = 0;
+            $hinduismUserActivityForum = 0;
+            $islamUserActivityForum = 0;
+            $judaismUserActivityForum = 0;
+            $otherReligionsUserActivityForum = 0;
+            $nonReligiousUserActivityForum = 0;
+
+            // User Activity Calendar
+            $buddhismUserActivityCalendar = 0;
+            $christianityUserActivityCalendar = 0;
+            $hinduismUserActivityCalendar = 0;
+            $islamUserActivityCalendar = 0;
+            $judaismUserActivityCalendar = 0;
+            $otherReligionsUserActivityCalendar = 0;
+            $nonReligiousUserActivityCalendar = 0;
+
             $januaryReportedContent = 0;
             $februaryReportedContent = 0;
             $marchReportedContent = 0;
@@ -110,9 +232,21 @@ class dashboardModel {
             $novemberReportedUsers = 0;
             $decemberReportedUsers = 0;
 
+            $filteredResultsAccessLogActive = array_filter($accessLogActiveResults, function ($row) use ($adminDashboardYear) {
+                $accessLogDate = new DateTime($row['datetime']);
+                return $accessLogDate->format('Y') == $adminDashboardYear || $accessLogDate->format('Y') == ($adminDashboardYear - 1);
+            });
+            $filteredResultsAccessLogGuest = array_filter($accessLogGuestResults, function ($row) use ($adminDashboardYear) {
+                $accessLogDate = new DateTime($row['datetime']);
+                return $accessLogDate->format('Y') == $adminDashboardYear || $accessLogDate->format('Y') == ($adminDashboardYear - 1);
+            });  
             $filteredResultsAccounts = array_filter($accountsResults, function ($row) use ($adminDashboardYear) {
                 $accountDate = new DateTime($row['accountDate']);
                 return $accountDate->format('Y') == $adminDashboardYear || $accountDate->format('Y') == ($adminDashboardYear - 1);
+            }); 
+            $filteredResultsUserActvity = array_filter($userActivityResults, function ($row) use ($adminDashboardYear) {
+                $userActivityDate = new DateTime($row['datetime']);
+                return $userActivityDate->format('Y') == $adminDashboardYear || $userActivityDate->format('Y') == ($adminDashboardYear - 1);
             });            
             $filteredResultsBookmarks = array_filter($bookmarksResults, function ($row) use ($adminDashboardYear) {
                 $bookmarksDate = new DateTime($row['datetime']);
@@ -257,6 +391,332 @@ class dashboardModel {
                 }
             }
 
+            foreach ($filteredResultsUserActvity as $row) {
+                $pointSource = $row['pointsource'];
+                $datetime = new DateTime($row['datetime']);
+                $userActivityMonth = $datetime->format('n');
+                $accountid = $row['accountid'];
+
+                $userActivityReligionStmt = $pdo->prepare("SELECT religion FROM accounts WHERE accountid = :accountid");
+                $userActivityReligionStmt->bindParam(":accountid", $accountid, PDO::PARAM_STR);
+                $userActivityReligionStmt->execute();
+                $userActivityReligionResult = $userActivityReligionStmt->fetchColumn();
+                
+                if ($datetime->format('Y') == $adminDashboardYear) {
+                    if(strpos($pointSource, "_country_") !== false || strpos($pointSource, "_pin_") !== false){
+                        switch ($userActivityMonth) {
+                            case 1:
+                                $januaryUserActivityMap++;
+                                break;
+                            case 2:
+                                $februaryUserActivityMap++;
+                                break;
+                            case 3:
+                                $marchUserActivityMap++;
+                                break;
+                            case 4:
+                                $aprilUserActivityMap++;
+                                break;
+                            case 5:
+                                $mayUserActivityMap++;
+                                break;
+                            case 6:
+                                $juneUserActivityMap++;
+                                break;
+                            case 7:
+                                $julyUserActivityMap++;
+                                break;
+                            case 8:
+                                $augustUserActivityMap++;
+                                break;
+                            case 9:
+                                $septemberUserActivityMap++;
+                                break;
+                            case 10:
+                                $octoberUserActivityMap++;
+                                break;
+                            case 11:
+                                $novemberUserActivityMap++;
+                                break;
+                            case 12:
+                                $decemberUserActivityMap++;
+                                break;
+                        }
+                        switch ($userActivityReligionResult) {
+                            case 'Buddhism':
+                                $buddhismUserActivityMap++;
+                                break;
+                            case 'Christianity':
+                                $christianityUserActivityMap++;
+                                break;
+                            case 'Hinduism':
+                                $hinduismUserActivityMap++;
+                                break;
+                            case 'Islam':
+                                $islamUserActivityMap++;
+                                break;
+                            case 'Judaism':
+                                $judaismUserActivityMap++;
+                                break;
+                            case 'Other Religions':
+                                $otherReligionsUserActivityMap++;
+                                break;
+                            case 'Non-Religious':
+                                $nonReligiousUserActivityMap++;
+                                break;
+                        }                          
+                    } else if (strpos($pointSource, "_lib_") !== false) {
+                        switch ($userActivityMonth) {
+                            case 1:
+                                $januaryUserActivityLibrary++;
+                                break;
+                            case 2:
+                                $februaryUserActivityLibrary++;
+                                break;
+                            case 3:
+                                $marchUserActivityLibrary++;
+                                break;
+                            case 4:
+                                $aprilUserActivityLibrary++;
+                                break;
+                            case 5:
+                                $mayUserActivityLibrary++;
+                                break;
+                            case 6:
+                                $juneUserActivityLibrary++;
+                                break;
+                            case 7:
+                                $julyUserActivityLibrary++;
+                                break;
+                            case 8:
+                                $augustUserActivityLibrary++;
+                                break;
+                            case 9:
+                                $septemberUserActivityLibrary++;
+                                break;
+                            case 10:
+                                $octoberUserActivityLibrary++;
+                                break;
+                            case 11:
+                                $novemberUserActivityLibrary++;
+                                break;
+                            case 12:
+                                $decemberUserActivityLibrary++;
+                                break;
+                        }  
+                        switch ($userActivityReligionResult) {
+                            case 'Buddhism':
+                                $buddhismUserActivityLibrary++;
+                                break;
+                            case 'Christianity':
+                                $christianityUserActivityLibrary++;
+                                break;
+                            case 'Hinduism':
+                                $hinduismUserActivityLibrary++;
+                                break;
+                            case 'Islam':
+                                $islamUserActivityLibrary++;
+                                break;
+                            case 'Judaism':
+                                $judaismUserActivityLibrary++;
+                                break;
+                            case 'Other Religions':
+                                $otherReligionsUserActivityLibrary++;
+                                break;
+                            case 'Non-Religious':
+                                $nonReligiousUserActivityLibrary++;
+                                break;
+                        }                      
+                    } else if (strpos($pointSource, "_cc_") !== false) {
+                        switch ($userActivityMonth) {
+                            case 1:
+                                $januaryUserActivityCommunity++;
+                                break;
+                            case 2:
+                                $februaryUserActivityCommunity++;
+                                break;
+                            case 3:
+                                $marchUserActivityCommunity++;
+                                break;
+                            case 4:
+                                $aprilUserActivityCommunity++;
+                                break;
+                            case 5:
+                                $mayUserActivityCommunity++;
+                                break;
+                            case 6:
+                                $juneUserActivityCommunity++;
+                                break;
+                            case 7:
+                                $julyUserActivityCommunity++;
+                                break;
+                            case 8:
+                                $augustUserActivityCommunity++;
+                                break;
+                            case 9:
+                                $septemberUserActivityCommunity++;
+                                break;
+                            case 10:
+                                $octoberUserActivityCommunity++;
+                                break;
+                            case 11:
+                                $novemberUserActivityCommunity++;
+                                break;
+                            case 12:
+                                $decemberUserActivityCommunity++;
+                                break;
+                        }
+                        switch ($userActivityReligionResult) {
+                            case 'Buddhism':
+                                $buddhismUserActivityCommunity++;
+                                break;
+                            case 'Christianity':
+                                $christianityUserActivityCommunity++;
+                                break;
+                            case 'Hinduism':
+                                $hinduismUserActivityCommunity++;
+                                break;
+                            case 'Islam':
+                                $islamUserActivityCommunity++;
+                                break;
+                            case 'Judaism':
+                                $judaismUserActivityCommunity++;
+                                break;
+                            case 'Other Religions':
+                                $otherReligionsUserActivityCommunity++;
+                                break;
+                            case 'Non-Religious':
+                                $nonReligiousUserActivityCommunity++;
+                                break;
+                        }                        
+                    }  else if (strpos($pointSource, "_forum_") !== false) {
+                        switch ($userActivityMonth) {
+                            case 1:
+                                $januaryUserActivityForum++;
+                                break;
+                            case 2:
+                                $februaryUserActivityForum++;
+                                break;
+                            case 3:
+                                $marchUserActivityForum++;
+                                break;
+                            case 4:
+                                $aprilUserActivityForum++;
+                                break;
+                            case 5:
+                                $mayUserActivityForum++;
+                                break;
+                            case 6:
+                                $juneUserActivityForum++;
+                                break;
+                            case 7:
+                                $julyUserActivityForum++;
+                                break;
+                            case 8:
+                                $augustUserActivityForum++;
+                                break;
+                            case 9:
+                                $septemberUserActivityForum++;
+                                break;
+                            case 10:
+                                $octoberUserActivityForum++;
+                                break;
+                            case 11:
+                                $novemberUserActivityForum++;
+                                break;
+                            case 12:
+                                $decemberUserActivityForum++;
+                                break;
+                        }       
+                        switch ($userActivityReligionResult) {
+                            case 'Buddhism':
+                                $buddhismUserActivityForum++;
+                                break;
+                            case 'Christianity':
+                                $christianityUserActivityForum++;
+                                break;
+                            case 'Hinduism':
+                                $hinduismUserActivityForum++;
+                                break;
+                            case 'Islam':
+                                $islamUserActivityForum++;
+                                break;
+                            case 'Judaism':
+                                $judaismUserActivityForum++;
+                                break;
+                            case 'Other Religions':
+                                $otherReligionsUserActivityForum++;
+                                break;
+                            case 'Non-Religious':
+                                $nonReligiousUserActivityForum++;
+                                break;
+                        }                 
+                    }  else if (strpos($pointSource, "_calendar_") !== false) {
+                        switch ($userActivityMonth) {
+                            case 1:
+                                $januaryUserActivityCalendar++;
+                                break;
+                            case 2:
+                                $februaryUserActivityCalendar++;
+                                break;
+                            case 3:
+                                $marchUserActivityCalendar++;
+                                break;
+                            case 4:
+                                $aprilUserActivityCalendar++;
+                                break;
+                            case 5:
+                                $mayUserActivityCalendar++;
+                                break;
+                            case 6:
+                                $juneUserActivityCalendar++;
+                                break;
+                            case 7:
+                                $julyUserActivityCalendar++;
+                                break;
+                            case 8:
+                                $augustUserActivityCalendar++;
+                                break;
+                            case 9:
+                                $septemberUserActivityCalendar++;
+                                break;
+                            case 10:
+                                $octoberUserActivityCalendar++;
+                                break;
+                            case 11:
+                                $novemberUserActivityCalendar++;
+                                break;
+                            case 12:
+                                $decemberUserActivityCalendar++;
+                                break;
+                        }  
+                        switch ($userActivityReligionResult) {
+                            case 'Buddhism':
+                                $buddhismUserActivityCalendar++;
+                                break;
+                            case 'Christianity':
+                                $christianityUserActivityCalendar++;
+                                break;
+                            case 'Hinduism':
+                                $hinduismUserActivityCalendar++;
+                                break;
+                            case 'Islam':
+                                $islamUserActivityCalendar++;
+                                break;
+                            case 'Judaism':
+                                $judaismUserActivityCalendar++;
+                                break;
+                            case 'Other Religions':
+                                $otherReligionsUserActivityCalendar++;
+                                break;
+                            case 'Non-Religious':
+                                $nonReligiousUserActivityCalendar++;
+                                break;
+                        }                      
+                    }             
+                }
+            }
+
             foreach ($filteredResultsContent as $row) {
                 $reportedContentDate = new DateTime($row['reportedOn']);
                 $reportMonth = $reportedContentDate->format('n');
@@ -347,8 +807,8 @@ class dashboardModel {
 
             $dashboardData = [
                 "newUsers" => count($filteredResultsAccounts),
-                "online" => 12,
-                "visitors" => 27,
+                "online" => count($filteredResultsAccessLogActive),
+                "visitors" => count($filteredResultsAccessLogGuest),
                 "registeredUsers" => $accountsStmt->rowCount(),
     
                 "bookmarks" => count($filteredResultsBookmarks),
@@ -392,6 +852,121 @@ class dashboardModel {
                 "octoberUsersCurrent" => $octoberUsersCurrent,
                 "novemberUsersCurrent" => $novemberUsersCurrent,
                 "decemberUsersCurrent" => $decemberUsersCurrent,
+
+                //user activity map
+                "januaryUserActivityMap" => $januaryUserActivityMap,
+                "februaryUserActivityMap" => $februaryUserActivityMap,
+                "marchUserActivityMap" => $marchUserActivityMap,
+                "aprilUserActivityMap" => $aprilUserActivityMap,
+                "mayUserActivityMap" => $mayUserActivityMap,
+                "juneUserActivityMap" => $juneUserActivityMap,
+                "julyUserActivityMap" => $julyUserActivityMap,
+                "augustUserActivityMap" => $augustUserActivityMap,
+                "septemberUserActivityMap" => $septemberUserActivityMap,
+                "octoberUserActivityMap" => $octoberUserActivityMap,
+                "novemberUserActivityMap" => $novemberUserActivityMap,
+                "decemberUserActivityMap" => $decemberUserActivityMap,
+
+                //user activity library
+                "januaryUserActivityLibrary" => $januaryUserActivityLibrary,
+                "februaryUserActivityLibrary" => $februaryUserActivityLibrary,
+                "marchUserActivityLibrary" => $marchUserActivityLibrary,
+                "aprilUserActivityLibrary" => $aprilUserActivityLibrary,
+                "mayUserActivityLibrary" => $mayUserActivityLibrary,
+                "juneUserActivityLibrary" => $juneUserActivityLibrary,
+                "julyUserActivityLibrary" => $julyUserActivityLibrary,
+                "augustUserActivityLibrary" => $augustUserActivityLibrary,
+                "septemberUserActivityLibrary" => $septemberUserActivityLibrary,
+                "octoberUserActivityLibrary" => $octoberUserActivityLibrary,
+                "novemberUserActivityLibrary" => $novemberUserActivityLibrary,
+                "decemberUserActivityLibrary" => $decemberUserActivityLibrary,
+
+                //user activity community
+                "januaryUserActivityCommunity" => $januaryUserActivityCommunity,
+                "februaryUserActivityCommunity" => $februaryUserActivityCommunity,
+                "marchUserActivityCommunity" => $marchUserActivityCommunity,
+                "aprilUserActivityCommunity" => $aprilUserActivityCommunity,
+                "mayUserActivityCommunity" => $mayUserActivityCommunity,
+                "juneUserActivityCommunity" => $juneUserActivityCommunity,
+                "julyUserActivityCommunity" => $julyUserActivityCommunity,
+                "augustUserActivityCommunity" => $augustUserActivityCommunity,
+                "septemberUserActivityCommunity" => $septemberUserActivityCommunity,
+                "octoberUserActivityCommunity" => $octoberUserActivityCommunity,
+                "novemberUserActivityCommunity" => $novemberUserActivityCommunity,
+                "decemberUserActivityCommunity" => $decemberUserActivityCommunity,
+
+                //user activity forum
+                "januaryUserActivityForum" => $januaryUserActivityForum,
+                "februaryUserActivityForum" => $februaryUserActivityForum,
+                "marchUserActivityForum" => $marchUserActivityForum,
+                "aprilUserActivityForum" => $aprilUserActivityForum,
+                "mayUserActivityForum" => $mayUserActivityForum,
+                "juneUserActivityForum" => $juneUserActivityForum,
+                "julyUserActivityForum" => $julyUserActivityForum,
+                "augustUserActivityForum" => $augustUserActivityForum,
+                "septemberUserActivityForum" => $septemberUserActivityForum,
+                "octoberUserActivityForum" => $octoberUserActivityForum,
+                "novemberUserActivityForum" => $novemberUserActivityForum,
+                "decemberUserActivityForum" => $decemberUserActivityForum,
+
+                //user activity calendar
+                "januaryUserActivityCalendar" => $januaryUserActivityCalendar,
+                "februaryUserActivityCalendar" => $februaryUserActivityCalendar,
+                "marchUserActivityCalendar" => $marchUserActivityCalendar,
+                "aprilUserActivityCalendar" => $aprilUserActivityCalendar,
+                "mayUserActivityCalendar" => $mayUserActivityCalendar,
+                "juneUserActivityCalendar" => $juneUserActivityCalendar,
+                "julyUserActivityCalendar" => $julyUserActivityCalendar,
+                "augustUserActivityCalendar" => $augustUserActivityCalendar,
+                "septemberUserActivityCalendar" => $septemberUserActivityCalendar,
+                "octoberUserActivityCalendar" => $octoberUserActivityCalendar,
+                "novemberUserActivityCalendar" => $novemberUserActivityCalendar,
+                "decemberUserActivityCalendar" => $decemberUserActivityCalendar,
+
+                // Map
+                "buddhismUserActivityMap" => $buddhismUserActivityMap,
+                "christianityUserActivityMap" => $christianityUserActivityMap,
+                "hinduismUserActivityMap" => $hinduismUserActivityMap,
+                "islamUserActivityMap" => $islamUserActivityMap,
+                "judaismUserActivityMap" => $judaismUserActivityMap,
+                "otherReligionsUserActivityMap" => $otherReligionsUserActivityMap,
+                "nonReligiousUserActivityMap" => $nonReligiousUserActivityMap,
+
+                // Library
+                "buddhismUserActivityLibrary" => $buddhismUserActivityLibrary,
+                "christianityUserActivityLibrary" => $christianityUserActivityLibrary,
+                "hinduismUserActivityLibrary" => $hinduismUserActivityLibrary,
+                "islamUserActivityLibrary" => $islamUserActivityLibrary,
+                "judaismUserActivityLibrary" => $judaismUserActivityLibrary,
+                "otherReligionsUserActivityLibrary" => $otherReligionsUserActivityLibrary,
+                "nonReligiousUserActivityLibrary" => $nonReligiousUserActivityLibrary,
+
+                // Community
+                "buddhismUserActivityCommunity" => $buddhismUserActivityCommunity,
+                "christianityUserActivityCommunity" => $christianityUserActivityCommunity,
+                "hinduismUserActivityCommunity" => $hinduismUserActivityCommunity,
+                "islamUserActivityCommunity" => $islamUserActivityCommunity,
+                "judaismUserActivityCommunity" => $judaismUserActivityCommunity,
+                "otherReligionsUserActivityCommunity" => $otherReligionsUserActivityCommunity,
+                "nonReligiousUserActivityCommunity" => $nonReligiousUserActivityCommunity,
+
+                // Forum
+                "buddhismUserActivityForum" => $buddhismUserActivityForum,
+                "christianityUserActivityForum" => $christianityUserActivityForum,
+                "hinduismUserActivityForum" => $hinduismUserActivityForum,
+                "islamUserActivityForum" => $islamUserActivityForum,
+                "judaismUserActivityForum" => $judaismUserActivityForum,
+                "otherReligionsUserActivityForum" => $otherReligionsUserActivityForum,
+                "nonReligiousUserActivityForum" => $nonReligiousUserActivityForum,
+
+                // Calendar
+                "buddhismUserActivityCalendar" => $buddhismUserActivityCalendar,
+                "christianityUserActivityCalendar" => $christianityUserActivityCalendar,
+                "hinduismUserActivityCalendar" => $hinduismUserActivityCalendar,
+                "islamUserActivityCalendar" => $islamUserActivityCalendar,
+                "judaismUserActivityCalendar" => $judaismUserActivityCalendar,
+                "otherReligionsUserActivityCalendar" => $otherReligionsUserActivityCalendar,
+                "nonReligiousUserActivityCalendar" => $nonReligiousUserActivityCalendar,
 
                 //reported content
                 "januaryReportedContent" => $januaryReportedContent,
