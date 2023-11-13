@@ -42,7 +42,7 @@ $(function() {
         }
     
         if (userViolationsArray.length != 0) {
-            var reportUserUsername = $("#reportUserUsername").val();
+            var reportUserUsername = $("#reportUserUsername").text();
             var additionalContext = $("#reportUserAdditional").val();
             var accountUsername = $("#accountUsernamePlaceholder").text();
             

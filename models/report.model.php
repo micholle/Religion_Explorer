@@ -283,9 +283,7 @@ class reportUserModel {
             $accountStmt = $pdo->prepare("SELECT accountid FROM accounts WHERE username = :username");
             $accountStmt->bindParam(":username", $data['username'], PDO::PARAM_STR);
             $accountStmt->execute();
-
             $accountid = $accountStmt->fetchColumn();
-            //get the accountid of the username using $data['username]
 		
 			$stmt = $pdo->prepare("INSERT INTO reportedusers(accountid, userViolations, additionalContext, reportedOn, reportedBy) VALUES (:accountid, :userViolations, :additionalContext, :reportedOn, :reportedBy)");
 	

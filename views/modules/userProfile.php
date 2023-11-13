@@ -60,7 +60,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-center align-items-center justify-content-lg-start flex-row">
                             <img src="../assets/img/editProfile/userBasicStats-star.png">
                             <p><?php echo $explorerPoints;?> Explorer Points</p>
-                            <img src="../assets/img/userProfile/question.png" class="userProfilePointsMarker">
+                            <!-- <img src="../assets/img/userProfile/question.png" class="userProfilePointsMarker"> -->
                         </div>
 
                         <div class="userBasicStatsOverview col-12 d-flex justify-content-center align-items-center justify-content-lg-start flex-row">
