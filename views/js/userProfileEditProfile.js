@@ -253,11 +253,7 @@ $(function() {
               var xhr = new XMLHttpRequest();
               xhr.open("POST", "../../ajax/uploadAvatar.ajax.php", true);
               xhr.onload = function () {
-                if (xhr.status === 200) {
                   window.location.href = "userProfileEditProfile.php";
-                } else {
-                  showErrorMessage("Error uploading the file. Please try again later.");
-                }
               };
               xhr.send(formData);
       

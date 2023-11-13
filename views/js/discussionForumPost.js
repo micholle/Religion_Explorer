@@ -1,4 +1,5 @@
 $(function() {
+    let canReload = true;
     //history
     $(document).on('click', '#forumViewHistory', function() {
         $('#viewHistoryModal').modal('show');
@@ -12,7 +13,7 @@ $(function() {
             data: { topicId: topicId },
             success: function(response) {
                 const history = JSON.parse(response);
-    
+                $('.forumHistoryContainer').empty();
                 if (history.length > 0) {
                     // Create and populate the modal with topic history entries
 
@@ -224,6 +225,7 @@ $(function() {
                 const parentComment = replyButton.closest('.forumPostViewComments');
                 const postId = $(this).attr('value'); // Get the post ID from the data attribute
                 const replyContainer = parentComment.querySelector('.threadReply');
+                canReload = false;
           
                 if (replyContainer) {
                     replyContainer.remove(); // Remove the reply container if it exists
@@ -259,6 +261,8 @@ $(function() {
                     const cancelReplyButton = replyContainer.querySelector('#cancelReplyButton');
                     cancelReplyButton.addEventListener('click', function () {
                         replyContainer.remove();
+                        canReload = true;
+                        getPosts("user_priority", $("#topicId").val());
                     });
           
                     const replyForm = replyContainer.querySelector('form');
@@ -302,6 +306,7 @@ $(function() {
             $("#reportContentNotice").show();
 
         } else {
+            canReload = true;
             $.ajax({
                 url: "../../ajax/discussionReply.ajax.php",
                 method: "POST",
@@ -313,7 +318,7 @@ $(function() {
                         };
                         ws.send(JSON.stringify(message));
                         getPosts("user_priority", $("#topicId").val());
-
+                        
                         //add explorer points: discussion forum reply              
                         var accountid = $("#accountidPlaceholder").text();
                         var currentDateTime = new Date();
@@ -323,7 +328,7 @@ $(function() {
                         explorerPoint.append("accountid", accountid);
                         explorerPoint.append("pointsource", accountid + "_forum_reply_" + unixTimestamp);
                         explorerPoint.append("points", 2);
-
+                        
                         $.ajax({
                             url: '../../ajax/addExplorerPoints.ajax.php',
                             method: "POST",
@@ -486,26 +491,28 @@ $(function() {
     
     
     function getPosts(sortCriteria, topicId) {
-        var userTimezoneOffsetMinutes = new Date().getTimezoneOffset();
-        $.ajax({
-            url: "../../ajax/discussionGetPosts.ajax.php",
-            method: "GET",
-            data: { sort: sortCriteria, topicId: topicId, userTimezoneOffsetMinutes: userTimezoneOffsetMinutes  },
-            success: function(data) {
-                $("#postContainer").html(data);
-                // Call the initializeReplyButtons function after loading the AJAX response
-                initializeReplyButtons();
-                attachDeleteButtonListeners();
-                initializeEditButtons();
-                shortenUpvotes();
-                attachProfilePictureListeners();
-            },
-            error: function(xhr, status, error) {
-                console.log(xhr.responseText);
-                console.log(status);
-                console.log(error);
-            }
-        });
+        if (canReload) {
+            var userTimezoneOffsetMinutes = new Date().getTimezoneOffset();
+            $.ajax({
+                url: "../../ajax/discussionGetPosts.ajax.php",
+                method: "GET",
+                data: { sort: sortCriteria, topicId: topicId, userTimezoneOffsetMinutes: userTimezoneOffsetMinutes  },
+                success: function(data) {
+                    $("#postContainer").html(data);
+                    // Call the initializeReplyButtons function after loading the AJAX response
+                    initializeReplyButtons();
+                    attachDeleteButtonListeners();
+                    initializeEditButtons();
+                    shortenUpvotes();
+                    attachProfilePictureListeners();
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
+        }
     }
 
     $(document).on('click', '#forumDeleteComment', function() {
@@ -745,9 +752,17 @@ $(function() {
             const type = targetElement.closest('.forumPostViewComments').hasClass('forumPostViewCommentReply') ? 'reply' : 'post';
             const id = $(this).attr('value');
             const contentElement = targetElement.closest('.forumPostViewComments').find('.contentEditable');
+            canReload = false;
             
             if (contentElement.attr('contenteditable') === 'false') {
                 contentElement.attr('contenteditable', 'true');
+                contentElement.focus();
+                const range = document.createRange();
+                range.selectNodeContents(contentElement[0]);
+                range.collapse(false); // Set the cursor to the end
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
                 targetElement.text('Save');
             } else {
                 contentElement.attr('contenteditable', 'false');
@@ -782,6 +797,7 @@ $(function() {
             $("#reportContentNotice").show();
             getPosts("user_priority", $("#topicId").val());
         } else {
+            canReload = true;
             $.ajax({
                 url: "../../ajax/discussionUpdate.ajax.php",
                 method: "POST",
@@ -792,6 +808,7 @@ $(function() {
                         getPosts("user_priority", $("#topicId").val());
                         $("#toast").html("Comment edited successfully.")
                         $("#toast").addClass('show');
+                        
                     
                         setTimeout(function() {
                             $("#toast").removeClass('show');
