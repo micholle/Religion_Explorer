@@ -1341,6 +1341,54 @@ class ModelDiscussion {
         }
     }
 
+    public function mdlGetAllTopicHistory($postId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $stmt = $pdo->prepare("SELECT ph.postContent, ph.postDate, a.username, a.avatar 
+                FROM post_history ph
+                JOIN posts p ON ph.postId = p.postId
+                JOIN accounts a ON p.accountId = a.accountid
+                WHERE p.postId = :postId
+                ORDER BY ph.replyDate DESC");
+            $stmt->bindParam(":postId", $postId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
+        } catch (Exception $e) {
+            return null; // Error occurred while retrieving topic history
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
+    public function mdlGetAllTopicHistory($replyId) {
+        $db = new Connection();
+        $pdo = $db->connect();
+
+        try {
+            $stmt = $pdo->prepare("SELECT rh.replyContent, rh.replyDate, a.username, a.avatar 
+                FROM reply_history rh
+                JOIN reply r ON rh.replyId = r.replyId
+                JOIN accounts a ON r.accountId = a.accountid
+                WHERE r.replyId = :replyId
+                ORDER BY rh.replyDate DESC");
+            $stmt->bindParam(":replyId", $replyId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
+        } catch (Exception $e) {
+            return null; // Error occurred while retrieving topic history
+        } finally {
+            $pdo = null;
+            $stmt = null;
+        }
+    }
+
     
     
 }

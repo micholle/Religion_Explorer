@@ -5,6 +5,10 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
     header("Location: splash.php");
     exit(); // Terminate the script to prevent further execution
 }
+if ($_SESSION['acctype'] != 'admin') {
+    // Redirect the user to splash.php
+    header("Location: map.php");
+}
 ?>
 <!doctype html>
 <html lang="en">

@@ -2,8 +2,6 @@ $(function() {
     let canReload = true;
     //history
     $(document).on('click', '#forumViewHistory', function() {
-        $('#viewHistoryModal').modal('show');
-        // Get the topicId from the HTML element
         const topicId = $('#topicId').val();
     
         // Use an AJAX request to fetch all topic history entries
@@ -46,15 +44,17 @@ $(function() {
                         const contentElement = $(contentHTML);
                         $('.forumHistoryContainer').append(contentElement);
                     });
-                    
-                    
-    
                     // Show the modal
                     $('#viewHistoryModal').modal('show');
                 } else {
-                    // Handle the case when no history is found
-                    $('#historyContent').html('No history found for this topic.');
-                    $('#viewHistoryModal').modal('show');
+                    $("#toast").html("No edit history found.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
+                    return
                 }
             },
             error: function(xhr, status, error) {
@@ -63,6 +63,126 @@ $(function() {
             }
         });
     });
+
+    $(document).on('click', '#forumCommentViewHistory', function() {
+        const postId = $(this).closest('.forumPostViewComments').data('post-id');
+        alert(postId);
+        // Use an AJAX request to fetch all comment history entries
+        $.ajax({
+            url: '../../ajax/getPostHistory.ajax.php',
+            method: 'POST',
+            data: { postId: postId },
+            success: function(response) {
+                const history = JSON.parse(response);
+                $('.forumHistoryContainer').empty();
+                if (history.length > 0) {
+                    // Create and populate the modal with comment history entries
+                    history.forEach(function(historyItem) {
+                        const contentHTML = `
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="forumPostViewComments forumPostViewHistory">
+                                    <div class="d-flex justify-content-start align-items-center flex-column">
+                                        <img src="data:image/png;base64, ${historyItem.avatar}" class="discussionForumAvatarComment">
+                                    </div>
+                                    <div class="forumPostViewContent">
+                                        <div class="row">
+                                            <div class="col-12 d-flex flex-row discussionForumHistoryHeader">
+                                                <h2 class="discussionForumUsernameComment">${historyItem.username}</h2>
+                                                <h2 class="discussionForumUsernameCommentSpace">•</h2>
+                                                <h2>${historyItem.postDate}</h2>
+                                            </div>
+                                        </div>
+                                        <div class="forumPostViewContentBox">
+                                            <p id="historyContent">${historyItem.postContent}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                      
+                        `;
+                        const contentElement = $(contentHTML);
+                        $('.forumHistoryContainer').append(contentElement);
+                    });
+                    // Show the modal
+                    $('#viewCommentHistoryModal').modal('show');
+                } else {
+                    $("#toast").html("No edit history found.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
+                    return
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.error(error);
+            }
+        });
+    });
+    
+    $(document).on('click', '#forumReplyViewHistory', function() {
+        const replyId = $(this).closest('.forumPostViewComments').data('reply-id');
+        alert(replyId);
+        // Use an AJAX request to fetch all reply history entries
+        $.ajax({
+            url: '../../ajax/getReplyHistory.ajax.php',
+            method: 'POST',
+            data: { replyId: replyId },
+            success: function(response) {
+                const history = JSON.parse(response);
+                $('.forumHistoryContainer').empty();
+                if (history.length > 0) {
+                    // Create and populate the modal with reply history entries
+                    history.forEach(function(historyItem) {
+                        const contentHTML = `
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="forumPostViewComments forumPostViewHistory">
+                                    <div class="d-flex justify-content-start align-items-center flex-column">
+                                        <img src="data:image/png;base64, ${historyItem.avatar}" class="discussionForumAvatarComment">
+                                    </div>
+                                    <div class="forumPostViewContent">
+                                        <div class="row">
+                                            <div class="col-12 d-flex flex-row discussionForumHistoryHeader">
+                                                <h2 class="discussionForumUsernameComment">${historyItem.username}</h2>
+                                                <h2 class="discussionForumUsernameCommentSpace">•</h2>
+                                                <h2>${historyItem.replyDate}</h2>
+                                            </div>
+                                        </div>
+                                        <div class="forumPostViewContentBox">
+                                            <p id="historyContent">${historyItem.replyContent}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                      
+                        `;
+                        const contentElement = $(contentHTML);
+                        $('.forumHistoryContainer').append(contentElement);
+                    });
+                    // Show the modal
+                    $('#viewReplyHistoryModal').modal('show');
+                } else {
+                    $("#toast").html("No edit history found.")
+                    $("#toast").css("background-color", "#E04F5F");
+                    $("#toast").addClass('show');
+                
+                    setTimeout(function() {
+                        $("#toast").removeClass('show');
+                    }, 2000);
+                    return
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.error(error);
+            }
+        });
+    });    
     
     $(document).on('click', '#forumCommentViewHistory', function() {
         $('#viewCommentHistoryModal').modal('show');

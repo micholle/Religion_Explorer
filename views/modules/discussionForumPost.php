@@ -199,7 +199,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <div class="modal-content">
                         <div class="modal-header text-center">
                             <div class="container d-flex justify-content-center align-items-center flex-column">
-                                <h5 class="modal-title w-100">Post Edit History</h5>
+                                <h5 class="modal-title w-100">Topic Edit History</h5>
                             </div>
                         </div>
 
@@ -216,7 +216,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                     <div class="modal-content">
                         <div class="modal-header text-center">
                             <div class="container d-flex justify-content-center align-items-center flex-column">
-                                <h5 class="modal-title w-100">Comment Edit History</h5>
+                                <h5 class="modal-title w-100">Post Edit History</h5>
                             </div>
                         </div>
 

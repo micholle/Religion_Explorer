@@ -89,7 +89,7 @@ foreach ($posts as $post) {
     $replies = $controller->ctrGetRepliesByPostId($post['postId']);
     foreach ($replies as $reply) {
         if ($reply['downvotes'] < 50){
-        $html .= '<div class="forumPostViewComments forumPostViewCommentReply d-flex flex-column">'; // Start of reply container
+        $html .= '<div class="forumPostViewComments forumPostViewCommentReply d-flex flex-column" data-reply-id="' . $reply['replyId'] . '">'; // Start of reply container
         $html .= '  <div class="d-flex justify-content-start align-items-start flex-row">';
         $html .= '<img src="data:image/png;base64,' . base64_encode($reply['avatar']) . '" class="discussionForumAvatarComment" data-accountid="' . $reply['accountid'] . '">';
         $html .= '    <div class="forumPostViewContent">';
