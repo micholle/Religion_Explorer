@@ -313,12 +313,6 @@ $(function() {
                 data: postData,
                 success: function(response) {
                     if (response === "success") {
-                        const message = {
-                            type: 'discussion'
-                        };
-                        ws.send(JSON.stringify(message));
-                        getPosts("user_priority", $("#topicId").val());
-                        
                         //add explorer points: discussion forum reply              
                         var accountid = $("#accountidPlaceholder").text();
                         var currentDateTime = new Date();
@@ -338,6 +332,12 @@ $(function() {
                             processData: false,
                             dataType: "text"
                         });
+
+                        const message = {
+                            type: 'discussion'
+                        };
+                        ws.send(JSON.stringify(message));
+                        getPosts("user_priority", $("#topicId").val());
                     } else {
                         $("#toast").html("Error occurred while creating the reply.")
                         $("#toast").css("background-color", "#E04F5F");
@@ -431,20 +431,6 @@ $(function() {
                 data: discussion,
                 success: function(response) {
                     if (response === "success") {
-                        $("#postContent").val("");
-                        $("#toast").html("Comment posted.")
-                        $("#toast").css("background-color", "");
-                        $("#toast").addClass('show');
-                    
-                        setTimeout(function() {
-                            $("#toast").removeClass('show');
-                        }, 2000);
-                        const message = {
-                            type: 'discussion'
-                        };
-                        ws.send(JSON.stringify(message));
-                        getPosts("user_priority", $("#topicId").val());
-
                         //add explorer points: discussion forum comment              
                         var accountid = $("#accountidPlaceholder").text();
                         var currentDateTime = new Date();
@@ -464,6 +450,20 @@ $(function() {
                             processData: false,
                             dataType: "text"
                         });
+                        
+                        $("#postContent").val("");
+                        $("#toast").html("Comment posted.")
+                        $("#toast").css("background-color", "");
+                        $("#toast").addClass('show');
+                    
+                        setTimeout(function() {
+                            $("#toast").removeClass('show');
+                        }, 2000);
+                        const message = {
+                            type: 'discussion'
+                        };
+                        ws.send(JSON.stringify(message));
+                        getPosts("user_priority", $("#topicId").val());
                     } else {
                         // Error occurred while creating the topic
                         $("#toast").html("Error occurred while creating the post.")
