@@ -1,10 +1,3 @@
-<?php session_start(); 
-if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
-    // Redirect the user to splash.php
-    header("Location: splash.php");
-    exit(); // Terminate the script to prevent further execution
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
