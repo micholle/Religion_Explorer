@@ -81,81 +81,81 @@ $(function() {
         $(".sidebar").css("display", "none");
     });
     
-    $('#submitReportUser').click(function(event) {    
-        event.preventDefault();
+    // $('#submitReportUser').click(function(event) {    
+    //     event.preventDefault();
 
-        var userViolationsArray = []; 
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    //     var userViolationsArray = []; 
+    //     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                userViolationsArray.push(checkbox.value);
-            }
-        });
+    //     checkboxes.forEach(checkbox => {
+    //         if (checkbox.checked) {
+    //             userViolationsArray.push(checkbox.value);
+    //         }
+    //     });
 
-        if($("#userOthers").val() != "") {
-            userViolationsArray.push($("#userOthers").val());
-        }
+    //     if($("#userOthers").val() != "") {
+    //         userViolationsArray.push($("#userOthers").val());
+    //     }
     
-        if (userViolationsArray.length != 0) {
-            var reportUserUsername = $("#reportUserUsername").val();
-            var additionalContext = $("#reportUserAdditional").val();
-            var accountUsername = $("#accountUsernamePlaceholder").text();
+    //     if (userViolationsArray.length != 0) {
+    //         var reportUserUsername = $("#reportUserUsername").val();
+    //         var additionalContext = $("#reportUserAdditional").val();
+    //         var accountUsername = $("#accountUsernamePlaceholder").text();
             
-            var currentDate = new Date();
-            var year = currentDate.getFullYear();
-            var month = String(currentDate.getMonth() + 1).padStart(2, '0');
-            var day = String(currentDate.getDate()).padStart(2, '0');
-            var reportedOn = `${year}-${month}-${day}`;
-            var userViolations = userViolationsArray.join(', ');
+    //         var currentDate = new Date();
+    //         var year = currentDate.getFullYear();
+    //         var month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    //         var day = String(currentDate.getDate()).padStart(2, '0');
+    //         var reportedOn = `${year}-${month}-${day}`;
+    //         var userViolations = userViolationsArray.join(', ');
 
-            reportData = new FormData();
-            reportData.append("username" , reportUserUsername);
-            reportData.append("userViolations" , userViolations);
-            reportData.append("additionalContext", additionalContext);
-            reportData.append("reportedOn", reportedOn);
-            reportData.append("reportedBy", accountUsername);
+    //         reportData = new FormData();
+    //         reportData.append("username" , reportUserUsername);
+    //         reportData.append("userViolations" , userViolations);
+    //         reportData.append("additionalContext", additionalContext);
+    //         reportData.append("reportedOn", reportedOn);
+    //         reportData.append("reportedBy", accountUsername);
     
-            $.ajax({
-                url: "../../ajax/submitReportUser.ajax.php",
-                method: "POST",
-                data: reportData,
-                dataType: "text",
-                processData: false,
-                contentType: false,
-                success: function() {
-                    $("#reportUserIcon").attr("src", "../assets/img/verification-check.png");
-                    $("#reportUserStatus").text("Report Received");
-                    $("#reportUserMessage").text("The team will review your complaint. Please expect a notification in 3-5 business days.");
-                },
-                error: function() {
-                    $("#reportUserIcon").attr("src", "../assets/img/verification-error.png");
-                    $("#reportUserStatus").text("Error");
-                    $("#reportUserMessage").text("There was an error processing your request. Please try again later.");
-                    $("#reportUserNoticeButton").css("background-color", "#E04F5F");
-                },
-                complete: function() {
-                    $("#reportUserNotice").modal();
-                    $("#reportUserNotice").show();
+    //         $.ajax({
+    //             url: "../../ajax/submitReportUser.ajax.php",
+    //             method: "POST",
+    //             data: reportData,
+    //             dataType: "text",
+    //             processData: false,
+    //             contentType: false,
+    //             success: function() {
+    //                 $("#reportUserIcon").attr("src", "../assets/img/verification-check.png");
+    //                 $("#reportUserStatus").text("Report Received");
+    //                 $("#reportUserMessage").text("The team will review your complaint. Please expect a notification in 3-5 business days.");
+    //             },
+    //             error: function() {
+    //                 $("#reportUserIcon").attr("src", "../assets/img/verification-error.png");
+    //                 $("#reportUserStatus").text("Error");
+    //                 $("#reportUserMessage").text("There was an error processing your request. Please try again later.");
+    //                 $("#reportUserNoticeButton").css("background-color", "#E04F5F");
+    //             },
+    //             complete: function() {
+    //                 $("#reportUserNotice").modal();
+    //                 $("#reportUserNotice").show();
 
-                    $("#reportUserModal").removeClass("fade").modal("hide");
-                    $("#reportUserModal").modal("dispose");
+    //                 $("#reportUserModal").removeClass("fade").modal("hide");
+    //                 $("#reportUserModal").modal("dispose");
 
-                    $("#reportUserUsername").val("");
-                    $("#reportUserForm")[0].reset();
-                    $("#reportUserAdditional").val("");
-                }
-            });
-        } else {
-            $("#toast").html("Please fill out all required fields.")
-            $("#toast").css("background-color", "#E04F5F");
-            $('#toast').addClass('show');
+    //                 $("#reportUserUsername").val("");
+    //                 $("#reportUserForm")[0].reset();
+    //                 $("#reportUserAdditional").val("");
+    //             }
+    //         });
+    //     } else {
+    //         $("#toast").html("Please fill out all required fields.")
+    //         $("#toast").css("background-color", "#E04F5F");
+    //         $('#toast').addClass('show');
         
-            setTimeout(function() {
-                $('#toast').removeClass('show');
-            }, 2000);
-        }
-    });
+    //         setTimeout(function() {
+    //             $('#toast').removeClass('show');
+    //         }, 2000);
+    //     }
+    // });
 
     $.ajax({
         url: "../../ajax/getNotifications.ajax.php",

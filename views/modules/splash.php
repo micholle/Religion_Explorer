@@ -21,12 +21,11 @@
             <img src="../assets/img/logo-and-text.png">
         </li>
         <ul>
-            <li><a href="#splash-page">Home</a></li>
+            <li><a href="#splash-page" style="margin-left: 0px;">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#developers">Developers</a></li>
             <li><a href="login.php"><button class="splashButton navBarButton">Log in</button></a></li>
-            <li><img src="../assets/img/menu.png" class="headerMenuIcon" id="menuIcon"></li>
         </ul>
     </header>
     
@@ -70,7 +69,7 @@
             <hr>
 
             <div class="row content">
-              <p>Religion Explorer is a website application that aims to become a reliable religious resource for people who practice the world's five major religions. It aspires to be a convenient source where users can see statistics, events, have fruitful discussions, or browse for information.</p>
+              <p>Religion Explorer is a web application that functions as a religious resource and as a platform that promotes camaraderie and global understanding for people who practice the world's five major religions. Users can also see statistics, events, have fruitful discussions, or browse for information.</p>
             </div>
 
           </div>

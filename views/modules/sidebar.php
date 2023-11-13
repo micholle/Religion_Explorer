@@ -99,25 +99,6 @@ function create_sidebar() {
             
             <div id="toast" class="toast"></div>
 
-            <div id="reportUserNotice" class="modal fade">
-                <div class="modal-dialog modal-xs modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                                        <img id="reportUserIcon" src="../assets/img/verification-check.png" height="80px" width="80px">
-                                        <h5 id="reportUserStatus" class="modal-title w-100">Report Received</h5>
-                                        <p id="reportUserMessage" class="text-center">The team will review your complaint. Please expect a notification in 3-5 business days.</p>
-                                        <button type="button" id="reportUserNoticeButton" class="roundedButton" data-dismiss="modal">Thanks!</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div id="reportDetails" class="modal fade">
                 <div class="modal-dialog modal-xs modal-dialog-centered">
                     <div class="modal-content">

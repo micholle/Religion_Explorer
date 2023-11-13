@@ -1573,8 +1573,12 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
             
                 <div class="row">
                     <div class="col-12">
-                        <div id="mapSlider" class="mapSlider">
-                            <div id="sliderOptions" class="sliderOptions">
+                        <div class="mapSliderContainer" style="background-color: peachpuff;">
+                            <div class="mapSliderDiv">
+                                <div id="mapSlider" class="mapSlider">
+                                    <div id="sliderOptions" class="sliderOptions">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
