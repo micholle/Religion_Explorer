@@ -1,5 +1,6 @@
 $(function() {
     var acctype = $('#acctype').text();
+    var username = $('#accountUsernamePlaceholder').text();
     $.ajax({
         url: "../../ajax/showSidebar.ajax.php",
         method: "POST",
@@ -63,7 +64,7 @@ $(function() {
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-6 col-lg-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 '<img onclick="downloadContent(' + "'" + photoDetails.filedata + '\', \'' + photoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
-                                (acctype === 'regular' ? '<img onclick="reportContent(' + "'" + photoDetails.title + '\', \'' + photoDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png">': '') +
+                                (acctype === 'regular' && username !== photoDetails.author ? '<img onclick="reportContent(' + "'" + photoDetails.title + '\', \'' + photoDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png">': '') +
                                 '<img onclick="copyContentLink(' + "'" + photoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-6 col-lg-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
@@ -120,7 +121,7 @@ $(function() {
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-6 col-lg-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 '<img onclick="downloadContent(' + "'" + videoDetails.filedata + '\', \'' + videoDetails.filename + '\')" class="libraryActions" src="../assets/img/download.png">' +
-                                (acctype === 'regular' ? '<img onclick="reportContent(' + "'" + videoDetails.title + '\', \'' + videoDetails.creationid + '\')" class="libraryActions" class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">': '') +
+                                (acctype === 'regular' && username !== photoDetails.author ? '<img onclick="reportContent(' + "'" + videoDetails.title + '\', \'' + videoDetails.creationid + '\')" class="libraryActions" class="libraryActions" src="../assets/img/alert.png" id="reportVideoSubmission">': '') +
                                 '<img onclick="copyContentLink(' + "'" + videoDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-6 col-lg-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
@@ -177,7 +178,7 @@ $(function() {
                         '<div class="row d-flex justify-content-start align-items-center flex-row libraryMediaInteractions">' +
                             '<div class="col-6 col-lg-11 d-flex justify-content-start align-items-center mediaInteractionsLeft">' +
                                 // '<img class="libraryActions" src="../assets/img/download.png">' +
-                                (acctype === 'regular' ? '<img onclick="reportContent(' + "'" + readingMaterialDetails.title + '\', \'' + readingMaterialDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' : '')+
+                                (acctype === 'regular' && username !== photoDetails.author ? '<img onclick="reportContent(' + "'" + readingMaterialDetails.title + '\', \'' + readingMaterialDetails.creationid + '\')" class="libraryActions" src="../assets/img/alert.png" id="reportReadMatSubmission">' : '')+
                                 '<img onclick="copyContentLink(' + "'" + readingMaterialDetails.creationid + "'" + ')" class="libraryActions" src="../assets/img/broken-link.png">' +
                             '</div>' +
                             '<div class="col-6 col-lg-1 d-flex justify-content-end align-items-center mediaInteractionsRight">' +
