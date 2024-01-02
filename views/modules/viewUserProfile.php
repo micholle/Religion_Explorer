@@ -50,9 +50,6 @@ $userData = getUserProfileInfo($accountid);
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-12 mh-100 d-flex justify-content-center align-items-center justify-content-lg-start align-items-lg-start flex-column">
                                     <h1><?php echo $userData['username']; ?></h1>
-                                    <?php if ($userData['displayNickname'] === '1') { ?>
-                                    <p class="nicknameText">aka <?php echo $userData['nickname']; ?></p>
-                                    <?php } ?>
                                 </div>
                             </div>
 

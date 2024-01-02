@@ -139,7 +139,7 @@ foreach ($posts as $post) {
         if ($reply['accountid'] === $_SESSION['accountid']) {
             $html .= '          <div class="forumPostViewMainInt d-flex justify-content-center align-items-center flex-row" data-reply-id="' . $reply['replyId'] . '">';
             $html .= '              <img src="../assets/img/discussionForum/delete.png" class="commentIcon">';
-            $html .= '              <p class="forumPostViewMainCount forumPostViewMainDeleteReply" value="' . $reply['replyId'] . '">Deleteeee</p>';
+            $html .= '              <p class="forumPostViewMainCount forumPostViewMainDeleteReply" value="' . $reply['replyId'] . '">Delete</p>';
             $html .= '          </div>';
         }
         $html .= '              </div>';

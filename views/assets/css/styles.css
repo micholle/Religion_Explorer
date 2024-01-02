@@ -832,6 +832,11 @@ h5 {
     }
 }
 
+.commCreationsVideo {
+    width: 100%;
+    border-radius: 15px;
+}
+
 .communityUploadArea {
     border-style: dashed;
     border-radius: 15px;

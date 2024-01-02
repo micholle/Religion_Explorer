@@ -90,7 +90,7 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                     <p>Username</p>
                                 </div>
                                 <div class="col-9 d-flex justify-content-end justify-content-lg-start align-items-center">
-                                    <input type="text" id="username" name="" placeholder="Placeholder">
+                                    <input type="text" id="username" name="" placeholder="<?php echo $_SESSION['username']; ?>">
                                 </div>
                             </div>
                             <div class="row no-gutters d-flex justify-content-center">
@@ -156,10 +156,6 @@ if (!isset($_SESSION['accountid']) || empty($_SESSION['accountid'])) {
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                                     <input type="checkbox" id="displayCalendar" <?php echo $displayCalendar == 1 ? "checked" : ""; ?>>
                                     <label for="">Display Personal Calendar</label>
-                                </div>
-                                <div class="col-12 d-flex justify-content-start align-items-center flex-row">
-                                    <input type="checkbox" id="displayNickname" <?php echo $displayNickname == 1 ? "checked" : ""; ?>>
-                                    <label for="">Display nickname/s</label>
                                 </div>
                                 <div class="col-12 d-flex justify-content-start align-items-center flex-row">
                                     <input type="checkbox" id="displayBookmark" <?php echo $displayBookmark == 1 ? "checked" : ""; ?>>

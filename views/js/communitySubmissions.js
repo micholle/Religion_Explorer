@@ -687,7 +687,7 @@ $(function() {
                 
                                     if(videoDetails.creationid == bookmark.resourceid) {
                                         bookmarkTitle = videoDetails.title;
-                                        bookmarkPreview = '<video controls> <source src=' + "../" + videoDetails.filedata + '> </video>';
+                                        bookmarkPreview = '<video controls class="commCreationsVideo"> <source src=' + "../" + videoDetails.filedata + '> </video>';
                                         bookmarkDescription = videoDetails.description;
 
                                         $("#recentlyBookmarked").append(
@@ -752,7 +752,7 @@ $(function() {
                                 if (video == bookmark.resourceid) {
                                     var videoDetails = libraryData["videos"][video];
                                     bookmarkTitle = videoDetails.title;
-                                    bookmarkPreview = '<video controls> <source src=' + videoDetails.file + '> </video>';
+                                    bookmarkPreview = '<video controls class="commCreationsVideo"> <source src=' + videoDetails.file + '> </video>';
                                     bookmarkDescription = videoDetails.description;
                                 
                                     $("#recentlyBookmarked").append(
